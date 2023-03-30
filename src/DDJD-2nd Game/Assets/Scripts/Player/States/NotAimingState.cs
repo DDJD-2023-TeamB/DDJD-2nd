@@ -20,6 +20,9 @@ public class NotAimingState : GenericState
         _context.Animator.SetBool("IsAiming", false);
         _context.AimComponent.StopAim();
         
+        
+        
+        
     }
 
     public override void Exit()

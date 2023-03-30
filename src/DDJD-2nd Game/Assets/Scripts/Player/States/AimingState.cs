@@ -22,14 +22,13 @@ public class AimingState : GenericState
         _context.Animator.SetBool("IsAiming", true);
         _context.AimComponent.StartAim();
 
+
+        
         
     }
 
     public override void Exit()
     {
-        //_context.Animator.SetBool("IsAiming", false);
-        _context.AimCamera.Priority = 5;
-        _context.AimComponent.StopAim();
     }
 
     public override bool CanChangeState(GenericState state)

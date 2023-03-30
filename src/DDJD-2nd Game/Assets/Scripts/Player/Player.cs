@@ -61,8 +61,17 @@ public class Player : StateContext
 
 
     [Header("Abilities")]
-    private Abilities _abilities;
-    public Abilities Abilities{get{return _abilities;}}
+    [SerializeField]
+    private PlayerEquippedSkills _equippedSkills;
+    public PlayerEquippedSkills EquippedSkills{get{return _equippedSkills;}}
+
+    [SerializeField]
+    private GameObject _LeftHand;
+    public GameObject LeftHand{get{return _LeftHand;}}
+
+    [SerializeField]
+    private GameObject _RightHand;
+    public GameObject RightHand{get{return _RightHand;}}
     
 
     void Awake(){
@@ -72,7 +81,6 @@ public class Player : StateContext
         _animator = GetComponent<Animator>();
         _aimComponent = GetComponent<AimComponent>();
         _shooter = GetComponent<Shooter>();
-        _abilities = GetComponent<Abilities>();
         ChangeState(_factory.Playable());
     }
     
