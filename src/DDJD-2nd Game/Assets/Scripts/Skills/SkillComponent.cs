@@ -6,5 +6,5 @@ public interface SkillComponent
 {
     void Shoot(Vector3 direction);
 
-    void SetStats(SkillStats stats);
+    void SetSkill(Skill skill);
 }

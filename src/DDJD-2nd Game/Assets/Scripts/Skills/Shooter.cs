@@ -32,7 +32,7 @@ public class Shooter : MonoBehaviour
     private void Shoot(Skill skill, Vector3 position, Vector3 direction){
         GameObject spell = Instantiate(skill.SpellPrefab, position, Quaternion.identity);
         SkillComponent skillComponent = spell.GetComponent<SkillComponent>();
-        skillComponent.SetStats(skill.Stats);
+        skillComponent.SetSkill(skill);
         skillComponent.Shoot(direction);
     }
 }
