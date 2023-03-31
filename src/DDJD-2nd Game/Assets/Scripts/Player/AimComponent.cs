@@ -67,7 +67,7 @@ public class AimComponent : MonoBehaviour
                 aimWeight = 0;
             }
         }
-        aimRig.weight = 0;   
+        aimRig.weight = 1.0f;   
         
     }
     public void SetAimPosition(Vector3 pos){

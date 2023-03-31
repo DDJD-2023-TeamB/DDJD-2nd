@@ -58,22 +58,39 @@ public class AimingState : GenericState
     }
 
     private void Attack(){
-        if(_context.Input.IsShooting && _timeUntilNextAttack <= 0f){
-            Shoot();
-        }  
+        if(_context.Input.IsLeftShooting && _timeUntilNextAttack <= 0f){
+            LeftShoot();
+        }
+        if(_context.Input.IsRightShooting && _timeUntilNextAttack <= 0f){
+            RightShoot();
+        }
         if(_context.Input.IsWaveAttacking){
             WaveAttack();
         }
     }
 
-    private void Shoot(){
+    private void LeftShoot(){
+
+        //TODO:: removed repeated code
         _timeUntilNextAttack = _attackCD;
-        Vector3 position = _context.AimCamera.transform.position + _context.AimCamera.transform.forward * 10f;
-        _context.Shooter.Shoot();
-        _context.Animator.SetTrigger("Shoot");
-        _lastAnimTrigger = "Shoot";
-        
+        Vector3 position = _context.LeftHand.transform.position;
+        Vector3 direction = _context.AimComponent.GetAimDirection(position);
+        _context.Shooter.LeftSpell = _context.EquippedSkills.LeftSkill;
+        _context.Shooter.LeftShoot(position, direction);
+        _context.Animator.SetTrigger("LeftShoot");
+        _lastAnimTrigger = "LeftShoot";
     }
+
+    private void RightShoot(){
+        _timeUntilNextAttack = _attackCD;
+        Vector3 position = _context.RightHand.transform.position;
+        Vector3 direction = _context.AimComponent.GetAimDirection(position);
+        _context.Shooter.RightSpell = _context.EquippedSkills.RightSkill;
+        _context.Shooter.RightShoot(position, direction);
+        _context.Animator.SetTrigger("RightShoot");
+        _lastAnimTrigger = "RightShoot";
+    }
+
 
     private void WaveAttack(){
         _timeUntilNextAttack = _attackCD;

@@ -197,9 +197,45 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Shoot"",
+                    ""name"": ""CombineSpellShot"",
                     ""type"": ""Button"",
                     ""id"": ""5a98a77a-c208-4464-858e-6002567c5690"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftSpellShot"",
+                    ""type"": ""Button"",
+                    ""id"": ""0b274111-0b30-491e-808d-902da5d62f23"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightSpellShot"",
+                    ""type"": ""Button"",
+                    ""id"": ""22769541-d336-4d03-a434-ebbda4a1d6d9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeLeftSpell"",
+                    ""type"": ""Button"",
+                    ""id"": ""3cc3d25b-16eb-424d-8966-d144654bc646"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeRightSpell"",
+                    ""type"": ""Button"",
+                    ""id"": ""c4ae74ac-747b-43cb-9f37-847b3f0d50ad"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -225,7 +261,51 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Shoot"",
+                    ""action"": ""CombineSpellShot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3dfa945b-5681-4a0c-9743-a85c1f491175"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftSpellShot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""18f1e32c-719d-4247-b314-05e0a592de32"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightSpellShot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f803f591-f7ed-433c-b1c3-2be561026a5a"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeLeftSpell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b61deb5e-86c0-4496-8a44-1caa48cb3b6d"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeRightSpell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -246,7 +326,11 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // Combat
         m_Combat = asset.FindActionMap("Combat", throwIfNotFound: true);
         m_Combat_Aim = m_Combat.FindAction("Aim", throwIfNotFound: true);
-        m_Combat_Shoot = m_Combat.FindAction("Shoot", throwIfNotFound: true);
+        m_Combat_CombineSpellShot = m_Combat.FindAction("CombineSpellShot", throwIfNotFound: true);
+        m_Combat_LeftSpellShot = m_Combat.FindAction("LeftSpellShot", throwIfNotFound: true);
+        m_Combat_RightSpellShot = m_Combat.FindAction("RightSpellShot", throwIfNotFound: true);
+        m_Combat_ChangeLeftSpell = m_Combat.FindAction("ChangeLeftSpell", throwIfNotFound: true);
+        m_Combat_ChangeRightSpell = m_Combat.FindAction("ChangeRightSpell", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -425,13 +509,21 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Combat;
     private List<ICombatActions> m_CombatActionsCallbackInterfaces = new List<ICombatActions>();
     private readonly InputAction m_Combat_Aim;
-    private readonly InputAction m_Combat_Shoot;
+    private readonly InputAction m_Combat_CombineSpellShot;
+    private readonly InputAction m_Combat_LeftSpellShot;
+    private readonly InputAction m_Combat_RightSpellShot;
+    private readonly InputAction m_Combat_ChangeLeftSpell;
+    private readonly InputAction m_Combat_ChangeRightSpell;
     public struct CombatActions
     {
         private @PlayerInput m_Wrapper;
         public CombatActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Aim => m_Wrapper.m_Combat_Aim;
-        public InputAction @Shoot => m_Wrapper.m_Combat_Shoot;
+        public InputAction @CombineSpellShot => m_Wrapper.m_Combat_CombineSpellShot;
+        public InputAction @LeftSpellShot => m_Wrapper.m_Combat_LeftSpellShot;
+        public InputAction @RightSpellShot => m_Wrapper.m_Combat_RightSpellShot;
+        public InputAction @ChangeLeftSpell => m_Wrapper.m_Combat_ChangeLeftSpell;
+        public InputAction @ChangeRightSpell => m_Wrapper.m_Combat_ChangeRightSpell;
         public InputActionMap Get() { return m_Wrapper.m_Combat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -444,9 +536,21 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
-            @Shoot.started += instance.OnShoot;
-            @Shoot.performed += instance.OnShoot;
-            @Shoot.canceled += instance.OnShoot;
+            @CombineSpellShot.started += instance.OnCombineSpellShot;
+            @CombineSpellShot.performed += instance.OnCombineSpellShot;
+            @CombineSpellShot.canceled += instance.OnCombineSpellShot;
+            @LeftSpellShot.started += instance.OnLeftSpellShot;
+            @LeftSpellShot.performed += instance.OnLeftSpellShot;
+            @LeftSpellShot.canceled += instance.OnLeftSpellShot;
+            @RightSpellShot.started += instance.OnRightSpellShot;
+            @RightSpellShot.performed += instance.OnRightSpellShot;
+            @RightSpellShot.canceled += instance.OnRightSpellShot;
+            @ChangeLeftSpell.started += instance.OnChangeLeftSpell;
+            @ChangeLeftSpell.performed += instance.OnChangeLeftSpell;
+            @ChangeLeftSpell.canceled += instance.OnChangeLeftSpell;
+            @ChangeRightSpell.started += instance.OnChangeRightSpell;
+            @ChangeRightSpell.performed += instance.OnChangeRightSpell;
+            @ChangeRightSpell.canceled += instance.OnChangeRightSpell;
         }
 
         private void UnregisterCallbacks(ICombatActions instance)
@@ -454,9 +558,21 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
-            @Shoot.started -= instance.OnShoot;
-            @Shoot.performed -= instance.OnShoot;
-            @Shoot.canceled -= instance.OnShoot;
+            @CombineSpellShot.started -= instance.OnCombineSpellShot;
+            @CombineSpellShot.performed -= instance.OnCombineSpellShot;
+            @CombineSpellShot.canceled -= instance.OnCombineSpellShot;
+            @LeftSpellShot.started -= instance.OnLeftSpellShot;
+            @LeftSpellShot.performed -= instance.OnLeftSpellShot;
+            @LeftSpellShot.canceled -= instance.OnLeftSpellShot;
+            @RightSpellShot.started -= instance.OnRightSpellShot;
+            @RightSpellShot.performed -= instance.OnRightSpellShot;
+            @RightSpellShot.canceled -= instance.OnRightSpellShot;
+            @ChangeLeftSpell.started -= instance.OnChangeLeftSpell;
+            @ChangeLeftSpell.performed -= instance.OnChangeLeftSpell;
+            @ChangeLeftSpell.canceled -= instance.OnChangeLeftSpell;
+            @ChangeRightSpell.started -= instance.OnChangeRightSpell;
+            @ChangeRightSpell.performed -= instance.OnChangeRightSpell;
+            @ChangeRightSpell.canceled -= instance.OnChangeRightSpell;
         }
 
         public void RemoveCallbacks(ICombatActions instance)
@@ -488,6 +604,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     public interface ICombatActions
     {
         void OnAim(InputAction.CallbackContext context);
-        void OnShoot(InputAction.CallbackContext context);
+        void OnCombineSpellShot(InputAction.CallbackContext context);
+        void OnLeftSpellShot(InputAction.CallbackContext context);
+        void OnRightSpellShot(InputAction.CallbackContext context);
+        void OnChangeLeftSpell(InputAction.CallbackContext context);
+        void OnChangeRightSpell(InputAction.CallbackContext context);
     }
 }

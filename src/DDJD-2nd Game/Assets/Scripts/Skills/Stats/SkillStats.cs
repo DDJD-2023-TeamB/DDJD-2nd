@@ -1,5 +1,5 @@
 using UnityEngine;
-public abstract class SpellStats {
+public abstract class SkillStats {
     [SerializeField]
     protected float _damage;
     [SerializeField]
@@ -7,7 +7,7 @@ public abstract class SpellStats {
 
     public float Damage { get => _damage; set => _damage = value; }
     public float Cooldown { get => _cooldown; set => _cooldown = value; }
-    public SpellStats(float damage, float cooldown)
+    public SkillStats(float damage, float cooldown)
     {
         _damage = damage;
         _cooldown = cooldown;

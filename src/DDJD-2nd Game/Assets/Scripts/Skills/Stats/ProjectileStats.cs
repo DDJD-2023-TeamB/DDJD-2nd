@@ -1,6 +1,6 @@
 using UnityEngine;
 [System.Serializable]
-public class ProjectileStats : SpellStats
+public class ProjectileStats : SkillStats
 {
     [SerializeField]
     private float _speed;
