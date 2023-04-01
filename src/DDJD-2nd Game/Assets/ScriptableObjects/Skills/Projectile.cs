@@ -9,7 +9,11 @@ public class Projectile : Skill
     private GameObject _impactPrefab;
     public GameObject ImpactPrefab => _impactPrefab;
 
-    [SerializeField] private ProjectileStats _stats;
-    public new ProjectileStats Stats => _stats;
+    [SerializeField]
+    private ProjectileStats _stats;
+
+    // Unity doesn't support covariant return types
+    public override SkillStats Stats {get {return (SkillStats)_stats;}}
+    public ProjectileStats ProjectileStats {get{return _stats;}}
     
 }

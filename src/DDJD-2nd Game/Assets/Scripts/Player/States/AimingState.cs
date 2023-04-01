@@ -9,12 +9,7 @@ public class AimingState : GenericState
     public AimingState(StateContext context, GenericState superState) : base(context, superState)
     { 
         _context = (Player)context;
-        _attackCD = 0.2f;
-        _timeUntilNextAttack = 0f;
     }
-
-    private float _attackCD;
-    private float _timeUntilNextAttack;
 
     public override void Enter()
     {
@@ -42,15 +37,8 @@ public class AimingState : GenericState
             //_context.Animator.ResetTrigger(_lastAnimTrigger);
             _lastAnimTrigger = null;
         }
-        if(_timeUntilNextAttack > 0f){
-            _timeUntilNextAttack -= Time.deltaTime;
-        }
         if(!_context.Input.IsAiming){
             _superstate.ChangeSubState(null);
-        }
-
-        if(_timeUntilNextAttack > 0f){
-            return;
         }
         Attack();
          
@@ -58,42 +46,40 @@ public class AimingState : GenericState
     }
 
     private void Attack(){
-        if(_context.Input.IsLeftShooting && _timeUntilNextAttack <= 0f){
+        if(_context.Input.IsLeftShooting){
             LeftShoot();
         }
-        if(_context.Input.IsRightShooting && _timeUntilNextAttack <= 0f){
+        if(_context.Input.IsRightShooting){
             RightShoot();
-        }
-        if(_context.Input.IsWaveAttacking){
-            WaveAttack();
         }
     }
 
     private void LeftShoot(){
-
-        //TODO:: removed repeated code
-        _timeUntilNextAttack = _attackCD;
+        Skill skill = _context.PlayerSkills.LeftSkill;
         Vector3 position = _context.LeftHand.transform.position;
-        Vector3 direction = _context.AimComponent.GetAimDirection(position);
-        _context.Shooter.LeftSpell = _context.EquippedSkills.LeftSkill;
-        _context.Shooter.LeftShoot(position, direction);
-        _context.Animator.SetTrigger("LeftShoot");
-        _lastAnimTrigger = "LeftShoot";
+        Shoot(skill, position, "LeftShoot");
     }
 
     private void RightShoot(){
-        _timeUntilNextAttack = _attackCD;
+        Skill skill = _context.PlayerSkills.RightSkill;
         Vector3 position = _context.RightHand.transform.position;
-        Vector3 direction = _context.AimComponent.GetAimDirection(position);
-        _context.Shooter.RightSpell = _context.EquippedSkills.RightSkill;
-        _context.Shooter.RightShoot(position, direction);
-        _context.Animator.SetTrigger("RightShoot");
-        _lastAnimTrigger = "RightShoot";
+        Shoot(skill, position, "RightShoot");
+    }
+
+    private void Shoot(Skill skill, Vector3 origin, string animationTrigger){
+        if(_context.PlayerSkills.IsSkillOnCooldown(skill)){
+            return;
+        }
+        _context.PlayerSkills.StartSkillCooldown(skill);
+        Vector3 direction = _context.AimComponent.GetAimDirection(origin);
+        _context.Shooter.RightSpell = skill;
+        _context.Shooter.RightShoot(origin, direction);
+        _context.Animator.SetTrigger(animationTrigger);
+        _lastAnimTrigger = animationTrigger;
     }
 
 
     private void WaveAttack(){
-        _timeUntilNextAttack = _attackCD;
         _context.Animator.SetTrigger("WaveAttack");
         _lastAnimTrigger = "WaveAttack";
     }

@@ -33,10 +33,10 @@ public class AimComponent : MonoBehaviour
         _aimUI.SetActive(true);
 
         if(_leftRune == null){    
-            _leftRune = _player.EquippedSkills.RightSkill.ActivateRune(_player.RightHand);
+            _leftRune = _player.PlayerSkills.RightSkill.ActivateRune(_player.RightHand);
         }
         if(_rightRune == null){
-            _rightRune = _player.EquippedSkills.LeftSkill.ActivateRune(_player.LeftHand);
+            _rightRune = _player.PlayerSkills.LeftSkill.ActivateRune(_player.LeftHand);
         }
     }
 

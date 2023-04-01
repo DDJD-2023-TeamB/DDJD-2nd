@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7351654228936006430}
   - component: {fileID: 1329190085941599728}
   - component: {fileID: 182098147305830135}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,9 +44,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 814310454050963301}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 629c3b722b20681459c810d7c270b4f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 9693cd30753073a4e8379b65b3d38cd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _radius: 3
 --- !u!54 &1329190085941599728
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -87,7 +88,7 @@ GameObject:
   - component: {fileID: 985589225741181487}
   - component: {fileID: 4959884377048534156}
   - component: {fileID: 3226521258979205743}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -6,9 +6,9 @@ public abstract class Skill : ScriptableObject
     private GameObject _spellPrefab;
     public GameObject SpellPrefab { get => _spellPrefab; set => _spellPrefab = value; }
 
-    [SerializeField] 
+    [SerializeField]
     private SkillStats _stats;
-    public SkillStats Stats { get => _stats; set => _stats = value; }
+    public virtual SkillStats Stats { get => _stats; set => _stats = value; }
 
     [SerializeField]
     private GameObject _handRunePrefab;

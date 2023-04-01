@@ -5,6 +5,6 @@ using UnityEngine;
 public interface SkillComponent
 {
     void Shoot(Vector3 direction);
-
+    void SetCaster(GameObject caster);
     void SetSkill(Skill skill);
 }
