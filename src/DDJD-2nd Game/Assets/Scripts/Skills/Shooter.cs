@@ -7,28 +7,28 @@ public class Shooter : MonoBehaviour
     private GameObject _leftSpell;
     private GameObject _rightSpell;
 
-    public GameObject LeftSpell{get{return _leftSpell;} set{_leftSpell = value;}}
-    public GameObject RightSpell{get{return _rightSpell;} set{_rightSpell = value;}}
-
-
-
-    // Start is called before the first frame update
-    void Start()
+    public GameObject LeftSpell
     {
-        
+        get { return _leftSpell; }
+        set { _leftSpell = value; }
+    }
+    public GameObject RightSpell
+    {
+        get { return _rightSpell; }
+        set { _rightSpell = value; }
     }
 
-    // Update is called once per frame
-    void Update()
+    public GameObject CreateLeftSpell(AimedSkill skill, Transform transform)
     {
-        
-    }
-
-    public GameObject CreateLeftSpell(Skill skill, Transform transform){
-        if(_leftSpell != null){
+        if (_leftSpell != null)
+        {
             CancelLeftShoot();
         }
-        _leftSpell = GameObject.Instantiate(skill.SpellPrefab, transform.position, Quaternion.identity);
+        _leftSpell = GameObject.Instantiate(
+            skill.SpellPrefab,
+            transform.position,
+            Quaternion.identity
+        );
         _leftSpell.transform.parent = transform;
         SkillComponent skillComponent = _leftSpell.GetComponent<SkillComponent>();
         skillComponent.SetCaster(gameObject);
@@ -36,11 +36,17 @@ public class Shooter : MonoBehaviour
         return _leftSpell;
     }
 
-    public GameObject CreateRightSpell(Skill skill, Transform transform){
-        if(_rightSpell != null){
+    public GameObject CreateRightSpell(AimedSkill skill, Transform transform)
+    {
+        if (_rightSpell != null)
+        {
             CancelRightShoot();
         }
-        _rightSpell = GameObject.Instantiate(skill.SpellPrefab, transform.position, Quaternion.identity);
+        _rightSpell = GameObject.Instantiate(
+            skill.SpellPrefab,
+            transform.position,
+            Quaternion.identity
+        );
         _rightSpell.transform.parent = transform;
         SkillComponent skillComponent = _rightSpell.GetComponent<SkillComponent>();
         skillComponent.SetCaster(gameObject);
@@ -48,39 +54,46 @@ public class Shooter : MonoBehaviour
         return _rightSpell;
     }
 
-    public void CancelLeftShoot(){
-        if(_leftSpell != null){
+    public void CancelLeftShoot()
+    {
+        if (_leftSpell != null)
+        {
             EndShoot(_leftSpell);
             _leftSpell = null;
         }
     }
 
-    public void CancelRightShoot(){
-        if(_rightSpell != null){
+    public void CancelRightShoot()
+    {
+        if (_rightSpell != null)
+        {
             EndShoot(_rightSpell);
             _rightSpell = null;
         }
     }
 
-    public void CancelShots(){
+    public void CancelShots()
+    {
         CancelLeftShoot();
         CancelRightShoot();
     }
 
-
-    public void Shoot(GameObject spell, Vector3 direction){
+    public void Shoot(GameObject spell, Vector3 direction)
+    {
         SkillComponent skillComponent = spell.GetComponent<SkillComponent>();
         skillComponent.Shoot(direction);
-        if(_leftSpell == spell){
+        if (_leftSpell == spell)
+        {
             _leftSpell = null;
         }
-        else if(_rightSpell == spell){
+        else if (_rightSpell == spell)
+        {
             _rightSpell = null;
         }
-        
     }
 
-    private void EndShoot(GameObject spell){
+    private void EndShoot(GameObject spell)
+    {
         Destroy(spell);
     }
 }
