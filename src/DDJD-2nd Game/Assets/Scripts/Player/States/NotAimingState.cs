@@ -28,7 +28,10 @@ public class NotAimingState : GenericState
         return true;
     }
 
-    public override void StateUpdate() { }
+    public override void StateUpdate()
+    {
+        CheckDash();
+    }
 
     public static bool GiveSubState(GenericState state, StateContext context)
     {
@@ -43,5 +46,31 @@ public class NotAimingState : GenericState
             return true;
         }
         return false;
+    }
+
+    private void CheckDash()
+    {
+        if (!_context.Input.IsDashing)
+            return;
+
+        if (_context.PlayerSkills.DashSkill != null)
+        {
+            UseDashSkill(_context.PlayerSkills.DashSkill);
+        }
+        else
+        {
+            // TODO: Normal dash
+        }
+    }
+
+    private void UseDashSkill(Dash dashSkill)
+    {
+        if (_context.PlayerSkills.IsSkillOnCooldown(dashSkill))
+        {
+            return;
+        }
+        _context.PlayerSkills.StartSkillCooldown(dashSkill);
+        _context.DashComponent.DashWithSkill(dashSkill);
+        // TODO: Trigger animation
     }
 }

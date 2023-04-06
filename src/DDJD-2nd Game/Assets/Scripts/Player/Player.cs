@@ -36,6 +36,12 @@ public class Player : StateContext
         get { return _shooter; }
     }
 
+    private Dashable _dashComponent;
+    public Dashable DashComponent
+    {
+        get { return _dashComponent; }
+    }
+
     [Header("Player Movement")]
     [SerializeField]
     private float _maxSpeed = 5f;
@@ -130,6 +136,7 @@ public class Player : StateContext
         _animator = GetComponent<Animator>();
         _aimComponent = GetComponent<AimComponent>();
         _shooter = GetComponent<Shooter>();
+        _dashComponent = GetComponent<Dashable>();
         _playerSkills.Player = this;
         ChangeState(_factory.Playable());
     }
