@@ -6,10 +6,8 @@ public class Dashable : MonoBehaviour
 {
     public void DashWithSkill(Dash dashSkill)
     {
-        GameObject spell = Instantiate(
-            dashSkill.SpellPrefab,
-            transform.position,
-            Quaternion.identity
-        );
+        // TODO: Improve after dash logic is implemented
+        Quaternion rotation = Quaternion.LookRotation(transform.forward);
+        GameObject spell = Instantiate(dashSkill.SpellPrefab, transform.position, rotation);
     }
 }
