@@ -12,11 +12,12 @@ public abstract class ProjectileComponent : MonoBehaviour , SkillComponent
 
     protected GameObject _caster;
 
-    void Awake()
+    protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody>();
     }
 
+    
 
     public void SetCaster(GameObject caster){
         _caster = caster;
@@ -27,9 +28,11 @@ public abstract class ProjectileComponent : MonoBehaviour , SkillComponent
         _impactPrefab = _skill.ImpactPrefab;
     }
 
-    public void Shoot(Vector3 direction){
+    public virtual void Shoot(Vector3 direction){
         _rb.AddForce(direction.normalized * _stats.Speed , ForceMode.Impulse);
     }
+
+
 
     public void OnTriggerEnter(Collider other){
         if(other.gameObject == _caster){

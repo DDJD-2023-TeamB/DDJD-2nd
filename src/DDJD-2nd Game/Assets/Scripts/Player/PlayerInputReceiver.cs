@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerInputReceiver : MonoBehaviour
 {
@@ -42,6 +43,13 @@ public class PlayerInputReceiver : MonoBehaviour
     private bool _isChangingRightSpell;
     public bool IsChangingRightSpell{get{return _isChangingRightSpell;}}
 
+    //Callbacks
+    public Action OnLeftShootKeydown;
+    public Action OnRightShootKeydown;
+    public Action OnLeftShootKeyup;
+    public Action OnRightShootKeyup;
+
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -65,19 +73,28 @@ public class PlayerInputReceiver : MonoBehaviour
         _playerInput.Combat.CombineSpellShot.performed += ctx => _isCombineShooting = true;
         _playerInput.Combat.CombineSpellShot.canceled += ctx => _isCombineShooting = false;
 
-        _playerInput.Combat.LeftSpellShot.performed += ctx => _isLeftShooting = true;
-        _playerInput.Combat.LeftSpellShot.canceled += ctx => _isLeftShooting = false;
-
-        _playerInput.Combat.RightSpellShot.performed += ctx => _isRightShooting = true;
-        _playerInput.Combat.RightSpellShot.canceled += ctx => _isRightShooting = false;
+        _playerInput.Combat.LeftSpellShot.performed += ctx => {
+            _isLeftShooting = true;
+            OnLeftShootKeydown?.Invoke();
+        };
+        _playerInput.Combat.LeftSpellShot.canceled += ctx => {
+            _isLeftShooting = false;
+            OnLeftShootKeyup?.Invoke();
+        };
+        _playerInput.Combat.RightSpellShot.performed += ctx => {
+            _isRightShooting = true;
+            OnRightShootKeydown?.Invoke();
+        };
+        _playerInput.Combat.RightSpellShot.canceled += ctx => {
+            _isRightShooting = false;
+            OnRightShootKeyup?.Invoke();
+        };
 
         _playerInput.Combat.ChangeLeftSpell.performed += ctx => _isChangingLeftSpell = true;
         _playerInput.Combat.ChangeLeftSpell.canceled += ctx => _isChangingLeftSpell = false;
 
         _playerInput.Combat.ChangeRightSpell.performed += ctx => _isChangingRightSpell = true;
         _playerInput.Combat.ChangeRightSpell.canceled += ctx => _isChangingRightSpell = false;
-
-
         
     }
 

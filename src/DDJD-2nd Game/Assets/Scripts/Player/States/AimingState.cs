@@ -17,6 +17,11 @@ public class AimingState : GenericState
         _context.Animator.SetBool("IsAiming", true);
         _context.AimComponent.StartAim();
 
+        _context.Input.OnLeftShootKeydown += OnLeftShootKeyDown;
+        _context.Input.OnRightShootKeydown += OnRightShootKeyDown;
+
+        _context.Input.OnLeftShootKeyup += OnLeftShootKeyup;
+        _context.Input.OnRightShootKeyup += OnRightShootKeyup;
 
         
         
@@ -24,6 +29,11 @@ public class AimingState : GenericState
 
     public override void Exit()
     {
+        _context.Input.OnLeftShootKeydown -= OnLeftShootKeyDown;
+        _context.Input.OnRightShootKeydown -= OnRightShootKeyDown;
+
+        _context.Input.OnLeftShootKeyup -= OnLeftShootKeyup;
+        _context.Input.OnRightShootKeyup -= OnRightShootKeyup;
     }
 
     public override bool CanChangeState(GenericState state)
@@ -40,49 +50,90 @@ public class AimingState : GenericState
         if(!_context.Input.IsAiming){
             _superstate.ChangeSubState(null);
         }
-        Attack();
+        //Attack();
          
         
     }
 
     private void Attack(){
         if(_context.Input.IsLeftShooting){
-            LeftShoot();
+            //LeftShoot();
         }
         if(_context.Input.IsRightShooting){
-            RightShoot();
+            //RightShoot();
         }
     }
 
-    private void LeftShoot(){
+    void OnLeftShootKeyDown(){
         Skill skill = _context.PlayerSkills.LeftSkill;
-        Vector3 position = _context.LeftHand.transform.position;
-        Shoot(skill, position, "LeftShoot");
+        GameObject spell = _context.Shooter.CreateLeftSpell(skill, _context.LeftHand.transform.position);
+        OnShootKeyDown(skill, spell, "LeftShoot");   
     }
 
-    private void RightShoot(){
+    void OnRightShootKeyDown(){
         Skill skill = _context.PlayerSkills.RightSkill;
-        Vector3 position = _context.RightHand.transform.position;
-        Shoot(skill, position, "RightShoot");
+        GameObject spell = _context.Shooter.CreateRightSpell(skill, _context.RightHand.transform.position);
+        OnShootKeyDown(skill, spell, "RightShoot");
+
     }
 
-    private void Shoot(Skill skill, Vector3 origin, string animationTrigger){
+    void OnLeftShootKeyup(){
+        Skill skill = _context.PlayerSkills.LeftSkill;
+        GameObject spell = _context.Shooter.LeftSpell;
+        OnShootKeyUp(skill, spell, "LeftShoot");
+
+    }
+
+    void OnRightShootKeyup(){
+        Skill skill = _context.PlayerSkills.RightSkill;
+        GameObject spell = _context.Shooter.RightSpell;
+        OnShootKeyUp(skill, spell, "RightShoot");
+    }
+
+    private void OnShootKeyDown(Skill skill, GameObject spell, string animationTrigger){
         if(_context.PlayerSkills.IsSkillOnCooldown(skill)){
             return;
         }
-        _context.PlayerSkills.StartSkillCooldown(skill);
-        Vector3 direction = _context.AimComponent.GetAimDirection(origin);
-        _context.Shooter.RightSpell = skill;
-        _context.Shooter.RightShoot(origin, direction);
-        _context.Animator.SetTrigger(animationTrigger);
-        _lastAnimTrigger = animationTrigger;
+        Vector3 origin = spell.transform.position;
+        switch(skill.ShootType){
+            case ShootType.Instant:
+                _context.PlayerSkills.StartSkillCooldown(skill);
+                Vector3 direction = _context.AimComponent.GetAimDirection(origin);
+                _context.Shooter.Shoot(spell, direction);
+                _context.Animator.SetTrigger(animationTrigger);
+                _lastAnimTrigger = animationTrigger;
+                break;
+            case ShootType.Charge:
+                _context.Animator.SetTrigger(animationTrigger);
+                _lastAnimTrigger = animationTrigger;
+                break;
+            case ShootType.Hold:
+                // TODO
+                break;
+        }
     }
 
-
-    private void WaveAttack(){
-        _context.Animator.SetTrigger("WaveAttack");
-        _lastAnimTrigger = "WaveAttack";
+    private void OnShootKeyUp(Skill skill, GameObject spell, string animationTrigger){
+        if(_context.PlayerSkills.IsSkillOnCooldown(skill)){
+            return;
+        }
+        Vector3 origin = spell.transform.position;
+        switch(skill.ShootType){
+            case ShootType.Instant:
+                // DO nothing
+                break;
+            case ShootType.Charge:
+                Vector3 direction = _context.AimComponent.GetAimDirection(origin);
+                _context.Shooter.Shoot(spell, direction);
+                _context.Animator.SetTrigger(animationTrigger);
+                _lastAnimTrigger = animationTrigger;
+                break;
+            case ShootType.Hold:
+                // TODO
+                break;
+        }
     }
+
 
     public static bool GiveSubState (GenericState state, StateContext context){
         if(!(context is Player)){

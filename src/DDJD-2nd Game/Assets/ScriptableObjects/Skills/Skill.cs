@@ -14,6 +14,10 @@ public abstract class Skill : ScriptableObject
     private GameObject _handRunePrefab;
     public GameObject HandRunePrefab { get => _handRunePrefab; set => _handRunePrefab = value; }
 
+    [SerializeField]
+    private ShootType _shootType;
+    public ShootType ShootType { get => _shootType; set => _shootType = value; }
+
     private GameObject _rune;
 
     public GameObject ActivateRune(GameObject parent){
