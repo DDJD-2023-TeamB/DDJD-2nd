@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface SkillComponent
+public abstract class SkillComponent : MonoBehaviour
 {
-    void Shoot(Vector3 direction);
-    void SetCaster(GameObject caster);
-    void SetSkill(Skill skill);
+    protected GameObject _caster;
+
+    public void SetCaster(GameObject caster)
+    {
+        _caster = caster;
+    }
+
+    public abstract void SetSkill(Skill skill);
 }

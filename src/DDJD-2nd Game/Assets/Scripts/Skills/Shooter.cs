@@ -80,7 +80,7 @@ public class Shooter : MonoBehaviour
 
     public void Shoot(GameObject spell, Vector3 direction)
     {
-        SkillComponent skillComponent = spell.GetComponent<SkillComponent>();
+        ProjectileComponent skillComponent = spell.GetComponent<ProjectileComponent>();
         skillComponent.Shoot(direction);
         if (_leftSpell == spell)
         {

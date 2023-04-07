@@ -21,9 +21,25 @@ public class DashStats : SkillStats
         set => _distance = value;
     }
 
-    public DashStats(float damage, float cooldown, float speed)
+    [SerializeField]
+    private float _effectDuration;
+    public float EffectDuration
+    {
+        get => _effectDuration;
+        set => _effectDuration = value;
+    }
+
+    public DashStats(
+        float damage,
+        float cooldown,
+        float speed,
+        float distance,
+        float effectDuration
+    )
         : base(damage, cooldown)
     {
         _speed = speed;
+        _distance = distance;
+        _effectDuration = effectDuration;
     }
 }

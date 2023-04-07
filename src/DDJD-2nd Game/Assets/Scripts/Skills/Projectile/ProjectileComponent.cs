@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ProjectileComponent : MonoBehaviour, SkillComponent
+public abstract class ProjectileComponent : SkillComponent
 {
     protected Rigidbody _rb;
     protected Collider _collider;
@@ -10,9 +10,7 @@ public abstract class ProjectileComponent : MonoBehaviour, SkillComponent
     protected Projectile _skill;
     protected GameObject _impactPrefab;
 
-    protected GameObject _caster;
-
-    protected virtual void Awake()
+    void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
@@ -31,12 +29,7 @@ public abstract class ProjectileComponent : MonoBehaviour, SkillComponent
         _rb.isKinematic = false;
     }
 
-    public void SetCaster(GameObject caster)
-    {
-        _caster = caster;
-    }
-
-    public virtual void SetSkill(Skill skill)
+    public override void SetSkill(Skill skill)
     {
         _skill = (Projectile)skill;
         _stats = _skill.ProjectileStats;
