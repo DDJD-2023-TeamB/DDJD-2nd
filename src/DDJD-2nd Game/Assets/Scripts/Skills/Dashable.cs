@@ -5,10 +5,14 @@ using UnityEngine;
 public class Dashable : MonoBehaviour
 {
     Rigidbody _rigidbody;
+    int _playerLayer;
+    int _enemyLayer;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _playerLayer = LayerMask.NameToLayer("Player");
+        _enemyLayer = LayerMask.NameToLayer("Enemy");
     }
 
     public void DashWithSkill(Dash dashSkill)
