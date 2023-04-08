@@ -18,14 +18,14 @@ public abstract class SkillStats
     }
 
     [SerializeField]
-    private ShootType _shootType;
-    public ShootType ShootType
+    private CastType _castType;
+    public CastType CastType
     {
-        get => _shootType;
-        set => _shootType = value;
+        get => _castType;
+        set => _castType = value;
     }
 
-    [ConditionalField(nameof(_shootType), false, ShootType.Charge)]
+    [ConditionalField(nameof(_castType), false, CastType.Charge)]
     [SerializeField]
     protected float _maxChargeTime;
     public float MaxChargeTime

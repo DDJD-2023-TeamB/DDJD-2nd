@@ -10,7 +10,7 @@ public abstract class ProjectileComponent : SkillComponent
     protected Projectile _skill;
     protected GameObject _impactPrefab;
 
-    void Awake()
+    protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();

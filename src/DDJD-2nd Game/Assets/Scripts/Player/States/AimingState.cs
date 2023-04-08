@@ -60,20 +60,20 @@ public class AimingState : GenericState
             return;
         }
         Vector3 origin = spell.transform.position;
-        switch (skill.Stats.ShootType)
+        switch (skill.Stats.CastType)
         {
-            case ShootType.Instant:
+            case CastType.Instant:
                 _context.PlayerSkills.StartSkillCooldown(skill);
                 Vector3 direction = _context.AimComponent.GetAimDirection(origin);
                 _context.Shooter.Shoot(spell, direction);
                 _context.Animator.SetTrigger(animationTrigger);
                 _lastAnimTrigger = animationTrigger;
                 break;
-            case ShootType.Charge:
+            case CastType.Charge:
                 _context.Animator.SetTrigger(animationTrigger);
                 _lastAnimTrigger = animationTrigger;
                 break;
-            case ShootType.Hold:
+            case CastType.Hold:
                 // TODO
                 break;
         }
@@ -85,19 +85,19 @@ public class AimingState : GenericState
         {
             return;
         }
-        Vector3 origin = spell.transform.position;
-        switch (skill.Stats.ShootType)
+        switch (skill.Stats.CastType)
         {
-            case ShootType.Instant:
+            case CastType.Instant:
                 // DO nothing
                 break;
-            case ShootType.Charge:
+            case CastType.Charge:
+                Vector3 origin = spell.transform.position;
                 Vector3 direction = _context.AimComponent.GetAimDirection(origin);
                 _context.Shooter.Shoot(spell, direction);
                 _context.Animator.SetTrigger(animationTrigger);
                 _lastAnimTrigger = animationTrigger;
                 break;
-            case ShootType.Hold:
+            case CastType.Hold:
                 // TODO
                 break;
         }
