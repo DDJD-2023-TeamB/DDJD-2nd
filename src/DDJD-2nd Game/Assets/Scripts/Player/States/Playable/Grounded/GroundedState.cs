@@ -14,7 +14,7 @@ public class GroundedState : GenericState
     public override void Enter()
     {
         _context.Animator.SetBool("IsGrounded", true);
-        ChangeSubState(_context.Factory.Idle(this));
+        CheckMoving();
     }
 
     public override void Exit() { }
@@ -26,12 +26,6 @@ public class GroundedState : GenericState
 
     public override void StateUpdate()
     {
-        if (!MovementUtils.IsGrounded(_context.Rigidbody))
-        {
-            _superstate.ChangeSubState(_context.Factory.Airborne(_superstate));
-            return;
-        }
-
         if (_context.Input.IsJumping)
         {
             _context.Rigidbody.AddForce(
@@ -40,5 +34,25 @@ public class GroundedState : GenericState
             );
             _context.Animator.SetTrigger("Jump");
         }
+        CheckMoving();
+    }
+
+    private bool CheckMoving(){
+        if(!(_substate is MoveState)){
+            if (_context.Input.MoveInput != Vector2.zero )
+            {
+                ChangeSubState(_context.Factory.Move(this));
+                return true;
+            }
+        }
+        else if(!(_substate is IdleState)){
+            bool isMoving = _context.Rigidbody.velocity.magnitude > 0.1f ;
+            if (_context.Input.MoveInput == Vector2.zero && !isMoving)
+            {
+                ChangeSubState(_context.Factory.Idle(this));
+                return true;
+            }
+        }
+        return false;
     }
 }

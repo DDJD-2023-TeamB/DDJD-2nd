@@ -52,11 +52,6 @@ public class MoveState : GenericState
     // Check state and substate, return true if state is changed
     private bool CheckCurrentStates()
     {
-        if (!AimingState.GiveSubState(this, _context))
-        {
-            NotAimingState.GiveSubState(this, _context);
-        }
-
         if (_context.Input.MoveInput == Vector2.zero)
         {
             if (_context.Rigidbody.velocity.magnitude < 0.1f)
