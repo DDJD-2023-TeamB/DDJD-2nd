@@ -50,18 +50,6 @@ public class AimingState : GenericState
         if(!_context.Input.IsAiming){
             _superstate.ChangeSubState(null);
         }
-        //Attack();
-         
-        
-    }
-
-    private void Attack(){
-        if(_context.Input.IsLeftShooting){
-            //LeftShoot();
-        }
-        if(_context.Input.IsRightShooting){
-            //RightShoot();
-        }
     }
 
     private void OnShootKeyDown(Skill skill, GameObject spell, string animationTrigger){
@@ -69,7 +57,7 @@ public class AimingState : GenericState
             return;
         }
         Vector3 origin = spell.transform.position;
-        switch(skill.ShootType){
+        switch(skill.Stats.ShootType){
             case ShootType.Instant:
                 _context.PlayerSkills.StartSkillCooldown(skill);
                 Vector3 direction = _context.AimComponent.GetAimDirection(origin);
@@ -92,7 +80,7 @@ public class AimingState : GenericState
             return;
         }
         Vector3 origin = spell.transform.position;
-        switch(skill.ShootType){
+        switch(skill.Stats.ShootType){
             case ShootType.Instant:
                 // DO nothing
                 break;

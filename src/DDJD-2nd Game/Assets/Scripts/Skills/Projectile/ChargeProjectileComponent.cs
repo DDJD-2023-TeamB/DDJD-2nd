@@ -5,17 +5,8 @@ using UnityEngine.VFX;
 
 public abstract class ChargeProjectileComponent : ProjectileComponent
 {
-
-    [SerializeField]
-    protected float _maxChargeTime = 2.0f;
-
-    [SerializeField]
-    protected float _chargeSpeed = 1.0f;
-
     protected float _chargeTime = 0.0f;
     private bool _isCharging = false;
-
-    private Transform _casterOffset;
 
 
     override protected void Awake(){
@@ -26,14 +17,13 @@ public abstract class ChargeProjectileComponent : ProjectileComponent
 
     }
 
-
     protected void Charge(){
         if(!_isCharging){
             return;
         }
         _chargeTime += Time.deltaTime;
-        if(_chargeTime >= _maxChargeTime){
-            _chargeTime = _maxChargeTime;
+        if(_chargeTime >= _stats.MaxChargeTime){
+            _chargeTime = _stats.MaxChargeTime;
         }
         OnCharge();
     }
@@ -50,7 +40,7 @@ public abstract class ChargeProjectileComponent : ProjectileComponent
     }
 
     protected float GetCurrentCharge(){
-        return _chargeTime / _maxChargeTime;
+        return _chargeTime / _stats.MaxChargeTime;
     }
     
 }

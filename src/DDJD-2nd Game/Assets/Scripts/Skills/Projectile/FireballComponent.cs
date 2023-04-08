@@ -32,8 +32,12 @@ public class FireballComponent : ChargeProjectileComponent
     override protected void Awake(){
         base.Awake();
         _fireballVFX = GetComponentInChildren<VisualEffect>();
+    }
+
+    override public void SetSkill(Skill skill){
+        base.SetSkill(skill);
         _fireballVFX.SetFloat("SpawnRadius", 0.1f);
-        _fireballVFX.SetFloat("SpawnRate", PARTICLES / _maxChargeTime);
+        _fireballVFX.SetFloat("SpawnRate", PARTICLES / _stats.MaxChargeTime);
     }
 
     protected override void OnCharge(){

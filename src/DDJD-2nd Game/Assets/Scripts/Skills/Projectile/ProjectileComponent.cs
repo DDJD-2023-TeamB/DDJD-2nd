@@ -33,7 +33,7 @@ public abstract class ProjectileComponent : MonoBehaviour , SkillComponent
     public void SetCaster(GameObject caster){
         _caster = caster;
     }
-    public void SetSkill(Skill skill){
+    public virtual void SetSkill(Skill skill){
         _skill = (Projectile) skill;
         _stats = _skill.ProjectileStats;
         _impactPrefab = _skill.ImpactPrefab;
