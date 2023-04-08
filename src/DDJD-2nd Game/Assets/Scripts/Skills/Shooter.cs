@@ -24,16 +24,24 @@ public class Shooter : MonoBehaviour
         
     }
 
-    public GameObject CreateLeftSpell(Skill skill, Vector3 position){
-        _leftSpell = GameObject.Instantiate(skill.SpellPrefab, position, Quaternion.identity);
+    public GameObject CreateLeftSpell(Skill skill, Transform transform){
+        if(_leftSpell != null){
+            CancelLeftShoot();
+        }
+        _leftSpell = GameObject.Instantiate(skill.SpellPrefab, transform.position, Quaternion.identity);
+        _leftSpell.transform.parent = transform;
         SkillComponent skillComponent = _leftSpell.GetComponent<SkillComponent>();
         skillComponent.SetCaster(gameObject);
         skillComponent.SetSkill(skill);
         return _leftSpell;
     }
 
-    public GameObject CreateRightSpell(Skill skill, Vector3 position){
-        _rightSpell = GameObject.Instantiate(skill.SpellPrefab, position, Quaternion.identity);
+    public GameObject CreateRightSpell(Skill skill, Transform transform){
+        if(_rightSpell != null){
+            CancelRightShoot();
+        }
+        _rightSpell = GameObject.Instantiate(skill.SpellPrefab, transform.position, Quaternion.identity);
+        _rightSpell.transform.parent = transform;
         SkillComponent skillComponent = _rightSpell.GetComponent<SkillComponent>();
         skillComponent.SetCaster(gameObject);
         skillComponent.SetSkill(skill);

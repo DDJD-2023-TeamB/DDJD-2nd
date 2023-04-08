@@ -15,10 +15,15 @@ public abstract class ChargeProjectileComponent : ProjectileComponent
     protected float _chargeTime = 0.0f;
     private bool _isCharging = false;
 
+    private Transform _casterOffset;
+
 
     override protected void Awake(){
         base.Awake();
         _isCharging = true;
+
+        
+
     }
 
 

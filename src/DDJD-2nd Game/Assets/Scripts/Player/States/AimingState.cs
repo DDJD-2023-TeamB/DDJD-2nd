@@ -64,32 +64,6 @@ public class AimingState : GenericState
         }
     }
 
-    void OnLeftShootKeyDown(){
-        Skill skill = _context.PlayerSkills.LeftSkill;
-        GameObject spell = _context.Shooter.CreateLeftSpell(skill, _context.LeftHand.transform.position);
-        OnShootKeyDown(skill, spell, "LeftShoot");   
-    }
-
-    void OnRightShootKeyDown(){
-        Skill skill = _context.PlayerSkills.RightSkill;
-        GameObject spell = _context.Shooter.CreateRightSpell(skill, _context.RightHand.transform.position);
-        OnShootKeyDown(skill, spell, "RightShoot");
-
-    }
-
-    void OnLeftShootKeyup(){
-        Skill skill = _context.PlayerSkills.LeftSkill;
-        GameObject spell = _context.Shooter.LeftSpell;
-        OnShootKeyUp(skill, spell, "LeftShoot");
-
-    }
-
-    void OnRightShootKeyup(){
-        Skill skill = _context.PlayerSkills.RightSkill;
-        GameObject spell = _context.Shooter.RightSpell;
-        OnShootKeyUp(skill, spell, "RightShoot");
-    }
-
     private void OnShootKeyDown(Skill skill, GameObject spell, string animationTrigger){
         if(_context.PlayerSkills.IsSkillOnCooldown(skill)){
             return;
@@ -134,7 +108,6 @@ public class AimingState : GenericState
         }
     }
 
-
     public static bool GiveSubState (GenericState state, StateContext context){
         if(!(context is Player)){
             return false;
@@ -146,4 +119,35 @@ public class AimingState : GenericState
         }
         return false;
     }
+
+
+    
+    void OnLeftShootKeyDown(){
+        Skill skill = _context.PlayerSkills.LeftSkill;
+        GameObject spell = _context.Shooter.CreateLeftSpell(skill, _context.LeftHand.transform);
+        OnShootKeyDown(skill, spell, "LeftShoot");   
+    }
+
+    void OnRightShootKeyDown(){
+        Skill skill = _context.PlayerSkills.RightSkill;
+        GameObject spell = _context.Shooter.CreateRightSpell(skill, _context.RightHand.transform);
+        OnShootKeyDown(skill, spell, "RightShoot");
+
+    }
+
+    void OnLeftShootKeyup(){
+        Skill skill = _context.PlayerSkills.LeftSkill;
+        GameObject spell = _context.Shooter.LeftSpell;
+        OnShootKeyUp(skill, spell, "LeftShoot");
+
+    }
+
+    void OnRightShootKeyup(){
+        Skill skill = _context.PlayerSkills.RightSkill;
+        GameObject spell = _context.Shooter.RightSpell;
+        OnShootKeyUp(skill, spell, "RightShoot");
+    }
+
+
+    
 }
