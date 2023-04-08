@@ -1,1 +1,1 @@
-public interface StateFactory{}
+public interface StateFactory { }

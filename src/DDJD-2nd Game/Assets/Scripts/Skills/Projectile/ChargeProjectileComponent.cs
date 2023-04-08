@@ -8,39 +8,41 @@ public abstract class ChargeProjectileComponent : ProjectileComponent
     protected float _chargeTime = 0.0f;
     private bool _isCharging = false;
 
-
-    override protected void Awake(){
+    override protected void Awake()
+    {
         base.Awake();
         _isCharging = true;
-
-        
-
     }
 
-    protected void Charge(){
-        if(!_isCharging){
+    protected void Charge()
+    {
+        if (!_isCharging)
+        {
             return;
         }
         _chargeTime += Time.deltaTime;
-        if(_chargeTime >= _stats.MaxChargeTime){
+        if (_chargeTime >= _stats.MaxChargeTime)
+        {
             _chargeTime = _stats.MaxChargeTime;
         }
         OnCharge();
     }
 
-    public override void Shoot(Vector3 direction){
+    public override void Shoot(Vector3 direction)
+    {
         base.Shoot(direction);
         _isCharging = false;
     }
+
     protected abstract void OnCharge();
 
-    
-    protected void Update(){
+    protected void Update()
+    {
         Charge();
     }
 
-    protected float GetCurrentCharge(){
+    protected float GetCurrentCharge()
+    {
         return _chargeTime / _stats.MaxChargeTime;
     }
-    
 }

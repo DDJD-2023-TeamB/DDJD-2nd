@@ -1,4 +1,4 @@
-public enum ShootType
+public enum CastType
 {
     Instant, // Apply cooldown instantly, shoot immediately
     Charge, // Apply cooldown and shoot after release
