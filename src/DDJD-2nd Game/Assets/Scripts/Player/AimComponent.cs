@@ -17,10 +17,11 @@ public class AimComponent : MonoBehaviour
     [SerializeField]
     private GameObject _aimUI;
 
+    private GameObject _leftRune;
+    private GameObject _rightRune;
 
-
-    //private float aimWeight = 0f;
-    //private bool isAiming = false;
+    private float aimWeight = 0f;
+    private bool isAiming = false;
     // Start is called before the first frame update
     void Awake()
     {
@@ -28,19 +29,33 @@ public class AimComponent : MonoBehaviour
     }
 
     public void StartAim(){
-        //isAiming = true;
+        isAiming = true;
         _aimUI.SetActive(true);
+
+        if(_leftRune == null){    
+            _leftRune = _player.PlayerSkills.RightSkill.ActivateRune(_player.RightHand);
+        }
+        if(_rightRune == null){
+            _rightRune = _player.PlayerSkills.LeftSkill.ActivateRune(_player.LeftHand);
+        }
     }
 
     public void StopAim(){
-        //isAiming = false;
+        isAiming = false;
         _aimUI.SetActive(false);
+
+        GameObject[] runes = new GameObject[]{_leftRune, _rightRune};
+        foreach(GameObject rune in runes){
+            if(rune != null){
+                Destroy(rune);
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*
+        
         if(aimWeight < 1f && isAiming){
             aimWeight += 2 * Time.deltaTime;
             if(aimWeight > 1){
@@ -52,8 +67,8 @@ public class AimComponent : MonoBehaviour
                 aimWeight = 0;
             }
         }
-        aimRig.weight = aimWeight;   
-        */
+        aimRig.weight = 1.0f;   
+        
     }
     public void SetAimPosition(Vector3 pos){
         _aimTarget.position = pos;

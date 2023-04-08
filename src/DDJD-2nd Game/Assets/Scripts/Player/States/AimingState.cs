@@ -9,12 +9,7 @@ public class AimingState : GenericState
     public AimingState(StateContext context, GenericState superState) : base(context, superState)
     { 
         _context = (Player)context;
-        _attackCD = 0.2f;
-        _timeUntilNextAttack = 0f;
     }
-
-    private float _attackCD;
-    private float _timeUntilNextAttack;
 
     public override void Enter()
     {
@@ -22,14 +17,23 @@ public class AimingState : GenericState
         _context.Animator.SetBool("IsAiming", true);
         _context.AimComponent.StartAim();
 
+        _context.Input.OnLeftShootKeydown += OnLeftShootKeyDown;
+        _context.Input.OnRightShootKeydown += OnRightShootKeyDown;
+
+        _context.Input.OnLeftShootKeyup += OnLeftShootKeyup;
+        _context.Input.OnRightShootKeyup += OnRightShootKeyup;
+
+        
         
     }
 
     public override void Exit()
     {
-        //_context.Animator.SetBool("IsAiming", false);
-        _context.AimCamera.Priority = 5;
-        _context.AimComponent.StopAim();
+        _context.Input.OnLeftShootKeydown -= OnLeftShootKeyDown;
+        _context.Input.OnRightShootKeydown -= OnRightShootKeyDown;
+
+        _context.Input.OnLeftShootKeyup -= OnLeftShootKeyup;
+        _context.Input.OnRightShootKeyup -= OnRightShootKeyup;
     }
 
     public override bool CanChangeState(GenericState state)
@@ -43,43 +47,53 @@ public class AimingState : GenericState
             //_context.Animator.ResetTrigger(_lastAnimTrigger);
             _lastAnimTrigger = null;
         }
-        if(_timeUntilNextAttack > 0f){
-            _timeUntilNextAttack -= Time.deltaTime;
-        }
         if(!_context.Input.IsAiming){
             _superstate.ChangeSubState(null);
         }
+    }
 
-        if(_timeUntilNextAttack > 0f){
+    private void OnShootKeyDown(Skill skill, GameObject spell, string animationTrigger){
+        if(_context.PlayerSkills.IsSkillOnCooldown(skill)){
             return;
         }
-        Attack();
-         
-        
-    }
-
-    private void Attack(){
-        if(_context.Input.IsShooting && _timeUntilNextAttack <= 0f){
-            Shoot();
-        }  
-        if(_context.Input.IsWaveAttacking){
-            WaveAttack();
+        Vector3 origin = spell.transform.position;
+        switch(skill.Stats.ShootType){
+            case ShootType.Instant:
+                _context.PlayerSkills.StartSkillCooldown(skill);
+                Vector3 direction = _context.AimComponent.GetAimDirection(origin);
+                _context.Shooter.Shoot(spell, direction);
+                _context.Animator.SetTrigger(animationTrigger);
+                _lastAnimTrigger = animationTrigger;
+                break;
+            case ShootType.Charge:
+                _context.Animator.SetTrigger(animationTrigger);
+                _lastAnimTrigger = animationTrigger;
+                break;
+            case ShootType.Hold:
+                // TODO
+                break;
         }
     }
 
-    private void Shoot(){
-        _timeUntilNextAttack = _attackCD;
-        Vector3 position = _context.AimCamera.transform.position + _context.AimCamera.transform.forward * 10f;
-        _context.Shooter.Shoot();
-        _context.Animator.SetTrigger("Shoot");
-        _lastAnimTrigger = "Shoot";
-        
-    }
-
-    private void WaveAttack(){
-        _timeUntilNextAttack = _attackCD;
-        _context.Animator.SetTrigger("WaveAttack");
-        _lastAnimTrigger = "WaveAttack";
+    private void OnShootKeyUp(Skill skill, GameObject spell, string animationTrigger){
+        if(_context.PlayerSkills.IsSkillOnCooldown(skill)){
+            return;
+        }
+        Vector3 origin = spell.transform.position;
+        switch(skill.Stats.ShootType){
+            case ShootType.Instant:
+                // DO nothing
+                break;
+            case ShootType.Charge:
+                Vector3 direction = _context.AimComponent.GetAimDirection(origin);
+                _context.Shooter.Shoot(spell, direction);
+                _context.Animator.SetTrigger(animationTrigger);
+                _lastAnimTrigger = animationTrigger;
+                break;
+            case ShootType.Hold:
+                // TODO
+                break;
+        }
     }
 
     public static bool GiveSubState (GenericState state, StateContext context){
@@ -93,4 +107,35 @@ public class AimingState : GenericState
         }
         return false;
     }
+
+
+    
+    void OnLeftShootKeyDown(){
+        Skill skill = _context.PlayerSkills.LeftSkill;
+        GameObject spell = _context.Shooter.CreateLeftSpell(skill, _context.LeftHand.transform);
+        OnShootKeyDown(skill, spell, "LeftShoot");   
+    }
+
+    void OnRightShootKeyDown(){
+        Skill skill = _context.PlayerSkills.RightSkill;
+        GameObject spell = _context.Shooter.CreateRightSpell(skill, _context.RightHand.transform);
+        OnShootKeyDown(skill, spell, "RightShoot");
+
+    }
+
+    void OnLeftShootKeyup(){
+        Skill skill = _context.PlayerSkills.LeftSkill;
+        GameObject spell = _context.Shooter.LeftSpell;
+        OnShootKeyUp(skill, spell, "LeftShoot");
+
+    }
+
+    void OnRightShootKeyup(){
+        Skill skill = _context.PlayerSkills.RightSkill;
+        GameObject spell = _context.Shooter.RightSpell;
+        OnShootKeyUp(skill, spell, "RightShoot");
+    }
+
+
+    
 }

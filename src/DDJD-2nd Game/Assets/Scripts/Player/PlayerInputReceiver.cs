@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerInputReceiver : MonoBehaviour
 {
@@ -18,8 +19,14 @@ public class PlayerInputReceiver : MonoBehaviour
     private bool _isAiming;
     public bool IsAiming{get{return _isAiming;}}
 
-    private bool _isShooting;
-    public bool IsShooting{get{return _isShooting;}}
+    private bool _isCombineShooting;
+    public bool IsCombineShooting{get{return _isCombineShooting;}}
+
+    private bool _isLeftShooting;
+    public bool IsLeftShooting{get{return _isLeftShooting;}}
+
+    private bool _isRightShooting;
+    public bool IsRightShooting{get{return _isRightShooting;}}
 
     private bool _isJumping;
     public bool IsJumping{get{return _isJumping;}}
@@ -29,6 +36,19 @@ public class PlayerInputReceiver : MonoBehaviour
 
     private bool _isDashing;
     public bool IsDashing{get{return _isDashing;}}
+
+    private bool _isChangingLeftSpell;
+    public bool IsChangingLeftSpell{get{return _isChangingLeftSpell;}}
+
+    private bool _isChangingRightSpell;
+    public bool IsChangingRightSpell{get{return _isChangingRightSpell;}}
+
+    //Callbacks
+    public Action OnLeftShootKeydown;
+    public Action OnRightShootKeydown;
+    public Action OnLeftShootKeyup;
+    public Action OnRightShootKeyup;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -50,10 +70,31 @@ public class PlayerInputReceiver : MonoBehaviour
         _playerInput.Combat.Aim.performed += ctx => _isAiming = true;
         _playerInput.Combat.Aim.canceled += ctx => _isAiming = false;
 
-        _playerInput.Combat.Shoot.performed += ctx => _isShooting = true;
-        _playerInput.Combat.Shoot.canceled += ctx => _isShooting = false;
+        _playerInput.Combat.CombineSpellShot.performed += ctx => _isCombineShooting = true;
+        _playerInput.Combat.CombineSpellShot.canceled += ctx => _isCombineShooting = false;
 
+        _playerInput.Combat.LeftSpellShot.performed += ctx => {
+            _isLeftShooting = true;
+            OnLeftShootKeydown?.Invoke();
+        };
+        _playerInput.Combat.LeftSpellShot.canceled += ctx => {
+            _isLeftShooting = false;
+            OnLeftShootKeyup?.Invoke();
+        };
+        _playerInput.Combat.RightSpellShot.performed += ctx => {
+            _isRightShooting = true;
+            OnRightShootKeydown?.Invoke();
+        };
+        _playerInput.Combat.RightSpellShot.canceled += ctx => {
+            _isRightShooting = false;
+            OnRightShootKeyup?.Invoke();
+        };
 
+        _playerInput.Combat.ChangeLeftSpell.performed += ctx => _isChangingLeftSpell = true;
+        _playerInput.Combat.ChangeLeftSpell.canceled += ctx => _isChangingLeftSpell = false;
+
+        _playerInput.Combat.ChangeRightSpell.performed += ctx => _isChangingRightSpell = true;
+        _playerInput.Combat.ChangeRightSpell.canceled += ctx => _isChangingRightSpell = false;
         
     }
 

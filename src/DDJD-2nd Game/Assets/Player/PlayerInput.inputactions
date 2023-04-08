@@ -175,9 +175,45 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Shoot",
+                    "name": "CombineSpellShot",
                     "type": "Button",
                     "id": "5a98a77a-c208-4464-858e-6002567c5690",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LeftSpellShot",
+                    "type": "Button",
+                    "id": "0b274111-0b30-491e-808d-902da5d62f23",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightSpellShot",
+                    "type": "Button",
+                    "id": "22769541-d336-4d03-a434-ebbda4a1d6d9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeLeftSpell",
+                    "type": "Button",
+                    "id": "3cc3d25b-16eb-424d-8966-d144654bc646",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeRightSpell",
+                    "type": "Button",
+                    "id": "c4ae74ac-747b-43cb-9f37-847b3f0d50ad",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -203,7 +239,51 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shoot",
+                    "action": "CombineSpellShot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3dfa945b-5681-4a0c-9743-a85c1f491175",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftSpellShot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "18f1e32c-719d-4247-b314-05e0a592de32",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightSpellShot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f803f591-f7ed-433c-b1c3-2be561026a5a",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeLeftSpell",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b61deb5e-86c0-4496-8a44-1caa48cb3b6d",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeRightSpell",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

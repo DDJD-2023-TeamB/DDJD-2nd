@@ -76,6 +76,12 @@ public class PlayableState : GenericState
 
         //Raycast to find the correct aim height
         Vector3 targetPosition = _context.AimCamera.transform.position + _context.AimCamera.transform.forward * 10f;
+        // Raycast for debug
+        Debug.DrawRay(_context.AimCamera.transform.position, _context.AimCamera.transform.forward * 10f, Color.red, 2f);
+
+
+
+
         _context.AimComponent.SetAimPosition(targetPosition);
 
         
