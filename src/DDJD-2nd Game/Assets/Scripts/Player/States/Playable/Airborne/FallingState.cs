@@ -31,10 +31,6 @@ public class FallingState : GenericState
     // Check state and substate, return true if state is changed
     private bool CheckCurrentStates()
     {
-        if (!AimingState.GiveSubState(this, _context))
-        {
-            NotAimingState.GiveSubState(this, _context);
-        }
         return false;
     }
 }

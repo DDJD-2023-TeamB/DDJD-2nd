@@ -1,9 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class AimingState : GenericState
+public class AimingState : MovableState
 {
-    private Player _context;
     private int _cameraPriorityBoost = 10;
     private string _lastAnimTrigger;
 
@@ -15,6 +14,7 @@ public class AimingState : GenericState
 
     public override void Enter()
     {
+        base.Enter();
         _context.AimCamera.Priority = 5 + _cameraPriorityBoost;
         _context.Animator.SetBool("IsAiming", true);
         _context.AimComponent.StartAim();
@@ -33,6 +33,10 @@ public class AimingState : GenericState
 
         _context.Input.OnLeftShootKeyup -= OnLeftShootKeyup;
         _context.Input.OnRightShootKeyup -= OnRightShootKeyup;
+
+        _context.AimCamera.Priority = 5;
+        _context.Animator.SetBool("IsAiming", false);
+        _context.AimComponent.StopAim();
     }
 
     public override bool CanChangeState(GenericState state)
@@ -42,6 +46,7 @@ public class AimingState : GenericState
 
     public override void StateUpdate()
     {
+        base.StateUpdate();
         if (_lastAnimTrigger != null)
         {
             //_context.Animator.ResetTrigger(_lastAnimTrigger);
@@ -101,21 +106,6 @@ public class AimingState : GenericState
                 // TODO
                 break;
         }
-    }
-
-    public static bool GiveSubState(GenericState state, StateContext context)
-    {
-        if (!(context is Player))
-        {
-            return false;
-        }
-        Player player = (Player)context;
-        if (!(state.Substate is AimingState) && player.Input.IsAiming)
-        {
-            state.ChangeSubState(player.Factory.Aiming(state));
-            return true;
-        }
-        return false;
     }
 
     void OnLeftShootKeyDown()

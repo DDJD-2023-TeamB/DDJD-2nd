@@ -35,16 +35,7 @@ public class IdleState : GenericState
     // Check state and substate, return true if state is changed
     private bool CheckCurrentStates()
     {
-        if (!AimingState.GiveSubState(this, _context))
-        {
-            NotAimingState.GiveSubState(this, _context);
-        }
 
-        if (_context.Input.MoveInput != Vector2.zero)
-        {
-            _superstate.ChangeSubState(_context.Factory.Move(_superstate));
-            return true;
-        }
         return false;
     }
 }

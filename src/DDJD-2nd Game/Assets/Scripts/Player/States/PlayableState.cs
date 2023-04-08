@@ -26,19 +26,18 @@ public class PlayableState : GenericState
 
     public override void StateUpdate()
     {
-        CheckAirbone();
+        CheckAiming();
         LookRotation();
     }
 
-    private void CheckAirbone()
-    {
-        if (!MovementUtils.IsGrounded(_context.Rigidbody) && !(_substate is AirborneState))
+    private void CheckAiming(){
+        if (_context.Input.IsAiming && !(_substate is AimingState))
         {
-            ChangeSubState(_context.Factory.Airborne(_substate));
+            ChangeSubState(_context.Factory.Aiming(this));
         }
-        else if (MovementUtils.IsGrounded(_context.Rigidbody) && _substate is AirborneState)
+        else if (!_context.Input.IsAiming && _substate is AimingState)
         {
-            ChangeSubState(_context.Factory.Grounded(_substate));
+            ChangeSubState(_context.Factory.NotAiming(this));
         }
     }
 
