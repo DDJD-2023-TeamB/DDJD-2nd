@@ -6,19 +6,19 @@ using UnityEngine;
 public class DashStats : SkillStats
 {
     [SerializeField]
-    private float _speed;
-    public float Speed
+    private float _force;
+    public float Force
     {
-        get => _speed;
-        set => _speed = value;
+        get => _force;
+        set => _force = value;
     }
 
     [SerializeField]
-    private float _distance;
-    public float Distance
+    private float _duration;
+    public float Duration
     {
-        get => _distance;
-        set => _distance = value;
+        get => _duration;
+        set => _duration = value;
     }
 
     [SerializeField]
@@ -32,14 +32,14 @@ public class DashStats : SkillStats
     public DashStats(
         float damage,
         float cooldown,
-        float speed,
-        float distance,
+        float force,
+        float duration,
         float effectDuration
     )
         : base(damage, cooldown)
     {
-        _speed = speed;
-        _distance = distance;
+        _force = force;
+        _duration = duration;
         _effectDuration = effectDuration;
     }
 }
