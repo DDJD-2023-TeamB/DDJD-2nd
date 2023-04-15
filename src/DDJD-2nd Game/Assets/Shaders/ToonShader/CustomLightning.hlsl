@@ -1,6 +1,13 @@
 #ifndef CUSTOM_LIGHTING_INCLUDED
 #define CUSTOM_LIGHTING_INCLUDED
 
+#ifndef SHADERGRAPH_PREVIEW
+    #include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
+    #if (SHADERPASS != SHADERPASS_FORWARD)
+        #undef REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR
+    #endif
+#endif
+
 void MainLight_float(float3 WorldPos, out float3 Direction, out float3 Color, out float DistanceAtten, out float ShadowAtten)
 {
 #if SHADERGRAPH_PREVIEW
