@@ -30,7 +30,8 @@ public class PlayableState : GenericState
         LookRotation();
     }
 
-    private void CheckAiming(){
+    private void CheckAiming()
+    {
         if (_context.Input.IsAiming && !(_substate is AimingState))
         {
             ChangeSubState(_context.Factory.Aiming(this));
@@ -85,12 +86,14 @@ public class PlayableState : GenericState
         Vector3 targetPosition =
             _context.AimCamera.transform.position + _context.AimCamera.transform.forward * 10f;
         // Raycast for debug
+        /*
         Debug.DrawRay(
             _context.AimCamera.transform.position,
             _context.AimCamera.transform.forward * 10f,
             Color.red,
             2f
         );
+        */
 
         _context.AimComponent.SetAimPosition(targetPosition);
     }
