@@ -46,4 +46,9 @@ public class PlayerStateFactory : StateFactory
     {
         return new FallingState(_context, superState);
     }
+
+    public MeleeAttackingState GetMeleeAttackingState(GenericState superState)
+    {
+        return new MeleeAttackingState(_context, superState);
+    }
 }

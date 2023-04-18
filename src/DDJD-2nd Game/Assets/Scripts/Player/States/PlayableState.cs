@@ -30,12 +30,13 @@ public class PlayableState : GenericState
         LookRotation();
     }
 
-    private void CheckAiming(){
-        if (_context.Input.IsAiming && !(_substate is AimingState))
+    private void CheckAiming()
+    {
+        if (_context.Input.IsAiming && !(_substate is AimingState) && !_context.Input.IsMeleeAttacking)
         {
             ChangeSubState(_context.Factory.Aiming(this));
         }
-        else if (!_context.Input.IsAiming && _substate is AimingState)
+        else if (!_context.Input.IsAiming && !(_substate is NotAimingState))
         {
             ChangeSubState(_context.Factory.NotAiming(this));
         }
@@ -85,12 +86,14 @@ public class PlayableState : GenericState
         Vector3 targetPosition =
             _context.AimCamera.transform.position + _context.AimCamera.transform.forward * 10f;
         // Raycast for debug
+        /*
         Debug.DrawRay(
             _context.AimCamera.transform.position,
             _context.AimCamera.transform.forward * 10f,
             Color.red,
             2f
         );
+        */
 
         _context.AimComponent.SetAimPosition(targetPosition);
     }

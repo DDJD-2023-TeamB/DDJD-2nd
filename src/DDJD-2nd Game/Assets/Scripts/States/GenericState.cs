@@ -43,6 +43,7 @@ public abstract class GenericState
         {
             _substate.Enter();
         }
+
         return true;
     }
 

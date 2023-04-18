@@ -30,11 +30,24 @@ public class FireballComponent : ChargeProjectileComponent
             {
                 continue;
             }
+            // https://docs.unity3d.com/ScriptReference/Physics.SphereCastAll.html
+            //Notes: For colliders that overlap the sphere at the start of the sweep,
+            //RaycastHit.normal is set opposite to the direction of the sweep, RaycastHit.distance is set to zero, and the zero vector gets returned in RaycastHit.point
+            Vector3 point = hit.distance == 0 ? hit.collider.bounds.center : hit.point;
+            Vector3 direction = (point - transform.position).normalized;
+            
+            //Up line in hit.collider.gameObject.transform.position
+            Debug.DrawLine(transform.position,  hit.collider.bounds.center, Color.green, 5.0f);
+            Debug.Log("hit point" + point);
+            Debug.Log("direction" + direction);
+
+            
+            Damage(hit.collider.gameObject, (int)GetDamage(), point, direction);
             Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.AddExplosionForce(
-                    GetDamage() * 5.0f,
+                    GetDamage(),
                     transform.position,
                     _explosionRadius,
                     0.0f,

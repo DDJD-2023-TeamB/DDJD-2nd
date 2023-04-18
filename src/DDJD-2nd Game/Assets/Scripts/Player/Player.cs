@@ -114,6 +114,12 @@ public class Player : StateContext
         get { return _playerSkills; }
     }
 
+    public MeleeCombat _meleeCombat;
+    public MeleeCombat MeleeCombat
+    {
+        get { return _meleeCombat; }
+    }
+
     [SerializeField]
     private GameObject _LeftHand;
     public GameObject LeftHand
@@ -138,6 +144,7 @@ public class Player : StateContext
         _shooter = GetComponent<Shooter>();
         _dashComponent = GetComponent<Dashable>();
         _playerSkills.Player = this;
+        _meleeCombat = GetComponent<MeleeCombat>();
         ChangeState(_factory.Playable());
     }
 
