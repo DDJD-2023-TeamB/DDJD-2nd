@@ -28,6 +28,11 @@ public class RagdollController : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
+    public Transform GetRagdollTransform()
+    {
+        return _rigidbodies[0].transform;
+    }
+
     public void ActivateRagdoll()
     {
         Rigidbody[] rigidbodies = GetComponentsInChildren<Rigidbody>();

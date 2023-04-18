@@ -6,6 +6,8 @@ public abstract class Enemy : MonoBehaviour, Damageable
 {
     protected Rigidbody _rb;
     protected CharacterStatus _status;
+    [SerializeField]
+    protected GameObject _deathVFX;
 
     virtual public void Awake()
     {
@@ -21,6 +23,15 @@ public abstract class Enemy : MonoBehaviour, Damageable
     public virtual void Die(int force, Vector3 hitPoint, Vector3 hitDirection)
     {
         Destroy(gameObject);
+        SpawnDeathVFX(transform.position);
+    }
+
+    protected GameObject SpawnDeathVFX(Vector3 position)
+    {
+        GameObject deathVFX = Instantiate(_deathVFX, position, transform.rotation);
+        Destroy(gameObject, 0.1f);
+        Destroy(deathVFX, 3f);
+        return deathVFX;
     }
 
     // Update is called once per frame
