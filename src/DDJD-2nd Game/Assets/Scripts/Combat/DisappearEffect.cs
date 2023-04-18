@@ -46,10 +46,4 @@ public class DisappearEffect : MonoBehaviour
             renderer.materials = new Material[]{_material};
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
 }
