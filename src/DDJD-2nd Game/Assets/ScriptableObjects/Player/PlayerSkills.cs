@@ -16,6 +16,14 @@ public class PlayerSkills : ScriptableObject
     private AimedSkill _rightSkill;
 
     [SerializeField]
+    private Element _currentElement;
+    public Element CurrentElement
+    {
+        get => _currentElement;
+        set => _currentElement = value;
+    }
+
+    [SerializeField]
     private Dash _dashSkill;
 
     public AimedSkill LeftSkill

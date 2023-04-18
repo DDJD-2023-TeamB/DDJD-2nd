@@ -85,6 +85,9 @@ public class PlayerInputReceiver : MonoBehaviour
     public Action OnLeftShootKeyup;
     public Action OnRightShootKeyup;
 
+    public Action OnMeleeAttackKeydown;
+    public Action OnMeleeAttackKeyup;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -134,6 +137,13 @@ public class PlayerInputReceiver : MonoBehaviour
 
         _playerInput.Combat.ChangeRightSpell.performed += ctx => _isChangingRightSpell = true;
         _playerInput.Combat.ChangeRightSpell.canceled += ctx => _isChangingRightSpell = false;
+
+        _playerInput.Combat.MeleeAttack.performed += ctx => {
+            OnMeleeAttackKeydown?.Invoke();
+        };
+        _playerInput.Combat.MeleeAttack.canceled += ctx => {
+            OnMeleeAttackKeyup?.Invoke();
+        };
     }
 
     private void Move(Vector2 value)
