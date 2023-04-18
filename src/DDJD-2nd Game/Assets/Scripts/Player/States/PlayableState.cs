@@ -32,7 +32,7 @@ public class PlayableState : GenericState
 
     private void CheckAiming()
     {
-        if (_context.Input.IsAiming && !(_substate is AimingState))
+        if (_context.Input.IsAiming && !(_substate is AimingState) && !_context.Input.IsMeleeAttacking)
         {
             ChangeSubState(_context.Factory.Aiming(this));
         }

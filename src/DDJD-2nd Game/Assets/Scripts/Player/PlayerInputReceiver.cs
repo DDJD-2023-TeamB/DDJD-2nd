@@ -79,6 +79,12 @@ public class PlayerInputReceiver : MonoBehaviour
         get { return _isChangingRightSpell; }
     }
 
+    private bool _isMeleeAttacking;
+    public bool IsMeleeAttacking
+    {
+        get { return _isMeleeAttacking; }
+    }
+
     //Callbacks
     public Action OnLeftShootKeydown;
     public Action OnRightShootKeydown;
@@ -87,6 +93,8 @@ public class PlayerInputReceiver : MonoBehaviour
 
     public Action OnMeleeAttackKeydown;
     public Action OnMeleeAttackKeyup;
+
+    
 
     // Start is called before the first frame update
     void Awake()
@@ -139,9 +147,11 @@ public class PlayerInputReceiver : MonoBehaviour
         _playerInput.Combat.ChangeRightSpell.canceled += ctx => _isChangingRightSpell = false;
 
         _playerInput.Combat.MeleeAttack.performed += ctx => {
+            _isMeleeAttacking = true;
             OnMeleeAttackKeydown?.Invoke();
         };
         _playerInput.Combat.MeleeAttack.canceled += ctx => {
+            _isMeleeAttacking = false;
             OnMeleeAttackKeyup?.Invoke();
         };
     }

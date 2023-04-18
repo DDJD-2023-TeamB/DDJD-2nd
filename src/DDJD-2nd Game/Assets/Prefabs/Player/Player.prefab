@@ -3273,6 +3273,7 @@ MonoBehaviour:
   maxAngle: 330
   _aimCamera: {fileID: 4492101057451422945}
   _playerSkills: {fileID: 11400000, guid: 4416c54b33ddce64baf418917cb99d12, type: 2}
+  _meleeCombat: {fileID: 0}
   _LeftHand: {fileID: 6737474002199511682}
   _RightHand: {fileID: 95746222303557215}
 --- !u!54 &7026416567958636131
@@ -3458,7 +3459,8 @@ MonoBehaviour:
   rightHandHitBox: {fileID: 2625061817219118427}
   rightFootHitBox: {fileID: 4642713434733892028}
   leftFootHitBox: {fileID: 8709851357610998055}
-  _damage: 20
+  _damage: 40
+  _attackPushForce: 300
 --- !u!1 &8198835224221356302
 GameObject:
   m_ObjectHideFlags: 0

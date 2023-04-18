@@ -26,6 +26,18 @@ public class GroundedState : GenericState
 
     public override void StateUpdate()
     {
+        if(_context.Input.IsMeleeAttacking && !(_substate is MeleeAttackingState))
+        {
+            ChangeSubState(_context.Factory.GetMeleeAttackingState(this));
+            return;
+        }
+
+        if(_context.Input.IsMeleeAttacking && _substate is MeleeAttackingState)
+        {
+            //Can't move or jump while attacking
+            return;
+        }
+        
         if (_context.Input.IsJumping)
         {
             _context.Rigidbody.AddForce(
@@ -33,8 +45,11 @@ public class GroundedState : GenericState
                 ForceMode.Impulse
             );
             _context.Animator.SetTrigger("Jump");
+            return;
         }
+
         CheckMoving();
+            
     }
 
     private bool CheckMoving(){

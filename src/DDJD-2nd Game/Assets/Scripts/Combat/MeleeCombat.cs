@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class MeleeCombat : MonoBehaviour
 {
 
@@ -18,7 +18,15 @@ public class MeleeCombat : MonoBehaviour
     [Header("Combat settings")]
     [SerializeField]
     private float _damage = 40f;
+
+    [SerializeField]
+    private float _attackPushForce = 10f; // How much force to apply to the player when starting to attack
+    public float AttackPushForce{
+        get { return _attackPushForce; }
+    }
     private PlayerSkills _playerSkills;
+
+    public Action OnAttackStart;
     // Start is called before the first frame update
     void Awake()
     {
@@ -41,7 +49,11 @@ public class MeleeCombat : MonoBehaviour
         
     }
 
-    
+    //Moves player in a specific direction
+    // Gets called in the beginning of each combat animation
+    public void StartAttacking(){
+        OnAttackStart?.Invoke();
+    }
 
     // Force [0, 1]
     private void StartHit(Hitbox hitbox, float force){
