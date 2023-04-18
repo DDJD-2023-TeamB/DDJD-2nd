@@ -36,7 +36,7 @@ public class PlayableState : GenericState
         {
             ChangeSubState(_context.Factory.Aiming(this));
         }
-        else if (!_context.Input.IsAiming && _substate is AimingState)
+        else if (!_context.Input.IsAiming && !(_substate is NotAimingState))
         {
             ChangeSubState(_context.Factory.NotAiming(this));
         }

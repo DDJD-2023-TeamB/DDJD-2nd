@@ -16,9 +16,15 @@ public class NotAimingState : MovableState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("Entering not aiming state");
+        _context.Input.OnMeleeAttackKeydown += OnMeleeAttackKeydown;
+        _context.Input.OnMeleeAttackKeyup += OnMeleeAttackKeyup;
     }
 
-    public override void Exit() { }
+    public override void Exit() {
+        _context.Input.OnMeleeAttackKeydown -= OnMeleeAttackKeydown;
+        _context.Input.OnMeleeAttackKeyup -= OnMeleeAttackKeyup;
+     }
 
     public override bool CanChangeState(GenericState state)
     {
@@ -29,6 +35,16 @@ public class NotAimingState : MovableState
     {
         base.StateUpdate();
         CheckDash();
+    }
+
+    private void OnMeleeAttackKeydown()
+    {
+        _context.Animator.SetBool("IsAttacking", true);
+    }
+
+    private void OnMeleeAttackKeyup()
+    {
+        _context.Animator.SetBool("IsAttacking", false);
     }
 
     private void CheckDash()
