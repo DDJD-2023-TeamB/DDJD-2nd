@@ -16,7 +16,6 @@ public class NotAimingState : MovableState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Entering not aiming state");
         _context.Input.OnMeleeAttackKeydown += OnMeleeAttackKeydown;
         _context.Input.OnMeleeAttackKeyup += OnMeleeAttackKeyup;
     }
