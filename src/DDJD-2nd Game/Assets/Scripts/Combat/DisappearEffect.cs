@@ -23,7 +23,6 @@ public class DisappearEffect : MonoBehaviour
         if(!disappearing){
             return;
         }
-        Debug.Log("Disappearing " + _timeElapsed);
         _timeElapsed += Time.deltaTime;
         float dissolveAmount = _timeElapsed / _timeToDisappear;
         foreach (Renderer renderer in _renderers)
