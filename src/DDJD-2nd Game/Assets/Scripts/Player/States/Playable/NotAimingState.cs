@@ -3,12 +3,8 @@ using System.Collections;
 
 public class NotAimingState : MovableState
 {
-
     public NotAimingState(StateContext context, GenericState superState)
-        : base(context, superState)
-    {
-        
-    }
+        : base(context, superState) { }
 
     private float _attackCD;
     private float _timeUntilNextAttack;
@@ -20,13 +16,19 @@ public class NotAimingState : MovableState
         _context.Input.OnMeleeAttackKeyup += OnMeleeAttackKeyup;
     }
 
-    public override void Exit() {
+    public override void Exit()
+    {
+        base.Exit();
         _context.Input.OnMeleeAttackKeydown -= OnMeleeAttackKeydown;
         _context.Input.OnMeleeAttackKeyup -= OnMeleeAttackKeyup;
-     }
+    }
 
     public override bool CanChangeState(GenericState state)
     {
+        if (!base.CanChangeState(state))
+        {
+            return false;
+        }
         return true;
     }
 

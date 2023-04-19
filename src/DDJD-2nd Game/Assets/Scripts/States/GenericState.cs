@@ -23,8 +23,33 @@ public abstract class GenericState
     }
 
     public abstract void Enter();
-    public abstract void Exit();
-    public abstract bool CanChangeState(GenericState state);
+
+    public virtual void Exit()
+    {
+        if (_substate != null)
+        {
+            _substate.Exit();
+        }
+    }
+
+    public virtual bool CanChangeState(GenericState state)
+    {
+        if (_substate != null)
+        {
+            return _substate.CanHaveSuperState(state);
+        }
+        return true;
+    }
+
+    public virtual bool CanHaveSuperState(GenericState state)
+    {
+        if (_substate != null)
+        {
+            return _substate.CanHaveSuperState(state);
+        }
+        return true;
+    }
+
     public abstract void StateUpdate();
 
     public bool ChangeSubState(GenericState state)
@@ -35,6 +60,10 @@ public abstract class GenericState
         }
         if (_substate != null)
         {
+            if (!_substate.CanChangeState(state))
+            {
+                return false;
+            }
             _substate.ChangeSubState(null);
             _substate.Exit();
         }
