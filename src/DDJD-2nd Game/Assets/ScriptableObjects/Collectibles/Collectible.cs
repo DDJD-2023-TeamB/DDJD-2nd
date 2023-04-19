@@ -7,4 +7,11 @@ using UnityEngine;
 public class Collectible : ScriptableObject 
 {
     public int score;
+    public void Collect(Collectible collectible)
+    {
+        score += collectible.score;
+        Debug.Log("Score: " + score);
+ 
+        //UpdateScore();
+    }
 }

@@ -7,17 +7,20 @@ using UnityEngine.UI;
 public class ItemCollector : MonoBehaviour
 {
     public Collectible collectible;
+    public Text scoreText;
 
+    private int score = 0;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            CollectibleManager collectibleManager = FindObjectOfType<CollectibleManager>();
-            if (collectibleManager != null)
+            InventoryManager inventoryManager = FindObjectOfType<InventoryManager>();
+            if (inventoryManager != null)
             {
-                collectibleManager.Collect(collectible);
+                inventoryManager.Collect(collectible);
                 Destroy(gameObject);
             }
         }
     }
+
 }
