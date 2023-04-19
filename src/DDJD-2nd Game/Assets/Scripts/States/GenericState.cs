@@ -35,6 +35,10 @@ public abstract class GenericState
         }
         if (_substate != null)
         {
+            if (!_substate.CanChangeState(state))
+            {
+                return false;
+            }
             _substate.ChangeSubState(null);
             _substate.Exit();
         }

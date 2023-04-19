@@ -1568,7 +1568,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4492101057451422959}
-  m_LocalRotation: {x: 0.058845513, y: 0.013041986, z: -0.0007688604, w: 0.99818164}
+  m_LocalRotation: {x: 0.05884778, y: 0.009657146, z: -0.000569315, w: 0.9982201}
   m_LocalPosition: {x: -0.5397235, y: 2.3344133, z: -1.468136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3265,7 +3265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxSpeed: 5
-  _jumpForce: 20
+  _jumpForce: 10
   _acceleration: 2
   _cameraTarget: {fileID: 4492101058934089455}
   _cameraRotationSpeed: 20
@@ -3290,7 +3290,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &7026416567958636128
 BoxCollider:
@@ -3299,7 +3299,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7694690271000812756}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 2969eb27630822d439ab8223226fc59c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
