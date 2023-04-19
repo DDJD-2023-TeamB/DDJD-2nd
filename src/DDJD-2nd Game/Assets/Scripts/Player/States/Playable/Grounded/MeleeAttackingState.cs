@@ -25,12 +25,17 @@ public class MeleeAttackingState : GenericState
 
     public override void Exit()
     {
+        base.Exit();
         _context.MeleeCombat.OnAttackStart -= OnAttackStart;
         _context.MeleeCombat.OnAttackEnd -= OnAttackEnd;
     }
 
     public override bool CanChangeState(GenericState state)
     {
+        if (!base.CanChangeState(state))
+        {
+            return false;
+        }
         if (_context.Input.IsMeleeAttacking)
         {
             return false;
@@ -38,6 +43,19 @@ public class MeleeAttackingState : GenericState
         if (_attackCounter != 0)
         {
             // If last attack animations hasn't ended, can't change state
+            return false;
+        }
+        return true;
+    }
+
+    public override bool CanHaveSuperState(GenericState state)
+    {
+        if (!base.CanHaveSuperState(state))
+        {
+            return false;
+        }
+        if (state is AimingState)
+        {
             return false;
         }
         return true;
@@ -51,6 +69,7 @@ public class MeleeAttackingState : GenericState
         Vector2 moveInput = _context.Input.MoveInput;
         Vector3 moveDirection =
             _context.transform.forward * moveInput.y + _context.transform.right * moveInput.x;
+        moveDirection = moveDirection.normalized;
         if (moveInput != Vector2.zero)
         {
             _context.Rigidbody.AddForce(

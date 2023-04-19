@@ -19,11 +19,16 @@ public class AirborneState : GenericState
 
     public override void Exit()
     {
+        base.Exit();
         _context.Animator.SetBool("IsGrounded", true);
     }
 
     public override bool CanChangeState(GenericState state)
     {
+        if (!base.CanChangeState(state))
+        {
+            return false;
+        }
         return true;
     }
 

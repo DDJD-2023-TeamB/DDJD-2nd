@@ -15,10 +15,17 @@ public class MoveState : GenericState
 
     public override void Enter() { }
 
-    public override void Exit() { }
+    public override void Exit()
+    {
+        base.Exit();
+    }
 
     public override bool CanChangeState(GenericState state)
     {
+        if (!base.CanChangeState(state))
+        {
+            return false;
+        }
         return true;
     }
 

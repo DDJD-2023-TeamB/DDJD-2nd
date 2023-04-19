@@ -17,10 +17,17 @@ public class PlayableState : GenericState
         ChangeSubState(_context.Factory.Grounded(this));
     }
 
-    public override void Exit() { }
+    public override void Exit()
+    {
+        base.Exit();
+    }
 
     public override bool CanChangeState(GenericState state)
     {
+        if (!base.CanChangeState(state))
+        {
+            return false;
+        }
         return true;
     }
 
@@ -32,7 +39,7 @@ public class PlayableState : GenericState
 
     private void CheckAiming()
     {
-        if (_context.Input.IsAiming && !(_substate is AimingState) && !_context.Input.IsMeleeAttacking)
+        if (_context.Input.IsAiming && !(_substate is AimingState))
         {
             ChangeSubState(_context.Factory.Aiming(this));
         }

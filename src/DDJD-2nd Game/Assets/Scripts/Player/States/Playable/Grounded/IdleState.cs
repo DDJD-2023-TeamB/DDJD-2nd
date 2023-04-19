@@ -17,10 +17,17 @@ public class IdleState : GenericState
         _context.Animator.SetFloat("RightSpeed", 0f);
     }
 
-    public override void Exit() { }
+    public override void Exit()
+    {
+        base.Exit();
+    }
 
     public override bool CanChangeState(GenericState state)
     {
+        if (!base.CanChangeState(state))
+        {
+            return false;
+        }
         return true;
     }
 
@@ -35,7 +42,6 @@ public class IdleState : GenericState
     // Check state and substate, return true if state is changed
     private bool CheckCurrentStates()
     {
-
         return false;
     }
 }

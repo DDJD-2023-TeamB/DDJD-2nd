@@ -18,10 +18,17 @@ public class GroundedState : GenericState
         CheckMoving();
     }
 
-    public override void Exit() { }
+    public override void Exit()
+    {
+        base.Exit();
+    }
 
     public override bool CanChangeState(GenericState state)
     {
+        if (!base.CanChangeState(state))
+        {
+            return false;
+        }
         return true;
     }
 
@@ -60,7 +67,7 @@ public class GroundedState : GenericState
                 return true;
             }
         }
-        else if (!(_substate is IdleState))
+        if (!(_substate is IdleState))
         {
             bool isMoving = _context.Rigidbody.velocity.magnitude > 0.1f;
             if (_context.Input.MoveInput == Vector2.zero && !isMoving)

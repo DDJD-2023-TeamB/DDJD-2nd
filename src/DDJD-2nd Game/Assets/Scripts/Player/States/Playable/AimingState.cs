@@ -28,6 +28,7 @@ public class AimingState : MovableState
 
     public override void Exit()
     {
+        base.Exit();
         _context.Input.OnLeftShootKeydown -= OnLeftShootKeyDown;
         _context.Input.OnRightShootKeydown -= OnRightShootKeyDown;
 
@@ -41,6 +42,10 @@ public class AimingState : MovableState
 
     public override bool CanChangeState(GenericState state)
     {
+        if (!base.CanChangeState(state))
+        {
+            return false;
+        }
         return true;
     }
 
