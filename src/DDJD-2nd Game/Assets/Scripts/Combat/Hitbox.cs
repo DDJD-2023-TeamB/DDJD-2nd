@@ -49,7 +49,7 @@ public class Hitbox : MonoBehaviour
         {
             _attackVfx.GetComponent<VisualEffect>().Stop();
             _attackVfx.transform.parent = null;
-            Destroy(_attackVfx, 1f);
+            Destroy(_attackVfx, 2f);
         }
         gameObject.SetActive(false);
     }
