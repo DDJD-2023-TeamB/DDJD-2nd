@@ -38,6 +38,9 @@ public class AimingState : MovableState
         _context.AimCamera.Priority = 5;
         _context.Animator.SetBool("IsAiming", false);
         _context.AimComponent.StopAim();
+
+        _context.Shooter.CancelLeftShoot();
+        _context.Shooter.CancelRightShoot();
     }
 
     public override bool CanChangeState(GenericState state)
