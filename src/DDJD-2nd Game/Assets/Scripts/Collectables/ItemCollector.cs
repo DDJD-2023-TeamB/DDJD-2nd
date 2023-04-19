@@ -6,11 +6,7 @@ using UnityEngine.UI;
 
 public class ItemCollector : MonoBehaviour
 {
-    [SerializeField] private Text itemText;
-    [SerializeField] private Text scoreText;
-
-    private int items = 0;
-    private int score = 0;
+    public Collectible collectible;
 
     private void OnTriggerEnter(Collider other)
     {
