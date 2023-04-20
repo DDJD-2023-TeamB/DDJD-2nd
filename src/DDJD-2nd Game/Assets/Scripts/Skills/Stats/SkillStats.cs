@@ -7,6 +7,12 @@ public abstract class SkillStats
     protected float _damage;
 
     [SerializeField]
+    protected float _force;
+
+    [SerializeField, Range(0, 1)]
+    protected float _damageToForceMultiplier;
+
+    [SerializeField]
     protected float _cooldown;
 
     [SerializeField]
@@ -43,6 +49,23 @@ public abstract class SkillStats
     {
         get => _cooldown;
         set => _cooldown = value;
+    }
+
+    public float Force
+    {
+        get => _force;
+        set => _force = value;
+    }
+
+    public float DamageToForceMultiplier
+    {
+        get => _damageToForceMultiplier;
+        set => _damageToForceMultiplier = value;
+    }
+
+    public float ForceWithDamage()
+    {
+        return _force + _damage * _damageToForceMultiplier;
     }
 
     public SkillStats(float damage, float cooldown)

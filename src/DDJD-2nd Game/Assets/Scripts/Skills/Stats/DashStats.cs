@@ -6,14 +6,6 @@ using UnityEngine;
 public class DashStats : SkillStats
 {
     [SerializeField]
-    private float _force;
-    public float Force
-    {
-        get => _force;
-        set => _force = value;
-    }
-
-    [SerializeField]
     private float _duration;
     public float Duration
     {

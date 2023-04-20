@@ -38,7 +38,7 @@ public abstract class ProjectileComponent : SkillComponent
         _impactPrefab = _skill.ImpactPrefab;
     }
 
-    public virtual void Shoot(Vector3 direction)
+    public override void Shoot(Vector3 direction)
     {
         ActivateSpell();
         transform.parent = null; // Detach from caster

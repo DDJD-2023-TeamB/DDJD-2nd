@@ -41,7 +41,7 @@ public class FireballComponent : ChargeProjectileComponent
             if (rb != null)
             {
                 rb.AddExplosionForce(
-                    GetDamage(),
+                    GetForce(),
                     transform.position,
                     _explosionRadius,
                     0.0f,
@@ -92,5 +92,10 @@ public class FireballComponent : ChargeProjectileComponent
     private float GetDamage()
     {
         return _stats.Damage * GetCurrentCharge();
+    }
+
+    private float GetForce()
+    {
+        return _stats.ForceWithDamage() * GetCurrentCharge();
     }
 }
