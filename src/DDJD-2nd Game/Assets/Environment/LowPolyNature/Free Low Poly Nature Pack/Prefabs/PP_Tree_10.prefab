@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7196912292531665256}
   - component: {fileID: 4901155340339187106}
   - component: {fileID: 6846767348704259192}
+  - component: {fileID: 8488819954623831348}
   m_Layer: 0
   m_Name: PP_Tree_10
   m_TagString: Untagged
@@ -30,6 +31,7 @@ Transform:
     w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -53,10 +55,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -81,6 +85,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &6846767348704259192
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -90,8 +95,22 @@ MeshCollider:
   m_GameObject: {fileID: 6846767348704259191}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 5006698605598939749, guid: a3ccb41ae53c6bf4bb0a5bfc470bf069, type: 3}
+--- !u!136 &8488819954623831348
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6846767348704259191}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.42351162
+  m_Height: 5.4358
+  m_Direction: 1
+  m_Center: {x: 0.026248753, y: 2.3769515, z: 0.01655984}
