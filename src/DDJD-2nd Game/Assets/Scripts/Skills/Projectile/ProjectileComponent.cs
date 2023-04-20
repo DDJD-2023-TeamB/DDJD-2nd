@@ -10,6 +10,8 @@ public abstract class ProjectileComponent : SkillComponent
     protected Projectile _skill;
     protected GameObject _impactPrefab;
 
+    protected bool _destroyOnImpact = true;
+
     protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -54,7 +56,10 @@ public abstract class ProjectileComponent : SkillComponent
             SpawnHitVFX();
         }
         OnImpact(other);
-        Destroy(gameObject);
+        if (_destroyOnImpact)
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected virtual void SpawnHitVFX()

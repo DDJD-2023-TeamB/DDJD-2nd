@@ -17,10 +17,10 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: 1097
+    x: 1146
     y: 830
-    width: 693
-    height: 261
+    width: 644
+    height: 242
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -31,7 +31,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d4c867f6b72b714dbb5fd1780afe208, type: 3}
-  m_Name: FireRuneVFX
+  m_Name: WindRuneVFX
   m_EditorClassIdentifier: 
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 0}
@@ -54,7 +54,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":12.7675199508667,"g":3.09062123298645,"b":0.0,"a":0.0}'
+      m_SerializableObject: '{"r":1.945465087890625,"g":8.574187278747559,"b":1.2537726163864136,"a":0.0}'
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -98,7 +98,7 @@ VisualEffectResource:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FireRuneVFX
+  m_Name: WindRuneVFX
   m_Graph: {fileID: 114350483966674976}
   m_Infos:
     m_RendererSettings:
@@ -186,7 +186,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":12.7675199508667,"g":3.09062123298645,"b":0.0,"a":0.0}'
+      m_SerializableObject: '{"r":1.945465087890625,"g":8.574187278747559,"b":1.2537726163864136,"a":0.0}'
     m_Space: 2147483647
   m_Property:
     name: o
@@ -691,7 +691,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615019}
       inputSlot: {fileID: 8926484042661615021}
-    position: {x: 1096.7397, y: 1040.0498}
+    position: {x: 1170, y: 1021}
     expandedSlots: []
     expanded: 0
 --- !u!114 &8926484042661615019
