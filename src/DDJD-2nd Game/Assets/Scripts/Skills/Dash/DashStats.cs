@@ -20,4 +20,12 @@ public class DashStats
         get => _duration;
         set => _duration = value;
     }
+
+    [SerializeField]
+    private float _maxSpeed;
+    public float MaxSpeed
+    {
+        get => _maxSpeed;
+        set => _maxSpeed = value;
+    }
 }

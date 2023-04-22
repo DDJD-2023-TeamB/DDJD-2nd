@@ -8,7 +8,7 @@ public class DashState : MeleeAttackableState
     private DashStats _stats;
     private DashSkill _skill;
     private Rigidbody _rigidbody;
-    private bool _isDashOver = false;
+    private Dashable _dashable;
 
     public DashState(
         StateContext context,
@@ -26,17 +26,15 @@ public class DashState : MeleeAttackableState
 
     public override void Enter()
     {
-        Dashable dashable = _context.GetComponent<Dashable>();
+        _dashable = _context.GetComponent<Dashable>();
         if (_skill != null && !_context.PlayerSkills.IsSkillOnCooldown(_skill))
         {
-            dashable.DashWithSkill(_skill);
+            _dashable.DashWithSkill(_skill);
             _context.PlayerSkills.StartSkillCooldown(_skill);
-            _context.StartCoroutine(OnDashEnd(_skill.DashStats.Duration));
         }
         else
         {
-            dashable.Dash(_stats);
-            _context.StartCoroutine(OnDashEnd(_stats.Duration));
+            _dashable.Dash(_stats);
         }
     }
 
@@ -46,13 +44,6 @@ public class DashState : MeleeAttackableState
         {
             return false;
         }
-        return _isDashOver;
-    }
-
-    private IEnumerator OnDashEnd(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        _isDashOver = true;
-        yield return null;
+        return !_dashable.IsDashing;
     }
 }

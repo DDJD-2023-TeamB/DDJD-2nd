@@ -19,10 +19,31 @@ public class Dashable : MonoBehaviour
     [SerializeField]
     private bool resetVelocity = true;
 
+    [SerializeField]
+    private float _maxRegularSpeed = 5f;
+
+    private bool _isDashing = false;
+    public bool IsDashing
+    {
+        get => _isDashing;
+    }
+    private DashStats _currentDashStats;
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _inputReceiver = GetComponent<PlayerInputReceiver>();
+    }
+
+    private void Update()
+    {
+        Vector3 flatVel = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
+        float maxSpeed = _isDashing ? _currentDashStats.MaxSpeed : _maxRegularSpeed;
+        if (flatVel.magnitude > maxSpeed)
+        {
+            Vector3 limitedVel = flatVel.normalized * maxSpeed;
+            _rigidbody.velocity = new Vector3(limitedVel.x, _rigidbody.velocity.y, limitedVel.z);
+        }
     }
 
     public void DashWithSkill(DashSkill dashSkill)
@@ -54,6 +75,8 @@ public class Dashable : MonoBehaviour
 
         _rigidbody.AddForce(force, ForceMode.Impulse);
 
+        _isDashing = true;
+        _currentDashStats = stats;
         Invoke(nameof(ResetDash), stats.Duration);
     }
 
@@ -61,6 +84,8 @@ public class Dashable : MonoBehaviour
     {
         if (disableGravity)
             _rigidbody.useGravity = true;
+        _isDashing = false;
+        _currentDashStats = null;
     }
 
     private Vector3 GetDirection(Transform forwardTransform)
@@ -76,6 +101,7 @@ public class Dashable : MonoBehaviour
         {
             direction = forwardTransform.forward;
         }
+        direction.y = 0;
 
         return direction.normalized;
     }
