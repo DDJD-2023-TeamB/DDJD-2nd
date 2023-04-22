@@ -42,7 +42,6 @@ public abstract class ProjectileComponent : SkillComponent
     {
         ActivateSpell();
         transform.parent = null; // Detach from caster
-        Debug.Log("Direction: " + direction.normalized * _stats.Speed);
         _rb.AddForce(direction.normalized * _stats.Speed, ForceMode.Impulse);
     }
 

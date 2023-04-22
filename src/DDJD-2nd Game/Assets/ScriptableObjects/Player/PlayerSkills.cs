@@ -58,7 +58,6 @@ public class PlayerSkills : ScriptableObject
         {
             _skillCooldowns.Add(skill, 0f);
         }
-        Debug.Log("Starting cooldown for " + skill.Stats);
         _skillCooldowns[skill] = skill.Stats.Cooldown;
         _player.StartCoroutine(SkillCooldown(skill));
     }
