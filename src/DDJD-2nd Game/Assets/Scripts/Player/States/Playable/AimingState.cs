@@ -70,6 +70,7 @@ public class AimingState : MovableState
     {
         if (_context.PlayerSkills.IsSkillOnCooldown(skill))
         {
+            GameObject.Destroy(spell);
             return;
         }
         Vector3 origin = spell.transform.position;
@@ -94,8 +95,9 @@ public class AimingState : MovableState
 
     private void OnShootKeyUp(AimedSkill skill, GameObject spell, string animationTrigger)
     {
-        if (_context.PlayerSkills.IsSkillOnCooldown(skill))
+        if (spell == null)
         {
+            //Was destroyed
             return;
         }
         switch (skill.Stats.CastType)
@@ -109,6 +111,7 @@ public class AimingState : MovableState
                 _context.Shooter.Shoot(spell, direction);
                 _context.Animator.SetTrigger(animationTrigger);
                 _lastAnimTrigger = animationTrigger;
+                _context.PlayerSkills.StartSkillCooldown(skill);
                 break;
             case CastType.Hold:
                 // TODO

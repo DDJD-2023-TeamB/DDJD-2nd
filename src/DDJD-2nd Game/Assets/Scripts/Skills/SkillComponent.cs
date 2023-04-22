@@ -6,8 +6,20 @@ public abstract class SkillComponent : MonoBehaviour
 {
     protected GameObject _caster;
 
+    public GameObject Caster
+    {
+        get { return _caster; }
+    }
+
     [SerializeField]
     private bool _damageCaster = false;
+
+    protected float _elapsedTime = 0.0f;
+
+    void Update()
+    {
+        _elapsedTime += Time.deltaTime;
+    }
 
     public void SetCaster(GameObject caster)
     {
