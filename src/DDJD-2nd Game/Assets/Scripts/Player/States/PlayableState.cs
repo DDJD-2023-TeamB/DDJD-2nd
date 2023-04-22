@@ -14,7 +14,7 @@ public class PlayableState : GenericState
 
     public override void Enter()
     {
-        ChangeSubState(_context.Factory.Grounded(this));
+        CheckAiming();
     }
 
     public override void Exit()

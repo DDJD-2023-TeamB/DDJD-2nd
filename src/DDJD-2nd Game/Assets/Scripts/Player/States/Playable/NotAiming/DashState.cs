@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DashState : GenericState
+public class DashState : MeleeAttackableState
 {
     private Player _context;
     private DashStats _stats;
@@ -37,30 +37,11 @@ public class DashState : GenericState
     public override void Exit()
     {
         base.Exit();
-        // TODO no fucking clue
+        // TODO change superstate's substateto grounded or airb
     }
 
-    public override bool CanChangeState(GenericState state)
+    public override void StateUpdate()
     {
-        if (!base.CanChangeState(state))
-        {
-            return false;
-        }
-        // TODO no fucking clue
-        return true;
-    }
-
-    public override bool CanHaveSuperState(GenericState state)
-    {
-        if (!base.CanHaveSuperState(state))
-        {
-            return false;
-        }
-        // TODO no fucking clue
-        return true;
-    }
-
-    public override void StateUpdate() {
-        // TODO no fucking clue
+        base.StateUpdate();
     }
 }

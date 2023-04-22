@@ -60,10 +60,16 @@ public class NotAimingState : MovableState
         }
         if (_substate is DashState)
         {
-            return; // TODO only this will be needed
+            return;
         }
 
         // TODO stats for regular dash
-        ChangeSubState(_context.Factory.Dash(this, _context.PlayerSkills.DashSkill.DashStats, _context.PlayerSkills.DashSkill));
+        ChangeSubState(
+            _context.Factory.Dash(
+                this,
+                _context.PlayerSkills.DashSkill.DashStats,
+                _context.PlayerSkills.DashSkill
+            )
+        );
     }
 }

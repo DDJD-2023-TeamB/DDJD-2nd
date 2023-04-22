@@ -42,11 +42,6 @@ public class PlayerStateFactory : StateFactory
         return new GroundedState(_context, superState);
     }
 
-    public FallingState Falling(GenericState superState)
-    {
-        return new FallingState(_context, superState);
-    }
-
     public MeleeAttackingState GetMeleeAttackingState(GenericState superState)
     {
         return new MeleeAttackingState(_context, superState);
