@@ -5,14 +5,10 @@ using UnityEngine;
 public class Dashable : MonoBehaviour
 {
     Rigidbody _rigidbody;
-    int _playerLayer;
-    int _enemyLayer;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _playerLayer = LayerMask.NameToLayer("Player");
-        _enemyLayer = LayerMask.NameToLayer("Enemy");
     }
 
     public void DashWithSkill(Dash dashSkill)
@@ -23,8 +19,13 @@ public class Dashable : MonoBehaviour
         dashComponent.SetCaster(gameObject);
         dashComponent.SetSkill(dashSkill);
 
+        Dash(dashSkill.DashStats);
+    }
+
+    public void Dash(DashStats stats)
+    {
         // TODO: Improve movement after dash logic is implemented
-        Vector3 force = transform.forward * dashSkill.DashStats.Force;
+        Vector3 force = transform.forward * stats.Force;
         _rigidbody.AddForce(force, ForceMode.Impulse);
     }
 }

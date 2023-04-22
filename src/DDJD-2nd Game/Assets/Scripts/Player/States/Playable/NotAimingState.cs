@@ -51,26 +51,19 @@ public class NotAimingState : MovableState
     private void CheckDash()
     {
         if (!_context.Input.IsDashing)
-            return;
-
-        if (_context.PlayerSkills.DashSkill != null)
-        {
-            UseDashSkill(_context.PlayerSkills.DashSkill);
-        }
-        else
-        {
-            // TODO: Normal dash
-        }
-    }
-
-    private void UseDashSkill(Dash dashSkill)
-    {
-        if (_context.PlayerSkills.IsSkillOnCooldown(dashSkill))
         {
             return;
         }
-        _context.PlayerSkills.StartSkillCooldown(dashSkill);
-        _context.DashComponent.DashWithSkill(dashSkill);
-        // TODO: Trigger animation
+        if (_context.PlayerSkills.IsSkillOnCooldown(_context.PlayerSkills.DashSkill))
+        {
+            return;
+        }
+        if (_substate is DashState)
+        {
+            return; // TODO only this will be needed
+        }
+
+        // TODO stats for regular dash
+        ChangeSubState(_context.Factory.Dash(this, _context.PlayerSkills.DashSkill.DashStats, _context.PlayerSkills.DashSkill));
     }
 }
