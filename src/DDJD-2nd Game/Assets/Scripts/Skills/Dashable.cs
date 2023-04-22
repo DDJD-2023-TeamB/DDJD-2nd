@@ -48,8 +48,15 @@ public class Dashable : MonoBehaviour
 
     public void DashWithSkill(DashSkill dashSkill)
     {
-        Quaternion rotation = Quaternion.LookRotation(transform.forward);
-        GameObject spell = Instantiate(dashSkill.SpellPrefab, transform.position, rotation);
+        Vector3 direction = GetDashDirection();
+        Vector3 position = new Vector3(
+            transform.position.x,
+            transform.position.y + 1f,
+            transform.position.z
+        );
+        Quaternion rotation = Quaternion.LookRotation(direction);
+
+        GameObject spell = Instantiate(dashSkill.SpellPrefab, position, rotation);
         DashComponent dashComponent = spell.GetComponent<DashComponent>();
         dashComponent.SetCaster(gameObject);
         dashComponent.SetSkill(dashSkill);
@@ -59,13 +66,7 @@ public class Dashable : MonoBehaviour
 
     public void Dash(DashStats stats)
     {
-        Transform forwardTransform;
-        if (allowAllDirections)
-            forwardTransform = _playerCam;
-        else
-            forwardTransform = transform;
-
-        Vector3 direction = GetDirection(forwardTransform);
+        Vector3 direction = GetDashDirection();
         Vector3 force = direction * stats.Force;
 
         if (disableGravity)
@@ -88,8 +89,14 @@ public class Dashable : MonoBehaviour
         _currentDashStats = null;
     }
 
-    private Vector3 GetDirection(Transform forwardTransform)
+    private Vector3 GetDashDirection()
     {
+        Transform forwardTransform;
+        if (allowAllDirections)
+            forwardTransform = _playerCam;
+        else
+            forwardTransform = transform;
+
         Vector2 moveInput = _inputReceiver.MoveInput;
         Vector3 direction = Vector3.zero;
         if (allowAllDirections && moveInput != Vector2.zero)
