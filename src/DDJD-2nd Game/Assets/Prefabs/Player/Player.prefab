@@ -1568,7 +1568,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4492101057451422959}
-  m_LocalRotation: {x: 0.05884778, y: 0.009657146, z: -0.000569315, w: 0.9982201}
+  m_LocalRotation: {x: 0.058843754, y: 0.0151503645, z: -0.000893155, w: 0.99815184}
   m_LocalPosition: {x: -0.5397235, y: 2.3344133, z: -1.468136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3202,6 +3202,7 @@ GameObject:
   - component: {fileID: 8244842273400313447}
   - component: {fileID: 7310436562981443879}
   - component: {fileID: 3788135562345574591}
+  - component: {fileID: 132688717697300227}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -3461,6 +3462,22 @@ MonoBehaviour:
   leftFootHitBox: {fileID: 8709851357610998055}
   _damage: 40
   _attackPushForce: 300
+--- !u!114 &132688717697300227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694690271000812756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afce8ce93f52d4d49b25dd79cde95721, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerCam: {fileID: 4492101058340307228}
+  allowAllDirections: 1
+  disableGravity: 0
+  resetVelocity: 1
 --- !u!1 &8198835224221356302
 GameObject:
   m_ObjectHideFlags: 0
