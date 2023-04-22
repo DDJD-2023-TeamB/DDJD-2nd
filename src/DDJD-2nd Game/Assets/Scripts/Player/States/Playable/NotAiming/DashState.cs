@@ -8,6 +8,7 @@ public class DashState : MeleeAttackableState
     private DashStats _stats;
     private DashSkill _skill;
     private Rigidbody _rigidbody;
+    private bool _isDashOver = false;
 
     public DashState(
         StateContext context,
@@ -30,21 +31,28 @@ public class DashState : MeleeAttackableState
         {
             dashable.DashWithSkill(_skill);
             _context.PlayerSkills.StartSkillCooldown(_skill);
+            _context.StartCoroutine(OnDashEnd(_skill.DashStats.Duration));
         }
         else
         {
             dashable.Dash(_stats);
+            _context.StartCoroutine(OnDashEnd(_stats.Duration));
         }
     }
 
-    public override void Exit()
+    public override bool CanChangeState(GenericState state)
     {
-        base.Exit();
-        // TODO change superstate's substate to grounded or airb
+        if (!base.CanChangeState(state))
+        {
+            return false;
+        }
+        return _isDashOver;
     }
 
-    public override void StateUpdate()
+    private IEnumerator OnDashEnd(float duration)
     {
-        base.StateUpdate();
+        yield return new WaitForSeconds(duration);
+        _isDashOver = true;
+        yield return null;
     }
 }

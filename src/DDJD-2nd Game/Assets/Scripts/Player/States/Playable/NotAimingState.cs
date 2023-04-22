@@ -59,7 +59,6 @@ public class NotAimingState : MovableState
             return;
         }
 
-        // TODO stats for regular dash
         ChangeSubState(
             _context.Factory.Dash(
                 this,
