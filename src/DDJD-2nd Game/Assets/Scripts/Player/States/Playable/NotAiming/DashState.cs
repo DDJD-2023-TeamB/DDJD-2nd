@@ -6,10 +6,15 @@ public class DashState : MeleeAttackableState
 {
     private Player _context;
     private DashStats _stats;
-    private Dash _skill;
+    private DashSkill _skill;
     private Rigidbody _rigidbody;
 
-    public DashState(StateContext context, GenericState superState, DashStats stats, Dash skill)
+    public DashState(
+        StateContext context,
+        GenericState superState,
+        DashStats stats,
+        DashSkill skill
+    )
         : base(context, superState)
     {
         _context = (Player)context;
@@ -21,11 +26,9 @@ public class DashState : MeleeAttackableState
     public override void Enter()
     {
         Dashable dashable = _context.GetComponent<Dashable>();
-        if (_skill != null)
+        if (_skill != null && !_context.PlayerSkills.IsSkillOnCooldown(_skill))
         {
             dashable.DashWithSkill(_skill);
-            // TODO only use dash when state is not active, might not be a need for skill cooldown
-            // Dash probably doesn't even need to be a skill?
             _context.PlayerSkills.StartSkillCooldown(_skill);
         }
         else
@@ -37,7 +40,7 @@ public class DashState : MeleeAttackableState
     public override void Exit()
     {
         base.Exit();
-        // TODO change superstate's substateto grounded or airb
+        // TODO change superstate's substate to grounded or airb
     }
 
     public override void StateUpdate()

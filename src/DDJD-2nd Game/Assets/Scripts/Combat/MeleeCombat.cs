@@ -72,8 +72,8 @@ public class MeleeCombat : MonoBehaviour
     {
         float velocity = 1.0f + _player.Rigidbody.velocity.magnitude / 5.0f;
         hitbox.Activate(
-            _playerSkills.CurrentElement.AttackVfx,
-            _playerSkills.CurrentElement.HitVfx,
+            _playerSkills.CurrentElement?.AttackVfx,
+            _playerSkills.CurrentElement?.HitVfx,
             force * _damage * velocity,
             force * _damage * velocity
         );

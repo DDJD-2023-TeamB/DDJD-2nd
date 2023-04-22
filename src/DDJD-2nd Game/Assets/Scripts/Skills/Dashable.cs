@@ -11,7 +11,7 @@ public class Dashable : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    public void DashWithSkill(Dash dashSkill)
+    public void DashWithSkill(DashSkill dashSkill)
     {
         Quaternion rotation = Quaternion.LookRotation(transform.forward);
         GameObject spell = Instantiate(dashSkill.SpellPrefab, transform.position, rotation);

@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spellPrefab: {fileID: 1749058838326422176, guid: 6c974321201a9574ba406d4733a304e9,
     type: 3}
-  _stats:
+  _skillStats:
     _damage: 10
-    _cooldown: 1
-    _force: 12
+    _cooldown: 5
+    _castTime: 0
+    _castType: 0
+    _maxChargeTime: 0
+    _effectDuration: 2
+  _dashStats:
+    _force: 1
     _duration: 1
-    _effectDuration: 1

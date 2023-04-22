@@ -54,10 +54,6 @@ public class NotAimingState : MovableState
         {
             return;
         }
-        if (_context.PlayerSkills.IsSkillOnCooldown(_context.PlayerSkills.DashSkill))
-        {
-            return;
-        }
         if (_substate is DashState)
         {
             return;
@@ -67,8 +63,8 @@ public class NotAimingState : MovableState
         ChangeSubState(
             _context.Factory.Dash(
                 this,
-                _context.PlayerSkills.DashSkill.DashStats,
-                _context.PlayerSkills.DashSkill
+                _context.PlayerSkills.DashStats,
+                _context.PlayerSkills.CurrentElement?.DashSkill
             )
         );
     }

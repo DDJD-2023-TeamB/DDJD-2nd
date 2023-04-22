@@ -47,7 +47,7 @@ public class PlayerStateFactory : StateFactory
         return new MeleeAttackingState(_context, superState);
     }
 
-    public DashState Dash(GenericState superState, DashStats stats, Dash skill = null)
+    public DashState Dash(GenericState superState, DashStats stats, DashSkill skill = null)
     {
         // TODO I think we can get the skill from the context
         return new DashState(_context, superState, stats, skill);
