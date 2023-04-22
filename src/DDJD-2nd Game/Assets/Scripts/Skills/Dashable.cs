@@ -22,6 +22,10 @@ public class Dashable : MonoBehaviour
     [SerializeField]
     private float _maxRegularSpeed = 5f;
 
+    [SerializeField]
+    private float _speedChangeFactor = 50f;
+
+    private float _maxSpeed;
     private bool _isDashing = false;
     public bool IsDashing
     {
@@ -33,15 +37,15 @@ public class Dashable : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _inputReceiver = GetComponent<PlayerInputReceiver>();
+        _maxSpeed = _maxRegularSpeed;
     }
 
     private void Update()
     {
         Vector3 flatVel = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
-        float maxSpeed = _isDashing ? _currentDashStats.MaxSpeed : _maxRegularSpeed;
-        if (flatVel.magnitude > maxSpeed)
+        if (flatVel.magnitude > _maxSpeed)
         {
-            Vector3 limitedVel = flatVel.normalized * maxSpeed;
+            Vector3 limitedVel = flatVel.normalized * _maxSpeed;
             _rigidbody.velocity = new Vector3(limitedVel.x, _rigidbody.velocity.y, limitedVel.z);
         }
     }
@@ -76,6 +80,7 @@ public class Dashable : MonoBehaviour
 
         _rigidbody.AddForce(force, ForceMode.Impulse);
 
+        _maxSpeed = stats.MaxSpeed;
         _isDashing = true;
         _currentDashStats = stats;
         Invoke(nameof(ResetDash), stats.Duration);
@@ -87,6 +92,25 @@ public class Dashable : MonoBehaviour
             _rigidbody.useGravity = true;
         _isDashing = false;
         _currentDashStats = null;
+        StartCoroutine(SmoothlyChangeMaxSpeed(_maxRegularSpeed));
+    }
+
+    private IEnumerator SmoothlyChangeMaxSpeed(float targetSpeed)
+    {
+        float time = 0;
+        float diff = Mathf.Abs(_maxSpeed - targetSpeed);
+        float startValue = _maxSpeed;
+        int counter = 0;
+
+        while (time < 1)
+        {
+            time += Time.deltaTime / diff * _speedChangeFactor;
+            _maxSpeed = Mathf.Lerp(startValue, targetSpeed, time);
+            counter++;
+            yield return null;
+        }
+
+        _maxSpeed = targetSpeed;
     }
 
     private Vector3 GetDashDirection()
