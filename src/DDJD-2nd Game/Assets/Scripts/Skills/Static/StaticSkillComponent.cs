@@ -20,6 +20,7 @@ public class StaticSkillComponent : SkillComponent
 
     public override void SetSkill(Skill skill)
     {
+        base.SetSkill(skill);
         _skill = (StaticSkill)skill;
         _stats = _skill.StaticStats;
     }

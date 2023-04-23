@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class FireballComponent : ChargeProjectileComponent
+public class FireballComponent : ProjectileComponent
 {
     [SerializeField]
     private float _explosionRadius = 3.0f;
@@ -62,12 +62,14 @@ public class FireballComponent : ChargeProjectileComponent
         base.SetSkill(skill);
         _fireballVFX.SetFloat("SpawnRadius", 0.1f);
         _fireballVFX.SetFloat("SpawnRate", PARTICLES / _stats.MaxChargeTime);
+
+        _chargeComponent.OnCharge += OnCharge;
     }
 
-    protected override void OnCharge()
+    protected void OnCharge()
     {
         float previousRadius = _currentRadius;
-        _currentRadius = Mathf.Lerp(0, _maxRadius, GetCurrentCharge());
+        _currentRadius = Mathf.Lerp(0, _maxRadius, _chargeComponent.GetCurrentCharge());
         float radiusChange = _currentRadius - previousRadius;
         transform.position += _caster.transform.forward * radiusChange;
         _fireballVFX.SetFloat("Size", _currentRadius);
@@ -77,7 +79,7 @@ public class FireballComponent : ChargeProjectileComponent
     public override void Shoot(Vector3 direction)
     {
         base.Shoot(direction);
-        _explosionRadius = _explosionRadius * GetCurrentCharge();
+        _explosionRadius = _explosionRadius * _chargeComponent.GetCurrentCharge();
         _fireballVFX.SetFloat("SpawnRate", 0);
     }
 
@@ -87,15 +89,5 @@ public class FireballComponent : ChargeProjectileComponent
         VisualEffect vfx = impact.GetComponent<VisualEffect>();
         vfx.SetFloat("Size", _currentRadius);
         Destroy(impact, 3.0f);
-    }
-
-    private float GetDamage()
-    {
-        return _stats.Damage * GetCurrentCharge();
-    }
-
-    private float GetForce()
-    {
-        return _stats.ForceWithDamage() * GetCurrentCharge();
     }
 }

@@ -6,6 +6,9 @@ public abstract class SkillComponent : MonoBehaviour
 {
     protected GameObject _caster;
 
+    protected bool _isChargeAttack = false;
+    protected ChargeComponent _chargeComponent;
+
     public GameObject Caster
     {
         get { return _caster; }
@@ -16,17 +19,32 @@ public abstract class SkillComponent : MonoBehaviour
 
     protected float _elapsedTime = 0.0f;
 
-    void Update()
+    virtual protected void Update()
     {
         _elapsedTime += Time.deltaTime;
     }
 
-    public void SetCaster(GameObject caster)
+    public virtual void SetCaster(GameObject caster)
     {
         _caster = caster;
     }
 
-    public abstract void SetSkill(Skill skill);
+    public virtual void SetSkill(Skill skill)
+    {
+        SkillStats stats = skill.Stats;
+        if (stats.CastType == CastType.Charge)
+        {
+            _isChargeAttack = true;
+            _chargeComponent = GetComponent<ChargeComponent>();
+            if (_chargeComponent == null)
+            {
+                Debug.LogError(gameObject.name + ": No ChargeComponent found when required");
+                return;
+            }
+            _chargeComponent.MaxChargeTime = stats.MaxChargeTime;
+            _chargeComponent.MinChargeTime = stats.MinChargeTime;
+        }
+    }
 
     protected void Damage(GameObject target, int damage, Vector3 hitPoint, Vector3 direction)
     {
