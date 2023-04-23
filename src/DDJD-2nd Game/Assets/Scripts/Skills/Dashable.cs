@@ -6,6 +6,7 @@ public class Dashable : MonoBehaviour
 {
     private Rigidbody _rigidbody;
     private PlayerInputReceiver _inputReceiver;
+    private Animator _animator;
 
     [SerializeField]
     private Transform _playerCam;
@@ -37,6 +38,7 @@ public class Dashable : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _inputReceiver = GetComponent<PlayerInputReceiver>();
+        _animator = GetComponent<Animator>();
         _maxSpeed = _maxRegularSpeed;
     }
 
@@ -79,6 +81,7 @@ public class Dashable : MonoBehaviour
             _rigidbody.velocity = Vector3.zero;
 
         _rigidbody.AddForce(force, ForceMode.Impulse);
+        SetDashAnimation();
 
         _maxSpeed = stats.MaxSpeed;
         _isDashing = true;
@@ -92,6 +95,9 @@ public class Dashable : MonoBehaviour
             _rigidbody.useGravity = true;
         _isDashing = false;
         _currentDashStats = null;
+        _animator.SetBool("IsDashing", false);
+        _animator.SetFloat("DashX", 0f);
+        _animator.SetFloat("DashY", 0f);
         StartCoroutine(SmoothlyChangeMaxSpeed(_maxRegularSpeed));
     }
 
@@ -135,5 +141,21 @@ public class Dashable : MonoBehaviour
         direction.y = 0;
 
         return direction.normalized;
+    }
+
+    private void SetDashAnimation()
+    {
+        Vector2 moveInput = _inputReceiver.MoveInput;
+        float dashX = 0;
+        float dashY = 0;
+
+        if (moveInput.x != 0)
+            dashX = moveInput.x > 0 ? 1 : -1;
+        if (moveInput.y != 0)
+            dashY = moveInput.y > 0 ? 1 : -1;
+
+        _animator.SetBool("IsDashing", true);
+        _animator.SetFloat("DashX", dashX);
+        _animator.SetFloat("DashY", dashY);
     }
 }
