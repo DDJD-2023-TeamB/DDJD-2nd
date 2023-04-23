@@ -50,6 +50,14 @@ public class Tornado : GroundProjectileComponent
         _lifetime = 0.0f;
         _caughtObjects = new List<CaughtInTornado>();
         _tornadoVFX = GetComponentInChildren<VisualEffect>();
+        //StartCoroutine(SpawnTornado());
+    }
+
+    private IEnumerator SpawnTornado()
+    {
+        _tornadoVFX.SetFloat("Duration", 5.0f);
+        yield return new WaitForSeconds(0.2f);
+        _tornadoVFX.SetFloat("Duration", 100.0f);
     }
 
     public override void SetSkill(Skill skill)
