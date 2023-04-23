@@ -1568,7 +1568,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4492101057451422959}
-  m_LocalRotation: {x: 0.058843754, y: 0.0151503645, z: -0.000893155, w: 0.99815184}
+  m_LocalRotation: {x: 0.05884772, y: 0.009759208, z: -0.00057533174, w: 0.99821913}
   m_LocalPosition: {x: -0.5397235, y: 2.3344133, z: -1.468136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3474,10 +3474,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afce8ce93f52d4d49b25dd79cde95721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCam: {fileID: 4492101058340307228}
+  _playerCamTransform: {fileID: 4492101058340307228}
   allowAllDirections: 1
   disableGravity: 0
   resetVelocity: 1
+  _maxRegularSpeed: 5
+  _speedChangeFactor: 50
 --- !u!1 &8198835224221356302
 GameObject:
   m_ObjectHideFlags: 0

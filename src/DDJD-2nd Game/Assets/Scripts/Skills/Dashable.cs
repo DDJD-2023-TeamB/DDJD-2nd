@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Dashable : MonoBehaviour
 {
@@ -9,7 +10,8 @@ public class Dashable : MonoBehaviour
     private Animator _animator;
 
     [SerializeField]
-    private Transform _playerCam;
+    private Transform _playerCamTransform;
+    private FovController _fovController;
 
     [SerializeField]
     private bool allowAllDirections = true;
@@ -33,6 +35,7 @@ public class Dashable : MonoBehaviour
         get => _isDashing;
     }
     private DashStats _currentDashStats;
+    private float _defaultFov;
 
     private void Awake()
     {
@@ -40,6 +43,8 @@ public class Dashable : MonoBehaviour
         _inputReceiver = GetComponent<PlayerInputReceiver>();
         _animator = GetComponent<Animator>();
         _maxSpeed = _maxRegularSpeed;
+        _fovController = _playerCamTransform.GetComponent<FovController>();
+        _defaultFov = _fovController.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView;
     }
 
     private void Update()
@@ -54,6 +59,8 @@ public class Dashable : MonoBehaviour
 
     public void DashWithSkill(DashSkill dashSkill)
     {
+        Dash(dashSkill.DashStats);
+
         Vector3 direction = GetDashDirection();
         Vector3 position = new Vector3(
             transform.position.x,
@@ -66,12 +73,11 @@ public class Dashable : MonoBehaviour
         DashComponent dashComponent = spell.GetComponent<DashComponent>();
         dashComponent.SetCaster(gameObject);
         dashComponent.SetSkill(dashSkill);
-
-        Dash(dashSkill.DashStats);
     }
 
     public void Dash(DashStats stats)
     {
+        _isDashing = true;
         Vector3 direction = GetDashDirection();
         Vector3 force = direction * stats.Force;
 
@@ -82,9 +88,9 @@ public class Dashable : MonoBehaviour
 
         _rigidbody.AddForce(force, ForceMode.Impulse);
         SetDashAnimation();
+        _fovController.ChangeFov(stats.CameraFov, stats.EnterFovTime);
 
         _maxSpeed = stats.MaxSpeed;
-        _isDashing = true;
         _currentDashStats = stats;
         Invoke(nameof(ResetDash), stats.Duration);
     }
@@ -94,7 +100,9 @@ public class Dashable : MonoBehaviour
         if (disableGravity)
             _rigidbody.useGravity = true;
         _isDashing = false;
+        _fovController.ChangeFov(_defaultFov, _currentDashStats.ExitFovTime);
         _currentDashStats = null;
+
         _animator.SetBool("IsDashing", false);
         _animator.SetFloat("DashX", 0f);
         _animator.SetFloat("DashY", 0f);
@@ -106,13 +114,11 @@ public class Dashable : MonoBehaviour
         float time = 0;
         float diff = Mathf.Abs(_maxSpeed - targetSpeed);
         float startValue = _maxSpeed;
-        int counter = 0;
 
         while (time < 1)
         {
             time += Time.deltaTime / diff * _speedChangeFactor;
             _maxSpeed = Mathf.Lerp(startValue, targetSpeed, time);
-            counter++;
             yield return null;
         }
 
@@ -123,7 +129,7 @@ public class Dashable : MonoBehaviour
     {
         Transform forwardTransform;
         if (allowAllDirections)
-            forwardTransform = _playerCam;
+            forwardTransform = _playerCamTransform;
         else
             forwardTransform = transform;
 
