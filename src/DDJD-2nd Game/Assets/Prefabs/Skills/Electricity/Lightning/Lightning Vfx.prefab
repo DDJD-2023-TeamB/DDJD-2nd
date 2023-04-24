@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1749058838326422176}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 7.03, y: 0.69, z: -4.96}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -61,9 +61,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 2
-  m_Height: 13
+  m_Height: 14
   m_Direction: 2
-  m_Center: {x: 0.15593126, y: 0, z: 8.77}
+  m_Center: {x: 0.15593126, y: 0, z: 6.65}
 --- !u!2083052967 &6551930551421182360
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -84,7 +84,10 @@ VisualEffect:
     m_Vector2f:
       m_Array: []
     m_Vector3f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 0, y: 0, z: -2.68}
+        m_Name: Cone_transform_position
+        m_Overridden: 1
     m_Vector4f:
       m_Array: []
     m_Uint:
