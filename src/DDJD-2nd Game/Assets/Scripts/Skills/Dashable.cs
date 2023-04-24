@@ -14,6 +14,11 @@ public class Dashable : MonoBehaviour
     private FovController _fovController;
 
     [SerializeField]
+    // This cooldown is used to prevent the character from dashing too often, even if the skill was used or its cooldown is over
+    private float _minCooldown = 1f;
+    private float _timeSinceLastDash = 0f;
+
+    [SerializeField]
     private bool allowAllDirections = true;
 
     [SerializeField]
@@ -55,11 +60,13 @@ public class Dashable : MonoBehaviour
             Vector3 limitedVel = flatVel.normalized * _maxSpeed;
             _rigidbody.velocity = new Vector3(limitedVel.x, _rigidbody.velocity.y, limitedVel.z);
         }
+        _timeSinceLastDash += Time.deltaTime;
     }
 
     public void DashWithSkill(DashSkill dashSkill)
     {
-        Dash(dashSkill.DashStats);
+        if (!Dash(dashSkill.DashStats))
+            return;
 
         Vector3 direction = GetDashDirection();
         Vector3 position = new Vector3(
@@ -75,8 +82,14 @@ public class Dashable : MonoBehaviour
         dashComponent.SetSkill(dashSkill);
     }
 
-    public void Dash(DashStats stats)
+    /**
+    * Returns true if the dash was successful, false otherwise
+    */
+    public bool Dash(DashStats stats)
     {
+        if (_timeSinceLastDash < _minCooldown)
+            return false;
+
         _isDashing = true;
         Vector3 direction = GetDashDirection();
         Vector3 force = direction * stats.Force;
@@ -93,6 +106,9 @@ public class Dashable : MonoBehaviour
         _maxSpeed = stats.MaxSpeed;
         _currentDashStats = stats;
         Invoke(nameof(ResetDash), stats.Duration);
+
+        _timeSinceLastDash = 0f;
+        return true;
     }
 
     private void ResetDash()
@@ -163,5 +179,10 @@ public class Dashable : MonoBehaviour
         _animator.SetBool("IsDashing", true);
         _animator.SetFloat("DashX", dashX);
         _animator.SetFloat("DashY", dashY);
+    }
+
+    public bool IsDashOnCooldown()
+    {
+        return _timeSinceLastDash < _minCooldown;
     }
 }

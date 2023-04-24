@@ -50,11 +50,11 @@ public class NotAimingState : MovableState
 
     private void CheckDash()
     {
-        if (!_context.Input.IsDashing)
-        {
-            return;
-        }
-        if (_substate is DashState)
+        if (
+            !_context.Input.IsDashing
+            || _substate is DashState
+            || _context.Dashable.IsDashOnCooldown()
+        )
         {
             return;
         }
