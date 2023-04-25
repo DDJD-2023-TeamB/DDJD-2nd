@@ -104,7 +104,7 @@ public class Tornado : GroundProjectileComponent, NonCollidable
             0
         );
         boxCollider.size = originalSize * _chargeComponent.GetCurrentCharge();
-        _tornadoStrength = _skill.Stats.Force * _chargeComponent.GetCurrentCharge();
+        _tornadoStrength = _skillStats.Force * _chargeComponent.GetCurrentCharge();
         _rotationStrength = 50f * _chargeComponent.GetCurrentCharge();
 
         StartCoroutine(DestroyTornado());
@@ -127,7 +127,7 @@ public class Tornado : GroundProjectileComponent, NonCollidable
         Destroy(gameObject, 2.0f);
     }
 
-    protected override void OnImpact(Collider other)
+    protected override void OnImpact(Collider other, float multiplier)
     {
         if (!other.attachedRigidbody)
             return;
@@ -141,11 +141,21 @@ public class Tornado : GroundProjectileComponent, NonCollidable
             caught = other.gameObject.AddComponent<CaughtInTornado>();
         }
 
-        caught.Init(this, _rb, _tornadoStrength);
-
         if (!_caughtObjects.Contains(caught))
         {
+            caught.Init(this, _rb, _tornadoStrength);
             _caughtObjects.Add(caught);
+        }
+
+        //Damage
+        Damageable damageable = other.GetComponent<Damageable>();
+        if (damageable != null)
+        {
+            damageable.TakeDamage(
+                (int)(_stats.Damage * multiplier),
+                other.ClosestPoint(transform.position),
+                transform.forward
+            );
         }
     }
 

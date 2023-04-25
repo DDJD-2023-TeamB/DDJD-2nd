@@ -12,6 +12,9 @@ public abstract class ProjectileComponent : SkillComponent
 
     private bool _originalIsKinematic;
 
+    [SerializeField]
+    protected bool _destroyOnImpact = true;
+
     protected bool _leftCaster = false;
 
     [SerializeField]
@@ -67,36 +70,30 @@ public abstract class ProjectileComponent : SkillComponent
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    public override void OnTriggerEnter(Collider other)
     {
-        // Remake this
-        if (other.gameObject == _caster)
-        {
-            return;
-        }
+        base.OnTriggerEnter(other);
+    }
 
-        if (other.GetComponent<NonCollidable>() != null)
-        {
-            return;
-        }
-        if (_impactPrefab != null)
-        {
-            SpawnHitVFX();
-        }
-        OnImpact(other);
-        if (_stats.DestroyOnImpact)
+    protected override void OnImpact(Collider other, float multiplier = 1)
+    {
+        base.OnImpact(other, multiplier);
+        if (_destroyOnImpact)
         {
             Destroy(gameObject);
+            SpawnHitVFX();
         }
     }
 
     protected virtual void SpawnHitVFX()
     {
+        if (_impactPrefab == null)
+        {
+            return;
+        }
         GameObject impact = Instantiate(_impactPrefab, transform.position, Quaternion.identity);
         Destroy(impact, 3.0f);
     }
-
-    protected abstract void OnImpact(Collider other);
 
     protected float GetDamage()
     {

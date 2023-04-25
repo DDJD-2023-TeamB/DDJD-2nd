@@ -134,6 +134,12 @@ public class Player : StateContext
         get { return _RightHand; }
     }
 
+    private Dashable _dashable;
+    public Dashable Dashable
+    {
+        get { return _dashable; }
+    }
+
     void Awake()
     {
         _inputReceiver = GetComponent<PlayerInputReceiver>();
@@ -145,6 +151,7 @@ public class Player : StateContext
         _dashComponent = GetComponent<Dashable>();
         _playerSkills.Player = this;
         _meleeCombat = GetComponent<MeleeCombat>();
+        _dashable = GetComponent<Dashable>();
         ChangeState(_factory.Playable());
     }
 

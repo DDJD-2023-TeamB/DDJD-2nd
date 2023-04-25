@@ -15,8 +15,9 @@ public class FireballComponent : ProjectileComponent
 
     private const int PARTICLES = 128;
 
-    protected override void OnImpact(Collider other)
+    protected override void OnImpact(Collider other, float multiplier = 1)
     {
+        base.OnImpact(other);
         //Raycast sphere
         RaycastHit[] hits = Physics.SphereCastAll(
             transform.position,

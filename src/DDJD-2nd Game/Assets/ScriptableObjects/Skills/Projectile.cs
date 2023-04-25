@@ -17,7 +17,7 @@ public class Projectile : AimedSkill
     private ProjectileStats _stats;
 
     // Unity doesn't support covariant return types
-    public override SkillStats Stats
+    public override SkillStats SkillStats
     {
         get { return (SkillStats)_stats; }
         set { _stats = (ProjectileStats)value; }

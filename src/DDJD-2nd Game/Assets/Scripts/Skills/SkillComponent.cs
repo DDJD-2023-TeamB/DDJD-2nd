@@ -20,6 +20,7 @@ public abstract class SkillComponent : MonoBehaviour
         }
     }
 
+    protected SkillStats _skillStats;
     public GameObject Caster
     {
         get { return _caster; }
@@ -30,7 +31,7 @@ public abstract class SkillComponent : MonoBehaviour
 
     protected float _elapsedTime = 0.0f;
 
-    virtual protected void Update()
+    protected virtual void Update()
     {
         _elapsedTime += Time.deltaTime;
     }
@@ -42,12 +43,12 @@ public abstract class SkillComponent : MonoBehaviour
 
     public virtual void SetSkill(Skill skill)
     {
-        SkillStats stats = skill.Stats;
-        if (stats.CastType == CastType.Charge)
+        _skillStats = skill.SkillStats;
+        if (_skillStats.CastType == CastType.Charge)
         {
             _isChargeAttack = true;
-            _chargeComponent.MaxChargeTime = stats.MaxChargeTime;
-            _chargeComponent.MinChargeTime = stats.MinChargeTime;
+            _chargeComponent.MaxChargeTime = _skillStats.MaxChargeTime;
+            _chargeComponent.MinChargeTime = _skillStats.MinChargeTime;
         }
     }
 
@@ -62,7 +63,7 @@ public abstract class SkillComponent : MonoBehaviour
         {
             return;
         }
-
+        Debug.Log("Damage: " + damage);
         damageable.TakeDamage(damage, hitPoint, direction);
     }
 
@@ -70,4 +71,80 @@ public abstract class SkillComponent : MonoBehaviour
     {
         // Do nothing
     }
+
+    public virtual void OnTriggerEnter(Collider other)
+    {
+        if (_skillStats == null)
+        {
+            return;
+        }
+        Collide(other);
+    }
+
+    public virtual void OnTriggerStay(Collider other)
+    {
+        if (_skillStats == null || !_skillStats.IsContinuous)
+        {
+            return;
+        }
+        Collide(other);
+    }
+
+    protected virtual void OnImpact(Collider other, float multiplier = 1)
+    {
+        // Override this method to add functionality
+    }
+
+    private void Collide(Collider other)
+    {
+        if (!CanCollide(other))
+        {
+            return;
+        }
+        GameObject otherObject = other.gameObject;
+        if (_skillStats.IsContinuous)
+        {
+            if (_collidedObjects.ContainsKey(otherObject))
+            {
+                // Register new impact
+                if (_elapsedTime - _collidedObjects[otherObject] > _skillStats.TickRate)
+                {
+                    float multiplier =
+                        _skillStats.TickRate / (_elapsedTime - _collidedObjects[otherObject]);
+                    _collidedObjects[otherObject] = _elapsedTime;
+                    multiplier = Mathf.Max(multiplier, 1f);
+                    OnImpact(other, multiplier);
+                }
+            }
+            else
+            {
+                // Register first impact with object
+                Debug.Log("First impact");
+                _collidedObjects.Add(otherObject, _elapsedTime);
+                OnImpact(other, 1f);
+            }
+        }
+        else if (!_collidedObjects.ContainsKey(otherObject))
+        {
+            // Register first impact with object
+            Debug.Log("First impact " + otherObject.name);
+            _collidedObjects.Add(otherObject, _elapsedTime);
+            OnImpact(other, 1f);
+        }
+    }
+
+    private bool CanCollide(Collider other)
+    {
+        if (other.gameObject == _caster)
+        {
+            return false;
+        }
+        if (_caster == null || other.GetComponent<NonCollidable>() != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    private Dictionary<GameObject, float> _collidedObjects = new Dictionary<GameObject, float>();
 }

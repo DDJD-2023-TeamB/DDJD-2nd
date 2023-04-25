@@ -17,15 +17,6 @@ public class ProjectileStats : SkillStats
     }
 
     [SerializeField]
-    private float _tickRate;
-
-    public float TickRate
-    {
-        get => _tickRate;
-        set => _tickRate = value;
-    }
-
-    [SerializeField]
     private float _range;
     public float Range
     {

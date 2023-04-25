@@ -74,7 +74,7 @@ public class AimingState : MovableState
             return;
         }
         Vector3 origin = spell.transform.position;
-        switch (skill.Stats.CastType)
+        switch (skill.SkillStats.CastType)
         {
             case CastType.Instant:
                 _context.PlayerSkills.StartSkillCooldown(skill);
@@ -100,7 +100,7 @@ public class AimingState : MovableState
             //Was destroyed
             return;
         }
-        switch (skill.Stats.CastType)
+        switch (skill.SkillStats.CastType)
         {
             case CastType.Instant:
                 // DO nothing
