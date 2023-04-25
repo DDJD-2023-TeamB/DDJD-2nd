@@ -12,12 +12,15 @@ public abstract class ProjectileComponent : SkillComponent
 
     private bool _originalIsKinematic;
 
+    protected bool _leftCaster = false;
+
     [SerializeField]
     [Tooltip("Set velocity instead of adding force")]
     private bool _setVelocity = false;
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _rb = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
         DeactivateSpell();
@@ -48,7 +51,7 @@ public abstract class ProjectileComponent : SkillComponent
     {
         ActivateSpell();
         transform.parent = null; // Detach from caster
-
+        _leftCaster = true;
         if (_setVelocity)
         {
             _rb.velocity = direction.normalized * _stats.Speed;

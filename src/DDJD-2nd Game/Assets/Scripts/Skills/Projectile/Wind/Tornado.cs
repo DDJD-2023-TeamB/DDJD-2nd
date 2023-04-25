@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class Tornado : GroundProjectileComponent
+public class Tornado : GroundProjectileComponent, NonCollidable
 {
     private float _currentSize = 0.0f;
 
@@ -50,13 +50,14 @@ public class Tornado : GroundProjectileComponent
         _lifetime = 0.0f;
         _caughtObjects = new List<CaughtInTornado>();
         _tornadoVFX = GetComponentInChildren<VisualEffect>();
+        _chargeComponent.OnChargeComplete += StopGeneratingTornado;
         //StartCoroutine(SpawnTornado());
     }
 
     private IEnumerator SpawnTornado()
     {
         _tornadoVFX.SetFloat("Duration", 5.0f);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(1.0f);
         _tornadoVFX.SetFloat("Duration", 100.0f);
     }
 
@@ -83,10 +84,17 @@ public class Tornado : GroundProjectileComponent
         //transform.rotation = _caster.transform.rotation;
     }
 
+    private void StopGeneratingTornado()
+    {
+        _tornadoVFX.SendEvent("StopGeneratingTornado");
+    }
+
     public override void Shoot(Vector3 direction)
     {
         base.Shoot(direction);
 
+        //Send event
+        StopGeneratingTornado();
         //Change collider scale
         BoxCollider boxCollider = (BoxCollider)_collider;
         Vector3 originalSize = boxCollider.size;
@@ -116,7 +124,7 @@ public class Tornado : GroundProjectileComponent
             _caughtObjects[i].Release();
         }
 
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject, 2.0f);
     }
 
     protected override void OnImpact(Collider other)

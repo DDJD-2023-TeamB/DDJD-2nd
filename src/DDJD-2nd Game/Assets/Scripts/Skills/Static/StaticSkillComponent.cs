@@ -6,8 +6,9 @@ public class StaticSkillComponent : SkillComponent
 {
     private Collider _collider;
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _collider = GetComponent<Collider>();
     }
 
