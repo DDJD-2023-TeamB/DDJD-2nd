@@ -13,7 +13,7 @@ public class StaticSkill : AimedSkill
     private StaticSkillStats _stats;
 
     // Unity doesn't support covariant return types
-    public override SkillStats Stats
+    public override SkillStats SkillStats
     {
         get { return (SkillStats)_stats; }
         set { _stats = (StaticSkillStats)value; }

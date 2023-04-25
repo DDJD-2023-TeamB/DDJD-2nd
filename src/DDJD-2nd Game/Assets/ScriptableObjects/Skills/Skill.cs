@@ -12,7 +12,7 @@ public abstract class Skill : ScriptableObject
 
     [SerializeField]
     private SkillStats _stats;
-    public virtual SkillStats Stats
+    public virtual SkillStats SkillStats
     {
         get => _stats;
         set => _stats = value;

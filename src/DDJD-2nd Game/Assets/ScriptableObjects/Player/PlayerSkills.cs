@@ -23,9 +23,6 @@ public class PlayerSkills : ScriptableObject
         set => _currentElement = value;
     }
 
-    [SerializeField]
-    private Dash _dashSkill;
-
     public AimedSkill LeftSkill
     {
         get => _leftSkill;
@@ -36,10 +33,13 @@ public class PlayerSkills : ScriptableObject
         get => _rightSkill;
         set => _rightSkill = value;
     }
-    public Dash DashSkill
+
+    [SerializeField]
+    private DashStats _dashStats;
+    public DashStats DashStats
     {
-        get => _dashSkill;
-        set => _dashSkill = value;
+        get => _dashStats;
+        set => _dashStats = value;
     }
 
     Dictionary<Skill, float> _skillCooldowns = new Dictionary<Skill, float>();
@@ -58,7 +58,7 @@ public class PlayerSkills : ScriptableObject
         {
             _skillCooldowns.Add(skill, 0f);
         }
-        _skillCooldowns[skill] = skill.Stats.Cooldown;
+        _skillCooldowns[skill] = skill.SkillStats.Cooldown;
         _player.StartCoroutine(SkillCooldown(skill));
     }
 
@@ -69,7 +69,8 @@ public class PlayerSkills : ScriptableObject
             _skillCooldowns[skill] -= COOLDOWN_TICK;
             yield return new WaitForSeconds(COOLDOWN_TICK);
         }
-        _skillCooldowns.Remove(skill);
+        if (_skillCooldowns.ContainsKey(skill))
+            _skillCooldowns.Remove(skill);
     }
 
     public bool IsSkillOnCooldown(Skill skill)
