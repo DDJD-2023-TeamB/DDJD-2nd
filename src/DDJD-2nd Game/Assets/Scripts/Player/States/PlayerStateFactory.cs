@@ -52,4 +52,9 @@ public class PlayerStateFactory : StateFactory
         // TODO I think we can get the skill from the context
         return new DashState(_context, superState, stats, skill);
     }
+
+    public InteractingState Interacting(GenericState superState)
+    {
+        return new InteractingState(_context, superState);
+    }
 }

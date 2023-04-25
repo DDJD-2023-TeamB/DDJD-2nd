@@ -140,6 +140,8 @@ public class Player : StateContext
         get { return _dashable; }
     }
 
+    public bool _interactedObject;
+
     void Awake()
     {
         _inputReceiver = GetComponent<PlayerInputReceiver>();
