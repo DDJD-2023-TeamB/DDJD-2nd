@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class Hitbox : MonoBehaviour
+public class Hitbox : MonoBehaviour, NonCollidable
 {
     private GameObject _parent;
     public GameObject Parent
@@ -61,7 +61,7 @@ public class Hitbox : MonoBehaviour
         if (other.gameObject == _parent)
             return;
 
-        if (other.gameObject.GetComponent<Hitbox>() != null)
+        if (other.gameObject.GetComponent<NonCollidable>() != null)
         {
             return;
         }

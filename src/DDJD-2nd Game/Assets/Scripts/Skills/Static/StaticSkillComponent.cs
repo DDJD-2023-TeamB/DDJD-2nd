@@ -6,8 +6,9 @@ public class StaticSkillComponent : SkillComponent
 {
     private Collider _collider;
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _collider = GetComponent<Collider>();
     }
 
@@ -18,6 +19,7 @@ public class StaticSkillComponent : SkillComponent
 
     public override void SetSkill(Skill skill)
     {
+        base.SetSkill(skill);
         _skill = (StaticSkill)skill;
         _stats = _skill.StaticStats;
     }

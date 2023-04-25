@@ -5,6 +5,21 @@ using UnityEngine;
 public abstract class SkillComponent : MonoBehaviour
 {
     protected GameObject _caster;
+
+    protected bool _isChargeAttack = false;
+    protected ChargeComponent _chargeComponent;
+
+    virtual protected void Awake()
+    {
+        Debug.Log("SkillComponent Awake");
+        _chargeComponent = GetComponent<ChargeComponent>();
+        if (_chargeComponent == null)
+        {
+            Debug.LogError(gameObject.name + ": No ChargeComponent found when required");
+            return;
+        }
+    }
+
     protected SkillStats _skillStats;
     public GameObject Caster
     {
@@ -21,7 +36,7 @@ public abstract class SkillComponent : MonoBehaviour
         _elapsedTime += Time.deltaTime;
     }
 
-    public void SetCaster(GameObject caster)
+    public virtual void SetCaster(GameObject caster)
     {
         _caster = caster;
     }
@@ -29,6 +44,12 @@ public abstract class SkillComponent : MonoBehaviour
     public virtual void SetSkill(Skill skill)
     {
         _skillStats = skill.SkillStats;
+        if (_skillStats.CastType == CastType.Charge)
+        {
+            _isChargeAttack = true;
+            _chargeComponent.MaxChargeTime = _skillStats.MaxChargeTime;
+            _chargeComponent.MinChargeTime = _skillStats.MinChargeTime;
+        }
     }
 
     protected void Damage(GameObject target, int damage, Vector3 hitPoint, Vector3 direction)
@@ -106,7 +127,7 @@ public abstract class SkillComponent : MonoBehaviour
         else if (!_collidedObjects.ContainsKey(otherObject))
         {
             // Register first impact with object
-            Debug.Log("First impact");
+            Debug.Log("First impact " + otherObject.name);
             _collidedObjects.Add(otherObject, _elapsedTime);
             OnImpact(other, 1f);
         }
