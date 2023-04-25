@@ -13,11 +13,6 @@ public abstract class SkillComponent : MonoBehaviour
     {
         Debug.Log("SkillComponent Awake");
         _chargeComponent = GetComponent<ChargeComponent>();
-        if (_chargeComponent == null)
-        {
-            Debug.LogError(gameObject.name + ": No ChargeComponent found when required");
-            return;
-        }
     }
 
     protected SkillStats _skillStats;
@@ -46,6 +41,11 @@ public abstract class SkillComponent : MonoBehaviour
         _skillStats = skill.SkillStats;
         if (_skillStats.CastType == CastType.Charge)
         {
+            if (_chargeComponent == null)
+            {
+                Debug.LogError(gameObject.name + ": No ChargeComponent found when required");
+                return;
+            }
             _isChargeAttack = true;
             _chargeComponent.MaxChargeTime = _skillStats.MaxChargeTime;
             _chargeComponent.MinChargeTime = _skillStats.MinChargeTime;
