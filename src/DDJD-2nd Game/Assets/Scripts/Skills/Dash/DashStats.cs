@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class DashStats : SkillStats
+public class DashStats
 {
     [SerializeField]
     private float _duration = 0.3f;
@@ -11,6 +11,14 @@ public class DashStats : SkillStats
     {
         get => _duration;
         set => _duration = value;
+    }
+
+    [SerializeField]
+    private float _force = 40f;
+    public float Force
+    {
+        get => _force;
+        set => _force = value;
     }
 
     [SerializeField]
@@ -43,23 +51,5 @@ public class DashStats : SkillStats
     {
         get => _exitFovTime;
         set => _exitFovTime = value;
-    }
-
-    public DashStats(
-        float damage,
-        float cooldown,
-        float duration,
-        float maxSpeed,
-        float cameraFov,
-        float enterFovTime,
-        float exitFovTime
-    )
-        : base(damage, cooldown)
-    {
-        _duration = duration;
-        _maxSpeed = maxSpeed;
-        _cameraFov = cameraFov;
-        _enterFovTime = enterFovTime;
-        _exitFovTime = exitFovTime;
     }
 }

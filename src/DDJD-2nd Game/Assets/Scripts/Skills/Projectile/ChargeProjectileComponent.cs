@@ -36,7 +36,7 @@ public abstract class ChargeProjectileComponent : ProjectileComponent
 
     protected abstract void OnCharge();
 
-    protected void Update()
+    protected override void Update()
     {
         Charge();
     }

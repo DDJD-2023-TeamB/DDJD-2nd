@@ -9,7 +9,6 @@ public class LightningComponent : DashComponent
     [SerializeField]
     private string[] _layersToDashThrough;
     private int[] _layersToIgnore;
-    private float timer = 0f;
 
     private List<GameObject> _objectsHit = new List<GameObject>();
 
@@ -25,41 +24,20 @@ public class LightningComponent : DashComponent
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void Update()
     {
-        if (other.gameObject == _caster)
-        {
-            return;
-        }
-        _objectsHit.Add(other.gameObject);
+        base.Update();
     }
 
-    private void OnTriggerExit(Collider other)
+    protected override void OnImpact(Collider other, float multiplier = 1)
     {
-        if (other.gameObject == _caster)
-        {
-            return;
-        }
-        _objectsHit.Remove(other.gameObject);
-    }
-
-    private void Update()
-    {
-        timer += Time.deltaTime;
-        if (timer < _skill.DashSkillStats.DamageRate)
-        {
-            return;
-        }
-        timer = 0f;
-        foreach (GameObject obj in _objectsHit)
-        {
-            Damage(
-                obj,
-                (int)_skill.DashSkillStats.Damage,
-                obj.transform.position,
-                transform.forward
-            );
-        }
+        base.OnImpact(other, multiplier);
+        Damage(
+            other.gameObject,
+            (int)(_skillStats.Damage * multiplier),
+            other.ClosestPoint(_caster.transform.position),
+            _caster.transform.forward
+        );
     }
 
     private void OnDestroy()

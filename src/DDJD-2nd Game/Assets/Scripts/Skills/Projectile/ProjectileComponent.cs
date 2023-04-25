@@ -10,6 +10,7 @@ public abstract class ProjectileComponent : SkillComponent
     protected Projectile _skill;
     protected GameObject _impactPrefab;
 
+    [SerializeField]
     protected bool _destroyOnImpact = true;
 
     protected virtual void Awake()
@@ -33,6 +34,7 @@ public abstract class ProjectileComponent : SkillComponent
 
     public override void SetSkill(Skill skill)
     {
+        base.SetSkill(skill);
         _skill = (Projectile)skill;
         _stats = _skill.ProjectileStats;
         _impactPrefab = _skill.ImpactPrefab;
@@ -45,34 +47,23 @@ public abstract class ProjectileComponent : SkillComponent
         _rb.AddForce(direction.normalized * _stats.Speed, ForceMode.Impulse);
     }
 
-    public void OnTriggerEnter(Collider other)
+    public override void OnTriggerEnter(Collider other)
     {
-        // Remake this
-        if (other.gameObject == _caster)
-        {
-            return;
-        }
-
-        if (other.GetComponent<NonCollidable>() != null)
-        {
-            return;
-        }
-        if (_impactPrefab != null)
-        {
-            SpawnHitVFX();
-        }
-        OnImpact(other);
+        base.OnTriggerEnter(other);
         if (_destroyOnImpact)
         {
             Destroy(gameObject);
+            SpawnHitVFX();
         }
     }
 
     protected virtual void SpawnHitVFX()
     {
+        if (_impactPrefab == null)
+        {
+            return;
+        }
         GameObject impact = Instantiate(_impactPrefab, transform.position, Quaternion.identity);
         Destroy(impact, 3.0f);
     }
-
-    protected abstract void OnImpact(Collider other);
 }
