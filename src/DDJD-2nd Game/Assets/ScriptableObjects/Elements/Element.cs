@@ -25,4 +25,11 @@ public class Element : ScriptableObject
     {
         get => _dashSkill;
     }
+
+    [SerializeField]
+    private AirMovementSkill _airMovementSkill;
+    public AirMovementSkill AirMovementSkill
+    {
+        get => _airMovementSkill;
+    }
 }
