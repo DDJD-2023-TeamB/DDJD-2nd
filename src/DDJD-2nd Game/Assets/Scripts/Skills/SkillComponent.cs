@@ -63,7 +63,6 @@ public abstract class SkillComponent : MonoBehaviour
         {
             return;
         }
-        Debug.Log("Damage: " + damage);
         damageable.TakeDamage(damage, hitPoint, direction);
     }
 
