@@ -12,6 +12,8 @@ public abstract class AirMovementComponent : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
+    public virtual void Reset() { }
+
     public virtual void SetSkill(AirMovementSkill skill)
     {
         enabled = true;

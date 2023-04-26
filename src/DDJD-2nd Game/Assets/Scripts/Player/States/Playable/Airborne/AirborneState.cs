@@ -25,6 +25,7 @@ public class AirborneState : GenericState
         _context.Animator.SetBool("IsGrounded", true);
         _context.Input.OnJumpKeyUp -= OnJumpKeyUp;
         _context.Input.OnJumpKeyDown -= OnJumpKeyDown;
+        _context.AirMovement?.Reset();
     }
 
     public override bool CanChangeState(GenericState state)

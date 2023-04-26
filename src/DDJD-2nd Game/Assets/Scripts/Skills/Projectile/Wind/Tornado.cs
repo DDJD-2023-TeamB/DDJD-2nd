@@ -121,7 +121,10 @@ public class Tornado : GroundProjectileComponent, NonCollidable
         _collider.enabled = false;
         for (int i = 0; i < _caughtObjects.Count; i++)
         {
-            _caughtObjects[i].Release();
+            if (_caughtObjects[i] != null)
+            {
+                _caughtObjects[i].Release();
+            }
         }
 
         Destroy(gameObject, 2.0f);

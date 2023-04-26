@@ -12,6 +12,14 @@ public class FlappySkillStats
     [SerializeField]
     public float _cooldown;
 
+    [SerializeField]
+    private int _maxJumps = 5;
+
+    public int MaxJumps
+    {
+        get => _maxJumps;
+    }
+
     public float UpwardForce
     {
         get => _upwardForce;
