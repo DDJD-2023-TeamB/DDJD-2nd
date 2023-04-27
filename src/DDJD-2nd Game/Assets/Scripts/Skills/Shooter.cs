@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
+    private Player _player;
+
+    private void Awake()
+    {
+        _player = GetComponent<Player>();
+    }
+
     private GameObject _leftSpell;
     private GameObject _rightSpell;
 
@@ -27,7 +34,7 @@ public class Shooter : MonoBehaviour
         _leftSpell = GameObject.Instantiate(
             skill.SpellPrefab,
             transform.position,
-            Quaternion.identity
+            _player.CameraTarget.transform.rotation
         );
         _leftSpell.transform.parent = transform;
         SkillComponent skillComponent = _leftSpell.GetComponent<SkillComponent>();
@@ -45,7 +52,7 @@ public class Shooter : MonoBehaviour
         _rightSpell = GameObject.Instantiate(
             skill.SpellPrefab,
             transform.position,
-            Quaternion.identity
+            _player.CameraTarget.transform.rotation
         );
         _rightSpell.transform.parent = transform;
         SkillComponent skillComponent = _rightSpell.GetComponent<SkillComponent>();
@@ -80,7 +87,7 @@ public class Shooter : MonoBehaviour
 
     public void Shoot(GameObject spell, Vector3 direction)
     {
-        ProjectileComponent skillComponent = spell.GetComponent<ProjectileComponent>();
+        SkillComponent skillComponent = spell.GetComponent<SkillComponent>();
         skillComponent.Shoot(direction);
         if (_leftSpell == spell)
         {

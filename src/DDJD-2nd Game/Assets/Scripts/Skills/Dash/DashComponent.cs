@@ -8,6 +8,7 @@ public abstract class DashComponent : SkillComponent
 
     public override void SetSkill(Skill skill)
     {
+        base.SetSkill(skill);
         _skill = (DashSkill)skill;
     }
 

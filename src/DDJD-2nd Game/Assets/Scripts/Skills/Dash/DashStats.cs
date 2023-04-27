@@ -6,19 +6,19 @@ using UnityEngine;
 public class DashStats
 {
     [SerializeField]
-    private float _force = 40f;
-    public float Force
-    {
-        get => _force;
-        set => _force = value;
-    }
-
-    [SerializeField]
     private float _duration = 0.3f;
     public float Duration
     {
         get => _duration;
         set => _duration = value;
+    }
+
+    [SerializeField]
+    private float _force = 40f;
+    public float Force
+    {
+        get => _force;
+        set => _force = value;
     }
 
     [SerializeField]

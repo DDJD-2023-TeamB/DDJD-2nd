@@ -1722,6 +1722,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4492101058340307228}
   - component: {fileID: 4492101058340307231}
+  - component: {fileID: 2745523767761230721}
   m_Layer: 6
   m_Name: Main Camera
   m_TagString: Untagged
@@ -1783,6 +1784,18 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 4492101057330347900}
+--- !u!114 &2745523767761230721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4492101058340307229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38ef059d8501b8f4bb6347efa66b284d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4492101058631373204
 GameObject:
   m_ObjectHideFlags: 0
@@ -3475,11 +3488,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerCamTransform: {fileID: 4492101058340307228}
+  _minCooldown: 1
   allowAllDirections: 1
   disableGravity: 0
   resetVelocity: 1
   _maxRegularSpeed: 5
-  _speedChangeFactor: 50
+  _speedChangeFactor: 200
 --- !u!1 &8198835224221356302
 GameObject:
   m_ObjectHideFlags: 0

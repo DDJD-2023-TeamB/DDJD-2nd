@@ -10,58 +10,106 @@ public abstract class ProjectileComponent : SkillComponent
     protected Projectile _skill;
     protected GameObject _impactPrefab;
 
-    protected virtual void Awake()
+    private bool _originalIsKinematic;
+
+    [SerializeField]
+    protected bool _destroyOnImpact = true;
+
+    protected bool _leftCaster = false;
+
+    [SerializeField]
+    [Tooltip("Set velocity instead of adding force")]
+    private bool _setVelocity = false;
+
+    protected override void Awake()
     {
+        base.Awake();
         _rb = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
         DeactivateSpell();
     }
 
-    void DeactivateSpell()
+    protected void DeactivateSpell()
     {
+        _originalIsKinematic = _rb.isKinematic;
         _collider.enabled = false;
         _rb.isKinematic = true;
     }
 
-    void ActivateSpell()
+    protected void ActivateSpell()
     {
         _collider.enabled = true;
-        _rb.isKinematic = false;
+        _rb.isKinematic = _originalIsKinematic;
     }
 
     public override void SetSkill(Skill skill)
     {
+        base.SetSkill(skill);
         _skill = (Projectile)skill;
         _stats = _skill.ProjectileStats;
         _impactPrefab = _skill.ImpactPrefab;
     }
 
-    public virtual void Shoot(Vector3 direction)
+    public override void Shoot(Vector3 direction)
     {
         ActivateSpell();
         transform.parent = null; // Detach from caster
-        _rb.AddForce(direction.normalized * _stats.Speed, ForceMode.Impulse);
+        _leftCaster = true;
+        if (_setVelocity)
+        {
+            _rb.velocity = direction.normalized * _stats.Speed;
+        }
+        else
+        {
+            _rb.AddForce(direction.normalized * _stats.Speed, ForceMode.Acceleration);
+        }
+
+        if (_isChargeAttack)
+        {
+            _chargeComponent.StopCharging();
+        }
     }
 
-    public void OnTriggerEnter(Collider other)
+    public override void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == _caster)
+        base.OnTriggerEnter(other);
+    }
+
+    protected override void OnImpact(Collider other, float multiplier = 1)
+    {
+        base.OnImpact(other, multiplier);
+        if (_destroyOnImpact)
         {
-            return;
-        }
-        if (_impactPrefab != null)
-        {
+            Destroy(gameObject);
             SpawnHitVFX();
         }
-        OnImpact(other);
-        Destroy(gameObject);
     }
 
     protected virtual void SpawnHitVFX()
     {
+        if (_impactPrefab == null)
+        {
+            return;
+        }
         GameObject impact = Instantiate(_impactPrefab, transform.position, Quaternion.identity);
         Destroy(impact, 3.0f);
     }
 
-    protected abstract void OnImpact(Collider other);
+    protected float GetDamage()
+    {
+        if (_isChargeAttack)
+        {
+            return _stats.Damage * _chargeComponent.GetCurrentCharge();
+        }
+        return _stats.Damage;
+    }
+
+    protected float GetForce()
+    {
+        if (_isChargeAttack)
+        {
+            return _stats.ForceWithDamage() * _chargeComponent.GetCurrentCharge();
+        }
+        return _stats.ForceWithDamage();
+    }
 }
