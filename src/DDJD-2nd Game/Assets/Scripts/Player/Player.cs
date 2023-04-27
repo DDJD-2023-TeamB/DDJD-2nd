@@ -140,6 +140,12 @@ public class Player : StateContext
         get { return _dashable; }
     }
 
+    private AirMovementComponent _airMovement;
+    public AirMovementComponent AirMovement
+    {
+        get { return _airMovement; }
+    }
+
     void Awake()
     {
         _inputReceiver = GetComponent<PlayerInputReceiver>();
@@ -155,8 +161,18 @@ public class Player : StateContext
         ChangeState(_factory.Playable());
     }
 
+    void Start()
+    {
+        UpdateElement();
+    }
+
     void Update()
     {
         _state.Update();
+    }
+
+    void UpdateElement()
+    {
+        _airMovement = _playerSkills.CurrentElement?.AirMovementSkill?.Initialize(gameObject);
     }
 }

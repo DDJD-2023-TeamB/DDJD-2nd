@@ -29,6 +29,12 @@ public class LightningComponent : DashComponent
         base.Update();
     }
 
+    public override void SetSkill(Skill skill)
+    {
+        base.SetSkill(skill);
+        Destroy(gameObject, _skill.DashSkillStats.EffectDuration);
+    }
+
     protected override void OnImpact(Collider other, float multiplier = 1)
     {
         base.OnImpact(other, multiplier);

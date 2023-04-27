@@ -13,8 +13,5 @@ public abstract class DashComponent : SkillComponent
     }
 
     // destroy the gameobject after the dash is over
-    protected virtual void Start()
-    {
-        Destroy(gameObject, _skill.DashSkillStats.EffectDuration);
-    }
+    protected virtual void Start() { }
 }

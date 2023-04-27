@@ -94,7 +94,8 @@ public class PlayerInputReceiver : MonoBehaviour
     public Action OnMeleeAttackKeydown;
     public Action OnMeleeAttackKeyup;
 
-    
+    public Action OnJumpKeyDown;
+    public Action OnJumpKeyUp;
 
     // Start is called before the first frame update
     void Awake()
@@ -104,8 +105,16 @@ public class PlayerInputReceiver : MonoBehaviour
         _playerInput.PlayerMovement.Move.canceled += ctx => Move(Vector2.zero);
         _playerInput.PlayerMovement.Run.performed += ctx => _isRunning = true;
         _playerInput.PlayerMovement.Run.canceled += ctx => _isRunning = false;
-        _playerInput.PlayerMovement.Jump.performed += ctx => _isJumping = true;
-        _playerInput.PlayerMovement.Jump.canceled += ctx => _isJumping = false;
+        _playerInput.PlayerMovement.Jump.performed += ctx =>
+        {
+            OnJumpKeyDown?.Invoke();
+            _isJumping = true;
+        };
+        _playerInput.PlayerMovement.Jump.canceled += ctx =>
+        {
+            OnJumpKeyUp?.Invoke();
+            _isJumping = false;
+        };
 
         _playerInput.PlayerMovement.Dash.performed += ctx => _isDashing = true;
         _playerInput.PlayerMovement.Dash.canceled += ctx => _isDashing = false;
@@ -146,11 +155,13 @@ public class PlayerInputReceiver : MonoBehaviour
         _playerInput.Combat.ChangeRightSpell.performed += ctx => _isChangingRightSpell = true;
         _playerInput.Combat.ChangeRightSpell.canceled += ctx => _isChangingRightSpell = false;
 
-        _playerInput.Combat.MeleeAttack.performed += ctx => {
+        _playerInput.Combat.MeleeAttack.performed += ctx =>
+        {
             _isMeleeAttacking = true;
             OnMeleeAttackKeydown?.Invoke();
         };
-        _playerInput.Combat.MeleeAttack.canceled += ctx => {
+        _playerInput.Combat.MeleeAttack.canceled += ctx =>
+        {
             _isMeleeAttacking = false;
             OnMeleeAttackKeyup?.Invoke();
         };
