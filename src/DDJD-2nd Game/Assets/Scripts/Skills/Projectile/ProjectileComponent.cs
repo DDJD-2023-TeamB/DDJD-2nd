@@ -62,6 +62,7 @@ public abstract class ProjectileComponent : SkillComponent
         else
         {
             _rb.AddForce(direction.normalized * _stats.Speed, ForceMode.Acceleration);
+            Debug.Log("Add force");
         }
 
         if (_isChargeAttack)
