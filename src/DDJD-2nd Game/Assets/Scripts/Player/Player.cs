@@ -36,6 +36,12 @@ public class Player : StateContext
         get { return _shooter; }
     }
 
+    private ObjectSpawner _objectSpawner;
+    public ObjectSpawner ObjectSpawner
+    {
+        get { return _objectSpawner; }
+    }
+
     private Dashable _dashComponent;
     public Dashable DashComponent
     {
@@ -154,6 +160,7 @@ public class Player : StateContext
         _animator = GetComponent<Animator>();
         _aimComponent = GetComponent<PlayerAimComponent>();
         _shooter = GetComponent<Shooter>();
+        _objectSpawner = GetComponent<ObjectSpawner>();
         _dashComponent = GetComponent<Dashable>();
         _playerSkills.Player = this;
         _meleeCombat = GetComponent<MeleeCombat>();

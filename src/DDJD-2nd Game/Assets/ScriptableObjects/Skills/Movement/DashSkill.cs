@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Dash", menuName = "Scriptable Objects/Skills/Dash", order = 2)]
+[CreateAssetMenu(fileName = "Dash", menuName = "Scriptable Objects/Skills/Dash", order = 4)]
 public class DashSkill : Skill
 {
     [SerializeField]

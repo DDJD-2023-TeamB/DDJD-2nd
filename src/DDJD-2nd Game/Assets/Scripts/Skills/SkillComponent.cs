@@ -35,6 +35,8 @@ public abstract class SkillComponent : MonoBehaviour
         _caster = caster;
     }
 
+    private Dictionary<GameObject, float> _collidedObjects = new Dictionary<GameObject, float>();
+
     public virtual void SetSkill(Skill skill)
     {
         _skillStats = skill.SkillStats;
@@ -151,8 +153,6 @@ public abstract class SkillComponent : MonoBehaviour
         }
         return true;
     }
-
-    private Dictionary<GameObject, float> _collidedObjects = new Dictionary<GameObject, float>();
 
     public virtual void DestroySpell()
     {

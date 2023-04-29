@@ -31,15 +31,7 @@ public class Shooter : MonoBehaviour
         {
             CancelLeftShoot();
         }
-        _leftSpell = GameObject.Instantiate(
-            skill.SpellPrefab,
-            transform.position,
-            _aimComponent.GetAimRotation()
-        );
-        _leftSpell.transform.parent = transform;
-        SkillComponent skillComponent = _leftSpell.GetComponent<SkillComponent>();
-        skillComponent.SetCaster(gameObject);
-        skillComponent.SetSkill(skill);
+        _leftSpell = CreateSpell(skill, transform);
         return _leftSpell;
     }
 
@@ -49,16 +41,22 @@ public class Shooter : MonoBehaviour
         {
             CancelRightShoot();
         }
-        _rightSpell = GameObject.Instantiate(
+        _rightSpell = CreateSpell(skill, transform);
+        return _rightSpell;
+    }
+
+    private GameObject CreateSpell(AimedSkill skill, Transform transform)
+    {
+        GameObject spell = GameObject.Instantiate(
             skill.SpellPrefab,
             transform.position,
             _aimComponent.GetAimRotation()
         );
-        _rightSpell.transform.parent = transform;
-        SkillComponent skillComponent = _rightSpell.GetComponent<SkillComponent>();
+        spell.transform.parent = transform;
+        SkillComponent skillComponent = spell.GetComponent<SkillComponent>();
         skillComponent.SetCaster(gameObject);
         skillComponent.SetSkill(skill);
-        return _rightSpell;
+        return spell;
     }
 
     public void CancelLeftShoot()
