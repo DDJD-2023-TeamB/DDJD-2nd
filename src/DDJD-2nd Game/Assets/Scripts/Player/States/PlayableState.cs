@@ -42,7 +42,7 @@ public class PlayableState : GenericState
     {
  
         // Se clickou no F e se está perto de algum interable
-        if (_context.Input.IsInteracting && !(_substate is InteractingState) && _context._interactedObject)
+    if (_context.Input.IsInteracting && !(_substate is InteractingState) && _context._interactedObject != null)
         {
             ChangeSubState(_context.Factory.Interacting(this));
         }

@@ -2,22 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
     private Queue<string> sentences;
-    public Text nameText;
-    public Text dialogueText;
-    public Animator animator;
+    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI dialogueText;
+    // public Animator animator;
     public void Start()
     {
         sentences = new Queue<string>();
     }
     public void StartDialogue(Dialogue dialogue)
     {
-        Debug.Log("Starting conversation with " + dialogue.name);
-        animator.SetBool("IsOpen", true);
-        nameText.text = dialogue.name;
+        Debug.Log("Starting conversation with " + dialogue.noun);
+        // animator.SetBool("IsOpen", true);
+        // nameText.text = dialogue.noun;
         sentences.Clear();
         foreach (string sentence in dialogue.sentences)
         {
