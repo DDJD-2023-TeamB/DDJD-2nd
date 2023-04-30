@@ -1,17 +1,20 @@
 using UnityEngine;
 using System.Collections;
 
-public class FallingState : GenericState
+public class InteractingState : GenericState
 {
     private Player _context;
 
-    public FallingState(StateContext context, GenericState superState)
+    public InteractingState(StateContext context, GenericState superState)
         : base(context, superState)
     {
         _context = (Player)context;
     }
 
-    public override void Enter() { }
+    public override void Enter()
+    {
+        Debug.Log("ON ENTER");
+    }
 
     public override void Exit()
     {

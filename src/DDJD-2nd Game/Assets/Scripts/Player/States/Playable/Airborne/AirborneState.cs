@@ -48,11 +48,6 @@ public class AirborneState : GenericState
             return true;
         }
 
-        if (_substate is FallingState)
-        {
-            ChangeSubState(_context.Factory.Falling(this));
-        }
-
         return false;
     }
 }
