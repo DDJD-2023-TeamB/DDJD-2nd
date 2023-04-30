@@ -11,7 +11,6 @@ public abstract class SkillComponent : MonoBehaviour
 
     virtual protected void Awake()
     {
-        Debug.Log("SkillComponent Awake");
         _chargeComponent = GetComponent<ChargeComponent>();
     }
 
@@ -118,7 +117,6 @@ public abstract class SkillComponent : MonoBehaviour
             else
             {
                 // Register first impact with object
-                Debug.Log("First impact");
                 _collidedObjects.Add(otherObject, _elapsedTime);
                 OnImpact(other, 1f);
             }
@@ -126,7 +124,6 @@ public abstract class SkillComponent : MonoBehaviour
         else if (!_collidedObjects.ContainsKey(otherObject))
         {
             // Register first impact with object
-            Debug.Log("First impact " + otherObject.name);
             _collidedObjects.Add(otherObject, _elapsedTime);
             OnImpact(other, 1f);
         }
@@ -146,4 +143,9 @@ public abstract class SkillComponent : MonoBehaviour
     }
 
     private Dictionary<GameObject, float> _collidedObjects = new Dictionary<GameObject, float>();
+
+    public virtual void DestroySpell()
+    {
+        Destroy(gameObject);
+    }
 }

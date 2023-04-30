@@ -9,25 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4cfa9ae009949e4c81d9eb55d0a6c88, type: 3}
-  m_Name: BasicFireShot
+  m_Script: {fileID: 11500000, guid: 16810e69a936d494296c943e398b8de8, type: 3}
+  m_Name: FlameThrower
   m_EditorClassIdentifier: 
-  _spellPrefab: {fileID: 5311460568920791482, guid: 48539a0912422af438fb9627a27cf2e8,
+  _spellPrefab: {fileID: 3470633235569862415, guid: 2866f985e98176e4d8ed49543d7ddc9c,
     type: 3}
   _handRunePrefab: {fileID: 4794543334150232581, guid: a18c434c32bb78b40be81332ad5c5725,
     type: 3}
-  _impactPrefab: {fileID: 8289852007905136683, guid: d46acfc68b7581648a6fd46b575efabd,
-    type: 3}
+  _impactPrefab: {fileID: 0}
   _stats:
-    _damage: 15
-    _force: 15
+    _damage: 10
+    _force: 0
     _damageToForceMultiplier: 0
-    _cooldown: 0.1
+    _cooldown: 0
     _castTime: 0
-    _castType: 0
+    _castType: 2
     _maxChargeTime: 0
-    _isContinuous: 0
-    _tickRate: 0
-    _speed: 1000
-    _destroyOnImpact: 1
-    _range: 25
+    _isContinuous: 1
+    _tickRate: 0.2
+    _duration: 1

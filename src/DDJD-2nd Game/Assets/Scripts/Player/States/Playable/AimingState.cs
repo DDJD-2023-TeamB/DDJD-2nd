@@ -74,11 +74,12 @@ public class AimingState : MovableState
             return;
         }
         Vector3 origin = spell.transform.position;
+        Vector3 direction;
         switch (skill.SkillStats.CastType)
         {
             case CastType.Instant:
                 _context.PlayerSkills.StartSkillCooldown(skill);
-                Vector3 direction = _context.AimComponent.GetAimDirection(origin);
+                direction = _context.AimComponent.GetAimDirection(origin);
                 _context.Shooter.Shoot(spell, direction);
                 _context.Animator.SetTrigger(animationTrigger);
                 _lastAnimTrigger = animationTrigger;
@@ -88,33 +89,51 @@ public class AimingState : MovableState
                 _lastAnimTrigger = animationTrigger;
                 break;
             case CastType.Hold:
-                // TODO
+                _context.PlayerSkills.StartSkillCooldown(skill);
+                _lastAnimTrigger = animationTrigger;
+                direction = _context.AimComponent.GetAimDirection(origin);
+                _context.Shooter.Shoot(spell, direction);
+                _context.Animator.SetTrigger(animationTrigger);
                 break;
         }
     }
 
-    private void OnShootKeyUp(AimedSkill skill, GameObject spell, string animationTrigger)
+    private void OnShootKeyUp(
+        AimedSkill skill,
+        GameObject spell,
+        string animationTrigger,
+        bool isLeft
+    )
     {
         if (spell == null)
         {
             //Was destroyed
             return;
         }
+        Vector3 direction;
+        Vector3 origin = spell.transform.position;
         switch (skill.SkillStats.CastType)
         {
             case CastType.Instant:
                 // DO nothing
                 break;
             case CastType.Charge:
-                Vector3 origin = spell.transform.position;
-                Vector3 direction = _context.AimComponent.GetAimDirection(origin);
+                direction = _context.AimComponent.GetAimDirection(origin);
                 _context.Shooter.Shoot(spell, direction);
                 _context.Animator.SetTrigger(animationTrigger);
                 _lastAnimTrigger = animationTrigger;
                 _context.PlayerSkills.StartSkillCooldown(skill);
                 break;
             case CastType.Hold:
-                // TODO
+                if (isLeft)
+                {
+                    _context.Shooter.CancelLeftShoot();
+                }
+                else
+                {
+                    _context.Shooter.CancelRightShoot();
+                }
+
                 break;
         }
     }
@@ -137,13 +156,13 @@ public class AimingState : MovableState
     {
         AimedSkill skill = _context.PlayerSkills.LeftSkill;
         GameObject spell = _context.Shooter.LeftSpell;
-        OnShootKeyUp(skill, spell, "LeftShoot");
+        OnShootKeyUp(skill, spell, "LeftShoot", true);
     }
 
     void OnRightShootKeyup()
     {
         AimedSkill skill = _context.PlayerSkills.RightSkill;
         GameObject spell = _context.Shooter.RightSpell;
-        OnShootKeyUp(skill, spell, "RightShoot");
+        OnShootKeyUp(skill, spell, "RightShoot", false);
     }
 }

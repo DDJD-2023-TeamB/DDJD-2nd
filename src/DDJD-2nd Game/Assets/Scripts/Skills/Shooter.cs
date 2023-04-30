@@ -101,6 +101,7 @@ public class Shooter : MonoBehaviour
 
     private void EndShoot(GameObject spell)
     {
-        Destroy(spell);
+        SkillComponent skillComponent = spell.GetComponent<SkillComponent>();
+        skillComponent.DestroySpell();
     }
 }
