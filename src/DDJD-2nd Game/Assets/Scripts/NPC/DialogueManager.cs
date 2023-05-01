@@ -29,11 +29,6 @@ public class DialogueManager : MonoBehaviour
     public void DisplayNextSentence()
     {
         if (!isTyping) {
-            if (sentences.Count == 0)
-            {
-                EndDialogue();
-                return;
-            }
             string sentence = sentences.Dequeue();
             StopAllCoroutines();
             StartCoroutine(TypeSentence(sentence));
@@ -53,5 +48,15 @@ public class DialogueManager : MonoBehaviour
     void EndDialogue()
     {
         animator.SetBool("isOpen", false);
+    }
+
+    public bool CheckIfDialogueEnded()
+    {
+        if (sentences.Count == 0)
+        {
+            EndDialogue();
+            return true;
+        }
+        return false;
     }
 }

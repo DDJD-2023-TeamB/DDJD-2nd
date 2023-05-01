@@ -22,6 +22,12 @@ public class NPCManager : Interactable
     }
 
     public void ContinueInteraction(){
-        FindObjectOfType<DialogueManager>().DisplayNextSentence();
+        DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
+        if(!dialogueManager.CheckIfDialogueEnded())
+            FindObjectOfType<DialogueManager>().DisplayNextSentence();
+        else{
+            base.EndInteract();
+        }
+  
     }
 }

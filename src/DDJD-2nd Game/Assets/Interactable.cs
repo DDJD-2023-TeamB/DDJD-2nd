@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
 {
-    //private GameObject object;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,17 +30,17 @@ public abstract class Interactable : MonoBehaviour
         if(other.tag != "Player"){
             return;
         }
-        Player player = other.gameObject.GetComponent<Player>();
-        player._interactedObject = null;
-        //TODO
-        Debug.Log("Leaving");
+        EndInteract();
     }
-
-
 
     private void Approach(){
+        // TODO APPEAR A TEXT 
         Debug.Log("Press F to open the upgrade book");
     }
-
     public abstract void Interact();
+
+    public void EndInteract(){
+        Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        player._interactedObject = null;
+    }
 }
