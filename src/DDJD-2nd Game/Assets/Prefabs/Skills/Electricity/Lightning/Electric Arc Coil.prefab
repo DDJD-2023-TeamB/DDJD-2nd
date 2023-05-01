@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4801813721207821554}
   - component: {fileID: 2210602237704665735}
   - component: {fileID: 516474724064534741}
+  - component: {fileID: 4901752214885097339}
   m_Layer: 0
   m_Name: Electric Arc Coil
   m_TagString: Untagged
@@ -98,3 +99,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &4901752214885097339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8225185152368856858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69986a2cf482e9f479f981f9a1dcc904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageCaster: 0
+  _arcPrefab: {fileID: 1634034571551166434, guid: 0a3493cdca321264f908019cc916e1df,
+    type: 3}

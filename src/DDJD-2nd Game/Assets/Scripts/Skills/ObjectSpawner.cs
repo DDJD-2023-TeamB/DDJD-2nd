@@ -44,7 +44,7 @@ public class ObjectSpawner : MonoBehaviour
         }
 
         if (_previewObject != null)
-            _previewObject.transform.position = GetPreviewObjectPosition();
+            _previewObject.transform.position = (Vector3)GetPreviewObjectPosition();
     }
 
     public GameObject CreatePreviewObject(SpawnSkill skill, Quaternion rotation)
@@ -54,7 +54,16 @@ public class ObjectSpawner : MonoBehaviour
             return null;
         }
 
-        _previewObject = Instantiate(skill.SpellPrefab, GetPreviewObjectPosition(), rotation);
+        Vector3? position = GetPreviewObjectPosition();
+        if (position == null)
+        {
+            return null;
+        }
+
+        _previewObject = Instantiate(skill.SpellPrefab, (Vector3)position, rotation);
+        SpawnSkillComponent spawnComponent = _previewObject.GetComponent<SpawnSkillComponent>();
+        spawnComponent.SetCaster(gameObject);
+        spawnComponent.SetSkill(skill);
 
         // Disable collisions
         _previewObject.GetComponent<Collider>().enabled = false;
@@ -80,17 +89,31 @@ public class ObjectSpawner : MonoBehaviour
 
         _spawnedObjects.Add(_previewObject);
         _spawnedObjectsLifeTime.Add(skill.SpawnStats.Duration);
+
+        SpawnSkillComponent spawnComponent = _previewObject.GetComponent<SpawnSkillComponent>();
+        spawnComponent.Spawn();
+
         _previewObject = null;
     }
 
+    public float GetObjectLifeTime(GameObject obj)
+    {
+        int index = _spawnedObjects.IndexOf(obj);
+        if (index == -1)
+            return -1;
+        return _spawnedObjectsLifeTime[index];
+    }
+
     // TODO check if we can avoid the object from clipping through the ground
-    private Vector3 GetPreviewObjectPosition()
+    private Vector3? GetPreviewObjectPosition()
     {
         RaycastHit hit;
         if (_aimComponent.GetAimRaycastHit(out hit))
         {
             return hit.point;
         }
-        return _previewObject.transform.position;
+        if (_previewObject == null)
+            return _previewObject.transform.position;
+        return null;
     }
 }

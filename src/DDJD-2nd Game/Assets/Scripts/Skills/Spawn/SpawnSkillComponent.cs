@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnSkillComponent : MonoBehaviour
+public abstract class SpawnSkillComponent : SkillComponent
 {
-    // Start is called before the first frame update
-    void Start()
+    protected SpawnSkill _skill;
+
+    public override void SetSkill(Skill skill)
     {
-        
+        base.SetSkill(skill);
+        _skill = (SpawnSkill)skill;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // Called after adding the object to ObjectSpawner's list
+    public abstract void Spawn();
 }

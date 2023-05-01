@@ -152,7 +152,7 @@ public class AimingState : MovableState
 
         if (spell == null)
         {
-            // Was destroyed
+            // Was destroyed or wasn't spawned
             return;
         }
 
