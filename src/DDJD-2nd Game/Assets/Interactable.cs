@@ -40,9 +40,7 @@ public abstract class Interactable : MonoBehaviour
 
 
     private void Approach(){
-        //_playerIsInteracting
         Debug.Log("Press F to open the upgrade book");
-
     }
 
     public abstract void Interact();

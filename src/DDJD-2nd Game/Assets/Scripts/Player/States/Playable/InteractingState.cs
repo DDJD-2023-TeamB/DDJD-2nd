@@ -17,7 +17,6 @@ public class InteractingState : GenericState
         Debug.Log("Interacting", objt);
         objt.Interact();
         Debug.Log("ON ENTER");
-
     }
 
     public override void Exit()
@@ -36,15 +35,13 @@ public class InteractingState : GenericState
 
     public override void StateUpdate()
     {
-        if (CheckCurrentStates())
-        {
-            return;
+        Debug.Log("Interactinggggggggggggggggggggg");
+        Debug.Log(_context.Input.IsContinueReading);
+        Interactable objt = _context._interactedObject.GetComponent<Interactable>();
+        if (_context.Input.IsContinueReading && objt is NPCManager) {
+            Debug.Log("NEEEEEEEEEEXT");
+            NPCManager npc = (NPCManager)objt;
+            npc.ContinueInteraction();
         }
-    }
-
-    // Check state and substate, return true if state is changed
-    private bool CheckCurrentStates()
-    {
-        return false;
     }
 }

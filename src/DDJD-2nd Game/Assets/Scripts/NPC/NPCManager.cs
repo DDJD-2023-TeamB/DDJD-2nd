@@ -20,4 +20,8 @@ public class NPCManager : Interactable
     public override void Interact(){
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }
+
+    public void ContinueInteraction(){
+        FindObjectOfType<DialogueManager>().DisplayNextSentence();
+    }
 }

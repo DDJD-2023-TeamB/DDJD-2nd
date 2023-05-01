@@ -9,7 +9,7 @@ public class DialogueManager : MonoBehaviour
     private Queue<string> sentences;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
-    // public Animator animator;
+    public Animator animator;
     public void Start()
     {
         sentences = new Queue<string>();
@@ -17,7 +17,8 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue)
     {
         Debug.Log("Starting conversation with " + dialogue.noun);
-        // animator.SetBool("IsOpen", true);
+        animator.SetBool("isOpen", true);
+        Debug.Log(animator.GetBool("isOpen"));
         // nameText.text = dialogue.noun;
         sentences.Clear();
         foreach (string sentence in dialogue.sentences)
@@ -28,6 +29,7 @@ public class DialogueManager : MonoBehaviour
     }
     public void DisplayNextSentence()
     {
+        Debug.Log("Displaying next sentence");
         if (sentences.Count == 0)
         {
             EndDialogue();
@@ -49,6 +51,7 @@ public class DialogueManager : MonoBehaviour
     }
     void EndDialogue()
     {
+        animator.SetBool("isOpen", false);
         Debug.Log("End of conversation.");
     }
 }
