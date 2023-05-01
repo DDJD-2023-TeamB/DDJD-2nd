@@ -99,13 +99,7 @@ public class PlayerAimComponent : MonoBehaviour, AimComponent
         if (rayCast)
         {
             RaycastHit hit;
-            if (
-                Physics.Raycast(
-                    _player.AimCamera.transform.position,
-                    _player.AimCamera.transform.forward,
-                    out hit
-                )
-            )
+            if (GetAimRaycastHit(out hit))
             {
                 position = hit.point;
             }
@@ -118,5 +112,14 @@ public class PlayerAimComponent : MonoBehaviour, AimComponent
     public Quaternion GetAimRotation()
     {
         return _player.CameraTarget.transform.rotation;
+    }
+
+    public bool GetAimRaycastHit(out RaycastHit hit)
+    {
+        return Physics.Raycast(
+            _player.AimCamera.transform.position,
+            _player.AimCamera.transform.forward,
+            out hit
+        );
     }
 }

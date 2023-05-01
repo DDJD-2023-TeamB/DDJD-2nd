@@ -21,6 +21,14 @@ public class ObjectSpawner : MonoBehaviour
     {
         get => _previewObject;
     }
+    private Color _previewObjectColor;
+
+    private AimComponent _aimComponent;
+
+    private void Awake()
+    {
+        _aimComponent = GetComponent<AimComponent>();
+    }
 
     private void Update()
     {
@@ -35,7 +43,8 @@ public class ObjectSpawner : MonoBehaviour
             }
         }
 
-        // TODO calculate preview position based on the player aim
+        if (_previewObject != null)
+            _previewObject.transform.position = GetPreviewObjectPosition();
     }
 
     public GameObject CreatePreviewObject(SpawnSkill skill, Quaternion rotation)
@@ -44,17 +53,44 @@ public class ObjectSpawner : MonoBehaviour
         {
             return null;
         }
-        // TODO calculate position based on the player aim
-        // TODO change object opacity
-        _previewObject = Instantiate(skill.SpellPrefab, new Vector3(), rotation);
+
+        _previewObject = Instantiate(skill.SpellPrefab, GetPreviewObjectPosition(), rotation);
+
+        // Disable collisions
+        _previewObject.GetComponent<Collider>().enabled = false;
+
+        // Add transparency
+        Renderer renderer = _previewObject.GetComponent<Renderer>();
+        Color oldColor = renderer.material.color;
+        Color newColor = new Color(oldColor.r, oldColor.g, oldColor.b, 0.5f);
+        renderer.material.color = newColor;
+        _previewObjectColor = oldColor;
+
         return _previewObject;
     }
 
     public void SpawnObject(SpawnSkill skill)
     {
-        // TODO set opacity back to normal
+        // Reactivate collisions
+        _previewObject.GetComponent<Collider>().enabled = true;
+
+        // Reset transparency
+        Renderer renderer = _previewObject.GetComponent<Renderer>();
+        renderer.material.color = _previewObjectColor;
+
         _spawnedObjects.Add(_previewObject);
         _spawnedObjectsLifeTime.Add(skill.SpawnStats.Duration);
         _previewObject = null;
+    }
+
+    // TODO check if we can avoid the object from clipping through the ground
+    private Vector3 GetPreviewObjectPosition()
+    {
+        RaycastHit hit;
+        if (_aimComponent.GetAimRaycastHit(out hit))
+        {
+            return hit.point;
+        }
+        return _previewObject.transform.position;
     }
 }
