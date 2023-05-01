@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Collectible", menuName = "Scriptable Objects/Collectibles", order = 3)]
-
-public class Collectible : ScriptableObject 
+public class Collectible : ScriptableObject
 {
-    public int score;
-    public void Collect(Collectible collectible)
-    {
-        score += collectible.score;
-        Debug.Log("Score: " + score);
- 
-        //UpdateScore();
+    public int id;
+    public string name;
+    public int value;
+    public Sprite icon;
+
+    public CollectibleType collectibleType;
+
+    public enum CollectibleType{
+        Potion,
+        Book,
+        QuestItem
     }
+
+    //public abstract void Use();
 }
