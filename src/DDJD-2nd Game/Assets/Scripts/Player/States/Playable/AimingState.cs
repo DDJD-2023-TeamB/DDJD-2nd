@@ -118,16 +118,13 @@ public class AimingState : MovableState
         bool isLeft
     )
     {
-        Debug.Log("OnShootKeyUp");
         if (spell == null)
         {
             //Was destroyed
-            Debug.Log("Was destroyed how??");
             return;
         }
         Vector3 direction;
         Vector3 origin = spell.transform.position;
-        Debug.Log("CastType: " + skill.SkillStats.CastType);
         switch (skill.SkillStats.CastType)
         {
             case CastType.Instant:
@@ -143,16 +140,11 @@ public class AimingState : MovableState
             case CastType.Hold:
                 SkillComponent skillComponent = spell.GetComponent<SkillComponent>();
                 skillComponent.DestroySpell();
-
                 _skillsToAim.Remove(skillComponent);
                 if (isLeft)
-                {
                     _context.Shooter.CancelLeftShoot();
-                }
                 else
-                {
                     _context.Shooter.CancelRightShoot();
-                }
 
                 break;
         }
@@ -192,9 +184,9 @@ public class AimingState : MovableState
         {
             return;
         }
+
         Vector3 origin = spell.transform.position;
         Vector3 direction = _context.AimComponent.GetAimDirection(origin);
-        spell.transform.rotation = Quaternion.LookRotation(direction);
-        Debug.DrawRay(origin, direction * 100, Color.red);
+        spell.Aim(direction);
     }
 }
