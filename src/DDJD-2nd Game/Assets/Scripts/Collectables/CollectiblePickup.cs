@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectiblePickup : MonoBehaviour
+public class CollectiblePickup : Interactable
 {
     public Collectible Collectible;
 
@@ -12,11 +12,8 @@ public class CollectiblePickup : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public override void Interact()
     {
-        if (other.CompareTag("Player"))
-        {
-            Pickup();
-        }
+        Pickup();
     }
 }

@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7156570683595215880}
   - component: {fileID: 2760888911506558549}
   - component: {fileID: 2915098403012221878}
-  - component: {fileID: -6010079637837156228}
   m_Layer: 0
   m_Name: QuestItem
   m_TagString: Untagged
@@ -98,7 +97,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2760888911506558549
 MonoBehaviour:
@@ -126,15 +125,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Collectible: {fileID: 11400000, guid: cd994385346d04be0a5ebd99428624f0, type: 2}
---- !u!114 &-6010079637837156228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 854075188467763704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c505607d66914a40b7fc26aec0ac71c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -13,7 +13,8 @@ public class InteractingState : GenericState
 
     public override void Enter()
     {
-        Debug.Log("ON ENTER");
+        Interactable objt = _context._interactedObject.GetComponent<Interactable>();
+        objt.Interact();
     }
 
     public override void Exit()

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interactable : MonoBehaviour
+public abstract class Interactable : MonoBehaviour
 {
     //private GameObject object;
     // Start is called before the first frame update
@@ -23,7 +23,7 @@ public class Interactable : MonoBehaviour
             return;
         }
         Player player = other.gameObject.GetComponent<Player>();
-        player._interactedObject = true;
+        player._interactedObject = this.gameObject.GetComponent<Interactable>();
         Approach();
     }
 
@@ -32,16 +32,16 @@ public class Interactable : MonoBehaviour
             return;
         }
         Player player = other.gameObject.GetComponent<Player>();
-        player._interactedObject = false;
+        player._interactedObject = null;
         //TODO
         Debug.Log("Leaving");
     }
-
-
 
     private void Approach(){
         //_playerIsInteracting
         Debug.Log("Press F to open the upgrade book");
 
     }
+
+    public abstract void Interact();
 }

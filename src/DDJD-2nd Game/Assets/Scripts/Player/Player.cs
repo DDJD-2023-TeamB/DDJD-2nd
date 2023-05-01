@@ -140,7 +140,7 @@ public class Player : StateContext
         get { return _dashable; }
     }
 
-    public bool _interactedObject;
+    public Interactable _interactedObject;
 
     void Awake()
     {
