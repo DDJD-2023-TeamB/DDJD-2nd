@@ -14,6 +14,11 @@ public class StaticSkillComponent : SkillComponent
         _collider = GetComponent<Collider>();
     }
 
+    protected void DeactivateSpell()
+    {
+        _collider.enabled = false;
+    }
+
     protected StaticSkillStats _stats;
     protected StaticSkill _skill;
 
@@ -33,7 +38,10 @@ public class StaticSkillComponent : SkillComponent
             transform.parent = null; // Detach from caster
         }
         _shootDirection = direction;
-        StartCoroutine(DestroyAfterTime(_stats.Duration));
+        if (_stats.Duration >= 0.0f)
+        {
+            StartCoroutine(DestroyAfterTime(_stats.Duration));
+        }
     }
 
     private IEnumerator DestroyAfterTime(float time)

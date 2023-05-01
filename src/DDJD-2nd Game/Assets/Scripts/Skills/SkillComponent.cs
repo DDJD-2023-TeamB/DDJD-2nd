@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class SkillComponent : MonoBehaviour
 {
     protected GameObject _caster;
+    protected SkillStats _skillStats;
 
     protected bool _isChargeAttack = false;
     protected ChargeComponent _chargeComponent;
@@ -14,7 +15,6 @@ public abstract class SkillComponent : MonoBehaviour
         _chargeComponent = GetComponent<ChargeComponent>();
     }
 
-    protected SkillStats _skillStats;
     public GameObject Caster
     {
         get { return _caster; }
@@ -68,6 +68,11 @@ public abstract class SkillComponent : MonoBehaviour
     public virtual void Shoot(Vector3 direction)
     {
         // Do nothing
+    }
+
+    public virtual void Aim(Vector3 direction)
+    {
+        transform.rotation = Quaternion.LookRotation(direction);
     }
 
     public virtual void OnTriggerEnter(Collider other)
