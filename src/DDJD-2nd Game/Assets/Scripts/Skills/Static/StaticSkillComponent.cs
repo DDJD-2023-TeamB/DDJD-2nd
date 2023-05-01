@@ -6,7 +6,7 @@ public class StaticSkillComponent : SkillComponent
 {
     [SerializeField]
     private bool _leaveCaster = true;
-    private Collider _collider;
+    protected Collider _collider;
 
     protected override void Awake()
     {
