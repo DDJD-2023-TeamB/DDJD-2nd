@@ -14,13 +14,20 @@ public class PlayableState : GenericState
 
     public override void Enter()
     {
-        ChangeSubState(_context.Factory.Grounded(this));
+        CheckAiming();
     }
 
-    public override void Exit() { }
+    public override void Exit()
+    {
+        base.Exit();
+    }
 
     public override bool CanChangeState(GenericState state)
     {
+        if (!base.CanChangeState(state))
+        {
+            return false;
+        }
         return true;
     }
 
@@ -28,14 +35,31 @@ public class PlayableState : GenericState
     {
         CheckAiming();
         LookRotation();
+        CheckRange();
     }
 
-    private void CheckAiming(){
+    private void CheckRange()
+    {
+ 
+        // Se clickou no F e se está perto de algum interable
+        if (_context.Input.IsInteracting && !(_substate is InteractingState) && _context._interactedObject)
+        {
+            ChangeSubState(_context.Factory.Interacting(this));
+        }
+       /* else if (!_context.Input.IsAiming && !(_substate is NotAimingState))
+        {
+            ChangeSubState(_context.Factory.NotAiming(this));
+        }*/
+    }
+    
+
+    private void CheckAiming()
+    {
         if (_context.Input.IsAiming && !(_substate is AimingState))
         {
             ChangeSubState(_context.Factory.Aiming(this));
         }
-        else if (!_context.Input.IsAiming && _substate is AimingState)
+        else if (!_context.Input.IsAiming && !(_substate is NotAimingState))
         {
             ChangeSubState(_context.Factory.NotAiming(this));
         }
@@ -85,12 +109,14 @@ public class PlayableState : GenericState
         Vector3 targetPosition =
             _context.AimCamera.transform.position + _context.AimCamera.transform.forward * 10f;
         // Raycast for debug
+        /*
         Debug.DrawRay(
             _context.AimCamera.transform.position,
             _context.AimCamera.transform.forward * 10f,
             Color.red,
             2f
         );
+        */
 
         _context.AimComponent.SetAimPosition(targetPosition);
     }

@@ -9,6 +9,9 @@ public class LightningComponent : DashComponent
     [SerializeField]
     private string[] _layersToDashThrough;
     private int[] _layersToIgnore;
+    private float timer = 0f;
+
+    private List<GameObject> _objectsHit = new List<GameObject>();
 
     protected override void Start()
     {
@@ -22,14 +25,41 @@ public class LightningComponent : DashComponent
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == _caster)
         {
             return;
         }
-        // TODO: Deal damage to enemies
-        Debug.Log("Lightning hitting " + other.gameObject.name);
+        _objectsHit.Add(other.gameObject);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == _caster)
+        {
+            return;
+        }
+        _objectsHit.Remove(other.gameObject);
+    }
+
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer < _skill.DashSkillStats.DamageRate)
+        {
+            return;
+        }
+        timer = 0f;
+        foreach (GameObject obj in _objectsHit)
+        {
+            Damage(
+                obj,
+                (int)_skill.DashSkillStats.Damage,
+                obj.transform.position,
+                transform.forward
+            );
+        }
     }
 
     private void OnDestroy()

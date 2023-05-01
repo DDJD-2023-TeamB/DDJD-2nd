@@ -79,11 +79,28 @@ public class PlayerInputReceiver : MonoBehaviour
         get { return _isChangingRightSpell; }
     }
 
+    private bool _isMeleeAttacking;
+    public bool IsMeleeAttacking
+    {
+        get { return _isMeleeAttacking; }
+    }
+
+    private bool _isInterating;
+    public bool IsInteracting
+    {
+        get { return _isInterating; }
+    }
+
     //Callbacks
     public Action OnLeftShootKeydown;
     public Action OnRightShootKeydown;
     public Action OnLeftShootKeyup;
     public Action OnRightShootKeyup;
+
+    public Action OnMeleeAttackKeydown;
+    public Action OnMeleeAttackKeyup;
+
+    public Action OnInteration;
 
     // Start is called before the first frame update
     void Awake()
@@ -98,6 +115,11 @@ public class PlayerInputReceiver : MonoBehaviour
 
         _playerInput.PlayerMovement.Dash.performed += ctx => _isDashing = true;
         _playerInput.PlayerMovement.Dash.canceled += ctx => _isDashing = false;
+        
+        // CLicka no F e entra no estado isInteracting
+        _playerInput.PlayerMovement.Interact.performed += ctx => _isInterating = true;
+        _playerInput.PlayerMovement.Interact.canceled += ctx => _isInterating = false;
+
 
         _playerInput.CameraControl.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
         _playerInput.CameraControl.Look.canceled += ctx => Look(Vector2.zero);
@@ -134,6 +156,15 @@ public class PlayerInputReceiver : MonoBehaviour
 
         _playerInput.Combat.ChangeRightSpell.performed += ctx => _isChangingRightSpell = true;
         _playerInput.Combat.ChangeRightSpell.canceled += ctx => _isChangingRightSpell = false;
+
+        _playerInput.Combat.MeleeAttack.performed += ctx => {
+            _isMeleeAttacking = true;
+            OnMeleeAttackKeydown?.Invoke();
+        };
+        _playerInput.Combat.MeleeAttack.canceled += ctx => {
+            _isMeleeAttacking = false;
+            OnMeleeAttackKeyup?.Invoke();
+        };
     }
 
     private void Move(Vector2 value)

@@ -1,0 +1,44 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public abstract class Enemy : MonoBehaviour, Damageable
+{
+    protected Rigidbody _rb;
+    protected CharacterStatus _status;
+    [SerializeField]
+    protected GameObject _deathVFX;
+
+    virtual public void Awake()
+    {
+        _rb = GetComponent<Rigidbody>();
+        _status = GetComponent<CharacterStatus>();
+    }
+
+    virtual public void Start()
+    {
+        _status.OnDeath += Die;
+    }
+
+    public virtual void Die(int force, Vector3 hitPoint, Vector3 hitDirection)
+    {
+        Destroy(gameObject);
+        SpawnDeathVFX(transform.position);
+    }
+
+    protected GameObject SpawnDeathVFX(Vector3 position)
+    {
+        GameObject deathVFX = Instantiate(_deathVFX, position, transform.rotation);
+        Destroy(gameObject, 0.1f);
+        Destroy(deathVFX, 3f);
+        return deathVFX;
+    }
+
+    // Update is called once per frame
+    virtual public void Update() { }
+
+    public virtual void TakeDamage(int damage, Vector3 hitPoint, Vector3 hitDirection)
+    {
+        _status.TakeDamage(damage, hitPoint, hitDirection);
+    }
+}

@@ -62,6 +62,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""cafe9c71-1488-4ddc-8d4b-c00e01955368"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d71916b-dc38-42f7-97c3-5aec6962b94d"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -240,6 +260,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MeleeAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""a84ce4f6-1563-467d-a2c6-0709eb840509"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -308,6 +337,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""ChangeRightSpell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e5aa81f-aa2d-468d-89f3-c33eb50f925e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MeleeAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -320,6 +360,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_PlayerMovement_Run = m_PlayerMovement.FindAction("Run", throwIfNotFound: true);
         m_PlayerMovement_Jump = m_PlayerMovement.FindAction("Jump", throwIfNotFound: true);
         m_PlayerMovement_Dash = m_PlayerMovement.FindAction("Dash", throwIfNotFound: true);
+        m_PlayerMovement_Interact = m_PlayerMovement.FindAction("Interact", throwIfNotFound: true);
         // CameraControl
         m_CameraControl = asset.FindActionMap("CameraControl", throwIfNotFound: true);
         m_CameraControl_Look = m_CameraControl.FindAction("Look", throwIfNotFound: true);
@@ -331,6 +372,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Combat_RightSpellShot = m_Combat.FindAction("RightSpellShot", throwIfNotFound: true);
         m_Combat_ChangeLeftSpell = m_Combat.FindAction("ChangeLeftSpell", throwIfNotFound: true);
         m_Combat_ChangeRightSpell = m_Combat.FindAction("ChangeRightSpell", throwIfNotFound: true);
+        m_Combat_MeleeAttack = m_Combat.FindAction("MeleeAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -396,6 +438,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_Run;
     private readonly InputAction m_PlayerMovement_Jump;
     private readonly InputAction m_PlayerMovement_Dash;
+    private readonly InputAction m_PlayerMovement_Interact;
     public struct PlayerMovementActions
     {
         private @PlayerInput m_Wrapper;
@@ -404,6 +447,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_PlayerMovement_Run;
         public InputAction @Jump => m_Wrapper.m_PlayerMovement_Jump;
         public InputAction @Dash => m_Wrapper.m_PlayerMovement_Dash;
+        public InputAction @Interact => m_Wrapper.m_PlayerMovement_Interact;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -425,6 +469,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -441,6 +488,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -514,6 +564,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Combat_RightSpellShot;
     private readonly InputAction m_Combat_ChangeLeftSpell;
     private readonly InputAction m_Combat_ChangeRightSpell;
+    private readonly InputAction m_Combat_MeleeAttack;
     public struct CombatActions
     {
         private @PlayerInput m_Wrapper;
@@ -524,6 +575,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @RightSpellShot => m_Wrapper.m_Combat_RightSpellShot;
         public InputAction @ChangeLeftSpell => m_Wrapper.m_Combat_ChangeLeftSpell;
         public InputAction @ChangeRightSpell => m_Wrapper.m_Combat_ChangeRightSpell;
+        public InputAction @MeleeAttack => m_Wrapper.m_Combat_MeleeAttack;
         public InputActionMap Get() { return m_Wrapper.m_Combat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -551,6 +603,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @ChangeRightSpell.started += instance.OnChangeRightSpell;
             @ChangeRightSpell.performed += instance.OnChangeRightSpell;
             @ChangeRightSpell.canceled += instance.OnChangeRightSpell;
+            @MeleeAttack.started += instance.OnMeleeAttack;
+            @MeleeAttack.performed += instance.OnMeleeAttack;
+            @MeleeAttack.canceled += instance.OnMeleeAttack;
         }
 
         private void UnregisterCallbacks(ICombatActions instance)
@@ -573,6 +628,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @ChangeRightSpell.started -= instance.OnChangeRightSpell;
             @ChangeRightSpell.performed -= instance.OnChangeRightSpell;
             @ChangeRightSpell.canceled -= instance.OnChangeRightSpell;
+            @MeleeAttack.started -= instance.OnMeleeAttack;
+            @MeleeAttack.performed -= instance.OnMeleeAttack;
+            @MeleeAttack.canceled -= instance.OnMeleeAttack;
         }
 
         public void RemoveCallbacks(ICombatActions instance)
@@ -596,6 +654,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     public interface ICameraControlActions
     {
@@ -609,5 +668,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnRightSpellShot(InputAction.CallbackContext context);
         void OnChangeLeftSpell(InputAction.CallbackContext context);
         void OnChangeRightSpell(InputAction.CallbackContext context);
+        void OnMeleeAttack(InputAction.CallbackContext context);
     }
 }
