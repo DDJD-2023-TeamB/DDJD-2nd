@@ -124,19 +124,10 @@ public class PlayerInputReceiver : MonoBehaviour
         
         // CLicka no F e entra no estado isInteracting
         _playerInput.PlayerMovement.Interact.performed += ctx => _isInterating = true;
-        _playerInput.PlayerMovement.Interact.canceled += ctx => {
-            Debug.Log("Cancel interaction");
-            _isInterating = false;
-        };
+        _playerInput.PlayerMovement.Interact.canceled += ctx => _isInterating = false;
 
-        _playerInput.PlayerMovement.Continue.performed += ctx => {
-            Debug.Log("Continue");
-            _isContinueReading = true;
-        };
-        _playerInput.PlayerMovement.Continue.canceled += ctx => {
-            Debug.Log("Cancel");
-            _isContinueReading = false;
-        };
+        _playerInput.PlayerMovement.Continue.performed += ctx => _isContinueReading = true;
+        _playerInput.PlayerMovement.Continue.canceled += ctx => _isContinueReading = false;
 
         _playerInput.CameraControl.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
         _playerInput.CameraControl.Look.canceled += ctx => Look(Vector2.zero);

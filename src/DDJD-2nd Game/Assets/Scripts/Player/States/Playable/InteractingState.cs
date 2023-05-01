@@ -35,11 +35,8 @@ public class InteractingState : GenericState
 
     public override void StateUpdate()
     {
-        Debug.Log("Interactinggggggggggggggggggggg");
-        Debug.Log(_context.Input.IsContinueReading);
         Interactable objt = _context._interactedObject.GetComponent<Interactable>();
         if (_context.Input.IsContinueReading && objt is NPCManager) {
-            Debug.Log("NEEEEEEEEEEXT");
             NPCManager npc = (NPCManager)objt;
             npc.ContinueInteraction();
         }
