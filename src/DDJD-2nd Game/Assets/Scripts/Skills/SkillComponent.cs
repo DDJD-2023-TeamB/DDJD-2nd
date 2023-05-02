@@ -158,4 +158,9 @@ public abstract class SkillComponent : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public virtual bool CanShoot(Vector3 direction)
+    {
+        return true;
+    }
 }

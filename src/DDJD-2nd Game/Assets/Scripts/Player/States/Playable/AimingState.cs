@@ -87,13 +87,17 @@ public class AimingState : MovableState
         }
         Vector3 origin = spell.transform.position;
         Vector3 direction;
+        bool success = true;
         switch (skill.SkillStats.CastType)
         {
             case CastType.Instant:
-                _context.PlayerSkills.StartSkillCooldown(skill);
                 direction = _context.AimComponent.GetAimDirection(origin);
-                _context.Shooter.Shoot(spell, direction, true);
+                success = _context.Shooter.Shoot(spell, direction, true);
                 _context.Animator.SetTrigger(animationTrigger);
+                if (success)
+                {
+                    _context.PlayerSkills.StartSkillCooldown(skill);
+                }
                 _lastAnimTrigger = animationTrigger;
                 break;
             case CastType.Charge:
@@ -101,13 +105,23 @@ public class AimingState : MovableState
                 _lastAnimTrigger = animationTrigger;
                 break;
             case CastType.Hold:
-                _context.PlayerSkills.StartSkillCooldown(skill);
+
                 _lastAnimTrigger = animationTrigger;
                 direction = _context.AimComponent.GetAimDirection(origin);
-                _context.Shooter.Shoot(spell, direction, false);
-                _context.Animator.SetTrigger(animationTrigger);
-                _skillsToAim.Add(spell.GetComponent<SkillComponent>());
+                success = _context.Shooter.Shoot(spell, direction, false);
+                if (success)
+                {
+                    _context.PlayerSkills.StartSkillCooldown(skill);
+                    _context.Animator.SetTrigger(animationTrigger);
+                    _skillsToAim.Add(spell.GetComponent<SkillComponent>());
+                }
+
                 break;
+        }
+
+        if (!success)
+        {
+            GameObject.Destroy(spell);
         }
     }
 
@@ -125,6 +139,7 @@ public class AimingState : MovableState
         }
         Vector3 direction;
         Vector3 origin = spell.transform.position;
+        bool success = true;
         switch (skill.SkillStats.CastType)
         {
             case CastType.Instant:
@@ -132,10 +147,13 @@ public class AimingState : MovableState
                 break;
             case CastType.Charge:
                 direction = _context.AimComponent.GetAimDirection(origin);
-                _context.Shooter.Shoot(spell, direction, true);
+                success = _context.Shooter.Shoot(spell, direction, true);
                 _context.Animator.SetTrigger(animationTrigger);
                 _lastAnimTrigger = animationTrigger;
-                _context.PlayerSkills.StartSkillCooldown(skill);
+                if (success)
+                {
+                    _context.PlayerSkills.StartSkillCooldown(skill);
+                }
                 break;
             case CastType.Hold:
                 SkillComponent skillComponent = spell.GetComponent<SkillComponent>();
@@ -147,6 +165,11 @@ public class AimingState : MovableState
                     _context.Shooter.CancelRightShoot();
 
                 break;
+        }
+
+        if (!success)
+        {
+            _context.PlayerSkills.StartSkillCooldown(skill);
         }
     }
 

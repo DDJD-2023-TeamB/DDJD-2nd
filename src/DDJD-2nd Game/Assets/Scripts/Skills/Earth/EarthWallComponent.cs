@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class EarthWallComponent : StaticSkillComponent
 {
+    RaycastHit? _previousHit = null;
+
     protected override void Awake()
     {
         base.Awake();
         _collider.enabled = false;
+    }
+
+    public override bool CanShoot(Vector3 direction)
+    {
+        _previousHit = GetTarget(direction);
+        return _previousHit != null;
     }
 
     public override void Shoot(Vector3 direction)
@@ -15,13 +23,12 @@ public class EarthWallComponent : StaticSkillComponent
         base.Shoot(direction);
 
         // Draw a raycast from the player to the mouse position
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, 100f);
-        foreach (RaycastHit hit in hits)
+
+
+        _previousHit = _previousHit != null ? _previousHit : GetTarget(direction);
+        if (_previousHit != null)
         {
-            if (hit.collider.gameObject == gameObject)
-            {
-                continue;
-            }
+            RaycastHit hit = _previousHit.Value;
             transform.position = hit.point;
             transform.localRotation = Quaternion.LookRotation(
                 _caster.transform.forward,
@@ -29,5 +36,19 @@ public class EarthWallComponent : StaticSkillComponent
             );
             _collider.enabled = true;
         }
+    }
+
+    private RaycastHit? GetTarget(Vector3 direction)
+    {
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, 100f);
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.collider.gameObject == gameObject)
+            {
+                continue;
+            }
+            return hit;
+        }
+        return null;
     }
 }
