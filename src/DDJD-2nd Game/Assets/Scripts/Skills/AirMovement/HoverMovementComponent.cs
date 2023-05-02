@@ -12,7 +12,9 @@ public class HoverMovementComponent : AirMovementComponent
     private Transform _rightHand;
 
     private GameObject _leftHandVFX;
+    private VisualEffect _leftHandVFXEffect;
     private GameObject _rightHandVFX;
+    private VisualEffect _rightHandVFXEffect;
 
     public override void SetSkill(AirMovementSkill skill)
     {
@@ -29,31 +31,35 @@ public class HoverMovementComponent : AirMovementComponent
         _isHovering = true;
         _leftHandVFX = Instantiate(_skill.SpellPrefab, _leftHand.position, Quaternion.identity);
         _leftHandVFX.transform.parent = _leftHand;
+        _leftHandVFXEffect = _leftHandVFX.GetComponent<VisualEffect>();
         _rightHandVFX = Instantiate(_skill.SpellPrefab, _rightHand.position, Quaternion.identity);
         _rightHandVFX.transform.parent = _rightHand;
+        _rightHandVFXEffect = _rightHandVFX.GetComponent<VisualEffect>();
 
         StartCoroutine(Hover());
     }
 
     public override void OnKeyUp()
     {
-        if (_leftHandVFX != null)
-        {
-            _leftHandVFX.GetComponent<VisualEffect>().Stop();
-            Destroy(_leftHandVFX, 2.0f);
-            _leftHandVFX = null;
-        }
-        if (_rightHandVFX != null)
-        {
-            _rightHandVFX.GetComponent<VisualEffect>().Stop();
-            Destroy(_rightHandVFX, 2.0f);
-            _rightHandVFX = null;
-        }
+        Reset();
 
         _isHovering = false;
     }
 
-    public override void Update() { }
+    public override void Update()
+    {
+        if (_isHovering)
+        {
+            if (_leftHandVFXEffect != null)
+            {
+                _leftHandVFXEffect.SetVector3("Velocity", _player.Rigidbody.velocity);
+            }
+            if (_rightHandVFXEffect != null)
+            {
+                _rightHandVFXEffect.SetVector3("Velocity", _player.Rigidbody.velocity);
+            }
+        }
+    }
 
     private IEnumerator Hover()
     {
@@ -66,6 +72,25 @@ public class HoverMovementComponent : AirMovementComponent
                 ForceMode.Acceleration
             );
             yield return new WaitForSeconds(_updateRate);
+        }
+    }
+
+    void OnDestroy()
+    {
+        Reset();
+    }
+
+    public override void Reset()
+    {
+        if (_leftHandVFX != null)
+        {
+            _leftHandVFXEffect.Stop();
+            Destroy(_leftHandVFX, 2.0f);
+        }
+        if (_rightHandVFX != null)
+        {
+            _rightHandVFXEffect.Stop();
+            Destroy(_rightHandVFX, 2.0f);
         }
     }
 }

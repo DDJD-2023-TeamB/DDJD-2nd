@@ -5,17 +5,16 @@ using UnityEngine;
 public abstract class SkillComponent : MonoBehaviour
 {
     protected GameObject _caster;
+    protected SkillStats _skillStats;
 
     protected bool _isChargeAttack = false;
     protected ChargeComponent _chargeComponent;
 
     virtual protected void Awake()
     {
-        Debug.Log("SkillComponent Awake");
         _chargeComponent = GetComponent<ChargeComponent>();
     }
 
-    protected SkillStats _skillStats;
     public GameObject Caster
     {
         get { return _caster; }
@@ -71,6 +70,11 @@ public abstract class SkillComponent : MonoBehaviour
         // Do nothing
     }
 
+    public virtual void Aim(Vector3 direction)
+    {
+        transform.rotation = Quaternion.LookRotation(direction);
+    }
+
     public virtual void OnTriggerEnter(Collider other)
     {
         if (_skillStats == null)
@@ -118,7 +122,6 @@ public abstract class SkillComponent : MonoBehaviour
             else
             {
                 // Register first impact with object
-                Debug.Log("First impact");
                 _collidedObjects.Add(otherObject, _elapsedTime);
                 OnImpact(other, 1f);
             }
@@ -126,7 +129,6 @@ public abstract class SkillComponent : MonoBehaviour
         else if (!_collidedObjects.ContainsKey(otherObject))
         {
             // Register first impact with object
-            Debug.Log("First impact " + otherObject.name);
             _collidedObjects.Add(otherObject, _elapsedTime);
             OnImpact(other, 1f);
         }
@@ -146,4 +148,9 @@ public abstract class SkillComponent : MonoBehaviour
     }
 
     private Dictionary<GameObject, float> _collidedObjects = new Dictionary<GameObject, float>();
+
+    public virtual void DestroySpell()
+    {
+        Destroy(gameObject);
+    }
 }

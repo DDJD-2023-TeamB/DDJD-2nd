@@ -21,12 +21,23 @@ public abstract class ProjectileComponent : SkillComponent
     [Tooltip("Set velocity instead of adding force")]
     private bool _setVelocity = false;
 
+    private Vector3 _initialPosition;
+
     protected override void Awake()
     {
         base.Awake();
         _rb = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
         DeactivateSpell();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        if (Vector3.Distance(_initialPosition, transform.position) > _stats.Range)
+        {
+            DestroySpell();
+        }
     }
 
     protected void DeactivateSpell()
@@ -53,6 +64,7 @@ public abstract class ProjectileComponent : SkillComponent
     public override void Shoot(Vector3 direction)
     {
         ActivateSpell();
+        _initialPosition = transform.position;
         transform.parent = null; // Detach from caster
         _leftCaster = true;
         if (_setVelocity)
@@ -80,7 +92,7 @@ public abstract class ProjectileComponent : SkillComponent
         base.OnImpact(other, multiplier);
         if (_destroyOnImpact)
         {
-            Destroy(gameObject);
+            DestroySpell();
             SpawnHitVFX();
         }
     }
