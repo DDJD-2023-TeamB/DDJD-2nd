@@ -31,6 +31,10 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
         arcPos2.position = 2 * arcPos1.position / 3 + arcPos4.position / 3;
         arcPos3.position = arcPos1.position / 3 + 2 * arcPos4.position / 3;
 
+        SkillComponent arcComponent = arc.GetComponent<SkillComponent>();
+        arcComponent.SetCaster(_caster);
+        arcComponent.SetSkill(_skill);
+
         float arcLife = Mathf.Min(spawner.GetObjectLifeTime(lastCoil), _skill.SpawnStats.Duration);
         Destroy(arc, arcLife);
     }

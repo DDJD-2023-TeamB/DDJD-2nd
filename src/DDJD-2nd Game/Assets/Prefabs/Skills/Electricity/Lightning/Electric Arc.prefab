@@ -47,8 +47,8 @@ GameObject:
   - component: {fileID: 3832819125240614829}
   - component: {fileID: 7776148656299564115}
   - component: {fileID: 8726322443956727726}
-  - component: {fileID: 7146597643521042371}
   - component: {fileID: 7963821038328188203}
+  - component: {fileID: 8221102522796274018}
   m_Layer: 0
   m_Name: Electric Arc
   m_TagString: Untagged
@@ -96,18 +96,18 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: -0.09177399, y: 1.4011389, z: 5.7344756}
+      - m_Value: {x: 0, y: 0, z: 0}
         m_Name: Pos1
-        m_Overridden: 1
-      - m_Value: {x: 0.5676923, y: 1.4576807, z: 5.628676}
+        m_Overridden: 0
+      - m_Value: {x: 0, y: 0, z: 0}
         m_Name: Pos2
-        m_Overridden: 1
-      - m_Value: {x: 1.2271581, y: 1.5142226, z: 5.522876}
+        m_Overridden: 0
+      - m_Value: {x: 0, y: 0, z: 0}
         m_Name: Pos3
-        m_Overridden: 1
-      - m_Value: {x: 1.8866243, y: 1.5707645, z: 5.417076}
+        m_Overridden: 0
+      - m_Value: {x: 0, y: 0, z: 0}
         m_Name: Pos4
-        m_Overridden: 1
+        m_Overridden: 0
     m_Vector4f:
       m_Array: []
     m_Uint:
@@ -243,19 +243,6 @@ MonoBehaviour:
   m_Property:
     m_Name: Pos4
   Target: {fileID: 2627291437699366255}
---- !u!65 &7146597643521042371
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1634034571551166434}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.40835, y: 0.40050298, z: 4.7798686}
-  m_Center: {x: 0.018679142, y: 0.18840322, z: -0.6316588}
 --- !u!114 &7963821038328188203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,6 +256,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageCaster: 0
+--- !u!65 &8221102522796274018
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634034571551166434}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.4366074, y: 0.4213332, z: 0.48961258}
+  m_Center: {x: 6.3597, y: 0.65719754, z: 1.4268064}
 --- !u!1 &4751425462658845322
 GameObject:
   m_ObjectHideFlags: 0
