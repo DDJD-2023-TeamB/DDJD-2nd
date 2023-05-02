@@ -40,6 +40,9 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
         float realDistance = Vector3.Distance(pos1, pos4);
         float bezierDistance = Vector3.Distance(arcPos1.position, arcPos4.position);
         float scale = realDistance / bezierDistance;
+
+
+        // TODO scale fucks up sparks at the edges
         arc.transform.localScale = new Vector3(scale, arc.transform.localScale.y, arc.transform.localScale.z);
 
         // Set VFX positions
