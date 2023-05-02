@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class HumanoidEnemy : Enemy
 {
-    private Animator _animator;
+    protected Animator _animator;
+    public Animator Animator
+    {
+        get { return _animator; }
+    }
     private RagdollController _ragdollController;
 
     private DisappearEffect _disappearEffect;
@@ -24,7 +28,7 @@ public class HumanoidEnemy : Enemy
     }
 
     // Update is called once per frame
-    public override void  Update()
+    public override void Update()
     {
         base.Update();
     }
@@ -39,11 +43,11 @@ public class HumanoidEnemy : Enemy
     {
         _ragdollController.ActivateRagdoll();
         _ragdollController.PushRagdoll(force, hitPoint, hitDirection);
-        
+
         StartCoroutine(WaitAndDie(3f));
     }
 
-    protected IEnumerator  WaitAndDie(float waitTime)
+    protected IEnumerator WaitAndDie(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         Transform ragdollTransform = _ragdollController.GetRagdollTransform();

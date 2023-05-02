@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour, Damageable
+public abstract class Enemy : StateContext, Damageable
 {
     protected Rigidbody _rb;
     protected CharacterStatus _status;
+
     [SerializeField]
     protected GameObject _deathVFX;
+
+    private GenericState _currentState;
 
     virtual public void Awake()
     {
