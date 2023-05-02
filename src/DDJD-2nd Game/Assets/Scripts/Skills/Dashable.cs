@@ -75,11 +75,12 @@ public class Dashable : MonoBehaviour
             transform.position.z
         );
         Quaternion rotation = Quaternion.LookRotation(direction);
-
+        Debug.DrawRay(position, direction * 5f, Color.red, 10f);
         GameObject spell = Instantiate(dashSkill.SpellPrefab, position, rotation);
         DashComponent dashComponent = spell.GetComponent<DashComponent>();
         dashComponent.SetCaster(gameObject);
         dashComponent.SetSkill(dashSkill);
+        dashComponent.SetDashDirection(direction);
     }
 
     /**
@@ -89,7 +90,7 @@ public class Dashable : MonoBehaviour
     {
         if (_timeSinceLastDash < _minCooldown)
             return false;
-
+        _currentDashStats = stats;
         _isDashing = true;
         Vector3 direction = GetDashDirection();
         Vector3 force = direction * stats.Force;
@@ -104,7 +105,7 @@ public class Dashable : MonoBehaviour
         _fovController.ChangeFov(stats.CameraFov, stats.EnterFovTime);
 
         _maxSpeed = stats.MaxSpeed;
-        _currentDashStats = stats;
+
         Invoke(nameof(ResetDash), stats.Duration);
 
         _timeSinceLastDash = 0f;
@@ -153,15 +154,16 @@ public class Dashable : MonoBehaviour
         Vector3 direction = Vector3.zero;
         if (allowAllDirections && moveInput != Vector2.zero)
         {
-            direction =
-                forwardTransform.forward * moveInput.y + forwardTransform.right * moveInput.x;
+            direction = transform.forward * moveInput.y + transform.right * moveInput.x;
         }
         else
         {
             direction = forwardTransform.forward;
         }
-        direction.y = 0;
-
+        Vector3 axis =
+            -forwardTransform.forward * moveInput.x + forwardTransform.right * moveInput.y;
+        float angle = _currentDashStats.Angle;
+        direction = Quaternion.AngleAxis(-angle, axis) * direction;
         return direction.normalized;
     }
 

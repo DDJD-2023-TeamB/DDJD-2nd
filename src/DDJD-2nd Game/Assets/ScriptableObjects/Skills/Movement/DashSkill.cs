@@ -11,6 +11,9 @@ public class DashSkill : Skill
     [SerializeField]
     private DashStats _dashStats;
 
+    [SerializeField]
+    private bool _canDashInAir = true;
+
     // Unity doesn't support covariant return types
     public override SkillStats SkillStats
     {
@@ -23,5 +26,10 @@ public class DashSkill : Skill
     public DashStats DashStats
     {
         get { return _dashStats; }
+    }
+
+    public bool CanDashInAir
+    {
+        get { return _canDashInAir; }
     }
 }
