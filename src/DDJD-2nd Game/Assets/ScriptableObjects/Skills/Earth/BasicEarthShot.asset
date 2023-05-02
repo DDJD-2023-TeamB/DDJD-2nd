@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4cfa9ae009949e4c81d9eb55d0a6c88, type: 3}
+  m_Name: BasicEarthShot
+  m_EditorClassIdentifier: 
+  _spellPrefab: {fileID: 1729004604663840708, guid: 9c62f8b8656875c439999f3e8eec8865,
+    type: 3}
+  _handRunePrefab: {fileID: 3515472607831830144, guid: 8f2c0c2cc7d831e43bd6dd80a7bc8089,
+    type: 3}
+  _impactPrefab: {fileID: 7881186677100329843, guid: 07d2082fd92456446bdca9739fe888dc,
+    type: 3}
+  _stats:
+    _damage: 25
+    _force: 25
+    _damageToForceMultiplier: 0
+    _cooldown: 0.5
+    _castTime: 0
+    _castType: 0
+    _maxChargeTime: 0
+    _isContinuous: 0
+    _tickRate: 0
+    _speed: 20
+    _destroyOnImpact: 1
+    _range: 20
