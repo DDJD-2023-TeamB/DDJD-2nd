@@ -15,6 +15,7 @@ public class BasicStoneThrowComponent : ProjectileComponent
 
     public override void Shoot(Vector3 direction)
     {
+        transform.parent = null;
         StartCoroutine(ShootAfterDelay(direction));
     }
 
