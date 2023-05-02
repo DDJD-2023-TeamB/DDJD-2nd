@@ -128,14 +128,12 @@ public abstract class SkillComponent : MonoBehaviour
             }
             else
             {
-                // Register first impact with object
                 _collidedObjects.Add(otherObject, _elapsedTime);
                 OnImpact(other, 1f);
             }
         }
         else if (!_collidedObjects.ContainsKey(otherObject))
         {
-            // Register first impact with object
             _collidedObjects.Add(otherObject, _elapsedTime);
             OnImpact(other, 1f);
         }
