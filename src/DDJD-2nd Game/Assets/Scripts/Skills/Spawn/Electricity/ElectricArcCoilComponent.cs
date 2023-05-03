@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.VFX;
 using UnityEngine;
 
 public class ElectricArcCoilComponent : SpawnSkillComponent
@@ -7,8 +8,18 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
     [SerializeField]
     private GameObject _arcPrefab;
 
+    private VisualEffect _vfx;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _vfx = GetComponent<VisualEffect>();
+    }
+
     public override void Spawn()
     {
+        _vfx.Play();
+
         ObjectSpawner spawner = _caster.GetComponent<ObjectSpawner>();
         List<GameObject> spawnedObjects = spawner.SpawnedObjects;
         List<GameObject> coils = spawnedObjects.FindAll(
@@ -40,7 +51,11 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
         float realDistance = Vector3.Distance(pos1, pos4);
         float bezierDistance = Vector3.Distance(arcPos1.position, arcPos4.position);
         float scale = realDistance / bezierDistance;
-        arc.transform.localScale = new Vector3(scale, arc.transform.localScale.y, arc.transform.localScale.z);
+        arc.transform.localScale = new Vector3(
+            scale,
+            arc.transform.localScale.y,
+            arc.transform.localScale.z
+        );
 
         // Set VFX positions
         arcPos1.position = pos1;

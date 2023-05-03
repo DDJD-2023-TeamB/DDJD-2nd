@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4901752214885097339}
   - component: {fileID: 6092634099648311162}
   - component: {fileID: 3284227188584484039}
+  - component: {fileID: -4836895884784628859}
   m_Layer: 0
   m_Name: Electric Arc Coil
   m_TagString: Untagged
@@ -110,8 +111,8 @@ VisualEffect:
   m_GameObject: {fileID: 8225185152368856858}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: b25a5879943d4284e909f6e18b38f84e, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_ResourceVersion: 1
@@ -178,3 +179,17 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &-4836895884784628859
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8225185152368856858}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
