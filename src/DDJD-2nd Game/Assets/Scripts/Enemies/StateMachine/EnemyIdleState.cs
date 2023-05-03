@@ -1,6 +1,8 @@
+using UnityEngine;
+
 public class EnemyIdleState : GenericState
 {
-    private BasicEnemy _context;
+    protected BasicEnemy _context;
 
     public EnemyIdleState(BasicEnemy enemy)
         : base(enemy)
@@ -15,9 +17,9 @@ public class EnemyIdleState : GenericState
 
     public override void StateUpdate()
     {
-        if (false)
+        if (IsInAggroRange())
         {
-            _context.ChangeState(new EnemyChaseState(_context));
+            _context.ChangeState(_context.States.ChaseState);
         }
     }
 
@@ -30,5 +32,11 @@ public class EnemyIdleState : GenericState
     public override bool CanChangeState(GenericState state)
     {
         return true;
+    }
+
+    protected bool IsInAggroRange()
+    {
+        return Vector3.Distance(_context.transform.position, _context.Player.transform.position)
+            <= _context.AggroRange;
     }
 }

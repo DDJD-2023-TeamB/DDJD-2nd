@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
-public class AimComponent : MonoBehaviour
+public class PlayerAimComponent : MonoBehaviour, AimComponent
 {
     [SerializeField]
     private Rig aimRig;
@@ -113,5 +113,10 @@ public class AimComponent : MonoBehaviour
 
         Vector3 direction = position - origin;
         return direction;
+    }
+
+    public Quaternion GetAimRotation()
+    {
+        return _player.CameraTarget.transform.rotation;
     }
 }

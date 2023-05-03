@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyChaseState : GenericState
 {
-    private BasicEnemy _context;
+    protected BasicEnemy _context;
 
     public EnemyChaseState(BasicEnemy enemy)
         : base(enemy)
@@ -12,30 +12,47 @@ public class EnemyChaseState : GenericState
 
     public override void Enter()
     {
-        _context.Animator.SetBool("Chase", true);
+        _context.NavMeshAgent.enabled = true;
     }
 
     public override void StateUpdate()
     {
         if (IsInAttackRange())
         {
-            _context.ChangeState(new EnemyAttackState(_context));
+            _context.ChangeState(_context.States.AttackState);
+            return;
         }
-        else if (false)
+        else if (!IsInAggroRange())
         {
+            Debug.Log("Going to idle");
             _context.ChangeState(new EnemyIdleState(_context));
+            return;
         }
+
+        _context.Animator.SetFloat(
+            _context.ForwardSpeedHash,
+            _context.NavMeshAgent.velocity.magnitude
+        );
+        Move();
     }
 
     public override void Exit()
     {
         base.Exit();
-        _context.Animator.SetBool("Chase", false);
+        _context.Animator.SetFloat(_context.ForwardSpeedHash, 0.0f);
     }
 
-    private bool IsInAttackRange()
+    protected virtual void Move() { }
+
+    protected bool IsInAttackRange()
     {
-        // return Vector3.Distance(_context.transform.position, _context.transform.position) <= _context.AttackRange;
-        return false;
+        return Vector3.Distance(_context.transform.position, _context.Player.transform.position)
+            <= _context.AttackRange;
+    }
+
+    protected bool IsInAggroRange()
+    {
+        return Vector3.Distance(_context.transform.position, _context.Player.transform.position)
+            <= _context.AggroRange;
     }
 }

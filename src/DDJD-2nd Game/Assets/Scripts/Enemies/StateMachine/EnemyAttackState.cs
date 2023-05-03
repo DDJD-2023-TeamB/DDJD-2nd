@@ -1,6 +1,8 @@
+using UnityEngine;
+
 public class EnemyAttackState : GenericState
 {
-    private BasicEnemy _context;
+    protected BasicEnemy _context;
 
     public EnemyAttackState(BasicEnemy enemy)
         : base(enemy)
@@ -10,20 +12,35 @@ public class EnemyAttackState : GenericState
 
     public override void Enter()
     {
-        _context.Animator.SetBool("Attack", true);
+        _context.NavMeshAgent.enabled = true;
+        _context.Animator.SetBool("IsAiming", true);
     }
 
     public override void StateUpdate()
     {
-        if (false)
+        if (!IsInAttackRange())
         {
-            _context.ChangeState(new EnemyIdleState(_context));
+            _context.ChangeState(_context.States.ChaseState);
+            return;
         }
+
+        Attack();
+        Move();
     }
+
+    protected virtual void Attack() { }
+
+    protected virtual void Move() { }
 
     public override void Exit()
     {
         base.Exit();
-        _context.Animator.SetBool("Attack", false);
+        _context.Animator.SetBool("IsAiming", true);
+    }
+
+    protected bool IsInAttackRange()
+    {
+        return Vector3.Distance(_context.transform.position, _context.Player.transform.position)
+            <= _context.AttackRange;
     }
 }

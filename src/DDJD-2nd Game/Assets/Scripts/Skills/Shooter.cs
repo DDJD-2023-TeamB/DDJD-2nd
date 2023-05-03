@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
-    private Player _player;
+    private AimComponent _aimComponent;
 
     private void Awake()
     {
-        _player = GetComponent<Player>();
+        _aimComponent = GetComponent<AimComponent>();
     }
 
     private GameObject _leftSpell;
@@ -34,7 +34,7 @@ public class Shooter : MonoBehaviour
         _leftSpell = GameObject.Instantiate(
             skill.SpellPrefab,
             transform.position,
-            _player.CameraTarget.transform.rotation
+            _aimComponent.GetAimRotation()
         );
         _leftSpell.transform.parent = transform;
         SkillComponent skillComponent = _leftSpell.GetComponent<SkillComponent>();
@@ -52,7 +52,7 @@ public class Shooter : MonoBehaviour
         _rightSpell = GameObject.Instantiate(
             skill.SpellPrefab,
             transform.position,
-            _player.CameraTarget.transform.rotation
+            _aimComponent.GetAimRotation()
         );
         _rightSpell.transform.parent = transform;
         SkillComponent skillComponent = _rightSpell.GetComponent<SkillComponent>();

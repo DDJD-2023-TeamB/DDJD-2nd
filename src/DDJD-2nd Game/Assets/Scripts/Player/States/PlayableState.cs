@@ -102,6 +102,6 @@ public class PlayableState : GenericState
         );
         */
 
-        _context.AimComponent.SetAimPosition(targetPosition);
+        //_context.AimComponent.SetAimPosition(targetPosition);
     }
 }
