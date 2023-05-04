@@ -10,21 +10,9 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
 
     [SerializeField]
     private GameObject _vfxPrefab;
-
-    // private VisualEffect _vfx;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        // _vfx = GetComponent<VisualEffect>();
-    }
-
     public override void Spawn()
     {
-        // _vfx.Play();
-        Vector3 position = transform.position;
-        position.y = _vfxPrefab.transform.position.y;
-        Instantiate(_vfxPrefab, position, Quaternion.identity);
+        PlayVfx();
         DamageNearbyEnemies();
         CreateElectricArc();
     }
@@ -104,5 +92,13 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
 
         float arcLife = Mathf.Min(spawner.GetObjectLifeTime(lastCoil), _skill.SpawnStats.Duration);
         Destroy(arc, arcLife);
+    }
+
+    private void PlayVfx()
+    {
+        Vector3 position = transform.position;
+        position.y = _vfxPrefab.transform.position.y;
+        GameObject vfx = Instantiate(_vfxPrefab, position, Quaternion.identity);
+        Destroy(vfx, _skill.SpawnStats.Duration);
     }
 }
