@@ -10,6 +10,7 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
 
     [SerializeField]
     private GameObject _vfxPrefab;
+
     public override void Spawn()
     {
         PlayVfx();
@@ -19,20 +20,22 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
 
     private void DamageNearbyEnemies()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _skill.SpawnStats.DamageRadius);
+        Collider[] colliders = Physics.OverlapSphere(
+            transform.position,
+            _skill.SpawnStats.DamageRadius
+        );
         foreach (Collider collider in colliders)
         {
             if (collider.gameObject == _caster)
                 continue;
 
-            Enemy enemy = collider.gameObject.GetComponent<Enemy>();
-            if (enemy != null && _skill.SpawnStats.Damage > 0)
+            if (_skill.SpawnStats.Damage > 0)
             {
                 float distance = Vector3.Distance(transform.position, collider.transform.position);
                 float divider = Mathf.Min(1, distance);
 
                 Damage(
-                    enemy.gameObject,
+                    collider.gameObject,
                     (int)(_skill.SpawnStats.Damage / divider),
                     collider.ClosestPoint(transform.position),
                     collider.transform.position - transform.position
