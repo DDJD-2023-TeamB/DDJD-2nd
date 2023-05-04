@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class EarthWallComponent : StaticSkillComponent
 {
-    RaycastHit? _previousHit = null;
+    private RaycastHit? _previousHit = null;
+    private Animator _animator;
 
     protected override void Awake()
     {
         base.Awake();
         _collider.enabled = false;
+        _animator = GetComponent<Animator>();
     }
 
     public override bool CanShoot(Vector3 direction)
@@ -50,5 +52,11 @@ public class EarthWallComponent : StaticSkillComponent
             return hit;
         }
         return null;
+    }
+
+    public override void DestroySpell()
+    {
+        _animator.SetTrigger("EndWall");
+        Destroy(gameObject, 0.3f);
     }
 }
