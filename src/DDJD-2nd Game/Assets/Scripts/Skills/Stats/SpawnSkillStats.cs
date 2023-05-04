@@ -13,6 +13,14 @@ public class SpawnSkillStats : SkillStats
         set => _duration = value;
     }
 
+    [SerializeField]
+    private float _damageRadius;
+    public float DamageRadius
+    {
+        get => _damageRadius;
+        set => _damageRadius = value;
+    }
+
     public SpawnSkillStats(float damage, float cooldown, float duration)
         : base(damage, cooldown)
     {

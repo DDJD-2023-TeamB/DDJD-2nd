@@ -19,7 +19,36 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
     public override void Spawn()
     {
         _vfx.Play();
+        DamageNearbyEnemies();
+        CreateElectricArc();
+    }
 
+    private void DamageNearbyEnemies()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _skill.SpawnStats.DamageRadius);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.gameObject == _caster)
+                continue;
+
+            Enemy enemy = collider.gameObject.GetComponent<Enemy>();
+            if (enemy != null && _skill.SpawnStats.Damage > 0)
+            {
+                float distance = Vector3.Distance(transform.position, collider.transform.position);
+                float divider = Mathf.Min(1, distance);
+
+                Damage(
+                    enemy.gameObject,
+                    (int)(_skill.SpawnStats.Damage / divider),
+                    collider.ClosestPoint(transform.position),
+                    collider.transform.position - transform.position
+                );
+            }
+        }
+    }
+
+    private void CreateElectricArc()
+    {
         ObjectSpawner spawner = _caster.GetComponent<ObjectSpawner>();
         List<GameObject> spawnedObjects = spawner.SpawnedObjects;
         List<GameObject> coils = spawnedObjects.FindAll(
