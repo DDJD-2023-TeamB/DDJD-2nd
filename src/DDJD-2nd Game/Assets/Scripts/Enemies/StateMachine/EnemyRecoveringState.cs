@@ -18,7 +18,7 @@ public class EnemyRecoveringState : GenericState
     {
         // set all layers to 0 expect first
         _context.RagdollController.DeactivateRagdoll();
-        _context.Animator.Play(_recoveringAnimationName);
+        _context.Animator.Play(_recoveringAnimationName, 0, 0.0f);
         for (int i = 1; i < _context.Animator.layerCount; i++)
         {
             _layerWeights.Add(_context.Animator.GetLayerWeight(i));

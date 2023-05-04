@@ -13,11 +13,10 @@ public class RagdollController : MonoBehaviour
     [SerializeField]
     private float _knockbackForceMultiplier = 3f;
 
-    private BoneTransform[] _standUpBoneTransforms;
-    public BoneTransform[] StandUpBoneTransforms
-    {
-        get { return _standUpBoneTransforms; }
-    }
+    [SerializeField]
+    private List<string> _animationsLoaded = new List<string>();
+    private Dictionary<string, BoneTransform[]> _animationInitialBones =
+        new Dictionary<string, BoneTransform[]>();
 
     private Transform[] _bones;
 
@@ -27,6 +26,11 @@ public class RagdollController : MonoBehaviour
     }
 
     private Transform _hipsBone;
+
+    public Transform HipsBone
+    {
+        get { return _hipsBone; }
+    }
 
     // Start is called before the first frame update
     void Awake()
@@ -43,9 +47,10 @@ public class RagdollController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _hipsBone = _animator.GetBoneTransform(HumanBodyBones.Hips);
         _bones = GetRagdollTransforms();
-        _standUpBoneTransforms = new BoneTransform[_bones.Length];
-
-        PopulateStandUpBones("StandUpFaceDown");
+        foreach (string animation in _animationsLoaded)
+        {
+            PopulateAnimationBones(animation);
+        }
     }
 
     public Transform GetRagdollTransform()
@@ -119,12 +124,13 @@ public class RagdollController : MonoBehaviour
         closestRb.AddForce(hitDirection * totalForce, ForceMode.Impulse);
     }
 
-    public void AlignPositionWithHips()
+    public void AlignPositionWithHips(string animationName)
     {
         Vector3 originalPosition = _hipsBone.position;
         transform.position = _hipsBone.position;
 
-        Vector3 positionOffset = _standUpBoneTransforms[0].Position;
+        BoneTransform hipsAnimationBone = _animationInitialBones[animationName][0];
+        Vector3 positionOffset = hipsAnimationBone.Position;
         positionOffset.y = 0;
         positionOffset = transform.rotation * positionOffset;
         transform.position -= positionOffset;
@@ -148,6 +154,12 @@ public class RagdollController : MonoBehaviour
 
         Vector3 desiredDirection = _hipsBone.up * 1f;
         desiredDirection.y = 0;
+
+        bool isfacingUp = _hipsBone.forward.y > 0;
+        if (isfacingUp)
+        {
+            desiredDirection *= -1;
+        }
         desiredDirection.Normalize();
 
         Quaternion fromToRotation = Quaternion.FromToRotation(transform.forward, desiredDirection);
@@ -157,7 +169,7 @@ public class RagdollController : MonoBehaviour
         _hipsBone.rotation = originalHipsRotaiton;
     }
 
-    public void PopulateStandUpBones(string animationName)
+    public void PopulateAnimationBones(string animationName)
     {
         Vector3 positionBeforeSampling = transform.position;
         Quaternion rotationBeforeSampling = transform.rotation;
@@ -169,8 +181,12 @@ public class RagdollController : MonoBehaviour
                 break;
             }
         }
-        PopulateBoneTransforms(_standUpBoneTransforms);
 
+        BoneTransform[] boneTransforms = new BoneTransform[_bones.Length];
+        PopulateBoneTransforms(boneTransforms);
+        _animationInitialBones.Add(animationName, boneTransforms);
+
+        //Need to reset the position and rotation of the character after sampling
         transform.position = positionBeforeSampling;
         transform.rotation = rotationBeforeSampling;
     }
@@ -182,5 +198,10 @@ public class RagdollController : MonoBehaviour
             Transform bone = _bones[i].transform;
             boneTransforms[i] = new BoneTransform(bone.localPosition, bone.localRotation);
         }
+    }
+
+    public BoneTransform[] GetAnimationInitialBones(string animationName)
+    {
+        return _animationInitialBones[animationName];
     }
 }

@@ -14,15 +14,19 @@ public class EnemyRecoveringResetBonesState : GenericState
         : base(enemy)
     {
         _context = enemy;
-        _recoveringAnimationName = "StandUpFaceDown";
-        _standUpBoneTransforms = _context.RagdollController.StandUpBoneTransforms;
+
+        bool isfacingUp = _context.RagdollController.HipsBone.forward.y > 0;
+        _recoveringAnimationName = isfacingUp ? "StandUpFaceUp" : "StandUpFaceDown";
+        _standUpBoneTransforms = _context.RagdollController.GetAnimationInitialBones(
+            _recoveringAnimationName
+        );
         _ragdollBoneTransforms = new BoneTransform[_context.RagdollController.Bones.Length];
     }
 
     public override void Enter()
     {
         _context.RagdollController.AlignRotationWithHips();
-        _context.RagdollController.AlignPositionWithHips();
+        _context.RagdollController.AlignPositionWithHips(_recoveringAnimationName);
         PopulateBoneTransforms(_ragdollBoneTransforms);
     }
 
