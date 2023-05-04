@@ -3,12 +3,8 @@ using System.Collections;
 
 public class NotAimingState : MovableState
 {
-
     public NotAimingState(StateContext context, GenericState superState)
-        : base(context, superState)
-    {
-        
-    }
+        : base(context, superState) { }
 
     private float _attackCD;
     private float _timeUntilNextAttack;
@@ -16,12 +12,23 @@ public class NotAimingState : MovableState
     public override void Enter()
     {
         base.Enter();
+        _context.Input.OnMeleeAttackKeydown += OnMeleeAttackKeydown;
+        _context.Input.OnMeleeAttackKeyup += OnMeleeAttackKeyup;
     }
 
-    public override void Exit() { }
+    public override void Exit()
+    {
+        base.Exit();
+        _context.Input.OnMeleeAttackKeydown -= OnMeleeAttackKeydown;
+        _context.Input.OnMeleeAttackKeyup -= OnMeleeAttackKeyup;
+    }
 
     public override bool CanChangeState(GenericState state)
     {
+        if (!base.CanChangeState(state))
+        {
+            return false;
+        }
         return true;
     }
 
@@ -31,29 +38,33 @@ public class NotAimingState : MovableState
         CheckDash();
     }
 
-    private void CheckDash()
+    private void OnMeleeAttackKeydown()
     {
-        if (!_context.Input.IsDashing)
-            return;
-
-        if (_context.PlayerSkills.DashSkill != null)
-        {
-            UseDashSkill(_context.PlayerSkills.DashSkill);
-        }
-        else
-        {
-            // TODO: Normal dash
-        }
+        _context.Animator.SetBool("IsAttacking", true);
     }
 
-    private void UseDashSkill(Dash dashSkill)
+    private void OnMeleeAttackKeyup()
     {
-        if (_context.PlayerSkills.IsSkillOnCooldown(dashSkill))
+        _context.Animator.SetBool("IsAttacking", false);
+    }
+
+    private void CheckDash()
+    {
+        if (
+            !_context.Input.IsDashing
+            || _substate is DashState
+            || _context.Dashable.IsDashOnCooldown()
+        )
         {
             return;
         }
-        _context.PlayerSkills.StartSkillCooldown(dashSkill);
-        _context.DashComponent.DashWithSkill(dashSkill);
-        // TODO: Trigger animation
+
+        ChangeSubState(
+            _context.Factory.Dash(
+                this,
+                _context.PlayerSkills.DashStats,
+                _context.PlayerSkills.CurrentElement?.DashSkill
+            )
+        );
     }
 }

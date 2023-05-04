@@ -114,6 +114,12 @@ public class Player : StateContext
         get { return _playerSkills; }
     }
 
+    public MeleeCombat _meleeCombat;
+    public MeleeCombat MeleeCombat
+    {
+        get { return _meleeCombat; }
+    }
+
     [SerializeField]
     private GameObject _LeftHand;
     public GameObject LeftHand
@@ -128,6 +134,18 @@ public class Player : StateContext
         get { return _RightHand; }
     }
 
+    private Dashable _dashable;
+    public Dashable Dashable
+    {
+        get { return _dashable; }
+    }
+
+    private AirMovementComponent _airMovement;
+    public AirMovementComponent AirMovement
+    {
+        get { return _airMovement; }
+    }
+
     void Awake()
     {
         _inputReceiver = GetComponent<PlayerInputReceiver>();
@@ -138,11 +156,23 @@ public class Player : StateContext
         _shooter = GetComponent<Shooter>();
         _dashComponent = GetComponent<Dashable>();
         _playerSkills.Player = this;
+        _meleeCombat = GetComponent<MeleeCombat>();
+        _dashable = GetComponent<Dashable>();
         ChangeState(_factory.Playable());
+    }
+
+    void Start()
+    {
+        UpdateElement();
     }
 
     void Update()
     {
         _state.Update();
+    }
+
+    void UpdateElement()
+    {
+        _airMovement = _playerSkills.CurrentElement?.AirMovementSkill?.Initialize(gameObject);
     }
 }

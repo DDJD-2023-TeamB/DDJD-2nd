@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c04815a882e0bcf4f893397ffc063e5c, type: 3}
+  m_Name: FireDash
+  m_EditorClassIdentifier: 
+  _spellPrefab: {fileID: 7581297245760954433, guid: b52d6e1d6cbaf134683d62d77d9f877c,
+    type: 3}
+  _skillStats:
+    _damage: 25
+    _force: 0
+    _damageToForceMultiplier: 1
+    _cooldown: 0
+    _castTime: 0
+    _castType: 0
+    _maxChargeTime: 0
+    _isContinuous: 0
+    _tickRate: 0
+    _effectDuration: 3
+  _dashStats:
+    _duration: 0.5
+    _force: 50
+    _maxSpeed: 25
+    _cameraFov: 70
+    _enterFovTime: 0.05
+    _exitFovTime: 0.05
