@@ -22,31 +22,48 @@ public class BasicEnemy : HumanoidEnemy
     [SerializeField]
     private EnemySkills _enemySkills;
 
+    [SerializeField]
+    [Tooltip("The amount of force applied to the enemy required to knock it down")]
+    private float _forceResistance = 20f;
+
     public override void Awake()
     {
         base.Awake();
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        _states = new EnemyStates(new EnemyChaseState(this), new EnemyAttackState(this));
+        _states = new EnemyStates(
+            chaseState: new EnemyChaseState(this),
+            attackState: new EnemyAttackState(this),
+            idleState: new EnemyIdleState(this)
+        );
     }
 
     public override void Start()
     {
         base.Start();
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        Debug.Log("Player: " + _player);
         _state = new EnemyIdleState(this);
     }
 
     public override void Die(int force, Vector3 hitPoint, Vector3 hitDirection)
     {
         base.Die(force, hitPoint, hitDirection);
-        _navMeshAgent.enabled = false;
+        ChangeState(new EnemyDeadState(this));
     }
 
     public override void Update()
     {
         base.Update();
         _state.StateUpdate();
+    }
+
+    public override void TakeDamage(int damage, float force, Vector3 hitPoint, Vector3 hitDirection)
+    {
+        base.TakeDamage(damage, force, hitPoint, hitDirection);
+
+        if (force >= _forceResistance)
+        {
+            ChangeState(new EnemyKnockdownState(this, force, hitPoint, hitDirection));
+        }
     }
 
     //getters and setters

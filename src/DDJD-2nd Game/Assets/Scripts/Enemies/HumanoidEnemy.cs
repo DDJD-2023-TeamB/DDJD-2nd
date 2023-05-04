@@ -33,9 +33,9 @@ public class HumanoidEnemy : Enemy
         base.Update();
     }
 
-    public override void TakeDamage(int damage, Vector3 hitPoint, Vector3 hitDirection)
+    public override void TakeDamage(int damage, float force, Vector3 hitPoint, Vector3 hitDirection)
     {
-        base.TakeDamage(damage, hitPoint, hitDirection);
+        base.TakeDamage(damage, force, hitPoint, hitDirection);
         _animator.SetTrigger("Hit");
     }
 
@@ -52,5 +52,10 @@ public class HumanoidEnemy : Enemy
         yield return new WaitForSeconds(waitTime);
         Transform ragdollTransform = _ragdollController.GetRagdollTransform();
         SpawnDeathVFX(ragdollTransform.position);
+    }
+
+    public RagdollController RagdollController
+    {
+        get { return _ragdollController; }
     }
 }

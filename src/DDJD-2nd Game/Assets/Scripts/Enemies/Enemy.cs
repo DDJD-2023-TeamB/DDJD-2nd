@@ -40,8 +40,13 @@ public abstract class Enemy : StateContext, Damageable
     // Update is called once per frame
     virtual public void Update() { }
 
-    public virtual void TakeDamage(int damage, Vector3 hitPoint, Vector3 hitDirection)
+    public virtual void TakeDamage(int damage, float force, Vector3 hitPoint, Vector3 hitDirection)
     {
         _status.TakeDamage(damage, hitPoint, hitDirection);
+    }
+
+    public Rigidbody Rigidbody
+    {
+        get { return _rb; }
     }
 }

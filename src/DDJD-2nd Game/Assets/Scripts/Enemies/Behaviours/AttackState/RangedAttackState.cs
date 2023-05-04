@@ -40,20 +40,23 @@ public class RangedAttackState : EnemyAttackState
         while (true)
         {
             yield return new WaitForSeconds(_context.AttackSpeed);
-            Shooter shooter = _context.Shooter;
             AimedSkill aimedSkill = _context.EnemySkills.LeftSkill;
-            GameObject spell = _context.Shooter.CreateLeftSpell(
-                aimedSkill,
-                _context.LeftSpellOrigin.transform
-            );
-            Vector3 shotDirection = GetShotDirection(shooter.transform.position);
-            shooter.Shoot(spell, shotDirection, true);
+            Shoot(aimedSkill, _context.LeftSpellOrigin);
         }
+    }
+
+    private void Shoot(AimedSkill aimedSkill, GameObject origin)
+    {
+        GameObject spell = _context.Shooter.CreateLeftSpell(aimedSkill, origin.transform);
+        Vector3 shotDirection = GetShotDirection(origin.transform.position);
+        _context.Shooter.Shoot(spell, shotDirection, true);
     }
 
     private Vector3 GetShotDirection(Vector3 spellOrigin)
     {
-        Vector3 direction = _context.Player.transform.position - spellOrigin;
+        Vector3 playerPosition = _context.Player.transform.position;
+        playerPosition.y += 0.8f;
+        Vector3 direction = playerPosition - spellOrigin;
         return direction;
     }
 }

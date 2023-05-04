@@ -62,7 +62,7 @@ public abstract class SkillComponent : MonoBehaviour
         {
             return;
         }
-        damageable.TakeDamage(damage, hitPoint, direction);
+        damageable.TakeDamage(damage, _skillStats.ForceWithDamage(), hitPoint, direction);
     }
 
     public virtual void Shoot(Vector3 direction)

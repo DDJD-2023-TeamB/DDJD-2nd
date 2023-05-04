@@ -3091,7 +3091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 463f7c24ef564d64da4258f88470a53b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _knockbackForceMultiplier: 3
+  _knockbackForceMultiplier: 1
 --- !u!114 &1719889469382641536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3106,6 +3106,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _deathVFX: {fileID: 5471931807513829789, guid: 1418d163fbcef03428e9afeaf6db58f7,
     type: 3}
+  _attackRange: 10
+  _aggroRange: 40
+  _enemySkills: {fileID: 0}
+  _forceResistance: 20
 --- !u!54 &863070923031211676
 Rigidbody:
   m_ObjectHideFlags: 0
