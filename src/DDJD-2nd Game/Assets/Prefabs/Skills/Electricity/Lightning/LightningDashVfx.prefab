@@ -60,10 +60,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 2
-  m_Height: 14
+  m_Radius: 1.3371185
+  m_Height: 9.94604
   m_Direction: 2
-  m_Center: {x: 0.15593126, y: 0, z: 6.65}
+  m_Center: {x: 0.15593123, y: -0.17955065, z: 3.613216}
 --- !u!2083052967 &6551930551421182360
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -80,7 +80,25 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 30
+        m_Name: Speed
+        m_Overridden: 1
+      - m_Value: 0.25
+        m_Name: Lifetime
+        m_Overridden: 1
+      - m_Value: 0.2
+        m_Name: Noise Power
+        m_Overridden: 1
+      - m_Value: 0.001
+        m_Name: Cone_baseRadius
+        m_Overridden: 1
+      - m_Value: 0.01
+        m_Name: Cone_topRadius
+        m_Overridden: 1
+      - m_Value: 1
+        m_Name: Cone_height
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
