@@ -8,17 +8,23 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
     [SerializeField]
     private GameObject _arcPrefab;
 
-    private VisualEffect _vfx;
+    [SerializeField]
+    private GameObject _vfxPrefab;
+
+    // private VisualEffect _vfx;
 
     protected override void Awake()
     {
         base.Awake();
-        _vfx = GetComponent<VisualEffect>();
+        // _vfx = GetComponent<VisualEffect>();
     }
 
     public override void Spawn()
     {
-        _vfx.Play();
+        // _vfx.Play();
+        Vector3 position = transform.position;
+        position.y = _vfxPrefab.transform.position.y;
+        Instantiate(_vfxPrefab, position, Quaternion.identity);
         DamageNearbyEnemies();
         CreateElectricArc();
     }
