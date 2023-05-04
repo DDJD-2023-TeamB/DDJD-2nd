@@ -75,7 +75,6 @@ public class Dashable : MonoBehaviour
             transform.position.z
         );
         Quaternion rotation = Quaternion.LookRotation(direction);
-        Debug.DrawRay(position, direction * 5f, Color.red, 10f);
         GameObject spell = Instantiate(dashSkill.SpellPrefab, position, rotation);
         DashComponent dashComponent = spell.GetComponent<DashComponent>();
         dashComponent.SetCaster(gameObject);
