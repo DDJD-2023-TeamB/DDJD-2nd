@@ -13,11 +13,6 @@ public class FireDashComponent : DashComponent
         transform.position -= new Vector3(0f, 0.75f, 0f);
     }
 
-    protected override void Update()
-    {
-        base.Update();
-    }
-
     public override void SetSkill(Skill skill)
     {
         base.SetSkill(skill);
@@ -52,10 +47,5 @@ public class FireDashComponent : DashComponent
                 );
             }
         }
-    }
-
-    protected override void OnImpact(Collider other, float multiplier = 1)
-    {
-        base.OnImpact(other, multiplier);
     }
 }

@@ -84,6 +84,11 @@ public abstract class SkillComponent : MonoBehaviour
         Collide(other);
     }
 
+    public void OnCollisionEnter(Collision collision)
+    {
+        OnImpact(collision.collider);
+    }
+
     public virtual void OnTriggerStay(Collider other)
     {
         if (_skillStats == null || !_skillStats.IsContinuous)
@@ -152,5 +157,10 @@ public abstract class SkillComponent : MonoBehaviour
     public virtual void DestroySpell()
     {
         Destroy(gameObject);
+    }
+
+    public virtual bool CanShoot(Vector3 direction)
+    {
+        return true;
     }
 }

@@ -6,7 +6,7 @@ public class StaticSkillComponent : SkillComponent
 {
     [SerializeField]
     private bool _leaveCaster = true;
-    private Collider _collider;
+    protected Collider _collider;
 
     protected override void Awake()
     {
@@ -48,6 +48,6 @@ public class StaticSkillComponent : SkillComponent
     {
         yield return new WaitForSeconds(time);
         _collider.enabled = false;
-        Destroy(gameObject, 1.0f);
+        DestroySpell();
     }
 }

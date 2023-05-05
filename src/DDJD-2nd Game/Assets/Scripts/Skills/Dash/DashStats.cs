@@ -21,6 +21,15 @@ public class DashStats
         set => _force = value;
     }
 
+    [SerializeField, Range(0f, 90f)]
+    private float _angle = 0.0f;
+
+    public float Angle
+    {
+        get => _angle;
+        set => _angle = value;
+    }
+
     [SerializeField]
     private float _maxSpeed = 20f;
     public float MaxSpeed

@@ -85,14 +85,18 @@ public class Shooter : MonoBehaviour
         CancelRightShoot();
     }
 
-    public void Shoot(GameObject spell, Vector3 direction, bool leaveCaster)
+    public bool Shoot(GameObject spell, Vector3 direction, bool leaveCaster)
     {
         SkillComponent skillComponent = spell.GetComponent<SkillComponent>();
+        if (!skillComponent.CanShoot(direction))
+        {
+            return false;
+        }
         skillComponent.Shoot(direction);
 
         if (!leaveCaster)
         {
-            return;
+            return true;
         }
         if (_leftSpell == spell)
         {
@@ -102,6 +106,7 @@ public class Shooter : MonoBehaviour
         {
             _rightSpell = null;
         }
+        return true;
     }
 
     private void EndShoot(GameObject spell)
