@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour, Damageable
+public abstract class Enemy : StateContext, Damageable
 {
     protected Rigidbody _rb;
     protected CharacterStatus _status;
+
     [SerializeField]
     protected GameObject _deathVFX;
+
+    private GenericState _currentState;
 
     virtual public void Awake()
     {
@@ -37,8 +40,13 @@ public abstract class Enemy : MonoBehaviour, Damageable
     // Update is called once per frame
     virtual public void Update() { }
 
-    public virtual void TakeDamage(int damage, Vector3 hitPoint, Vector3 hitDirection)
+    public virtual void TakeDamage(int damage, float force, Vector3 hitPoint, Vector3 hitDirection)
     {
         _status.TakeDamage(damage, hitPoint, hitDirection);
+    }
+
+    public Rigidbody Rigidbody
+    {
+        get { return _rb; }
     }
 }

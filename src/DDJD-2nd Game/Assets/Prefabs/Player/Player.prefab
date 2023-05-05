@@ -1568,7 +1568,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4492101057451422959}
-  m_LocalRotation: {x: 0.05884772, y: 0.009759208, z: -0.00057533174, w: 0.99821913}
+  m_LocalRotation: {x: 0.058843702, y: 0.015210167, z: -0.00089668046, w: 0.99815094}
   m_LocalPosition: {x: -0.5397235, y: 2.3344133, z: -1.468136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3210,12 +3210,12 @@ GameObject:
   - component: {fileID: 7026416567958636131}
   - component: {fileID: 7026416567958636128}
   - component: {fileID: 7026416567958636130}
-  - component: {fileID: 7026416567958636133}
   - component: {fileID: 4434135871766422622}
   - component: {fileID: 8244842273400313447}
   - component: {fileID: 7310436562981443879}
   - component: {fileID: 3788135562345574591}
   - component: {fileID: 132688717697300227}
+  - component: {fileID: 3093818352404047951}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -3331,21 +3331,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99304c0583d90564c8a96da15abd8afa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7026416567958636133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7694690271000812756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60db74d9c015103409a6cb69fbeebe9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aimRig: {fileID: 1634484723759356305}
-  _aimTarget: {fileID: 4492101058631373207}
-  _aimUI: {fileID: 2302589016853556290}
 --- !u!114 &4434135871766422622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3494,6 +3479,21 @@ MonoBehaviour:
   resetVelocity: 1
   _maxRegularSpeed: 5
   _speedChangeFactor: 200
+--- !u!114 &3093818352404047951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694690271000812756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f589f9281a734fe428f71045527040ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimRig: {fileID: 1634484723759356305}
+  _aimTarget: {fileID: 4492101058631373207}
+  _aimUI: {fileID: 2302589016853556290}
 --- !u!1 &8198835224221356302
 GameObject:
   m_ObjectHideFlags: 0
