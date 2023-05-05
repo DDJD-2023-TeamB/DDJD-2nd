@@ -47,7 +47,10 @@ public class BasicStoneThrowComponent : ProjectileComponent
     public override void DestroySpell()
     {
         _vfx.Stop();
-        _vfx.SetFloat("ProjectileSize", 0.0f);
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
         DeactivateSpell();
         Destroy(gameObject, 2.0f);
     }

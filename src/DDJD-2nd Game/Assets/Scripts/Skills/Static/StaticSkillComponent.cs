@@ -48,6 +48,6 @@ public class StaticSkillComponent : SkillComponent
     {
         yield return new WaitForSeconds(time);
         _collider.enabled = false;
-        Destroy(gameObject, 1.0f);
+        DestroySpell();
     }
 }
