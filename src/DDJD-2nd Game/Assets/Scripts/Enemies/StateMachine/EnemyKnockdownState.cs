@@ -35,7 +35,6 @@ public class EnemyKnockdownState : GenericState
             hitPoint: _hitPoint,
             hitDirection: _hitDirection
         );
-        //_context.StartCoroutine(RecoverFromKnockdown());
         _timeGrounded = 0.0f;
     }
 
@@ -63,6 +62,6 @@ public class EnemyKnockdownState : GenericState
 
     private void RecoverFromKnockdown()
     {
-        _context.ChangeState(new EnemyRecoveringResetBonesState(_context));
+        _context.ChangeState(new EnemyRepositionRecoverBonesState(_context));
     }
 }

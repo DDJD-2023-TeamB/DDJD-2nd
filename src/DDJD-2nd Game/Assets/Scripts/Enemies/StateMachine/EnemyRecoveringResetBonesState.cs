@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class EnemyRecoveringResetBonesState : GenericState
+public class EnemyRepositionRecoverBonesState : GenericState
 {
     protected BasicEnemy _context;
     private string _recoveringAnimationName;
@@ -10,7 +10,7 @@ public class EnemyRecoveringResetBonesState : GenericState
 
     private float _elapsedResetBonesTime = 0.0f;
 
-    public EnemyRecoveringResetBonesState(BasicEnemy enemy)
+    public EnemyRepositionRecoverBonesState(BasicEnemy enemy)
         : base(enemy)
     {
         _context = enemy;
