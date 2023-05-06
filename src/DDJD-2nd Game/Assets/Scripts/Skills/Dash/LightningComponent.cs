@@ -10,11 +10,8 @@ public class LightningComponent : DashComponent
     private string[] _layersToDashThrough;
     private int[] _layersToIgnore;
 
-    private List<GameObject> _objectsHit = new List<GameObject>();
-
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
         _casterLayer = _caster.layer;
         _layersToIgnore = new int[_layersToDashThrough.Length];
         for (int i = 0; i < _layersToDashThrough.Length; i++)
@@ -22,11 +19,6 @@ public class LightningComponent : DashComponent
             _layersToIgnore[i] = LayerMask.NameToLayer(_layersToDashThrough[i]);
             Physics.IgnoreLayerCollision(_casterLayer, _layersToIgnore[i], true);
         }
-    }
-
-    protected override void Update()
-    {
-        base.Update();
     }
 
     public override void SetSkill(Skill skill)
