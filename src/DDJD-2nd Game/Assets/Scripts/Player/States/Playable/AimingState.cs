@@ -94,7 +94,9 @@ public class AimingState : MovableState
         }
         else
         {
-            spell = _context.Shooter.CreateLeftSpell(skill, _context.LeftHand.transform);
+            spell = isLeft
+                ? _context.Shooter.CreateLeftSpell(skill, _context.LeftHand.transform)
+                : _context.Shooter.CreateRightSpell(skill, _context.RightHand.transform);
         }
         string animationTrigger = GetAnimationTrigger(isLeft);
 

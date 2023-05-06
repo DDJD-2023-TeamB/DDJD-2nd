@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1749058838326422177}
   - component: {fileID: 6209716485624781878}
   - component: {fileID: 4004374486373461461}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LightningDashParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4827,6 +4827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7212caf123d52214fbec35143706b937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damageCaster: 0
   _layersToDashThrough:
   - Enemy
 --- !u!136 &4004374486373461461
