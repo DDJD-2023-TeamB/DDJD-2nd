@@ -24,11 +24,11 @@ public class ObjectSpawner : MonoBehaviour
     private Color _previewObjectColor;
     private Collider _previewObjectCollider;
 
-    private AimComponent _aimComponent;
+    private PlayerAimComponent _aimComponent;
 
     private void Awake()
     {
-        _aimComponent = GetComponent<AimComponent>();
+        _aimComponent = GetComponent<PlayerAimComponent>();
     }
 
     private void Update()
