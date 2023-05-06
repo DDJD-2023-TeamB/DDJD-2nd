@@ -11,6 +11,9 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
     [SerializeField]
     private GameObject _vfxPrefab;
 
+    [SerializeField]
+    private float _yOffset = 0.5f;
+
     public override void Spawn()
     {
         PlayVfx();
@@ -51,16 +54,20 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
         List<GameObject> coils = spawnedObjects.FindAll(
             obj => obj.GetComponent<ElectricArcCoilComponent>() != null
         );
-        if (coils.Count <= 1) // First one
+        if (coils.Count <= 1) // First oness
             return;
 
         GameObject lastCoil = coils[coils.Count - 2];
 
-        // Calculate Bezier arc
+        // Calculate Bezier arc with Y offset
         Vector3 pos1 = lastCoil.transform.position;
         Vector3 pos4 = transform.position;
         Vector3 pos2 = 2 * pos1 / 3 + pos4 / 3;
         Vector3 pos3 = pos1 / 3 + 2 * pos4 / 3;
+        pos1.y += _yOffset;
+        pos2.y += _yOffset;
+        pos3.y += _yOffset;
+        pos4.y += _yOffset;
 
         // Spawn object
         Vector3 arcPosition = (pos1 + pos4) / 2;
