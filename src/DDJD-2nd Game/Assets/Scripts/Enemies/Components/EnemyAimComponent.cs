@@ -53,15 +53,26 @@ public class EnemyAimComponent : MonoBehaviour, AimComponent
         return _aimDirection;
     }
 
+    public bool CanSeePlayer()
+    {
+        Vector3 position = transform.position + Vector3.up * 0.8f;
+        Vector3 direction = GetAimDirection(position);
+        return CanHitPlayer(position, direction);
+    }
+
     public bool CanHitPlayer(Vector3 origin, Vector3 direction)
     {
         RaycastHit hit;
         if (Physics.Raycast(origin, direction, out hit, _enemy.AttackRange))
         {
             Debug.DrawRay(origin, direction * hit.distance, Color.yellow, 5f);
-            Debug.Log("Hit " + hit.collider.gameObject.name);
-
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                return true;
+            }
+
+            //If collider is farther than player, can probably hit player
+            if (hit.distance > Vector3.Distance(origin, _enemy.Player.transform.position))
             {
                 return true;
             }

@@ -38,12 +38,24 @@ public class RangedAttackState : EnemyAttackState
         _context.Shooter.CancelShots();
     }
 
+    public override void StateUpdate()
+    {
+        base.StateUpdate();
+        if (_substate != null)
+        {
+            _substate.StateUpdate();
+        }
+    }
+
     private IEnumerator AttackCoroutine()
     {
         while (true)
         {
             yield return new WaitForSeconds(_context.AttackSpeed);
-            Shoot();
+            if (!(_substate is RangedRepositionState))
+            {
+                Shoot();
+            }
         }
     }
 
@@ -59,7 +71,7 @@ public class RangedAttackState : EnemyAttackState
         }
         else
         {
-            Debug.Log("Can't attack");
+            ChangeSubState(new RangedRepositionState(_context));
         }
     }
 }
