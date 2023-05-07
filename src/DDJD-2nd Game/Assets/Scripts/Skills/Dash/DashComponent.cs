@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class DashComponent : SkillComponent
 {
     protected DashSkill _skill;
+    protected Vector3 _dashDirection;
 
     public override void SetSkill(Skill skill)
     {
@@ -14,4 +15,9 @@ public abstract class DashComponent : SkillComponent
 
     // destroy the gameobject after the dash is over
     protected virtual void Start() { }
+
+    public virtual void SetDashDirection(Vector3 direction)
+    {
+        _dashDirection = direction;
+    }
 }

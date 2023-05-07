@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
-    private Player _player;
+    private AimComponent _aimComponent;
 
     private void Awake()
     {
-        _player = GetComponent<Player>();
+        _aimComponent = GetComponent<AimComponent>();
     }
 
     private GameObject _leftSpell;
@@ -31,15 +31,7 @@ public class Shooter : MonoBehaviour
         {
             CancelLeftShoot();
         }
-        _leftSpell = GameObject.Instantiate(
-            skill.SpellPrefab,
-            transform.position,
-            _player.CameraTarget.transform.rotation
-        );
-        _leftSpell.transform.parent = transform;
-        SkillComponent skillComponent = _leftSpell.GetComponent<SkillComponent>();
-        skillComponent.SetCaster(gameObject);
-        skillComponent.SetSkill(skill);
+        _leftSpell = CreateSpell(skill, transform);
         return _leftSpell;
     }
 
@@ -49,16 +41,22 @@ public class Shooter : MonoBehaviour
         {
             CancelRightShoot();
         }
-        _rightSpell = GameObject.Instantiate(
+        _rightSpell = CreateSpell(skill, transform);
+        return _rightSpell;
+    }
+
+    private GameObject CreateSpell(AimedSkill skill, Transform transform)
+    {
+        GameObject spell = GameObject.Instantiate(
             skill.SpellPrefab,
             transform.position,
-            _player.CameraTarget.transform.rotation
+            _aimComponent.GetAimRotation()
         );
-        _rightSpell.transform.parent = transform;
-        SkillComponent skillComponent = _rightSpell.GetComponent<SkillComponent>();
+        spell.transform.parent = transform;
+        SkillComponent skillComponent = spell.GetComponent<SkillComponent>();
         skillComponent.SetCaster(gameObject);
         skillComponent.SetSkill(skill);
-        return _rightSpell;
+        return spell;
     }
 
     public void CancelLeftShoot()
@@ -85,14 +83,18 @@ public class Shooter : MonoBehaviour
         CancelRightShoot();
     }
 
-    public void Shoot(GameObject spell, Vector3 direction, bool leaveCaster)
+    public bool Shoot(GameObject spell, Vector3 direction, bool leaveCaster)
     {
         SkillComponent skillComponent = spell.GetComponent<SkillComponent>();
+        if (!skillComponent.CanShoot(direction))
+        {
+            return false;
+        }
         skillComponent.Shoot(direction);
 
         if (!leaveCaster)
         {
-            return;
+            return true;
         }
         if (_leftSpell == spell)
         {
@@ -102,6 +104,7 @@ public class Shooter : MonoBehaviour
         {
             _rightSpell = null;
         }
+        return true;
     }
 
     private void EndShoot(GameObject spell)

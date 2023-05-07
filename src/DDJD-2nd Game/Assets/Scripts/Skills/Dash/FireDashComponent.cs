@@ -7,15 +7,9 @@ public class FireDashComponent : DashComponent
     [SerializeField]
     private float _explosionRadius = 5.0f;
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
         transform.position -= new Vector3(0f, 0.75f, 0f);
-    }
-
-    protected override void Update()
-    {
-        base.Update();
     }
 
     public override void SetSkill(Skill skill)
@@ -52,10 +46,5 @@ public class FireDashComponent : DashComponent
                 );
             }
         }
-    }
-
-    protected override void OnImpact(Collider other, float multiplier = 1)
-    {
-        base.OnImpact(other, multiplier);
     }
 }

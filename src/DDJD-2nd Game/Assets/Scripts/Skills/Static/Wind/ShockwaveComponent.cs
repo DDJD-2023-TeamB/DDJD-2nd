@@ -18,18 +18,21 @@ public class ShockwaveComponent : StaticSkillComponent, NonCollidable
         }
         Vector3 direction = (other.transform.position - _caster.transform.position).normalized;
         Rigidbody rb = other.GetComponent<Rigidbody>();
+        float force = _stats.ForceWithDamage() * multiplier;
         if (rb != null)
         {
-            rb.AddForce(
-                _stats.Damage * _stats.ForceWithDamage() * direction * multiplier,
-                ForceMode.Impulse
-            );
+            rb.AddForce(force * multiplier * direction, ForceMode.Impulse);
         }
 
         Damageable damageable = other.GetComponent<Damageable>();
         if (damageable != null)
         {
-            damageable.TakeDamage((int)(_stats.Damage * multiplier), transform.position, direction);
+            damageable.TakeDamage(
+                (int)(_stats.Damage * multiplier),
+                force,
+                transform.position,
+                direction
+            );
         }
     }
 }

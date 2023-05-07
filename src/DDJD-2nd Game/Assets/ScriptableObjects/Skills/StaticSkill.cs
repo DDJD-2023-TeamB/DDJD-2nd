@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Static", menuName = "Scriptable Objects/Skills/Static", order = 1)]
+[CreateAssetMenu(fileName = "Static", menuName = "Scriptable Objects/Skills/Static", order = 3)]
 public class StaticSkill : AimedSkill
 {
     [SerializeField]

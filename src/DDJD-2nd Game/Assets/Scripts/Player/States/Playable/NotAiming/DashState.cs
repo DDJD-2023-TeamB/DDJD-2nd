@@ -27,7 +27,11 @@ public class DashState : MeleeAttackableState
     public override void Enter()
     {
         _dashable = _context.GetComponent<Dashable>();
-        if (_skill != null && !_context.PlayerSkills.IsSkillOnCooldown(_skill))
+        bool canUseSkill =
+            _skill != null
+            && !_context.PlayerSkills.IsSkillOnCooldown(_skill)
+            && (_skill.CanDashInAir || MovementUtils.IsGrounded(_context.Rigidbody));
+        if (canUseSkill)
         {
             _dashable.DashWithSkill(_skill);
             _context.PlayerSkills.StartSkillCooldown(_skill);

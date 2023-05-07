@@ -36,13 +36,19 @@ public class Player : StateContext
         get { return _shooter; }
     }
 
+    private ObjectSpawner _objectSpawner;
+    public ObjectSpawner ObjectSpawner
+    {
+        get { return _objectSpawner; }
+    }
+
     private Dashable _dashComponent;
     public Dashable DashComponent
     {
         get { return _dashComponent; }
     }
 
-    [Header("Player Movement")]
+    [Header("Movement")]
     [SerializeField]
     private float _maxSpeed = 5f;
     public float MaxSpeed
@@ -152,8 +158,9 @@ public class Player : StateContext
         _rigidbody = GetComponent<Rigidbody>();
         _factory = new PlayerStateFactory(this);
         _animator = GetComponent<Animator>();
-        _aimComponent = GetComponent<AimComponent>();
+        _aimComponent = GetComponent<PlayerAimComponent>();
         _shooter = GetComponent<Shooter>();
+        _objectSpawner = GetComponent<ObjectSpawner>();
         _dashComponent = GetComponent<Dashable>();
         _playerSkills.Player = this;
         _meleeCombat = GetComponent<MeleeCombat>();

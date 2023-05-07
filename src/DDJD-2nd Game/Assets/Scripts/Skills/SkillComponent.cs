@@ -35,6 +35,8 @@ public abstract class SkillComponent : MonoBehaviour
         _caster = caster;
     }
 
+    private Dictionary<GameObject, float> _collidedObjects = new Dictionary<GameObject, float>();
+
     public virtual void SetSkill(Skill skill)
     {
         _skillStats = skill.SkillStats;
@@ -62,7 +64,7 @@ public abstract class SkillComponent : MonoBehaviour
         {
             return;
         }
-        damageable.TakeDamage(damage, hitPoint, direction);
+        damageable.TakeDamage(damage, _skillStats.ForceWithDamage(), hitPoint, direction);
     }
 
     public virtual void Shoot(Vector3 direction)
@@ -82,6 +84,11 @@ public abstract class SkillComponent : MonoBehaviour
             return;
         }
         Collide(other);
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        OnImpact(collision.collider);
     }
 
     public virtual void OnTriggerStay(Collider other)
@@ -121,14 +128,12 @@ public abstract class SkillComponent : MonoBehaviour
             }
             else
             {
-                // Register first impact with object
                 _collidedObjects.Add(otherObject, _elapsedTime);
                 OnImpact(other, 1f);
             }
         }
         else if (!_collidedObjects.ContainsKey(otherObject))
         {
-            // Register first impact with object
             _collidedObjects.Add(otherObject, _elapsedTime);
             OnImpact(other, 1f);
         }
@@ -147,10 +152,13 @@ public abstract class SkillComponent : MonoBehaviour
         return true;
     }
 
-    private Dictionary<GameObject, float> _collidedObjects = new Dictionary<GameObject, float>();
-
     public virtual void DestroySpell()
     {
         Destroy(gameObject);
+    }
+
+    public virtual bool CanShoot(Vector3 direction)
+    {
+        return true;
     }
 }

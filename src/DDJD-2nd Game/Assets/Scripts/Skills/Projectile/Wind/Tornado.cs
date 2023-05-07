@@ -156,6 +156,7 @@ public class Tornado : GroundProjectileComponent, NonCollidable
         {
             damageable.TakeDamage(
                 (int)(_stats.Damage * multiplier),
+                _tornadoStrength,
                 other.ClosestPoint(transform.position),
                 transform.forward
             );
