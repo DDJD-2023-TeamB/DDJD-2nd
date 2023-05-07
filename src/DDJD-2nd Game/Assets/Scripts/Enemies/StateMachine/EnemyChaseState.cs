@@ -1,22 +1,18 @@
 using UnityEngine;
 
-public class EnemyChaseState : GenericState
+public class EnemyChaseState : EnemyMovingState
 {
-    protected BasicEnemy _context;
-
     public EnemyChaseState(BasicEnemy enemy)
-        : base(enemy)
-    {
-        _context = enemy;
-    }
+        : base(enemy) { }
 
     public override void Enter()
     {
-        _context.NavMeshAgent.enabled = true;
+        base.Enter();
     }
 
     public override void StateUpdate()
     {
+        base.StateUpdate();
         if (IsInAttackRange())
         {
             _context.ChangeState(_context.States.AttackState);
@@ -28,18 +24,12 @@ public class EnemyChaseState : GenericState
             _context.ChangeState(new EnemyIdleState(_context));
             return;
         }
-
-        _context.Animator.SetFloat(
-            _context.ForwardSpeedHash,
-            _context.NavMeshAgent.velocity.magnitude
-        );
         Move();
     }
 
     public override void Exit()
     {
         base.Exit();
-        _context.Animator.SetFloat(_context.ForwardSpeedHash, 0.0f);
     }
 
     protected virtual void Move() { }

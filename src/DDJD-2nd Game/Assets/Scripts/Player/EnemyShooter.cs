@@ -100,8 +100,11 @@ public class EnemyShooter : Shooter
     {
         //GameObject spell = isLeft ? _enemy.Shooter.LeftSpell : _enemy.Shooter.RightSpell;
         yield return new WaitForSeconds(aimedSkill.SkillStats.MaxChargeTime + 0.5f);
-        Vector3 direction = GetShotDirection(spell.transform.position);
-        base.Shoot(spell, direction, true);
+        if (spell != null)
+        {
+            Vector3 direction = GetShotDirection(spell.transform.position);
+            base.Shoot(spell, direction, true);
+        }
     }
 
     private Vector3 GetShotDirection(Vector3 spellOrigin)

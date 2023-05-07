@@ -41,6 +41,7 @@ public class RangedAttackState : EnemyAttackState
     public override void StateUpdate()
     {
         base.StateUpdate();
+        FacePlayer();
         if (_substate != null)
         {
             _substate.StateUpdate();
@@ -73,5 +74,12 @@ public class RangedAttackState : EnemyAttackState
         {
             ChangeSubState(new RangedRepositionState(_context));
         }
+    }
+
+    private void FacePlayer()
+    {
+        Vector3 playerPosition = _context.Player.transform.position;
+        playerPosition.y = _context.transform.position.y;
+        _context.transform.LookAt(playerPosition);
     }
 }

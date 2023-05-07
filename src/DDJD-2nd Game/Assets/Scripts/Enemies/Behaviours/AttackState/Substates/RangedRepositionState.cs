@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class RangedRepositionState : GenericState
+public class RangedRepositionState : EnemyMovingState
 {
-    protected RangedEnemy _context;
+    protected new RangedEnemy _context;
 
     private int _tries = 0;
     private int _maxTries = 5;
@@ -17,16 +17,17 @@ public class RangedRepositionState : GenericState
 
     public override void Enter()
     {
-        _context.Rigidbody.isKinematic = true;
-        _context.NavMeshAgent.enabled = true;
+        base.Enter();
         StartReposition();
+        _context.Animator.SetBool("IsAiming", false);
+        _context.AimComponent.StopAim();
     }
 
     public override void Exit()
     {
-        _context.Rigidbody.isKinematic = false;
-        _context.NavMeshAgent.ResetPath();
-        _context.NavMeshAgent.enabled = false;
+        base.Exit();
+        _context.Animator.SetBool("IsAiming", true);
+        _context.AimComponent.StartAim();
     }
 
     private void StartReposition()
@@ -38,6 +39,7 @@ public class RangedRepositionState : GenericState
 
     public override void StateUpdate()
     {
+        base.StateUpdate();
         if (_context.NavMeshAgent.remainingDistance < 0.5f)
         {
             if (_context.AimComponent.CanSeePlayer())
@@ -70,9 +72,13 @@ public class RangedRepositionState : GenericState
 
         Vector3 direction = playerPosition - enemyPosition;
 
-        // Chose a random point on the circle
-        float angle = Random.Range(0, 2 * Mathf.PI);
+        // Chose a random point on the circle of the enemy side
+        //Get angle from enemy to player
+        float angleToPlayer = Mathf.Atan2(direction.z, direction.x);
+
+        float angle = Random.Range(angleToPlayer - 45, angleToPlayer + 45);
         float range = Random.Range(_context.AttackRange * 0.2f, _context.AttackRange * 0.9f);
+
         Vector3 newPositionOffset = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * range;
 
         // Add the offset to the player position
