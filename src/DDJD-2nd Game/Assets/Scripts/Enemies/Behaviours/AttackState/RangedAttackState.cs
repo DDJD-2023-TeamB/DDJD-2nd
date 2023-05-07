@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class RangedAttackState : EnemyAttackState
 {
@@ -33,6 +34,8 @@ public class RangedAttackState : EnemyAttackState
         {
             _context.StopCoroutine(_attackCoroutine);
         }
+
+        _context.Shooter.CancelShots();
     }
 
     private IEnumerator AttackCoroutine()
@@ -40,23 +43,23 @@ public class RangedAttackState : EnemyAttackState
         while (true)
         {
             yield return new WaitForSeconds(_context.AttackSpeed);
-            AimedSkill aimedSkill = _context.EnemySkills.LeftSkill;
-            Shoot(aimedSkill, _context.LeftSpellOrigin);
+            Shoot();
         }
     }
 
-    private void Shoot(AimedSkill aimedSkill, GameObject origin)
+    private void Shoot()
     {
-        GameObject spell = _context.Shooter.CreateLeftSpell(aimedSkill, origin.transform);
-        Vector3 shotDirection = GetShotDirection(origin.transform.position);
-        _context.Shooter.Shoot(spell, shotDirection, true);
-    }
-
-    private Vector3 GetShotDirection(Vector3 spellOrigin)
-    {
-        Vector3 playerPosition = _context.Player.transform.position;
-        playerPosition.y += 0.8f;
-        Vector3 direction = playerPosition - spellOrigin;
-        return direction;
+        AimedSkill aimedSkill;
+        Transform origin;
+        bool isLeft;
+        bool canAttack = _context.Shooter.ChooseSpellToUse(out aimedSkill, out origin, out isLeft);
+        if (canAttack)
+        {
+            _context.Shooter.Shoot(aimedSkill, origin, isLeft);
+        }
+        else
+        {
+            Debug.Log("Can't attack");
+        }
     }
 }

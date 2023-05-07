@@ -11,14 +11,14 @@ public class RangedEnemy : BasicEnemy
     [SerializeField]
     private GameObject _rightSpellOrigin;
 
-    private Shooter _shooter;
+    private EnemyShooter _shooter;
 
     private EnemyAimComponent _aimComponent;
 
     public override void Awake()
     {
         base.Awake();
-        _shooter = GetComponent<Shooter>();
+        _shooter = GetComponent<EnemyShooter>();
         _aimComponent = GetComponent<EnemyAimComponent>();
         _states = new EnemyStates(
             chaseState: new EnemySimpleMovementState(this),
@@ -27,7 +27,7 @@ public class RangedEnemy : BasicEnemy
         );
     }
 
-    public Shooter Shooter
+    public EnemyShooter Shooter
     {
         get { return _shooter; }
     }

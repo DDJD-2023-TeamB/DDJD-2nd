@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
-    private AimComponent _aimComponent;
+    protected AimComponent _aimComponent;
+    protected GameObject _leftSpell;
+    protected GameObject _rightSpell;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _aimComponent = GetComponent<AimComponent>();
     }
-
-    private GameObject _leftSpell;
-    private GameObject _rightSpell;
 
     public GameObject LeftSpell
     {
@@ -83,7 +82,7 @@ public class Shooter : MonoBehaviour
         CancelRightShoot();
     }
 
-    public bool Shoot(GameObject spell, Vector3 direction, bool leaveCaster)
+    public virtual bool Shoot(GameObject spell, Vector3 direction, bool leaveCaster)
     {
         SkillComponent skillComponent = spell.GetComponent<SkillComponent>();
         if (!skillComponent.CanShoot(direction))
