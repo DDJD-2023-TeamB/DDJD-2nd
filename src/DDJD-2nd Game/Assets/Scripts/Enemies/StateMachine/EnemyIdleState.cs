@@ -16,6 +16,7 @@ public class EnemyIdleState : GenericState
     public override void Enter()
     {
         _loopRoutine = _context.StartCoroutine(DetectPlayerLoop());
+        _context.NoiseListener.OnNoiseHeard += OnNoiseHeard;
     }
 
     private IEnumerator DetectPlayerLoop()
@@ -25,7 +26,7 @@ public class EnemyIdleState : GenericState
             yield return new WaitForSeconds(0.5f);
             if (IsInAggroRange())
             {
-                if (_context.LineOfSight.CanSeePlayer())
+                if (_context.LineOfSight.CanSeePlayer() || _context.NoiseListener.CanHearPlayer())
                 {
                     _context.ChangeState(_context.States.ChaseState);
                 }
@@ -39,6 +40,14 @@ public class EnemyIdleState : GenericState
     {
         base.Exit();
         _context.StopCoroutine(_loopRoutine);
+        _context.NoiseListener.OnNoiseHeard -= OnNoiseHeard;
+    }
+
+    private void OnNoiseHeard(Vector3 position)
+    {
+        Vector3 direction = position - _context.transform.position;
+        direction.y = 0;
+        ChangeSubState(new EnemyLookAtState(_context, direction));
     }
 
     public override bool CanChangeState(GenericState state)

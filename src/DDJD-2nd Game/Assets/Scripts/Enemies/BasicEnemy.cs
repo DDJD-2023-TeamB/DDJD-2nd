@@ -6,6 +6,7 @@ public class BasicEnemy : HumanoidEnemy
 {
     private Player _player;
     private NavMeshAgent _navMeshAgent;
+    private NoiseListener _noiseListener;
 
     [Header("Ranges")]
     [SerializeField]
@@ -32,6 +33,7 @@ public class BasicEnemy : HumanoidEnemy
     {
         base.Awake();
         _lineOfSight = GetComponent<EnemyLineOfSight>();
+        _noiseListener = GetComponent<NoiseListener>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _states = new EnemyStates(
             chaseState: new EnemyChaseState(this),
@@ -56,7 +58,7 @@ public class BasicEnemy : HumanoidEnemy
     public override void Update()
     {
         base.Update();
-        _state.StateUpdate();
+        _state.Update();
     }
 
     public override void TakeDamage(int damage, float force, Vector3 hitPoint, Vector3 hitDirection)
@@ -111,5 +113,10 @@ public class BasicEnemy : HumanoidEnemy
     public EnemyLineOfSight LineOfSight
     {
         get { return _lineOfSight; }
+    }
+
+    public NoiseListener NoiseListener
+    {
+        get { return _noiseListener; }
     }
 }

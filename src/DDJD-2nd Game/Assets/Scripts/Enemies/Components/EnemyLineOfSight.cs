@@ -17,6 +17,7 @@ public class EnemyLineOfSight : MonoBehaviour
     public bool CanSeePlayer()
     {
         Vector3 direction = _enemy.Player.transform.position - transform.position;
+        direction.y = 0;
         float angle = Vector3.Angle(direction, transform.forward);
         float halfAngle = _angle * 0.5f;
         if (angle < halfAngle && angle > -halfAngle)

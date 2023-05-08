@@ -6,6 +6,8 @@ public class RangedAttackState : EnemyAttackState
 {
     private Coroutine _attackCoroutine;
     private new RangedEnemy _context;
+    private int _attackTries = 0;
+    private int _maxAttackTries = 3;
 
     public RangedAttackState(RangedEnemy enemy)
         : base(enemy)
@@ -23,6 +25,7 @@ public class RangedAttackState : EnemyAttackState
         _context.Animator.SetBool("IsAiming", true);
         _context.AimComponent.StartAim();
         _attackCoroutine = _context.StartCoroutine(AttackCoroutine());
+        _attackTries = 0;
     }
 
     public override void Exit()
@@ -42,17 +45,13 @@ public class RangedAttackState : EnemyAttackState
     {
         base.StateUpdate();
         FacePlayer();
-        if (_substate != null)
-        {
-            _substate.StateUpdate();
-        }
     }
 
     private IEnumerator AttackCoroutine()
     {
         while (true)
         {
-            yield return new WaitForSeconds(_context.AttackSpeed);
+            yield return new WaitForSeconds(_context.EnemySkills.AttackSpeed);
             if (!(_substate is RangedRepositionState))
             {
                 Shoot();
@@ -69,10 +68,15 @@ public class RangedAttackState : EnemyAttackState
         if (canAttack)
         {
             _context.Shooter.Shoot(aimedSkill, origin, isLeft);
+            _attackTries = 0;
         }
         else
         {
-            ChangeSubState(new RangedRepositionState(_context));
+            _attackTries++;
+            if (_attackTries >= _maxAttackTries)
+            {
+                ChangeSubState(new RangedRepositionState(_context));
+            }
         }
     }
 

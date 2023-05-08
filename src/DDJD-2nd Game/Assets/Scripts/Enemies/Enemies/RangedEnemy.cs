@@ -3,8 +3,6 @@ using UnityEngine;
 public class RangedEnemy : BasicEnemy
 {
     [Header("Ranged Enemy Settings")]
-    private float _attackSpeed = 1.0f;
-
     [SerializeField]
     private GameObject _leftSpellOrigin;
 
@@ -30,11 +28,6 @@ public class RangedEnemy : BasicEnemy
     public EnemyShooter Shooter
     {
         get { return _shooter; }
-    }
-
-    public float AttackSpeed
-    {
-        get { return _attackSpeed; }
     }
 
     public GameObject LeftSpellOrigin

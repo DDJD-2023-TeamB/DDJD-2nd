@@ -111,6 +111,11 @@ public class EnemyShooter : Shooter
     {
         Vector3 playerPosition = _enemy.Player.transform.position;
         playerPosition.y += 0.8f;
+        // add noise to player position
+        playerPosition.x += Random.Range(-0.5f, 0.5f);
+        playerPosition.y += Random.Range(-0.5f, 0.5f);
+        playerPosition.z += Random.Range(-0.5f, 0.5f);
+
         Vector3 direction = playerPosition - spellOrigin;
         return direction;
     }

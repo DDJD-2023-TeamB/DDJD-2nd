@@ -9,10 +9,12 @@ public abstract class SkillComponent : MonoBehaviour
 
     protected bool _isChargeAttack = false;
     protected ChargeComponent _chargeComponent;
+    protected NoiseSource _noiseComponent;
 
     virtual protected void Awake()
     {
         _chargeComponent = GetComponent<ChargeComponent>();
+        _noiseComponent = GetComponent<NoiseSource>();
     }
 
     public GameObject Caster
@@ -83,12 +85,16 @@ public abstract class SkillComponent : MonoBehaviour
         {
             return;
         }
-        Collide(other);
+        if (Collide(other))
+        {
+            _noiseComponent?.MakeNoise(GetNoiseLevel());
+        }
     }
 
     public void OnCollisionEnter(Collision collision)
     {
         OnImpact(collision.collider);
+        _noiseComponent?.MakeNoise(GetNoiseLevel());
     }
 
     public virtual void OnTriggerStay(Collider other)
@@ -105,11 +111,11 @@ public abstract class SkillComponent : MonoBehaviour
         // Override this method to add functionality
     }
 
-    private void Collide(Collider other)
+    private bool Collide(Collider other)
     {
         if (!CanCollide(other))
         {
-            return;
+            return false;
         }
         GameObject otherObject = other.gameObject;
         if (_skillStats.IsContinuous)
@@ -137,6 +143,7 @@ public abstract class SkillComponent : MonoBehaviour
             _collidedObjects.Add(otherObject, _elapsedTime);
             OnImpact(other, 1f);
         }
+        return true;
     }
 
     private bool CanCollide(Collider other)
@@ -165,5 +172,10 @@ public abstract class SkillComponent : MonoBehaviour
     public virtual bool CanShoot(Vector3 direction)
     {
         return true;
+    }
+
+    public virtual float GetNoiseLevel()
+    {
+        return _skillStats.NoiseLevel;
     }
 }
