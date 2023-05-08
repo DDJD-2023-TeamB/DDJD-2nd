@@ -42,7 +42,7 @@ public class RangedRepositionState : EnemyMovingState
         base.StateUpdate();
         if (_context.NavMeshAgent.remainingDistance < 0.5f)
         {
-            if (_context.AimComponent.CanSeePlayer())
+            if (_context.AimComponent.CanHitPlayer())
             {
                 Debug.Log(_superstate.ChangeSubState(null));
             }

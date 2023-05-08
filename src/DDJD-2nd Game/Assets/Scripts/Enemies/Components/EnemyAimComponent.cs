@@ -53,7 +53,7 @@ public class EnemyAimComponent : MonoBehaviour, AimComponent
         return _aimDirection;
     }
 
-    public bool CanSeePlayer()
+    public bool CanHitPlayer()
     {
         Vector3 position = transform.position + Vector3.up * 0.8f;
         Vector3 direction = GetAimDirection(position);

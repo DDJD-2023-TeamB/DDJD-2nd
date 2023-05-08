@@ -149,6 +149,11 @@ public abstract class SkillComponent : MonoBehaviour
         {
             return false;
         }
+        SkillComponent skillComponent = other.GetComponent<SkillComponent>();
+        if (skillComponent != null && skillComponent.Caster.layer == _caster.layer)
+        {
+            return false;
+        }
         return true;
     }
 

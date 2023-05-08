@@ -26,9 +26,12 @@ public class BasicEnemy : HumanoidEnemy
     [Tooltip("The amount of force applied to the enemy required to knock it down")]
     private float _forceResistance = 20f;
 
+    private EnemyLineOfSight _lineOfSight;
+
     public override void Awake()
     {
         base.Awake();
+        _lineOfSight = GetComponent<EnemyLineOfSight>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _states = new EnemyStates(
             chaseState: new EnemyChaseState(this),
@@ -41,7 +44,7 @@ public class BasicEnemy : HumanoidEnemy
     {
         base.Start();
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        _state = new EnemyIdleState(this);
+        ChangeState(_states.IdleState);
     }
 
     public override void Die(int force, Vector3 hitPoint, Vector3 hitDirection)
@@ -103,5 +106,10 @@ public class BasicEnemy : HumanoidEnemy
     public EnemySkills EnemySkills
     {
         get { return _enemySkills; }
+    }
+
+    public EnemyLineOfSight LineOfSight
+    {
+        get { return _lineOfSight; }
     }
 }

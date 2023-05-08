@@ -7,8 +7,9 @@ public class FireDashComponent : DashComponent
     [SerializeField]
     private float _explosionRadius = 5.0f;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         transform.position -= new Vector3(0f, 0.75f, 0f);
     }
 
