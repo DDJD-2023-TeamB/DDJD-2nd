@@ -39,7 +39,6 @@ public class StoneThrowComponent : ProjectileComponent
     {
         transform.parent = null; // Detach from caster
         transform.localRotation = Quaternion.LookRotation(direction);
-        _vfx.SetFloat("SpawnTime", _skillStats.CastTime);
         StartCoroutine(ShootDelay(_skillStats.CastTime + 0.2f, direction));
     }
 

@@ -3,7 +3,6 @@ using UnityEngine;
 public class EnemyAimComponent : MonoBehaviour, AimComponent
 {
     private RangedEnemy _enemy;
-    private Transform _enemyTransform;
     private Vector3 _aimDirection;
 
     private GameObject _leftRune;
@@ -12,7 +11,6 @@ public class EnemyAimComponent : MonoBehaviour, AimComponent
     private void Start()
     {
         _enemy = GetComponent<RangedEnemy>();
-        _enemyTransform = _enemy.transform;
     }
 
     public void StartAim()
@@ -43,7 +41,7 @@ public class EnemyAimComponent : MonoBehaviour, AimComponent
 
     public Quaternion GetAimRotation()
     {
-        _aimDirection = _enemy.Player.transform.position - _enemyTransform.position;
+        _aimDirection = _enemy.Player.transform.position - transform.position;
         _aimDirection.y = 0;
         return Quaternion.LookRotation(_aimDirection);
     }
@@ -53,5 +51,33 @@ public class EnemyAimComponent : MonoBehaviour, AimComponent
         _aimDirection = _enemy.Player.transform.position - origin;
 
         return _aimDirection;
+    }
+
+    public bool CanHitPlayer()
+    {
+        Vector3 position = transform.position + Vector3.up * 0.8f;
+        Vector3 direction = GetAimDirection(position);
+        return CanHitPlayer(position, direction);
+    }
+
+    public bool CanHitPlayer(Vector3 origin, Vector3 direction)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(origin, direction, out hit, _enemy.AttackRange))
+        {
+            Debug.DrawRay(origin, direction * hit.distance, Color.yellow, 5f);
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                return true;
+            }
+
+            //If collider is farther than player, can probably hit player
+            if (hit.distance > Vector3.Distance(origin, _enemy.Player.transform.position))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

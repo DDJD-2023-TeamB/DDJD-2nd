@@ -1,10 +1,13 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class RangedAttackState : EnemyAttackState
 {
     private Coroutine _attackCoroutine;
     private new RangedEnemy _context;
+    private int _attackTries = 0;
+    private int _maxAttackTries = 3;
 
     public RangedAttackState(RangedEnemy enemy)
         : base(enemy)
@@ -22,6 +25,7 @@ public class RangedAttackState : EnemyAttackState
         _context.Animator.SetBool("IsAiming", true);
         _context.AimComponent.StartAim();
         _attackCoroutine = _context.StartCoroutine(AttackCoroutine());
+        _attackTries = 0;
     }
 
     public override void Exit()
@@ -33,30 +37,53 @@ public class RangedAttackState : EnemyAttackState
         {
             _context.StopCoroutine(_attackCoroutine);
         }
+
+        _context.Shooter.CancelShots();
+    }
+
+    public override void StateUpdate()
+    {
+        base.StateUpdate();
+        FacePlayer();
     }
 
     private IEnumerator AttackCoroutine()
     {
         while (true)
         {
-            yield return new WaitForSeconds(_context.AttackSpeed);
-            AimedSkill aimedSkill = _context.EnemySkills.LeftSkill;
-            Shoot(aimedSkill, _context.LeftSpellOrigin);
+            yield return new WaitForSeconds(_context.EnemySkills.AttackSpeed);
+            if (!(_substate is RangedRepositionState))
+            {
+                Shoot();
+            }
         }
     }
 
-    private void Shoot(AimedSkill aimedSkill, GameObject origin)
+    private void Shoot()
     {
-        GameObject spell = _context.Shooter.CreateLeftSpell(aimedSkill, origin.transform);
-        Vector3 shotDirection = GetShotDirection(origin.transform.position);
-        _context.Shooter.Shoot(spell, shotDirection, true);
+        AimedSkill aimedSkill;
+        Transform origin;
+        bool isLeft;
+        bool canAttack = _context.Shooter.ChooseSpellToUse(out aimedSkill, out origin, out isLeft);
+        if (canAttack)
+        {
+            _context.Shooter.Shoot(aimedSkill, origin, isLeft);
+            _attackTries = 0;
+        }
+        else
+        {
+            _attackTries++;
+            if (_attackTries >= _maxAttackTries)
+            {
+                ChangeSubState(new RangedRepositionState(_context));
+            }
+        }
     }
 
-    private Vector3 GetShotDirection(Vector3 spellOrigin)
+    private void FacePlayer()
     {
         Vector3 playerPosition = _context.Player.transform.position;
-        playerPosition.y += 0.8f;
-        Vector3 direction = playerPosition - spellOrigin;
-        return direction;
+        playerPosition.y = _context.transform.position.y;
+        _context.transform.LookAt(playerPosition);
     }
 }

@@ -1,8 +1,11 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemyIdleState : GenericState
 {
     protected BasicEnemy _context;
+
+    private Coroutine _loopRoutine;
 
     public EnemyIdleState(BasicEnemy enemy)
         : base(enemy)
@@ -10,19 +13,41 @@ public class EnemyIdleState : GenericState
         _context = enemy;
     }
 
-    public override void Enter() { }
-
-    public override void StateUpdate()
+    public override void Enter()
     {
-        if (IsInAggroRange())
+        _loopRoutine = _context.StartCoroutine(DetectPlayerLoop());
+        _context.NoiseListener.OnNoiseHeard += OnNoiseHeard;
+    }
+
+    private IEnumerator DetectPlayerLoop()
+    {
+        while (true)
         {
-            _context.ChangeState(_context.States.ChaseState);
+            yield return new WaitForSeconds(0.5f);
+            if (IsInAggroRange())
+            {
+                if (_context.LineOfSight.CanSeePlayer() || _context.NoiseListener.CanHearPlayer())
+                {
+                    _context.ChangeState(_context.States.ChaseState);
+                }
+            }
         }
     }
+
+    public override void StateUpdate() { }
 
     public override void Exit()
     {
         base.Exit();
+        _context.StopCoroutine(_loopRoutine);
+        _context.NoiseListener.OnNoiseHeard -= OnNoiseHeard;
+    }
+
+    private void OnNoiseHeard(Vector3 position)
+    {
+        Vector3 direction = position - _context.transform.position;
+        direction.y = 0;
+        ChangeSubState(new EnemyLookAtState(_context, direction));
     }
 
     public override bool CanChangeState(GenericState state)

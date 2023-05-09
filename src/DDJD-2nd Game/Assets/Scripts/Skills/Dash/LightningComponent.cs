@@ -10,8 +10,9 @@ public class LightningComponent : DashComponent
     private string[] _layersToDashThrough;
     private int[] _layersToIgnore;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         _casterLayer = _caster.layer;
         _layersToIgnore = new int[_layersToDashThrough.Length];
         for (int i = 0; i < _layersToDashThrough.Length; i++)

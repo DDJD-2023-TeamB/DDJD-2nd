@@ -9,6 +9,7 @@ public abstract class GenericState
     public GenericState Superstate
     {
         get { return _superstate; }
+        set { _superstate = value; }
     }
     public GenericState Substate
     {
@@ -70,6 +71,7 @@ public abstract class GenericState
         _substate = state;
         if (state != null)
         {
+            state.Superstate = this;
             _substate.Enter();
         }
 

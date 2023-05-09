@@ -16,6 +16,16 @@ public class EnemySkills : ScriptableObject
     private AimedSkill _rightSkill;
 
     [SerializeField]
+    private float _attackSpeed;
+
+    [SerializeField]
+    private bool _usesDash;
+    public bool UsesDash
+    {
+        get => _usesDash;
+    }
+
+    [SerializeField]
     private Element _currentElement;
     public Element CurrentElement
     {
@@ -40,5 +50,10 @@ public class EnemySkills : ScriptableObject
     {
         get => _dashStats;
         set => _dashStats = value;
+    }
+
+    public float AttackSpeed
+    {
+        get => _attackSpeed;
     }
 }
