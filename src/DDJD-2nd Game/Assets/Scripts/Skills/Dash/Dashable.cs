@@ -3,56 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class Dashable : MonoBehaviour
+public abstract class Dashable : MonoBehaviour
 {
-    private Rigidbody _rigidbody;
-    private PlayerInputReceiver _inputReceiver;
-    private Animator _animator;
-
-    [SerializeField]
-    private Transform _playerCamTransform;
-    private FovController _fovController;
+    protected Rigidbody _rigidbody;
+    protected Animator _animator;
 
     [SerializeField]
     // This cooldown is used to prevent the character from dashing too often, even if the skill was used or its cooldown is over
-    private float _minCooldown = 1f;
-    private float _timeSinceLastDash = 0f;
+    protected float _minCooldown = 1f;
+    protected float _timeSinceLastDash = 0f;
 
     [SerializeField]
-    private bool allowAllDirections = true;
+    protected bool allowAllDirections = true;
 
     [SerializeField]
-    private bool disableGravity = false;
+    protected bool disableGravity = false;
 
     [SerializeField]
-    private bool resetVelocity = true;
+    protected bool resetVelocity = true;
 
     [SerializeField]
-    private float _maxRegularSpeed = 5f;
+    protected float _maxRegularSpeed = 5f;
 
     [SerializeField]
-    private float _speedChangeFactor = 50f;
+    protected float _speedChangeFactor = 50f;
 
-    private float _maxSpeed;
-    private bool _isDashing = false;
+    protected float _maxSpeed;
+    protected bool _isDashing = false;
     public bool IsDashing
     {
         get => _isDashing;
     }
-    private DashStats _currentDashStats;
-    private float _defaultFov;
+    protected DashStats _currentDashStats;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _inputReceiver = GetComponent<PlayerInputReceiver>();
         _animator = GetComponent<Animator>();
         _maxSpeed = _maxRegularSpeed;
-        _fovController = _playerCamTransform.GetComponent<FovController>();
-        _defaultFov = _fovController.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView;
     }
 
-    private void Update()
+    protected void Update()
     {
         Vector3 flatVel = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
         if (flatVel.magnitude > _maxSpeed)
@@ -63,7 +54,7 @@ public class Dashable : MonoBehaviour
         _timeSinceLastDash += Time.deltaTime;
     }
 
-    public void DashWithSkill(DashSkill dashSkill)
+    public virtual void DashWithSkill(DashSkill dashSkill)
     {
         if (!Dash(dashSkill.DashStats))
             return;
@@ -85,7 +76,7 @@ public class Dashable : MonoBehaviour
     /**
     * Returns true if the dash was successful, false otherwise
     */
-    public bool Dash(DashStats stats)
+    public virtual bool Dash(DashStats stats)
     {
         if (_timeSinceLastDash < _minCooldown)
             return false;
@@ -101,7 +92,6 @@ public class Dashable : MonoBehaviour
 
         _rigidbody.AddForce(force, ForceMode.Impulse);
         SetDashAnimation();
-        _fovController.ChangeFov(stats.CameraFov, stats.EnterFovTime);
 
         _maxSpeed = stats.MaxSpeed;
 
@@ -111,12 +101,11 @@ public class Dashable : MonoBehaviour
         return true;
     }
 
-    private void ResetDash()
+    protected virtual void ResetDash()
     {
         if (disableGravity)
             _rigidbody.useGravity = true;
         _isDashing = false;
-        _fovController.ChangeFov(_defaultFov, _currentDashStats.ExitFovTime);
         _currentDashStats = null;
 
         _animator.SetBool("IsDashing", false);
@@ -125,7 +114,7 @@ public class Dashable : MonoBehaviour
         StartCoroutine(SmoothlyChangeMaxSpeed(_maxRegularSpeed));
     }
 
-    private IEnumerator SmoothlyChangeMaxSpeed(float targetSpeed)
+    protected IEnumerator SmoothlyChangeMaxSpeed(float targetSpeed)
     {
         float time = 0;
         float diff = Mathf.Abs(_maxSpeed - targetSpeed);
@@ -141,46 +130,9 @@ public class Dashable : MonoBehaviour
         _maxSpeed = targetSpeed;
     }
 
-    private Vector3 GetDashDirection()
-    {
-        Transform forwardTransform;
-        if (allowAllDirections)
-            forwardTransform = _playerCamTransform;
-        else
-            forwardTransform = transform;
+    protected abstract Vector3 GetDashDirection();
 
-        Vector2 moveInput = _inputReceiver.MoveInput;
-        Vector3 direction = Vector3.zero;
-        if (allowAllDirections && moveInput != Vector2.zero)
-        {
-            direction = transform.forward * moveInput.y + transform.right * moveInput.x;
-        }
-        else
-        {
-            direction = forwardTransform.forward;
-        }
-        Vector3 axis =
-            -forwardTransform.forward * moveInput.x + forwardTransform.right * moveInput.y;
-        float angle = _currentDashStats.Angle;
-        direction = Quaternion.AngleAxis(-angle, axis) * direction;
-        return direction.normalized;
-    }
-
-    private void SetDashAnimation()
-    {
-        Vector2 moveInput = _inputReceiver.MoveInput;
-        float dashX = 0;
-        float dashY = 0;
-
-        if (moveInput.x != 0)
-            dashX = moveInput.x > 0 ? 1 : -1;
-        if (moveInput.y != 0)
-            dashY = moveInput.y > 0 ? 1 : -1;
-
-        _animator.SetBool("IsDashing", true);
-        _animator.SetFloat("DashX", dashX);
-        _animator.SetFloat("DashY", dashY);
-    }
+    protected abstract void SetDashAnimation();
 
     public bool IsDashOnCooldown()
     {
