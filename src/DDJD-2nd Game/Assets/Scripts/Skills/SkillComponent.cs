@@ -87,14 +87,14 @@ public abstract class SkillComponent : MonoBehaviour
         }
         if (Collide(other))
         {
-            _noiseComponent?.MakeNoise(GetNoiseLevel());
+            _noiseComponent?.MakeNoise(GetNoiseRadius());
         }
     }
 
     public void OnCollisionEnter(Collision collision)
     {
         OnImpact(collision.collider);
-        _noiseComponent?.MakeNoise(GetNoiseLevel());
+        _noiseComponent?.MakeNoise(GetNoiseRadius());
     }
 
     public virtual void OnTriggerStay(Collider other)
@@ -174,8 +174,8 @@ public abstract class SkillComponent : MonoBehaviour
         return true;
     }
 
-    public virtual float GetNoiseLevel()
+    public virtual float GetNoiseRadius()
     {
-        return _skillStats.NoiseLevel;
+        return _skillStats.NoiseRadius;
     }
 }

@@ -19,11 +19,11 @@ public abstract class SkillStats
     protected float _castTime;
 
     [SerializeField]
-    protected float _noiseLevel = 1.0f;
-    public float NoiseLevel
+    protected float _noiseRadius = 1.0f;
+    public float NoiseRadius
     {
-        get => _noiseLevel;
-        set => _noiseLevel = value;
+        get => _noiseRadius;
+        set => _noiseRadius = value;
     }
     public float CastTime
     {
