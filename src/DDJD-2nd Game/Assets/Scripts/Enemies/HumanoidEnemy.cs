@@ -39,6 +39,11 @@ public class HumanoidEnemy : Enemy
         _animator.SetTrigger("Hit");
     }
 
+    public override bool IsTriggerDamage()
+    {
+        return _ragdollController.IsRagdollActive;
+    }
+
     public override void Die(int force, Vector3 hitPoint, Vector3 hitDirection)
     {
         _ragdollController.ActivateRagdoll();

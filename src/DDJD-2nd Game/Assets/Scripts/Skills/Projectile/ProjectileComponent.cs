@@ -91,7 +91,9 @@ public abstract class ProjectileComponent : SkillComponent
     protected override void OnImpact(Collider other, float multiplier = 1)
     {
         base.OnImpact(other, multiplier);
-        if (_destroyOnImpact)
+        Damageable damageable = other.GetComponent<Damageable>();
+        bool isTriggerDamage = damageable != null && damageable.IsTriggerDamage();
+        if (!isTriggerDamage && _destroyOnImpact)
         {
             DestroySpell();
             SpawnHitVFX();

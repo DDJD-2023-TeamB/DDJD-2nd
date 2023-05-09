@@ -39,6 +39,7 @@ public class BasicStoneThrowComponent : ProjectileComponent
         Damage(
             other.gameObject,
             (int)(_skillStats.Damage * multiplier),
+            (int)_skillStats.ForceWithDamage(),
             other.ClosestPoint(_caster.transform.position),
             _caster.transform.forward
         );

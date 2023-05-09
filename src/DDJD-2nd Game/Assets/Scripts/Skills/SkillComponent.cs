@@ -55,7 +55,13 @@ public abstract class SkillComponent : MonoBehaviour
         }
     }
 
-    protected void Damage(GameObject target, int damage, Vector3 hitPoint, Vector3 direction)
+    protected void Damage(
+        GameObject target,
+        int damage,
+        int force,
+        Vector3 hitPoint,
+        Vector3 direction
+    )
     {
         Damageable damageable = target.GetComponent<Damageable>();
         if (!_damageCaster && target == _caster)

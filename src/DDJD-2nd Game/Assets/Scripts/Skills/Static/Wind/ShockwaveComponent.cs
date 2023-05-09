@@ -24,15 +24,12 @@ public class ShockwaveComponent : StaticSkillComponent, NonCollidable
             rb.AddForce(force * multiplier * direction, ForceMode.Impulse);
         }
 
-        Damageable damageable = other.GetComponent<Damageable>();
-        if (damageable != null)
-        {
-            damageable.TakeDamage(
-                (int)(_stats.Damage * multiplier),
-                force,
-                transform.position,
-                direction
-            );
-        }
+        Damage(
+            other.gameObject,
+            (int)(_stats.Damage * multiplier),
+            (int)force,
+            transform.position,
+            direction
+        );
     }
 }

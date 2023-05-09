@@ -36,13 +36,13 @@ public class FireballComponent : ProjectileComponent
             //RaycastHit.normal is set opposite to the direction of the sweep, RaycastHit.distance is set to zero, and the zero vector gets returned in RaycastHit.point
             Vector3 point = hit.distance == 0 ? hit.collider.bounds.center : hit.point;
             Vector3 direction = (point - transform.position).normalized;
-
-            Damage(hit.collider.gameObject, (int)GetDamage(), point, direction);
+            float force = GetForce();
+            Damage(hit.collider.gameObject, (int)GetDamage(), (int)force, point, direction);
             Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.AddExplosionForce(
-                    GetForce(),
+                    force,
                     transform.position,
                     _explosionRadius,
                     0.0f,
