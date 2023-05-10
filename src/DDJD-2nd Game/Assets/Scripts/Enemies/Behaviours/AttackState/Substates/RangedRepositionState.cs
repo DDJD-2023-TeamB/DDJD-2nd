@@ -55,7 +55,7 @@ public class RangedRepositionState : EnemyMovingState
         {
             if (_context.AimComponent.CanHitPlayer())
             {
-                Debug.Log(_superstate.ChangeSubState(null));
+                _superstate.ChangeSubState(null);
             }
             else
             {

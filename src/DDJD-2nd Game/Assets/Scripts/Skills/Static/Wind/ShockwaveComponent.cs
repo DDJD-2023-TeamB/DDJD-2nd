@@ -12,16 +12,25 @@ public class ShockwaveComponent : StaticSkillComponent, NonCollidable
     protected override void OnImpact(Collider other, float multiplier = 1)
     {
         // Don't collide with skills from caster
-        if (other.GetComponent<SkillComponent>()?.Caster == _caster)
+        SkillComponent otherSkill = other.GetComponent<SkillComponent>();
+        if (otherSkill?.Caster == _caster)
         {
             return;
         }
-        Vector3 direction = (other.transform.position - _caster.transform.position).normalized;
+        Debug.Log("ShockwaveComponent.OnImpact");
+        Vector3 direction = _shootDirection.normalized;
         Rigidbody rb = other.GetComponent<Rigidbody>();
         float force = _stats.ForceWithDamage() * multiplier;
+        //Redirect skill
+
+        if (otherSkill != null)
+        {
+            otherSkill.SetCaster(_caster);
+            rb.velocity = Vector3.zero;
+        }
         if (rb != null)
         {
-            rb.AddForce(force * multiplier * direction, ForceMode.Impulse);
+            rb.AddForce(force * direction, ForceMode.Impulse);
         }
 
         Damage(
@@ -31,5 +40,15 @@ public class ShockwaveComponent : StaticSkillComponent, NonCollidable
             transform.position,
             direction
         );
+
+        //Knockdown enemy
+        BasicEnemy enemy = other.GetComponent<BasicEnemy>();
+        enemy?.Knockdown(force, transform.position, direction);
+    }
+
+    public override void DestroySpell()
+    {
+        DeactivateSpell();
+        Destroy(gameObject, 2.0f);
     }
 }

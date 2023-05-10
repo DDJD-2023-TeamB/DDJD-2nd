@@ -70,8 +70,13 @@ public class BasicEnemy : HumanoidEnemy
 
         if (force >= _forceResistance)
         {
-            ChangeState(new EnemyKnockdownState(this, force, hitPoint, hitDirection));
+            Knockdown(force, hitPoint, hitDirection);
         }
+    }
+
+    public void Knockdown(float force, Vector3 hitPoint, Vector3 hitDirection)
+    {
+        ChangeState(new EnemyKnockdownState(this, force, hitPoint, hitDirection));
     }
 
     //getters and setters
