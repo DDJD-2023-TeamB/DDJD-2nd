@@ -31,6 +31,13 @@ public class LightningComponent : DashComponent
     protected override void OnImpact(Collider other, float multiplier = 1)
     {
         base.OnImpact(other, multiplier);
+        Damage(
+            other.gameObject,
+            (int)(_skillStats.Damage * multiplier),
+            (int)_skillStats.ForceWithDamage(),
+            other.ClosestPoint(_caster.transform.position),
+            _caster.transform.forward
+        );
     }
 
     private void OnDestroy()
