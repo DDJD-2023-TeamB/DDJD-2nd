@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class RangedRepositionState : EnemyMovingState
 {
@@ -8,6 +9,8 @@ public class RangedRepositionState : EnemyMovingState
     private int _maxTries = 5;
 
     private Vector3 _newPosition;
+
+    private Coroutine _dashCoroutine;
 
     public RangedRepositionState(RangedEnemy enemy)
         : base(enemy)
@@ -21,6 +24,10 @@ public class RangedRepositionState : EnemyMovingState
         StartReposition();
         _context.Animator.SetBool("IsAiming", false);
         _context.AimComponent.StopAim();
+        if (_context.EnemySkills.UsesDash)
+        {
+            _dashCoroutine = _context.StartCoroutine(DashCoroutine());
+        }
     }
 
     public override void Exit()
@@ -28,6 +35,10 @@ public class RangedRepositionState : EnemyMovingState
         base.Exit();
         _context.Animator.SetBool("IsAiming", true);
         _context.AimComponent.StartAim();
+        if (_dashCoroutine != null)
+        {
+            _context.StopCoroutine(_dashCoroutine);
+        }
     }
 
     private void StartReposition()
@@ -95,5 +106,30 @@ public class RangedRepositionState : EnemyMovingState
             // If not, try again
             return GetNewPosition();
         }
+    }
+
+    private IEnumerator DashCoroutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1.0f);
+            bool canDash =
+                _context.NavMeshAgent.remainingDistance > 10.0f
+                && _context.EnemyDashable.IsDashReady();
+            if (canDash)
+            {
+                DashToPosition(_context.NavMeshAgent.destination);
+            }
+        }
+    }
+
+    private void DashToPosition(Vector3 position)
+    {
+        Vector3 direction = (position - _context.transform.position).normalized;
+        if (direction.y < 0)
+        {
+            direction.y = 0;
+        }
+        _context.ChangeState(new EnemyDashState(_context, direction, this));
     }
 }

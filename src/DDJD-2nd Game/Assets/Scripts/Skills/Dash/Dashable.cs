@@ -90,10 +90,11 @@ public abstract class Dashable : MonoBehaviour
         if (resetVelocity)
             _rigidbody.velocity = Vector3.zero;
 
-        _rigidbody.AddForce(force, ForceMode.Impulse);
+        _rigidbody.AddForce(force * 100f, ForceMode.Acceleration);
         SetDashAnimation();
 
         _maxSpeed = stats.MaxSpeed;
+        StartCoroutine(SmoothlyChangeMaxSpeed(stats.MaxSpeed));
 
         Invoke(nameof(ResetDash), stats.Duration);
 

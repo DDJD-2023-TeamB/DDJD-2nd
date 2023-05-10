@@ -29,12 +29,15 @@ public class BasicEnemy : HumanoidEnemy
 
     private EnemyLineOfSight _lineOfSight;
 
+    private EnemyDashable _enemyDashable;
+
     public override void Awake()
     {
         base.Awake();
         _lineOfSight = GetComponent<EnemyLineOfSight>();
         _noiseListener = GetComponent<NoiseListener>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _enemyDashable = GetComponent<EnemyDashable>();
         _states = new EnemyStates(
             chaseState: new EnemyChaseState(this),
             attackState: new EnemyAttackState(this),
@@ -118,5 +121,10 @@ public class BasicEnemy : HumanoidEnemy
     public NoiseListener NoiseListener
     {
         get { return _noiseListener; }
+    }
+
+    public EnemyDashable EnemyDashable
+    {
+        get { return _enemyDashable; }
     }
 }
