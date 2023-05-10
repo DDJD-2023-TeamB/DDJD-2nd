@@ -30,7 +30,7 @@ public class EnemyRecoveringState : GenericState
     {
         if (!_context.Animator.GetCurrentAnimatorStateInfo(0).IsName(_recoveringAnimationName))
         {
-            _context.ChangeState(_context.States.IdleState);
+            _context.ChangeState(_context.PopState());
             return;
         }
     }

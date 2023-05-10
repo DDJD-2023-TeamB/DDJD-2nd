@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
+using System;
 
 public class BasicEnemy : HumanoidEnemy
 {
@@ -30,6 +31,8 @@ public class BasicEnemy : HumanoidEnemy
     private EnemyLineOfSight _lineOfSight;
 
     private EnemyDashable _enemyDashable;
+
+    public Action OnDamageTaken;
 
     public override void Awake()
     {
@@ -68,6 +71,7 @@ public class BasicEnemy : HumanoidEnemy
     {
         base.TakeDamage(damage, force, hitPoint, hitDirection);
 
+        OnDamageTaken?.Invoke();
         if (force >= _forceResistance)
         {
             Knockdown(force, hitPoint, hitDirection);
@@ -76,7 +80,7 @@ public class BasicEnemy : HumanoidEnemy
 
     public void Knockdown(float force, Vector3 hitPoint, Vector3 hitDirection)
     {
-        ChangeState(new EnemyKnockdownState(this, force, hitPoint, hitDirection));
+        ChangeState(new EnemyKnockdownState(this, force, hitPoint, hitDirection, _state));
     }
 
     //getters and setters

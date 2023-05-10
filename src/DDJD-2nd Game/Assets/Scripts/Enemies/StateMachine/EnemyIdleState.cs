@@ -17,6 +17,7 @@ public class EnemyIdleState : GenericState
     {
         _loopRoutine = _context.StartCoroutine(DetectPlayerLoop());
         _context.NoiseListener.OnNoiseHeard += OnNoiseHeard;
+        _context.OnDamageTaken += OnDamageTaken;
     }
 
     private IEnumerator DetectPlayerLoop()
@@ -41,6 +42,7 @@ public class EnemyIdleState : GenericState
         base.Exit();
         _context.StopCoroutine(_loopRoutine);
         _context.NoiseListener.OnNoiseHeard -= OnNoiseHeard;
+        _context.OnDamageTaken -= OnDamageTaken;
     }
 
     private void OnNoiseHeard(Vector3 position)
@@ -59,5 +61,10 @@ public class EnemyIdleState : GenericState
     {
         return Vector3.Distance(_context.transform.position, _context.Player.transform.position)
             <= _context.AggroRange;
+    }
+
+    private void OnDamageTaken()
+    {
+        _context.ChangeState(_context.States.ChaseState);
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class StateContext : MonoBehaviour
 {
     protected GenericState _state;
+    protected Stack<GenericState> _stateStack = new Stack<GenericState>();
 
     public void ChangeState(GenericState state)
     {
@@ -23,5 +24,15 @@ public abstract class StateContext : MonoBehaviour
     void Update()
     {
         _state.StateUpdate();
+    }
+
+    public void PushState(GenericState state)
+    {
+        _stateStack.Push(state);
+    }
+
+    public GenericState PopState()
+    {
+        return _stateStack.Pop();
     }
 }
