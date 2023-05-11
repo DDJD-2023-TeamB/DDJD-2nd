@@ -21,7 +21,7 @@ public class RangedEnemy : BasicEnemy
         _states = new EnemyStates(
             chaseState: new EnemySimpleMovementState(this),
             attackState: new RangedAttackState(this),
-            idleState: new EnemyIdleState(this)
+            idleState: new EnemyRandomPatrolState(this)
         );
     }
 

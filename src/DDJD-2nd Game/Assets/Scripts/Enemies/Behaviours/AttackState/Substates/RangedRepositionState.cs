@@ -21,6 +21,8 @@ public class RangedRepositionState : EnemyMovingState
     public override void Enter()
     {
         base.Enter();
+        _context.NavMeshAgent.enabled = true;
+        _context.Rigidbody.isKinematic = true;
         StartReposition();
         _context.Animator.SetBool("IsAiming", false);
         _context.AimComponent.StopAim();
@@ -33,6 +35,8 @@ public class RangedRepositionState : EnemyMovingState
     public override void Exit()
     {
         base.Exit();
+        _context.NavMeshAgent.enabled = false;
+        _context.Rigidbody.isKinematic = false;
         _context.Animator.SetBool("IsAiming", true);
         _context.AimComponent.StartAim();
         if (_dashCoroutine != null)
