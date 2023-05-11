@@ -20,7 +20,9 @@ public class EnemySimpleMovementState : EnemyChaseState
         _context.Rigidbody.isKinematic = true;
         if (_context.EnemySkills.UsesDash)
         {
-            _dashCoroutine = _context.StartCoroutine(DashCoroutine());
+            _dashCoroutine = _context.StartCoroutine(
+                EnemyMovementStateUtils.DashCoroutine(_context, 10.0f, this)
+            );
         }
     }
 
@@ -31,37 +33,12 @@ public class EnemySimpleMovementState : EnemyChaseState
         _context.Rigidbody.isKinematic = false;
         if (_dashCoroutine != null)
         {
-            _context.StopCoroutine(_dashCoroutine);
+            _context.StopCoroutine(EnemyMovementStateUtils.DashCoroutine(_context, 10.0f, this));
         }
     }
 
     public override void StateUpdate()
     {
         base.StateUpdate();
-    }
-
-    private IEnumerator DashCoroutine()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(1.0f);
-            bool canDash =
-                _context.NavMeshAgent.remainingDistance > 10.0f
-                && _context.EnemyDashable.IsDashReady();
-            if (canDash)
-            {
-                DashToPosition(_context.NavMeshAgent.destination);
-            }
-        }
-    }
-
-    private void DashToPosition(Vector3 position)
-    {
-        Vector3 direction = (position - _context.transform.position).normalized;
-        if (direction.y < 0)
-        {
-            direction.y = 0;
-        }
-        _context.ChangeState(new EnemyDashState(_context, direction, this));
     }
 }
