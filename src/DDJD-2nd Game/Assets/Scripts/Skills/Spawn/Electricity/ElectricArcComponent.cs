@@ -10,6 +10,7 @@ public class ElectricArcComponent : SkillComponent
         Damage(
             other.gameObject,
             (int)(_skillStats.Damage * multiplier),
+            (int)(_skillStats.ForceWithDamage() * multiplier),
             other.ClosestPoint(transform.position),
             other.transform.forward
         );

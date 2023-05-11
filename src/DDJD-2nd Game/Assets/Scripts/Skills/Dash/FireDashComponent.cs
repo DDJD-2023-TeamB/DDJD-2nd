@@ -42,6 +42,7 @@ public class FireDashComponent : DashComponent
                 Damage(
                     collider.gameObject,
                     (int)(_skillStats.Damage),
+                    (int)(_skillStats.ForceWithDamage()),
                     collider.ClosestPoint(_caster.transform.position),
                     _caster.transform.forward
                 );

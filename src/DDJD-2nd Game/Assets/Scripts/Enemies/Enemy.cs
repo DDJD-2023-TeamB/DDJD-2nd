@@ -45,6 +45,11 @@ public abstract class Enemy : StateContext, Damageable
         _status.TakeDamage(damage, hitPoint, hitDirection);
     }
 
+    public virtual bool IsTriggerDamage()
+    {
+        return false;
+    }
+
     public Rigidbody Rigidbody
     {
         get { return _rb; }

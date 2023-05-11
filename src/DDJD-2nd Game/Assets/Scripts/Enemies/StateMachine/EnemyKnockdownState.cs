@@ -16,7 +16,8 @@ public class EnemyKnockdownState : GenericState
         BasicEnemy enemy,
         float force,
         Vector3 hitPoint,
-        Vector3 hitDirection
+        Vector3 hitDirection,
+        GenericState previousState
     )
         : base(enemy)
     {
@@ -24,6 +25,7 @@ public class EnemyKnockdownState : GenericState
         _force = force;
         _hitPoint = hitPoint;
         _hitDirection = hitDirection;
+        _context.PushState(previousState);
     }
 
     public override void Enter()

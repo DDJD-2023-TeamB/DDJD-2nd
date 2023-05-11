@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
+using System;
 
 public class BasicEnemy : HumanoidEnemy
 {
@@ -29,12 +30,17 @@ public class BasicEnemy : HumanoidEnemy
 
     private EnemyLineOfSight _lineOfSight;
 
+    private EnemyDashable _enemyDashable;
+
+    public Action OnDamageTaken;
+
     public override void Awake()
     {
         base.Awake();
         _lineOfSight = GetComponent<EnemyLineOfSight>();
         _noiseListener = GetComponent<NoiseListener>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _enemyDashable = GetComponent<EnemyDashable>();
         _states = new EnemyStates(
             chaseState: new EnemyChaseState(this),
             attackState: new EnemyAttackState(this),
@@ -65,10 +71,16 @@ public class BasicEnemy : HumanoidEnemy
     {
         base.TakeDamage(damage, force, hitPoint, hitDirection);
 
+        OnDamageTaken?.Invoke();
         if (force >= _forceResistance)
         {
-            ChangeState(new EnemyKnockdownState(this, force, hitPoint, hitDirection));
+            Knockdown(force, hitPoint, hitDirection);
         }
+    }
+
+    public void Knockdown(float force, Vector3 hitPoint, Vector3 hitDirection)
+    {
+        ChangeState(new EnemyKnockdownState(this, force, hitPoint, hitDirection, _state));
     }
 
     //getters and setters
@@ -118,5 +130,10 @@ public class BasicEnemy : HumanoidEnemy
     public NoiseListener NoiseListener
     {
         get { return _noiseListener; }
+    }
+
+    public EnemyDashable EnemyDashable
+    {
+        get { return _enemyDashable; }
     }
 }

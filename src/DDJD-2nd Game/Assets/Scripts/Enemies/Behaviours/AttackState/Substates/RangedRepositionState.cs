@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class RangedRepositionState : EnemyMovingState
 {
@@ -8,6 +9,8 @@ public class RangedRepositionState : EnemyMovingState
     private int _maxTries = 5;
 
     private Vector3 _newPosition;
+
+    private Coroutine _dashCoroutine;
 
     public RangedRepositionState(RangedEnemy enemy)
         : base(enemy)
@@ -21,6 +24,12 @@ public class RangedRepositionState : EnemyMovingState
         StartReposition();
         _context.Animator.SetBool("IsAiming", false);
         _context.AimComponent.StopAim();
+        if (_context.EnemySkills.UsesDash)
+        {
+            _dashCoroutine = _context.StartCoroutine(
+                EnemyMovementStateUtils.DashCoroutine(_context, 10.0f, this)
+            );
+        }
     }
 
     public override void Exit()
@@ -28,6 +37,10 @@ public class RangedRepositionState : EnemyMovingState
         base.Exit();
         _context.Animator.SetBool("IsAiming", true);
         _context.AimComponent.StartAim();
+        if (_dashCoroutine != null)
+        {
+            _context.StopCoroutine(_dashCoroutine);
+        }
     }
 
     private void StartReposition()
@@ -44,7 +57,7 @@ public class RangedRepositionState : EnemyMovingState
         {
             if (_context.AimComponent.CanHitPlayer())
             {
-                Debug.Log(_superstate.ChangeSubState(null));
+                _superstate.ChangeSubState(null);
             }
             else
             {

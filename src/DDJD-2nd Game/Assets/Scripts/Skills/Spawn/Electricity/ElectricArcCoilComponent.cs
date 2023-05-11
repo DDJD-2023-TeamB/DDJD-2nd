@@ -40,6 +40,7 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
                 Damage(
                     collider.gameObject,
                     (int)(_skill.SpawnStats.Damage / divider),
+                    (int)(_skill.SpawnStats.ForceWithDamage() / divider),
                     collider.ClosestPoint(transform.position),
                     collider.transform.position - transform.position
                 );

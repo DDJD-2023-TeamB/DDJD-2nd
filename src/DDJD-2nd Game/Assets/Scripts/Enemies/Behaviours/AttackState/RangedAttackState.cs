@@ -51,11 +51,11 @@ public class RangedAttackState : EnemyAttackState
     {
         while (true)
         {
-            yield return new WaitForSeconds(_context.EnemySkills.AttackSpeed);
             if (!(_substate is RangedRepositionState))
             {
                 Shoot();
             }
+            yield return new WaitForSeconds(_context.EnemySkills.AttackSpeed);
         }
     }
 
@@ -84,6 +84,11 @@ public class RangedAttackState : EnemyAttackState
     {
         Vector3 playerPosition = _context.Player.transform.position;
         playerPosition.y = _context.transform.position.y;
-        _context.transform.LookAt(playerPosition);
+        Quaternion rotation = Quaternion.LookRotation(playerPosition - _context.transform.position);
+        _context.transform.rotation = Quaternion.Slerp(
+            _context.transform.rotation,
+            rotation,
+            Time.deltaTime * 7.5f
+        );
     }
 }

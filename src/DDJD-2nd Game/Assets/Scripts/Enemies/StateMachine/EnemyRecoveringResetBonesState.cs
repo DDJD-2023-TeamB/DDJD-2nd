@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class EnemyRepositionRecoverBonesState : GenericState
 {
     protected BasicEnemy _context;
+    private GenericState _previousState;
     private string _recoveringAnimationName;
     private BoneTransform[] _standUpBoneTransforms;
     private BoneTransform[] _ragdollBoneTransforms;

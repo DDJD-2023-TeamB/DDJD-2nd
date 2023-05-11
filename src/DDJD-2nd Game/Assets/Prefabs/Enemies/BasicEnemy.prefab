@@ -3015,6 +3015,7 @@ GameObject:
   - component: {fileID: -6662390124669257774}
   - component: {fileID: 8617104444888835473}
   - component: {fileID: 6510409512166641490}
+  - component: {fileID: 3651729006223950212}
   m_Layer: 7
   m_Name: BasicEnemy
   m_TagString: Untagged
@@ -3179,7 +3180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4065081025af0b2479e725eb3ab6b271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _angle: 90.2
+  _angle: 170.5
 --- !u!114 &6510409512166641490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3193,6 +3194,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hearingRange: 1
+--- !u!114 &3651729006223950212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7679466201466161035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a4367c5d9d35d4597c0b3ec21ed13b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minCooldown: 1
+  allowAllDirections: 1
+  disableGravity: 0
+  resetVelocity: 1
+  _maxRegularSpeed: 5
+  _speedChangeFactor: 50
 --- !u!1 &7679466201466161037
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,6 +32,14 @@ public class RagdollController : MonoBehaviour
         get { return _hipsBone; }
     }
 
+    private bool _isRagdollActive;
+    public bool IsRagdollActive
+    {
+        get { return _isRagdollActive; }
+    }
+
+    private bool _originalIsTrigger;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -51,6 +59,8 @@ public class RagdollController : MonoBehaviour
         {
             PopulateAnimationBones(animation);
         }
+        _originalIsTrigger = _collider.isTrigger;
+        _isRagdollActive = false;
     }
 
     public Transform GetRagdollTransform()
@@ -69,9 +79,10 @@ public class RagdollController : MonoBehaviour
         {
             col.enabled = true;
         }
-        _collider.enabled = false;
+        _collider.isTrigger = true;
         _rb.isKinematic = true;
         _animator.enabled = false;
+        _isRagdollActive = true;
     }
 
     public float GetVelocity()
@@ -96,8 +107,10 @@ public class RagdollController : MonoBehaviour
             col.enabled = false;
         }
         _collider.enabled = true;
+        _collider.isTrigger = _originalIsTrigger;
         _rb.isKinematic = false;
         _animator.enabled = true;
+        _isRagdollActive = false;
     }
 
     public void PushRagdoll(int force, Vector3 hitPoint, Vector3 hitDirection)
