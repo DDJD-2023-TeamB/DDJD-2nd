@@ -20,7 +20,6 @@ public class EnemyLookAtState : GenericState
 
     public override void StateUpdate()
     {
-        Debug.Log("Updating rotation");
         _context.transform.rotation = Quaternion.Slerp(
             _context.transform.rotation,
             _desiredRotation,

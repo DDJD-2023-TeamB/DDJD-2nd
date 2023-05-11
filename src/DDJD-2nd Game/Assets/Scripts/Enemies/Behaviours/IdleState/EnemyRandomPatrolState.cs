@@ -55,7 +55,6 @@ public class EnemyRandomPatrolState : EnemyIdleState
         if (NavMesh.SamplePosition(randomPoint, out hit, 5.0f, NavMesh.AllAreas))
         {
             Vector3 positionToGo = hit.position;
-            Debug.Log(positionToGo);
             _context.NavMeshAgent.SetDestination(positionToGo);
         }
     }
