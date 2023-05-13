@@ -123,6 +123,7 @@ public class BasicEnemy : HumanoidEnemy
     public EnemySkills EnemySkills
     {
         get { return _enemySkills; }
+        set { _enemySkills = value; }
     }
 
     public EnemyLineOfSight LineOfSight
