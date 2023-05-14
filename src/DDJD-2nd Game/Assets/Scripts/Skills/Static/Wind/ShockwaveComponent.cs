@@ -17,7 +17,6 @@ public class ShockwaveComponent : StaticSkillComponent, NonCollidable
         {
             return;
         }
-        Debug.Log("ShockwaveComponent.OnImpact");
         Vector3 direction = _shootDirection.normalized;
         Rigidbody rb = other.GetComponent<Rigidbody>();
         float force = _stats.ForceWithDamage() * multiplier;

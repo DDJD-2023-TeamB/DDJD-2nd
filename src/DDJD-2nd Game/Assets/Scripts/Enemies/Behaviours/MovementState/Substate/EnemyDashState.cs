@@ -45,7 +45,6 @@ public class EnemyDashState : GenericState
 
     private void OnDashFinish()
     {
-        Debug.Log("Going to state " + _nextState.GetType().Name);
         _context.ChangeState(_nextState);
     }
 

@@ -27,7 +27,6 @@ public abstract class GenericState
     {
         if (_substate != null)
         {
-            Debug.Log("Enter substate");
             _substate.Enter();
         }
     }

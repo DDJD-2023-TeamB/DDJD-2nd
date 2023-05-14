@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using MyBox;
 
 public enum SpawnerTriggerType
@@ -8,10 +9,16 @@ public enum SpawnerTriggerType
     OnCombat
 }
 
-public class EnemyCamp : MonoBehaviour
+public class EnemyCamp : MonoBehaviour, NonCollidable
 {
     private EnemySpawnerManager _spawnerManager;
     private EnemyCommunicator _enemyCommunicator;
+
+    [SerializeField]
+    private List<GameObject> _defaultEnemies = new List<GameObject>();
+
+    //Default enemies instantiated when player enters camp
+    private List<GameObject> _copiedEnemies = new List<GameObject>();
     private Player _player;
 
     [SerializeField]
@@ -38,14 +45,36 @@ public class EnemyCamp : MonoBehaviour
             typeof(PlayerSightedMessage),
             (EnemyMessage msg) => _playerSighted = true
         );
+
+        //Disable default enemies
+        foreach (GameObject enemy in _defaultEnemies)
+        {
+            enemy.SetActive(false);
+        }
+    }
+
+    private void InstantiateDefaultEnemies()
+    {
+        List<GameObject> enemies = new List<GameObject>();
+        foreach (GameObject enemy in _defaultEnemies)
+        {
+            GameObject instantiatedEnemy = Instantiate(
+                enemy,
+                enemy.transform.position,
+                enemy.transform.rotation,
+                enemy.transform.parent
+            );
+            instantiatedEnemy.SetActive(true);
+            enemies.Add(instantiatedEnemy);
+        }
+
+        _copiedEnemies = enemies;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Triggered");
         if (other.CompareTag("Player"))
         {
-            Debug.Log("yey");
             _coroutine = StartCoroutine(CampCoroutine());
         }
     }
@@ -92,5 +121,26 @@ public class EnemyCamp : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _triggerRadius);
+    }
+
+    public void OnDisable()
+    {
+        if (_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+        }
+    }
+
+    public void OnEnable()
+    {
+        _spawnerManager.ResetSpawner();
+        _playerSighted = false;
+        InstantiateDefaultEnemies();
     }
 }

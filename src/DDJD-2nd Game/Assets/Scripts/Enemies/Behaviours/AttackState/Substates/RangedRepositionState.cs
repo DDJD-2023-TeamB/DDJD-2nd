@@ -21,7 +21,6 @@ public class RangedRepositionState : EnemyMovingState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("ranged repos enter");
         _context.NavMeshAgent.enabled = true;
         _context.Rigidbody.isKinematic = true;
         StartReposition();
@@ -30,7 +29,7 @@ public class RangedRepositionState : EnemyMovingState
         if (_context.EnemySkills.UsesDash)
         {
             _dashCoroutine = _context.StartCoroutine(
-                EnemyMovementStateUtils.DashCoroutine(_context, 10.0f, this)
+                EnemyMovementStateUtils.DashCoroutine(_context, 10.0f, _superstate)
             );
         }
     }
@@ -38,8 +37,6 @@ public class RangedRepositionState : EnemyMovingState
     public override void Exit()
     {
         base.Exit();
-        Debug.Log("Exit repo state");
-
         _context.Animator.SetBool("IsAiming", true);
         _context.AimComponent.StartAim();
         if (_dashCoroutine != null)

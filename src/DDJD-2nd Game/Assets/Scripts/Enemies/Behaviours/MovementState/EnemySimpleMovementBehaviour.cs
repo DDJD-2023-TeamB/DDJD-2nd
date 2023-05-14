@@ -31,7 +31,7 @@ public class EnemySimpleMovementState : EnemyChaseState
         base.Exit();
         if (_dashCoroutine != null)
         {
-            _context.StopCoroutine(EnemyMovementStateUtils.DashCoroutine(_context, 10.0f, this));
+            _context.StopCoroutine(_dashCoroutine);
         }
     }
 

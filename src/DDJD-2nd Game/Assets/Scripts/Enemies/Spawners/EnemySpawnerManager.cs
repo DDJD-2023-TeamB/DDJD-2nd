@@ -33,7 +33,10 @@ public class EnemySpawnerManager : MonoBehaviour
 
     public void Awake() { }
 
-    public void Start() { }
+    public void Start()
+    {
+        ResetSpawner();
+    }
 
     private void SpawnEnemy()
     {
@@ -51,14 +54,16 @@ public class EnemySpawnerManager : MonoBehaviour
 
     public void StartSpawn()
     {
-        Debug.Log("Start spawn");
-        _remainingEnemies = _totalAmountOfEnemies;
         _spawnCoroutine = StartCoroutine(SpawnCoroutine());
+    }
+
+    public void ResetSpawner()
+    {
+        _remainingEnemies = _totalAmountOfEnemies;
     }
 
     public void StopSpawn()
     {
-        Debug.Log("Stop spawn");
         if (_spawnCoroutine != null)
         {
             StopCoroutine(_spawnCoroutine);
@@ -70,12 +75,10 @@ public class EnemySpawnerManager : MonoBehaviour
         while (_remainingEnemies > 0 || _type == SpawnerType.Unlimitted)
         {
             SpawnEnemy();
-            Debug.Log("remaining enemies: " + _remainingEnemies);
             if (_remainingEnemies > 0)
             {
                 _remainingEnemies--;
             }
-            Debug.Log("remaining enemies: " + _remainingEnemies);
             yield return new WaitForSeconds(_spawnTimer + Random.Range(0.0f, 0.5f));
         }
     }

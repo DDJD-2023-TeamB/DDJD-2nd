@@ -34,7 +34,6 @@ public class FlameThrowerComponent : StaticSkillComponent, NonCollidable
 
     public override void DestroySpell()
     {
-        Debug.Log("Destroying FlameThrower");
         DeactivateSpell();
         _vfx.Stop();
         Destroy(gameObject, 3.0f);
