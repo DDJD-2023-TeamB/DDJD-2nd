@@ -1,22 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public enum SpawnerType
-{
-    Normal,
-    Unlimitted,
-    Resetable,
-    Boss
-}
-
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField]
-    private EnemySpawnerInfo _enemySpawnerInfo;
-
-    [SerializeField]
-    private SpawnerType _type;
-
     [SerializeField]
     private float _spawnDelay;
 

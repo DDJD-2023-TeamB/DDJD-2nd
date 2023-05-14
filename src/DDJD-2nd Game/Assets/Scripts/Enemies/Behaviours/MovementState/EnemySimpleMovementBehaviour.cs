@@ -27,8 +27,6 @@ public class EnemySimpleMovementState : EnemyChaseState
     public override void Exit()
     {
         base.Exit();
-        _context.NavMeshAgent.enabled = false;
-        _context.Rigidbody.isKinematic = false;
         if (_dashCoroutine != null)
         {
             _context.StopCoroutine(_dashCoroutine);

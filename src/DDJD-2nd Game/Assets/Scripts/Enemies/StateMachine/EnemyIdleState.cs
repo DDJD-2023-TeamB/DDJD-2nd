@@ -16,6 +16,7 @@ public class EnemyIdleState : GenericState
 
     public override void Enter()
     {
+        base.Enter();
         _loopRoutine = _context.StartCoroutine(DetectPlayerLoop());
         _context.NoiseListener.OnNoiseHeard += OnNoiseHeard;
         _context.OnDamageTaken += OnDamageTaken;

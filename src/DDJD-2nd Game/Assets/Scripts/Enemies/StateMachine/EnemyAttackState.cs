@@ -12,6 +12,7 @@ public class EnemyAttackState : GenericState
 
     public override void Enter()
     {
+        base.Enter();
         _context.NavMeshAgent.enabled = true;
         _context.Animator.SetBool("IsAiming", true);
     }

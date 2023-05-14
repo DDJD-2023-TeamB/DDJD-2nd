@@ -21,11 +21,11 @@ public class RangedAttackState : EnemyAttackState
 
     public override void Enter()
     {
-        base.Enter();
         _context.Animator.SetBool("IsAiming", true);
         _context.AimComponent.StartAim();
         _attackCoroutine = _context.StartCoroutine(AttackCoroutine());
         _attackTries = 0;
+        base.Enter();
     }
 
     public override void Exit()
