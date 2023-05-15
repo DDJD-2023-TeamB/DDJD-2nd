@@ -1,14 +1,9 @@
 using UnityEngine;
 
-public class EnemyAttackState : GenericState
+public class EnemyAttackState : EnemyState
 {
-    protected BasicEnemy _context;
-
     public EnemyAttackState(BasicEnemy enemy)
-        : base(enemy)
-    {
-        _context = enemy;
-    }
+        : base(enemy) { }
 
     public override void Enter()
     {

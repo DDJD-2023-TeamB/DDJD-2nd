@@ -31,6 +31,8 @@ public class EnemySpawnerManager : MonoBehaviour
 
     private int _remainingEnemies;
 
+    private List<GameObject> _spawnedEnemies = new List<GameObject>();
+
     public void Awake() { }
 
     public void Start()
@@ -42,14 +44,19 @@ public class EnemySpawnerManager : MonoBehaviour
     {
         EnemySpawner spawner;
         bool spawned = false;
+        GameObject enemy = null;
         do
         {
             //TODO:: Could be more efficient
             spawner = _spawners[Random.Range(0, _spawners.Count)];
             spawned = spawner.CanSpawn();
             EnemyInfo enemyInfo = _enemySpawnerInfo.GetRandomEnemyInfo();
-            spawner.SpawnEnemy(enemyInfo);
+            enemy = spawner.SpawnEnemy(enemyInfo);
         } while (!spawned);
+        if (enemy != null)
+        {
+            _spawnedEnemies.Add(enemy);
+        }
     }
 
     public void StartSpawn()
@@ -87,5 +94,10 @@ public class EnemySpawnerManager : MonoBehaviour
     {
         get { return _totalAmountOfEnemies; }
         set { _totalAmountOfEnemies = value; }
+    }
+
+    public List<GameObject> SpawnedEnemies
+    {
+        get { return _spawnedEnemies; }
     }
 }

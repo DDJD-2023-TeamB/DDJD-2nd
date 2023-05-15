@@ -64,7 +64,6 @@ public abstract class ProjectileComponent : SkillComponent
     public override void Shoot(Vector3 direction)
     {
         ActivateSpell();
-        Debug.DrawRay(transform.position, direction * 10f, Color.red, 100f);
         _initialPosition = transform.position;
         transform.parent = null; // Detach from caster
         _leftCaster = true;

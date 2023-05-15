@@ -18,7 +18,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update() { }
 
-    public void SpawnEnemy(EnemyInfo info)
+    public GameObject SpawnEnemy(EnemyInfo info)
     {
         Vector3 position;
         UnityEngine.AI.NavMeshHit hit;
@@ -30,7 +30,7 @@ public class EnemySpawner : MonoBehaviour
             if (tries == 0)
             {
                 Debug.LogError("Could not find a position to spawn enemy at " + transform.position);
-                return;
+                return null;
             }
         } while (
             UnityEngine.AI.NavMesh.SamplePosition(
@@ -46,6 +46,7 @@ public class EnemySpawner : MonoBehaviour
         BasicEnemy basicEnemy = enemy.GetComponent<BasicEnemy>();
         basicEnemy.EnemySkills = info.EnemySkills;
         StartCoroutine(SpawnCooldown());
+        return enemy;
     }
 
     private IEnumerator SpawnCooldown()

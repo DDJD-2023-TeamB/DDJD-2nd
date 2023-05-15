@@ -119,7 +119,9 @@ public class PlayerAimComponent : MonoBehaviour, AimComponent
         return Physics.Raycast(
             _player.AimCamera.transform.position,
             _player.AimCamera.transform.forward,
-            out hit
+            out hit,
+            100f,
+            LayerMask.GetMask("PlayerTrigger")
         );
     }
 }

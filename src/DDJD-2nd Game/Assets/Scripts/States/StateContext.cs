@@ -7,7 +7,7 @@ public abstract class StateContext : MonoBehaviour
     protected GenericState _state;
     protected Stack<GenericState> _stateStack = new Stack<GenericState>();
 
-    public void ChangeState(GenericState state)
+    public virtual void ChangeState(GenericState state)
     {
         if (_state != null)
         {

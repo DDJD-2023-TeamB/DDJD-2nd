@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using System.Collections;
 using System.Collections.Generic;
 using MyBox;
@@ -12,6 +13,8 @@ public enum SpawnerTriggerType
 public class EnemyCamp : MonoBehaviour, NonCollidable
 {
     private EnemySpawnerManager _spawnerManager;
+
+    [SerializeField]
     private EnemyCommunicator _enemyCommunicator;
 
     [SerializeField]
@@ -39,7 +42,6 @@ public class EnemyCamp : MonoBehaviour, NonCollidable
     private void Awake()
     {
         _spawnerManager = GetComponent<EnemySpawnerManager>();
-        _enemyCommunicator = GetComponent<EnemyCommunicator>();
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         _enemyCommunicator.SetMessageAction(
             typeof(PlayerSightedMessage),
@@ -89,17 +91,36 @@ public class EnemyCamp : MonoBehaviour, NonCollidable
                 _spawnerManager.StopSpawn();
             }
         }
+        Debug.Log("Exit " + other.name);
 
         //Move enemies back to camp
-        foreach (GameObject enemy in _copiedEnemies)
+        List<GameObject> enemies = new List<GameObject>(_copiedEnemies);
+
+        enemies.AddRange(_spawnerManager.SpawnedEnemies);
+        Debug.Log("Enemies: " + enemies.Count);
+        foreach (GameObject enemy in enemies)
         {
             // Get random position in camp
             Vector3 randomPosition = new Vector3(
-                Random.Range(-_isResetable, _isResetable),
+                Random.Range(-5.0f, 5.0f),
                 0.0f,
-                Random.Range(-_isResetable, _isResetable)
+                Random.Range(-5.0f, 5.0f)
             );
-            _enemyCommunicator.SendMessage(enemy, new MoveToMessage(randomPosition));
+            randomPosition += transform.position;
+            NavMeshHit hit;
+            NavMesh.SamplePosition(randomPosition, out hit, 5.0f, UnityEngine.AI.NavMesh.AllAreas);
+            //Draw ray to see where the enemy is going
+
+            if (enemy != null)
+            {
+                Debug.DrawRay(
+                    enemy.transform.position,
+                    hit.position - enemy.transform.position,
+                    Color.red,
+                    25.0f
+                );
+                _enemyCommunicator.SendMessage(enemy, new MoveToMessage(hit.position));
+            }
         }
     }
 

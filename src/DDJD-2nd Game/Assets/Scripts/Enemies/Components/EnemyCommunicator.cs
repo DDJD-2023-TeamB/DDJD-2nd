@@ -7,6 +7,8 @@ public class EnemyCommunicator : MonoBehaviour
 {
     private Dictionary<Type, Action<EnemyMessage>> _messageActions =
         new Dictionary<Type, Action<EnemyMessage>>();
+    private Dictionary<Type, EnemyMessage> _messagesUnhandled =
+        new Dictionary<Type, EnemyMessage>();
 
     [SerializeField]
     private float _messageRange = 50.0f;
@@ -23,6 +25,11 @@ public class EnemyCommunicator : MonoBehaviour
         {
             _messageActions[message.GetType()]?.Invoke(message);
         }
+        else
+        {
+            //Store message so when action is setted, it will be called
+            _messagesUnhandled.Add(message.GetType(), message);
+        }
     }
 
     public void SetMessageAction(Type messageType, Action<EnemyMessage> action)
@@ -31,6 +38,12 @@ public class EnemyCommunicator : MonoBehaviour
             _messageActions.Add(messageType, action);
         else
             _messageActions[messageType] = action;
+
+        if (_messagesUnhandled.ContainsKey(messageType))
+        {
+            _messageActions[messageType]?.Invoke(_messagesUnhandled[messageType]);
+            _messagesUnhandled.Remove(messageType);
+        }
     }
 
     public void DeleteAction(Type messageType, Action<EnemyMessage> action)

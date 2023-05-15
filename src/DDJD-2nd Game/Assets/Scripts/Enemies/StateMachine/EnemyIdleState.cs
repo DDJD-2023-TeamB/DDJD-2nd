@@ -2,17 +2,12 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-public class EnemyIdleState : GenericState
+public class EnemyIdleState : EnemyState
 {
-    protected BasicEnemy _context;
-
     private Coroutine _loopRoutine;
 
     public EnemyIdleState(BasicEnemy enemy)
-        : base(enemy)
-    {
-        _context = enemy;
-    }
+        : base(enemy) { }
 
     public override void Enter()
     {
@@ -87,7 +82,7 @@ public class EnemyIdleState : GenericState
 
     private IEnumerator WarnNearbyEnemies()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
         PlayerSightedMessage message = new PlayerSightedMessage(_context.Player.transform.position);
         _context.StartCoroutine(_context.EnemyCommunicator.SendMessageToEnemies(message));
     }
