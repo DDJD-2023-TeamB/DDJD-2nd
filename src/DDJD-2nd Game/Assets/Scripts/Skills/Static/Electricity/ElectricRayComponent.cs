@@ -13,15 +13,10 @@ public class ElectricRayComponent : StaticSkillComponent, NonCollidable
         _vfx = GetComponent<VisualEffect>();
     }
 
-    private void Start()
+    protected override void Update()
     {
+        base.Update();
         SetRayPosition();
-    }
-
-    public override void Shoot(Vector3 direction)
-    {
-        base.Shoot(direction);
-        transform.rotation = Quaternion.LookRotation(direction);
     }
 
     protected override void OnImpact(Collider other, float multiplier = 1)
@@ -38,29 +33,28 @@ public class ElectricRayComponent : StaticSkillComponent, NonCollidable
 
     public override void DestroySpell()
     {
-        DeactivateSpell();
         _vfx.Stop();
-        Destroy(gameObject, 3.0f);
+        Destroy(gameObject);
     }
 
     private void SetRayPosition()
     {
-        Vector3? hitPosition = GetHitPosition();
-        if (hitPosition == null)
+        Vector3 pos4;
+        RaycastHit? hit = GetRaycastHit();
+        if (hit != null)
         {
-            DestroySpell();
-            return;
+            pos4 = hit.Value.point;
         }
+        else
+        {
+            pos4 = transform.position + transform.forward * 20;
+        }
+
         // TODO extract this somewhere and use it in ElectricArcCoilComponent
         // Calculate Bezier arc
         Vector3 pos1 = transform.position;
-        Vector3 pos4 = hitPosition.Value;
         Vector3 pos2 = 2 * pos1 / 3 + pos4 / 3;
         Vector3 pos3 = pos1 / 3 + 2 * pos4 / 3;
-
-        // Set position and rotation
-        transform.position = (pos1 + pos4) / 2;
-        transform.right = pos1 - pos4;
 
         // Get bezier points
         Transform arcPos1 = transform.Find("Pos1");
@@ -70,8 +64,8 @@ public class ElectricRayComponent : StaticSkillComponent, NonCollidable
 
         // Scale object for correct box collider
         float realDistance = Vector3.Distance(pos1, pos4);
-        float bezierDistance = Vector3.Distance(arcPos1.position, arcPos4.position);
-        float scale = realDistance / bezierDistance;
+        float previousDistance = Vector3.Distance(arcPos1.position, arcPos4.position);
+        float scale = realDistance / previousDistance;
         transform.localScale = new Vector3(scale, transform.localScale.y, transform.localScale.z);
 
         // Set VFX positions
@@ -79,15 +73,18 @@ public class ElectricRayComponent : StaticSkillComponent, NonCollidable
         arcPos2.position = pos2;
         arcPos3.position = pos3;
         arcPos4.position = pos4;
+
+        if (hit != null)
+            Collide(hit.Value.collider);
     }
 
-    private Vector3? GetHitPosition()
+    private RaycastHit? GetRaycastHit()
     {
         AimComponent aimComponent = _caster.GetComponent<AimComponent>();
         RaycastHit hit;
         if (aimComponent.GetAimRaycastHit(out hit))
         {
-            return hit.point;
+            return hit;
         }
         return null;
     }

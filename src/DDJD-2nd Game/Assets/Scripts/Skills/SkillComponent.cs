@@ -117,7 +117,7 @@ public abstract class SkillComponent : MonoBehaviour
         // Override this method to add functionality
     }
 
-    private bool Collide(Collider other)
+    protected bool Collide(Collider other)
     {
         if (!CanCollide(other))
         {
