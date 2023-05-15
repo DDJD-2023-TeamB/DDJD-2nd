@@ -88,23 +88,7 @@ public class EnemyIdleState : GenericState
     private IEnumerator WarnNearbyEnemies()
     {
         yield return new WaitForSeconds(1.5f);
-        Collider[] colliders = Physics.OverlapSphere(
-            _context.transform.position,
-            _context.AggroRange,
-            LayerMask.GetMask("Enemy") | LayerMask.GetMask("PlayerTrigger")
-        );
-        PlayerSightedMessage message = new PlayerSightedMessage(_context.transform.position);
-        foreach (Collider collider in colliders)
-        {
-            if (collider == null)
-            {
-                break;
-            }
-            EnemyCommunicator communicator = collider.GetComponent<EnemyCommunicator>();
-            float timeToWait =
-                Vector3.Distance(_context.transform.position, collider.transform.position) / 10.0f;
-            yield return new WaitForSeconds(timeToWait);
-            communicator?.ReceiveMessage(message);
-        }
+        PlayerSightedMessage message = new PlayerSightedMessage(_context.Player.transform.position);
+        _context.StartCoroutine(_context.EnemyCommunicator.SendMessageToEnemies(message));
     }
 }

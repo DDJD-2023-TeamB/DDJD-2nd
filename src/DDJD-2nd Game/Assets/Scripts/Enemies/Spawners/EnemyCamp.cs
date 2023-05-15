@@ -89,6 +89,18 @@ public class EnemyCamp : MonoBehaviour, NonCollidable
                 _spawnerManager.StopSpawn();
             }
         }
+
+        //Move enemies back to camp
+        foreach (GameObject enemy in _copiedEnemies)
+        {
+            // Get random position in camp
+            Vector3 randomPosition = new Vector3(
+                Random.Range(-_isResetable, _isResetable),
+                0.0f,
+                Random.Range(-_isResetable, _isResetable)
+            );
+            _enemyCommunicator.SendMessage(enemy, new MoveToMessage(randomPosition));
+        }
     }
 
     private IEnumerator CampCoroutine()
@@ -135,6 +147,12 @@ public class EnemyCamp : MonoBehaviour, NonCollidable
         {
             StopCoroutine(_coroutine);
         }
+        foreach (GameObject enemy in _copiedEnemies)
+        {
+            Destroy(enemy);
+        }
+
+        _copiedEnemies.Clear();
     }
 
     public void OnEnable()
