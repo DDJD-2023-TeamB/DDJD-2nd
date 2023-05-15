@@ -18,7 +18,11 @@ public class ElectricRayUtils
 
         // Scale object for correct box collider
         float realDistance = Vector3.Distance(origin, end);
+        Debug.Log("origin" + origin);
+        Debug.Log("end" + end);
+        Debug.Log("realDistance" + realDistance);
         float previousDistance = Vector3.Distance(arcPos1.position, arcPos4.position);
+        Debug.Log("previousDistance" + previousDistance);
         float scale = realDistance / previousDistance;
         transform.localScale = new Vector3(scale, transform.localScale.y, transform.localScale.z);
 

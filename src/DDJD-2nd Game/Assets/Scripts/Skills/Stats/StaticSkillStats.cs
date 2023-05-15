@@ -12,9 +12,18 @@ public class StaticSkillStats : SkillStats
         set => _duration = value;
     }
 
-    public StaticSkillStats(float damage, float cooldown, float duration)
+    [SerializeField]
+    private float _maxDistance = 30f;
+    public float MaxDistance
+    {
+        get => _maxDistance;
+        set => _maxDistance = value;
+    }
+
+    public StaticSkillStats(float damage, float cooldown, float duration, float maxDistance)
         : base(damage, cooldown)
     {
         _duration = duration;
+        _maxDistance = maxDistance;
     }
 }

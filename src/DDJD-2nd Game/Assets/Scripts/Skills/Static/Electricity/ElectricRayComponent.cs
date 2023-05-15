@@ -16,26 +16,34 @@ public class ElectricRayComponent : StaticSkillComponent, NonCollidable
     protected override void Update()
     {
         base.Update();
-        RaycastHit? hit = SetRayPosition();
-        if (hit != null)
-            Collide(hit.Value.collider);
+        SetRayPosition();
     }
 
-    private RaycastHit? SetRayPosition()
+    private void SetRayPosition()
     {
+        Vector3 pos1 = transform.position;
         Vector3 pos4;
         RaycastHit? hit = GetRaycastHit();
+
         if (hit != null)
         {
             pos4 = hit.Value.point;
         }
         else
         {
-            pos4 = transform.position + transform.forward * 20;
+            pos4 = pos1 + transform.forward * _stats.MaxDistance;
         }
-        Vector3 pos1 = transform.position;
+
+        float distance = Vector3.Distance(pos1, pos4);
+        if (distance > _stats.MaxDistance)
+        {
+            pos4 = pos1 + transform.forward * _stats.MaxDistance;
+        }
+
         ElectricRayUtils.SetBezierAndScale(transform, pos1, pos4);
-        return hit;
+
+        if (hit != null && distance <= _stats.MaxDistance)
+            Collide(hit.Value.collider);
     }
 
     protected override void OnImpact(Collider other, float multiplier = 1)
