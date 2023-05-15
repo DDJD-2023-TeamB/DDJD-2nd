@@ -38,7 +38,6 @@ public class EnemyDashState : GenericState
             _dashable.Dash(_dashDirection, _stats);
         }
         _dashable.OnDashFinish += OnDashFinish;
-        Debug.Log("EnemyDashState");
     }
 
     public override void StateUpdate() { }
