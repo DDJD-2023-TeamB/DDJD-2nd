@@ -20,7 +20,7 @@ public class EnemyChaseState : EnemyState
         }
         else if (!IsInAggroRange())
         {
-            _context.ChangeState(new EnemyIdleState(_context));
+            _context.ChangeState(_context.States.IdleState);
             return;
         }
         Move();

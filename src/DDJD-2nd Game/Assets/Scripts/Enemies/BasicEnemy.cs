@@ -93,7 +93,7 @@ public class BasicEnemy : HumanoidEnemy
     public override void ChangeState(GenericState state)
     {
         base.ChangeState(state);
-        _stateText.text = state.GetType().ToString();
+        _stateText.text = state.GetType().ToString() + " " + state.Substate?.GetType().ToString();
     }
 
     //getters and setters
