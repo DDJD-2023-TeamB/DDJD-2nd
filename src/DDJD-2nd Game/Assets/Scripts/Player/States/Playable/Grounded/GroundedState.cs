@@ -26,7 +26,7 @@ public class GroundedState : MeleeAttackableState
         {
             _context.Rigidbody.AddForce(
                 Vector3.up * _context.JumpForce * Time.deltaTime * 10,
-                ForceMode.Impulse
+                ForceMode.Acceleration
             );
             _context.Animator.SetTrigger("Jump");
             return;
