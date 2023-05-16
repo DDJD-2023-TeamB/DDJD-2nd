@@ -176,7 +176,6 @@ public abstract class SkillComponent : MonoBehaviour
 
     public virtual void DestroySpell()
     {
-        Debug.Log("Destroy spell");
         Destroy(gameObject);
     }
 

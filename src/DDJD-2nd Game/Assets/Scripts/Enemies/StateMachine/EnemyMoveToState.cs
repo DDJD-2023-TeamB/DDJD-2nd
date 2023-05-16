@@ -21,7 +21,6 @@ public class EnemyMoveToState : EnemyState
         _context.NavMeshAgent.SetDestination(_position);
         _checkDestinationCoroutine = _context.StartCoroutine(CheckDestination());
         _context.OnDamageTaken += OnDamageTaken;
-        Debug.Log("Moving from " + _context.transform.position + " to " + _position);
     }
 
     public override void Exit()
@@ -54,12 +53,6 @@ public class EnemyMoveToState : EnemyState
             {
                 _context.NavMeshAgent.enabled = false;
                 _context.Rigidbody.isKinematic = false;
-                Debug.Log(
-                    "Reached destination "
-                        + _position
-                        + ". Actual position = "
-                        + _context.transform.position
-                );
                 _context.ChangeState(_context.States.IdleState);
                 yield break;
             }

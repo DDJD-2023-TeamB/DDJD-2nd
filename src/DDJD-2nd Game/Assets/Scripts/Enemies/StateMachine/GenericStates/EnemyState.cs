@@ -26,7 +26,6 @@ public abstract class EnemyState : GenericState
 
     private void MoveTo(EnemyMessage message)
     {
-        Debug.Log("Moving to");
         MoveToMessage moveToMessage = (MoveToMessage)message;
         _context.ChangeState(new EnemyMoveToState(_context, moveToMessage.Position));
     }

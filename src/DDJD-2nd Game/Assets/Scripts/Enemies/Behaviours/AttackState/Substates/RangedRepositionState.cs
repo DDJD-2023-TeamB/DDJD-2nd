@@ -28,7 +28,6 @@ public class RangedRepositionState : EnemyMovingState
                 EnemyMovementStateUtils.DashCoroutine(_context, 10.0f, this)
             );
         }
-        Debug.Log("Entered RangedRepositionState " + _context.NavMeshAgent.enabled);
     }
 
     public override void Exit()

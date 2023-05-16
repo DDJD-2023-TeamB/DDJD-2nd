@@ -91,13 +91,11 @@ public class EnemyCamp : MonoBehaviour, NonCollidable
                 _spawnerManager.StopSpawn();
             }
         }
-        Debug.Log("Exit " + other.name);
 
         //Move enemies back to camp
         List<GameObject> enemies = new List<GameObject>(_copiedEnemies);
 
         enemies.AddRange(_spawnerManager.SpawnedEnemies);
-        Debug.Log("Enemies: " + enemies.Count);
         foreach (GameObject enemy in enemies)
         {
             // Get random position in camp

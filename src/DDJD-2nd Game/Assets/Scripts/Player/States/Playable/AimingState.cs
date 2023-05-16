@@ -118,7 +118,6 @@ public class AimingState : MovableState
             case CastType.Charge:
                 _context.Animator.SetTrigger(animationTrigger);
                 _lastAnimTrigger = animationTrigger;
-                Debug.Log("Keydown");
                 break;
             case CastType.Hold:
 
@@ -164,7 +163,6 @@ public class AimingState : MovableState
         switch (skill.SkillStats.CastType)
         {
             case CastType.Charge:
-                Debug.Log("Keyup");
                 Vector3 origin = spell.transform.position;
                 Vector3 direction = _context.AimComponent.GetAimDirection(origin);
                 success = _context.Shooter.Shoot(spell, direction, true);

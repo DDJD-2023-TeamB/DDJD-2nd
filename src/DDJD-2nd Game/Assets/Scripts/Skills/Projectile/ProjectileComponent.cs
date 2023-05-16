@@ -64,7 +64,6 @@ public abstract class ProjectileComponent : SkillComponent
 
     public override void Shoot(Vector3 direction)
     {
-        Debug.Log("Shoot!");
         ActivateSpell();
         _isShooting = true;
         _initialPosition = transform.position;
