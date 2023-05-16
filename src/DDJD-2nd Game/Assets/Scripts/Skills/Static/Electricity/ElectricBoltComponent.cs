@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class ElectricRayComponent : RayCastSkillComponent, NonCollidable
+public class ElectricBoltComponent : RayCastSkillComponent, NonCollidable
 {
     private VisualEffect _vfx;
 
@@ -13,9 +13,9 @@ public class ElectricRayComponent : RayCastSkillComponent, NonCollidable
         _vfx = GetComponent<VisualEffect>();
     }
 
-    protected override void Update()
+    public override void Shoot(Vector3 direction)
     {
-        base.Update();
+        base.Shoot(direction);
         SetRayPosition();
     }
 
@@ -41,7 +41,6 @@ public class ElectricRayComponent : RayCastSkillComponent, NonCollidable
         }
 
         ElectricRayUtils.SetBezierAndScale(transform, pos1, pos4);
-
         if (hit != null && distance <= _stats.MaxDistance)
             Collide(hit.Value.collider);
     }
@@ -60,8 +59,13 @@ public class ElectricRayComponent : RayCastSkillComponent, NonCollidable
 
     public override void DestroySpell()
     {
+        StartCoroutine(DestroyCoroutine());
+    }
+
+    private IEnumerator DestroyCoroutine()
+    {
+        yield return new WaitForSeconds(1.0f);
         _vfx.Stop();
-        _vfx.SetFloat("Thickness", 0.0f);
         Destroy(gameObject, 0.5f);
     }
 }

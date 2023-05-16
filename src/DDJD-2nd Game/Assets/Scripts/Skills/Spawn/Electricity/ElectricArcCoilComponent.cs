@@ -9,14 +9,25 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
     private GameObject _arcPrefab;
 
     [SerializeField]
-    private GameObject _vfxPrefab;
+    private GameObject _boltVfxPrefab;
+
+    [SerializeField]
+    private GameObject _vfx;
 
     [SerializeField]
     private float _yOffset = 0.5f;
 
     public override void Spawn()
     {
-        PlayVfx();
+        StartCoroutine(SpawnAfterTime());
+    }
+
+    private IEnumerator SpawnAfterTime()
+    {
+        _vfx.SetActive(false);
+        PlayBoltVfx();
+        yield return new WaitForSeconds(0.25f);
+        _vfx.SetActive(true);
         DamageNearbyEnemies();
         CreateElectricArc();
     }
@@ -80,11 +91,18 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
         Destroy(arc, arcLife);
     }
 
-    private void PlayVfx()
+    private void PlayBoltVfx()
     {
         Vector3 position = transform.position;
-        position.y = _vfxPrefab.transform.position.y;
-        GameObject vfx = Instantiate(_vfxPrefab, position, Quaternion.identity);
+        position.y = _boltVfxPrefab.transform.position.y;
+        GameObject vfx = Instantiate(_boltVfxPrefab, position, Quaternion.identity);
         Destroy(vfx, _skill.SpawnStats.Duration);
+    }
+
+    public override void DestroySpell()
+    {
+        VisualEffect vfx = _vfx.GetComponent<VisualEffect>();
+        vfx.Stop();
+        Destroy(gameObject, 1.0f);
     }
 }
