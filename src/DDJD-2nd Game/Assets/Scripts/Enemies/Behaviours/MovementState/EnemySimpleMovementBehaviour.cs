@@ -38,5 +38,13 @@ public class EnemySimpleMovementState : EnemyChaseState
     public override void StateUpdate()
     {
         base.StateUpdate();
+        float forwardSpeed =
+            Vector3.Dot(_context.NavMeshAgent.velocity, _context.transform.forward)
+            / _context.NavMeshAgent.speed;
+        float rightSpeed =
+            Vector3.Dot(_context.NavMeshAgent.velocity, _context.transform.right)
+            / _context.NavMeshAgent.speed;
+        _context.Animator.SetFloat(_context.ForwardSpeedHash, forwardSpeed);
+        _context.Animator.SetFloat(_context.RightSpeedHash, rightSpeed);
     }
 }

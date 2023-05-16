@@ -8,8 +8,10 @@ public class EnemyAttackState : EnemyState
     public override void Enter()
     {
         base.Enter();
-        _context.NavMeshAgent.enabled = true;
+        _context.NavMeshAgent.enabled = false;
         _context.Animator.SetBool("IsAiming", true);
+        _context.Animator.SetFloat(_context.ForwardSpeedHash, 0);
+        _context.Animator.SetFloat(_context.RightSpeedHash, 0);
     }
 
     public override void StateUpdate()
@@ -31,7 +33,7 @@ public class EnemyAttackState : EnemyState
     public override void Exit()
     {
         base.Exit();
-        _context.Animator.SetBool("IsAiming", true);
+        _context.Animator.SetBool("IsAiming", false);
     }
 
     protected bool IsInAttackRange()
