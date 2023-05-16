@@ -18,8 +18,18 @@ public class Element : ScriptableObject
         get => _attackVfx;
     }
 
+    [SerializeField]
+    private DashSkill _dashSkill;
 
+    public DashSkill DashSkill
+    {
+        get => _dashSkill;
+    }
 
-    
-    
+    [SerializeField]
+    private AirMovementSkill _airMovementSkill;
+    public AirMovementSkill AirMovementSkill
+    {
+        get => _airMovementSkill;
+    }
 }

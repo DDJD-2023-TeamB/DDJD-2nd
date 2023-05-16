@@ -4,18 +4,20 @@ using UnityEngine;
 
 public abstract class DashComponent : SkillComponent
 {
-    protected DashStats _stats;
-    protected Dash _skill;
+    protected DashSkill _skill;
+    protected Vector3 _dashDirection;
 
     public override void SetSkill(Skill skill)
     {
-        _skill = (Dash)skill;
-        _stats = _skill.DashStats;
+        base.SetSkill(skill);
+        _skill = (DashSkill)skill;
     }
 
     // destroy the gameobject after the dash is over
-    protected virtual void Start()
+    protected virtual void Start() { }
+
+    public virtual void SetDashDirection(Vector3 direction)
     {
-        Destroy(gameObject, _stats.EffectDuration);
+        _dashDirection = direction;
     }
 }

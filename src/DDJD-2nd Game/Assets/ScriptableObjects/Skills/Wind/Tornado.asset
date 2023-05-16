@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4cfa9ae009949e4c81d9eb55d0a6c88, type: 3}
+  m_Name: Tornado
+  m_EditorClassIdentifier: 
+  _spellPrefab: {fileID: 2628219621962357413, guid: d3e21940a2bafc74e8eb87811fd0619b,
+    type: 3}
+  _handRunePrefab: {fileID: 7228292062507097493, guid: 6152d3bedc0383a4cb7c148e440e7623,
+    type: 3}
+  _impactPrefab: {fileID: 0}
+  _stats:
+    _damage: 5
+    _force: 50
+    _damageToForceMultiplier: 0
+    _cooldown: 0.2
+    _castTime: 0
+    _castType: 1
+    _maxChargeTime: 3
+    _isContinuous: 1
+    _tickRate: 0.1
+    _speed: 3
+    _destroyOnImpact: 0
+    _range: 10
