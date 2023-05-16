@@ -28,9 +28,9 @@ public class Collect : Quest
     }
 
     private void AddItem(GameObject item) {
-        List<GameObject> list = new List<GameObject>(currentItems);
+        List<GameObject> list = new List<GameObject>(this.currentItems);
         list.Add(item);
-        currentItems = list.ToArray();
+        this.currentItems = list.ToArray();
     }
 
 
