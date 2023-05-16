@@ -8,30 +8,22 @@ using UnityEngine;
 public class Collect : Quest
 {
 
-    private GameObject[] itemsToFind;
-    private GameObject[] currentItems;
+    private int numberOfItemsToFind;
+    private int currentNumberOfItemsFound;
+    private string itemType;
 
     public override bool CheckEnd() {
-        bool areEqual = itemsToFind.OrderBy(x => x.GetInstanceID()).SequenceEqual(currentItems.OrderBy(x => x.GetInstanceID()));
-
-        if (areEqual) {
+        if (currentNumberOfItemsFound == numberOfItemsToFind) {
             Finish();
             return true;
         }
         return false;
     }
 
+    //change for collectible
     public void CollectItem(GameObject item) {
-        if (itemsToFind.Contains(item)) {
-            AddItem(item);
+        if (item.tag == itemType) {
+            currentNumberOfItemsFound++;
         }
     }
-
-    private void AddItem(GameObject item) {
-        List<GameObject> list = new List<GameObject>(this.currentItems);
-        list.Add(item);
-        this.currentItems = list.ToArray();
-    }
-
-
 }

@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 
 // [CreateAssetMenu(fileName = "Quest", menuName = "DDJD-2nd Game/Quest", order = 0)]
-public interface Quest
+public abstract class Quest: MonoBehaviour
 {
 
     // public Image questItem;

@@ -13,18 +13,12 @@ public class Mission : MonoBehaviour
 
     public void StartMission()
     {
-        ChangeStatus(Status.Active);
+        this.status = Status.Active;
         this.currentQuest = 0;
     } 
     public void EndMission()
     {
-        ChangeStatus(Status.Completed);
-
-    } 
-    public void ChangeStatus(Status status)
-    {
-        this.status = status;
-
+        this.status = Status.Completed;
     } 
     public void NextQuest()
     {
