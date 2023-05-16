@@ -15,12 +15,17 @@ public class AirborneState : GenericState
     {
         _context.Animator.ResetTrigger("Jump");
         _context.Animator.SetBool("IsGrounded", false);
+        _context.Input.OnJumpKeyDown += OnJumpKeyDown;
+        _context.Input.OnJumpKeyUp += OnJumpKeyUp;
     }
 
     public override void Exit()
     {
         base.Exit();
         _context.Animator.SetBool("IsGrounded", true);
+        _context.Input.OnJumpKeyUp -= OnJumpKeyUp;
+        _context.Input.OnJumpKeyDown -= OnJumpKeyDown;
+        _context.AirMovement?.Reset();
     }
 
     public override bool CanChangeState(GenericState state)
@@ -49,5 +54,15 @@ public class AirborneState : GenericState
         }
 
         return false;
+    }
+
+    private void OnJumpKeyDown()
+    {
+        _context.AirMovement?.OnKeyDown();
+    }
+
+    private void OnJumpKeyUp()
+    {
+        _context.AirMovement?.OnKeyUp();
     }
 }

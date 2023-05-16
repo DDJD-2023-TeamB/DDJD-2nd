@@ -5,15 +5,19 @@ using UnityEngine;
 public abstract class DashComponent : SkillComponent
 {
     protected DashSkill _skill;
+    protected Vector3 _dashDirection;
 
     public override void SetSkill(Skill skill)
     {
+        base.SetSkill(skill);
         _skill = (DashSkill)skill;
     }
 
     // destroy the gameobject after the dash is over
-    protected virtual void Start()
+    protected virtual void Start() { }
+
+    public virtual void SetDashDirection(Vector3 direction)
     {
-        Destroy(gameObject, _skill.DashSkillStats.EffectDuration);
+        _dashDirection = direction;
     }
 }

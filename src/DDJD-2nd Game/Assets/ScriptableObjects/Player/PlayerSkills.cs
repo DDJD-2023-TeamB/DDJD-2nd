@@ -69,7 +69,8 @@ public class PlayerSkills : ScriptableObject
             _skillCooldowns[skill] -= COOLDOWN_TICK;
             yield return new WaitForSeconds(COOLDOWN_TICK);
         }
-        _skillCooldowns.Remove(skill);
+        if (_skillCooldowns.ContainsKey(skill))
+            _skillCooldowns.Remove(skill);
     }
 
     public bool IsSkillOnCooldown(Skill skill)
