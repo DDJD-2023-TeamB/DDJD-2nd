@@ -34,6 +34,8 @@ public class BasicEnemy : HumanoidEnemy
 
     public Action OnDamageTaken;
 
+    private EnemyCommunicator _enemyCommunicator;
+
     public override void Awake()
     {
         base.Awake();
@@ -41,6 +43,7 @@ public class BasicEnemy : HumanoidEnemy
         _noiseListener = GetComponent<NoiseListener>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _enemyDashable = GetComponent<EnemyDashable>();
+        _enemyCommunicator = GetComponent<EnemyCommunicator>();
         _states = new EnemyStates(
             chaseState: new EnemyChaseState(this),
             attackState: new EnemyAttackState(this),
@@ -135,5 +138,10 @@ public class BasicEnemy : HumanoidEnemy
     public EnemyDashable EnemyDashable
     {
         get { return _enemyDashable; }
+    }
+
+    public EnemyCommunicator EnemyCommunicator
+    {
+        get { return _enemyCommunicator; }
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class EnemyIdleState : GenericState
 {
@@ -18,6 +19,11 @@ public class EnemyIdleState : GenericState
         _loopRoutine = _context.StartCoroutine(DetectPlayerLoop());
         _context.NoiseListener.OnNoiseHeard += OnNoiseHeard;
         _context.OnDamageTaken += OnDamageTaken;
+        Action<EnemyMessage> playerSightedAction = OnPlayerSightedMessage;
+        _context.EnemyCommunicator.SetMessageAction(
+            typeof(PlayerSightedMessage),
+            playerSightedAction
+        );
     }
 
     private IEnumerator DetectPlayerLoop()
@@ -29,6 +35,7 @@ public class EnemyIdleState : GenericState
             {
                 if (_context.LineOfSight.CanSeePlayer() || _context.NoiseListener.CanHearPlayer())
                 {
+                    _context.StartCoroutine(WarnNearbyEnemies());
                     _context.ChangeState(_context.States.ChaseState);
                 }
             }
@@ -43,6 +50,10 @@ public class EnemyIdleState : GenericState
         _context.StopCoroutine(_loopRoutine);
         _context.NoiseListener.OnNoiseHeard -= OnNoiseHeard;
         _context.OnDamageTaken -= OnDamageTaken;
+        _context.EnemyCommunicator.DeleteAction(
+            typeof(PlayerSightedMessage),
+            OnPlayerSightedMessage
+        );
     }
 
     private void OnNoiseHeard(Vector3 position)
@@ -66,5 +77,29 @@ public class EnemyIdleState : GenericState
     private void OnDamageTaken()
     {
         _context.ChangeState(_context.States.ChaseState);
+    }
+
+    private void OnPlayerSightedMessage(EnemyMessage message)
+    {
+        _context.ChangeState(_context.States.ChaseState);
+    }
+
+    private IEnumerator WarnNearbyEnemies()
+    {
+        yield return new WaitForSeconds(1.5f);
+        Collider[] colliders = Physics.OverlapSphere(
+            _context.transform.position,
+            _context.AggroRange,
+            LayerMask.GetMask("Enemy")
+        );
+        PlayerSightedMessage message = new PlayerSightedMessage(_context.transform.position);
+        foreach (Collider collider in colliders)
+        {
+            EnemyCommunicator communicator = collider.GetComponent<EnemyCommunicator>();
+            float timeToWait =
+                Vector3.Distance(_context.transform.position, collider.transform.position) / 10.0f;
+            yield return new WaitForSeconds(timeToWait);
+            communicator?.ReceiveMessage(message);
+        }
     }
 }

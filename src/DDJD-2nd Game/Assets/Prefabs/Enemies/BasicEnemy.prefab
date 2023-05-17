@@ -3016,6 +3016,7 @@ GameObject:
   - component: {fileID: 8617104444888835473}
   - component: {fileID: 6510409512166641490}
   - component: {fileID: 3651729006223950212}
+  - component: {fileID: 4269489879880276418}
   m_Layer: 7
   m_Name: BasicEnemy
   m_TagString: Untagged
@@ -3162,7 +3163,7 @@ NavMeshAgent:
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
@@ -3181,6 +3182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _angle: 170.5
+  _distance: 20
 --- !u!114 &6510409512166641490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3212,6 +3214,18 @@ MonoBehaviour:
   resetVelocity: 1
   _maxRegularSpeed: 5
   _speedChangeFactor: 50
+--- !u!114 &4269489879880276418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7679466201466161035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c61c35141a48384596b87f3e0dd9d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7679466201466161037
 GameObject:
   m_ObjectHideFlags: 0
