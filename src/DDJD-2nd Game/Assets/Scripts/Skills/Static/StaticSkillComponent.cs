@@ -16,7 +16,10 @@ public class StaticSkillComponent : SkillComponent
 
     protected void DeactivateSpell()
     {
-        _collider.enabled = false;
+        if (_collider != null)
+        {
+            _collider.enabled = false;
+        }
     }
 
     protected StaticSkillStats _stats;
@@ -47,7 +50,7 @@ public class StaticSkillComponent : SkillComponent
     private IEnumerator DestroyAfterTime(float time)
     {
         yield return new WaitForSeconds(time);
-        _collider.enabled = false;
+        DeactivateSpell();
         DestroySpell();
     }
 }
