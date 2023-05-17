@@ -79,4 +79,14 @@ public class EnemyAimComponent : MonoBehaviour, AimComponent
 
         return false;
     }
+
+    public bool GetAimRaycastHit(out RaycastHit hit)
+    {
+        // TODO Check if this is correct
+        return Physics.Raycast(
+            _enemy.Player.transform.position,
+            _enemy.Player.transform.forward,
+            out hit
+        );
+    }
 }
