@@ -7,6 +7,9 @@ public class EnemyLineOfSight : MonoBehaviour
     [Range(0, 180)]
     private float _angle;
 
+    [SerializeField]
+    private float _distance = 20.0f;
+
     private BasicEnemy _enemy;
 
     public void Awake()
@@ -23,14 +26,7 @@ public class EnemyLineOfSight : MonoBehaviour
         if (angle < halfAngle && angle > -halfAngle)
         {
             RaycastHit hit;
-            if (
-                Physics.Raycast(
-                    transform.position,
-                    direction.normalized,
-                    out hit,
-                    _enemy.AggroRange
-                )
-            )
+            if (Physics.Raycast(transform.position, direction.normalized, out hit, _distance))
             {
                 if (hit.collider.gameObject == _enemy.Player.gameObject)
                 {

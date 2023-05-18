@@ -38,7 +38,7 @@ public class ObjectSpawner : MonoBehaviour
             _spawnedObjectsLifeTime[i] -= Time.deltaTime;
             if (_spawnedObjectsLifeTime[i] <= 0)
             {
-                Destroy(_spawnedObjects[i]);
+                _spawnedObjects[i].GetComponent<SpawnSkillComponent>().DestroySpell();
                 _spawnedObjects.RemoveAt(i);
                 _spawnedObjectsLifeTime.RemoveAt(i);
             }
@@ -72,10 +72,13 @@ public class ObjectSpawner : MonoBehaviour
 
         // Add transparency
         Renderer renderer = _previewObject.GetComponent<Renderer>();
-        Color oldColor = renderer.material.color;
-        Color newColor = new Color(oldColor.r, oldColor.g, oldColor.b, 0.5f);
-        renderer.material.color = newColor;
-        _previewObjectColor = oldColor;
+        if (renderer != null)
+        {
+            Color oldColor = renderer.material.color;
+            Color newColor = new Color(oldColor.r, oldColor.g, oldColor.b, 0.5f);
+            renderer.material.color = newColor;
+            _previewObjectColor = oldColor;
+        }
 
         return _previewObject;
     }
@@ -87,7 +90,10 @@ public class ObjectSpawner : MonoBehaviour
 
         // Reset transparency
         Renderer renderer = _previewObject.GetComponent<Renderer>();
-        renderer.material.color = _previewObjectColor;
+        if (renderer != null)
+        {
+            renderer.material.color = _previewObjectColor;
+        }
 
         _spawnedObjects.Add(_previewObject);
         _spawnedObjectsLifeTime.Add(skill.SpawnStats.Duration);
