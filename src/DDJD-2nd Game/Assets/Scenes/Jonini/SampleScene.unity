@@ -665,6 +665,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chunkLoaders:
   - {fileID: 2775214963086539400}
+  _playerTransform: {fileID: 571771588}
 --- !u!4 &491121795
 Transform:
   m_ObjectHideFlags: 0
@@ -710,6 +711,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afce8ce93f52d4d49b25dd79cde95721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &571771588 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7026416567958636142, guid: 8084707323b635540b484e279ebd75fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 916199378}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &673954238
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,7 +1280,7 @@ PrefabInstance:
     - target: {fileID: 2775214962948361765, guid: afb742d5b638f414699f96c706dd8709,
         type: 3}
       propertyPath: m_Name
-      value: Chunk1Collider
+      value: WindChunk1Loader
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afb742d5b638f414699f96c706dd8709, type: 3}
