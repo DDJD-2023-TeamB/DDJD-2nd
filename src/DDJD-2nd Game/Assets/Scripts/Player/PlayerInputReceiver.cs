@@ -97,6 +97,13 @@ public class PlayerInputReceiver : MonoBehaviour
     public Action OnJumpKeyDown;
     public Action OnJumpKeyUp;
 
+    public Action OnInventoryKeydown;
+    public Action OnInventoryKeyup;
+    public Action OnMissionKeydown;
+    public Action OnMissionKeyup;
+    public Action OnMenuKeydown;
+    public Action OnMenuKeyup;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -165,6 +172,15 @@ public class PlayerInputReceiver : MonoBehaviour
             _isMeleeAttacking = false;
             OnMeleeAttackKeyup?.Invoke();
         };
+
+        _playerInput.UI.Inventory.performed += ctx => OnInventoryKeydown?.Invoke();
+        _playerInput.UI.Inventory.canceled += ctx => OnInventoryKeyup?.Invoke();
+
+        _playerInput.UI.Missions.performed += ctx => OnMissionKeydown?.Invoke();
+        _playerInput.UI.Missions.canceled += ctx => OnMissionKeyup?.Invoke();
+
+        _playerInput.UI.Menu.performed += ctx => OnMenuKeydown?.Invoke();
+        _playerInput.UI.Menu.canceled += ctx => OnMenuKeyup?.Invoke();
     }
 
     private void Move(Vector2 value)

@@ -52,4 +52,24 @@ public class PlayerStateFactory : StateFactory
         // TODO I think we can get the skill from the context
         return new DashState(_context, superState, stats, skill);
     }
+
+    public ChangeSpellState ChangeSpell(GenericState superState)
+    {
+        return new ChangeSpellState(_context, superState);
+    }
+
+    public InventoryState Inventory()
+    {
+        return new InventoryState(_context);
+    }
+
+    public MissionMenuState MissionMenu()
+    {
+        return new MissionMenuState(_context);
+    }
+
+    public MenuState Menu()
+    {
+        return new MenuState(_context);
+    }
 }

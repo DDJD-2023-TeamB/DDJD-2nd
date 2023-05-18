@@ -15,11 +15,17 @@ public class PlayableState : GenericState
     public override void Enter()
     {
         CheckAiming();
+        _context.Input.OnInventoryKeydown += OnInventoryKeydown;
+        _context.Input.OnMissionKeydown += OnMissionKeydown;
+        _context.Input.OnMenuKeydown += OnMenuKeydown;
     }
 
     public override void Exit()
     {
         base.Exit();
+        _context.Input.OnInventoryKeydown -= OnInventoryKeydown;
+        _context.Input.OnMissionKeydown -= OnMissionKeydown;
+        _context.Input.OnMenuKeydown -= OnMenuKeydown;
     }
 
     public override bool CanChangeState(GenericState state)
@@ -101,5 +107,20 @@ public class PlayableState : GenericState
             2f
         );
         */
+    }
+
+    private void OnInventoryKeydown()
+    {
+        _context.ChangeState(_context.Factory.Inventory());
+    }
+
+    private void OnMissionKeydown()
+    {
+        _context.ChangeState(_context.Factory.MissionMenu());
+    }
+
+    private void OnMenuKeydown()
+    {
+        _context.ChangeState(_context.Factory.Menu());
     }
 }
