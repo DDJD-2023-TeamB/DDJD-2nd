@@ -16,7 +16,9 @@ public class ChunkLoader : MonoBehaviour
     * This method is called by the SpawnChunks script when the player enters the trigger.
     */
     public void LoadChunk() {
-        if (!this._loading && !this._assetReference.IsValid()) {
+        if (this._assetReference == null || this._loading) return;
+
+        if (!this._assetReference.IsValid()) {
             this._loading = true;
             
             // The asset reference is not loaded yet, so load it now
@@ -29,7 +31,9 @@ public class ChunkLoader : MonoBehaviour
     * This method is called by the SpawnChunks script when the player exits the trigger.
     */
     public void UnloadChunk() {
-        if (!this._loading && this._assetReference.IsValid()) {
+        if (this._assetReference == null || this._loading) return;
+
+        if (this._assetReference.IsValid()) {
             this._loading = true;
 
             // Destroy the chunk instance
