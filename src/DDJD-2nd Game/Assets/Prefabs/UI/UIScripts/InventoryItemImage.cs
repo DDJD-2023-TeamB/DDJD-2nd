@@ -9,6 +9,7 @@ public class InventoryItemImage : MonoBehaviour, IBeginDragHandler, IDragHandler
     public Image image;
     public ItemStack currentItem;
     public GameObject inventoryUI;
+    public GameObject itemAmountText;
 
     [HideInInspector] public Transform parentAfterDrag;
 

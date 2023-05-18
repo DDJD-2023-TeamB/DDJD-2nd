@@ -82,7 +82,6 @@ public class UIController : MonoBehaviour
         return;
         if (currentMenu == "playing" && Input.GetKeyDown(inventoryKey))
         {
-            Debug.Log("openning menu");
             currentMenu = "inventory";
             _playerUI.inventoryUI.SetActive(true);
             _playerUI.playingUI.SetActive(false);
@@ -203,14 +202,12 @@ public class UIController : MonoBehaviour
 
     public void ChangeLeftWheelItem(int slot, ItemStack item)
     {
-        print("Changing item from left wheel at slot " + slot + " to " + item);
         leftWheelItems[slot] = item;
         _playerUI.leftSpellWheel.GetComponent<WheelController>().updateSpellWheel(leftWheelItems);
     }
 
     public void ChangeRightWheelItem(int slot, ItemStack item)
     {
-        print("Changing item from right wheel at slot " + slot + " to " + item);
         rightWheelItems[slot] = item;
         _playerUI.rightSpellWheel.GetComponent<WheelController>().updateSpellWheel(rightWheelItems);
     }
@@ -218,8 +215,22 @@ public class UIController : MonoBehaviour
     public void LoadInventory()
     {
         //Should load items from a game controller, this is just test code
-        ItemType firestoneItem = new ItemType("firestone", 10, fireStoneSprite, false, false);
-        ItemType redDiamondItem = new ItemType("redDiamond", 10, redDiamondSprite, true, true);
+        ItemType firestoneItem = new ItemType(
+            "firestone",
+            "Fire Stone",
+            10,
+            fireStoneSprite,
+            false,
+            false
+        );
+        ItemType redDiamondItem = new ItemType(
+            "redDiamond",
+            "Red Diamond",
+            10,
+            redDiamondSprite,
+            true,
+            true
+        );
         ItemStack firestoneStack1 = new ItemStack(firestoneItem, null);
         ItemStack firestoneStack2 = new ItemStack(firestoneItem, null);
         ItemStack firestoneStack3 = new ItemStack(firestoneItem, null);
@@ -227,6 +238,7 @@ public class UIController : MonoBehaviour
         ItemStack firestoneStack5 = new ItemStack(firestoneItem, null);
         ItemStack redDiamondStack1 = new ItemStack(redDiamondItem, null);
         ItemStack redDiamondStack2 = new ItemStack(redDiamondItem, null);
+        redDiamondStack2.amount = 427;
         AddItem(firestoneStack1);
         AddItem(firestoneStack2);
         AddItem(firestoneStack3);
@@ -280,13 +292,22 @@ public class ItemType
     public bool isConsumable;
     public bool isSpell;
     public Sprite itemSprite;
+    public string name;
 
-    public ItemType(string typeID, int maxItems, Sprite itemSprite, bool isConsumable, bool isSpell)
+    public ItemType(
+        string typeID,
+        string name,
+        int maxItems,
+        Sprite itemSprite,
+        bool isConsumable,
+        bool isSpell
+    )
     {
         this.typeID = typeID;
         this.maxItems = maxItems;
         this.itemSprite = itemSprite;
         this.isConsumable = isConsumable;
         this.isSpell = isSpell;
+        this.name = name;
     }
 }

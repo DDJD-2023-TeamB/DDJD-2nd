@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,7 +40,7 @@ public class InventoryUI : MonoBehaviour
 
 
 
-    public void AddItem(ItemStack item)
+    public bool AddItem(ItemStack item)
     {
         Transform availableSlot;
         if (item.type.isSpell)
@@ -50,11 +51,18 @@ public class InventoryUI : MonoBehaviour
         {
             availableSlot= FindAvailableItemSlot();
         }
+        if(availableSlot == null)
+        {
+            return false;
+        }
         GameObject newItem = Instantiate(InventoryItemPrefab);
         newItem.transform.SetParent(availableSlot,false);
         newItem.transform.localScale = Vector3.one;
         newItem.GetComponentInChildren<Image>().sprite = item.type.itemSprite;
         newItem.GetComponent<InventoryItemImage>().currentItem = item;
+        newItem.GetComponent<InventoryItemImage>().itemAmountText.GetComponent<TextMeshProUGUI>().text = item.amount.ToString();
+        availableSlot.GetComponent<InventorySlot>().currentItem = item;
+        return true;
     }
 
     public bool RemoveItem(ItemStack item)
