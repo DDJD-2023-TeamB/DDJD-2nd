@@ -16,5 +16,13 @@ public class SpawnChunks : MonoBehaviour
                 this._chunkLoaders[0].LoadChunk();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            if (this._chunkLoaders.Length > 0)
+            {
+                this._chunkLoaders[0].UnloadChunk();
+            }
+        }
     }
 }
