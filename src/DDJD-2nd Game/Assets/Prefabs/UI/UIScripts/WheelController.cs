@@ -9,12 +9,15 @@ public class WheelController : MonoBehaviour
     public GameObject spellWheelBackground;
     public GameObject edgeObject;
     public GameObject wheelHiglighter;
-    public GameObject wheelSelector;
-    public GameObject uiController;
+    public WheelSelectorController wheelSelector;
+    public UIController uiController;
     public GameObject wheelSlots;
     public GameObject wheelSlotImagePrefab;
     float slotSize = 0;
     WheelHiglighterContoller highlighterController;
+
+    private Item[] _itemList = new Item[6];
+
     void Start()
     {
         slotSize = edgeObject.transform.position.x - spellWheelBackground.transform.position.x;
@@ -71,14 +74,19 @@ public class WheelController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            wheelSelector.GetComponent<WheelSelectorController>().changeSelection(slot);
-            uiController.GetComponent<UIController>().SelectSlotLeft(slot);
+            wheelSelector.changeSelection(slot);
+            //uiController.SelectSlotLeft(slot);
         }
     }
 
-
-    public void updateSpellWheel(ItemStack[] itemList)
+    public ItemSkill GetSelectedSlot()
     {
+        return (ItemSkill)_itemList[wheelSelector.CurrentSlot];
+    }
+
+    public void updateSpellWheel(Item[] itemList)
+    {
+        _itemList = itemList;
         for (int i = 0; i < itemList.Length; i++)
         {
             if (itemList[i] != null)
@@ -86,8 +94,8 @@ public class WheelController : MonoBehaviour
                 GameObject itemImage = Instantiate(wheelSlotImagePrefab);
                 itemImage.transform.SetParent(wheelSlots.transform.GetChild(i));
                 itemImage.transform.position = wheelSlots.transform.GetChild(i).position;
-                itemImage.transform.localScale = new Vector2(1,1);
-                itemImage.GetComponent<Image>().sprite = itemList[i].type.itemSprite;
+                itemImage.transform.localScale = new Vector2(1, 1);
+                itemImage.GetComponent<Image>().sprite = itemList[i].Icon;
             }
             else
             {

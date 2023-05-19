@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 1476956531576785441}
   - component: {fileID: 1111271986603139512}
   - component: {fileID: 7906243943254869909}
-  - component: {fileID: 2951425086648249570}
+  - component: {fileID: 736222608649113145}
   m_Layer: 6
   m_Name: UI
   m_TagString: PlayerUI
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2951425086648249570
+--- !u!114 &736222608649113145
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -400,23 +400,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 568079139487936959}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70e99400df5aada4a8a80f59a101a691, type: 3}
+  m_Script: {fileID: 11500000, guid: c86036af5bd73f44e8d394364b1dfaf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryUI: {fileID: 4424125706744704437}
+  inventoryUI: {fileID: 3528289619942864747}
   menuUI: {fileID: 4921325610878591692}
   leftSpellWheel: {fileID: 6865377309096176892}
   rightSpellWheel: {fileID: 2506099698596049292}
   missionsUI: {fileID: 3287625157040611022}
   playingUI: {fileID: 1646466835030491053}
-  currentMenu: playing
-  inventoryKey: 9
-  menuKey: 27
-  leftWheelKey: 113
-  rightWheelKey: 101
-  missionsKey: 109
-  fireStoneSprite: {fileID: 21300000, guid: eebdf6c3971176b40aed226d56f7f8af, type: 3}
-  redDiamondSprite: {fileID: 21300000, guid: 79c32a0efbfff5243952761612676010, type: 3}
 --- !u!1 &689057219014479300
 GameObject:
   m_ObjectHideFlags: 0
@@ -1609,7 +1601,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2494967251726544941
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1678,7 +1670,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &8423847185887591929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1711,7 +1703,7 @@ MonoBehaviour:
   spellWheelBackground: {fileID: 5542727056310561717}
   edgeObject: {fileID: 6387110358323075350}
   wheelHiglighter: {fileID: 4132197035355129214}
-  wheelSelector: {fileID: 8355802122753149750}
+  wheelSelector: {fileID: 881250606174429054}
   uiController: {fileID: 568079139487936959}
   wheelSlots: {fileID: 4850270247334085946}
   wheelSlotImagePrefab: {fileID: 7550414180389196432, guid: 703636d477dd0664a8c6ad394f569acc,
@@ -2197,7 +2189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5761053062587773359
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2263,7 +2255,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &5506129468346991321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2897,6 +2889,8 @@ MonoBehaviour:
     type: 3}
   itemsPanel: {fileID: 9168672264661356416}
   spellsPanel: {fileID: 9091371448724828039}
+  _leftWheel: {fileID: 6456823543129514739}
+  _rightWheel: {fileID: 2463079275830190370}
 --- !u!1 &4646818414926687961
 GameObject:
   m_ObjectHideFlags: 0
@@ -3304,7 +3298,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5084880304907956307
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3371,7 +3365,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &2871477375720430635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3404,6 +3398,8 @@ MonoBehaviour:
   InventoryItemPrefab: {fileID: 0}
   itemsPanel: {fileID: 0}
   spellsPanel: {fileID: 0}
+  _leftWheel: {fileID: 0}
+  _rightWheel: {fileID: 0}
 --- !u!1 &4963937750981827034
 GameObject:
   m_ObjectHideFlags: 0
@@ -3723,7 +3719,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0.00012207031}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4193,7 +4189,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2371248390323743151}
   m_HandleRect: {fileID: 7854877329735765471}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4294,7 +4290,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5497211173293814239
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4363,7 +4359,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &4306172782848404797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4396,7 +4392,7 @@ MonoBehaviour:
   spellWheelBackground: {fileID: 6559951723243244074}
   edgeObject: {fileID: 6249359556366854600}
   wheelHiglighter: {fileID: 2871150543178545342}
-  wheelSelector: {fileID: 5304060384542135278}
+  wheelSelector: {fileID: 4247010109136859637}
   uiController: {fileID: 568079139487936959}
   wheelSlots: {fileID: 1204893425775064306}
   wheelSlotImagePrefab: {fileID: 7550414180389196432, guid: 703636d477dd0664a8c6ad394f569acc,
@@ -4573,9 +4569,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -17, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1799714732393896379
 CanvasRenderer:
@@ -6877,6 +6873,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventorySlot 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4578633497761966193, guid: 0ed388066a752af41b6ab1b553aea185,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7170022969667538443, guid: 0ed388066a752af41b6ab1b553aea185,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ed388066a752af41b6ab1b553aea185, type: 3}
 --- !u!224 &350350307746265503 stripped
@@ -7876,6 +7882,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: InventorySlot 1 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578633497761966193, guid: 0ed388066a752af41b6ab1b553aea185,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ed388066a752af41b6ab1b553aea185, type: 3}

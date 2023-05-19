@@ -8,9 +8,10 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     private PlayerUI _playerUI;
+    private Player _player;
 
-    ItemStack[] leftWheelItems = new ItemStack[6];
-    ItemStack[] rightWheelItems = new ItemStack[6];
+    ItemSkill[] leftWheelItems = new ItemSkill[6];
+    ItemSkill[] rightWheelItems = new ItemSkill[6];
     ItemStack[] itemList = new ItemStack[30];
 
     public string currentMenu = "playing";
@@ -26,24 +27,39 @@ public class UIController : MonoBehaviour
     public Sprite fireStoneSprite;
     public Sprite redDiamondSprite;
 
+    private void Awake()
+    {
+        _player = GetComponent<Player>();
+    }
+
     private void Start()
     {
         _playerUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
 
-        _playerUI.inventoryUI.SetActive(false);
+        _playerUI.inventoryUI.gameObject.SetActive(false);
         _playerUI.menuUI.SetActive(false);
         _playerUI.leftSpellWheel.SetActive(false);
         _playerUI.rightSpellWheel.SetActive(false);
         _playerUI.missionsUI.SetActive(false);
 
+        InventoryUI inventoryUI = _playerUI.inventoryUI;
+        //inventoryUI.OnItemDrop += ;
+        //inventoryUI.OnItemSkillDrop += ;
+        inventoryUI.OnItemSkillLeftDrop += ChangeLeftWheelItem;
+        inventoryUI.OnItemSkillRightDrop += ChangeRightWheelItem;
+        inventoryUI.SetupActions();
+
         //DEBUG
+
+
+        UpdateSpellWheels();
         LoadInventory();
     }
 
     public void OpenInventory(bool isOpening)
     {
         currentMenu = "inventory";
-        _playerUI.inventoryUI.SetActive(isOpening);
+        _playerUI.inventoryUI.gameObject.SetActive(isOpening);
         _playerUI.playingUI.SetActive(!isOpening);
     }
 
@@ -77,68 +93,23 @@ public class UIController : MonoBehaviour
         }
     }
 
-    private void Update()
+    public AimedSkill GetLeftSkillSelected()
     {
-        return;
-        if (currentMenu == "playing" && Input.GetKeyDown(inventoryKey))
-        {
-            currentMenu = "inventory";
-            _playerUI.inventoryUI.SetActive(true);
-            _playerUI.playingUI.SetActive(false);
-            _playerUI.leftSpellWheel.SetActive(false);
-            _playerUI.rightSpellWheel.SetActive(false);
-        }
-        else if (currentMenu == "playing" && Input.GetKeyDown(menuKey))
-        {
-            currentMenu = "menu";
-            _playerUI.menuUI.SetActive(true);
-            _playerUI.playingUI.SetActive(false);
-            _playerUI.leftSpellWheel.SetActive(false);
-            _playerUI.rightSpellWheel.SetActive(false);
-        }
-        else if (currentMenu == "playing" && Input.GetKeyDown(missionsKey))
-        {
-            currentMenu = "missions";
-            _playerUI.missionsUI.SetActive(true);
-            _playerUI.playingUI.SetActive(false);
-            _playerUI.leftSpellWheel.SetActive(false);
-            _playerUI.rightSpellWheel.SetActive(false);
-        }
-        else if (currentMenu == "playing" && Input.GetKeyDown(leftWheelKey))
-        {
-            _playerUI.leftSpellWheel.SetActive(true);
-        }
-        else if (currentMenu == "playing" && Input.GetKeyDown(rightWheelKey))
-        {
-            _playerUI.rightSpellWheel.SetActive(true);
-        }
-        else if (Input.GetKeyUp(leftWheelKey))
-        {
-            _playerUI.leftSpellWheel.SetActive(false);
-        }
-        else if (Input.GetKeyUp(rightWheelKey))
-        {
-            _playerUI.rightSpellWheel.SetActive(false);
-        }
-        else if (currentMenu == "inventory" && Input.GetKeyDown(inventoryKey))
-        {
-            currentMenu = "playing";
-            _playerUI.inventoryUI.SetActive(false);
-            _playerUI.playingUI.SetActive(true);
-        }
-        else if (currentMenu == "missions" && Input.GetKeyDown(missionsKey))
-        {
-            currentMenu = "playing";
-            _playerUI.missionsUI.SetActive(false);
-            _playerUI.playingUI.SetActive(true);
-        }
-        else if (currentMenu == "menu" && Input.GetKeyDown(menuKey))
-        {
-            currentMenu = "playing";
-            _playerUI.menuUI.SetActive(false);
-            _playerUI.playingUI.SetActive(true);
-        }
+        ItemSkill itemSkill = _playerUI.leftSpellWheel
+            .GetComponent<WheelController>()
+            .GetSelectedSlot();
+        return itemSkill.Skill;
     }
+
+    public AimedSkill GetRightSkillSelected()
+    {
+        ItemSkill itemSkill = _playerUI.rightSpellWheel
+            .GetComponent<WheelController>()
+            .GetSelectedSlot();
+        return itemSkill.Skill;
+    }
+
+    private void Update() { }
 
     public void SelectSlotLeft(int slot)
     {
@@ -152,6 +123,8 @@ public class UIController : MonoBehaviour
 
     public void UpdateSpellWheels()
     {
+        leftWheelItems = _player.PlayerSkills.EquippedLeftSkills.ToArray();
+        rightWheelItems = _player.PlayerSkills.EquippedRightSkills.ToArray();
         _playerUI.leftSpellWheel.GetComponent<WheelController>().updateSpellWheel(leftWheelItems);
         _playerUI.rightSpellWheel.GetComponent<WheelController>().updateSpellWheel(rightWheelItems);
     }
@@ -163,7 +136,7 @@ public class UIController : MonoBehaviour
             if (itemList[i] == null)
             {
                 itemList[i] = item;
-                _playerUI.inventoryUI.GetComponent<InventoryUI>().AddItem(item);
+                _playerUI.inventoryUI.AddItem(item);
                 return true;
             }
         }
@@ -178,7 +151,7 @@ public class UIController : MonoBehaviour
             {
                 ItemStack removedItem = itemList[i];
                 itemList[i] = null;
-                _playerUI.inventoryUI.GetComponent<InventoryUI>().RemoveItem(removedItem);
+                _playerUI.inventoryUI.RemoveItem(removedItem);
                 return removedItem;
             }
         }
@@ -193,27 +166,58 @@ public class UIController : MonoBehaviour
             {
                 ItemStack removedItem = itemList[i];
                 itemList[i] = null;
-                _playerUI.inventoryUI.GetComponent<InventoryUI>().RemoveItem(removedItem);
+                _playerUI.inventoryUI.RemoveItem(removedItem);
                 return removedItem;
             }
         }
         return null;
     }
 
-    public void ChangeLeftWheelItem(int slot, ItemStack item)
+    public void ChangeLeftWheelItem(ItemStack itemStack, int slot)
     {
-        leftWheelItems[slot] = item;
+        if (!(itemStack.type is ItemSkill))
+        {
+            Debug.Log("Is not itemskill");
+            return;
+        }
+        ItemSkill itemSkill = (ItemSkill)itemStack.type;
+        leftWheelItems[slot] = itemSkill;
+        _player.PlayerSkills.EquippedLeftSkills[slot] = itemSkill;
         _playerUI.leftSpellWheel.GetComponent<WheelController>().updateSpellWheel(leftWheelItems);
+        UpdateSpellWheels();
+        _playerUI.inventoryUI.SetLeftWheelSkills(new List<ItemSkill>(leftWheelItems));
     }
 
-    public void ChangeRightWheelItem(int slot, ItemStack item)
+    public void ChangeRightWheelItem(ItemStack itemStack, int slot)
     {
-        rightWheelItems[slot] = item;
+        if (!(itemStack.type is ItemSkill))
+        {
+            Debug.Log("Is not itemskill");
+            return;
+        }
+        ItemSkill itemSkill = (ItemSkill)itemStack.type;
+        rightWheelItems[slot] = itemSkill;
+        _player.PlayerSkills.EquippedRightSkills[slot] = itemSkill;
         _playerUI.rightSpellWheel.GetComponent<WheelController>().updateSpellWheel(rightWheelItems);
+        UpdateSpellWheels();
+        _playerUI.inventoryUI.SetRightWheelSkills(new List<ItemSkill>(rightWheelItems));
+    }
+
+    public void LoadSpells()
+    {
+        foreach (ItemSkill itemSkill in _player.PlayerSkills.LearnedSkills)
+        {
+            AddItem(new ItemStack(itemSkill, null));
+        }
     }
 
     public void LoadInventory()
     {
+        LoadSpells();
+        _playerUI.inventoryUI.SetLeftWheelSkills(new List<ItemSkill>(leftWheelItems));
+        _playerUI.inventoryUI.SetRightWheelSkills(new List<ItemSkill>(rightWheelItems));
+
+        /*
         //Should load items from a game controller, this is just test code
         ItemType firestoneItem = new ItemType(
             "firestone",
@@ -246,16 +250,22 @@ public class UIController : MonoBehaviour
         AddItem(firestoneStack5);
         AddItem(redDiamondStack1);
         AddItem(redDiamondStack2);
+        */
+    }
+
+    public Player Player
+    {
+        get { return _player; }
     }
 }
 
 public class ItemStack
 {
-    public ItemType type;
+    public Item type;
     public int amount;
     public string id;
 
-    public ItemStack(ItemType itemType, string id)
+    public ItemStack(Item itemType, string id)
     {
         this.type = itemType;
         this.amount = 1;

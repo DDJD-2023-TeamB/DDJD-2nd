@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class WheelSelectorController : MonoBehaviour
 {
-
     float targetAngle;
     public float rotationSpeed = 1200f;
+
+    private int _currentSlot = 0;
 
     private void Update()
     {
@@ -24,26 +25,29 @@ public class WheelSelectorController : MonoBehaviour
         {
             remaniningAngle += 360;
         }
-        //Debug.Log("Cur Angle: " + currAngle + "    Tar Angle: " + targetAngle + "     Rem Angle: " + remaniningAngle + "     Rotation Speed: " + rotationSpeed);
         if (Mathf.Abs(remaniningAngle) < rotationSpeed * Time.deltaTime)
         {
             transform.rotation = Quaternion.Euler(0, 0, targetAngle);
         }
         else
         {
-            transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + Mathf.Sign(remaniningAngle) * rotationSpeed * Time.deltaTime);
-            //Debug.Log("Cur Angle: " + transform.rotation.z + "    Tar Angle: " + targetAngle + "     Rotating...");
+            transform.rotation = Quaternion.Euler(
+                0,
+                0,
+                transform.rotation.eulerAngles.z
+                    + Mathf.Sign(remaniningAngle) * rotationSpeed * Time.deltaTime
+            );
         }
     }
 
     public void setTargetAngle(float angle)
     {
-        //Debug.Log("Changing higlhihting angle to " + angle);
         this.targetAngle = angle;
     }
 
     public void changeSelection(int slot)
     {
+        _currentSlot = slot;
         switch (slot)
         {
             case 0:
@@ -65,5 +69,10 @@ public class WheelSelectorController : MonoBehaviour
                 setTargetAngle(180);
                 break;
         }
+    }
+
+    public int CurrentSlot
+    {
+        get { return _currentSlot; }
     }
 }

@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class PlayerUI : MonoBehaviour
 {
-    public GameObject inventoryUI,
-        menuUI,
+    [SerializeField]
+    public InventoryUI inventoryUI;
+
+    [SerializeField]
+    public GameObject menuUI,
         leftSpellWheel,
         rightSpellWheel,
         missionsUI,
