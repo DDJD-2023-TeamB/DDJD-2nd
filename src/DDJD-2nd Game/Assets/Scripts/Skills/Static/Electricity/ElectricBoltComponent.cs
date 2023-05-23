@@ -16,7 +16,6 @@ public class ElectricBoltComponent : RayCastSkillComponent, NonCollidable
     public override void Shoot(Vector3 direction)
     {
         base.Shoot(direction);
-        Debug.Log("ElectricBoltComponent: Shoot" + direction);
         SetRayPosition();
     }
 

@@ -49,7 +49,6 @@ public class ElectricRayComponent : RayCastSkillComponent, NonCollidable
     protected override void OnImpact(Collider other, float multiplier = 1)
     {
         base.OnImpact(other);
-        Debug.Log("Ola");
         Damage(
             other.gameObject,
             (int)(_skillStats.Damage * multiplier),
