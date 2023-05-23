@@ -114,7 +114,6 @@ public abstract class SkillComponent : MonoBehaviour
 
     protected virtual void OnImpact(Collider other, float multiplier = 1)
     {
-        Debug.Log("Impact");
         // Override this method to add functionality
     }
 

@@ -11,10 +11,8 @@ public class RayCastSkillComponent : StaticSkillComponent, NonCollidable
         RaycastHit hit;
         if (aimComponent.GetAimRaycastHit(out hit))
         {
-            Debug.Log("Hit " + hit.collider.gameObject.name);
             return hit;
         }
-        Debug.Log("Not hit");
         return null;
     }
 }

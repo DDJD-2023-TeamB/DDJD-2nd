@@ -86,7 +86,8 @@ public class EnemyAimComponent : MonoBehaviour, AimComponent
         return Physics.Raycast(
             _enemy.Player.transform.position,
             _enemy.Player.transform.forward,
-            out hit
+            out hit,
+            RayCastUtils.RayCastMask
         );
     }
 }

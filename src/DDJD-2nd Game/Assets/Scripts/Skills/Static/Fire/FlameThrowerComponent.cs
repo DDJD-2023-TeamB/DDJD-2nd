@@ -16,6 +16,7 @@ public class FlameThrowerComponent : StaticSkillComponent, NonCollidable
     public override void Shoot(Vector3 direction)
     {
         base.Shoot(direction);
+        Debug.Log("FlameThrowerComponent: Shoot" + direction);
         //face the direction of the caster
         transform.rotation = Quaternion.LookRotation(direction);
     }

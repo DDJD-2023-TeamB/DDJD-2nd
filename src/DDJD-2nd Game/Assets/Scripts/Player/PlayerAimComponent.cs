@@ -121,7 +121,7 @@ public class PlayerAimComponent : MonoBehaviour, AimComponent
             _player.AimCamera.transform.forward,
             out hit,
             100f,
-            ~LayerMask.GetMask("PlayerTrigger")
+            RayCastUtils.RayCastMask
         );
     }
 }
