@@ -1,19 +1,17 @@
 using UnityEngine;
 
-public class EnemyAttackState : GenericState
+public class EnemyAttackState : EnemyState
 {
-    protected BasicEnemy _context;
-
     public EnemyAttackState(BasicEnemy enemy)
-        : base(enemy)
-    {
-        _context = enemy;
-    }
+        : base(enemy) { }
 
     public override void Enter()
     {
-        _context.NavMeshAgent.enabled = true;
+        base.Enter();
+        _context.NavMeshAgent.enabled = false;
         _context.Animator.SetBool("IsAiming", true);
+        _context.Animator.SetFloat(_context.ForwardSpeedHash, 0);
+        _context.Animator.SetFloat(_context.RightSpeedHash, 0);
     }
 
     public override void StateUpdate()
@@ -35,7 +33,7 @@ public class EnemyAttackState : GenericState
     public override void Exit()
     {
         base.Exit();
-        _context.Animator.SetBool("IsAiming", true);
+        _context.Animator.SetBool("IsAiming", false);
     }
 
     protected bool IsInAttackRange()

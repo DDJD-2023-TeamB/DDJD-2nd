@@ -23,8 +23,6 @@ public class EnemyRandomPatrolState : EnemyIdleState
     public override void Exit()
     {
         base.Exit();
-        _context.NavMeshAgent.enabled = false;
-        _context.Rigidbody.isKinematic = false;
         _context.NavMeshAgent.speed = _previousSpeed;
         if (_samplePositionCoroutine != null)
         {

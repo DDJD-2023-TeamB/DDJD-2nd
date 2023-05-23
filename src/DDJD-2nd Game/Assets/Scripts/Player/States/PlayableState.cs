@@ -14,6 +14,7 @@ public class PlayableState : GenericState
 
     public override void Enter()
     {
+        base.Enter();
         CheckAiming();
     }
 

@@ -14,7 +14,10 @@ public class EnemyLookAtState : GenericState
         _desiredRotation = Quaternion.LookRotation(desiredDirection);
     }
 
-    public override void Enter() { }
+    public override void Enter()
+    {
+        base.Enter();
+    }
 
     public override void Exit() { }
 

@@ -17,6 +17,7 @@ public class MeleeAttackingState : GenericState
 
     public override void Enter()
     {
+        base.Enter();
         _context.MeleeCombat.OnAttackStart += OnAttackStart;
         _context.MeleeCombat.OnAttackEnd += OnAttackEnd;
 

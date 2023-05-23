@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
 using System;
+using TMPro;
 
 public class BasicEnemy : HumanoidEnemy
 {
@@ -35,6 +36,9 @@ public class BasicEnemy : HumanoidEnemy
     public Action OnDamageTaken;
 
     private EnemyCommunicator _enemyCommunicator;
+
+    [SerializeField]
+    private TextMeshProUGUI _stateText;
 
     public override void Awake()
     {
@@ -86,6 +90,12 @@ public class BasicEnemy : HumanoidEnemy
         ChangeState(new EnemyKnockdownState(this, force, hitPoint, hitDirection, _state));
     }
 
+    public override void ChangeState(GenericState state)
+    {
+        base.ChangeState(state);
+        _stateText.text = state.GetType().ToString() + " " + state.Substate?.GetType().ToString();
+    }
+
     //getters and setters
     public Player Player
     {
@@ -123,6 +133,7 @@ public class BasicEnemy : HumanoidEnemy
     public EnemySkills EnemySkills
     {
         get { return _enemySkills; }
+        set { _enemySkills = value; }
     }
 
     public EnemyLineOfSight LineOfSight

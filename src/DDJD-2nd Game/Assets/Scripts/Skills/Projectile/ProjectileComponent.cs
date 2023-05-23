@@ -22,6 +22,7 @@ public abstract class ProjectileComponent : SkillComponent
     private bool _setVelocity = false;
 
     private Vector3 _initialPosition;
+    private bool _isShooting = false;
 
     protected override void Awake()
     {
@@ -34,7 +35,7 @@ public abstract class ProjectileComponent : SkillComponent
     protected override void Update()
     {
         base.Update();
-        if (Vector3.Distance(_initialPosition, transform.position) > _stats.Range)
+        if (_isShooting && Vector3.Distance(_initialPosition, transform.position) > _stats.Range)
         {
             DestroySpell();
         }
@@ -64,7 +65,7 @@ public abstract class ProjectileComponent : SkillComponent
     public override void Shoot(Vector3 direction)
     {
         ActivateSpell();
-        Debug.DrawRay(transform.position, direction * 10f, Color.red, 100f);
+        _isShooting = true;
         _initialPosition = transform.position;
         transform.parent = null; // Detach from caster
         _leftCaster = true;
