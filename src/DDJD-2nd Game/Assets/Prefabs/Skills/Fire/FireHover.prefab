@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5630693577602357730}
   - component: {fileID: 150743758810259188}
+  - component: {fileID: -1616795267437055893}
   - component: {fileID: 926101632087766071}
+  - component: {fileID: -2060038563363698089}
   m_Layer: 2
-  m_Name: ElectricityHover
+  m_Name: FireHover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +43,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5748043872736922122}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 7b625e1f4bf2cbb43b060b66edeed341, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: a75dfe9decd677e4d8570a35391c4b8f, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -70,6 +72,18 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &-1616795267437055893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5748043872736922122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a34a52769d84d47a6512c72e7f671b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!73398921 &926101632087766071
 VFXRenderer:
   serializedVersion: 1
@@ -110,3 +124,27 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &-2060038563363698089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5748043872736922122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - hover
+    _values:
+    - _playOnStart: 1
+      _eventReference:
+        Guid:
+          Data1: 41983174
+          Data2: 1098292774
+          Data3: -2047966317
+          Data4: -758028151
+        Path: event:/Fire Abilities/Fire Hover

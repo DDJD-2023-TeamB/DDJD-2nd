@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 7018883994862709450}
   - component: {fileID: 1866506817447275733}
   - component: {fileID: 8000545382946450324}
+  - component: {fileID: 2558262410881071803}
   m_Layer: 2
   m_Name: Shockwave
   m_TagString: Untagged
@@ -132,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageCaster: 0
+  _leaveCaster: 1
 --- !u!54 &1866506817447275733
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -161,6 +163,30 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.365096, y: 1.6372215, z: 2.4252105}
   m_Center: {x: 0.03753084, y: 0, z: 1.1073408}
+--- !u!114 &2558262410881071803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7932264220128826489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - shockwave
+    _values:
+    - _playOnStart: 1
+      _eventReference:
+        Guid:
+          Data1: 638874205
+          Data2: 1205450335
+          Data3: 1621254806
+          Data4: -1563458553
+        Path: event:/Wind Abilities/Wind Shockwave
 --- !u!1 &7932264220759950300
 GameObject:
   m_ObjectHideFlags: 0

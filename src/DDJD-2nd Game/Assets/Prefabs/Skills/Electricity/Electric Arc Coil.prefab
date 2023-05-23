@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 6531503289842114095}
   - component: {fileID: 3998733597335694924}
   - component: {fileID: 81257703777011906}
+  - component: {fileID: -5738211443159528740}
   m_Layer: 2
   m_Name: Electric Arc Coil
   m_TagString: Untagged
@@ -177,6 +178,30 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0, y: 0, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-5738211443159528740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6531503289841877519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - spawn
+    _values:
+    - _playOnStart: 0
+      _eventReference:
+        Guid:
+          Data1: 1597697550
+          Data2: 1222469949
+          Data3: 864584331
+          Data4: -186679544
+        Path: event:/Lightning Abilities/Lightning Coil Trap
 --- !u!1001 &2766483465329045027
 PrefabInstance:
   m_ObjectHideFlags: 0
