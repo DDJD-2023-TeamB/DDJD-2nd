@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{f46f5fbd-a806-45b2-ae9e-80a4b7bbed9c}">
+		<property name="name">
+			<value>Wind Battle State</value>
+		</property>
+		<relationship name="folder">
+			<destination>{de79e17d-ef84-4ec5-bc49-2e353b71570e}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{946c69d0-5c72-41e5-ab6e-0e1634bdd1f7}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{946c69d0-5c72-41e5-ab6e-0e1634bdd1f7}">
+		<property name="parameterType">
+			<value>1</value>
+		</property>
+		<property name="minimum">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="initialValue">
+			<value>1</value>
+		</property>
+	</object>
+</objects>
