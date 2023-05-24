@@ -2,20 +2,16 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-public class EnemyIdleState : GenericState
+public class EnemyIdleState : EnemyState
 {
-    protected BasicEnemy _context;
-
     private Coroutine _loopRoutine;
 
     public EnemyIdleState(BasicEnemy enemy)
-        : base(enemy)
-    {
-        _context = enemy;
-    }
+        : base(enemy) { }
 
     public override void Enter()
     {
+        base.Enter();
         _loopRoutine = _context.StartCoroutine(DetectPlayerLoop());
         _context.NoiseListener.OnNoiseHeard += OnNoiseHeard;
         _context.OnDamageTaken += OnDamageTaken;
@@ -86,20 +82,8 @@ public class EnemyIdleState : GenericState
 
     private IEnumerator WarnNearbyEnemies()
     {
-        yield return new WaitForSeconds(1.5f);
-        Collider[] colliders = Physics.OverlapSphere(
-            _context.transform.position,
-            _context.AggroRange,
-            LayerMask.GetMask("Enemy")
-        );
-        PlayerSightedMessage message = new PlayerSightedMessage(_context.transform.position);
-        foreach (Collider collider in colliders)
-        {
-            EnemyCommunicator communicator = collider.GetComponent<EnemyCommunicator>();
-            float timeToWait =
-                Vector3.Distance(_context.transform.position, collider.transform.position) / 10.0f;
-            yield return new WaitForSeconds(timeToWait);
-            communicator?.ReceiveMessage(message);
-        }
+        yield return new WaitForSeconds(0.5f);
+        PlayerSightedMessage message = new PlayerSightedMessage(_context.Player.transform.position);
+        _context.StartCoroutine(_context.EnemyCommunicator.SendMessageToEnemies(message));
     }
 }

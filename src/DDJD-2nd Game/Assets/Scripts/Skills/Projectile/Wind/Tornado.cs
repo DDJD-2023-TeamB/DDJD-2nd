@@ -44,14 +44,25 @@ public class Tornado : GroundProjectileComponent, NonCollidable
 
     private List<CaughtInTornado> _caughtObjects;
 
+    private SoundEmitter _soundEmitter;
+    private FMOD.Studio.PARAMETER_ID _sfxStateId;
+    private FMOD.Studio.PARAMETER_ID _sfxTornadoIntensityId;
+
     override protected void Awake()
     {
         base.Awake();
+        _soundEmitter = GetComponent<SoundEmitter>();
         _lifetime = 0.0f;
         _caughtObjects = new List<CaughtInTornado>();
         _tornadoVFX = GetComponentInChildren<VisualEffect>();
         _chargeComponent.OnChargeComplete += StopGeneratingTornado;
         //StartCoroutine(SpawnTornado());
+    }
+
+    public void Start()
+    {
+        _sfxStateId = _soundEmitter.GetParameterId("tornado", "Tornado");
+        _sfxTornadoIntensityId = _soundEmitter.GetParameterId("tornado", "TornadoIntensity");
     }
 
     private IEnumerator SpawnTornado()
@@ -106,15 +117,22 @@ public class Tornado : GroundProjectileComponent, NonCollidable
         boxCollider.size = originalSize * _chargeComponent.GetCurrentCharge();
         _tornadoStrength = _skillStats.Force * _chargeComponent.GetCurrentCharge();
         _rotationStrength = 50f * _chargeComponent.GetCurrentCharge();
-
         StartCoroutine(DestroyTornado());
+
+        _soundEmitter.Stop("tornado");
+        _soundEmitter.SetParameter(
+            "tornado",
+            _sfxTornadoIntensityId,
+            _chargeComponent.GetCurrentCharge()
+        );
+        _soundEmitter.SetParameterWithLabel("tornado", _sfxStateId, "Release", true);
     }
 
     private IEnumerator DestroyTornado()
     {
         float timeToDestroy = _stats.Range / _stats.Speed;
         yield return new WaitForSeconds(timeToDestroy);
-
+        _soundEmitter.StopAndRelease("tornado");
         _tornadoVFX.SetFloat("Duration", _lifetime + 2.0f);
 
         yield return new WaitForSeconds(1.5f);

@@ -65,7 +65,6 @@ public class EnemyAimComponent : MonoBehaviour, AimComponent
         RaycastHit hit;
         if (Physics.Raycast(origin, direction, out hit, _enemy.AttackRange))
         {
-            Debug.DrawRay(origin, direction * hit.distance, Color.yellow, 5f);
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 return true;
@@ -87,7 +86,8 @@ public class EnemyAimComponent : MonoBehaviour, AimComponent
         return Physics.Raycast(
             _enemy.Player.transform.position,
             _enemy.Player.transform.forward,
-            out hit
+            out hit,
+            RayCastUtils.RayCastMask
         );
     }
 }

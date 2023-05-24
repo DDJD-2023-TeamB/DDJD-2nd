@@ -7,10 +7,19 @@ public class BasicShotComponent : ProjectileComponent
 {
     private VisualEffect _vfx;
 
+    private SoundEmitter _soundEmitter;
+
     protected override void Awake()
     {
         base.Awake();
         _vfx = GetComponent<VisualEffect>();
+        _soundEmitter = GetComponent<SoundEmitter>();
+    }
+
+    public override void Shoot(Vector3 direction)
+    {
+        base.Shoot(direction);
+        _soundEmitter.PlayAndRelease("spawn");
     }
 
     protected override void OnImpact(Collider other, float multiplier = 1)

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6617006005067010077}
   - component: {fileID: 3278868152377275284}
   - component: {fileID: 5215342044545796747}
+  - component: {fileID: 3870533458548296773}
   m_Layer: 2
   m_Name: Tornado
   m_TagString: Untagged
@@ -172,3 +173,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e323423f5da5e5d42a3c0ee351f89f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3870533458548296773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2628219621962357413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - tornado
+    _values:
+    - _playOnStart: 1
+      _eventReference:
+        Guid:
+          Data1: 293150937
+          Data2: 1094837986
+          Data3: -59558243
+          Data4: -1142915216
+        Path: event:/Wind Abilities/Tornado

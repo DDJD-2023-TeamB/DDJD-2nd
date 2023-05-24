@@ -49,12 +49,11 @@ public class RangedAttackState : EnemyAttackState
 
     private IEnumerator AttackCoroutine()
     {
+        //Wait one frame
+        yield return 0;
         while (true)
         {
-            if (!(_substate is RangedRepositionState))
-            {
-                Shoot();
-            }
+            Shoot();
             yield return new WaitForSeconds(_context.EnemySkills.AttackSpeed);
         }
     }
@@ -75,7 +74,7 @@ public class RangedAttackState : EnemyAttackState
             _attackTries++;
             if (_attackTries >= _maxAttackTries)
             {
-                ChangeSubState(new RangedRepositionState(_context));
+                _context.ChangeState(new RangedRepositionState(_context));
             }
         }
     }

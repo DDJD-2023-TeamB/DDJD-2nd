@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public abstract class MovableState : GenericState{
-
+public abstract class MovableState : GenericState
+{
     protected Player _context;
 
     public override void Enter()
     {
+        base.Enter();
         CheckAirbone();
     }
 
@@ -15,7 +16,8 @@ public abstract class MovableState : GenericState{
         _context = (Player)context;
     }
 
-    public override void StateUpdate(){
+    public override void StateUpdate()
+    {
         CheckAirbone();
     }
 

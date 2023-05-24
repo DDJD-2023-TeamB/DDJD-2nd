@@ -23,7 +23,13 @@ public abstract class GenericState
         _superstate = superState;
     }
 
-    public abstract void Enter();
+    public virtual void Enter()
+    {
+        if (_substate != null)
+        {
+            _substate.Enter();
+        }
+    }
 
     public virtual void Exit()
     {
@@ -85,5 +91,10 @@ public abstract class GenericState
         {
             _substate.Update();
         }
+    }
+
+    public GenericState GetSubState()
+    {
+        return _substate;
     }
 }

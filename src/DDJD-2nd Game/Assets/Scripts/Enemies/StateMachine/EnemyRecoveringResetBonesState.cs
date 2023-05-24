@@ -26,6 +26,7 @@ public class EnemyRepositionRecoverBonesState : GenericState
 
     public override void Enter()
     {
+        base.Enter();
         _context.RagdollController.AlignRotationWithHips();
         _context.RagdollController.AlignPositionWithHips(_recoveringAnimationName);
         PopulateBoneTransforms(_ragdollBoneTransforms);

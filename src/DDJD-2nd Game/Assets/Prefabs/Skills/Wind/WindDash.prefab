@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4782967438381874668}
   - component: {fileID: 4782967438381874669}
   - component: {fileID: -2463504748630244671}
-  - component: {fileID: -330729552303087727}
+  - component: {fileID: -5861469488365233900}
   m_Layer: 2
   m_Name: WindDash
   m_TagString: Untagged
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageCaster: 0
---- !u!114 &-330729552303087727
+--- !u!114 &-5861469488365233900
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,6 +134,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 4782967438381874670}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8d342615445ea04cb7bbdfa97f4c5ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 845962415
+      Data2: 1337427977
+      Data3: 649952186
+      Data4: 684587714
+    Path: event:/Wind Abilities/Wind Dash
+  Event: 
+  PlayEvent: 1
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

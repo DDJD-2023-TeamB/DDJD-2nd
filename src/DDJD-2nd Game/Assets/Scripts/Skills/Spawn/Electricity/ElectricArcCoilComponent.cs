@@ -17,8 +17,23 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
     [SerializeField]
     private float _yOffset = 0.5f;
 
+    private SoundEmitter _soundEmitter;
+    private FMOD.Studio.PARAMETER_ID _sfxStateId;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _soundEmitter = GetComponent<SoundEmitter>();
+    }
+
+    public void Start()
+    {
+        _sfxStateId = _soundEmitter.GetParameterId("spawn", "Parameter 1");
+    }
+
     public override void Spawn()
     {
+        _soundEmitter.SetParameterWithLabel("spawn", _sfxStateId, "Activate", true);
         StartCoroutine(SpawnAfterTime());
     }
 
