@@ -146,6 +146,7 @@ public class Player : StateContext
         get { return _dashable; }
     }
 
+    public Interactable _interactedObject;
     private AirMovementComponent _airMovement;
     public AirMovementComponent AirMovement
     {
