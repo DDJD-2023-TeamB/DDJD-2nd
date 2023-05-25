@@ -10,7 +10,10 @@ public class EnemyDeadState : GenericState
         _context = enemy;
     }
 
-    public override void Enter() { }
+    public override void Enter()
+    {
+        base.Enter();
+    }
 
     public override void StateUpdate()
     {

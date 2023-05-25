@@ -13,6 +13,7 @@ public class AirborneState : GenericState
 
     public override void Enter()
     {
+        base.Enter();
         _context.Animator.ResetTrigger("Jump");
         _context.Animator.SetBool("IsGrounded", false);
         _context.Input.OnJumpKeyDown += OnJumpKeyDown;

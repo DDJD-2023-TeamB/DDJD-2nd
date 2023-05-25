@@ -167,6 +167,10 @@ public abstract class SkillComponent : MonoBehaviour
         {
             return false;
         }
+        if (_caster.layer == other.gameObject.layer)
+        {
+            return false;
+        }
         return true;
     }
 

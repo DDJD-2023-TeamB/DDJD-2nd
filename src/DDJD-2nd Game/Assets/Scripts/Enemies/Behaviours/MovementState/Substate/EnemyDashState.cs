@@ -22,6 +22,7 @@ public class EnemyDashState : GenericState
 
     public override void Enter()
     {
+        base.Enter();
         _dashable = _context.EnemyDashable;
         _stats = _context.EnemySkills.DashStats;
         _skill = _context.EnemySkills.CurrentElement.DashSkill;
@@ -49,8 +50,6 @@ public class EnemyDashState : GenericState
 
     public override void Exit()
     {
-        _context.NavMeshAgent.enabled = true;
-        _context.Rigidbody.isKinematic = true;
         _dashable.OnDashFinish -= OnDashFinish;
     }
 }

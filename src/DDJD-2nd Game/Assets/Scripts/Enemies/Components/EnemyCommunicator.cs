@@ -7,6 +7,11 @@ public class EnemyCommunicator : MonoBehaviour
 {
     private Dictionary<Type, Action<EnemyMessage>> _messageActions =
         new Dictionary<Type, Action<EnemyMessage>>();
+    private Dictionary<Type, EnemyMessage> _messagesUnhandled =
+        new Dictionary<Type, EnemyMessage>();
+
+    [SerializeField]
+    private float _messageRange = 50.0f;
 
     // Start is called before the first frame update
     void Start() { }
@@ -20,6 +25,11 @@ public class EnemyCommunicator : MonoBehaviour
         {
             _messageActions[message.GetType()]?.Invoke(message);
         }
+        else
+        {
+            //Store message so when action is setted, it will be called
+            _messagesUnhandled.Add(message.GetType(), message);
+        }
     }
 
     public void SetMessageAction(Type messageType, Action<EnemyMessage> action)
@@ -28,6 +38,12 @@ public class EnemyCommunicator : MonoBehaviour
             _messageActions.Add(messageType, action);
         else
             _messageActions[messageType] = action;
+
+        if (_messagesUnhandled.ContainsKey(messageType))
+        {
+            _messageActions[messageType]?.Invoke(_messagesUnhandled[messageType]);
+            _messagesUnhandled.Remove(messageType);
+        }
     }
 
     public void DeleteAction(Type messageType, Action<EnemyMessage> action)
@@ -41,5 +57,31 @@ public class EnemyCommunicator : MonoBehaviour
         if (!_messageActions.ContainsKey(messageType))
             _messageActions.Add(messageType, (EnemyMessage msg) => { });
         return _messageActions[messageType];
+    }
+
+    public IEnumerator SendMessageToEnemies(EnemyMessage message)
+    {
+        Collider[] colliders = Physics.OverlapSphere(
+            transform.position,
+            _messageRange,
+            LayerMask.GetMask("Enemy") | LayerMask.GetMask("PlayerTrigger")
+        );
+        foreach (Collider collider in colliders)
+        {
+            if (collider == null)
+            {
+                break;
+            }
+            EnemyCommunicator communicator = collider.GetComponent<EnemyCommunicator>();
+            float timeToWait =
+                Vector3.Distance(transform.position, collider.transform.position) / 10.0f;
+            yield return new WaitForSeconds(timeToWait);
+            communicator?.ReceiveMessage(message);
+        }
+    }
+
+    public void SendMessage(GameObject enemy, EnemyMessage message)
+    {
+        enemy.GetComponent<EnemyCommunicator>()?.ReceiveMessage(message);
     }
 }

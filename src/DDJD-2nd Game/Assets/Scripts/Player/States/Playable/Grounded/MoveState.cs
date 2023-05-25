@@ -13,7 +13,10 @@ public class MoveState : GenericState
         _context = (Player)context;
     }
 
-    public override void Enter() { }
+    public override void Enter()
+    {
+        base.Enter();
+    }
 
     public override void Exit()
     {

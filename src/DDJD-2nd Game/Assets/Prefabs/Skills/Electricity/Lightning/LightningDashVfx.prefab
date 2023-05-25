@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4004374486373461461}
   - component: {fileID: 6551930551421182360}
   - component: {fileID: 2771042178950473318}
+  - component: {fileID: 3769222027607500799}
   m_Layer: 2
   m_Name: LightningDashVfx
   m_TagString: Untagged
@@ -162,3 +163,27 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &3769222027607500799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749058838326422176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - dash
+    _values:
+    - _playOnStart: 1
+      _eventReference:
+        Guid:
+          Data1: -1956220180
+          Data2: 1154910215
+          Data3: -1464254787
+          Data4: -1334484791
+        Path: event:/Lightning Abilities/Lightning Dash
