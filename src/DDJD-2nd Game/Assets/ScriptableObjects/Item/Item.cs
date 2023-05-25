@@ -12,6 +12,7 @@ public abstract class Item : ScriptableObject
     [SerializeField]
     private Sprite _icon;
 
+
     //[SerializeField]
     //private bool _isStackable;
     //

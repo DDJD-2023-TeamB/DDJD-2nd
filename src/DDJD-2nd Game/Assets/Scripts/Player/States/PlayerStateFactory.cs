@@ -71,6 +71,8 @@ public class PlayerStateFactory : StateFactory
     public MenuState Menu()
     {
         return new MenuState(_context);
+    }
+
     public InteractingState Interacting(GenericState superState)
     {
         return new InteractingState(_context, superState);
