@@ -25,6 +25,12 @@ public class CaughtInTornado : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!enabled)
+        {
+            //Remove this component
+            Destroy(this);
+            return;
+        }
         //Rotate object around tornado center
         Vector3 direction = transform.position - tornadoReference.transform.position;
         //Project

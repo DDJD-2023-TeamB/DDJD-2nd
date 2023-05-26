@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 7776148656299564115}
   - component: {fileID: 8726322443956727726}
   - component: {fileID: 1151368901426560208}
-  - component: {fileID: -7920166375068334571}
+  - component: {fileID: -1929167772646228940}
   m_Layer: 2
   m_Name: Electric Ray
   m_TagString: Untagged
@@ -257,37 +257,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageCaster: 0
   _leaveCaster: 0
---- !u!114 &-7920166375068334571
+--- !u!114 &-1929167772646228940
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1634034571551166434}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  Event: 
-  PlayEvent: 0
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  _events:
+    _keys:
+    - ray
+    _values:
+    - _playOnStart: 1
+      _stopOnDestroy: 1
+      _eventReference:
+        Guid:
+          Data1: 1174936131
+          Data2: 1170517645
+          Data3: 1064794521
+          Data4: 14931114
+        Path: event:/Lightning Abilities/Eletrical Ray
 --- !u!1 &4751425462658845322
 GameObject:
   m_ObjectHideFlags: 0

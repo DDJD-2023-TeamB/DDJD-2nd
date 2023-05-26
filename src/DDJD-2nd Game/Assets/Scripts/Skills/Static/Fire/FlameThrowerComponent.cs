@@ -11,13 +11,10 @@ public class FlameThrowerComponent : StaticSkillComponent, NonCollidable
 
     private Coroutine _soundRoutine;
 
-    private SoundEmitter _soundEmitter;
-
     protected override void Awake()
     {
         base.Awake();
         _vfx = GetComponent<VisualEffect>();
-        _soundEmitter = GetComponent<SoundEmitter>();
     }
 
     private string _sfxName = "flamethrower";

@@ -17,22 +17,22 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
     [SerializeField]
     private float _yOffset = 0.5f;
 
-    private SoundEmitter _soundEmitter;
     private FMOD.Studio.PARAMETER_ID _sfxStateId;
 
     protected override void Awake()
     {
         base.Awake();
-        _soundEmitter = GetComponent<SoundEmitter>();
     }
 
     public void Start()
     {
-        _sfxStateId = _soundEmitter.GetParameterId("spawn", "Parameter 1");
+        _sfxStateId = _soundEmitter.GetParameterId("spawn", "Coil Trap");
+        _soundEmitter.Play("spawn");
     }
 
     public override void Spawn()
     {
+        _soundEmitter.Stop("spawn");
         _soundEmitter.SetParameterWithLabel("spawn", _sfxStateId, "Activate", true);
         StartCoroutine(SpawnAfterTime());
     }
@@ -103,6 +103,9 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
         arcComponent.SetSkill(_skill);
 
         float arcLife = Mathf.Min(spawner.GetObjectLifeTime(lastCoil), _skill.SpawnStats.Duration);
+
+        //Activate sound
+        _soundEmitter.SetParameterWithLabel("spawn", _sfxStateId, "Conection", false);
         Destroy(arc, arcLife);
     }
 
@@ -118,6 +121,7 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
     {
         VisualEffect vfx = _vfx.GetComponent<VisualEffect>();
         vfx.Stop();
+        _soundEmitter.StopAndReleaseAll();
         Destroy(gameObject, 1.0f);
     }
 }

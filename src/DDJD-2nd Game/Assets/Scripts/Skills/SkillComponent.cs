@@ -11,10 +11,13 @@ public abstract class SkillComponent : MonoBehaviour
     protected ChargeComponent _chargeComponent;
     protected NoiseSource _noiseComponent;
 
+    protected SoundEmitter _soundEmitter;
+
     virtual protected void Awake()
     {
         _chargeComponent = GetComponent<ChargeComponent>();
         _noiseComponent = GetComponent<NoiseSource>();
+        _soundEmitter = GetComponent<SoundEmitter>();
     }
 
     public GameObject Caster

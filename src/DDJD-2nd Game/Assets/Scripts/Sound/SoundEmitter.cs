@@ -26,6 +26,10 @@ public class SoundEmitter : MonoBehaviour
                 eventInstance.start();
             }
             _eventInstances.Add(pair.Key, eventInstance);
+            if (sound.UpdatePosition)
+            {
+                StartCoroutine(UpdatePosition(eventInstance));
+            }
         }
     }
 
@@ -115,5 +119,30 @@ public class SoundEmitter : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         action();
+    }
+
+    public void OnDestroy()
+    {
+        foreach (KeyValuePair<string, FMOD.Studio.EventInstance> pair in _eventInstances)
+        {
+            string eventName = pair.Key;
+            if (_events[eventName].StopOnDestroy)
+            {
+                StopAndRelease(eventName);
+            }
+            else
+            {
+                _eventInstances[eventName].release();
+            }
+        }
+    }
+
+    public IEnumerator UpdatePosition(FMOD.Studio.EventInstance eventInstance)
+    {
+        while (true)
+        {
+            eventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }
