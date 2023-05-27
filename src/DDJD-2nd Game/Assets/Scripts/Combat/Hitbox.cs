@@ -105,7 +105,13 @@ public class Hitbox : MonoBehaviour, NonCollidable
         Damageable damageable = other.GetComponent<Damageable>();
         if (damageable == null)
             return false;
-        damageable.TakeDamage((int)_damage, _force, transform.position, _parent.transform.forward);
+        damageable.TakeDamage(
+            this.gameObject,
+            (int)_damage,
+            _force,
+            transform.position,
+            _parent.transform.forward
+        );
         return true;
     }
 }

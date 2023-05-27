@@ -26,7 +26,12 @@ public class CharacterStatus : MonoBehaviour
     // Update is called once per frame
     void Update() { }
 
-    public void TakeDamage(int damage, Vector3 hitPoint = default(Vector3), Vector3 hitDirection = default(Vector3))
+    public void TakeDamage(
+        GameObject damager,
+        int damage,
+        Vector3 hitPoint = default(Vector3),
+        Vector3 hitDirection = default(Vector3)
+    )
     {
         _health -= damage;
         if (_health <= 0)

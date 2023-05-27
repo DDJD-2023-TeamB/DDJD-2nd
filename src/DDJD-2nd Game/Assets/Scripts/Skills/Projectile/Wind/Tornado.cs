@@ -186,6 +186,7 @@ public class Tornado : GroundProjectileComponent, NonCollidable
         if (damageable != null)
         {
             damageable.TakeDamage(
+                this.gameObject,
                 (int)(_stats.Damage * multiplier),
                 _tornadoStrength,
                 other.ClosestPoint(transform.position),

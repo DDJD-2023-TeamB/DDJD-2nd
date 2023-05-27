@@ -40,6 +40,11 @@ public class RagdollController : MonoBehaviour
 
     private bool _originalIsTrigger;
 
+    [SerializeField]
+    private bool _setBoneComponentsOnAwake = true;
+
+    private List<GameObject> damageInteractions;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -61,6 +66,35 @@ public class RagdollController : MonoBehaviour
         }
         _originalIsTrigger = _collider.isTrigger;
         _isRagdollActive = false;
+        damageInteractions = new List<GameObject>();
+    }
+
+    public void Start()
+    {
+        if (_setBoneComponentsOnAwake)
+        {
+            foreach (Rigidbody rb in _rigidbodies)
+            {
+                BoneComponent boneComponent = rb.GetComponent<BoneComponent>();
+                if (boneComponent == null)
+                {
+                    boneComponent = rb.gameObject.AddComponent<BoneComponent>() as BoneComponent;
+                }
+                boneComponent.SetRagdollController(this);
+            }
+        }
+    }
+
+    public void AddDamageInteraction(GameObject gameObject)
+    {
+        damageInteractions.Add(gameObject);
+        Debug.Log("Added damage interaction: " + gameObject.name);
+        StartCoroutine(ReleaseDamageInteraction(gameObject));
+    }
+
+    public bool CanDamage(GameObject gameObject)
+    {
+        return !damageInteractions.Contains(gameObject);
     }
 
     public Transform GetRagdollTransform()
@@ -104,10 +138,11 @@ public class RagdollController : MonoBehaviour
         }
         foreach (Collider col in _colliders)
         {
-            col.enabled = false;
+            //col.enabled = false;
+            col.isTrigger = false;
         }
-        _collider.enabled = true;
-        _collider.isTrigger = _originalIsTrigger;
+        //_collider.enabled = true;
+        //_collider.isTrigger = _originalIsTrigger;
         _rb.isKinematic = false;
         _animator.enabled = true;
         _isRagdollActive = false;
@@ -216,5 +251,13 @@ public class RagdollController : MonoBehaviour
     public BoneTransform[] GetAnimationInitialBones(string animationName)
     {
         return _animationInitialBones[animationName];
+    }
+
+    private IEnumerator ReleaseDamageInteraction(GameObject gameObject)
+    {
+        yield return 0;
+        //Remove from next frame
+        Debug.Log("Removed damage interaction: " + gameObject.name);
+        damageInteractions.Remove(gameObject);
     }
 }

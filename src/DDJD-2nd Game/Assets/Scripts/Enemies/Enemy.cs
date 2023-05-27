@@ -40,9 +40,15 @@ public abstract class Enemy : StateContext, Damageable
     // Update is called once per frame
     virtual public void Update() { }
 
-    public virtual void TakeDamage(int damage, float force, Vector3 hitPoint, Vector3 hitDirection)
+    public virtual void TakeDamage(
+        GameObject damager,
+        int damage,
+        float force,
+        Vector3 hitPoint,
+        Vector3 hitDirection
+    )
     {
-        _status.TakeDamage(damage, hitPoint, hitDirection);
+        _status.TakeDamage(damager, damage, hitPoint, hitDirection);
     }
 
     public virtual bool IsTriggerDamage()
