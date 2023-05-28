@@ -132,7 +132,10 @@ public abstract class SkillComponent : MonoBehaviour
         {
             return false;
         }
+
         GameObject otherObject = other.gameObject;
+        Damageable damageable = otherObject.GetComponent<Damageable>();
+        otherObject = damageable?.GetDamageableObject() ?? otherObject;
         if (_skillStats.IsContinuous)
         {
             if (_collidedObjects.ContainsKey(otherObject))

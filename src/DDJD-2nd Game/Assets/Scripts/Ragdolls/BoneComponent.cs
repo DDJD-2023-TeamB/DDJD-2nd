@@ -43,4 +43,9 @@ public class BoneComponent : MonoBehaviour, Damageable
         _ragdollController = ragdollController;
         _damageable = _ragdollController.GetComponent<Damageable>();
     }
+
+    public GameObject GetDamageableObject()
+    {
+        return _ragdollController.gameObject;
+    }
 }

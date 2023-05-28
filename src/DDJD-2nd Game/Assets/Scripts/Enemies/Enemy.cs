@@ -51,6 +51,11 @@ public abstract class Enemy : StateContext, Damageable
         _status.TakeDamage(damager, damage, hitPoint, hitDirection);
     }
 
+    public virtual GameObject GetDamageableObject()
+    {
+        return gameObject;
+    }
+
     public virtual bool IsTriggerDamage()
     {
         return false;

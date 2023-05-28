@@ -11,4 +11,9 @@ public interface Damageable
     );
 
     bool IsTriggerDamage();
+
+    // Get the main object that can be damaged, for example, a bone can be damaged, but the main object is the one that suffers the damage
+
+
+    GameObject GetDamageableObject();
 }
