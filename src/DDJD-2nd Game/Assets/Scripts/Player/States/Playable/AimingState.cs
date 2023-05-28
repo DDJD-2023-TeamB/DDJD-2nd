@@ -121,8 +121,7 @@ public class AimingState : MovableState
                 _context.Animator.SetTrigger(animationTrigger);
                 _lastAnimTrigger = animationTrigger;
                 break;
-            case CastType.Hold: // TODO handle mana on tick rate, TENSOO
-
+            case CastType.Hold:
                 _lastAnimTrigger = animationTrigger;
                 direction = _context.AimComponent.GetAimDirection(origin);
                 success = _context.Shooter.Shoot(
