@@ -92,14 +92,16 @@ public class AimingState : MovableState
                 skill.SpellPrefab.transform.rotation
             );
         }
-        else
+        else if (_context.CharacterStatus.Mana > 0 || skill.SkillStats.ManaCost == 0) // Prevent charge and hold spells from being created when no mana
         {
             spell = isLeft
                 ? _context.Shooter.CreateLeftSpell(skill, _context.LeftHand.transform)
                 : _context.Shooter.CreateRightSpell(skill, _context.RightHand.transform);
         }
-        string animationTrigger = GetAnimationTrigger(isLeft);
+        else
+            return;
 
+        string animationTrigger = GetAnimationTrigger(isLeft);
         Vector3 origin = spell.transform.position;
         Vector3 direction;
         bool success = true;
@@ -115,11 +117,11 @@ public class AimingState : MovableState
                     _lastAnimTrigger = animationTrigger;
                 }
                 break;
-            case CastType.Charge: // TODO check for cost here? limit charge to mana cost?
+            case CastType.Charge:
                 _context.Animator.SetTrigger(animationTrigger);
                 _lastAnimTrigger = animationTrigger;
                 break;
-            case CastType.Hold: // TODO handle mana
+            case CastType.Hold: // TODO handle mana on tick rate, TENSOO
 
                 _lastAnimTrigger = animationTrigger;
                 direction = _context.AimComponent.GetAimDirection(origin);
@@ -170,11 +172,17 @@ public class AimingState : MovableState
             case CastType.Charge:
                 Vector3 origin = spell.transform.position;
                 Vector3 direction = _context.AimComponent.GetAimDirection(origin);
-                success = _context.Shooter.Shoot(spell, direction, true, skill.SkillStats.ManaCost);
+                ChargeComponent chargeComponent = spell.GetComponent<ChargeComponent>();
+                success = _context.Shooter.Shoot(
+                    spell,
+                    direction,
+                    true,
+                    chargeComponent.GetManaCost()
+                );
+                _context.Animator.SetTrigger(animationTrigger);
+                _lastAnimTrigger = animationTrigger;
                 if (success)
                 {
-                    _context.Animator.SetTrigger(animationTrigger);
-                    _lastAnimTrigger = animationTrigger;
                     _context.PlayerSkills.StartSkillCooldown(skill);
                 }
                 break;

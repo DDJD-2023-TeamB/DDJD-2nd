@@ -91,7 +91,7 @@ public class Shooter : MonoBehaviour
         {
             return false;
         }
-        if (!_status.ConsumeMana(manaCost))
+        if (!_status.ConsumeMana(manaCost)) // TODO change to skill componeont (canShoot or shoot)
         {
             return false;
         }

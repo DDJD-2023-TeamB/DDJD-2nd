@@ -61,6 +61,11 @@ public class CharacterStatus : MonoBehaviour
         }
     }
 
+    public bool HasEnoughMana(int manaCost)
+    {
+        return _mana >= manaCost;
+    }
+
     public bool ConsumeMana(int manaCost)
     {
         if (_mana < manaCost)

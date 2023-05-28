@@ -38,6 +38,7 @@ public abstract class SkillComponent : MonoBehaviour
     public virtual void SetCaster(GameObject caster)
     {
         _caster = caster;
+        _chargeComponent?.SetCaster(_caster);
     }
 
     private Dictionary<GameObject, float> _collidedObjects = new Dictionary<GameObject, float>();
@@ -55,6 +56,7 @@ public abstract class SkillComponent : MonoBehaviour
             _isChargeAttack = true;
             _chargeComponent.MaxChargeTime = _skillStats.MaxChargeTime;
             _chargeComponent.MinChargeTime = _skillStats.MinChargeTime;
+            _chargeComponent.SetManaCost(_skillStats.ManaCost);
         }
     }
 

@@ -152,6 +152,12 @@ public class Player : StateContext
         get { return _airMovement; }
     }
 
+    private CharacterStatus _characterStatus;
+    public CharacterStatus CharacterStatus
+    {
+        get { return _characterStatus; }
+    }
+
     void Awake()
     {
         _inputReceiver = GetComponent<PlayerInputReceiver>();
@@ -165,6 +171,7 @@ public class Player : StateContext
         _playerSkills.Player = this;
         _meleeCombat = GetComponent<MeleeCombat>();
         _dashable = GetComponent<Dashable>();
+        _characterStatus = GetComponent<CharacterStatus>();
         ChangeState(_factory.Playable());
     }
 
