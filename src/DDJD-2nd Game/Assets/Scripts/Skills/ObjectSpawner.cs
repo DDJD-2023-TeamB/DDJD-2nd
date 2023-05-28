@@ -25,10 +25,12 @@ public class ObjectSpawner : MonoBehaviour
     private Collider _previewObjectCollider;
 
     private PlayerAimComponent _aimComponent;
+    private CharacterStatus _status;
 
     private void Awake()
     {
         _aimComponent = GetComponent<PlayerAimComponent>();
+        _status = GetComponent<CharacterStatus>();
     }
 
     private void Update()
@@ -83,8 +85,16 @@ public class ObjectSpawner : MonoBehaviour
         return _previewObject;
     }
 
-    public void SpawnObject(SpawnSkill skill)
+    public bool SpawnObject(SpawnSkill skill)
     {
+        if (!_status.ConsumeMana(skill.SkillStats.ManaCost))
+        {
+            Destroy(_previewObject);
+            _previewObject = null;
+            _previewObjectCollider = null;
+            return false;
+        }
+
         // Reactivate collisions
         _previewObjectCollider.enabled = true;
 
@@ -103,6 +113,8 @@ public class ObjectSpawner : MonoBehaviour
 
         _previewObject = null;
         _previewObjectCollider = null;
+
+        return true;
     }
 
     public float GetObjectLifeTime(GameObject obj)

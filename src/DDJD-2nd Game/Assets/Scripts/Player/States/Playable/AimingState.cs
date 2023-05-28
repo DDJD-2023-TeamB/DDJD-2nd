@@ -107,23 +107,28 @@ public class AimingState : MovableState
         {
             case CastType.Instant:
                 direction = _context.AimComponent.GetAimDirection(origin);
-                success = _context.Shooter.Shoot(spell, direction, true);
-                _context.Animator.SetTrigger(animationTrigger);
+                success = _context.Shooter.Shoot(spell, direction, true, skill.SkillStats.ManaCost);
                 if (success)
                 {
+                    _context.Animator.SetTrigger(animationTrigger);
                     _context.PlayerSkills.StartSkillCooldown(skill);
+                    _lastAnimTrigger = animationTrigger;
                 }
-                _lastAnimTrigger = animationTrigger;
                 break;
-            case CastType.Charge:
+            case CastType.Charge: // TODO check for cost here? limit charge to mana cost?
                 _context.Animator.SetTrigger(animationTrigger);
                 _lastAnimTrigger = animationTrigger;
                 break;
-            case CastType.Hold:
+            case CastType.Hold: // TODO handle mana
 
                 _lastAnimTrigger = animationTrigger;
                 direction = _context.AimComponent.GetAimDirection(origin);
-                success = _context.Shooter.Shoot(spell, direction, false);
+                success = _context.Shooter.Shoot(
+                    spell,
+                    direction,
+                    false,
+                    skill.SkillStats.ManaCost
+                );
                 if (success)
                 {
                     _context.PlayerSkills.StartSkillCooldown(skill);
@@ -165,11 +170,11 @@ public class AimingState : MovableState
             case CastType.Charge:
                 Vector3 origin = spell.transform.position;
                 Vector3 direction = _context.AimComponent.GetAimDirection(origin);
-                success = _context.Shooter.Shoot(spell, direction, true);
-                _context.Animator.SetTrigger(animationTrigger);
-                _lastAnimTrigger = animationTrigger;
+                success = _context.Shooter.Shoot(spell, direction, true, skill.SkillStats.ManaCost);
                 if (success)
                 {
+                    _context.Animator.SetTrigger(animationTrigger);
+                    _lastAnimTrigger = animationTrigger;
                     _context.PlayerSkills.StartSkillCooldown(skill);
                 }
                 break;
@@ -184,8 +189,11 @@ public class AimingState : MovableState
 
                 break;
             case CastType.Spawn:
-                _context.ObjectSpawner.SpawnObject((SpawnSkill)skill);
-                _context.PlayerSkills.StartSkillCooldown(skill);
+                success = _context.ObjectSpawner.SpawnObject((SpawnSkill)skill);
+                if (success)
+                {
+                    _context.PlayerSkills.StartSkillCooldown(skill);
+                }
                 break;
         }
 

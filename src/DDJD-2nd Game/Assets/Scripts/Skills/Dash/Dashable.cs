@@ -35,12 +35,14 @@ public abstract class Dashable : MonoBehaviour
         get => _isDashing;
     }
     protected DashStats _currentDashStats;
+    protected CharacterStatus _status;
 
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
         _maxSpeed = _maxRegularSpeed;
+        _status = GetComponent<CharacterStatus>();
     }
 
     protected void Update()
