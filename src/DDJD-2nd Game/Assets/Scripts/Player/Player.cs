@@ -153,6 +153,9 @@ public class Player : StateContext
         get { return _airMovement; }
     }
 
+    [SerializeField]
+    private Dialogue _dialogue; //TODO:: Get from UI after UI PR merges
+
     void Awake()
     {
         _inputReceiver = GetComponent<PlayerInputReceiver>();
@@ -182,5 +185,16 @@ public class Player : StateContext
     void UpdateElement()
     {
         _airMovement = _playerSkills.CurrentElement?.AirMovementSkill?.Initialize(gameObject);
+    }
+
+    public Dialogue Dialogue
+    {
+        get { return _dialogue; }
+    }
+
+    public Interactable InteractedObject
+    {
+        get { return _interactedObject; }
+        set { _interactedObject = value; }
     }
 }
