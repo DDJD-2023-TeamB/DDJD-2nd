@@ -279,6 +279,15 @@ public class ItemStack
         }
     }
 
+    public override bool Equals(object obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+            return false;
+
+        ItemStack otherItem = (ItemStack)obj;
+        return type.Equals(otherItem.type);
+    }
+
     static System.Random random = new System.Random();
 
     string GenerateRandomStringHash(int hashLength)

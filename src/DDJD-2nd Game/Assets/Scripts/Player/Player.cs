@@ -155,6 +155,7 @@ public class Player : StateContext
 
     private UIController _uiController;
 
+    private InventoryManager _inventoryManager;
     void Awake()
     {
         _inputReceiver = GetComponent<PlayerInputReceiver>();
@@ -169,6 +170,7 @@ public class Player : StateContext
         _meleeCombat = GetComponent<MeleeCombat>();
         _dashable = GetComponent<Dashable>();
         _uiController = GetComponent<UIController>();
+        _inventoryManager = GetComponent<InventoryManager>();
         ChangeState(_factory.Playable());
     }
 

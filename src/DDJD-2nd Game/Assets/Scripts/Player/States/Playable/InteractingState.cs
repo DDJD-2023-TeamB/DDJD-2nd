@@ -14,7 +14,7 @@ public class InteractingState : GenericState
     public override void Enter()
     {
         Interactable objt = _context._interactedObject.GetComponent<Interactable>();
-        //objt.Interact();
+        objt.Interact();
         HelpManager.Instance.SetHelpText("");
     }
 

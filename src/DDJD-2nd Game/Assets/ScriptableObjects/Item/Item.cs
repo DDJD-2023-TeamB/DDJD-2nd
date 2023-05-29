@@ -20,6 +20,15 @@ public abstract class Item : ScriptableObject
     //[SerializeField]
     //private int _maxStack;
 
+    public override bool Equals(object obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+            return false;
+
+        Item otherItem = (Item)obj;
+        return _name == otherItem._name;
+    }
+
     public string Name
     {
         get => _name;
