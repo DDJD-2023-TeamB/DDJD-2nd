@@ -94,7 +94,7 @@ public class PlayerAimComponent : MonoBehaviour, AimComponent
     public Vector3 GetAimDirection(Vector3 origin, bool rayCast = true)
     {
         Vector3 position =
-            _player.AimCamera.transform.position + _player.AimCamera.transform.forward * 10f;
+            _player.AimCamera.transform.position + _player.AimCamera.transform.forward * 100f;
         ;
         if (rayCast)
         {

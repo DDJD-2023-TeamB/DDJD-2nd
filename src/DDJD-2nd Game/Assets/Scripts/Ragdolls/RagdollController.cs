@@ -6,6 +6,8 @@ public class RagdollController : MonoBehaviour
 {
     private Rigidbody[] _rigidbodies; //Rig rigibodies
     private Collider[] _colliders; //Rig colliders
+
+    [SerializeField]
     private Collider _collider; //Main collider
     private Rigidbody _rb; //Main rigidbody
     private Animator _animator;
@@ -43,6 +45,7 @@ public class RagdollController : MonoBehaviour
     [SerializeField]
     private bool _setBoneComponentsOnAwake = true;
 
+    // List of objects that damaged this ragdoll in this frame.
     private List<GameObject> damageInteractions;
 
     // Start is called before the first frame update
@@ -56,7 +59,7 @@ public class RagdollController : MonoBehaviour
         _rigidbodies = rigidbodies.ToArray();
 
         _colliders = GetComponentsInChildren<Collider>();
-        _collider = GetComponent<Collider>();
+        //_collider = GetComponent<Collider>();
         _animator = GetComponent<Animator>();
         _hipsBone = _animator.GetBoneTransform(HumanBodyBones.Hips);
         _bones = GetRagdollTransforms();
@@ -83,12 +86,13 @@ public class RagdollController : MonoBehaviour
                 boneComponent.SetRagdollController(this);
             }
         }
+
+        DeactivateRagdoll();
     }
 
     public void AddDamageInteraction(GameObject gameObject)
     {
         damageInteractions.Add(gameObject);
-        Debug.Log("Added damage interaction: " + gameObject.name);
         StartCoroutine(ReleaseDamageInteraction(gameObject));
     }
 
@@ -113,7 +117,7 @@ public class RagdollController : MonoBehaviour
         {
             col.enabled = true;
         }
-        _collider.isTrigger = true;
+        _collider.enabled = false;
         _rb.isKinematic = true;
         _animator.enabled = false;
         _isRagdollActive = true;
@@ -141,8 +145,8 @@ public class RagdollController : MonoBehaviour
             //col.enabled = false;
             col.isTrigger = false;
         }
-        //_collider.enabled = true;
-        //_collider.isTrigger = _originalIsTrigger;
+        _collider.enabled = true;
+        _collider.isTrigger = _originalIsTrigger;
         _rb.isKinematic = false;
         _animator.enabled = true;
         _isRagdollActive = false;
@@ -165,11 +169,11 @@ public class RagdollController : MonoBehaviour
                 closestDistance = distance;
                 closestRb = rb;
             }
-            rb.AddForce(totalForce * 0.2f * hitDirection, ForceMode.Impulse);
+            //rb.AddForce(totalForce * 0.2f * hitDirection, ForceMode.Impulse);
         }
 
         //Add force to closest rigidbody
-        closestRb.AddForce(hitDirection * totalForce, ForceMode.Impulse);
+        //closestRb.AddForce(hitDirection * totalForce, ForceMode.Impulse);
     }
 
     public void AlignPositionWithHips(string animationName)
@@ -257,7 +261,14 @@ public class RagdollController : MonoBehaviour
     {
         yield return 0;
         //Remove from next frame
-        Debug.Log("Removed damage interaction: " + gameObject.name);
-        damageInteractions.Remove(gameObject);
+        if (gameObject != null)
+        {
+            damageInteractions.Remove(gameObject);
+        }
+        else
+        {
+            // Remove nulls
+            damageInteractions.RemoveAll(item => item == null);
+        }
     }
 }

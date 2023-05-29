@@ -36,11 +36,12 @@ public class StaticSkillComponent : SkillComponent
 
     public override void Shoot(Vector3 direction)
     {
+        base.Shoot(direction);
+        _shootDirection = direction;
         if (_leaveCaster)
         {
             transform.parent = null; // Detach from caster
         }
-        _shootDirection = direction;
         if (_stats.Duration >= 0.0f)
         {
             StartCoroutine(DestroyAfterTime(_stats.Duration));

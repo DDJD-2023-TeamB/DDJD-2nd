@@ -28,10 +28,12 @@ public class BoneComponent : MonoBehaviour, Damageable
     {
         if (_ragdollController.CanDamage(damager))
         {
+            _ragdollController.AddDamageInteraction(damager);
             _damageable?.TakeDamage(damager, damage, force, hitPoint, hitDirection);
         }
     }
 
+    //Deprecated probably
     public bool IsTriggerDamage()
     {
         //    return _ragdollController.IsRagdollActive;

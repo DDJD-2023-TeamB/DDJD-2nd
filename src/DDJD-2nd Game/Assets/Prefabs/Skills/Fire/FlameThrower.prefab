@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5806788631339706958}
   - component: {fileID: 2846749482624589739}
   - component: {fileID: -4775025516913383002}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: FlameThrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,6 +157,8 @@ MonoBehaviour:
     - flamethrower
     _values:
     - _playOnStart: 1
+      _stopOnDestroy: 1
+      _updatePosition: 0
       _eventReference:
         Guid:
           Data1: 640669569

@@ -67,6 +67,7 @@ public abstract class SkillComponent : MonoBehaviour
     )
     {
         Damageable damageable = target.GetComponent<Damageable>();
+        target = damageable?.GetDamageableObject() ?? target;
         if (!_damageCaster && target == _caster)
         {
             return;

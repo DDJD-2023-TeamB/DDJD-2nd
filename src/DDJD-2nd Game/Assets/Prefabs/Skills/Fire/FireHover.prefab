@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -1616795267437055893}
   - component: {fileID: 926101632087766071}
   - component: {fileID: -2060038563363698089}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: FireHover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,6 +141,8 @@ MonoBehaviour:
     - hover
     _values:
     - _playOnStart: 1
+      _stopOnDestroy: 1
+      _updatePosition: 0
       _eventReference:
         Guid:
           Data1: 41983174
