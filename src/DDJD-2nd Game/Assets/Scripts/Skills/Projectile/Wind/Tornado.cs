@@ -44,18 +44,16 @@ public class Tornado : GroundProjectileComponent, NonCollidable
 
     private List<CaughtInTornado> _caughtObjects;
 
-    private SoundEmitter _soundEmitter;
     private FMOD.Studio.PARAMETER_ID _sfxStateId;
     private FMOD.Studio.PARAMETER_ID _sfxTornadoIntensityId;
 
     override protected void Awake()
     {
         base.Awake();
-        _soundEmitter = GetComponent<SoundEmitter>();
         _lifetime = 0.0f;
         _caughtObjects = new List<CaughtInTornado>();
         _tornadoVFX = GetComponentInChildren<VisualEffect>();
-        _chargeComponent.OnChargeComplete += StopGeneratingTornado;
+        _chargeComponent.OnChargeComplete += OnChargeComplete;
         //StartCoroutine(SpawnTornado());
     }
 
@@ -95,9 +93,20 @@ public class Tornado : GroundProjectileComponent, NonCollidable
         //transform.rotation = _caster.transform.rotation;
     }
 
+    private void OnChargeComplete()
+    {
+        _soundEmitter.Stop("tornado");
+        _soundEmitter.SetParameterWithLabel("tornado", _sfxStateId, "Iddle", true);
+    }
+
     private void StopGeneratingTornado()
     {
         _tornadoVFX.SendEvent("StopGeneratingTornado");
+        _soundEmitter.SetParameter(
+            "tornado",
+            _sfxTornadoIntensityId,
+            _chargeComponent.GetCurrentCharge()
+        );
     }
 
     public override void Shoot(Vector3 direction)
@@ -120,13 +129,17 @@ public class Tornado : GroundProjectileComponent, NonCollidable
         StartCoroutine(DestroyTornado());
 
         _soundEmitter.Stop("tornado");
-        _soundEmitter.SetParameter(
-            "tornado",
-            _sfxTornadoIntensityId,
-            _chargeComponent.GetCurrentCharge()
-        );
         _soundEmitter.SetParameterWithLabel("tornado", _sfxStateId, "Release", true);
+        _soundEmitter.CallWithDelay(
+            () =>
+            {
+                _soundEmitter.SetParameterWithLabel("tornado", _sfxStateId, "Iddle", false);
+            },
+            0.05f
+        );
     }
+
+    public override void DestroySpell() { }
 
     private IEnumerator DestroyTornado()
     {

@@ -7,13 +7,10 @@ public class BasicShotComponent : ProjectileComponent
 {
     private VisualEffect _vfx;
 
-    private SoundEmitter _soundEmitter;
-
     protected override void Awake()
     {
         base.Awake();
         _vfx = GetComponent<VisualEffect>();
-        _soundEmitter = GetComponent<SoundEmitter>();
     }
 
     public override void Shoot(Vector3 direction)

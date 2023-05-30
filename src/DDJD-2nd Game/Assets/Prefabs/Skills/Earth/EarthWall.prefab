@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3147380221760138007}
   - component: {fileID: 6875219525244819154}
   - component: {fileID: -939552510764001391}
+  - component: {fileID: 2603892125764430306}
   m_Layer: 0
   m_Name: EarthWall
   m_TagString: Untagged
@@ -209,6 +210,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d342615445ea04cb7bbdfa97f4c5ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2603892125764430306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4561369372010039488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - wall
+    _values:
+    - _playOnStart: 1
+      _stopOnDestroy: 1
+      _eventReference:
+        Guid:
+          Data1: 831013483
+          Data2: 1210916949
+          Data3: -1725597526
+          Data4: 72450163
+        Path: event:/Earth Abilities/Earth Wall
 --- !u!1 &8733616984201336530
 GameObject:
   m_ObjectHideFlags: 0

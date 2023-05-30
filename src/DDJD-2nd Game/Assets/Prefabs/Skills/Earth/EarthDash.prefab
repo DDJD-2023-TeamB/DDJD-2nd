@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 1798649150006209225}
   - component: {fileID: 1798649150006209224}
   - component: {fileID: 5591841299798252130}
+  - component: {fileID: 5808985208869153387}
   m_Layer: 0
   m_Name: EarthDash
   m_TagString: Untagged
@@ -323,3 +324,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageCaster: 0
+--- !u!114 &5808985208869153387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798649150006209227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - dash
+    _values:
+    - _playOnStart: 1
+      _stopOnDestroy: 0
+      _eventReference:
+        Guid:
+          Data1: -833299946
+          Data2: 1170512998
+          Data3: -1660124788
+          Data4: -1909754626
+        Path: event:/Earth Abilities/Eath Dash
