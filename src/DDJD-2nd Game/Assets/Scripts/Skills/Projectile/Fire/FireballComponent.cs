@@ -36,6 +36,11 @@ public class FireballComponent : ProjectileComponent
     protected override void OnImpact(Collider other, float multiplier = 1)
     {
         base.OnImpact(other);
+
+        _soundEmitter.Stop("fireball");
+        _soundEmitter.SetParameterWithLabel("fireball", _sfxStateId, "Impact", true);
+        _fireballVFX.enabled = false;
+
         //Raycast sphere
         RaycastHit[] hits = Physics.SphereCastAll(
             transform.position,
@@ -114,5 +119,11 @@ public class FireballComponent : ProjectileComponent
         VisualEffect vfx = impact.GetComponent<VisualEffect>();
         vfx.SetFloat("Size", _currentRadius);
         Destroy(impact, 3.0f);
+    }
+
+    public override void DestroySpell()
+    {
+        DeactivateSpell();
+        Destroy(gameObject, 1.5f);
     }
 }
