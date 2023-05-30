@@ -6,6 +6,9 @@ using UnityEngine.VFX;
 public class Hitbox : MonoBehaviour, NonCollidable
 {
     private GameObject _parent;
+    private SoundEmitter _soundEmitter;
+
+    private FMOD.Studio.PARAMETER_ID _hitsfxId;
     public GameObject Parent
     {
         get { return _parent; }
@@ -23,21 +26,37 @@ public class Hitbox : MonoBehaviour, NonCollidable
     private float _force;
     private float _damage;
 
+    private Element _currentElement;
+
     private Dictionary<GameObject, bool> _alreadyHit;
 
-    public void Activate(GameObject attackVfx, GameObject hitVfx, float force, float damage)
+    protected void Awake()
+    {
+        _soundEmitter = GetComponent<SoundEmitter>();
+    }
+
+    protected void Start()
+    {
+        _hitsfxId = _soundEmitter.GetParameterId("melee", "Basic Melee");
+    }
+
+    public void Activate(Element element, float force, float damage)
     {
         gameObject.SetActive(true);
-        if (attackVfx != null)
+        if (element?.AttackVfx != null)
         {
-            _attackVfx = Instantiate(attackVfx, transform.position, transform.rotation);
+            _attackVfx = Instantiate(element.AttackVfx, transform.position, transform.rotation);
             _attackVfx.transform.parent = transform;
             _attackVfx
                 .GetComponent<VisualEffect>()
                 .SetVector3("Forward", _parent.transform.forward);
             _attackVfx.GetComponent<VisualEffect>().SetVector3("Up", _parent.transform.up);
         }
-        _hitVfx = hitVfx;
+        _hitVfx = element.HitVfx;
+        _currentElement = element;
+        _soundEmitter?.SetParameterWithLabel("melee", _hitsfxId, "Miss", true);
+        _soundEmitter?.UpdatePosition("melee");
+
         _force = force;
         _damage = damage;
         _alreadyHit = new Dictionary<GameObject, bool>();
@@ -53,8 +72,6 @@ public class Hitbox : MonoBehaviour, NonCollidable
         }
         gameObject.SetActive(false);
     }
-
-    public void Awake() { }
 
     public void OnTriggerEnter(Collider other)
     {
@@ -78,6 +95,7 @@ public class Hitbox : MonoBehaviour, NonCollidable
 
         if (hitted)
         {
+            _soundEmitter?.SetParameterWithLabel("melee", _hitsfxId, "Basic", false);
             SpawnHitVFX(transform.position);
             _alreadyHit.Add(other.gameObject, true);
         }
@@ -110,7 +128,8 @@ public class Hitbox : MonoBehaviour, NonCollidable
             (int)_damage,
             _force,
             transform.position,
-            _parent.transform.forward
+            _parent.transform.forward,
+            _currentElement
         );
         return true;
     }

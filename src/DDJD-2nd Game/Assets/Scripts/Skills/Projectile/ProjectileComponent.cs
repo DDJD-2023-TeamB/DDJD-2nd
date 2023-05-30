@@ -7,7 +7,7 @@ public abstract class ProjectileComponent : SkillComponent
     protected Rigidbody _rb;
     protected Collider _collider;
     protected ProjectileStats _stats;
-    protected Projectile _skill;
+    protected Projectile _projectile;
     protected GameObject _impactPrefab;
 
     private bool _originalIsKinematic;
@@ -57,9 +57,9 @@ public abstract class ProjectileComponent : SkillComponent
     public override void SetSkill(Skill skill)
     {
         base.SetSkill(skill);
-        _skill = (Projectile)skill;
-        _stats = _skill.ProjectileStats;
-        _impactPrefab = _skill.ImpactPrefab;
+        _projectile = (Projectile)skill;
+        _stats = _projectile.ProjectileStats;
+        _impactPrefab = _projectile.ImpactPrefab;
     }
 
     public override void Shoot(Vector3 direction)

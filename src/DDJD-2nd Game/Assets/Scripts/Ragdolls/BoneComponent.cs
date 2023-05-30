@@ -23,13 +23,14 @@ public class BoneComponent : MonoBehaviour, Damageable
         int damage,
         float force,
         Vector3 hitPoint,
-        Vector3 hitDirection
+        Vector3 hitDirection,
+        Element element
     )
     {
         if (_ragdollController.CanDamage(damager))
         {
             _ragdollController.AddDamageInteraction(damager);
-            _damageable?.TakeDamage(damager, damage, force, hitPoint, hitDirection);
+            _damageable?.TakeDamage(damager, damage, force, hitPoint, hitDirection, element);
         }
     }
 

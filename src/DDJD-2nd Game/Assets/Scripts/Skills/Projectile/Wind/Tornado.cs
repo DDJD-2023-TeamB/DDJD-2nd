@@ -190,7 +190,8 @@ public class Tornado : GroundProjectileComponent, NonCollidable
                 (int)(_stats.Damage * multiplier),
                 _tornadoStrength,
                 other.ClosestPoint(transform.position),
-                transform.forward
+                transform.forward,
+                _skill.Element
             );
         }
     }

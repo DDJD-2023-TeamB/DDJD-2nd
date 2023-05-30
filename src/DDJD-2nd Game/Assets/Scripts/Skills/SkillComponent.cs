@@ -5,6 +5,8 @@ using UnityEngine;
 public abstract class SkillComponent : MonoBehaviour
 {
     protected GameObject _caster;
+
+    protected Skill _skill;
     protected SkillStats _skillStats;
 
     protected bool _isChargeAttack = false;
@@ -44,6 +46,7 @@ public abstract class SkillComponent : MonoBehaviour
 
     public virtual void SetSkill(Skill skill)
     {
+        _skill = skill;
         _skillStats = skill.SkillStats;
         if (_skillStats.CastType == CastType.Charge)
         {
@@ -81,7 +84,8 @@ public abstract class SkillComponent : MonoBehaviour
             damage,
             _skillStats.ForceWithDamage(),
             hitPoint,
-            direction
+            direction,
+            _skill.Element
         );
     }
 

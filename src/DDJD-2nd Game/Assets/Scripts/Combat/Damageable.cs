@@ -7,7 +7,8 @@ public interface Damageable
         int damage,
         float force,
         Vector3 hitPoint,
-        Vector3 hitDirection
+        Vector3 hitDirection,
+        Element element
     );
 
     bool IsTriggerDamage();

@@ -145,4 +145,14 @@ public class SoundEmitter : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
+
+    public void UpdatePosition(string eventName)
+    {
+        if (_eventInstances.ContainsKey(eventName))
+        {
+            _eventInstances[eventName].set3DAttributes(
+                FMODUnity.RuntimeUtils.To3DAttributes(gameObject)
+            );
+        }
+    }
 }

@@ -62,7 +62,7 @@ public class LightningComponent : DashComponent, NonCollidable
     public override void SetSkill(Skill skill)
     {
         base.SetSkill(skill);
-        StartCoroutine(DestroyAfter(_skill.DashSkillStats.EffectDuration));
+        StartCoroutine(DestroyAfter(_dashSkill.DashSkillStats.EffectDuration));
     }
 
     protected override void OnImpact(Collider other, float multiplier = 1)

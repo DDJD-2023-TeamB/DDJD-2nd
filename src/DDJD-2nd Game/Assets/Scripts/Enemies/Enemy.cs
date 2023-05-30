@@ -12,15 +12,20 @@ public abstract class Enemy : StateContext, Damageable
 
     private GenericState _currentState;
 
+    protected SoundEmitter _soundEmitter;
+    private FMOD.Studio.PARAMETER_ID _damageTypeParameterId;
+
     virtual public void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _status = GetComponent<CharacterStatus>();
+        _soundEmitter = GetComponent<SoundEmitter>();
     }
 
     virtual public void Start()
     {
         _status.OnDeath += Die;
+        _damageTypeParameterId = _soundEmitter.GetParameterId("damage", "Damage Type");
     }
 
     public virtual void Die(int force, Vector3 hitPoint, Vector3 hitDirection)
@@ -45,9 +50,21 @@ public abstract class Enemy : StateContext, Damageable
         int damage,
         float force,
         Vector3 hitPoint,
-        Vector3 hitDirection
+        Vector3 hitDirection,
+        Element element
     )
     {
+        Debug.Log("Element: " + element);
+        if (element != null)
+        {
+            _soundEmitter.UpdatePosition("damage");
+            _soundEmitter.SetParameterWithLabel(
+                "damage",
+                _damageTypeParameterId,
+                element.SfxDamageLabel,
+                true
+            );
+        }
         _status.TakeDamage(damager, damage, hitPoint, hitDirection);
     }
 

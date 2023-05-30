@@ -79,10 +79,11 @@ public class BasicEnemy : HumanoidEnemy
         int damage,
         float force,
         Vector3 hitPoint,
-        Vector3 hitDirection
+        Vector3 hitDirection,
+        Element element
     )
     {
-        base.TakeDamage(damager, damage, force, hitPoint, hitDirection);
+        base.TakeDamage(damager, damage, force, hitPoint, hitDirection, element);
 
         OnDamageTaken?.Invoke();
         if (force >= _forceResistance)

@@ -236,6 +236,7 @@ GameObject:
   - component: {fileID: 1578423061471397423}
   - component: {fileID: 9029944465990448921}
   - component: {fileID: 2715304234544930070}
+  - component: {fileID: 3769909569626782521}
   m_Layer: 9
   m_Name: LeftHandHitBox
   m_TagString: Untagged
@@ -283,6 +284,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f26629a092a164dab236d075583683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3769909569626782521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855736713580985946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - melee
+    _values:
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: 820308842
+          Data2: 1337895590
+          Data3: -138653824
+          Data4: -1723026112
+        Path: event:/Melee Attacks
 --- !u!1 &956762218124547194
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,6 +991,7 @@ GameObject:
   - component: {fileID: 8517818375070919311}
   - component: {fileID: 716971567613677415}
   - component: {fileID: 8709851357610998055}
+  - component: {fileID: 1639183931769134707}
   m_Layer: 6
   m_Name: LeftFootHitBox
   m_TagString: Untagged
@@ -1012,6 +1040,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f26629a092a164dab236d075583683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1639183931769134707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2870785494786809861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - melee
+    _values:
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: 820308842
+          Data2: 1337895590
+          Data3: -138653824
+          Data4: -1723026112
+        Path: event:/Melee Attacks
 --- !u!1 &2944585961000116056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1618,7 +1672,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4492101057451422959}
-  m_LocalRotation: {x: 0.058845427, y: 0.013147389, z: -0.0007750742, w: 0.99818027}
+  m_LocalRotation: {x: 0.05884567, y: 0.012831626, z: -0.0007564591, w: 0.9981844}
   m_LocalPosition: {x: -0.5397235, y: 2.3344133, z: -1.468136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2087,6 +2141,7 @@ GameObject:
   - component: {fileID: 3129688510996236332}
   - component: {fileID: 942165180637659622}
   - component: {fileID: 4642713434733892028}
+  - component: {fileID: 3065342751113120485}
   m_Layer: 6
   m_Name: RightFootHitBox
   m_TagString: Untagged
@@ -2135,6 +2190,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f26629a092a164dab236d075583683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3065342751113120485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4910991743724890576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - melee
+    _values:
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: 820308842
+          Data2: 1337895590
+          Data3: -138653824
+          Data4: -1723026112
+        Path: event:/Melee Attacks
 --- !u!1 &5038380692370057851
 GameObject:
   m_ObjectHideFlags: 0
@@ -2511,6 +2592,7 @@ GameObject:
   - component: {fileID: 79076952650345937}
   - component: {fileID: 988894118790861810}
   - component: {fileID: 2625061817219118427}
+  - component: {fileID: 8749276271521842887}
   m_Layer: 9
   m_Name: RightHandHitBox
   m_TagString: Untagged
@@ -2558,6 +2640,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f26629a092a164dab236d075583683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8749276271521842887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5850911896283943163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - melee
+    _values:
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: 820308842
+          Data2: 1337895590
+          Data3: -138653824
+          Data4: -1723026112
+        Path: event:/Melee Attacks
 --- !u!1 &5903967639473050877
 GameObject:
   m_ObjectHideFlags: 0
