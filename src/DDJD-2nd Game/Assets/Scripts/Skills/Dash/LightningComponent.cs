@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class LightningComponent : DashComponent
+public class LightningComponent : DashComponent, NonCollidable
 {
     private int _casterLayer;
 
@@ -20,14 +20,14 @@ public class LightningComponent : DashComponent
 
     private List<List<Material>> _casterMaterials = new List<List<Material>>();
 
-    private Collider _collider;
+    private CapsuleCollider _collider;
 
     protected override void Awake()
     {
         base.Awake();
         _vfx = GetComponent<VisualEffect>();
         _lightningMaterial = Instantiate(_lightningMaterial);
-        _collider = GetComponent<Collider>();
+        _collider = GetComponent<CapsuleCollider>();
     }
 
     protected override void Start()
@@ -84,6 +84,7 @@ public class LightningComponent : DashComponent
         base.OnDashEnd();
         _vfx.SendEvent("Flash");
         _vfx.SetFloat("CharacterParticleRate", 0);
+        UpdateCollider();
         for (int i = 0; i < _layersToDashThrough.Length; i++)
         {
             Physics.IgnoreLayerCollision(_casterLayer, _layersToIgnore[i], false);
@@ -93,6 +94,13 @@ public class LightningComponent : DashComponent
         {
             _skinnedMeshRenderers[i].materials = _casterMaterials[i].ToArray();
         }
+    }
+
+    private void UpdateCollider()
+    {
+        float dashLength = (_caster.transform.position - transform.position).magnitude;
+        _collider.center = new Vector3(0, 0, dashLength / 2);
+        _collider.height = dashLength;
     }
 
     public override void DestroySpell()
