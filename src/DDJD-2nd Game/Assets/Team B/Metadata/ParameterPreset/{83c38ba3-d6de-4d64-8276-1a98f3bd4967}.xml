@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="ParameterPreset" id="{52191520-1b02-403a-9c09-402cb84ea836}">
+	<object class="ParameterPreset" id="{83c38ba3-d6de-4d64-8276-1a98f3bd4967}">
 		<property name="name">
-			<value>Charged Fire Ball</value>
+			<value>Damage Type</value>
 		</property>
 		<relationship name="folder">
 			<destination>{de79e17d-ef84-4ec5-bc49-2e353b71570e}</destination>
 		</relationship>
 		<relationship name="parameter">
-			<destination>{731e801b-b517-48ac-9bf5-12ec37b2ee40}</destination>
+			<destination>{fca40e0f-cb60-4bf0-8eb6-b5d90a5de890}</destination>
 		</relationship>
 	</object>
-	<object class="GameParameter" id="{731e801b-b517-48ac-9bf5-12ec37b2ee40}">
+	<object class="GameParameter" id="{fca40e0f-cb60-4bf0-8eb6-b5d90a5de890}">
 		<property name="parameterType">
 			<value>2</value>
 		</property>
 		<property name="maximum">
-			<value>4</value>
+			<value>5</value>
 		</property>
 		<property name="enumerationLabels">
-			<value>Charge</value>
-			<value>Iddle</value>
-			<value>Release</value>
-			<value>Impact</value>
+			<value>Base</value>
+			<value>Earth</value>
+			<value>Fire</value>
+			<value>Lightning</value>
+			<value>Wind</value>
 		</property>
 		<property name="initialValue">
 			<value>0</value>
