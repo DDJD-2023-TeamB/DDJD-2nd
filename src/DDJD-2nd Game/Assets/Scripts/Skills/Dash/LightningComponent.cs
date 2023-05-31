@@ -57,6 +57,7 @@ public class LightningComponent : DashComponent, NonCollidable
         _vfx.SetVector3("Position", _caster.transform.position);
         _vfx.SendEvent("Flash");
         StartCoroutine(UpdateVFXTrail());
+        _soundEmitter.SetEventPositionToFollow("dash", _caster);
     }
 
     public override void SetSkill(Skill skill)

@@ -51,11 +51,11 @@ public class MoveState : GenericState
         }
         _context.Animator.SetFloat(
             "ForwardSpeed",
-            Vector3.Dot(_context.Rigidbody.velocity, _context.transform.forward)
+            Vector3.Dot(_context.Rigidbody.velocity, _context.transform.forward) / _context.MaxSpeed
         );
         _context.Animator.SetFloat(
             "RightSpeed",
-            Vector3.Dot(_context.Rigidbody.velocity, _context.transform.right)
+            Vector3.Dot(_context.Rigidbody.velocity, _context.transform.right) / _context.MaxSpeed
         );
     }
 
@@ -94,8 +94,10 @@ public class MoveState : GenericState
         Vector3 velocity = _context.Rigidbody.velocity;
         Vector3 moveDirection =
             _context.transform.forward * moveInput.y + _context.transform.right * moveInput.x;
+        Debug.Log("velocity: " + velocity.magnitude + " maxspeed: " + _context.MaxSpeed);
         if (velocity.magnitude < _context.MaxSpeed)
         {
+            Debug.Log("accelerating");
             _context.Rigidbody.AddForce(
                 moveDirection * _context.Acceleration * Time.deltaTime * 1000,
                 ForceMode.Acceleration

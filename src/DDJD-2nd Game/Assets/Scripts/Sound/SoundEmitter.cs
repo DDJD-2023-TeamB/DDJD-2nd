@@ -12,6 +12,8 @@ public class SoundEmitter : MonoBehaviour
     private Dictionary<string, FMOD.Studio.EventInstance> _eventInstances =
         new Dictionary<string, FMOD.Studio.EventInstance>();
 
+    private Dictionary<string, GameObject> _eventPositions = new Dictionary<string, GameObject>();
+
     private void Awake()
     {
         foreach (KeyValuePair<string, GameSound> pair in _events)
@@ -28,9 +30,14 @@ public class SoundEmitter : MonoBehaviour
             _eventInstances.Add(pair.Key, eventInstance);
             if (sound.UpdatePosition)
             {
-                StartCoroutine(UpdatePosition(eventInstance));
+                StartCoroutine(UpdatePosition(pair.Key, eventInstance));
             }
         }
+    }
+
+    public void SetEventPositionToFollow(string eventName, GameObject position)
+    {
+        _eventPositions[eventName] = position;
     }
 
     public FMOD.Studio.PARAMETER_ID GetParameterId(string eventName, string parameterName)
@@ -137,11 +144,12 @@ public class SoundEmitter : MonoBehaviour
         }
     }
 
-    public IEnumerator UpdatePosition(FMOD.Studio.EventInstance eventInstance)
+    public IEnumerator UpdatePosition(string eventName, FMOD.Studio.EventInstance eventInstance)
     {
         while (true)
         {
-            eventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+            GameObject positionObject = _eventPositions.GetValueOrDefault(eventName) ?? gameObject;
+            eventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(positionObject));
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -150,8 +158,9 @@ public class SoundEmitter : MonoBehaviour
     {
         if (_eventInstances.ContainsKey(eventName))
         {
+            GameObject positionObject = _eventPositions.GetValueOrDefault(eventName) ?? gameObject;
             _eventInstances[eventName].set3DAttributes(
-                FMODUnity.RuntimeUtils.To3DAttributes(gameObject)
+                FMODUnity.RuntimeUtils.To3DAttributes(positionObject)
             );
         }
     }

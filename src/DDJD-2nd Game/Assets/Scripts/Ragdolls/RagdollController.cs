@@ -8,7 +8,9 @@ public class RagdollController : MonoBehaviour
     private Collider[] _colliders; //Rig colliders
 
     [SerializeField]
-    private Collider _collider; //Main collider
+    private Collider _collider; //Collider to aid in ragdoll get up
+
+    private Collider _triggerCollider; //Main Collider
     private Rigidbody _rb; //Main rigidbody
     private Animator _animator;
 
@@ -59,7 +61,7 @@ public class RagdollController : MonoBehaviour
         _rigidbodies = rigidbodies.ToArray();
 
         _colliders = GetComponentsInChildren<Collider>();
-        //_collider = GetComponent<Collider>();
+        _triggerCollider = GetComponent<Collider>();
         _animator = GetComponent<Animator>();
         _hipsBone = _animator.GetBoneTransform(HumanBodyBones.Hips);
         _bones = GetRagdollTransforms();
@@ -118,6 +120,7 @@ public class RagdollController : MonoBehaviour
             col.enabled = true;
         }
         _collider.enabled = false;
+        _triggerCollider.enabled = false;
         _rb.isKinematic = true;
         _animator.enabled = false;
         _isRagdollActive = true;
@@ -146,6 +149,8 @@ public class RagdollController : MonoBehaviour
             col.isTrigger = false;
         }
         _collider.enabled = true;
+        _triggerCollider.enabled = true;
+        _triggerCollider.isTrigger = true;
         _collider.isTrigger = _originalIsTrigger;
         _rb.isKinematic = false;
         _animator.enabled = true;

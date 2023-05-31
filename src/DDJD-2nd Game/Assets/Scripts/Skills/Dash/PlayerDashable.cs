@@ -12,12 +12,21 @@ public class PlayerDashable : Dashable
     private FovController _fovController;
     private float _defaultFov;
 
+    private Player _player;
+
     protected override void Awake()
     {
         base.Awake();
         _inputReceiver = GetComponent<PlayerInputReceiver>();
         _fovController = _playerCamTransform.GetComponent<FovController>();
         _defaultFov = _fovController.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView;
+        _player = GetComponent<Player>();
+    }
+
+    protected void Start()
+    {
+        _maxRegularSpeed = _player.MaxSpeed;
+        _maxSpeed = _maxRegularSpeed;
     }
 
     /**
