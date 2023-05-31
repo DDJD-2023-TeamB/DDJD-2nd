@@ -3350,6 +3350,7 @@ GameObject:
   - component: {fileID: 4269489879880276418}
   - component: {fileID: 2887794238888504324}
   - component: {fileID: 7562078159073174495}
+  - component: {fileID: 8307550782042618538}
   - component: {fileID: 3273867762492815134}
   m_Layer: 7
   m_Name: BasicEnemy
@@ -3565,6 +3566,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.15
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &8307550782042618538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7679466201466161035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c13b46f5f8082424282362e44f757aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3273867762492815134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3580,6 +3593,7 @@ MonoBehaviour:
   _events:
     _keys:
     - damage
+    - footstep
     _values:
     - _playOnStart: 0
       _stopOnDestroy: 0
@@ -3591,6 +3605,16 @@ MonoBehaviour:
           Data3: 822255807
           Data4: -415185279
         Path: event:/Take Damage
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: 167925518
+          Data2: 1308022944
+          Data3: 855472541
+          Data4: -2142007058
+        Path: event:/Movement/Footsteps
 --- !u!1 &7679466201466161037
 GameObject:
   m_ObjectHideFlags: 0

@@ -95,7 +95,7 @@ public class Hitbox : MonoBehaviour, NonCollidable
 
         if (hitted)
         {
-            _soundEmitter?.SetParameterWithLabel("melee", _hitsfxId, "Basic", false);
+            _soundEmitter?.SetParameterWithLabel("melee", _hitsfxId, "Hit", false);
             SpawnHitVFX(transform.position);
             _alreadyHit.Add(other.gameObject, true);
         }

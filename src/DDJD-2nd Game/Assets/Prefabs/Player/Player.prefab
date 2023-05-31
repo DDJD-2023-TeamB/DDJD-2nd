@@ -3379,6 +3379,8 @@ GameObject:
   - component: {fileID: 2948459615406707077}
   - component: {fileID: 5458505848532433039}
   - component: {fileID: 8062649751035626759}
+  - component: {fileID: 5597915682881764452}
+  - component: {fileID: 4346819917323664300}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -3699,6 +3701,44 @@ MonoBehaviour:
   _health: 500
   _maxHealth: 500
   _cameraShakeIntensity: 20
+--- !u!114 &5597915682881764452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694690271000812756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c13b46f5f8082424282362e44f757aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4346819917323664300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694690271000812756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - footstep
+    _values:
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: 167925518
+          Data2: 1308022944
+          Data3: 855472541
+          Data4: -2142007058
+        Path: event:/Movement/Footsteps
 --- !u!1 &8198835224221356302
 GameObject:
   m_ObjectHideFlags: 0
