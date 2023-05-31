@@ -22,6 +22,7 @@ public class CameraController : MonoBehaviour
     protected void Awake()
     {
         _player = GetComponent<Player>();
+        SetAimCamera(false);
     }
 
     protected void Start() { }

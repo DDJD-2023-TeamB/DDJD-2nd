@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class Player : StateContext
+public class Player : StateContext, Damageable
 {
     private PlayerStateFactory _factory;
     public PlayerStateFactory Factory
@@ -159,6 +159,8 @@ public class Player : StateContext
         get { return _cameraController; }
     }
 
+    private PlayerStatus _status;
+
     void Awake()
     {
         _inputReceiver = GetComponent<PlayerInputReceiver>();
@@ -173,6 +175,7 @@ public class Player : StateContext
         _meleeCombat = GetComponent<MeleeCombat>();
         _dashable = GetComponent<Dashable>();
         _cameraController = GetComponent<CameraController>();
+        _status = GetComponent<PlayerStatus>();
         ChangeState(_factory.Playable());
     }
 
@@ -189,5 +192,27 @@ public class Player : StateContext
     void UpdateElement()
     {
         _airMovement = _playerSkills.CurrentElement?.AirMovementSkill?.Initialize(gameObject);
+    }
+
+    public void TakeDamage(
+        GameObject damager,
+        int damage,
+        float force,
+        Vector3 hitPoint,
+        Vector3 hitDirection,
+        Element element
+    )
+    {
+        _status.TakeDamage(damager, damage, hitPoint, hitDirection);
+    }
+
+    public bool IsTriggerDamage()
+    {
+        return false;
+    }
+
+    public GameObject GetDamageableObject()
+    {
+        return this.gameObject;
     }
 }

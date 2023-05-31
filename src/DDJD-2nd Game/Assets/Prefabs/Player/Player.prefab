@@ -3376,6 +3376,7 @@ GameObject:
   - component: {fileID: 5741952415770023321}
   - component: {fileID: 2948459615406707077}
   - component: {fileID: 5458505848532433039}
+  - component: {fileID: 8062649751035626759}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -3439,9 +3440,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4c21bafd157f34c9dae2852eb2c19d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSpeed: 10
+  _maxSpeed: 7.5
   _jumpForce: 200
-  _acceleration: 4
+  _acceleration: 2
   _cameraTarget: {fileID: 4492101058934089455}
   _cameraRotationSpeed: 20
   _minAngle: 30
@@ -3466,7 +3467,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!65 &7026416567958636128
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3681,6 +3682,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _regularCamera: {fileID: 4492101058340307231}
   _aimCamera: {fileID: 4492101057451422945}
+--- !u!114 &8062649751035626759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694690271000812756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce144dd0ad4a34249b38badc065fa0db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 500
+  _maxHealth: 500
+  _cameraShakeIntensity: 20
 --- !u!1 &8198835224221356302
 GameObject:
   m_ObjectHideFlags: 0

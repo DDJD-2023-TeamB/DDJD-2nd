@@ -31,7 +31,6 @@ public class ElectricBoltComponent : RayCastSkillComponent, NonCollidable
         }
         else
         {
-            Debug.Log("_shootDirection " + _shootDirection);
             pos4 = pos1 + _shootDirection * _stats.MaxDistance;
         }
 

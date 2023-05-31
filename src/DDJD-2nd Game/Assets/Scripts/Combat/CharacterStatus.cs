@@ -18,7 +18,7 @@ public class CharacterStatus : MonoBehaviour
         set { _onDeath = value; }
     }
 
-    void Awake()
+    protected virtual void Awake()
     {
         _health = _maxHealth;
     }
@@ -26,7 +26,7 @@ public class CharacterStatus : MonoBehaviour
     // Update is called once per frame
     void Update() { }
 
-    public void TakeDamage(
+    public virtual void TakeDamage(
         GameObject damager,
         int damage,
         Vector3 hitPoint = default(Vector3),

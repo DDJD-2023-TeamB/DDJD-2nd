@@ -37,6 +37,7 @@ public class PlayerDashable : Dashable
         bool dashSuccessful = base.Dash(stats);
         if (!dashSuccessful)
             return false;
+        _player.CameraController.ShakeCamera(stats.CameraShakeIntensity, stats.CameraShakeDuration);
         _fovController.ChangeFov(stats.CameraFov, stats.EnterFovTime);
         return true;
     }

@@ -54,7 +54,6 @@ public abstract class Enemy : StateContext, Damageable
         Element element
     )
     {
-        Debug.Log("Element: " + element);
         if (element != null)
         {
             _soundEmitter.UpdatePosition("damage");
