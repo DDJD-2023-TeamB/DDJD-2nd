@@ -23,9 +23,14 @@ public class FlappyMovementComponent : AirMovementComponent
         {
             return;
         }
+        _animator.SetTrigger("JumpAir");
         _jumpsAvailable--;
-        _rb.velocity = Vector3.zero;
+    }
+
+    public void Skywalk()
+    {
         Vector3 moveDirection = GetMovementDirection();
+        _rb.velocity = Vector3.zero;
         _rb.AddForce(Vector3.up * _skill.FlappySkillStats.UpwardForce, ForceMode.Acceleration);
         _rb.AddForce(moveDirection * _skill.FlappySkillStats.ForwardForce, ForceMode.Acceleration);
         GameObject vfx = Instantiate(
