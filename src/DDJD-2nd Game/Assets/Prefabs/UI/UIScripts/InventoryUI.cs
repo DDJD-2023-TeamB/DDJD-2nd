@@ -8,6 +8,7 @@ using System;
 
 public class InventoryUI : MonoBehaviour
 {
+
     public GameObject InventoryItemPrefab;
 
     public GameObject itemsPanel;
@@ -104,7 +105,7 @@ public class InventoryUI : MonoBehaviour
     public bool AddItem(ItemStack item)
     {
         Transform availableSlot;
-        if (item.type is ItemSkill)
+        if (item.item is ItemSkill)
         {
             availableSlot = FindAvailableSpellSlot();
         }
@@ -120,9 +121,21 @@ public class InventoryUI : MonoBehaviour
         return true;
     }
 
+    public void RemoveAllItems()
+    {
+        for (int i = 0; i < itemsPanel.transform.childCount; i++)
+        {
+            if (itemsPanel.transform.GetChild(i).childCount != 0)
+            {   
+                GameObject itemObject = itemsPanel.transform.GetChild(i).gameObject;
+                Destroy(itemObject);           
+            }
+        }
+    }
+
     public bool RemoveItem(ItemStack item)
     {
-        if (item.type is ItemSkill)
+        if (item.item is ItemSkill)
         {
             for (int i = 0; i < spellsPanel.transform.childCount; i++)
             {
@@ -175,7 +188,7 @@ public class InventoryUI : MonoBehaviour
             }
             Transform slot = GetLeftSkillSlot(i);
             //Remove children
-            ItemStack item = new ItemStack(skills[i], null);
+            ItemStack item = new ItemStack(skills[i],1, null);
             GameObject newItem = CreateItemSlot(item, slot);
         }
     }
@@ -189,12 +202,12 @@ public class InventoryUI : MonoBehaviour
                 continue;
             }
             Transform slot = GetRightSkillSlot(i);
-            ItemStack item = new ItemStack(skills[i], null);
+            ItemStack item = new ItemStack(skills[i],1, null);
             GameObject newItem = CreateItemSlot(item, slot);
         }
     }
 
-    private GameObject CreateItemSlot(ItemStack itemStack, Transform slot)
+    private GameObject CreateItemSlot(ItemStack ItemStack, Transform slot)
     {
         InventorySlot invSlot = slot.GetComponent<InventorySlot>();
         if (invSlot.currentItem != null)
@@ -204,13 +217,13 @@ public class InventoryUI : MonoBehaviour
         GameObject newItem = Instantiate(InventoryItemPrefab);
         newItem.transform.SetParent(slot, false);
         newItem.transform.localScale = Vector3.one;
-        newItem.GetComponentInChildren<Image>().sprite = itemStack.type.Icon;
-        newItem.GetComponent<InventoryItemImage>().currentItem = itemStack;
+        newItem.GetComponentInChildren<Image>().sprite = ItemStack.item.Icon;
+        newItem.GetComponent<InventoryItemImage>().currentItem = ItemStack;
         newItem
             .GetComponent<InventoryItemImage>()
             .itemAmountText.GetComponent<TextMeshProUGUI>()
-            .text = itemStack.amount.ToString();
-        invSlot.currentItem = itemStack;
+            .text = ItemStack.amount.ToString();
+        invSlot.currentItem = ItemStack;
         return newItem;
     }
 

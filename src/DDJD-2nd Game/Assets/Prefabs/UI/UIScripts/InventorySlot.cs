@@ -20,7 +20,9 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         get { return index; }
         set { index = value; }
     }
+
     public ItemStack currentItem;
+
     public Boolean isFromWheel = false; //Wether this slot belongs to a spell wheel, set in the inspector
     public int wheelIndex = -1;
     public string wheelSide = "";
@@ -119,7 +121,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
                 Input.mousePosition + new Vector3(0, 5, 0),
                 Quaternion.identity
             );
-            currentTitleTextObject.GetComponent<TextMeshProUGUI>().text = currentItem.type.name;
+            currentTitleTextObject.GetComponent<TextMeshProUGUI>().text = currentItem.item.name;
             currentTitleTextObject.transform.SetParent(transform.root);
             _graphic.raycastTarget = false;
         }

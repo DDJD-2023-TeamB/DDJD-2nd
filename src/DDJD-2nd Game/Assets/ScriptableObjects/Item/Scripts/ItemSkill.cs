@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ItemSkill", menuName = "Items/ItemSkill", order = 1)]
-public class ItemSkill : Item
+public class ItemSkill : ItemObject
 {
     [SerializeField]
     private AimedSkill _skill;
@@ -9,5 +9,10 @@ public class ItemSkill : Item
     {
         get => _skill;
         set => _skill = value;
+    }
+
+    public void Awake()
+    {
+        _type = ItemType.Spell;
     }
 }

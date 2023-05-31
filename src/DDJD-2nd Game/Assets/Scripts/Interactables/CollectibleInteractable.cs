@@ -5,12 +5,11 @@ using TMPro;
 
 public class CollectibleInteractable : Interactable
 {
-    public Item _item;
+    public CollectibleObject _item;
     public override void Interact()
     {
-        // add item to inventory
-        Debug.Log("Interacting with " + _item.name);
-        GameObject.FindWithTag("Player").GetComponent<InventoryManager>().AddItem(_item);
+        Debug.Log("Interacting with " + _item.Type);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().inventory.AddItem(_item, 1);
         Destroy(gameObject);
     }
 }

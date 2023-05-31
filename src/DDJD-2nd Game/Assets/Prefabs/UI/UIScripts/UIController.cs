@@ -4,14 +4,18 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIController : MonoBehaviour
 {
+    private ItemsInventoryObject _itemsInventory;
+
     private PlayerUI _playerUI;
     private Player _player;
 
     ItemSkill[] leftWheelItems = new ItemSkill[6];
     ItemSkill[] rightWheelItems = new ItemSkill[6];
+    //Remover quando se fizer a função de remove
     ItemStack[] itemList = new ItemStack[30];
 
     public string currentMenu = "playing";
@@ -49,10 +53,12 @@ public class UIController : MonoBehaviour
         inventoryUI.OnItemSkillRightDrop += ChangeRightWheelItem;
         inventoryUI.SetupActions();
 
+        _itemsInventory = _player.inventory;
+
         //DEBUG
 
-
         UpdateSpellWheels();
+        //Items and spells
         LoadInventory();
     }
 
@@ -61,6 +67,12 @@ public class UIController : MonoBehaviour
         currentMenu = "inventory";
         _playerUI.inventoryUI.gameObject.SetActive(isOpening);
         _playerUI.playingUI.SetActive(!isOpening);
+
+        if(isOpening)
+        {
+            _playerUI.inventoryUI.RemoveAllItems();
+            LoadItems();
+        }
     }
 
     public void OpenMenu(bool isOpening)
@@ -109,7 +121,8 @@ public class UIController : MonoBehaviour
         return itemSkill.Skill;
     }
 
-    private void Update() { }
+    private void Update() {
+    }
 
     public void SelectSlotLeft(int slot)
     {
@@ -129,21 +142,12 @@ public class UIController : MonoBehaviour
         _playerUI.rightSpellWheel.GetComponent<WheelController>().updateSpellWheel(rightWheelItems);
     }
 
-    public Boolean AddItem(ItemStack item)
+    public void AddItem(ItemStack item)
     {
-        for (int i = 0; i < itemList.Length; i++)
-        {
-            if (itemList[i] == null)
-            {
-                itemList[i] = item;
-                _playerUI.inventoryUI.AddItem(item);
-                return true;
-            }
-        }
-        return false;
+        _playerUI.inventoryUI.AddItem(item);
     }
 
-    public ItemStack RemoveItem(ItemStack item)
+    /*public ItemStack RemoveItem(ItemStack item)
     {
         for (int i = 0; i < itemList.Length; i++)
         {
@@ -156,9 +160,9 @@ public class UIController : MonoBehaviour
             }
         }
         return null;
-    }
+    }*/
 
-    public ItemStack RemoveItem(string itemID)
+    /*public ItemStack RemoveItem(string itemID)
     {
         for (int i = 0; i < itemList.Length; i++)
         {
@@ -171,16 +175,16 @@ public class UIController : MonoBehaviour
             }
         }
         return null;
-    }
+    }*/
 
-    public void ChangeLeftWheelItem(ItemStack itemStack, int slot)
+    public void ChangeLeftWheelItem(ItemStack ItemStack, int slot)
     {
-        if (!(itemStack.type is ItemSkill))
+        if (!(ItemStack.item is ItemSkill))
         {
             Debug.Log("Is not itemskill");
             return;
         }
-        ItemSkill itemSkill = (ItemSkill)itemStack.type;
+        ItemSkill itemSkill = (ItemSkill)ItemStack.item;
         leftWheelItems[slot] = itemSkill;
         _player.PlayerSkills.EquippedLeftSkills[slot] = itemSkill;
         _playerUI.leftSpellWheel.GetComponent<WheelController>().updateSpellWheel(leftWheelItems);
@@ -188,14 +192,14 @@ public class UIController : MonoBehaviour
         _playerUI.inventoryUI.SetLeftWheelSkills(new List<ItemSkill>(leftWheelItems));
     }
 
-    public void ChangeRightWheelItem(ItemStack itemStack, int slot)
+    public void ChangeRightWheelItem(ItemStack ItemStack, int slot)
     {
-        if (!(itemStack.type is ItemSkill))
+        if (!(ItemStack.item is ItemSkill))
         {
             Debug.Log("Is not itemskill");
             return;
         }
-        ItemSkill itemSkill = (ItemSkill)itemStack.type;
+        ItemSkill itemSkill = (ItemSkill)ItemStack.item;
         rightWheelItems[slot] = itemSkill;
         _player.PlayerSkills.EquippedRightSkills[slot] = itemSkill;
         _playerUI.rightSpellWheel.GetComponent<WheelController>().updateSpellWheel(rightWheelItems);
@@ -207,7 +211,15 @@ public class UIController : MonoBehaviour
     {
         foreach (ItemSkill itemSkill in _player.PlayerSkills.LearnedSkills)
         {
-            AddItem(new ItemStack(itemSkill, null));
+            AddItem(new ItemStack(itemSkill,1, null));
+        }
+    }
+
+    public void LoadItems()
+    {
+        foreach (var item in _itemsInventory.Container)
+        {
+            _playerUI.inventoryUI.AddItem(item);
         }
     }
 
@@ -216,10 +228,11 @@ public class UIController : MonoBehaviour
         LoadSpells();
         _playerUI.inventoryUI.SetLeftWheelSkills(new List<ItemSkill>(leftWheelItems));
         _playerUI.inventoryUI.SetRightWheelSkills(new List<ItemSkill>(rightWheelItems));
+        LoadItems();
 
-        /*
+
         //Should load items from a game controller, this is just test code
-        ItemType firestoneItem = new ItemType(
+        /*Item firestoneItem = new ItemType(
             "firestone",
             "Fire Stone",
             10,
@@ -236,7 +249,6 @@ public class UIController : MonoBehaviour
             true
         );
         ItemStack firestoneStack1 = new ItemStack(firestoneItem, null);
-        ItemStack firestoneStack2 = new ItemStack(firestoneItem, null);
         ItemStack firestoneStack3 = new ItemStack(firestoneItem, null);
         ItemStack firestoneStack4 = new ItemStack(firestoneItem, null);
         ItemStack firestoneStack5 = new ItemStack(firestoneItem, null);
@@ -249,8 +261,8 @@ public class UIController : MonoBehaviour
         AddItem(firestoneStack4);
         AddItem(firestoneStack5);
         AddItem(redDiamondStack1);
-        AddItem(redDiamondStack2);
-        */
+        AddItem(redDiamondStack2);*/
+        
     }
 
     public Player Player
@@ -259,52 +271,8 @@ public class UIController : MonoBehaviour
     }
 }
 
-public class ItemStack
-{
-    public Item type;
-    public int amount;
-    public string id;
 
-    public ItemStack(Item itemType, string id)
-    {
-        this.type = itemType;
-        this.amount = 1;
-        if (id != null)
-        {
-            this.id = id;
-        }
-        else
-        {
-            id = GenerateRandomStringHash(10);
-        }
-    }
-
-    public override bool Equals(object obj)
-    {
-        if (obj == null || GetType() != obj.GetType())
-            return false;
-
-        ItemStack otherItem = (ItemStack)obj;
-        return type.Equals(otherItem.type);
-    }
-
-    static System.Random random = new System.Random();
-
-    string GenerateRandomStringHash(int hashLength)
-    {
-        string Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < hashLength; i++)
-        {
-            int randomIndex = random.Next(Characters.Length);
-            stringBuilder.Append(Characters[randomIndex]);
-        }
-
-        return stringBuilder.ToString();
-    }
-}
-
-public class ItemType
+/*public class ItemType
 {
     public string typeID;
     public int maxItems;
@@ -329,4 +297,4 @@ public class ItemType
         this.isSpell = isSpell;
         this.name = name;
     }
-}
+}*/

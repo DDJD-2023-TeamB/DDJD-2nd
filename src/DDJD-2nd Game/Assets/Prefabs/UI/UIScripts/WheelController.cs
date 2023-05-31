@@ -16,7 +16,7 @@ public class WheelController : MonoBehaviour
     float slotSize = 0;
     WheelHiglighterContoller highlighterController;
 
-    private Item[] _itemList = new Item[6];
+    private ItemObject[] _itemList = new ItemObject[6];
 
     void Start()
     {
@@ -84,7 +84,7 @@ public class WheelController : MonoBehaviour
         return (ItemSkill)_itemList[wheelSelector.CurrentSlot];
     }
 
-    public void updateSpellWheel(Item[] itemList)
+    public void updateSpellWheel(ItemObject[] itemList)
     {
         _itemList = itemList;
         for (int i = 0; i < itemList.Length; i++)
