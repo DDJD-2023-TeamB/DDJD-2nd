@@ -124,6 +124,7 @@ public class FireballComponent : ProjectileComponent
     public override void DestroySpell()
     {
         DeactivateSpell();
+        _soundEmitter.StopAndRelease("fireball");
         Destroy(gameObject);
     }
 }
