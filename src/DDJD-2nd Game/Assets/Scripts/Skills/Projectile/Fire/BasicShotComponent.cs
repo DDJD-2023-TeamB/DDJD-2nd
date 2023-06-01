@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class BasicShotComponent : ProjectileComponent
+public class BasicShotComponent : ProjectileComponent, NonPushable
 {
     private VisualEffect _vfx;
 
@@ -34,7 +34,7 @@ public class BasicShotComponent : ProjectileComponent
         base.OnImpact(other);
 
         Rigidbody rb = other.GetComponent<Rigidbody>();
-        if (rb != null)
+        if (rb != null && other.GetComponent<NonPushable>() != null)
         {
             rb.AddForce(transform.forward * _skillStats.ForceWithDamage(), ForceMode.Impulse);
         }

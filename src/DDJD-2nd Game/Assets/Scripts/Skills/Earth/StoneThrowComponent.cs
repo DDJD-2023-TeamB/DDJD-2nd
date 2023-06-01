@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class StoneThrowComponent : ProjectileComponent
+public class StoneThrowComponent : ProjectileComponent, NonPushable
 {
     private VisualEffect _vfx;
     private FMOD.Studio.PARAMETER_ID _sfxStateId;

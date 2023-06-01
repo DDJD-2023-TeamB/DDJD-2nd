@@ -24,6 +24,8 @@ public abstract class ProjectileComponent : SkillComponent
     private Vector3 _initialPosition;
     private bool _isShooting = false;
 
+    private float _health;
+
     protected override void Awake()
     {
         base.Awake();
@@ -60,6 +62,7 @@ public abstract class ProjectileComponent : SkillComponent
         _projectile = (Projectile)skill;
         _stats = _projectile.ProjectileStats;
         _impactPrefab = _projectile.ImpactPrefab;
+        _health = _stats.MaxHealth;
     }
 
     public override void Shoot(Vector3 direction)
@@ -93,11 +96,22 @@ public abstract class ProjectileComponent : SkillComponent
     {
         base.OnImpact(other, multiplier);
         Damageable damageable = other.GetComponent<Damageable>();
-        bool isTriggerDamage = damageable != null && damageable.IsTriggerDamage();
-        if (!isTriggerDamage && _destroyOnImpact)
+
+        ProjectileComponent projectileComponent = other.GetComponent<ProjectileComponent>();
+        if (projectileComponent != null && _stats.IsDestructible)
         {
-            DestroySpell();
-            SpawnHitVFX();
+            _health -= projectileComponent.GetDamageToSpells();
+            if (_health <= 0)
+            {
+                Explode();
+            }
+        }
+        else
+        {
+            if (_destroyOnImpact)
+            {
+                Explode();
+            }
         }
     }
 
@@ -127,5 +141,26 @@ public abstract class ProjectileComponent : SkillComponent
             return _stats.ForceWithDamage() * _chargeComponent.GetCurrentCharge();
         }
         return _stats.ForceWithDamage();
+    }
+
+    protected virtual void Explode()
+    {
+        DestroySpell();
+        SpawnHitVFX();
+    }
+
+    private ProjectileStats ProjectileStats
+    {
+        get { return _stats; }
+    }
+
+    public virtual float GetDamageToSpells()
+    {
+        float charge = 1.0f;
+        if (_isChargeAttack)
+        {
+            charge = _chargeComponent.GetCurrentCharge();
+        }
+        return _stats.DamageToSpellsMultiplier * _stats.Damage * charge;
     }
 }
