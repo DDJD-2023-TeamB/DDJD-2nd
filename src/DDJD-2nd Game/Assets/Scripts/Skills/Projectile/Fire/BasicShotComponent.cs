@@ -7,10 +7,20 @@ public class BasicShotComponent : ProjectileComponent
 {
     private VisualEffect _vfx;
 
+    [SerializeField]
+    private string _sfxStateName;
+
+    private FMOD.Studio.PARAMETER_ID _sfxStateId;
+
     protected override void Awake()
     {
         base.Awake();
         _vfx = GetComponent<VisualEffect>();
+    }
+
+    protected void Start()
+    {
+        _sfxStateId = _soundEmitter.GetParameterId("shot", _sfxStateName);
     }
 
     public override void Shoot(Vector3 direction)
@@ -28,6 +38,8 @@ public class BasicShotComponent : ProjectileComponent
         {
             rb.AddForce(transform.forward * _skillStats.ForceWithDamage(), ForceMode.Impulse);
         }
+
+        _soundEmitter.SetParameterWithLabel("shot", _sfxStateId, "Impact", false);
 
         Damage(
             other.gameObject,

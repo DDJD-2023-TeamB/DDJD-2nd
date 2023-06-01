@@ -111,7 +111,7 @@ public abstract class SkillComponent : MonoBehaviour
         }
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public virtual void OnCollisionEnter(Collision collision)
     {
         OnImpact(collision.collider);
         _noiseComponent?.MakeNoise(GetNoiseRadius());

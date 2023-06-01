@@ -124,6 +124,6 @@ public class FireballComponent : ProjectileComponent
     public override void DestroySpell()
     {
         DeactivateSpell();
-        Destroy(gameObject, 1.5f);
+        Destroy(gameObject);
     }
 }

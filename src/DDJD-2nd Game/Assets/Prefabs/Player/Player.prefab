@@ -1315,6 +1315,7 @@ MonoBehaviour:
   - Abilities
   - Music
   - Movement
+  - UI
   CollisionTag: 
   PreloadSamples: 0
 --- !u!1 &3500396441678054356
@@ -1674,7 +1675,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4492101057451422959}
-  m_LocalRotation: {x: 0.058843058, y: 0.01590802, z: -0.0009378208, w: 0.9981401}
+  m_LocalRotation: {x: 0.058846235, y: 0.012066573, z: -0.00071135716, w: 0.9981939}
   m_LocalPosition: {x: -0.5397235, y: 2.3344133, z: -1.468136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3464,7 +3465,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7694690271000812756}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 15
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -3713,6 +3714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c13b46f5f8082424282362e44f757aa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _floorType: Wood
 --- !u!114 &4346819917323664300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3728,6 +3730,7 @@ MonoBehaviour:
   _events:
     _keys:
     - footstep
+    - jump
     _values:
     - _playOnStart: 0
       _stopOnDestroy: 0
@@ -3739,6 +3742,16 @@ MonoBehaviour:
           Data3: 855472541
           Data4: -2142007058
         Path: event:/Movement/Footsteps
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: -765863022
+          Data2: 1209146570
+          Data3: -2126559301
+          Data4: 781296483
+        Path: event:/Movement/Jump
 --- !u!1 &8198835224221356302
 GameObject:
   m_ObjectHideFlags: 0

@@ -161,6 +161,26 @@ public class Player : StateContext, Damageable
 
     private PlayerStatus _status;
 
+    private SoundEmitter _soundEmitter;
+
+    private FMOD.Studio.PARAMETER_ID _sfxJumpStateId;
+
+    public FMOD.Studio.PARAMETER_ID SfxJumpStateId
+    {
+        get { return _sfxJumpStateId; }
+    }
+
+    public SoundEmitter SoundEmitter
+    {
+        get { return _soundEmitter; }
+    }
+
+    private FMOD.Studio.PARAMETER_ID _sfxJumpIntensityId;
+    public FMOD.Studio.PARAMETER_ID SfxJumpIntensityId
+    {
+        get { return _sfxJumpIntensityId; }
+    }
+
     void Awake()
     {
         _inputReceiver = GetComponent<PlayerInputReceiver>();
@@ -176,12 +196,15 @@ public class Player : StateContext, Damageable
         _dashable = GetComponent<Dashable>();
         _cameraController = GetComponent<CameraController>();
         _status = GetComponent<PlayerStatus>();
+        _soundEmitter = GetComponent<SoundEmitter>();
         ChangeState(_factory.Playable());
     }
 
     void Start()
     {
         UpdateElement();
+        _sfxJumpStateId = _soundEmitter.GetParameterId("jump", "Jump State");
+        _sfxJumpIntensityId = _soundEmitter.GetParameterId("jump", "Jump Intensity");
     }
 
     void Update()

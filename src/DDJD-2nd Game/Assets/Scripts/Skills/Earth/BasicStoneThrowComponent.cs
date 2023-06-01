@@ -7,10 +7,17 @@ public class BasicStoneThrowComponent : ProjectileComponent
 {
     private VisualEffect _vfx;
 
+    private FMOD.Studio.PARAMETER_ID _sfxStateId;
+
     protected override void Awake()
     {
         base.Awake();
         _vfx = GetComponent<VisualEffect>();
+    }
+
+    protected void Start()
+    {
+        _sfxStateId = _soundEmitter.GetParameterId("shot", "Basic Earth Shot State");
     }
 
     public override void Shoot(Vector3 direction)
@@ -36,6 +43,7 @@ public class BasicStoneThrowComponent : ProjectileComponent
             rb.AddForce(transform.forward * _skillStats.ForceWithDamage(), ForceMode.Impulse);
         }
 
+        _soundEmitter.SetParameterWithLabel("shot", _sfxStateId, "Impact", false);
         Damage(
             other.gameObject,
             (int)(_skillStats.Damage * multiplier),

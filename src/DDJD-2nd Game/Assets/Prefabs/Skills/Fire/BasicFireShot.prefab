@@ -142,6 +142,7 @@ MonoBehaviour:
   _damageCaster: 0
   _destroyOnImpact: 1
   _setVelocity: 0
+  _sfxStateName: Fire Ball
 --- !u!54 &1355039477858213897
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -172,9 +173,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _events:
     _keys:
-    - spawn
+    - shot
     _values:
-    - _playOnStart: 0
+    - _playOnStart: 1
       _stopOnDestroy: 1
       _updatePosition: 0
       _eventReference:

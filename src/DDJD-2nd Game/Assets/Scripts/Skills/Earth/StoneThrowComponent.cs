@@ -22,7 +22,7 @@ public class StoneThrowComponent : ProjectileComponent
 
     public void Start()
     {
-        _sfxStateId = _soundEmitter.GetParameterId("stone", "state");
+        _sfxStateId = _soundEmitter.GetParameterId("stone", "Earth Shot State");
     }
 
     protected override void OnImpact(Collider other, float multiplier = 1)
@@ -39,7 +39,14 @@ public class StoneThrowComponent : ProjectileComponent
             other.ClosestPoint(_caster.transform.position),
             _caster.transform.forward
         );
+        _soundEmitter.SetParameterWithLabel("stone", _sfxStateId, "Impact", false);
         StartCoroutine(DestroyAfterTime(_destroyAfterCollision));
+    }
+
+    public override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+        _soundEmitter.SetParameterWithLabel("stone", _sfxStateId, "Rebound", false);
     }
 
     public override void Shoot(Vector3 direction)

@@ -27,6 +27,24 @@ public class AirborneState : GenericState
         _context.Input.OnJumpKeyUp -= OnJumpKeyUp;
         _context.Input.OnJumpKeyDown -= OnJumpKeyDown;
         _context.AirMovement?.Reset();
+
+        bool IsGrounded = MovementUtils.IsGrounded(_context.Rigidbody);
+        if (IsGrounded)
+        {
+            _context.SoundEmitter.SetParameterWithLabel(
+                "jump",
+                _context.SfxJumpStateId,
+                "Hit",
+                false
+            );
+            _context.SoundEmitter.SetParameter(
+                "jump",
+                _context.SfxJumpIntensityId,
+                _context.Rigidbody.velocity.magnitude / 15.0f,
+                true
+            );
+            _context.SoundEmitter.Play("footstep");
+        }
     }
 
     public override bool CanChangeState(GenericState state)
