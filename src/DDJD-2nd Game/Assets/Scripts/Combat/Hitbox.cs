@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class Hitbox : MonoBehaviour
+public class Hitbox : MonoBehaviour, NonCollidable
 {
     private GameObject _parent;
     public GameObject Parent
@@ -61,7 +61,7 @@ public class Hitbox : MonoBehaviour
         if (other.gameObject == _parent)
             return;
 
-        if (other.gameObject.GetComponent<Hitbox>() != null)
+        if (other.gameObject.GetComponent<NonCollidable>() != null)
         {
             return;
         }
@@ -105,7 +105,7 @@ public class Hitbox : MonoBehaviour
         Damageable damageable = other.GetComponent<Damageable>();
         if (damageable == null)
             return false;
-        damageable.TakeDamage((int)_damage, transform.position, _parent.transform.forward);
+        damageable.TakeDamage((int)_damage, _force, transform.position, _parent.transform.forward);
         return true;
     }
 }

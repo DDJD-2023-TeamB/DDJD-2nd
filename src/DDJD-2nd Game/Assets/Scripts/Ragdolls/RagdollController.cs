@@ -13,6 +13,33 @@ public class RagdollController : MonoBehaviour
     [SerializeField]
     private float _knockbackForceMultiplier = 3f;
 
+    [SerializeField]
+    private List<string> _animationsLoaded = new List<string>();
+    private Dictionary<string, BoneTransform[]> _animationInitialBones =
+        new Dictionary<string, BoneTransform[]>();
+
+    private Transform[] _bones;
+
+    public Transform[] Bones
+    {
+        get { return _bones; }
+    }
+
+    private Transform _hipsBone;
+
+    public Transform HipsBone
+    {
+        get { return _hipsBone; }
+    }
+
+    private bool _isRagdollActive;
+    public bool IsRagdollActive
+    {
+        get { return _isRagdollActive; }
+    }
+
+    private bool _originalIsTrigger;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -26,11 +53,19 @@ public class RagdollController : MonoBehaviour
         _colliders = GetComponentsInChildren<Collider>();
         _collider = GetComponent<Collider>();
         _animator = GetComponent<Animator>();
+        _hipsBone = _animator.GetBoneTransform(HumanBodyBones.Hips);
+        _bones = GetRagdollTransforms();
+        foreach (string animation in _animationsLoaded)
+        {
+            PopulateAnimationBones(animation);
+        }
+        _originalIsTrigger = _collider.isTrigger;
+        _isRagdollActive = false;
     }
 
     public Transform GetRagdollTransform()
     {
-        return _rigidbodies[0].transform;
+        return _hipsBone.transform;
     }
 
     public void ActivateRagdoll()
@@ -44,9 +79,20 @@ public class RagdollController : MonoBehaviour
         {
             col.enabled = true;
         }
-        _collider.enabled = false;
+        _collider.isTrigger = true;
         _rb.isKinematic = true;
         _animator.enabled = false;
+        _isRagdollActive = true;
+    }
+
+    public float GetVelocity()
+    {
+        return _rigidbodies[0].velocity.magnitude;
+    }
+
+    public Transform[] GetRagdollTransforms()
+    {
+        return _hipsBone.GetComponentsInChildren<Transform>();
     }
 
     public void DeactivateRagdoll()
@@ -61,8 +107,10 @@ public class RagdollController : MonoBehaviour
             col.enabled = false;
         }
         _collider.enabled = true;
+        _collider.isTrigger = _originalIsTrigger;
         _rb.isKinematic = false;
         _animator.enabled = true;
+        _isRagdollActive = false;
     }
 
     public void PushRagdoll(int force, Vector3 hitPoint, Vector3 hitDirection)
@@ -73,6 +121,7 @@ public class RagdollController : MonoBehaviour
         //Get rigidbody closest to hitpoint
         Rigidbody closestRb = rigidbodies[0];
         float closestDistance = Vector3.Distance(rigidbodies[0].transform.position, hitPoint);
+        float totalForce = force * _knockbackForceMultiplier;
         foreach (Rigidbody rb in rigidbodies)
         {
             float distance = Vector3.Distance(rb.transform.position, hitPoint);
@@ -81,15 +130,91 @@ public class RagdollController : MonoBehaviour
                 closestDistance = distance;
                 closestRb = rb;
             }
+            rb.AddForce(totalForce * 0.2f * hitDirection, ForceMode.Impulse);
         }
 
         //Add force to closest rigidbody
-        closestRb.AddForce(hitDirection * force * _knockbackForceMultiplier, ForceMode.Impulse);
+        closestRb.AddForce(hitDirection * totalForce, ForceMode.Impulse);
+    }
 
-        //Draw debug lines
-        Debug.DrawLine(hitPoint, hitPoint + hitDirection * force, Color.red, 20f);
+    public void AlignPositionWithHips(string animationName)
+    {
+        Vector3 originalPosition = _hipsBone.position;
+        transform.position = _hipsBone.position;
 
-        //Draw debug sphere on hitpoint
-        Debug.DrawLine(hitPoint, hitPoint + new Vector3(0, 1, 0), Color.blue, 20f);
+        BoneTransform hipsAnimationBone = _animationInitialBones[animationName][0];
+        Vector3 positionOffset = hipsAnimationBone.Position;
+        positionOffset.y = 0;
+        positionOffset = transform.rotation * positionOffset;
+        transform.position -= positionOffset;
+
+        if (Physics.Raycast(_hipsBone.position, Vector3.down, out RaycastHit hit, 1f))
+        {
+            transform.position = new Vector3(
+                transform.position.x,
+                hit.point.y,
+                transform.position.z
+            );
+        }
+
+        _hipsBone.position = originalPosition;
+    }
+
+    public void AlignRotationWithHips()
+    {
+        Vector3 originalPosition = _hipsBone.position;
+        Quaternion originalHipsRotaiton = _hipsBone.rotation;
+
+        Vector3 desiredDirection = _hipsBone.up * 1f;
+        desiredDirection.y = 0;
+
+        bool isfacingUp = _hipsBone.forward.y > 0;
+        if (isfacingUp)
+        {
+            desiredDirection *= -1;
+        }
+        desiredDirection.Normalize();
+
+        Quaternion fromToRotation = Quaternion.FromToRotation(transform.forward, desiredDirection);
+        transform.rotation *= fromToRotation;
+
+        _hipsBone.position = originalPosition;
+        _hipsBone.rotation = originalHipsRotaiton;
+    }
+
+    public void PopulateAnimationBones(string animationName)
+    {
+        Vector3 positionBeforeSampling = transform.position;
+        Quaternion rotationBeforeSampling = transform.rotation;
+        foreach (AnimationClip clip in _animator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == animationName)
+            {
+                clip.SampleAnimation(gameObject, 0f);
+                break;
+            }
+        }
+
+        BoneTransform[] boneTransforms = new BoneTransform[_bones.Length];
+        PopulateBoneTransforms(boneTransforms);
+        _animationInitialBones.Add(animationName, boneTransforms);
+
+        //Need to reset the position and rotation of the character after sampling
+        transform.position = positionBeforeSampling;
+        transform.rotation = rotationBeforeSampling;
+    }
+
+    private void PopulateBoneTransforms(BoneTransform[] boneTransforms)
+    {
+        for (int i = 0; i < boneTransforms.Length; i++)
+        {
+            Transform bone = _bones[i].transform;
+            boneTransforms[i] = new BoneTransform(bone.localPosition, bone.localRotation);
+        }
+    }
+
+    public BoneTransform[] GetAnimationInitialBones(string animationName)
+    {
+        return _animationInitialBones[animationName];
     }
 }

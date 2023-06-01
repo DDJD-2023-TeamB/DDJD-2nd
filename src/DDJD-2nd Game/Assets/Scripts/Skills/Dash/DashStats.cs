@@ -6,6 +6,14 @@ using UnityEngine;
 public class DashStats
 {
     [SerializeField]
+    private float _duration = 0.3f;
+    public float Duration
+    {
+        get => _duration;
+        set => _duration = value;
+    }
+
+    [SerializeField]
     private float _force = 40f;
     public float Force
     {
@@ -13,12 +21,13 @@ public class DashStats
         set => _force = value;
     }
 
-    [SerializeField]
-    private float _duration = 0.3f;
-    public float Duration
+    [SerializeField, Range(0f, 90f)]
+    private float _angle = 0.0f;
+
+    public float Angle
     {
-        get => _duration;
-        set => _duration = value;
+        get => _angle;
+        set => _angle = value;
     }
 
     [SerializeField]
