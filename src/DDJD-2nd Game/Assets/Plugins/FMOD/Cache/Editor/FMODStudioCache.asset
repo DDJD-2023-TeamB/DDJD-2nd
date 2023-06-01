@@ -1,0 +1,831 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7016477255862857333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Earth Abilities/Big Earth Shot
+  m_EditorClassIdentifier: 
+  Path: event:/Earth Abilities/Big Earth Shot
+  Guid:
+    Data1: 1927124898
+    Data2: 1232069210
+    Data3: 1190102411
+    Data4: 601975116
+  Banks:
+  - {fileID: -848166600332245090}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -52358398465352682}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5664179714331183948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wind Abilities/Tornado
+  m_EditorClassIdentifier: 
+  Path: event:/Wind Abilities/Tornado
+  Guid:
+    Data1: 293150937
+    Data2: 1094837986
+    Data3: -59558243
+    Data4: -1142915216
+  Banks:
+  - {fileID: -848166600332245090}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 3710920423676409920}
+  - {fileID: -1934215050661734160}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4766781282135463726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wind Abilities/Wind Shockwave
+  m_EditorClassIdentifier: 
+  Path: event:/Wind Abilities/Wind Shockwave
+  Guid:
+    Data1: 638874205
+    Data2: 1205450335
+    Data3: 1621254806
+    Data4: -1563458553
+  Banks:
+  - {fileID: -848166600332245090}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3902562119041510127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Fire Abilities/Flame Thrower
+  m_EditorClassIdentifier: 
+  Path: event:/Fire Abilities/Flame Thrower
+  Guid:
+    Data1: 640669569
+    Data2: 1247239832
+    Data3: 1364535937
+    Data4: 1428956938
+  Banks:
+  - {fileID: -848166600332245090}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -2101731511884315654}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3824399478445020748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Lightning Abilities/Lightning Bolt
+  m_EditorClassIdentifier: 
+  Path: event:/Lightning Abilities/Lightning Bolt
+  Guid:
+    Data1: 712309426
+    Data2: 1254320789
+    Data3: -1405382491
+    Data4: -2111074209
+  Banks:
+  - {fileID: -848166600332245090}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3593094992319545292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Earth Abilities/Earth Wall
+  m_EditorClassIdentifier: 
+  Path: event:/Earth Abilities/Earth Wall
+  Guid:
+    Data1: 831013483
+    Data2: 1210916949
+    Data3: -1725597526
+    Data4: 72450163
+  Banks:
+  - {fileID: -848166600332245090}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 7243397930504136692}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3360673686100466475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Lightning Coil Trap/Coil Connections
+  m_EditorClassIdentifier: 
+  Name: Coil Connections
+  StudioPath: 
+  Min: 1
+  Max: 2
+  Default: 1
+  ID:
+    data1: 3974670781
+    data2: 2527777007
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-2956952977586906152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Charged Fire Ball/Charged Fire Ball
+  m_EditorClassIdentifier: 
+  Name: Charged Fire Ball
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1012577476
+    data2: 3563575602
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Charge
+  - Release
+  Exists: 1
+--- !u!114 &-2742159505906968034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Lightning Abilities/Lightning Coil Trap
+  m_EditorClassIdentifier: 
+  Path: event:/Lightning Abilities/Lightning Coil Trap
+  Guid:
+    Data1: -354655867
+    Data2: 1199452359
+    Data3: -478052685
+    Data4: 1292578611
+  Banks:
+  - {fileID: -848166600332245090}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -104661092123777411}
+  - {fileID: -3360673686100466475}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2101731511884315654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Flame Thrower/State
+  m_EditorClassIdentifier: 
+  Name: State
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 1241025904
+    data2: 2873257780
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Trigger
+  - On
+  - Off
+  Exists: 1
+--- !u!114 &-1934215050661734160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Tornado/Tornado Intensity
+  m_EditorClassIdentifier: 
+  Name: Tornado Intensity
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4114973686
+    data2: 600190015
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-1079877539454773760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Team B/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638209503910800686
+  FileSizes:
+  - Name: Desktop
+    Value: 1036
+  Exists: 1
+--- !u!114 &-848166600332245090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Abilities.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Team B/Build/Desktop/Abilities.bank
+  Name: Abilities
+  StudioPath: bank:/Abilities
+  lastModified: 638209503910760862
+  FileSizes:
+  - Name: Desktop
+    Value: 2534080
+  Exists: 1
+--- !u!114 &-198615529995954253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wind Abilities/Wind Dash
+  m_EditorClassIdentifier: 
+  Path: event:/Wind Abilities/Wind Dash
+  Guid:
+    Data1: 845962415
+    Data2: 1337427977
+    Data3: 649952186
+    Data4: 684587714
+  Banks:
+  - {fileID: -848166600332245090}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-104661092123777411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Lightning Coil Trap/Coil Trap
+  m_EditorClassIdentifier: 
+  Name: Coil Trap
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 1
+  ID:
+    data1: 3364036008
+    data2: 4075053287
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Placement
+  - Conection
+  - Activate
+  Exists: 1
+--- !u!114 &-52358398465352682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Big Earth Shot/Earth Shot State
+  m_EditorClassIdentifier: 
+  Name: Earth Shot State
+  StudioPath: 
+  Min: 0
+  Max: 3
+  Default: 0
+  ID:
+    data1: 1116713854
+    data2: 2715038836
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Create
+  - Rebound
+  - Roll
+  - Destroy
+  Exists: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: 5945739910864070352}
+  - {fileID: -848166600332245090}
+  - {fileID: -1079877539454773760}
+  EditorEvents:
+  - {fileID: 7556411680199511551}
+  - {fileID: 2992830830475247368}
+  - {fileID: 2913485342536671928}
+  - {fileID: 4500531753108744746}
+  - {fileID: 8215857887856026818}
+  - {fileID: 8502581455112501360}
+  - {fileID: -4766781282135463726}
+  - {fileID: -3593094992319545292}
+  - {fileID: -3902562119041510127}
+  - {fileID: -2742159505906968034}
+  - {fileID: 4404672860358740764}
+  - {fileID: -7016477255862857333}
+  - {fileID: -198615529995954253}
+  - {fileID: -3824399478445020748}
+  - {fileID: 3462537424924235951}
+  - {fileID: 8118351445784880452}
+  - {fileID: -5664179714331183948}
+  - {fileID: 1911431036208214987}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: -1079877539454773760}
+  StringsBanks:
+  - {fileID: 5945739910864070352}
+  cacheTime: 638209503910806751
+  cacheVersion: 131603
+--- !u!114 &1911431036208214987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Lightning Abilities/Lightning Dash
+  m_EditorClassIdentifier: 
+  Path: event:/Lightning Abilities/Lightning Dash
+  Guid:
+    Data1: -1956220180
+    Data2: 1154910215
+    Data3: -1464254787
+    Data4: -1334484791
+  Banks:
+  - {fileID: -848166600332245090}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &2913485342536671928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wind Abilities/Sky Walk
+  m_EditorClassIdentifier: 
+  Path: event:/Wind Abilities/Sky Walk
+  Guid:
+    Data1: -1609703646
+    Data2: 1243081810
+    Data3: -917458784
+    Data4: -303585638
+  Banks:
+  - {fileID: -848166600332245090}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &2992830830475247368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Earth Abilities/Eath Dash
+  m_EditorClassIdentifier: 
+  Path: event:/Earth Abilities/Eath Dash
+  Guid:
+    Data1: -833299946
+    Data2: 1170512998
+    Data3: -1660124788
+    Data4: -1909754626
+  Banks:
+  - {fileID: -848166600332245090}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3462537424924235951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Lightning Abilities/Lightning Hoover
+  m_EditorClassIdentifier: 
+  Path: event:/Lightning Abilities/Lightning Hoover
+  Guid:
+    Data1: -1491889467
+    Data2: 1184799545
+    Data3: -2098703684
+    Data4: -1533862193
+  Banks:
+  - {fileID: -848166600332245090}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3710920423676409920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Tornado/Tornado
+  m_EditorClassIdentifier: 
+  Name: Tornado
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 568008195
+    data2: 688747680
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Charge
+  - Release
+  Exists: 1
+--- !u!114 &4404672860358740764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Fire Abilities/Fire Dash
+  m_EditorClassIdentifier: 
+  Path: event:/Fire Abilities/Fire Dash
+  Guid:
+    Data1: 1364273544
+    Data2: 1145371865
+    Data3: 1544592265
+    Data4: 1177358969
+  Banks:
+  - {fileID: -848166600332245090}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4500531753108744746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Fire Abilities/Fire Ball
+  m_EditorClassIdentifier: 
+  Path: event:/Fire Abilities/Fire Ball
+  Guid:
+    Data1: -482984664
+    Data2: 1146691305
+    Data3: -908953159
+    Data4: 2116586193
+  Banks:
+  - {fileID: -848166600332245090}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5945739910864070352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Team B/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638209503910806751
+  FileSizes:
+  - Name: Desktop
+    Value: 2146
+  Exists: 1
+--- !u!114 &6124506214778802942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Charged Fire Ball/Charged Fire Ball Intensity
+  m_EditorClassIdentifier: 
+  Name: Charged Fire Ball Intensity
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 522363370
+    data2: 3547473405
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &7243397930504136692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Earth Wall/Earth Wall
+  m_EditorClassIdentifier: 
+  Name: Earth Wall
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1867973908
+    data2: 3643573038
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Create
+  - Destroy
+  Exists: 1
+--- !u!114 &7556411680199511551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Fire Abilities/Charged Fire Ball
+  m_EditorClassIdentifier: 
+  Path: event:/Fire Abilities/Charged Fire Ball
+  Guid:
+    Data1: -2005077496
+    Data2: 1206145027
+    Data3: -1941280634
+    Data4: -267591952
+  Banks:
+  - {fileID: -848166600332245090}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -2956952977586906152}
+  - {fileID: 6124506214778802942}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8118351445784880452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Fire Abilities/Fire Hover
+  m_EditorClassIdentifier: 
+  Path: event:/Fire Abilities/Fire Hover
+  Guid:
+    Data1: 41983174
+    Data2: 1098292774
+    Data3: -2047966317
+    Data4: -758028151
+  Banks:
+  - {fileID: -848166600332245090}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8215857887856026818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Earth Abilities/Baisc Earth Shot
+  m_EditorClassIdentifier: 
+  Path: event:/Earth Abilities/Baisc Earth Shot
+  Guid:
+    Data1: -1686684373
+    Data2: 1081799628
+    Data3: 1465188752
+    Data4: 2123147733
+  Banks:
+  - {fileID: -848166600332245090}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8502581455112501360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Lightning Abilities/Eletrical Ray
+  m_EditorClassIdentifier: 
+  Path: event:/Lightning Abilities/Eletrical Ray
+  Guid:
+    Data1: 1174936131
+    Data2: 1170517645
+    Data3: 1064794521
+    Data4: 14931114
+  Banks:
+  - {fileID: -848166600332245090}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
