@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName="Book", menuName = "Items/Book")]
+[CreateAssetMenu(fileName="Book", menuName = "Scriptable Objects/Items/Book")]
 public class Book : CollectibleObject
 {
     public void Awake()

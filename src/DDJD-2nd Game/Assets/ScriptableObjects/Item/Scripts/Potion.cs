@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName="Potion", menuName = "Items/Potion")]
+[CreateAssetMenu(fileName="Potion", menuName = "Scriptable Objects/Items/Potion")]
 public class Potion : CollectibleObject
 {
     public int restoreHealthValue;
