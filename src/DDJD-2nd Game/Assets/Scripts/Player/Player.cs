@@ -5,6 +5,8 @@ using Cinemachine;
 
 public class Player : StateContext
 {
+    public ItemsInventoryObject inventory;
+    
     private PlayerStateFactory _factory;
     public PlayerStateFactory Factory
     {
@@ -146,11 +148,14 @@ public class Player : StateContext
         get { return _dashable; }
     }
 
+    public Interactable _interactedObject;
     private AirMovementComponent _airMovement;
     public AirMovementComponent AirMovement
     {
         get { return _airMovement; }
     }
+
+    private UIController _uiController;
 
     void Awake()
     {
@@ -165,6 +170,7 @@ public class Player : StateContext
         _playerSkills.Player = this;
         _meleeCombat = GetComponent<MeleeCombat>();
         _dashable = GetComponent<Dashable>();
+        _uiController = GetComponent<UIController>();
         ChangeState(_factory.Playable());
     }
 
@@ -181,5 +187,10 @@ public class Player : StateContext
     void UpdateElement()
     {
         _airMovement = _playerSkills.CurrentElement?.AirMovementSkill?.Initialize(gameObject);
+    }
+
+    public UIController UIController
+    {
+        get { return _uiController; }
     }
 }
