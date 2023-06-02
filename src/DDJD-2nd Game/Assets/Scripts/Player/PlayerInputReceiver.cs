@@ -85,6 +85,12 @@ public class PlayerInputReceiver : MonoBehaviour
         get { return _isMeleeAttacking; }
     }
 
+    private bool _isInterating;
+    public bool IsInteracting
+    {
+        get { return _isInterating; }
+    }
+
     //Callbacks
     public Action OnLeftShootKeydown;
     public Action OnRightShootKeydown;
@@ -94,8 +100,16 @@ public class PlayerInputReceiver : MonoBehaviour
     public Action OnMeleeAttackKeydown;
     public Action OnMeleeAttackKeyup;
 
+    public Action OnInteration;
     public Action OnJumpKeyDown;
     public Action OnJumpKeyUp;
+
+    public Action OnInventoryKeydown;
+    public Action OnInventoryKeyup;
+    public Action OnMissionKeydown;
+    public Action OnMissionKeyup;
+    public Action OnMenuKeydown;
+    public Action OnMenuKeyup;
 
     // Start is called before the first frame update
     void Awake()
@@ -118,6 +132,11 @@ public class PlayerInputReceiver : MonoBehaviour
 
         _playerInput.PlayerMovement.Dash.performed += ctx => _isDashing = true;
         _playerInput.PlayerMovement.Dash.canceled += ctx => _isDashing = false;
+        
+        // CLicka no F e entra no estado isInteracting
+        _playerInput.PlayerMovement.Interact.performed += ctx => _isInterating = true;
+        _playerInput.PlayerMovement.Interact.canceled += ctx => _isInterating = false;
+
 
         _playerInput.CameraControl.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
         _playerInput.CameraControl.Look.canceled += ctx => Look(Vector2.zero);
@@ -165,6 +184,15 @@ public class PlayerInputReceiver : MonoBehaviour
             _isMeleeAttacking = false;
             OnMeleeAttackKeyup?.Invoke();
         };
+
+        _playerInput.UI.Inventory.performed += ctx => OnInventoryKeydown?.Invoke();
+        _playerInput.UI.Inventory.canceled += ctx => OnInventoryKeyup?.Invoke();
+
+        _playerInput.UI.Missions.performed += ctx => OnMissionKeydown?.Invoke();
+        _playerInput.UI.Missions.canceled += ctx => OnMissionKeyup?.Invoke();
+
+        _playerInput.UI.Menu.performed += ctx => OnMenuKeydown?.Invoke();
+        _playerInput.UI.Menu.canceled += ctx => OnMenuKeyup?.Invoke();
     }
 
     private void Move(Vector2 value)

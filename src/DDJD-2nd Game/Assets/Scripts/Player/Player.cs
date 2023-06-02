@@ -5,6 +5,8 @@ using Cinemachine;
 
 public class Player : StateContext, Damageable
 {
+    public ItemsInventoryObject inventory;
+
     private PlayerStateFactory _factory;
     public PlayerStateFactory Factory
     {
@@ -146,6 +148,7 @@ public class Player : StateContext, Damageable
         get { return _dashable; }
     }
 
+    public Interactable _interactedObject;
     private AirMovementComponent _airMovement;
     public AirMovementComponent AirMovement
     {
@@ -180,6 +183,7 @@ public class Player : StateContext, Damageable
     {
         get { return _sfxJumpIntensityId; }
     }
+    private UIController _uiController;
 
     void Awake()
     {
@@ -197,6 +201,7 @@ public class Player : StateContext, Damageable
         _cameraController = GetComponent<CameraController>();
         _status = GetComponent<PlayerStatus>();
         _soundEmitter = GetComponent<SoundEmitter>();
+        _uiController = GetComponent<UIController>();
         ChangeState(_factory.Playable());
     }
 
@@ -237,5 +242,10 @@ public class Player : StateContext, Damageable
     public GameObject GetDamageableObject()
     {
         return this.gameObject;
+    }
+
+    public UIController UIController
+    {
+        get { return _uiController; }
     }
 }
