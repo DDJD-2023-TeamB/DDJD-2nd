@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class ChangeSpellState : MovableState
 {
     public ChangeSpellState(StateContext context, GenericState superState)
@@ -6,6 +8,7 @@ public class ChangeSpellState : MovableState
     public override void Enter()
     {
         base.Enter();
+        Time.timeScale = 0.2f;
     }
 
     public override void Exit()
@@ -25,6 +28,7 @@ public class ChangeSpellState : MovableState
 
         _context.UIController.OpenLeftSpell(false);
         _context.UIController.OpenRightSpell(false);
+        Time.timeScale = 1.0f;
     }
 
     public override void StateUpdate()
