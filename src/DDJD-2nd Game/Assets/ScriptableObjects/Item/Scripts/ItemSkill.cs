@@ -1,6 +1,10 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ItemSkill", menuName = "Scriptable Objects/Items/ItemSkill", order = 1)]
+[CreateAssetMenu(
+    fileName = "ItemSkill",
+    menuName = "Scriptable Objects/Items/ItemSkill",
+    order = 1
+)]
 public class ItemSkill : ItemObject
 {
     [SerializeField]
@@ -9,10 +13,5 @@ public class ItemSkill : ItemObject
     {
         get => _skill;
         set => _skill = value;
-    }
-
-    public void Awake()
-    {
-        _type = ItemType.Spell;
     }
 }
