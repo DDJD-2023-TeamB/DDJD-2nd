@@ -11,7 +11,7 @@ public class ItemsInventoryObject : ScriptableObject
     public List<ItemStack> Container = new List<ItemStack>();
     public void AddItem(CollectibleObject item, int amount)
     {
-        ItemStack slot = Container.Find(x => x.item.Type == item.Type);
+        ItemStack slot = Container.Find(x => x.item == item);
 
         if (slot != null)
         {
