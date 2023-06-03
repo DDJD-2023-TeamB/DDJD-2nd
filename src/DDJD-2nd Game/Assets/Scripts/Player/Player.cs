@@ -182,6 +182,10 @@ public class Player : StateContext, Damageable
     public FMOD.Studio.PARAMETER_ID SfxJumpIntensityId
     {
         get { return _sfxJumpIntensityId; }
+    private CharacterStatus _characterStatus;
+    public CharacterStatus CharacterStatus
+    {
+        get { return _characterStatus; }
     }
     private UIController _uiController;
 
@@ -201,6 +205,7 @@ public class Player : StateContext, Damageable
         _cameraController = GetComponent<CameraController>();
         _status = GetComponent<PlayerStatus>();
         _soundEmitter = GetComponent<SoundEmitter>();
+        _characterStatus = GetComponent<CharacterStatus>();
         _uiController = GetComponent<UIController>();
         ChangeState(_factory.Playable());
     }

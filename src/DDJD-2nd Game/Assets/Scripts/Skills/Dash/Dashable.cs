@@ -35,6 +35,7 @@ public abstract class Dashable : MonoBehaviour
         get => _isDashing;
     }
     protected DashStats _currentDashStats;
+    protected CharacterStatus _status;
 
     private DashComponent _lastDashSkill;
 
@@ -43,6 +44,7 @@ public abstract class Dashable : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
         _maxSpeed = _maxRegularSpeed;
+        _status = GetComponent<CharacterStatus>();
     }
 
     protected void Update()
