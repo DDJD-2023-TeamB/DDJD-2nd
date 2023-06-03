@@ -67,7 +67,7 @@ public class UIController : MonoBehaviour
     {
         currentMenu = "inventory";
         _playerUI.inventoryUI.gameObject.SetActive(isOpening);
-        _playerUI.playingUI.SetActive(!isOpening);
+        _playerUI.playingUI.gameObject.SetActive(!isOpening);
 
         if (isOpening)
         {
@@ -80,14 +80,14 @@ public class UIController : MonoBehaviour
     {
         currentMenu = "menu";
         _playerUI.menuUI.SetActive(isOpening);
-        _playerUI.playingUI.SetActive(!isOpening);
+        _playerUI.playingUI.gameObject.SetActive(!isOpening);
     }
 
     public void OpenMissions(bool isOpening)
     {
         currentMenu = "missions";
         _playerUI.missionsUI.SetActive(isOpening);
-        _playerUI.playingUI.SetActive(!isOpening);
+        _playerUI.playingUI.gameObject.SetActive(!isOpening);
     }
 
     public void OpenLeftSpell(bool isOpening)
@@ -127,6 +127,11 @@ public class UIController : MonoBehaviour
     }
 
     private void Update() { }
+
+    public void UpdateHealth(int currentHealth, int maxHealth)
+    {
+        _playerUI.playingUI.UpdateHealth(currentHealth, maxHealth);
+    }
 
     public void SelectSlotLeft(int slot)
     {

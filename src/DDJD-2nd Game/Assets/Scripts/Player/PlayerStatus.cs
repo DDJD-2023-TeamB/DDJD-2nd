@@ -28,5 +28,8 @@ public class PlayerStatus : CharacterStatus
         float shakeIntensity =
             Mathf.Clamp01((float)damage / (float)_maxHealth) * _cameraShakeIntensity;
         _player.CameraController.ShakeCamera(shakeIntensity, 0.2f);
+
+        //Update ui
+        _player.UIController.UpdateHealth(_health, _maxHealth);
     }
 }
