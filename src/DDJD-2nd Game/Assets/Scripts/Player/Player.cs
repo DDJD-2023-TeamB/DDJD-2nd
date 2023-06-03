@@ -184,6 +184,8 @@ public class Player : StateContext, Damageable
         get { return _sfxJumpIntensityId; }
     }
     private UIController _uiController;
+    [SerializeField]
+    private Dialogue _dialogue; //TODO:: Get from UI after UI PR merges
 
     void Awake()
     {
@@ -247,5 +249,15 @@ public class Player : StateContext, Damageable
     public UIController UIController
     {
         get { return _uiController; }
+    }
+    public Dialogue Dialogue
+    {
+        get { return _dialogue; }
+    }
+
+    public Interactable InteractedObject
+    {
+        get { return _interactedObject; }
+        set { _interactedObject = value; }
     }
 }

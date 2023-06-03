@@ -13,7 +13,9 @@ public class InteractingState : GenericState
 
     public override void Enter()
     {
-        Interactable objt = _context._interactedObject.GetComponent<Interactable>();
+        Interactable objt = _context.InteractedObject;
+        _context.Animator.SetFloat("ForwardSpeed", 0.0f);
+        _context.Animator.SetFloat("RightSpeed", 0.0f);
         objt.Interact();
         HelpManager.Instance.SetHelpText("");
     }
@@ -34,15 +36,11 @@ public class InteractingState : GenericState
 
     public override void StateUpdate()
     {
-        if (CheckCurrentStates())
+        Interactable objt = _context.InteractedObject;
+        if (_context.Input.IsContinueReading && objt is Npc)
         {
-            return;
+            Npc npc = (Npc)objt;
+            npc.ContinueInteraction();
         }
-    }
-
-    // Check state and substate, return true if state is changed
-    private bool CheckCurrentStates()
-    {
-        return false;
     }
 }

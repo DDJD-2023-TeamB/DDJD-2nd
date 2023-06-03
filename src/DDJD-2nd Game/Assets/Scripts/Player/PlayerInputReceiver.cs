@@ -91,6 +91,12 @@ public class PlayerInputReceiver : MonoBehaviour
         get { return _isInterating; }
     }
 
+    private bool _isContinueReading;
+    public bool IsContinueReading
+    {
+        get { return _isContinueReading; }
+    }
+
     //Callbacks
     public Action OnLeftShootKeydown;
     public Action OnRightShootKeydown;
@@ -103,7 +109,6 @@ public class PlayerInputReceiver : MonoBehaviour
     public Action OnInteration;
     public Action OnJumpKeyDown;
     public Action OnJumpKeyUp;
-
     public Action OnInventoryKeydown;
     public Action OnInventoryKeyup;
     public Action OnMissionKeydown;
@@ -137,6 +142,8 @@ public class PlayerInputReceiver : MonoBehaviour
         _playerInput.PlayerMovement.Interact.performed += ctx => _isInterating = true;
         _playerInput.PlayerMovement.Interact.canceled += ctx => _isInterating = false;
 
+        _playerInput.PlayerMovement.Continue.performed += ctx => _isContinueReading = true;
+        _playerInput.PlayerMovement.Continue.canceled += ctx => _isContinueReading = false;
 
         _playerInput.CameraControl.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
         _playerInput.CameraControl.Look.canceled += ctx => Look(Vector2.zero);

@@ -7,34 +7,36 @@ public abstract class Interactable : MonoBehaviour
 {
     private TextMeshProUGUI _helpText;
     //private GameObject object;
+    protected Player _player;
+
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
-        
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void Update() { }
 
-    public void OnTriggerEnter(Collider other){
-        
-        if(other.tag != "Player"){
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.tag != "Player")
+        {
             return;
         }
-        Player player = other.gameObject.GetComponent<Player>();
-        player._interactedObject = this.gameObject.GetComponent<Interactable>();
+   
+        _player._interactedObject = this.gameObject.GetComponent<Interactable>();
         Approach();
     }
 
-    public void OnTriggerExit(Collider other){
-        if(other.tag != "Player"){
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.tag != "Player")
+        {
             return;
         }
-        Player player = other.gameObject.GetComponent<Player>();
-        player._interactedObject = null;
+
+        _player._interactedObject = null;
         HelpManager.Instance.SetHelpText("");
         //TODO
         Debug.Log("Leaving");
@@ -43,7 +45,20 @@ public abstract class Interactable : MonoBehaviour
     private void Approach(){
         //_playerIsInteracting
         HelpManager.Instance.SetHelpText("Press F to interact");
+        EndInteract();
+    }
+
+    protected virtual void Approach()
+    {
+        // TODO APPEAR A TEXT
+        Debug.Log("Press F to open the upgrade book");
     }
 
     public abstract void Interact();
+
+    public virtual void EndInteract()
+    {
+        _player.InteractedObject = null;
+    }
+
 }
