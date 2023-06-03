@@ -68,6 +68,8 @@ public class CharacterStatus : MonoBehaviour
 
     public bool ConsumeMana(int manaCost)
     {
+        if (!_useMana)
+            return true;
         if (_mana < manaCost)
         {
             return false;
