@@ -46,8 +46,7 @@ public class PlayableState : GenericState
     }
 
     private void CheckRange()
-    {
-        // Se clickou no F e se está perto de algum interable
+    {   
         if (
             _context.Input.IsInteracting
             && !(_substate is InteractingState)
