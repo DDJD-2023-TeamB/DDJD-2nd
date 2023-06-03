@@ -92,7 +92,14 @@ public class AimingState : MovableState
                 skill.SpellPrefab.transform.rotation
             );
         }
-        else if (_context.CharacterStatus.Mana > 0 || skill.SkillStats.ManaCost == 0) // Prevent charge and hold spells from being created when no mana
+        else if (
+            skill.SkillStats.CastType == CastType.Instant
+            && _context.CharacterStatus.Mana < skill.SkillStats.ManaCost
+        )
+        {
+            return;
+        }
+        else if (_context.CharacterStatus.Mana > 0 || skill.SkillStats.ManaCost == 0) // Prevent charge and hold spells from being created without no mana
         {
             spell = isLeft
                 ? _context.Shooter.CreateLeftSpell(skill, _context.LeftHand.transform)
