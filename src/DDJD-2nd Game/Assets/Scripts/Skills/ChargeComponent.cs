@@ -11,6 +11,9 @@ public class ChargeComponent : MonoBehaviour
     public Action OnChargeComplete;
     public Action OnCharge;
 
+    private CharacterStatus _characterStatus;
+    private int _maxManaCost = 0;
+
     private float _maxChargeTime = 0.0f;
     private float _minChargeTime = 0.0f;
 
@@ -38,6 +41,13 @@ public class ChargeComponent : MonoBehaviour
             return;
         }
         _chargeTime += Time.deltaTime;
+        if (!_characterStatus.HasEnoughMana(GetManaCost()))
+        {
+            _isCharging = false;
+            _chargeTime -= Time.deltaTime;
+            return;
+        }
+
         if (_chargeTime >= MaxChargeTime)
         {
             _chargeTime = MaxChargeTime;
@@ -60,6 +70,11 @@ public class ChargeComponent : MonoBehaviour
         return _chargeTime / MaxChargeTime;
     }
 
+    public int GetManaCost()
+    {
+        return Mathf.CeilToInt(_maxManaCost * GetCurrentCharge());
+    }
+
     public void StopCharging()
     {
         _isCharging = false;
@@ -68,5 +83,15 @@ public class ChargeComponent : MonoBehaviour
     public bool IsCharging()
     {
         return _isCharging;
+    }
+
+    public void SetCaster(GameObject caster)
+    {
+        _characterStatus = caster.GetComponent<CharacterStatus>();
+    }
+
+    public void SetManaCost(int manaCost)
+    {
+        _maxManaCost = manaCost;
     }
 }

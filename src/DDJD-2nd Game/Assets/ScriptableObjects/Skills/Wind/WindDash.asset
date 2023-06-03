@@ -20,15 +20,19 @@ MonoBehaviour:
     _damageToForceMultiplier: 0
     _cooldown: 0.5
     _castTime: 0
+    _noiseRadius: 0
     _castType: 0
     _maxChargeTime: 0
     _isContinuous: 0
     _tickRate: 0
+    _manaCost: 5
     _effectDuration: 0
   _dashStats:
     _duration: 0.2
     _force: 30
+    _angle: 0
     _maxSpeed: 40
     _cameraFov: 60
     _enterFovTime: 0.25
     _exitFovTime: 0.25
+  _canDashInAir: 1

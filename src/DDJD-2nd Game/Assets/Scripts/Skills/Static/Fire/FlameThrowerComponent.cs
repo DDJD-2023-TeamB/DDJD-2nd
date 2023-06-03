@@ -60,6 +60,7 @@ public class FlameThrowerComponent : StaticSkillComponent, NonCollidable
             StopCoroutine(_soundRoutine);
         }
 
+        active = false;
         Destroy(gameObject, 3.0f);
     }
 

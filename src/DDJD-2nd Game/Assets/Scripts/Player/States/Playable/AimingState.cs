@@ -92,14 +92,23 @@ public class AimingState : MovableState
                 skill.SpellPrefab.transform.rotation
             );
         }
-        else
+        else if (
+            skill.SkillStats.CastType == CastType.Instant
+            && _context.CharacterStatus.Mana < skill.SkillStats.ManaCost
+        )
+        {
+            return;
+        }
+        else if (_context.CharacterStatus.Mana > 0 || skill.SkillStats.ManaCost == 0) // Prevent charge and hold spells from being created without no mana
         {
             spell = isLeft
                 ? _context.Shooter.CreateLeftSpell(skill, _context.LeftHand.transform)
                 : _context.Shooter.CreateRightSpell(skill, _context.RightHand.transform);
         }
-        string animationTrigger = GetAnimationTrigger(isLeft);
+        else
+            return;
 
+        string animationTrigger = GetAnimationTrigger(isLeft);
         Vector3 origin = spell.transform.position;
         Vector3 direction;
         bool success = true;
@@ -107,23 +116,27 @@ public class AimingState : MovableState
         {
             case CastType.Instant:
                 direction = _context.AimComponent.GetAimDirection(origin);
-                success = _context.Shooter.Shoot(spell, direction, true);
-                _context.Animator.SetTrigger(animationTrigger);
+                success = _context.Shooter.Shoot(spell, direction, true, skill.SkillStats.ManaCost);
                 if (success)
                 {
+                    _context.Animator.SetTrigger(animationTrigger);
                     _context.PlayerSkills.StartSkillCooldown(skill);
+                    _lastAnimTrigger = animationTrigger;
                 }
-                _lastAnimTrigger = animationTrigger;
                 break;
             case CastType.Charge:
                 _context.Animator.SetTrigger(animationTrigger);
                 _lastAnimTrigger = animationTrigger;
                 break;
             case CastType.Hold:
-
                 _lastAnimTrigger = animationTrigger;
                 direction = _context.AimComponent.GetAimDirection(origin);
-                success = _context.Shooter.Shoot(spell, direction, false);
+                success = _context.Shooter.Shoot(
+                    spell,
+                    direction,
+                    false,
+                    skill.SkillStats.ManaCost
+                );
                 if (success)
                 {
                     _context.PlayerSkills.StartSkillCooldown(skill);
@@ -165,7 +178,13 @@ public class AimingState : MovableState
             case CastType.Charge:
                 Vector3 origin = spell.transform.position;
                 Vector3 direction = _context.AimComponent.GetAimDirection(origin);
-                success = _context.Shooter.Shoot(spell, direction, true);
+                ChargeComponent chargeComponent = spell.GetComponent<ChargeComponent>();
+                success = _context.Shooter.Shoot(
+                    spell,
+                    direction,
+                    true,
+                    chargeComponent.GetManaCost()
+                );
                 _context.Animator.SetTrigger(animationTrigger);
                 _lastAnimTrigger = animationTrigger;
                 if (success)
@@ -184,8 +203,11 @@ public class AimingState : MovableState
 
                 break;
             case CastType.Spawn:
-                _context.ObjectSpawner.SpawnObject((SpawnSkill)skill);
-                _context.PlayerSkills.StartSkillCooldown(skill);
+                success = _context.ObjectSpawner.SpawnObject((SpawnSkill)skill);
+                if (success)
+                {
+                    _context.PlayerSkills.StartSkillCooldown(skill);
+                }
                 break;
         }
 
