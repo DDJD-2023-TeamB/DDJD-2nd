@@ -18,6 +18,7 @@ public class Npc : Interactable
 
     public override void Interact()
     {
+        Debug.Log("Interactinggggggggg");
         _dialogue.StartDialogue(_dialogueInfo);
     }
 
