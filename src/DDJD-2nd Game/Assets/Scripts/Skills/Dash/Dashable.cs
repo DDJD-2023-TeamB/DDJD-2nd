@@ -37,6 +37,8 @@ public abstract class Dashable : MonoBehaviour
     protected DashStats _currentDashStats;
     protected CharacterStatus _status;
 
+    private DashComponent _lastDashSkill;
+
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -73,6 +75,7 @@ public abstract class Dashable : MonoBehaviour
         dashComponent.SetCaster(gameObject);
         dashComponent.SetSkill(dashSkill);
         dashComponent.SetDashDirection(direction);
+        _lastDashSkill = dashComponent;
     }
 
     /**
@@ -96,7 +99,7 @@ public abstract class Dashable : MonoBehaviour
         SetDashAnimation();
 
         _maxSpeed = stats.MaxSpeed;
-        StartCoroutine(SmoothlyChangeMaxSpeed(stats.MaxSpeed));
+        StartCoroutine(SmoothlyChangeMaxSpeed(stats.MaxSpeed, false));
 
         Invoke(nameof(ResetDash), stats.Duration);
 
@@ -114,10 +117,10 @@ public abstract class Dashable : MonoBehaviour
         _animator.SetBool("IsDashing", false);
         _animator.SetFloat("DashX", 0f);
         _animator.SetFloat("DashY", 0f);
-        StartCoroutine(SmoothlyChangeMaxSpeed(_maxRegularSpeed));
+        StartCoroutine(SmoothlyChangeMaxSpeed(_maxRegularSpeed, true));
     }
 
-    protected IEnumerator SmoothlyChangeMaxSpeed(float targetSpeed)
+    protected IEnumerator SmoothlyChangeMaxSpeed(float targetSpeed, bool isEnd = false)
     {
         float time = 0;
         float diff = Mathf.Abs(_maxSpeed - targetSpeed);
@@ -129,7 +132,11 @@ public abstract class Dashable : MonoBehaviour
             _maxSpeed = Mathf.Lerp(startValue, targetSpeed, time);
             yield return null;
         }
-
+        if (isEnd)
+        {
+            _lastDashSkill?.OnDashEnd();
+            _lastDashSkill = null;
+        }
         _maxSpeed = targetSpeed;
     }
 

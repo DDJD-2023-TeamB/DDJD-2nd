@@ -14,6 +14,9 @@ public class NotAimingState : MovableState
         base.Enter();
         _context.Input.OnMeleeAttackKeydown += OnMeleeAttackKeydown;
         _context.Input.OnMeleeAttackKeyup += OnMeleeAttackKeyup;
+
+        _context.Input.OnLeftShootKeydown += OnLeftShootKeyDown;
+        _context.Input.OnRightShootKeydown += OnRightShootKeyDown;
     }
 
     public override void Exit()
@@ -21,6 +24,9 @@ public class NotAimingState : MovableState
         base.Exit();
         _context.Input.OnMeleeAttackKeydown -= OnMeleeAttackKeydown;
         _context.Input.OnMeleeAttackKeyup -= OnMeleeAttackKeyup;
+
+        _context.Input.OnLeftShootKeydown -= OnLeftShootKeyDown;
+        _context.Input.OnRightShootKeydown -= OnRightShootKeyDown;
     }
 
     public override bool CanChangeState(GenericState state)
@@ -46,6 +52,16 @@ public class NotAimingState : MovableState
     private void OnMeleeAttackKeyup()
     {
         _context.Animator.SetBool("IsAttacking", false);
+    }
+
+    private void OnLeftShootKeyDown()
+    {
+        _context.ChangeState(_context.Factory.ChangeSpell(_superstate));
+    }
+
+    private void OnRightShootKeyDown()
+    {
+        _context.ChangeState(_context.Factory.ChangeSpell(_superstate));
     }
 
     private void CheckDash()
