@@ -48,12 +48,6 @@ public abstract class Interactable : MonoBehaviour
         EndInteract();
     }
 
-    protected virtual void Approach()
-    {
-        // TODO APPEAR A TEXT
-        Debug.Log("Press F to open the upgrade book");
-    }
-
     public abstract void Interact();
 
     public virtual void EndInteract()
