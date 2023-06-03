@@ -84,6 +84,11 @@ public class AimingState : MovableState
             return;
         }
 
+        if (_context.CharacterStatus.Mana < skill.SkillStats.ManaCost)
+        {
+            return;
+        }
+
         GameObject spell;
         if (skill.SkillStats.CastType == CastType.Spawn)
         {
@@ -91,13 +96,6 @@ public class AimingState : MovableState
                 (SpawnSkill)skill,
                 skill.SpellPrefab.transform.rotation
             );
-        }
-        else if (
-            skill.SkillStats.CastType == CastType.Instant
-            && _context.CharacterStatus.Mana < skill.SkillStats.ManaCost
-        )
-        {
-            return;
         }
         else if (_context.CharacterStatus.Mana > 0 || skill.SkillStats.ManaCost == 0) // Prevent charge and hold spells from being created without no mana
         {
