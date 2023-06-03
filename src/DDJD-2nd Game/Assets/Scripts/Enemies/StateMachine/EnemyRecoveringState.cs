@@ -16,6 +16,7 @@ public class EnemyRecoveringState : GenericState
 
     public override void Enter()
     {
+        base.Enter();
         // set all layers to 0 expect first
         _context.RagdollController.DeactivateRagdoll();
         _context.Animator.Play(_recoveringAnimationName, 0, 0.0f);
@@ -30,7 +31,7 @@ public class EnemyRecoveringState : GenericState
     {
         if (!_context.Animator.GetCurrentAnimatorStateInfo(0).IsName(_recoveringAnimationName))
         {
-            _context.ChangeState(_context.PopState());
+            _context.ChangeState(_context.States.AttackState);
             return;
         }
     }
@@ -38,7 +39,6 @@ public class EnemyRecoveringState : GenericState
     public override void Exit()
     {
         base.Exit();
-        _context.NavMeshAgent.enabled = false;
     }
 
     public override bool CanChangeState(GenericState state)

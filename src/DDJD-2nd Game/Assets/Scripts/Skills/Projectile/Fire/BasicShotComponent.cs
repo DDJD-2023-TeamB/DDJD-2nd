@@ -13,6 +13,12 @@ public class BasicShotComponent : ProjectileComponent
         _vfx = GetComponent<VisualEffect>();
     }
 
+    public override void Shoot(Vector3 direction)
+    {
+        base.Shoot(direction);
+        _soundEmitter.PlayAndRelease("spawn");
+    }
+
     protected override void OnImpact(Collider other, float multiplier = 1)
     {
         base.OnImpact(other);

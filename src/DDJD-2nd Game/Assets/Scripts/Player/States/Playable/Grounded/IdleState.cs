@@ -13,6 +13,7 @@ public class IdleState : GenericState
 
     public override void Enter()
     {
+        base.Enter();
         _context.Animator.SetFloat("ForwardSpeed", 0f);
         _context.Animator.SetFloat("RightSpeed", 0f);
     }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{ed200a24-8ebd-4c37-a263-286299b7b4c8}">
+		<property name="name">
+			<value>Hover Type</value>
+		</property>
+		<relationship name="folder">
+			<destination>{de79e17d-ef84-4ec5-bc49-2e353b71570e}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{3bdde659-a055-480d-9724-fc83983a0d20}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{3bdde659-a055-480d-9724-fc83983a0d20}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Basic</value>
+			<value>Fire</value>
+			<value>Lightning</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

@@ -23,6 +23,15 @@ public class PlayerSkills : ScriptableObject
         set => _currentElement = value;
     }
 
+    [SerializeField]
+    private List<ItemSkill> _learnedSkills = new List<ItemSkill>();
+
+    [SerializeField]
+    private List<ItemSkill> _equippedLeftSkills = new List<ItemSkill>();
+
+    [SerializeField]
+    private List<ItemSkill> _equippedRightSkills = new List<ItemSkill>();
+
     public AimedSkill LeftSkill
     {
         get => _leftSkill;
@@ -76,5 +85,23 @@ public class PlayerSkills : ScriptableObject
     public bool IsSkillOnCooldown(Skill skill)
     {
         return _skillCooldowns.ContainsKey(skill);
+    }
+
+    public List<ItemSkill> EquippedRightSkills
+    {
+        get => _equippedRightSkills;
+        set => _equippedRightSkills = value;
+    }
+
+    public List<ItemSkill> EquippedLeftSkills
+    {
+        get => _equippedLeftSkills;
+        set => _equippedLeftSkills = value;
+    }
+
+    public List<ItemSkill> LearnedSkills
+    {
+        get => _learnedSkills;
+        set => _learnedSkills = value;
     }
 }

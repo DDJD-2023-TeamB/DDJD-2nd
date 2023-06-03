@@ -5,6 +5,8 @@ using Cinemachine;
 
 public class Player : StateContext
 {
+    public ItemsInventoryObject inventory;
+    
     private PlayerStateFactory _factory;
     public PlayerStateFactory Factory
     {
@@ -156,6 +158,8 @@ public class Player : StateContext
     [SerializeField]
     private Dialogue _dialogue; //TODO:: Get from UI after UI PR merges
 
+    private UIController _uiController;
+
     void Awake()
     {
         _inputReceiver = GetComponent<PlayerInputReceiver>();
@@ -169,6 +173,7 @@ public class Player : StateContext
         _playerSkills.Player = this;
         _meleeCombat = GetComponent<MeleeCombat>();
         _dashable = GetComponent<Dashable>();
+        _uiController = GetComponent<UIController>();
         ChangeState(_factory.Playable());
     }
 
@@ -196,5 +201,10 @@ public class Player : StateContext
     {
         get { return _interactedObject; }
         set { _interactedObject = value; }
+
+    public UIController UIController
+    {
+        get { return _uiController; }
+
     }
 }

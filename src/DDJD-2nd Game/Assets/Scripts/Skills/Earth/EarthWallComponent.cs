@@ -7,11 +7,18 @@ public class EarthWallComponent : StaticSkillComponent
     private RaycastHit? _previousHit = null;
     private Animator _animator;
 
+    private FMOD.Studio.PARAMETER_ID _sfxStateId;
+
     protected override void Awake()
     {
         base.Awake();
         _collider.enabled = false;
         _animator = GetComponent<Animator>();
+    }
+
+    public void Start()
+    {
+        _sfxStateId = _soundEmitter.GetParameterId("wall", "Earth Wall");
     }
 
     public override bool CanShoot(Vector3 direction)
@@ -56,7 +63,8 @@ public class EarthWallComponent : StaticSkillComponent
 
     public override void DestroySpell()
     {
+        _soundEmitter.SetParameterWithLabel("wall", _sfxStateId, "Destroy", true);
         _animator.SetTrigger("EndWall");
-        Destroy(gameObject, 0.3f);
+        Destroy(gameObject, 1.5f);
     }
 }

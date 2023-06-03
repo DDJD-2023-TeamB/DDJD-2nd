@@ -11,10 +11,13 @@ public class HoverMovementComponent : AirMovementComponent
     private Transform _leftHand;
     private Transform _rightHand;
 
-    private GameObject _leftHandVFX;
-    private VisualEffect _leftHandVFXEffect;
-    private GameObject _rightHandVFX;
-    private VisualEffect _rightHandVFXEffect;
+    private HoverComponent _leftHandVFX;
+    private HoverComponent _rightHandVFX;
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
     public override void SetSkill(AirMovementSkill skill)
     {
@@ -29,13 +32,12 @@ public class HoverMovementComponent : AirMovementComponent
     public override void OnKeyDown()
     {
         _isHovering = true;
-        _leftHandVFX = Instantiate(_skill.SpellPrefab, _leftHand.position, Quaternion.identity);
+        _leftHandVFX = Instantiate(_skill.SpellPrefab, _leftHand.position, Quaternion.identity)
+            .GetComponent<HoverComponent>();
         _leftHandVFX.transform.parent = _leftHand;
-        _leftHandVFXEffect = _leftHandVFX.GetComponent<VisualEffect>();
-        _rightHandVFX = Instantiate(_skill.SpellPrefab, _rightHand.position, Quaternion.identity);
+        _rightHandVFX = Instantiate(_skill.SpellPrefab, _rightHand.position, Quaternion.identity)
+            .GetComponent<HoverComponent>();
         _rightHandVFX.transform.parent = _rightHand;
-        _rightHandVFXEffect = _rightHandVFX.GetComponent<VisualEffect>();
-
         StartCoroutine(Hover());
     }
 
@@ -50,13 +52,13 @@ public class HoverMovementComponent : AirMovementComponent
     {
         if (_isHovering)
         {
-            if (_leftHandVFXEffect != null)
+            if (_leftHandVFX != null)
             {
-                _leftHandVFXEffect.SetVector3("Velocity", _player.Rigidbody.velocity);
+                _leftHandVFX.SetVelocity(_player.Rigidbody.velocity);
             }
-            if (_rightHandVFXEffect != null)
+            if (_rightHandVFX != null)
             {
-                _rightHandVFXEffect.SetVector3("Velocity", _player.Rigidbody.velocity);
+                _rightHandVFX.SetVelocity(_player.Rigidbody.velocity);
             }
         }
     }
@@ -84,12 +86,12 @@ public class HoverMovementComponent : AirMovementComponent
     {
         if (_leftHandVFX != null)
         {
-            _leftHandVFXEffect.Stop();
+            _leftHandVFX.Stop();
             Destroy(_leftHandVFX, 2.0f);
         }
         if (_rightHandVFX != null)
         {
-            _rightHandVFXEffect.Stop();
+            _rightHandVFX.Stop();
             Destroy(_rightHandVFX, 2.0f);
         }
     }

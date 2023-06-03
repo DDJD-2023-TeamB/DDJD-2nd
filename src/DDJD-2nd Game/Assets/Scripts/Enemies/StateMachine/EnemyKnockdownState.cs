@@ -30,6 +30,7 @@ public class EnemyKnockdownState : GenericState
 
     public override void Enter()
     {
+        base.Enter();
         _context.NavMeshAgent.enabled = false;
         _context.RagdollController.ActivateRagdoll();
         _context.RagdollController.PushRagdoll(

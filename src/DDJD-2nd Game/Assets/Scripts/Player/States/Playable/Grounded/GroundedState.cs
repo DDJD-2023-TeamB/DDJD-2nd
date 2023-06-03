@@ -13,6 +13,7 @@ public class GroundedState : MeleeAttackableState
 
     public override void Enter()
     {
+        base.Enter();
         _context.Animator.SetBool("IsGrounded", true);
         ChangeSubState(_context.Factory.Idle(this));
         CheckMoving();

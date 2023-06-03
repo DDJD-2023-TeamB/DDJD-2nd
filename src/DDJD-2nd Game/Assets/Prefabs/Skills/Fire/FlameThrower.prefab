@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8101394167880465703}
   - component: {fileID: 5806788631339706958}
   - component: {fileID: 2846749482624589739}
+  - component: {fileID: -4775025516913383002}
   m_Layer: 2
   m_Name: FlameThrower
   m_TagString: Untagged
@@ -139,3 +140,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.7203064, y: 1.3460642, z: 3.8743253}
   m_Center: {x: 0.049526215, y: 0.1730321, z: 2.2535703}
+--- !u!114 &-4775025516913383002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3470633235569862415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - flamethrower
+    _values:
+    - _playOnStart: 1
+      _eventReference:
+        Guid:
+          Data1: 640669569
+          Data2: 1247239832
+          Data3: 1364535937
+          Data4: 1428956938
+        Path: event:/Fire Abilities/Flame Thrower

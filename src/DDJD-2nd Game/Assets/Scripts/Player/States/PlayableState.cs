@@ -14,12 +14,19 @@ public class PlayableState : GenericState
 
     public override void Enter()
     {
+        base.Enter();
         CheckAiming();
+        _context.Input.OnInventoryKeydown += OnInventoryKeydown;
+        _context.Input.OnMissionKeydown += OnMissionKeydown;
+        _context.Input.OnMenuKeydown += OnMenuKeydown;
     }
 
     public override void Exit()
     {
         base.Exit();
+        _context.Input.OnInventoryKeydown -= OnInventoryKeydown;
+        _context.Input.OnMissionKeydown -= OnMissionKeydown;
+        _context.Input.OnMenuKeydown -= OnMenuKeydown;
     }
 
     public override bool CanChangeState(GenericState state)
@@ -50,6 +57,21 @@ public class PlayableState : GenericState
             ChangeSubState(_context.Factory.Interacting(this));
         }
     }
+
+    private void CheckRange()
+    {
+ 
+        // Se clickou no F e se está perto de algum interable
+        if (_context.Input.IsInteracting && !(_substate is InteractingState) && _context._interactedObject != null)
+        {
+            ChangeSubState(_context.Factory.Interacting(this));
+        }
+       /* else if (!_context.Input.IsAiming && !(_substate is NotAimingState))
+        {
+            ChangeSubState(_context.Factory.NotAiming(this));
+        }*/
+    }
+    
 
     private void CheckAiming()
     {
@@ -119,5 +141,20 @@ public class PlayableState : GenericState
             2f
         );
         */
+    }
+
+    private void OnInventoryKeydown()
+    {
+        _context.ChangeState(_context.Factory.Inventory());
+    }
+
+    private void OnMissionKeydown()
+    {
+        _context.ChangeState(_context.Factory.MissionMenu());
+    }
+
+    private void OnMenuKeydown()
+    {
+        _context.ChangeState(_context.Factory.Menu());
     }
 }

@@ -9,14 +9,40 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
     private GameObject _arcPrefab;
 
     [SerializeField]
-    private GameObject _vfxPrefab;
+    private GameObject _boltVfxPrefab;
+
+    [SerializeField]
+    private GameObject _vfx;
 
     [SerializeField]
     private float _yOffset = 0.5f;
 
+    private FMOD.Studio.PARAMETER_ID _sfxStateId;
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    public void Start()
+    {
+        _sfxStateId = _soundEmitter.GetParameterId("spawn", "Coil Trap");
+        _soundEmitter.Play("spawn");
+    }
+
     public override void Spawn()
     {
-        PlayVfx();
+        _soundEmitter.Stop("spawn");
+        _soundEmitter.SetParameterWithLabel("spawn", _sfxStateId, "Activate", true);
+        StartCoroutine(SpawnAfterTime());
+    }
+
+    private IEnumerator SpawnAfterTime()
+    {
+        _vfx.SetActive(false);
+        PlayBoltVfx();
+        yield return new WaitForSeconds(0.25f);
+        _vfx.SetActive(true);
         DamageNearbyEnemies();
         CreateElectricArc();
     }
@@ -63,53 +89,39 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
         // Calculate Bezier arc with Y offset
         Vector3 pos1 = lastCoil.transform.position;
         Vector3 pos4 = transform.position;
-        Vector3 pos2 = 2 * pos1 / 3 + pos4 / 3;
-        Vector3 pos3 = pos1 / 3 + 2 * pos4 / 3;
         pos1.y += _yOffset;
-        pos2.y += _yOffset;
-        pos3.y += _yOffset;
         pos4.y += _yOffset;
 
         // Spawn object
         Vector3 arcPosition = (pos1 + pos4) / 2;
         GameObject arc = Instantiate(_arcPrefab, arcPosition, Quaternion.identity);
         arc.transform.right = pos1 - pos4;
-
-        // Get bezier points
-        Transform arcPos1 = arc.transform.Find("Pos1");
-        Transform arcPos2 = arc.transform.Find("Pos2");
-        Transform arcPos3 = arc.transform.Find("Pos3");
-        Transform arcPos4 = arc.transform.Find("Pos4");
-
-        // Scale object for correct box collider
-        float realDistance = Vector3.Distance(pos1, pos4);
-        float bezierDistance = Vector3.Distance(arcPos1.position, arcPos4.position);
-        float scale = realDistance / bezierDistance;
-        arc.transform.localScale = new Vector3(
-            scale,
-            arc.transform.localScale.y,
-            arc.transform.localScale.z
-        );
-
-        // Set VFX positions
-        arcPos1.position = pos1;
-        arcPos2.position = pos2;
-        arcPos3.position = pos3;
-        arcPos4.position = pos4;
+        ElectricRayUtils.SetBezierAndScale(arc.transform, pos1, pos4);
 
         SkillComponent arcComponent = arc.GetComponent<SkillComponent>();
         arcComponent.SetCaster(_caster);
         arcComponent.SetSkill(_skill);
 
         float arcLife = Mathf.Min(spawner.GetObjectLifeTime(lastCoil), _skill.SpawnStats.Duration);
+
+        //Activate sound
+        _soundEmitter.SetParameterWithLabel("spawn", _sfxStateId, "Conection", false);
         Destroy(arc, arcLife);
     }
 
-    private void PlayVfx()
+    private void PlayBoltVfx()
     {
         Vector3 position = transform.position;
-        position.y = _vfxPrefab.transform.position.y;
-        GameObject vfx = Instantiate(_vfxPrefab, position, Quaternion.identity);
+        position.y = _boltVfxPrefab.transform.position.y;
+        GameObject vfx = Instantiate(_boltVfxPrefab, position, Quaternion.identity);
         Destroy(vfx, _skill.SpawnStats.Duration);
+    }
+
+    public override void DestroySpell()
+    {
+        VisualEffect vfx = _vfx.GetComponent<VisualEffect>();
+        vfx.Stop();
+        _soundEmitter.StopAndReleaseAll();
+        Destroy(gameObject, 1.0f);
     }
 }

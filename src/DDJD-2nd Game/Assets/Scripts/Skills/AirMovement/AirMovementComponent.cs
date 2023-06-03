@@ -5,7 +5,7 @@ public abstract class AirMovementComponent : MonoBehaviour
     protected Player _player;
     protected Rigidbody _rb;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         enabled = false;
         _player = GetComponent<Player>();

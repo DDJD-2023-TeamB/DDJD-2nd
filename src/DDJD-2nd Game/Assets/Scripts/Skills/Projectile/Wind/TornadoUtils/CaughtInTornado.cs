@@ -25,6 +25,12 @@ public class CaughtInTornado : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!enabled)
+        {
+            //Remove this component
+            Destroy(this);
+            return;
+        }
         //Rotate object around tornado center
         Vector3 direction = transform.position - tornadoReference.transform.position;
         //Project
@@ -33,8 +39,6 @@ public class CaughtInTornado : MonoBehaviour
         Vector3 normal = Quaternion.AngleAxis(130, tornadoReference.RotationAxis) * projection;
         normal = Quaternion.AngleAxis(tornadoReference.Lift, projection) * normal;
         rigid.AddForce(normal * tornadoReference.TornadoStrength, ForceMode.Force);
-
-        Debug.DrawRay(transform.position, normal * 10, Color.red);
     }
 
     //Call this when tornadoReference already exists

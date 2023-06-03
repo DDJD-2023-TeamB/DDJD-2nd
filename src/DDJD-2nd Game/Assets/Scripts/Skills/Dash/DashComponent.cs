@@ -20,4 +20,6 @@ public abstract class DashComponent : SkillComponent
     {
         _dashDirection = direction;
     }
+
+    public virtual void OnDashEnd() { }
 }

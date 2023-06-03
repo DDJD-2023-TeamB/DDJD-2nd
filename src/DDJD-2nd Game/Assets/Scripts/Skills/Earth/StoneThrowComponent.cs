@@ -6,6 +6,7 @@ using UnityEngine.VFX;
 public class StoneThrowComponent : ProjectileComponent
 {
     private VisualEffect _vfx;
+    private FMOD.Studio.PARAMETER_ID _sfxStateId;
 
     [SerializeField, Tooltip("Time after collision to destroy the projectile")]
     private float _destroyAfterCollision = 3.0f;
@@ -17,6 +18,11 @@ public class StoneThrowComponent : ProjectileComponent
     {
         base.Awake();
         _vfx = GetComponent<VisualEffect>();
+    }
+
+    public void Start()
+    {
+        _sfxStateId = _soundEmitter.GetParameterId("stone", "state");
     }
 
     protected override void OnImpact(Collider other, float multiplier = 1)
@@ -64,12 +70,14 @@ public class StoneThrowComponent : ProjectileComponent
     public override void DestroySpell()
     {
         _vfx.Stop();
+        _soundEmitter.SetParameterWithLabel("stone", _sfxStateId, "destroy", true);
         //raycast to find the ground
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 100.0f))
         {
             transform.position = hit.point;
         }
+
         Destroy(gameObject);
         SpawnHitVFX();
     }

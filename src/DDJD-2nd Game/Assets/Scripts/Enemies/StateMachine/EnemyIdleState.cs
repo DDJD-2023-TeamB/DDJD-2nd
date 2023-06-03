@@ -1,23 +1,25 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
-public class EnemyIdleState : GenericState
+public class EnemyIdleState : EnemyState
 {
-    protected BasicEnemy _context;
-
     private Coroutine _loopRoutine;
 
     public EnemyIdleState(BasicEnemy enemy)
-        : base(enemy)
-    {
-        _context = enemy;
-    }
+        : base(enemy) { }
 
     public override void Enter()
     {
+        base.Enter();
         _loopRoutine = _context.StartCoroutine(DetectPlayerLoop());
         _context.NoiseListener.OnNoiseHeard += OnNoiseHeard;
         _context.OnDamageTaken += OnDamageTaken;
+        Action<EnemyMessage> playerSightedAction = OnPlayerSightedMessage;
+        _context.EnemyCommunicator.SetMessageAction(
+            typeof(PlayerSightedMessage),
+            playerSightedAction
+        );
     }
 
     private IEnumerator DetectPlayerLoop()
@@ -29,6 +31,7 @@ public class EnemyIdleState : GenericState
             {
                 if (_context.LineOfSight.CanSeePlayer() || _context.NoiseListener.CanHearPlayer())
                 {
+                    _context.StartCoroutine(WarnNearbyEnemies());
                     _context.ChangeState(_context.States.ChaseState);
                 }
             }
@@ -43,6 +46,10 @@ public class EnemyIdleState : GenericState
         _context.StopCoroutine(_loopRoutine);
         _context.NoiseListener.OnNoiseHeard -= OnNoiseHeard;
         _context.OnDamageTaken -= OnDamageTaken;
+        _context.EnemyCommunicator.DeleteAction(
+            typeof(PlayerSightedMessage),
+            OnPlayerSightedMessage
+        );
     }
 
     private void OnNoiseHeard(Vector3 position)
@@ -66,5 +73,17 @@ public class EnemyIdleState : GenericState
     private void OnDamageTaken()
     {
         _context.ChangeState(_context.States.ChaseState);
+    }
+
+    private void OnPlayerSightedMessage(EnemyMessage message)
+    {
+        _context.ChangeState(_context.States.ChaseState);
+    }
+
+    private IEnumerator WarnNearbyEnemies()
+    {
+        yield return new WaitForSeconds(0.5f);
+        PlayerSightedMessage message = new PlayerSightedMessage(_context.Player.transform.position);
+        _context.StartCoroutine(_context.EnemyCommunicator.SendMessageToEnemies(message));
     }
 }

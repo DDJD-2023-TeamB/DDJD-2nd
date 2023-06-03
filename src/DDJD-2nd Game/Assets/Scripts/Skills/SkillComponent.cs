@@ -11,10 +11,13 @@ public abstract class SkillComponent : MonoBehaviour
     protected ChargeComponent _chargeComponent;
     protected NoiseSource _noiseComponent;
 
+    protected SoundEmitter _soundEmitter;
+
     virtual protected void Awake()
     {
         _chargeComponent = GetComponent<ChargeComponent>();
         _noiseComponent = GetComponent<NoiseSource>();
+        _soundEmitter = GetComponent<SoundEmitter>();
     }
 
     public GameObject Caster
@@ -117,7 +120,7 @@ public abstract class SkillComponent : MonoBehaviour
         // Override this method to add functionality
     }
 
-    private bool Collide(Collider other)
+    protected bool Collide(Collider other)
     {
         if (!CanCollide(other))
         {
@@ -164,6 +167,10 @@ public abstract class SkillComponent : MonoBehaviour
         }
         SkillComponent skillComponent = other.GetComponent<SkillComponent>();
         if (skillComponent != null && skillComponent.Caster.layer == _caster.layer)
+        {
+            return false;
+        }
+        if (_caster.layer == other.gameObject.layer)
         {
             return false;
         }

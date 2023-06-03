@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2195806542070801790}
   - component: {fileID: 2334859516411995535}
   - component: {fileID: 6490192986615935499}
+  - component: {fileID: 2056257870573070739}
   m_Layer: 0
   m_Name: AirWalk
   m_TagString: Untagged
@@ -110,3 +111,34 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &2056257870573070739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6978591958241927630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1609703646
+      Data2: 1243081810
+      Data3: -917458784
+      Data4: -303585638
+    Path: event:/Wind Abilities/Sky Walk
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

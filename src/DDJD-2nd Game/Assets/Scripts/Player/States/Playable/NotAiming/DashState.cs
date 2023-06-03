@@ -26,6 +26,7 @@ public class DashState : MeleeAttackableState
 
     public override void Enter()
     {
+        base.Enter();
         _dashable = _context.GetComponent<Dashable>();
         bool canUseSkill =
             _skill != null

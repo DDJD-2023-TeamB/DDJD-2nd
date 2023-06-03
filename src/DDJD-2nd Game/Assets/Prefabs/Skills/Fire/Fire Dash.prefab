@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7159283518672043759}
   - component: {fileID: 426293044524413467}
   - component: {fileID: -4223670631243638721}
-  - component: {fileID: 8329970442278774179}
+  - component: {fileID: 4638680905780232180}
   m_Layer: 2
   m_Name: Fire Dash
   m_TagString: Untagged
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageCaster: 0
   _explosionRadius: 5
---- !u!114 &8329970442278774179
+--- !u!114 &4638680905780232180
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,6 +135,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 7581297245760954433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8d342615445ea04cb7bbdfa97f4c5ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1364273544
+      Data2: 1145371865
+      Data3: 1544592265
+      Data4: 1177358969
+    Path: event:/Fire Abilities/Fire Dash
+  Event: 
+  PlayEvent: 1
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

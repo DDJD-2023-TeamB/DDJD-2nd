@@ -1,23 +1,20 @@
 using UnityEngine;
 
-public class EnemyMovingState : GenericState
+public class EnemyMovingState : EnemyState
 {
-    protected BasicEnemy _context;
-
     public EnemyMovingState(BasicEnemy enemy)
-        : base(enemy)
-    {
-        _context = enemy;
-    }
+        : base(enemy) { }
 
     public override void Enter()
     {
+        base.Enter();
         _context.Rigidbody.isKinematic = true;
         _context.NavMeshAgent.enabled = true;
     }
 
     public override void StateUpdate()
     {
+        base.StateUpdate();
         float forwardSpeed =
             Vector3.Dot(_context.NavMeshAgent.velocity, _context.transform.forward)
             / _context.NavMeshAgent.speed;
@@ -31,9 +28,6 @@ public class EnemyMovingState : GenericState
     public override void Exit()
     {
         base.Exit();
-        _context.NavMeshAgent.ResetPath();
-        _context.NavMeshAgent.enabled = false;
-        _context.Rigidbody.isKinematic = false;
         _context.Animator.SetFloat(_context.ForwardSpeedHash, 0.0f);
         _context.Animator.SetFloat(_context.RightSpeedHash, 0.0f);
     }

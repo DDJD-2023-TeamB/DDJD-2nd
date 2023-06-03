@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyChaseState : EnemyMovingState
+public class EnemyChaseState : EnemyState
 {
     public EnemyChaseState(BasicEnemy enemy)
         : base(enemy) { }
@@ -20,7 +20,7 @@ public class EnemyChaseState : EnemyMovingState
         }
         else if (!IsInAggroRange())
         {
-            _context.ChangeState(new EnemyIdleState(_context));
+            _context.ChangeState(_context.States.IdleState);
             return;
         }
         Move();

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
 using System;
+using TMPro;
 
 public class BasicEnemy : HumanoidEnemy
 {
@@ -34,6 +35,11 @@ public class BasicEnemy : HumanoidEnemy
 
     public Action OnDamageTaken;
 
+    private EnemyCommunicator _enemyCommunicator;
+
+    [SerializeField]
+    private TextMeshProUGUI _stateText;
+
     public override void Awake()
     {
         base.Awake();
@@ -41,6 +47,7 @@ public class BasicEnemy : HumanoidEnemy
         _noiseListener = GetComponent<NoiseListener>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _enemyDashable = GetComponent<EnemyDashable>();
+        _enemyCommunicator = GetComponent<EnemyCommunicator>();
         _states = new EnemyStates(
             chaseState: new EnemyChaseState(this),
             attackState: new EnemyAttackState(this),
@@ -83,6 +90,12 @@ public class BasicEnemy : HumanoidEnemy
         ChangeState(new EnemyKnockdownState(this, force, hitPoint, hitDirection, _state));
     }
 
+    public override void ChangeState(GenericState state)
+    {
+        base.ChangeState(state);
+        _stateText.text = state.GetType().ToString() + " " + state.Substate?.GetType().ToString();
+    }
+
     //getters and setters
     public Player Player
     {
@@ -120,6 +133,7 @@ public class BasicEnemy : HumanoidEnemy
     public EnemySkills EnemySkills
     {
         get { return _enemySkills; }
+        set { _enemySkills = value; }
     }
 
     public EnemyLineOfSight LineOfSight
@@ -135,5 +149,10 @@ public class BasicEnemy : HumanoidEnemy
     public EnemyDashable EnemyDashable
     {
         get { return _enemyDashable; }
+    }
+
+    public EnemyCommunicator EnemyCommunicator
+    {
+        get { return _enemyCommunicator; }
     }
 }

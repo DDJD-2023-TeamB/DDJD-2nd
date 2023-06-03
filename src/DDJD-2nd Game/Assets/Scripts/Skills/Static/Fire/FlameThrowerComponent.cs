@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
+using FMODUnity;
 
 public class FlameThrowerComponent : StaticSkillComponent, NonCollidable
 {
     private VisualEffect _vfx;
+    private FMOD.Studio.PARAMETER_ID _sfxStateId;
+
+    private Coroutine _soundRoutine;
 
     protected override void Awake()
     {
@@ -13,9 +17,21 @@ public class FlameThrowerComponent : StaticSkillComponent, NonCollidable
         _vfx = GetComponent<VisualEffect>();
     }
 
+    private string _sfxName = "flamethrower";
+
+    protected void Start()
+    {
+        _sfxStateId = _soundEmitter.GetParameterId(_sfxName, "state");
+        _soundRoutine = _soundEmitter.CallWithDelay(
+            () => _soundEmitter.SetParameterWithLabel(_sfxName, _sfxStateId, "On", false),
+            0.05f
+        );
+    }
+
     public override void Shoot(Vector3 direction)
     {
         base.Shoot(direction);
+
         //face the direction of the caster
         transform.rotation = Quaternion.LookRotation(direction);
     }
@@ -34,9 +50,21 @@ public class FlameThrowerComponent : StaticSkillComponent, NonCollidable
 
     public override void DestroySpell()
     {
-        Debug.Log("Destroying FlameThrower");
         DeactivateSpell();
+        _soundEmitter.Stop(_sfxName);
+        _soundEmitter.SetParameterWithLabel(_sfxName, _sfxStateId, "Off", true);
+        _soundEmitter.CallWithDelay(() => _soundEmitter.StopAndRelease(_sfxName), 1.0f);
         _vfx.Stop();
+        if (_soundRoutine != null)
+        {
+            StopCoroutine(_soundRoutine);
+        }
+
         Destroy(gameObject, 3.0f);
+    }
+
+    public void OnDestroy()
+    {
+        _soundEmitter.StopAndReleaseAll();
     }
 }

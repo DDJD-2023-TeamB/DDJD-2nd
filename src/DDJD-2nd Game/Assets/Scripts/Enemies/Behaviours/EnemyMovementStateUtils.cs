@@ -9,11 +9,14 @@ public class EnemyMovementStateUtils
         {
             yield return new WaitForSeconds(1.0f);
             bool canDash =
-                enemy.NavMeshAgent.remainingDistance > minDistance
+                enemy.NavMeshAgent.enabled
+                && enemy.NavMeshAgent.isOnNavMesh
+                && enemy.NavMeshAgent.remainingDistance > minDistance
                 && enemy.EnemyDashable.IsDashReady();
             if (canDash)
             {
                 DashToPosition(enemy, enemy.NavMeshAgent.destination, state);
+                break;
             }
         }
     }

@@ -29,16 +29,22 @@ public class EnemySimpleMovementState : EnemyChaseState
     public override void Exit()
     {
         base.Exit();
-        _context.NavMeshAgent.enabled = false;
-        _context.Rigidbody.isKinematic = false;
         if (_dashCoroutine != null)
         {
-            _context.StopCoroutine(EnemyMovementStateUtils.DashCoroutine(_context, 10.0f, this));
+            _context.StopCoroutine(_dashCoroutine);
         }
     }
 
     public override void StateUpdate()
     {
         base.StateUpdate();
+        float forwardSpeed =
+            Vector3.Dot(_context.NavMeshAgent.velocity, _context.transform.forward)
+            / _context.NavMeshAgent.speed;
+        float rightSpeed =
+            Vector3.Dot(_context.NavMeshAgent.velocity, _context.transform.right)
+            / _context.NavMeshAgent.speed;
+        _context.Animator.SetFloat(_context.ForwardSpeedHash, forwardSpeed);
+        _context.Animator.SetFloat(_context.RightSpeedHash, rightSpeed);
     }
 }

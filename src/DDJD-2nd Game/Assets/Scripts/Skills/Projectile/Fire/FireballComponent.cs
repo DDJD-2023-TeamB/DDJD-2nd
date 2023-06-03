@@ -15,6 +15,24 @@ public class FireballComponent : ProjectileComponent
 
     private const int PARTICLES = 128;
 
+    private FMOD.Studio.PARAMETER_ID _sfxChargeId;
+    private FMOD.Studio.PARAMETER_ID _sfxStateId;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _fireballVFX = GetComponentInChildren<VisualEffect>();
+    }
+
+    protected void Start()
+    {
+        _sfxChargeId = _soundEmitter.GetParameterId("fireball", "Charged Fire Ball Intensity");
+        _sfxStateId = _soundEmitter.GetParameterId("fireball", "Charged Fire Ball");
+        _soundEmitter.SetParameter("fireball", _sfxChargeId, 0.0f);
+
+        _chargeComponent.OnChargeComplete += OnChargeComplete;
+    }
+
     protected override void OnImpact(Collider other, float multiplier = 1)
     {
         base.OnImpact(other);
@@ -52,12 +70,6 @@ public class FireballComponent : ProjectileComponent
         }
     }
 
-    override protected void Awake()
-    {
-        base.Awake();
-        _fireballVFX = GetComponentInChildren<VisualEffect>();
-    }
-
     override public void SetSkill(Skill skill)
     {
         base.SetSkill(skill);
@@ -77,9 +89,21 @@ public class FireballComponent : ProjectileComponent
         _fireballVFX.SetFloat("SpawnRadius", _currentRadius * 4.0f);
     }
 
+    private void OnChargeComplete()
+    {
+        _soundEmitter.SetParameterWithLabel("fireball", _sfxStateId, "Iddle", false);
+    }
+
     public override void Shoot(Vector3 direction)
     {
         base.Shoot(direction);
+        _soundEmitter.SetParameter("fireball", _sfxChargeId, _chargeComponent.GetCurrentCharge());
+        _soundEmitter.Stop("fireball");
+        _soundEmitter.SetParameterWithLabel("fireball", _sfxStateId, "Release", true);
+        _soundEmitter.CallWithDelay(
+            () => _soundEmitter.SetParameterWithLabel("fireball", _sfxStateId, "Iddle", false),
+            0.05f
+        );
         _explosionRadius = _explosionRadius * _chargeComponent.GetCurrentCharge();
         _fireballVFX.SetFloat("SpawnRate", 0);
     }

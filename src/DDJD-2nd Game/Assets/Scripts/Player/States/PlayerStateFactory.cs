@@ -53,6 +53,26 @@ public class PlayerStateFactory : StateFactory
         return new DashState(_context, superState, stats, skill);
     }
 
+    public ChangeSpellState ChangeSpell(GenericState superState)
+    {
+        return new ChangeSpellState(_context, superState);
+    }
+
+    public InventoryState Inventory()
+    {
+        return new InventoryState(_context);
+    }
+
+    public MissionMenuState MissionMenu()
+    {
+        return new MissionMenuState(_context);
+    }
+
+    public MenuState Menu()
+    {
+        return new MenuState(_context);
+    }
+
     public InteractingState Interacting(GenericState superState)
     {
         return new InteractingState(_context, superState);
