@@ -67,7 +67,7 @@ public class CharacterStatus : MonoBehaviour
         return _mana >= manaCost;
     }
 
-    public bool ConsumeMana(int manaCost)
+    public virtual bool ConsumeMana(int manaCost)
     {
         if (!_useMana)
             return true;
@@ -79,7 +79,7 @@ public class CharacterStatus : MonoBehaviour
         return true;
     }
 
-    public void RestoreMana(int manaQuantity)
+    public virtual void RestoreMana(int manaQuantity)
     {
         _mana = Mathf.Min(_mana + manaQuantity, _maxMana);
     }

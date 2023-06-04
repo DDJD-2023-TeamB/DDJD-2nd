@@ -3382,7 +3382,6 @@ GameObject:
   - component: {fileID: 8062649751035626759}
   - component: {fileID: 5597915682881764452}
   - component: {fileID: 4346819917323664300}
-  - component: {fileID: 761159289657698755}
   - component: {fileID: 7961308323444105709}
   m_Layer: 6
   m_Name: Player
@@ -3705,6 +3704,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 500
   _maxHealth: 500
+  _useMana: 1
+  _mana: 100
+  _maxMana: 100
   _cameraShakeIntensity: 20
 --- !u!114 &5597915682881764452
 MonoBehaviour:
@@ -3756,23 +3758,6 @@ MonoBehaviour:
           Data3: -2126559301
           Data4: 781296483
         Path: event:/Movement/Jump
---- !u!114 &761159289657698755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7694690271000812756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f0ee0d6613609419c20d92531e4015, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 100
-  _maxHealth: 100
-  _useMana: 1
-  _mana: 100
-  _maxMana: 100
 --- !u!114 &7961308323444105709
 MonoBehaviour:
   m_ObjectHideFlags: 0

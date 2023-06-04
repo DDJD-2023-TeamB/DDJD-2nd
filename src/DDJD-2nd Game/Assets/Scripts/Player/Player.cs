@@ -182,6 +182,7 @@ public class Player : StateContext, Damageable
     public FMOD.Studio.PARAMETER_ID SfxJumpIntensityId
     {
         get { return _sfxJumpIntensityId; }
+    }
     private CharacterStatus _characterStatus;
     public CharacterStatus CharacterStatus
     {

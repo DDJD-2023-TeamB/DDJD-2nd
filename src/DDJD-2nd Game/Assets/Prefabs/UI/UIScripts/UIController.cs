@@ -133,6 +133,11 @@ public class UIController : MonoBehaviour
         _playerUI.playingUI.UpdateHealth(currentHealth, maxHealth);
     }
 
+    public void UpdateMana(int currentMana, int maxMana, bool isLeft)
+    {
+        _playerUI.playingUI.UpdateMana(currentMana, maxMana, isLeft);
+    }
+
     public void SelectSlotLeft(int slot)
     {
         //Select spell on game controller
