@@ -133,9 +133,14 @@ public class UIController : MonoBehaviour
         _playerUI.playingUI.UpdateHealth(currentHealth, maxHealth);
     }
 
-    public void UpdateMana(int currentMana, int maxMana, bool isLeft)
+    public void UpdateMana(Element element, int currentMana, int maxMana)
     {
-        _playerUI.playingUI.UpdateMana(currentMana, maxMana, isLeft);
+        _playerUI.playingUI.UpdateMana(element, currentMana, maxMana);
+    }
+
+    public void UpdateElements(Skill leftSkill, Skill rightSkill, Element element)
+    {
+        _playerUI.playingUI.UpdateElements(leftSkill, rightSkill, element);
     }
 
     public void SelectSlotLeft(int slot)

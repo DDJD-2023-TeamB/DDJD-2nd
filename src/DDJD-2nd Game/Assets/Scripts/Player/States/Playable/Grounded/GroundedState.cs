@@ -19,9 +19,30 @@ public class GroundedState : MeleeAttackableState
         CheckMoving();
     }
 
+    private void CheckAbsorb()
+    {
+        if (_substate is AbsorbingState)
+        {
+            bool stopAbsorbing = !_context.Input.IsAbsorbing;
+            if (stopAbsorbing)
+            {
+                ChangeSubState(_context.Factory.Idle(this));
+            }
+        }
+        if (_context.Input.IsAbsorbing && !(_substate is AbsorbingState))
+        {
+            ChangeSubState(_context.Factory.Absorbing(this));
+        }
+    }
+
     public override void StateUpdate()
     {
         base.StateUpdate();
+        CheckAbsorb();
+        if (_substate is AbsorbingState)
+        {
+            return;
+        }
 
         if (_context.Input.IsJumping)
         {

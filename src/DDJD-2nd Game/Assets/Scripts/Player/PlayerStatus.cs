@@ -33,26 +33,27 @@ public class PlayerStatus : CharacterStatus
         _player.UIController.UpdateHealth(_health, _maxHealth);
     }
 
-    private void UpdateMana(int mana, int maxMana)
+    private void UpdateMana(Element element)
     {
-        _player.UIController.UpdateMana(_mana, _maxMana, true);
+        int mana = _elementMana[element];
+        _player.UIController.UpdateMana(element, mana, _maxMana);
     }
 
-    public override bool ConsumeMana(int manaCost)
+    public override bool ConsumeMana(Element element, int manaCost)
     {
-        bool success = base.ConsumeMana(manaCost);
+        bool success = base.ConsumeMana(element, manaCost);
         if (!success)
         {
             return false;
         }
-        UpdateMana(_mana, _maxMana);
+        UpdateMana(element);
 
         return success;
     }
 
-    public override void RestoreMana(int manaQuantity)
+    public override void RestoreMana(Element element, int manaQuantity)
     {
-        base.RestoreMana(manaQuantity);
-        UpdateMana(_mana, _maxMana);
+        base.RestoreMana(element, manaQuantity);
+        UpdateMana(element);
     }
 }

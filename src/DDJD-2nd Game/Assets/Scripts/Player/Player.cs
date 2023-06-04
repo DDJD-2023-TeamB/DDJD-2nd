@@ -226,6 +226,11 @@ public class Player : StateContext, Damageable
     void UpdateElement()
     {
         _airMovement = _playerSkills.CurrentElement?.AirMovementSkill?.Initialize(gameObject);
+        _uiController.UpdateElements(
+            _playerSkills.LeftSkill,
+            _playerSkills.RightSkill,
+            _playerSkills.CurrentElement
+        );
     }
 
     public void TakeDamage(

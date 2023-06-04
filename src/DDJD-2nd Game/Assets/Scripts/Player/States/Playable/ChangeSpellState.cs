@@ -28,6 +28,11 @@ public class ChangeSpellState : MovableState
 
         _context.UIController.OpenLeftSpell(false);
         _context.UIController.OpenRightSpell(false);
+        _context.UIController.UpdateElements(
+            leftSkill,
+            rightSkill,
+            _context.PlayerSkills.CurrentElement
+        );
         Time.timeScale = 1.0f;
     }
 

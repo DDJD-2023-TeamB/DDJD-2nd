@@ -269,6 +269,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AbsorbMana"",
+                    ""type"": ""Button"",
+                    ""id"": ""f685dd20-e13e-444a-b7cb-466999df4b35"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -346,6 +355,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MeleeAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e4e330f7-d4fb-4eb3-b0b6-0e5f2f26d651"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AbsorbMana"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -441,6 +461,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Combat_ChangeLeftSpell = m_Combat.FindAction("ChangeLeftSpell", throwIfNotFound: true);
         m_Combat_ChangeRightSpell = m_Combat.FindAction("ChangeRightSpell", throwIfNotFound: true);
         m_Combat_MeleeAttack = m_Combat.FindAction("MeleeAttack", throwIfNotFound: true);
+        m_Combat_AbsorbMana = m_Combat.FindAction("AbsorbMana", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
@@ -638,6 +659,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Combat_ChangeLeftSpell;
     private readonly InputAction m_Combat_ChangeRightSpell;
     private readonly InputAction m_Combat_MeleeAttack;
+    private readonly InputAction m_Combat_AbsorbMana;
     public struct CombatActions
     {
         private @PlayerInput m_Wrapper;
@@ -649,6 +671,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @ChangeLeftSpell => m_Wrapper.m_Combat_ChangeLeftSpell;
         public InputAction @ChangeRightSpell => m_Wrapper.m_Combat_ChangeRightSpell;
         public InputAction @MeleeAttack => m_Wrapper.m_Combat_MeleeAttack;
+        public InputAction @AbsorbMana => m_Wrapper.m_Combat_AbsorbMana;
         public InputActionMap Get() { return m_Wrapper.m_Combat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -679,6 +702,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @MeleeAttack.started += instance.OnMeleeAttack;
             @MeleeAttack.performed += instance.OnMeleeAttack;
             @MeleeAttack.canceled += instance.OnMeleeAttack;
+            @AbsorbMana.started += instance.OnAbsorbMana;
+            @AbsorbMana.performed += instance.OnAbsorbMana;
+            @AbsorbMana.canceled += instance.OnAbsorbMana;
         }
 
         private void UnregisterCallbacks(ICombatActions instance)
@@ -704,6 +730,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @MeleeAttack.started -= instance.OnMeleeAttack;
             @MeleeAttack.performed -= instance.OnMeleeAttack;
             @MeleeAttack.canceled -= instance.OnMeleeAttack;
+            @AbsorbMana.started -= instance.OnAbsorbMana;
+            @AbsorbMana.performed -= instance.OnAbsorbMana;
+            @AbsorbMana.canceled -= instance.OnAbsorbMana;
         }
 
         public void RemoveCallbacks(ICombatActions instance)
@@ -804,6 +833,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnChangeLeftSpell(InputAction.CallbackContext context);
         void OnChangeRightSpell(InputAction.CallbackContext context);
         void OnMeleeAttack(InputAction.CallbackContext context);
+        void OnAbsorbMana(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

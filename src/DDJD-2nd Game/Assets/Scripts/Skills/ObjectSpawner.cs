@@ -87,7 +87,7 @@ public class ObjectSpawner : MonoBehaviour
 
     public bool SpawnObject(SpawnSkill skill)
     {
-        if (!_status.ConsumeMana(skill.SkillStats.ManaCost))
+        if (!_status.ConsumeMana(skill.Element, skill.SkillStats.ManaCost))
         {
             Destroy(_previewObject);
             _previewObject = null;

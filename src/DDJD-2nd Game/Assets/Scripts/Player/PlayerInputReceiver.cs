@@ -91,6 +91,12 @@ public class PlayerInputReceiver : MonoBehaviour
         get { return _isInterating; }
     }
 
+    private bool _isAbsorbing;
+    public bool IsAbsorbing
+    {
+        get { return _isAbsorbing; }
+    }
+
     //Callbacks
     public Action OnLeftShootKeydown;
     public Action OnRightShootKeydown;
@@ -132,11 +138,10 @@ public class PlayerInputReceiver : MonoBehaviour
 
         _playerInput.PlayerMovement.Dash.performed += ctx => _isDashing = true;
         _playerInput.PlayerMovement.Dash.canceled += ctx => _isDashing = false;
-        
+
         // CLicka no F e entra no estado isInteracting
         _playerInput.PlayerMovement.Interact.performed += ctx => _isInterating = true;
         _playerInput.PlayerMovement.Interact.canceled += ctx => _isInterating = false;
-
 
         _playerInput.CameraControl.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
         _playerInput.CameraControl.Look.canceled += ctx => Look(Vector2.zero);
@@ -173,6 +178,9 @@ public class PlayerInputReceiver : MonoBehaviour
 
         _playerInput.Combat.ChangeRightSpell.performed += ctx => _isChangingRightSpell = true;
         _playerInput.Combat.ChangeRightSpell.canceled += ctx => _isChangingRightSpell = false;
+
+        _playerInput.Combat.AbsorbMana.performed += ctx => _isAbsorbing = true;
+        _playerInput.Combat.AbsorbMana.canceled += ctx => _isAbsorbing = false;
 
         _playerInput.Combat.MeleeAttack.performed += ctx =>
         {

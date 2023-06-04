@@ -58,6 +58,7 @@ public class Hitbox : MonoBehaviour, NonCollidable
         _currentElement = element;
         _soundEmitter?.SetParameterWithLabel("melee", _hitsfxId, "Miss", true);
         _soundEmitter?.UpdatePosition("melee");
+        _soundEmitter?.Stop("meleeElement");
         _soundEmitter?.SetParameterWithLabel(
             "meleeElement",
             _elementsfxId,

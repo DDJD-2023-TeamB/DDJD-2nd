@@ -32,6 +32,11 @@ public class CharacterStatus : MonoBehaviour
     [ConditionalField(nameof(_useMana), false, true)]
     protected int _maxMana = 100;
 
+    [SerializeField]
+    [ConditionalField(nameof(_useMana), false, true)]
+    protected SerializedDictionary<Element, int> _elementMana =
+        new SerializedDictionary<Element, int>();
+
     protected Action<int, Vector3, Vector3> _onDeath;
     public Action<int, Vector3, Vector3> OnDeath
     {
@@ -67,20 +72,25 @@ public class CharacterStatus : MonoBehaviour
         return _mana >= manaCost;
     }
 
-    public virtual bool ConsumeMana(int manaCost)
+    public virtual bool ConsumeMana(Element element, int manaCost)
     {
         if (!_useMana)
             return true;
-        if (_mana < manaCost)
+        int mana = _elementMana[element];
+        if (mana < manaCost)
         {
             return false;
         }
-        _mana -= manaCost;
+
+        mana -= manaCost;
+        _elementMana[element] = mana;
         return true;
     }
 
-    public virtual void RestoreMana(int manaQuantity)
+    public virtual void RestoreMana(Element element, int manaQuantity)
     {
-        _mana = Mathf.Min(_mana + manaQuantity, _maxMana);
+        int mana = _elementMana[element];
+        mana = Mathf.Min(mana + manaQuantity, _maxMana);
+        _elementMana[element] = mana;
     }
 }
