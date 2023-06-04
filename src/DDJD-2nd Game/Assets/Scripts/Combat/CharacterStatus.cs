@@ -39,7 +39,7 @@ public class CharacterStatus : MonoBehaviour
         set { _onDeath = value; }
     }
 
-    void Awake()
+    protected virtual void Awake()
     {
         _health = _maxHealth;
         _mana = _maxMana;
@@ -48,7 +48,8 @@ public class CharacterStatus : MonoBehaviour
     // Update is called once per frame
     void Update() { }
 
-    public void TakeDamage(
+    public virtual void TakeDamage(
+        GameObject damager,
         int damage,
         Vector3 hitPoint = default(Vector3),
         Vector3 hitDirection = default(Vector3)
@@ -66,7 +67,7 @@ public class CharacterStatus : MonoBehaviour
         return _mana >= manaCost;
     }
 
-    public bool ConsumeMana(int manaCost)
+    public virtual bool ConsumeMana(int manaCost)
     {
         if (!_useMana)
             return true;
@@ -78,7 +79,7 @@ public class CharacterStatus : MonoBehaviour
         return true;
     }
 
-    public void RestoreMana(int manaQuantity)
+    public virtual void RestoreMana(int manaQuantity)
     {
         _mana = Mathf.Min(_mana + manaQuantity, _maxMana);
     }

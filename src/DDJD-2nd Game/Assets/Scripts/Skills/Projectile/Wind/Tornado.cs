@@ -179,17 +179,13 @@ public class Tornado : GroundProjectileComponent, NonCollidable
             _caughtObjects.Add(caught);
         }
 
-        //Damage
-        Damageable damageable = other.GetComponent<Damageable>();
-        if (damageable != null)
-        {
-            damageable.TakeDamage(
-                (int)(_stats.Damage * multiplier),
-                _tornadoStrength,
-                other.ClosestPoint(transform.position),
-                transform.forward
-            );
-        }
+        Damage(
+            other.gameObject,
+            (int)(_stats.Damage * multiplier),
+            (int)_tornadoStrength,
+            other.ClosestPoint(transform.position),
+            transform.forward
+        );
     }
 
     protected void OnTriggerExit(Collider other)

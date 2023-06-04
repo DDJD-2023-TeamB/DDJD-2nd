@@ -15,6 +15,7 @@ public class UIController : MonoBehaviour
 
     ItemSkill[] leftWheelItems = new ItemSkill[6];
     ItemSkill[] rightWheelItems = new ItemSkill[6];
+
     //Remover quando se fizer a função de remove
     ItemStack[] itemList = new ItemStack[30];
 
@@ -42,8 +43,8 @@ public class UIController : MonoBehaviour
 
         _playerUI.inventoryUI.gameObject.SetActive(false);
         _playerUI.menuUI.SetActive(false);
-        _playerUI.leftSpellWheel.SetActive(false);
-        _playerUI.rightSpellWheel.SetActive(false);
+        _playerUI.leftSpellWheel.gameObject.SetActive(false);
+        _playerUI.rightSpellWheel.gameObject.SetActive(false);
         _playerUI.missionsUI.SetActive(false);
 
         InventoryUI inventoryUI = _playerUI.inventoryUI;
@@ -66,9 +67,9 @@ public class UIController : MonoBehaviour
     {
         currentMenu = "inventory";
         _playerUI.inventoryUI.gameObject.SetActive(isOpening);
-        _playerUI.playingUI.SetActive(!isOpening);
+        _playerUI.playingUI.gameObject.SetActive(!isOpening);
 
-        if(isOpening)
+        if (isOpening)
         {
             _playerUI.inventoryUI.RemoveAllItems();
             LoadItems();
@@ -79,49 +80,62 @@ public class UIController : MonoBehaviour
     {
         currentMenu = "menu";
         _playerUI.menuUI.SetActive(isOpening);
-        _playerUI.playingUI.SetActive(!isOpening);
+        _playerUI.playingUI.gameObject.SetActive(!isOpening);
     }
 
     public void OpenMissions(bool isOpening)
     {
         currentMenu = "missions";
         _playerUI.missionsUI.SetActive(isOpening);
-        _playerUI.playingUI.SetActive(!isOpening);
+        _playerUI.playingUI.gameObject.SetActive(!isOpening);
     }
 
     public void OpenLeftSpell(bool isOpening)
     {
-        if (_playerUI.leftSpellWheel.activeInHierarchy != isOpening)
+        if (_playerUI.leftSpellWheel.gameObject.activeInHierarchy != isOpening)
         {
-            _playerUI.leftSpellWheel.SetActive(isOpening);
+            _playerUI.leftSpellWheel.gameObject.SetActive(isOpening);
         }
     }
 
     public void OpenRightSpell(bool isOpening)
     {
-        if (_playerUI.rightSpellWheel.activeInHierarchy != isOpening)
+        if (_playerUI.rightSpellWheel.gameObject.activeInHierarchy != isOpening)
         {
-            _playerUI.rightSpellWheel.SetActive(isOpening);
+            _playerUI.rightSpellWheel.gameObject.SetActive(isOpening);
         }
     }
 
     public AimedSkill GetLeftSkillSelected()
     {
-        ItemSkill itemSkill = _playerUI.leftSpellWheel
-            .GetComponent<WheelController>()
-            .GetSelectedSlot();
+        ItemSkill itemSkill = _playerUI.leftSpellWheel.GetSelectedSlot();
+        if (itemSkill == null)
+        {
+            return null;
+        }
         return itemSkill.Skill;
     }
 
     public AimedSkill GetRightSkillSelected()
     {
-        ItemSkill itemSkill = _playerUI.rightSpellWheel
-            .GetComponent<WheelController>()
-            .GetSelectedSlot();
+        ItemSkill itemSkill = _playerUI.rightSpellWheel.GetSelectedSlot();
+        if (itemSkill == null)
+        {
+            return null;
+        }
         return itemSkill.Skill;
     }
 
-    private void Update() {
+    private void Update() { }
+
+    public void UpdateHealth(int currentHealth, int maxHealth)
+    {
+        _playerUI.playingUI.UpdateHealth(currentHealth, maxHealth);
+    }
+
+    public void UpdateMana(int currentMana, int maxMana, bool isLeft)
+    {
+        _playerUI.playingUI.UpdateMana(currentMana, maxMana, isLeft);
     }
 
     public void SelectSlotLeft(int slot)
@@ -211,7 +225,7 @@ public class UIController : MonoBehaviour
     {
         foreach (ItemSkill itemSkill in _player.PlayerSkills.LearnedSkills)
         {
-            AddItem(new ItemStack(itemSkill,1, null));
+            AddItem(new ItemStack(itemSkill, 1, null));
         }
     }
 
@@ -229,7 +243,6 @@ public class UIController : MonoBehaviour
         _playerUI.inventoryUI.SetLeftWheelSkills(new List<ItemSkill>(leftWheelItems));
         _playerUI.inventoryUI.SetRightWheelSkills(new List<ItemSkill>(rightWheelItems));
         LoadItems();
-
 
         //Should load items from a game controller, this is just test code
         /*Item firestoneItem = new ItemType(
@@ -262,7 +275,6 @@ public class UIController : MonoBehaviour
         AddItem(firestoneStack5);
         AddItem(redDiamondStack1);
         AddItem(redDiamondStack2);*/
-        
     }
 
     public Player Player

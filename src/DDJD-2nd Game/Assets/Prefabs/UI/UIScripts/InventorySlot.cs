@@ -114,7 +114,11 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (currentItem != null)
+        if (ItemTitleTextPrefab == null)
+        {
+            return;
+        }
+        if (currentItem.item != null)
         {
             currentTitleTextObject = Instantiate(
                 ItemTitleTextPrefab,

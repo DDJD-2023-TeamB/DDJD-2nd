@@ -16,13 +16,13 @@ public class WindDashComponent : DashComponent
     public override void SetSkill(Skill skill)
     {
         base.SetSkill(skill);
-        _dashVFX.SetFloat("Duration", _skill.DashStats.Duration + 0.2f);
+        _dashVFX.SetFloat("Duration", _dashSkill.DashStats.Duration + 0.2f);
         StartCoroutine(StopVFX());
     }
 
     private IEnumerator StopVFX()
     {
-        yield return new WaitForSeconds(_skill.DashStats.Duration + 0.2f);
+        yield return new WaitForSeconds(_dashSkill.DashStats.Duration + 0.2f);
         _dashVFX.Stop();
         Destroy(gameObject, 1.0f);
     }

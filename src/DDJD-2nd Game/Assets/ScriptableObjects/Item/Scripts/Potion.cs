@@ -6,12 +6,9 @@ using UnityEngine;
 public class Potion : CollectibleObject
 {
     public int restoreHealthValue;
-    public void Awake()
-    {
-        _type = ItemType.Potion;
-    }
 
     public override void Use(){
+        // TODO : update _health
         Debug.Log("Using potion");
     }
 }

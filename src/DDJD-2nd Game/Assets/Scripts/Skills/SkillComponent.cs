@@ -5,6 +5,8 @@ using UnityEngine;
 public abstract class SkillComponent : MonoBehaviour
 {
     protected GameObject _caster;
+
+    protected Skill _skill;
     protected SkillStats _skillStats;
 
     protected bool _isChargeAttack = false;
@@ -60,6 +62,7 @@ public abstract class SkillComponent : MonoBehaviour
 
     public virtual void SetSkill(Skill skill)
     {
+        _skill = skill;
         _skillStats = skill.SkillStats;
         if (_skillStats.CastType == CastType.Charge)
         {
@@ -84,6 +87,7 @@ public abstract class SkillComponent : MonoBehaviour
     )
     {
         Damageable damageable = target.GetComponent<Damageable>();
+        target = damageable?.GetDamageableObject() ?? target;
         if (!_damageCaster && target == _caster)
         {
             return;
@@ -92,7 +96,14 @@ public abstract class SkillComponent : MonoBehaviour
         {
             return;
         }
-        damageable.TakeDamage(damage, _skillStats.ForceWithDamage(), hitPoint, direction);
+        damageable.TakeDamage(
+            this.gameObject,
+            damage,
+            _skillStats.ForceWithDamage(),
+            hitPoint,
+            direction,
+            _skill.Element
+        );
     }
 
     public virtual void Shoot(Vector3 direction)
@@ -117,7 +128,7 @@ public abstract class SkillComponent : MonoBehaviour
         }
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public virtual void OnCollisionEnter(Collision collision)
     {
         OnImpact(collision.collider);
         _noiseComponent?.MakeNoise(GetNoiseRadius());
@@ -143,7 +154,10 @@ public abstract class SkillComponent : MonoBehaviour
         {
             return false;
         }
+
         GameObject otherObject = other.gameObject;
+        Damageable damageable = otherObject.GetComponent<Damageable>();
+        otherObject = damageable?.GetDamageableObject() ?? otherObject;
         if (_skillStats.IsContinuous)
         {
             if (_collidedObjects.ContainsKey(otherObject))

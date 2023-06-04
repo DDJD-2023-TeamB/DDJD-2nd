@@ -21,7 +21,7 @@ public class FlameThrowerComponent : StaticSkillComponent, NonCollidable
 
     protected void Start()
     {
-        _sfxStateId = _soundEmitter.GetParameterId(_sfxName, "state");
+        _sfxStateId = _soundEmitter.GetParameterId(_sfxName, "Flame Thrower State");
         _soundRoutine = _soundEmitter.CallWithDelay(
             () => _soundEmitter.SetParameterWithLabel(_sfxName, _sfxStateId, "On", false),
             0.05f

@@ -63,7 +63,15 @@ public class EnemyAimComponent : MonoBehaviour, AimComponent
     public bool CanHitPlayer(Vector3 origin, Vector3 direction)
     {
         RaycastHit hit;
-        if (Physics.Raycast(origin, direction, out hit, _enemy.AttackRange))
+        if (
+            Physics.Raycast(
+                origin,
+                direction,
+                out hit,
+                _enemy.AttackRange,
+                RayCastUtils.RayCastMask
+            )
+        )
         {
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
             {

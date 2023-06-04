@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6551930551421182360}
   - component: {fileID: 2771042178950473318}
   - component: {fileID: 3769222027607500799}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: LightningDashVfx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,6 +51,7 @@ MonoBehaviour:
   _damageCaster: 0
   _layersToDashThrough:
   - Enemy
+  - Attack
   _lightningMaterial: {fileID: 2100000, guid: fd80d8825a3c23b4cad992accfc5c26b, type: 2}
 --- !u!136 &4004374486373461461
 CapsuleCollider:
@@ -182,11 +183,11 @@ MonoBehaviour:
     _values:
     - _playOnStart: 1
       _stopOnDestroy: 1
-      _updatePosition: 0
+      _updatePosition: 1
       _eventReference:
         Guid:
-          Data1: -1956220180
-          Data2: 1154910215
-          Data3: -1464254787
-          Data4: -1334484791
+          Data1: -576157393
+          Data2: 1228724193
+          Data3: 1430006419
+          Data4: 9756058
         Path: event:/Lightning Abilities/Lightning Dash

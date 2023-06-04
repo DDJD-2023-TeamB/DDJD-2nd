@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -1616795267437055893}
   - component: {fileID: 926101632087766071}
   - component: {fileID: -2060038563363698089}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: FireHover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,11 +140,13 @@ MonoBehaviour:
     _keys:
     - hover
     _values:
-    - _playOnStart: 1
+    - _playOnStart: 0
+      _stopOnDestroy: 1
+      _updatePosition: 1
       _eventReference:
         Guid:
-          Data1: 41983174
-          Data2: 1098292774
-          Data3: -2047966317
-          Data4: -758028151
-        Path: event:/Fire Abilities/Fire Hover
+          Data1: 2076421778
+          Data2: 1201338855
+          Data3: -1030229826
+          Data4: -1976586680
+        Path: event:/Hover

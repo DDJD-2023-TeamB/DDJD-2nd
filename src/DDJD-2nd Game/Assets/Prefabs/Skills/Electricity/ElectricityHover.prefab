@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -4932525996251996825}
   - component: {fileID: 926101632087766071}
   - component: {fileID: -5116202018308446525}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: ElectricityHover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,10 +141,12 @@ MonoBehaviour:
     - hover
     _values:
     - _playOnStart: 1
+      _stopOnDestroy: 1
+      _updatePosition: 1
       _eventReference:
         Guid:
-          Data1: -1491889467
-          Data2: 1184799545
-          Data3: -2098703684
-          Data4: -1533862193
-        Path: event:/Lightning Abilities/Lightning Hoover
+          Data1: 2076421778
+          Data2: 1201338855
+          Data3: -1030229826
+          Data4: -1976586680
+        Path: event:/Hover

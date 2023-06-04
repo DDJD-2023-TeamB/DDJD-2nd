@@ -1,10 +1,10 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 
 public class AimingState : MovableState
 {
-    private int _cameraPriorityBoost = 10;
     private string _lastAnimTrigger;
 
     private List<SkillComponent> _skillsToAim = new List<SkillComponent>();
@@ -18,7 +18,7 @@ public class AimingState : MovableState
     public override void Enter()
     {
         base.Enter();
-        _context.AimCamera.Priority = 5 + _cameraPriorityBoost;
+        _context.CameraController.SetAimCamera(true);
         _context.Animator.SetBool("IsAiming", true);
         _context.AimComponent.StartAim();
 
@@ -38,7 +38,7 @@ public class AimingState : MovableState
         _context.Input.OnLeftShootKeyup -= OnLeftShootKeyup;
         _context.Input.OnRightShootKeyup -= OnRightShootKeyup;
 
-        _context.AimCamera.Priority = 5;
+        _context.CameraController.SetAimCamera(false);
         _context.Animator.SetBool("IsAiming", false);
         _context.AimComponent.StopAim();
 

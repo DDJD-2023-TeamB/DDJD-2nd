@@ -1,13 +1,6 @@
 using MyBox;
 using UnityEngine;
 
-public enum ItemType
-{
-    Potion,
-    Book,
-    QuestItem, 
-    Spell
-}
 public abstract class ItemObject : ScriptableObject
 {
     [SerializeField]
@@ -18,8 +11,6 @@ public abstract class ItemObject : ScriptableObject
 
     [SerializeField]
     private Sprite _icon;
-
-    protected ItemType _type;
 
      //[SerializeField]
     //private bool _isStackable;
@@ -37,9 +28,5 @@ public abstract class ItemObject : ScriptableObject
     {
         get => _icon;
     }
-
-    public ItemType Type
-    {
-        get => _type;
-    }
+    
 }

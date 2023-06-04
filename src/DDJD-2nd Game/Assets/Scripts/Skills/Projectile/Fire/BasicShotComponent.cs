@@ -3,14 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class BasicShotComponent : ProjectileComponent
+public class BasicShotComponent : ProjectileComponent, NonPushable
 {
     private VisualEffect _vfx;
+
+    [SerializeField]
+    private string _sfxStateName;
+
+    private FMOD.Studio.PARAMETER_ID _sfxStateId;
 
     protected override void Awake()
     {
         base.Awake();
         _vfx = GetComponent<VisualEffect>();
+    }
+
+    protected void Start()
+    {
+        _sfxStateId = _soundEmitter.GetParameterId("shot", _sfxStateName);
     }
 
     public override void Shoot(Vector3 direction)
@@ -24,10 +34,12 @@ public class BasicShotComponent : ProjectileComponent
         base.OnImpact(other);
 
         Rigidbody rb = other.GetComponent<Rigidbody>();
-        if (rb != null)
+        if (rb != null && other.GetComponent<NonPushable>() != null)
         {
             rb.AddForce(transform.forward * _skillStats.ForceWithDamage(), ForceMode.Impulse);
         }
+
+        _soundEmitter.SetParameterWithLabel("shot", _sfxStateId, "Impact", false);
 
         Damage(
             other.gameObject,

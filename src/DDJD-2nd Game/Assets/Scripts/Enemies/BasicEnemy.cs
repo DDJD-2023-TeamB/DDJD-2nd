@@ -74,9 +74,16 @@ public class BasicEnemy : HumanoidEnemy
         _state.Update();
     }
 
-    public override void TakeDamage(int damage, float force, Vector3 hitPoint, Vector3 hitDirection)
+    public override void TakeDamage(
+        GameObject damager,
+        int damage,
+        float force,
+        Vector3 hitPoint,
+        Vector3 hitDirection,
+        Element element
+    )
     {
-        base.TakeDamage(damage, force, hitPoint, hitDirection);
+        base.TakeDamage(damager, damage, force, hitPoint, hitDirection, element);
 
         OnDamageTaken?.Invoke();
         if (force >= _forceResistance)
