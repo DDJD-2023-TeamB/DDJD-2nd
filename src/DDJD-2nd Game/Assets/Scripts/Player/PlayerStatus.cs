@@ -40,14 +40,12 @@ public class PlayerStatus : CharacterStatus
 
     public override bool ConsumeMana(int manaCost)
     {
-        Debug.Log("ola");
         bool success = base.ConsumeMana(manaCost);
         if (!success)
         {
             return false;
         }
         UpdateMana(_mana, _maxMana);
-        Debug.Log("Mana = " + _mana);
 
         return success;
     }
