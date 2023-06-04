@@ -9,6 +9,7 @@ public class Hitbox : MonoBehaviour, NonCollidable
     private SoundEmitter _soundEmitter;
 
     private FMOD.Studio.PARAMETER_ID _hitsfxId;
+    private FMOD.Studio.PARAMETER_ID _elementsfxId;
     public GameObject Parent
     {
         get { return _parent; }
@@ -38,6 +39,7 @@ public class Hitbox : MonoBehaviour, NonCollidable
     protected void Start()
     {
         _hitsfxId = _soundEmitter.GetParameterId("melee", "Basic Melee");
+        _elementsfxId = _soundEmitter.GetParameterId("meleeElement", "Melee Type");
     }
 
     public void Activate(Element element, float force, float damage)
@@ -56,6 +58,13 @@ public class Hitbox : MonoBehaviour, NonCollidable
         _currentElement = element;
         _soundEmitter?.SetParameterWithLabel("melee", _hitsfxId, "Miss", true);
         _soundEmitter?.UpdatePosition("melee");
+        _soundEmitter?.SetParameterWithLabel(
+            "meleeElement",
+            _elementsfxId,
+            element.SfxDamageLabel,
+            true
+        );
+        _soundEmitter?.UpdatePosition("meleeElement");
 
         _force = force;
         _damage = damage;
