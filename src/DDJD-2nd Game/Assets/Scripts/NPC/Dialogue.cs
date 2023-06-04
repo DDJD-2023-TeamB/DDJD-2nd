@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+[System.Serializable]
 public class Dialogue : MonoBehaviour
 {
     [SerializeField]
@@ -32,6 +33,7 @@ public class Dialogue : MonoBehaviour
         _animator.SetBool("isOpen", true);
         _nameText.text = dialogueInfo.Noun;
         _sentences.Clear();
+
         foreach (string sentence in dialogueInfo.Sentences)
         {
             _sentences.Enqueue(sentence);
@@ -47,10 +49,13 @@ public class Dialogue : MonoBehaviour
         {
             return;
         }
-        Debug.Log("IsTyping " + _isTyping);
-        string sentence = _sentences.Dequeue();
-        _isTyping = true;
-        StartCoroutine(TypeSentence(sentence));
+        
+        if( _sentences.Count > 0 )
+        {
+            string sentence = _sentences.Dequeue();
+            _isTyping = true;
+            StartCoroutine(TypeSentence(sentence));
+        }
     }
 
     IEnumerator TypeSentence(string sentence)

@@ -26,9 +26,6 @@ public abstract class Interactable : MonoBehaviour
         }
    
         _player.InteractedObject = this;
-        Debug.Log("Approaching with");
-        Debug.Log(_player.InteractedObject);
-        
         Approach();
     }
 
@@ -39,15 +36,12 @@ public abstract class Interactable : MonoBehaviour
             return;
         }
 
-        //_player._interactedObject = null;
         HelpManager.Instance.SetHelpText("");
         EndInteract();
-        //TODO
         Debug.Log("Leaving");
     }
 
     private void Approach(){
-        //_playerIsInteracting
         HelpManager.Instance.SetHelpText("Press F to interact");
     }
 

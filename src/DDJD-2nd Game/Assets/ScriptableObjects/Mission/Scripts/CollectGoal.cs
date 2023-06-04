@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName="Collect", menuName = "Scriptable Objects/Mission System/Goal/Collect")]
-public class CollectGoal : Goal
+public class CollectGoal : GoalObject
 {
 }
 

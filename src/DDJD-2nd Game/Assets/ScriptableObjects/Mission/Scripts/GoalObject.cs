@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Goal : ScriptableObject
+public abstract class GoalObject : ScriptableObject
 {
-    private bool _isFinished = false;
+    public bool _completed = false;
     [SerializeField]
     private string _description;
     //private Location;

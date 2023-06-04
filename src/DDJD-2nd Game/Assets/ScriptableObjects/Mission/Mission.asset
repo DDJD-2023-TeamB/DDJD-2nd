@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c3120dc6799746bdb3c0626cadbfc38, type: 3}
+  m_Name: Mission
+  m_EditorClassIdentifier: 
+  _status: 0
+  _type: 0
+  _goals:
+  - {fileID: 11400000, guid: 965912b2b719a40ff8badf7f8f3a3377, type: 2}
+  _dialogueBegin:
+    _noun: NPC
+    _sentences:
+    - Welcome to your first Mission
+    - Go talk to Tristan
+  _dialogueEnd:
+    _noun: NPC
+    _sentences:
+    - You've completed the mission. Well Done.
+  _reward:
+    _gold: 10
+    _items:
+    - {fileID: 11400000, guid: e563f69444c374ab19b4b2a71d6d1bb3, type: 2}
+  _npc: {fileID: 713695034757746217, guid: b648f4c3bc0d62a44a73b8bef2f93291, type: 3}
