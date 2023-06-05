@@ -259,4 +259,9 @@ public class Player : StateContext, Damageable
     {
         get { return _uiController; }
     }
+
+    public PlayerStatus Status
+    {
+        get { return _status; }
+    }
 }
