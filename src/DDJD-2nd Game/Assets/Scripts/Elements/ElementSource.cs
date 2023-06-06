@@ -13,7 +13,7 @@ public class ElementSource : MonoBehaviour
 
     private Player _player;
 
-    private VisualEffect _currentVFX;
+    private ElementAbsorbVFX _currentVFX;
 
     protected void Awake() { }
 
@@ -27,12 +27,11 @@ public class ElementSource : MonoBehaviour
     {
         _player = player;
         _currentVFX = Instantiate(_tranferVfxPrefab, transform.position, Quaternion.identity)
-            .GetComponent<VisualEffect>();
+            .GetComponent<ElementAbsorbVFX>();
 
         //VFx face hand
         _currentVFX.transform.forward = (handTransform.position - transform.position).normalized;
-
-        _currentVFX.SetVector3("Target", handTransform.position);
+        _currentVFX.SetTarget(handTransform);
     }
 
     public virtual void StopTransfer(Player player)
@@ -40,7 +39,6 @@ public class ElementSource : MonoBehaviour
         if (_player == player && _currentVFX != null)
         {
             _currentVFX.Stop();
-            Destroy(_currentVFX.gameObject, 1f);
         }
     }
 
