@@ -1697,7 +1697,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4492101057451422959}
-  m_LocalRotation: {x: 0.058845695, y: 0.012802327, z: -0.0007547318, w: 0.99818474}
+  m_LocalRotation: {x: 0.05883757, y: 0.020951057, z: -0.0012351215, w: 0.99804693}
   m_LocalPosition: {x: -0.5397235, y: 2.3344133, z: -1.468136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2152,6 +2152,7 @@ Transform:
   - {fileID: 1383292200363455867}
   - {fileID: 8348653656342378348}
   - {fileID: 79076952650345937}
+  - {fileID: 8228588811459176773}
   m_Father: {fileID: 5015672085775979565}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3401,6 +3402,102 @@ Transform:
   m_Father: {fileID: 7026416567958636142}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7581090568947958763
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8228588811459176773}
+  - component: {fileID: 1710605454393682399}
+  - component: {fileID: 520502159936630103}
+  - component: {fileID: 1606891433340151289}
+  m_Layer: 9
+  m_Name: RightHandAbsorb
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8228588811459176773
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7581090568947958763}
+  m_LocalRotation: {x: 0.00000008137429, y: -0.00000015446862, z: -1, w: 0.00000021209962}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9204738695688527437}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1710605454393682399
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7581090568947958763}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &520502159936630103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7581090568947958763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84f26629a092a164dab236d075583683, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1606891433340151289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7581090568947958763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - melee
+    - meleeElement
+    _values:
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: 820308842
+          Data2: 1337895590
+          Data3: -138653824
+          Data4: -1723026112
+        Path: event:/Melee Attacks
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: -1107946826
+          Data2: 1278192834
+          Data3: 1011146412
+          Data4: 577834099
+        Path: event:/Attacks/Melee overlay
 --- !u!1 &7694690271000812756
 GameObject:
   m_ObjectHideFlags: 0
@@ -3731,7 +3828,7 @@ MonoBehaviour:
   _regularCamera: {fileID: 4492101058340307231}
   _aimCamera: {fileID: 4492101057451422945}
   _cameraTarget: {fileID: 4492101058934089452}
-  _cameraRotationSpeed: 20
+  _cameraRotationSpeed: 40
   _minAngle: 30
   _maxAngle: 330
 --- !u!114 &8062649751035626759
@@ -3841,6 +3938,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6f8bc5673b3f3c409f4055098f5d4b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _absorbTime: 0.1
+  _absorbAmount: 5
+  _absorbRange: 3
+  _absorbTarget: {fileID: 7581090568947958763}
 --- !u!1 &8198835224221356302
 GameObject:
   m_ObjectHideFlags: 0

@@ -73,32 +73,22 @@ public class CameraController : MonoBehaviour
     public void RotateCamera(Vector3 lookInput, bool moveRigidbody)
     {
         Vector3 cameraRotation = _cameraTarget.transform.localEulerAngles;
+        if (moveRigidbody)
+        {
+            cameraRotation.x = _player.Rigidbody.transform.localEulerAngles.x;
+        }
         float minAngle = _minAngle;
         float maxAngle = _maxAngle;
         if (Math.Abs(lookInput.y) > 0.5)
         {
             float amountToRotate = -lookInput.y * _cameraRotationSpeed * Time.deltaTime;
-            float finalAngle = _cameraTarget.transform.localEulerAngles.x + amountToRotate;
-            if (finalAngle <= minAngle || finalAngle >= maxAngle)
-            {
-                cameraRotation.x += amountToRotate;
-            }
+            cameraRotation.x += amountToRotate;
         }
 
         if (Math.Abs(lookInput.x) > 0.5)
         {
             float amountToRotate = lookInput.x * _cameraRotationSpeed * Time.deltaTime;
-            if (moveRigidbody)
-            {
-                _player.Rigidbody.MoveRotation(
-                    _player.Rigidbody.rotation
-                        * Quaternion.Euler(new Vector3(0f, amountToRotate, 0f))
-                );
-            }
-            else
-            {
-                cameraRotation.y += amountToRotate;
-            }
+            cameraRotation.y += amountToRotate;
         }
 
         //Fix camera angle if broken
@@ -112,7 +102,23 @@ public class CameraController : MonoBehaviour
         //    );
         //}
 
-        _cameraTarget.transform.localEulerAngles = cameraRotation;
+        if (cameraRotation.y >= maxAngle)
+        {
+            cameraRotation.y = maxAngle;
+        }
+        if (cameraRotation.y <= minAngle)
+        {
+            cameraRotation.y = minAngle;
+        }
+        if (moveRigidbody)
+        {
+            _player.Rigidbody.transform.localEulerAngles = new Vector3(0f, cameraRotation.y, 0f);
+            _cameraTarget.transform.localEulerAngles = new Vector3(cameraRotation.x, 0f, 0f);
+        }
+        else
+        {
+            _cameraTarget.transform.localEulerAngles = cameraRotation;
+        }
     }
 
     public void ResetCameraRotation()

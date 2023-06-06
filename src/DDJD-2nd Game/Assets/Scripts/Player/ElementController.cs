@@ -17,6 +17,9 @@ public class ElementController : MonoBehaviour
     private float _absorbRange = 3f;
     private Player _player;
 
+    [SerializeField]
+    private GameObject _absorbTarget;
+
     protected void Awake()
     {
         _player = GetComponent<Player>();
@@ -49,7 +52,7 @@ public class ElementController : MonoBehaviour
     private IEnumerator AbsorbCoroutine()
     {
         Element element = _sourceToAbsorb.Element;
-        _sourceToAbsorb.Transfer(_player, _player.RightHand.transform);
+        _sourceToAbsorb.Transfer(_player, _absorbTarget.transform);
         while (true)
         {
             yield return new WaitForSeconds(_absorbTime);
