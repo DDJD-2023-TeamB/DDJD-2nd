@@ -72,6 +72,27 @@ public class Player : StateContext, Damageable
         get { return _acceleration; }
     }
 
+    [SerializeField]
+    private float _maxAirSpeed = 4f;
+    public float MaxAirSpeed
+    {
+        get { return _maxAirSpeed; }
+    }
+
+    [SerializeField]
+    private float _airAcceleration = 0.8f;
+    public float AirAcceleration
+    {
+        get { return _airAcceleration; }
+    }
+
+    [SerializeField]
+    private int _accelerationMultiplier = 1000;
+    public int AccelerationMultiplier
+    {
+        get { return _accelerationMultiplier; }
+    }
+
     [Header("Camera movement")]
     [SerializeField]
     private Transform _cameraTarget;
