@@ -12,21 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c3120dc6799746bdb3c0626cadbfc38, type: 3}
   m_Name: Mission
   m_EditorClassIdentifier: 
-  _status: 0
+  _status: 1
   _type: 0
   _goals:
   - {fileID: 11400000, guid: 965912b2b719a40ff8badf7f8f3a3377, type: 2}
-  _dialogueBegin:
-    _noun: NPC
-    _sentences:
-    - Welcome to your first Mission
-    - Go talk to Tristan
-  _dialogueEnd:
-    _noun: NPC
-    _sentences:
-    - You've completed the mission. Well Done.
+  _interactionBegin: {fileID: 11400000, guid: 13151eb888352419a8330207842f2836, type: 2}
+  _interactionEnd: {fileID: 11400000, guid: f79b3115c351e4433b16dff4d1fe07c2, type: 2}
   _reward:
     _gold: 10
     _items:
     - {fileID: 11400000, guid: e563f69444c374ab19b4b2a71d6d1bb3, type: 2}
-  _npc: {fileID: 713695034757746217, guid: b648f4c3bc0d62a44a73b8bef2f93291, type: 3}

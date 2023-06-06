@@ -41,19 +41,21 @@ public class Mission2 : ScriptableObject
         get { return _goals; }
     }
     
+    // Interaction - NPC + Dialogo
+    // npc dá start tem ir ver se tem uma mission associada através do scriptable object
+    // default dialogue -> interactionBegin.Dialogue 
     [SerializeField]
-    private DialogueInfo _dialogueBegin;
-    public DialogueInfo DialogueBegin
+    private Interaction _interactionBegin;
+    public Interaction InteractionBegin
     {
-        get => _dialogueBegin;
+        get => _interactionBegin;
     }
 
     [SerializeField]
-    private DialogueInfo _dialogueEnd;
-
-    public DialogueInfo DialogueEnd
+    private Interaction _interactionEnd;
+    public Interaction InteractionEnd
     {
-        get => _dialogueEnd;
+        get => _interactionEnd;
     }
     
    
@@ -71,14 +73,6 @@ public class Mission2 : ScriptableObject
     public List<Mission> UnblockedMissions
     {
         get { return _unblockedMissions; }
-    }
-
-    [SerializeField]
-    private GameObject _npc;
-
-    public GameObject Npc
-    {
-        get { return _npc; }
     }
 
     //mapAreas

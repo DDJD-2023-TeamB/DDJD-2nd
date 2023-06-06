@@ -5,7 +5,10 @@ using Cinemachine;
 
 public class Player : StateContext, Damageable
 {
+    //TODO - mudar para private
     public ItemsInventoryObject inventory;
+
+    public int gold; 
 
     private PlayerStateFactory _factory;
     public PlayerStateFactory Factory

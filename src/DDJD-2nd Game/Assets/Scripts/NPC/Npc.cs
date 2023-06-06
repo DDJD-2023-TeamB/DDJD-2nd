@@ -6,18 +6,19 @@ using UnityEngine;
 public class Npc : Interactable
 {
     [SerializeField]
-    private DialogueInfo _defaultDialogueInfo;
+    private NpcObject _npc;
 
     private Dialogue _dialogue;
     private DialogueInfo _currentDialogueInfo;
 
-    public Mission2 _mission;
+    private MissionController _missionController;
 
     protected override void Start()
     {
         base.Start();
         _dialogue = _player.Dialogue;
-        _currentDialogueInfo = _defaultDialogueInfo;
+        _currentDialogueInfo = _npc.DefaultDialogueInfo;
+        _missionController = _player.GetComponent<MissionController>();
     }
 
     void Update() { }
@@ -29,23 +30,28 @@ public class Npc : Interactable
 
     public override void Interact()
     {
-        if(_mission != null)
+        _missionController.CheckIfNpcIsMyGoal(_npc);
+
+        if (_npc.Mission != null)
         {
-            if( _mission.Status == MissionState.Blocked)
+            if (_npc.Mission.Status == MissionState.Blocked)
             {
-                _currentDialogueInfo = _defaultDialogueInfo;
+                _currentDialogueInfo = _npc.DefaultDialogueInfo;
             }
-            if( _mission.Status == MissionState.Available)
+            if (_npc.Mission.Status == MissionState.Available)
             {
-                _currentDialogueInfo = _mission.DialogueBegin;
-                _mission.Status = MissionState.Ongoing;
+                if(_npc == _npc.Mission.InteractionBegin.Npc)
+                {
+                    _currentDialogueInfo = _npc.Mission.InteractionBegin.DialogueInfo;
+                    _npc.Mission.Status = MissionState.Ongoing;
+                }
             }
-            else if( _mission.Status == MissionState.Completed)
+            else if (_npc.Mission.Status == MissionState.Completed)
             {
-                _currentDialogueInfo = _mission.DialogueEnd;
+                if(_npc == _npc.Mission.InteractionEnd.Npc) _currentDialogueInfo = _npc.Mission.InteractionEnd.DialogueInfo;
             }
-            _dialogue.StartDialogue(_currentDialogueInfo);
         }
+        _dialogue.StartDialogue(_currentDialogueInfo);
     }
 
     public void ContinueInteraction()

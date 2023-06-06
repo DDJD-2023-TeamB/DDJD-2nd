@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
-  m_Name: Interact
+  m_Script: {fileID: 11500000, guid: 34f8777e3318d4daca0f479db6edb42a, type: 3}
+  m_Name: InteractionEnd
   m_EditorClassIdentifier: 
-  _completed: 0
-  _description: Talk to Tristan
-  _npcToInteract: {fileID: 11400000, guid: 15f81436f65c9415ea4bde98e57c0e27, type: 2}
+  _dialogueInfo:
+    _noun: Tristan
+    _sentences:
+    - Well done
+  _npc: {fileID: 11400000, guid: 15f81436f65c9415ea4bde98e57c0e27, type: 2}
