@@ -29,12 +29,15 @@ public class ElementSource : MonoBehaviour
         _currentVFX = Instantiate(_tranferVfxPrefab, transform.position, Quaternion.identity)
             .GetComponent<VisualEffect>();
 
+        //VFx face hand
+        _currentVFX.transform.forward = (handTransform.position - transform.position).normalized;
+
         _currentVFX.SetVector3("Target", handTransform.position);
     }
 
     public virtual void StopTransfer(Player player)
     {
-        if (_player == player)
+        if (_player == player && _currentVFX != null)
         {
             _currentVFX.Stop();
             Destroy(_currentVFX.gameObject, 1f);
