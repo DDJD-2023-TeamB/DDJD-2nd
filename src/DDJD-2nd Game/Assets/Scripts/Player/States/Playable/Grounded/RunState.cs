@@ -61,11 +61,6 @@ public class RunState : GenericState
         }
 
         Vector2 moveInput = _context.Input.MoveInput;
-        if (moveInput == Vector2.zero || !_context.Input.IsRunning)
-        {
-            _superstate.ChangeSubState(_context.Factory.Move(_superstate));
-            return;
-        }
         Accelerate(moveInput);
         _context.Animator.SetFloat(
             "ForwardSpeed",
@@ -111,6 +106,7 @@ public class RunState : GenericState
         Vector3 velocity = _context.Rigidbody.velocity;
         Vector3 moveDirection =
             _context.transform.forward * moveInput.y + _context.transform.right * moveInput.x;
+
         if (velocity.magnitude < _context.CharacterMovement.MaxRunSpeed)
         {
             _context.Rigidbody.AddForce(

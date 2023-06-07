@@ -64,6 +64,22 @@ public class GroundedState : MeleeAttackableState
                 }
             }
         }
+        if (_substate is RunState)
+        {
+            if (_context.Input.MoveInput == Vector2.zero || !_context.Input.IsRunning)
+            {
+                ChangeSubState(_context.Factory.Move(this));
+                return true;
+            }
+        }
+        if (_substate is MeleeAttackingState)
+        {
+            if (!_context.Input.IsMeleeAttacking)
+            {
+                ChangeSubState(_context.Factory.Idle(this));
+                return true;
+            }
+        }
         if (_substate is IdleState)
         {
             if (_context.Input.MoveInput != Vector2.zero)

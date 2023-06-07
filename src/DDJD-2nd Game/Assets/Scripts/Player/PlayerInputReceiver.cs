@@ -117,6 +117,8 @@ public class PlayerInputReceiver : MonoBehaviour
     public Action OnMenuKeydown;
     public Action OnMenuKeyup;
 
+    public Action OnPrintState;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -201,6 +203,8 @@ public class PlayerInputReceiver : MonoBehaviour
 
         _playerInput.UI.Menu.performed += ctx => OnMenuKeydown?.Invoke();
         _playerInput.UI.Menu.canceled += ctx => OnMenuKeyup?.Invoke();
+
+        _playerInput.Debug.PrintState.performed += ctx => OnPrintState?.Invoke();
     }
 
     private void Move(Vector2 value)

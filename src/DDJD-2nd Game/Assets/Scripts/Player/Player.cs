@@ -163,6 +163,7 @@ public class Player : StateContext, Damageable
         UpdateElement();
         _sfxJumpStateId = _soundEmitter.GetParameterId("jump", "Jump State");
         _sfxJumpIntensityId = _soundEmitter.GetParameterId("jump", "Jump Intensity");
+        _inputReceiver.OnPrintState += () => _state?.PrintState();
     }
 
     void Update()
