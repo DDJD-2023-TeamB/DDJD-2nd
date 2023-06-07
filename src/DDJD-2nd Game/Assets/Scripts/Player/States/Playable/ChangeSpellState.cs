@@ -1,3 +1,7 @@
+using FMOD;
+using System.Diagnostics;
+using UnityEngine;
+
 public class ChangeSpellState : MovableState
 {
     public ChangeSpellState(StateContext context, GenericState superState)

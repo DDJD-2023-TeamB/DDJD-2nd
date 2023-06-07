@@ -176,7 +176,7 @@ public class Player : StateContext
 
     void Start()
     {
-        UpdateElement();
+        UpdateElement(null);
     }
 
     void Update()
@@ -184,8 +184,12 @@ public class Player : StateContext
         _state.Update();
     }
 
-    void UpdateElement()
+    public void UpdateElement(Element element)
     {
+        if (element != null)
+        {
+            _playerSkills.CurrentElement = element;
+        }
         _airMovement = _playerSkills.CurrentElement?.AirMovementSkill?.Initialize(gameObject);
     }
 

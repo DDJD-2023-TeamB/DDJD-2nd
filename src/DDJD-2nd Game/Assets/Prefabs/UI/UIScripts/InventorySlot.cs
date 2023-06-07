@@ -11,9 +11,8 @@ using static MyBox.EditorTools.MyGUI;
 
 public class InventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    GameObject UIObject;
+    InventoryUI inventoryUI;
     public GameObject ItemTitleTextPrefab;
-    GameObject currentTitleTextObject = null;
     private int index;
     public int Index
     {
@@ -38,10 +37,18 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
 
     private void Start()
     {
-        UIObject = GameObject.Find("UI");
-        if (UIObject == null)
+        GameObject iui = GameObject.Find("InventoryUI");
+        if (iui != null)
         {
-            Debug.LogError("InventoryUI not found!");
+            inventoryUI = iui.GetComponent<InventoryUI>();
+            if (inventoryUI == null)
+            {
+                Debug.LogError("InventoryUI Component not found in UI object");
+            }
+        }
+        else
+        {
+            Debug.LogError("Couldn't find InevntoryUI object in InventorySlot.css");
         }
     }
 
@@ -51,97 +58,44 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         {
             GameObject dropped = eventData.pointerDrag;
             currentItem = dropped.GetComponent<InventoryItemImage>().currentItem;
-            Debug.Log("Drop");
             OnDropAction?.Invoke(currentItem, index);
-            /*
-            //Check if old slot is a wheel slot, if so update wheel
-            string parentName = dropped.GetComponent<InventoryItemImage>().parentAfterDrag.name;
-            if (parentName.Contains("SpellSlot"))
-            {
-                if (
-                    dropped.GetComponent<InventoryItemImage>().parentAfterDrag.parent.name
-                    == "LeftSpellWheel"
-                )
-                {
-                    UIObject
-                        .GetComponent<UIController>()
-                        .ChangeLeftWheelItem(
-                            int.Parse(parentName[parentName.Length - 1].ToString()),
-                            currentItem
-                        );
-                }
-                else if (
-                    dropped.GetComponent<InventoryItemImage>().parentAfterDrag.parent.name
-                    == "RightSpellWheel"
-                )
-                {
-                    UIObject
-                        .GetComponent<Player>()
-                        .UIController.ChangeRightWheelItem(
-                            int.Parse(parentName[parentName.Length - 1].ToString()),
-                            null
-                        );
-                }
-                else
-                {
-                    Debug.LogError("Invalid parent name of spell slot!!!");
-                }
-            }
-
-            dropped.GetComponent<InventoryItemImage>().parentAfterDrag = transform;
-            if (isFromWheel)
-            {
-                if (wheelSide == "left")
-                {
-                    UIObject
-                        .GetComponent<UIController>()
-                        .ChangeLeftWheelItem(wheelIndex, currentItem.type);
-                }
-                else if (wheelSide == "right")
-                {
-                    UIObject
-                        .GetComponent<UIController>()
-                        .ChangeRightWheelItem(wheelIndex, currentItem.type);
-                }
-                else
-                {
-                    Debug.LogError("Wheel slot has an invalid side!");
-                }
-            }
-            */
+            
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (currentItem != null)
+        if (currentItem.item != null && !Input.GetMouseButton(0))
         {
-            currentTitleTextObject = Instantiate(
+            Debug.Log("Creating title text \"" + currentItem.item.Name + "\"");
+            inventoryUI.itemTitle = Instantiate(
                 ItemTitleTextPrefab,
                 Input.mousePosition + new Vector3(0, 5, 0),
                 Quaternion.identity
             );
-            currentTitleTextObject.GetComponent<TextMeshProUGUI>().text = currentItem.item.name;
-            currentTitleTextObject.transform.SetParent(transform.root);
+            inventoryUI.itemTitle.GetComponent<TextMeshProUGUI>().text = currentItem.item.Name;
+            inventoryUI.itemTitle.transform.SetParent(transform.root);
             _graphic.raycastTarget = false;
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (currentTitleTextObject != null)
+        if (inventoryUI.itemTitle != null)
         {
-            Destroy(currentTitleTextObject);
-            currentTitleTextObject = null;
+            Destroy(inventoryUI.itemTitle);
+            inventoryUI.itemTitle = null;
             //_graphic.raycastTarget = true;
         }
     }
 
     private void Update()
-    {
-        if (currentTitleTextObject != null)
+    {   
+        if (inventoryUI.itemTitle != null)
         {
-            currentTitleTextObject.transform.position = Input.mousePosition + new Vector3(0, 10, 0);
+            inventoryUI.itemTitle.transform.position = Input.mousePosition + new Vector3(0, 10, 0);
         }
+        
     }
+
 }

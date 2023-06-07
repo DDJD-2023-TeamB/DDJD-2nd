@@ -27,9 +27,12 @@ public class UIController : MonoBehaviour
     public KeyCode leftWheelKey = KeyCode.Q;
     public KeyCode rightWheelKey = KeyCode.E;
     public KeyCode missionsKey = KeyCode.M;
+    public KeyCode activeElementKey = KeyCode.LeftAlt;
 
     public Sprite fireStoneSprite;
     public Sprite redDiamondSprite;
+
+    public GameObject currentItemTitle;
 
     private void Awake()
     {
@@ -45,6 +48,7 @@ public class UIController : MonoBehaviour
         _playerUI.leftSpellWheel.SetActive(false);
         _playerUI.rightSpellWheel.SetActive(false);
         _playerUI.missionsUI.SetActive(false);
+        _playerUI.activeElementWheel.SetActive(false);
 
         InventoryUI inventoryUI = _playerUI.inventoryUI;
         //inventoryUI.OnItemDrop += ;
@@ -102,6 +106,14 @@ public class UIController : MonoBehaviour
         if (_playerUI.rightSpellWheel.activeInHierarchy != isOpening)
         {
             _playerUI.rightSpellWheel.SetActive(isOpening);
+        }
+    }
+
+    public void OpenActiveElement(bool isOpening)
+    {
+        if (_playerUI.activeElementWheel.activeInHierarchy != isOpening)
+        {
+            _playerUI.activeElementWheel.SetActive(isOpening);
         }
     }
 

@@ -12,6 +12,11 @@ public class PlayerStateFactory : StateFactory
         return new IdleState(_context, superState);
     }
 
+    public ChangeActiveElementState ChangeElement(GenericState superState)
+    {
+        return new ChangeActiveElementState(_context, superState);
+    }
+
     public MoveState Move(GenericState superState)
     {
         return new MoveState(_context, superState);

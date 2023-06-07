@@ -10,5 +10,6 @@ public class PlayerUI : MonoBehaviour
         leftSpellWheel,
         rightSpellWheel,
         missionsUI,
-        playingUI;
+        playingUI,
+        activeElementWheel;
 }
