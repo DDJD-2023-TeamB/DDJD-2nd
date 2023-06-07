@@ -3474,6 +3474,7 @@ GameObject:
   - component: {fileID: 4346819917323664300}
   - component: {fileID: 7961308323444105709}
   - component: {fileID: 1218520422210949770}
+  - component: {fileID: 6552981424179309022}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -3538,9 +3539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: 2f5852599379b4183bf507c38fcd8d84, type: 2}
-  _maxSpeed: 7.5
   _jumpForce: 200
-  _acceleration: 2
   _playerSkills: {fileID: 11400000, guid: 4416c54b33ddce64baf418917cb99d12, type: 2}
   _meleeCombat: {fileID: 0}
   _LeftHand: {fileID: 6737474002199511682}
@@ -3780,6 +3779,8 @@ MonoBehaviour:
   _cameraRotationSpeed: 40
   _maxAngle: 80
   _minAngle: -25
+  _runFov: 60
+  _walkFov: 50
 --- !u!114 &8062649751035626759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3892,6 +3893,22 @@ MonoBehaviour:
   _absorbRange: 3
   _offset: 2
   _absorbTarget: {fileID: 7581090568947958763}
+--- !u!114 &6552981424179309022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694690271000812756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2637b65c6a8ea33419559760dfa4d5ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _acceleration: 2
+  _maxRunSpeed: 15
+  _maxSpeed: 7.5
+  _maxAnimationSpeed: 1.75
 --- !u!1 &8198835224221356302
 GameObject:
   m_ObjectHideFlags: 0

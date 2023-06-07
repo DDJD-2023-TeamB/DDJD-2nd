@@ -53,7 +53,15 @@ public class GroundedState : MeleeAttackableState
 
     private bool CheckMoving()
     {
-        if (!(_substate is MoveState))
+        if (_substate is MoveState)
+        {
+            if (_context.Input.IsRunning)
+            {
+                ChangeSubState(_context.Factory.Run(this));
+                return true;
+            }
+        }
+        if (_substate is IdleState)
         {
             if (_context.Input.MoveInput != Vector2.zero)
             {

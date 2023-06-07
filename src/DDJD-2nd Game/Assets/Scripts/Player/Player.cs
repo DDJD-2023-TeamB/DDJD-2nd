@@ -44,32 +44,12 @@ public class Player : StateContext, Damageable
         get { return _objectSpawner; }
     }
 
-    private Dashable _dashComponent;
-    public Dashable DashComponent
-    {
-        get { return _dashComponent; }
-    }
-
     [Header("Movement")]
-    [SerializeField]
-    private float _maxSpeed = 5f;
-    public float MaxSpeed
-    {
-        get { return _maxSpeed; }
-    }
-
     [SerializeField]
     private float _jumpForce = 20f;
     public float JumpForce
     {
         get { return _jumpForce; }
-    }
-
-    [SerializeField]
-    private float _acceleration = 2.0f;
-    public float Acceleration
-    {
-        get { return _acceleration; }
     }
 
     private AimComponent _aimComponent;
@@ -106,8 +86,8 @@ public class Player : StateContext, Damageable
         get { return _RightHand; }
     }
 
-    private Dashable _dashable;
-    public Dashable Dashable
+    private PlayerDashable _dashable;
+    public PlayerDashable Dashable
     {
         get { return _dashable; }
     }
@@ -154,6 +134,7 @@ public class Player : StateContext, Damageable
     }
     private UIController _uiController;
     private ElementController _elementController;
+    private CharacterMovement _characterMovement;
 
     void Awake()
     {
@@ -164,16 +145,16 @@ public class Player : StateContext, Damageable
         _aimComponent = GetComponent<PlayerAimComponent>();
         _shooter = GetComponent<Shooter>();
         _objectSpawner = GetComponent<ObjectSpawner>();
-        _dashComponent = GetComponent<Dashable>();
         _playerSkills.Player = this;
         _meleeCombat = GetComponent<MeleeCombat>();
-        _dashable = GetComponent<Dashable>();
+        _dashable = GetComponent<PlayerDashable>();
         _cameraController = GetComponent<CameraController>();
         _status = GetComponent<PlayerStatus>();
         _soundEmitter = GetComponent<SoundEmitter>();
         _characterStatus = GetComponent<CharacterStatus>();
         _uiController = GetComponent<UIController>();
         _elementController = GetComponent<ElementController>();
+        _characterMovement = GetComponent<CharacterMovement>();
         ChangeState(_factory.Playable());
     }
 
@@ -234,5 +215,10 @@ public class Player : StateContext, Damageable
     public ElementController ElementController
     {
         get { return _elementController; }
+    }
+
+    public CharacterMovement CharacterMovement
+    {
+        get { return _characterMovement; }
     }
 }

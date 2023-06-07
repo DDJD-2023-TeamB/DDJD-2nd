@@ -47,7 +47,7 @@ public abstract class Dashable : MonoBehaviour
         _status = GetComponent<CharacterStatus>();
     }
 
-    protected void Update()
+    protected virtual void Update()
     {
         Vector3 flatVel = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
         if (flatVel.magnitude > _maxSpeed)
@@ -117,7 +117,7 @@ public abstract class Dashable : MonoBehaviour
         _animator.SetBool("IsDashing", false);
         _animator.SetFloat("DashX", 0f);
         _animator.SetFloat("DashY", 0f);
-        StartCoroutine(SmoothlyChangeMaxSpeed(_maxRegularSpeed, true));
+        StartCoroutine(SmoothlyChangeMaxSpeed(GetRegularSpeed(), true));
     }
 
     protected IEnumerator SmoothlyChangeMaxSpeed(float targetSpeed, bool isEnd = false)
@@ -147,5 +147,10 @@ public abstract class Dashable : MonoBehaviour
     public bool IsDashOnCooldown()
     {
         return _timeSinceLastDash < _minCooldown;
+    }
+
+    protected virtual float GetRegularSpeed()
+    {
+        return _maxRegularSpeed;
     }
 }

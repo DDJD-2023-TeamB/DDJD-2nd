@@ -11,6 +11,8 @@ public class FootSteps : MonoBehaviour
 
     private FMOD.Studio.PARAMETER_ID _floorTypeParameterId;
 
+    private bool _skipNextStep = false;
+
     protected void Awake()
     {
         _soundEmitter = GetComponent<SoundEmitter>();
@@ -31,9 +33,16 @@ public class FootSteps : MonoBehaviour
 
     public void PlayFootstep(AnimationEvent animationEvent)
     {
-        if (animationEvent.animatorClipInfo.weight > 0.5f)
+        if (_skipNextStep)
+        {
+            _skipNextStep = false;
+            return;
+        }
+        float weight = animationEvent.animatorClipInfo.weight;
+        if (weight >= 0.48f)
         {
             _soundEmitter.Play("footstep");
+            _skipNextStep = weight <= 0.5f && weight >= 0.48f;
         }
     }
 }
