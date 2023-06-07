@@ -1,5 +1,3 @@
-using FMOD;
-using System.Diagnostics;
 using UnityEngine;
 
 public class ChangeSpellState : MovableState
@@ -10,19 +8,27 @@ public class ChangeSpellState : MovableState
     public override void Enter()
     {
         base.Enter();
+        Time.timeScale = 0.2f;
     }
 
     public override void Exit()
     {
         base.Exit();
-        //AimedSkill rightSkill = _context.UIController.GetRightSkillSelected();
-        //AimedSkill leftSkill = _context.UIController.GetLeftSkillSelected();
+        AimedSkill rightSkill = _context.UIController.GetRightSkillSelected();
+        AimedSkill leftSkill = _context.UIController.GetLeftSkillSelected();
 
-        //_context.PlayerSkills.LeftSkill = leftSkill;
-        //_context.PlayerSkills.RightSkill = rightSkill;
+        if (rightSkill != null)
+        {
+            _context.PlayerSkills.RightSkill = rightSkill;
+        }
+        if (leftSkill != null)
+        {
+            _context.PlayerSkills.LeftSkill = leftSkill;
+        }
 
-        //_context.UIController.OpenLeftSpell(false);
-        //_context.UIController.OpenRightSpell(false);
+        _context.UIController.OpenLeftSpell(false);
+        _context.UIController.OpenRightSpell(false);
+        Time.timeScale = 1.0f;
     }
 
     public override void StateUpdate()
@@ -33,7 +39,6 @@ public class ChangeSpellState : MovableState
             _context.ChangeState(_context.Factory.Playable());
             return;
         }
-
         _context.UIController.OpenLeftSpell(_context.Input.IsLeftShooting);
         _context.UIController.OpenRightSpell(_context.Input.IsRightShooting);
     }

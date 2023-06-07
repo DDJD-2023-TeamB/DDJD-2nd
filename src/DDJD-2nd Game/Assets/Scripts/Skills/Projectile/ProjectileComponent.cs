@@ -7,7 +7,7 @@ public abstract class ProjectileComponent : SkillComponent
     protected Rigidbody _rb;
     protected Collider _collider;
     protected ProjectileStats _stats;
-    protected Projectile _skill;
+    protected Projectile _projectile;
     protected GameObject _impactPrefab;
 
     private bool _originalIsKinematic;
@@ -23,6 +23,8 @@ public abstract class ProjectileComponent : SkillComponent
 
     private Vector3 _initialPosition;
     private bool _isShooting = false;
+
+    private float _health;
 
     protected override void Awake()
     {
@@ -57,9 +59,10 @@ public abstract class ProjectileComponent : SkillComponent
     public override void SetSkill(Skill skill)
     {
         base.SetSkill(skill);
-        _skill = (Projectile)skill;
-        _stats = _skill.ProjectileStats;
-        _impactPrefab = _skill.ImpactPrefab;
+        _projectile = (Projectile)skill;
+        _stats = _projectile.ProjectileStats;
+        _impactPrefab = _projectile.ImpactPrefab;
+        _health = _stats.MaxHealth;
     }
 
     public override void Shoot(Vector3 direction)
@@ -93,11 +96,22 @@ public abstract class ProjectileComponent : SkillComponent
     {
         base.OnImpact(other, multiplier);
         Damageable damageable = other.GetComponent<Damageable>();
-        bool isTriggerDamage = damageable != null && damageable.IsTriggerDamage();
-        if (!isTriggerDamage && _destroyOnImpact)
+
+        ProjectileComponent projectileComponent = other.GetComponent<ProjectileComponent>();
+        if (projectileComponent != null && _stats.IsDestructible)
         {
-            DestroySpell();
-            SpawnHitVFX();
+            _health -= projectileComponent.GetDamageToSpells();
+            if (_health <= 0)
+            {
+                Explode();
+            }
+        }
+        else
+        {
+            if (_destroyOnImpact)
+            {
+                Explode();
+            }
         }
     }
 
@@ -127,5 +141,26 @@ public abstract class ProjectileComponent : SkillComponent
             return _stats.ForceWithDamage() * _chargeComponent.GetCurrentCharge();
         }
         return _stats.ForceWithDamage();
+    }
+
+    protected virtual void Explode()
+    {
+        DestroySpell();
+        SpawnHitVFX();
+    }
+
+    private ProjectileStats ProjectileStats
+    {
+        get { return _stats; }
+    }
+
+    public virtual float GetDamageToSpells()
+    {
+        float charge = 1.0f;
+        if (_isChargeAttack)
+        {
+            charge = _chargeComponent.GetCurrentCharge();
+        }
+        return _stats.DamageToSpellsMultiplier * _stats.Damage * charge;
     }
 }

@@ -26,7 +26,15 @@ public class EnemyLineOfSight : MonoBehaviour
         if (angle < halfAngle && angle > -halfAngle)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, direction.normalized, out hit, _distance))
+            if (
+                Physics.Raycast(
+                    transform.position,
+                    direction.normalized,
+                    out hit,
+                    _distance,
+                    RayCastUtils.RayCastMask
+                )
+            )
             {
                 if (hit.collider.gameObject == _enemy.Player.gameObject)
                 {

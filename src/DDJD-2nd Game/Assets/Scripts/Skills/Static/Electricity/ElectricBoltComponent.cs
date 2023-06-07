@@ -31,7 +31,7 @@ public class ElectricBoltComponent : RayCastSkillComponent, NonCollidable
         }
         else
         {
-            pos4 = pos1 + transform.forward * _stats.MaxDistance;
+            pos4 = pos1 + _shootDirection * _stats.MaxDistance;
         }
 
         float distance = Vector3.Distance(pos1, pos4);

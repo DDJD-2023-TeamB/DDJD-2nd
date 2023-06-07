@@ -141,11 +141,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 1364273544
-      Data2: 1145371865
-      Data3: 1544592265
-      Data4: 1177358969
-    Path: event:/Fire Abilities/Fire Dash
+      Data1: 1742516872
+      Data2: 1324610506
+      Data3: -1868929350
+      Data4: 1570893751
+    Path: event:/Movement/Dash
   Event: 
   PlayEvent: 1
   StopEvent: 0
@@ -153,7 +153,9 @@ MonoBehaviour:
   TriggerOnce: 0
   Preload: 0
   AllowNonRigidbodyDoppler: 0
-  Params: []
+  Params:
+  - Name: Parameter 1
+    Value: 1
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20

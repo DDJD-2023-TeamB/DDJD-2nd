@@ -10,7 +10,6 @@ public class WheelController : MonoBehaviour
     public GameObject edgeObject;
     public GameObject wheelHiglighter;
     public WheelSelectorController wheelSelector;
-    public UIController uiController;
     public GameObject wheelSlots;
     public GameObject wheelSlotImagePrefab;
     float slotSize = 0;
@@ -81,6 +80,11 @@ public class WheelController : MonoBehaviour
 
     public ItemSkill GetSelectedSlot()
     {
+        ItemObject item = _itemList[wheelSelector.CurrentSlot];
+        if (item == null)
+        {
+            return null;
+        }
         return (ItemSkill)_itemList[wheelSelector.CurrentSlot];
     }
 

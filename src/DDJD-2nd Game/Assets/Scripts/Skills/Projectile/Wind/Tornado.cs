@@ -54,7 +54,6 @@ public class Tornado : GroundProjectileComponent, NonCollidable
         _caughtObjects = new List<CaughtInTornado>();
         _tornadoVFX = GetComponentInChildren<VisualEffect>();
         _chargeComponent.OnChargeComplete += OnChargeComplete;
-        //StartCoroutine(SpawnTornado());
     }
 
     public void Start()
@@ -90,7 +89,6 @@ public class Tornado : GroundProjectileComponent, NonCollidable
         Vector3 newPosition = transform.position;
         newPosition.y = caster.transform.position.y + 0.2f;
         transform.position = newPosition;
-        //transform.rotation = _caster.transform.rotation;
     }
 
     private void OnChargeComplete()
@@ -181,17 +179,13 @@ public class Tornado : GroundProjectileComponent, NonCollidable
             _caughtObjects.Add(caught);
         }
 
-        //Damage
-        Damageable damageable = other.GetComponent<Damageable>();
-        if (damageable != null)
-        {
-            damageable.TakeDamage(
-                (int)(_stats.Damage * multiplier),
-                _tornadoStrength,
-                other.ClosestPoint(transform.position),
-                transform.forward
-            );
-        }
+        Damage(
+            other.gameObject,
+            (int)(_stats.Damage * multiplier),
+            (int)_tornadoStrength,
+            other.ClosestPoint(transform.position),
+            transform.forward
+        );
     }
 
     protected void OnTriggerExit(Collider other)

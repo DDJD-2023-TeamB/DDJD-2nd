@@ -30,6 +30,12 @@ public class GroundedState : MeleeAttackableState
                 ForceMode.Acceleration
             );
             _context.Animator.SetTrigger("Jump");
+            _context.SoundEmitter.SetParameterWithLabel(
+                "jump",
+                _context.SfxJumpStateId,
+                "Jump",
+                true
+            );
             return;
         }
 

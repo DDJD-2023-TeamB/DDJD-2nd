@@ -57,12 +57,13 @@ public class LightningComponent : DashComponent, NonCollidable
         _vfx.SetVector3("Position", _caster.transform.position);
         _vfx.SendEvent("Flash");
         StartCoroutine(UpdateVFXTrail());
+        _soundEmitter.SetEventPositionToFollow("dash", _caster);
     }
 
     public override void SetSkill(Skill skill)
     {
         base.SetSkill(skill);
-        StartCoroutine(DestroyAfter(_skill.DashSkillStats.EffectDuration));
+        StartCoroutine(DestroyAfter(_dashSkill.DashSkillStats.EffectDuration));
     }
 
     protected override void OnImpact(Collider other, float multiplier = 1)

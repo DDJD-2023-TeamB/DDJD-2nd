@@ -8,7 +8,6 @@ using System;
 
 public class InventoryUI : MonoBehaviour
 {
-
     public GameObject InventoryItemPrefab;
 
     public GameObject itemsPanel;
@@ -127,9 +126,9 @@ public class InventoryUI : MonoBehaviour
         for (int i = 0; i < itemsPanel.transform.childCount; i++)
         {
             if (itemsPanel.transform.GetChild(i).childCount != 0)
-            {   
+            {
                 GameObject itemObject = itemsPanel.transform.GetChild(i).gameObject;
-                Destroy(itemObject);           
+                Destroy(itemObject);
             }
         }
     }
@@ -189,7 +188,7 @@ public class InventoryUI : MonoBehaviour
             }
             Transform slot = GetLeftSkillSlot(i);
             //Remove children
-            ItemStack item = new ItemStack(skills[i],1, null);
+            ItemStack item = new ItemStack(skills[i], 1, null);
             GameObject newItem = CreateItemSlot(item, slot);
         }
     }
@@ -203,7 +202,7 @@ public class InventoryUI : MonoBehaviour
                 continue;
             }
             Transform slot = GetRightSkillSlot(i);
-            ItemStack item = new ItemStack(skills[i],1, null);
+            ItemStack item = new ItemStack(skills[i], 1, null);
             GameObject newItem = CreateItemSlot(item, slot);
         }
     }

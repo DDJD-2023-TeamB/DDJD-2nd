@@ -61,4 +61,20 @@ public class DashStats
         get => _exitFovTime;
         set => _exitFovTime = value;
     }
+
+    [SerializeField]
+    private float _cameraShakeIntensity = 0.5f;
+
+    [SerializeField]
+    private float _cameraShakeDuration = 0.2f;
+
+    public float CameraShakeIntensity
+    {
+        get => _cameraShakeIntensity;
+    }
+
+    public float CameraShakeDuration
+    {
+        get => _cameraShakeDuration;
+    }
 }

@@ -38,6 +38,8 @@ public class HoverMovementComponent : AirMovementComponent
         _rightHandVFX = Instantiate(_skill.SpellPrefab, _rightHand.position, Quaternion.identity)
             .GetComponent<HoverComponent>();
         _rightHandVFX.transform.parent = _rightHand;
+        _leftHandVFX.Element = _player.PlayerSkills.CurrentElement;
+        _rightHandVFX.Element = _player.PlayerSkills.CurrentElement;
         StartCoroutine(Hover());
     }
 

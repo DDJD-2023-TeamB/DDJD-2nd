@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spellPrefab: {fileID: 7932264220128826489, guid: b51bc2415843ef4468308ab400e8044f,
     type: 3}
+  _element: {fileID: 11400000, guid: 4f1fc44ed51339b4195c6001521bf9e3, type: 2}
   _handRunePrefab: {fileID: 7228292062507097493, guid: 6152d3bedc0383a4cb7c148e440e7623,
     type: 3}
   _impactPrefab: {fileID: 0}
   _stats:
     _damage: 5
-    _force: 20
+    _force: 150
     _damageToForceMultiplier: 0
     _cooldown: 0.5
     _castTime: 0
@@ -28,4 +29,6 @@ MonoBehaviour:
     _maxChargeTime: 0
     _isContinuous: 0
     _tickRate: 1
+    _manaCost: 5
     _duration: 0.1
+    _maxDistance: 0

@@ -14,21 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Fireball
   _spellPrefab: {fileID: 814310454050963301, guid: 184812d18d3d74848b404334f8b3829d,
     type: 3}
+  _element: {fileID: 11400000, guid: 395138bc558d7cf449eb38e7c3e9ab91, type: 2}
   _handRunePrefab: {fileID: 4794543334150232581, guid: a18c434c32bb78b40be81332ad5c5725,
     type: 3}
   _impactPrefab: {fileID: 1962525620440749890, guid: fab5aa9db6cb4f94c87ae24208c5799e,
     type: 3}
   _stats:
-    _damage: 60
+    _damage: 50
     _force: 40
     _damageToForceMultiplier: 0
     _cooldown: 0.5
     _castTime: 0
     _noiseRadius: 15
     _castType: 1
-    _maxChargeTime: 1
+    _maxChargeTime: 3
     _isContinuous: 0
     _tickRate: 0
+    _manaCost: 10
     _speed: 500
     _destroyOnImpact: 1
     _range: 35
+    _isDestructible: 1
+    _maxHealth: 100
+    _damageToSpellsMultiplier: 2

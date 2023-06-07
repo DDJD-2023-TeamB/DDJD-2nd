@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class Player : StateContext
+public class Player : StateContext, Damageable
 {
     public ItemsInventoryObject inventory;
-    
+
     private PlayerStateFactory _factory;
     public PlayerStateFactory Factory
     {
@@ -155,6 +155,39 @@ public class Player : StateContext
         get { return _airMovement; }
     }
 
+    private CameraController _cameraController;
+
+    public CameraController CameraController
+    {
+        get { return _cameraController; }
+    }
+
+    private PlayerStatus _status;
+
+    private SoundEmitter _soundEmitter;
+
+    private FMOD.Studio.PARAMETER_ID _sfxJumpStateId;
+
+    public FMOD.Studio.PARAMETER_ID SfxJumpStateId
+    {
+        get { return _sfxJumpStateId; }
+    }
+
+    public SoundEmitter SoundEmitter
+    {
+        get { return _soundEmitter; }
+    }
+
+    private FMOD.Studio.PARAMETER_ID _sfxJumpIntensityId;
+    public FMOD.Studio.PARAMETER_ID SfxJumpIntensityId
+    {
+        get { return _sfxJumpIntensityId; }
+    }
+    private CharacterStatus _characterStatus;
+    public CharacterStatus CharacterStatus
+    {
+        get { return _characterStatus; }
+    }
     private UIController _uiController;
 
     void Awake()
@@ -170,6 +203,10 @@ public class Player : StateContext
         _playerSkills.Player = this;
         _meleeCombat = GetComponent<MeleeCombat>();
         _dashable = GetComponent<Dashable>();
+        _cameraController = GetComponent<CameraController>();
+        _status = GetComponent<PlayerStatus>();
+        _soundEmitter = GetComponent<SoundEmitter>();
+        _characterStatus = GetComponent<CharacterStatus>();
         _uiController = GetComponent<UIController>();
         ChangeState(_factory.Playable());
     }
@@ -177,6 +214,8 @@ public class Player : StateContext
     void Start()
     {
         UpdateElement(null);
+        _sfxJumpStateId = _soundEmitter.GetParameterId("jump", "Jump State");
+        _sfxJumpIntensityId = _soundEmitter.GetParameterId("jump", "Jump Intensity");
     }
 
     void Update()
@@ -191,6 +230,28 @@ public class Player : StateContext
             _playerSkills.CurrentElement = element;
         }
         _airMovement = _playerSkills.CurrentElement?.AirMovementSkill?.Initialize(gameObject);
+    }
+
+    public void TakeDamage(
+        GameObject damager,
+        int damage,
+        float force,
+        Vector3 hitPoint,
+        Vector3 hitDirection,
+        Element element
+    )
+    {
+        _status.TakeDamage(damager, damage, hitPoint, hitDirection);
+    }
+
+    public bool IsTriggerDamage()
+    {
+        return false;
+    }
+
+    public GameObject GetDamageableObject()
+    {
+        return this.gameObject;
     }
 
     public UIController UIController

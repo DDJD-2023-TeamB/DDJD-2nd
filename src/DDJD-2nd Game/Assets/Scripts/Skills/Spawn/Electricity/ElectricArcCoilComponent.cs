@@ -51,22 +51,22 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
     {
         Collider[] colliders = Physics.OverlapSphere(
             transform.position,
-            _skill.SpawnStats.DamageRadius
+            _spawnSkill.SpawnStats.DamageRadius
         );
         foreach (Collider collider in colliders)
         {
             if (collider.gameObject == _caster)
                 continue;
 
-            if (_skill.SpawnStats.Damage > 0)
+            if (_spawnSkill.SpawnStats.Damage > 0)
             {
                 float distance = Vector3.Distance(transform.position, collider.transform.position);
                 float divider = Mathf.Min(1, distance);
 
                 Damage(
                     collider.gameObject,
-                    (int)(_skill.SpawnStats.Damage / divider),
-                    (int)(_skill.SpawnStats.ForceWithDamage() / divider),
+                    (int)(_spawnSkill.SpawnStats.Damage / divider),
+                    (int)(_spawnSkill.SpawnStats.ForceWithDamage() / divider),
                     collider.ClosestPoint(transform.position),
                     collider.transform.position - transform.position
                 );
@@ -100,9 +100,12 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
 
         SkillComponent arcComponent = arc.GetComponent<SkillComponent>();
         arcComponent.SetCaster(_caster);
-        arcComponent.SetSkill(_skill);
+        arcComponent.SetSkill(_spawnSkill);
 
-        float arcLife = Mathf.Min(spawner.GetObjectLifeTime(lastCoil), _skill.SpawnStats.Duration);
+        float arcLife = Mathf.Min(
+            spawner.GetObjectLifeTime(lastCoil),
+            _spawnSkill.SpawnStats.Duration
+        );
 
         //Activate sound
         _soundEmitter.SetParameterWithLabel("spawn", _sfxStateId, "Conection", false);
@@ -114,7 +117,7 @@ public class ElectricArcCoilComponent : SpawnSkillComponent
         Vector3 position = transform.position;
         position.y = _boltVfxPrefab.transform.position.y;
         GameObject vfx = Instantiate(_boltVfxPrefab, position, Quaternion.identity);
-        Destroy(vfx, _skill.SpawnStats.Duration);
+        Destroy(vfx, _spawnSkill.SpawnStats.Duration);
     }
 
     public override void DestroySpell()

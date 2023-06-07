@@ -51,11 +51,11 @@ public class MoveState : GenericState
         }
         _context.Animator.SetFloat(
             "ForwardSpeed",
-            Vector3.Dot(_context.Rigidbody.velocity, _context.transform.forward)
+            Vector3.Dot(_context.Rigidbody.velocity, _context.transform.forward) / _context.MaxSpeed
         );
         _context.Animator.SetFloat(
             "RightSpeed",
-            Vector3.Dot(_context.Rigidbody.velocity, _context.transform.right)
+            Vector3.Dot(_context.Rigidbody.velocity, _context.transform.right) / _context.MaxSpeed
         );
     }
 

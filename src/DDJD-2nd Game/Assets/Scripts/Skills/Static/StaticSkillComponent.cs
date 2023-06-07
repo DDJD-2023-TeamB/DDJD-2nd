@@ -23,24 +23,25 @@ public class StaticSkillComponent : SkillComponent
     }
 
     protected StaticSkillStats _stats;
-    protected StaticSkill _skill;
+    protected StaticSkill _staticSkill;
 
     protected Vector3 _shootDirection;
 
     public override void SetSkill(Skill skill)
     {
         base.SetSkill(skill);
-        _skill = (StaticSkill)skill;
-        _stats = _skill.StaticStats;
+        _staticSkill = (StaticSkill)skill;
+        _stats = _staticSkill.StaticStats;
     }
 
     public override void Shoot(Vector3 direction)
     {
+        base.Shoot(direction);
+        _shootDirection = direction;
         if (_leaveCaster)
         {
             transform.parent = null; // Detach from caster
         }
-        _shootDirection = direction;
         if (_stats.Duration >= 0.0f)
         {
             StartCoroutine(DestroyAfterTime(_stats.Duration));
