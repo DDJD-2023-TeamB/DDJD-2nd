@@ -79,6 +79,12 @@ public class PlayerInputReceiver : MonoBehaviour
         get { return _isChangingRightSpell; }
     }
 
+    private bool _isChangingActiveElement;
+    public bool IsChangingActiveElement
+    {
+        get { return _isChangingActiveElement; }
+    }
+
     private bool _isMeleeAttacking;
     public bool IsMeleeAttacking
     {
@@ -181,6 +187,8 @@ public class PlayerInputReceiver : MonoBehaviour
 
         _playerInput.Combat.AbsorbMana.performed += ctx => _isAbsorbing = true;
         _playerInput.Combat.AbsorbMana.canceled += ctx => _isAbsorbing = false;
+        _playerInput.Combat.ChangeActiveElement.performed += ctx => _isChangingActiveElement = true;
+        _playerInput.Combat.ChangeActiveElement.canceled += ctx => _isChangingActiveElement = false;
 
         _playerInput.Combat.MeleeAttack.performed += ctx =>
         {
