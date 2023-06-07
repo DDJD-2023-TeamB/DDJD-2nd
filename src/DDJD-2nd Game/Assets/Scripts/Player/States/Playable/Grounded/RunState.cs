@@ -37,7 +37,16 @@ public class RunState : GenericState
         {
             return false;
         }
-        if (state is AimState)
+        return true;
+    }
+
+    public override bool CanHaveSuperState(GenericState state)
+    {
+        if (!base.CanHaveSuperState(state))
+        {
+            return false;
+        }
+        if (state is AimingState)
         {
             return false;
         }
@@ -99,7 +108,6 @@ public class RunState : GenericState
 
     private void Accelerate(Vector2 moveInput)
     {
-        Debug.Log("Accelerate");
         Vector3 velocity = _context.Rigidbody.velocity;
         Vector3 moveDirection =
             _context.transform.forward * moveInput.y + _context.transform.right * moveInput.x;

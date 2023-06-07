@@ -57,8 +57,11 @@ public class GroundedState : MeleeAttackableState
         {
             if (_context.Input.IsRunning)
             {
-                ChangeSubState(_context.Factory.Run(this));
-                return true;
+                bool success = ChangeSubState(_context.Factory.Run(this));
+                if (success)
+                {
+                    return true;
+                }
             }
         }
         if (_substate is IdleState)
