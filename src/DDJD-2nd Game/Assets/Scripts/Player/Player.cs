@@ -160,7 +160,7 @@ public class Player : StateContext, Damageable
 
     void Start()
     {
-        UpdateElement();
+        UpdateElement(null);
         _sfxJumpStateId = _soundEmitter.GetParameterId("jump", "Jump State");
         _sfxJumpIntensityId = _soundEmitter.GetParameterId("jump", "Jump Intensity");
         _inputReceiver.OnPrintState += () => _state?.PrintState();
@@ -171,8 +171,12 @@ public class Player : StateContext, Damageable
         _state.Update();
     }
 
-    void UpdateElement()
+    public void UpdateElement(Element element)
     {
+        if (element != null)
+        {
+            _playerSkills.CurrentElement = element;
+        }
         _airMovement = _playerSkills.CurrentElement?.AirMovementSkill?.Initialize(gameObject);
         _uiController.UpdateElements(
             _playerSkills.LeftSkill,
