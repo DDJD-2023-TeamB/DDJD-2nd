@@ -310,7 +310,7 @@ MonoBehaviour:
           Data2: 1337895590
           Data3: -138653824
           Data4: -1723026112
-        Path: event:/Melee Attacks
+        Path: event:/Attacks/Melee
     - _playOnStart: 0
       _stopOnDestroy: 0
       _updatePosition: 1
@@ -1077,7 +1077,7 @@ MonoBehaviour:
           Data2: 1337895590
           Data3: -138653824
           Data4: -1723026112
-        Path: event:/Melee Attacks
+        Path: event:/Attacks/Melee
     - _playOnStart: 0
       _stopOnDestroy: 0
       _updatePosition: 1
@@ -2242,7 +2242,7 @@ MonoBehaviour:
           Data2: 1337895590
           Data3: -138653824
           Data4: -1723026112
-        Path: event:/Melee Attacks
+        Path: event:/Attacks/Melee
     - _playOnStart: 0
       _stopOnDestroy: 0
       _updatePosition: 1
@@ -2703,7 +2703,7 @@ MonoBehaviour:
           Data2: 1337895590
           Data3: -138653824
           Data4: -1723026112
-        Path: event:/Melee Attacks
+        Path: event:/Attacks/Melee
     - _playOnStart: 0
       _stopOnDestroy: 0
       _updatePosition: 1
@@ -3412,8 +3412,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8228588811459176773}
   - component: {fileID: 1710605454393682399}
-  - component: {fileID: 520502159936630103}
-  - component: {fileID: 1606891433340151289}
   m_Layer: 9
   m_Name: RightHandAbsorb
   m_TagString: Untagged
@@ -3449,55 +3447,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &520502159936630103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7581090568947958763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84f26629a092a164dab236d075583683, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1606891433340151289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7581090568947958763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _events:
-    _keys:
-    - melee
-    - meleeElement
-    _values:
-    - _playOnStart: 0
-      _stopOnDestroy: 0
-      _updatePosition: 1
-      _eventReference:
-        Guid:
-          Data1: 820308842
-          Data2: 1337895590
-          Data3: -138653824
-          Data4: -1723026112
-        Path: event:/Melee Attacks
-    - _playOnStart: 0
-      _stopOnDestroy: 0
-      _updatePosition: 1
-      _eventReference:
-        Guid:
-          Data1: -1107946826
-          Data2: 1278192834
-          Data3: 1011146412
-          Data4: 577834099
-        Path: event:/Attacks/Melee overlay
 --- !u!1 &7694690271000812756
 GameObject:
   m_ObjectHideFlags: 0
@@ -3941,6 +3890,7 @@ MonoBehaviour:
   _absorbTime: 0.1
   _absorbAmount: 5
   _absorbRange: 3
+  _offset: 2
   _absorbTarget: {fileID: 7581090568947958763}
 --- !u!1 &8198835224221356302
 GameObject:

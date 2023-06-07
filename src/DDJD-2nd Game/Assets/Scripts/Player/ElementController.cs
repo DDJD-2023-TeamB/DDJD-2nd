@@ -15,10 +15,18 @@ public class ElementController : MonoBehaviour
 
     [SerializeField]
     private float _absorbRange = 3f;
+
+    [SerializeField]
+    private float _offset = 2.0f;
     private Player _player;
 
     [SerializeField]
     private GameObject _absorbTarget;
+
+    public ElementSource SourceToAbsorb
+    {
+        get { return _sourceToAbsorb; }
+    }
 
     protected void Awake()
     {
@@ -31,11 +39,16 @@ public class ElementController : MonoBehaviour
     {
         Vector3 position = _player.transform.position;
         position.y += 1f;
-        RaycastHit hit;
-        if (Physics.Raycast(position, _player.transform.forward, out hit, _absorbRange))
+        position -= _player.transform.forward * _offset;
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(position, _player.transform.forward, _absorbRange + _offset);
+        foreach (RaycastHit hit in hits)
         {
             _sourceToAbsorb = hit.collider.GetComponent<ElementSource>();
-            return _sourceToAbsorb != null;
+            if (_sourceToAbsorb != null)
+            {
+                return true;
+            }
         }
         return false;
     }

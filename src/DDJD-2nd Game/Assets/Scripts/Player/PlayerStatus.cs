@@ -33,7 +33,7 @@ public class PlayerStatus : CharacterStatus
         _player.UIController.UpdateHealth(_health, _maxHealth);
     }
 
-    private void UpdateMana(Element element)
+    public void UpdateMana(Element element)
     {
         int mana = _elementMana[element];
         _player.UIController.UpdateMana(element, mana, _maxMana);

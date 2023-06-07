@@ -33,6 +33,8 @@ public class ChangeSpellState : MovableState
             rightSkill,
             _context.PlayerSkills.CurrentElement
         );
+        _context.Status.UpdateMana(leftSkill.Element);
+        _context.Status.UpdateMana(rightSkill.Element);
         Time.timeScale = 1.0f;
     }
 
