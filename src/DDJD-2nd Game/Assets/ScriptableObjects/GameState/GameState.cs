@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName="GameState", menuName = "Scriptable Objects/GameState")]
 public class GameState : ScriptableObject
 {
+    //TODO AMANHA
     [SerializeField]
     private List<Mission2> _unblockedMissions = new List<Mission2>();
     

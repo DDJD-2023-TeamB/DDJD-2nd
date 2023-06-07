@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MissionController : MonoBehaviour
 {
-    //TODO: conjunto de unblocked missões - Vindo do game state
+    //TODO AMANHA: conjunto de unblocked missões - Vindo do game state
     [SerializeField]
     private Mission2 _currentMission;
 
@@ -25,12 +25,33 @@ public class MissionController : MonoBehaviour
         {
             foreach (var goal in _currentMission.Goals)
             {
-                if (goal is InteractGoal interactGoal)
+                if (!goal._completed && goal is InteractGoal interactGoal)
                 {
                     if (interactGoal.NpcToInteract == npc)
                     {
                         goal._completed = true;
                         Debug.Log("Interact Goal Completed");
+                    }
+                }
+            }
+            CheckIfAllGoalsAreCompleted();
+        }
+       
+    }
+
+    public void CheckIfItemCollectedIsMyGoal(CollectibleObject collectible)
+    {
+        if (_currentMission.Status == MissionState.Ongoing)
+        {
+            foreach (var goal in _currentMission.Goals)
+            {
+                if (!goal._completed && goal is CollectGoal collectGoal)
+                {
+                    if (collectGoal.CollectibleToCollect == collectible)
+                    {
+                        collectGoal.Quantity -= 1;
+                        if(collectGoal.Quantity == 0) goal._completed = true;
+                        Debug.Log("Collect Goal Completed");
                     }
                 }
             }

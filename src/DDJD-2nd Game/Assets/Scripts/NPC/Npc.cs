@@ -11,14 +11,11 @@ public class Npc : Interactable
     private Dialogue _dialogue;
     private DialogueInfo _currentDialogueInfo;
 
-    private MissionController _missionController;
-
     protected override void Start()
     {
         base.Start();
         _dialogue = _player.Dialogue;
         _currentDialogueInfo = _npc.DefaultDialogueInfo;
-        _missionController = _player.GetComponent<MissionController>();
     }
 
     void Update() { }

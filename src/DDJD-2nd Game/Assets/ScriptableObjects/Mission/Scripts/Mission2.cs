@@ -41,9 +41,6 @@ public class Mission2 : ScriptableObject
         get { return _goals; }
     }
     
-    // Interaction - NPC + Dialogo
-    // npc dá start tem ir ver se tem uma mission associada através do scriptable object
-    // default dialogue -> interactionBegin.Dialogue 
     [SerializeField]
     private Interaction _interactionBegin;
     public Interaction InteractionBegin
@@ -75,6 +72,9 @@ public class Mission2 : ScriptableObject
         get { return _unblockedMissions; }
     }
 
+    //TODO AMANHA
     //mapAreas
+
+
     //onFinished -> callback
 }

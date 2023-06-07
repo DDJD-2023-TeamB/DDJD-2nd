@@ -8,7 +8,6 @@ using UnityEngine;
 )]
 public class InteractGoal : GoalObject
 {
-    //add here a npc
     [SerializeField]
     private NpcObject _npcToInteract;
 

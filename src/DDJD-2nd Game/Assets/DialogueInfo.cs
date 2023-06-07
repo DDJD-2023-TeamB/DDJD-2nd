@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class DialogueInfo
 {
-    // TODO : To remove, but waiting for UI
+    // TODO AMANHA : To remove, but waiting for UI
     [SerializeField]
     private string _noun;
 
