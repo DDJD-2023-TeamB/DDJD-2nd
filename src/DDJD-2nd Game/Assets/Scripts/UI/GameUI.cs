@@ -9,25 +9,46 @@ public class GameUI : MonoBehaviour
     private Slider _healthBar;
 
     [SerializeField]
-    private Slider _leftManaBar;
+    private ManaBarController _leftManaBar;
 
     [SerializeField]
-    private Slider _rightManaBar;
+    private ManaBarController _rightManaBar;
+
+    private Element _leftElement;
+    private Element _rightElement;
+
+    [SerializeField]
+    private SerializedDictionary<Element, ElementUI> _elementsUI =
+        new SerializedDictionary<Element, ElementUI>();
+
+    public void UpdateElements(Skill leftSkill, Skill rightSkill, Element mainElement)
+    {
+        if (leftSkill.Element != _leftElement)
+        {
+            _leftElement = leftSkill.Element;
+            _leftManaBar.ChangeManaBar(_elementsUI[_leftElement]);
+        }
+        if (rightSkill.Element != _rightElement)
+        {
+            _rightElement = rightSkill.Element;
+            _rightManaBar.ChangeManaBar(_elementsUI[_rightElement]);
+        }
+    }
 
     public void UpdateHealth(int currentHealth, int maxHealth)
     {
         _healthBar.value = (float)currentHealth / (float)maxHealth;
     }
 
-    public void UpdateMana(int currentMana, int maxMana, bool isLeft)
+    public void UpdateMana(Element element, int currentMana, int maxMana)
     {
-        if (isLeft)
+        if (element == _leftElement)
         {
-            _leftManaBar.value = (float)currentMana / (float)maxMana;
+            _leftManaBar.Value = (float)currentMana / (float)maxMana;
         }
-        else
+        if (element == _rightElement)
         {
-            _rightManaBar.value = (float)currentMana / (float)maxMana;
+            _rightManaBar.Value = (float)currentMana / (float)maxMana;
         }
     }
 }

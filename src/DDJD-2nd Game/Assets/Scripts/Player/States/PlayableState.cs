@@ -47,18 +47,16 @@ public class PlayableState : GenericState
 
     private void CheckRange()
     {
- 
         // Se clickou no F e se está perto de algum interable
-        if (_context.Input.IsInteracting && !(_substate is InteractingState) && _context._interactedObject != null)
+        if (
+            _context.Input.IsInteracting
+            && !(_substate is InteractingState)
+            && _context._interactedObject != null
+        )
         {
             ChangeSubState(_context.Factory.Interacting(this));
         }
-       /* else if (!_context.Input.IsAiming && !(_substate is NotAimingState))
-        {
-            ChangeSubState(_context.Factory.NotAiming(this));
-        }*/
     }
-    
 
     private void CheckAiming()
     {
@@ -80,50 +78,7 @@ public class PlayableState : GenericState
             return;
         }
 
-        float minAngle = _context.MinAngle;
-        float maxAngle = _context.MaxAngle;
-
-        if (lookInput.x != 0f && Math.Abs(lookInput.x) > 0.5)
-        {
-            float amountToRotate = lookInput.x * _context.CameraRotationSpeed * Time.deltaTime;
-            _context.Rigidbody.MoveRotation(
-                _context.Rigidbody.rotation * Quaternion.Euler(new Vector3(0f, amountToRotate, 0f))
-            );
-        }
-
-        if (lookInput.y != 0f && Math.Abs(lookInput.x) > 0.5)
-        {
-            float amountToRotate = -lookInput.y * _context.CameraRotationSpeed * Time.deltaTime;
-            float finalAngle = _context.CameraTarget.transform.localEulerAngles.x + amountToRotate;
-            if (finalAngle <= minAngle || finalAngle >= maxAngle)
-            {
-                _context.CameraTarget.transform.Rotate(
-                    new Vector3(amountToRotate, 0f, 0f),
-                    Space.Self
-                );
-            }
-        }
-
-        //Fix camera angle if broken
-        float cameraAngle = _context.CameraTarget.transform.localEulerAngles.x;
-        if (cameraAngle > minAngle && cameraAngle < maxAngle)
-        {
-            float amountToRotate = minAngle - cameraAngle;
-            _context.CameraTarget.transform.Rotate(new Vector3(amountToRotate, 0f, 0f), Space.Self);
-        }
-
-        //Raycast to find the correct aim height
-        Vector3 targetPosition =
-            _context.AimCamera.transform.position + _context.AimCamera.transform.forward * 10f;
-        // Raycast for debug
-        /*
-        Debug.DrawRay(
-            _context.AimCamera.transform.position,
-            _context.AimCamera.transform.forward * 10f,
-            Color.red,
-            2f
-        );
-        */
+        _context.CameraController.RotateCamera(lookInput, true);
     }
 
     private void OnInventoryKeydown()

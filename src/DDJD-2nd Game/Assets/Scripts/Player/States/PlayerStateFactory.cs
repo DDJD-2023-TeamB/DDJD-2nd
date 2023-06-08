@@ -82,4 +82,9 @@ public class PlayerStateFactory : StateFactory
     {
         return new InteractingState(_context, superState);
     }
+
+    public AbsorbingState Absorbing(GenericState superState)
+    {
+        return new AbsorbingState(_context, superState);
+    }
 }
