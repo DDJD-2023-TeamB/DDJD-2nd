@@ -49,13 +49,16 @@ public abstract class Dashable : MonoBehaviour
 
     protected virtual void Update()
     {
+        _timeSinceLastDash += Time.deltaTime;
+        if (!_isDashing)
+            return;
+
         Vector3 flatVel = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
         if (flatVel.magnitude > _maxSpeed)
         {
             Vector3 limitedVel = flatVel.normalized * _maxSpeed;
             _rigidbody.velocity = new Vector3(limitedVel.x, _rigidbody.velocity.y, limitedVel.z);
         }
-        _timeSinceLastDash += Time.deltaTime;
     }
 
     public virtual void DashWithSkill(DashSkill dashSkill)

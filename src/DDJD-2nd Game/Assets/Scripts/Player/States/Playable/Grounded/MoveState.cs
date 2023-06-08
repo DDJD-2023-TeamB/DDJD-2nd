@@ -86,7 +86,10 @@ public class MoveState : GenericState
         if (velocity.magnitude < _context.CharacterMovement.MaxSpeed)
         {
             _context.Rigidbody.AddForce(
-                moveDirection * _context.CharacterMovement.Acceleration * Time.deltaTime * 1000,
+                moveDirection
+                    * _context.CharacterMovement.Acceleration
+                    * Time.deltaTime
+                    * _context.AccelerationMultiplier,
                 ForceMode.Acceleration
             );
         }
