@@ -92,43 +92,6 @@ public class Player : StateContext, Damageable
     {
         get { return _accelerationMultiplier; }
     }
-
-    [Header("Camera movement")]
-    [SerializeField]
-    private Transform _cameraTarget;
-    public Transform CameraTarget
-    {
-        get { return _cameraTarget; }
-    }
-
-    [SerializeField]
-    private float _cameraRotationSpeed = 20.0f;
-    public float CameraRotationSpeed
-    {
-        get { return _cameraRotationSpeed; }
-    }
-
-    [SerializeField]
-    private float _minAngle = 30f;
-    public float MinAngle
-    {
-        get { return _minAngle; }
-    }
-
-    [SerializeField]
-    private float maxAngle = 330f;
-    public float MaxAngle
-    {
-        get { return maxAngle; }
-    }
-
-    [SerializeField]
-    private CinemachineVirtualCamera _aimCamera;
-    public CinemachineVirtualCamera AimCamera
-    {
-        get { return _aimCamera; }
-    }
-
     private AimComponent _aimComponent;
     public AimComponent AimComponent
     {
@@ -210,6 +173,7 @@ public class Player : StateContext, Damageable
         get { return _characterStatus; }
     }
     private UIController _uiController;
+    private ElementController _elementController;
 
     void Awake()
     {
@@ -229,12 +193,13 @@ public class Player : StateContext, Damageable
         _soundEmitter = GetComponent<SoundEmitter>();
         _characterStatus = GetComponent<CharacterStatus>();
         _uiController = GetComponent<UIController>();
+        _elementController = GetComponent<ElementController>();
         ChangeState(_factory.Playable());
     }
 
     void Start()
     {
-        UpdateElement();
+        UpdateElement(null);
         _sfxJumpStateId = _soundEmitter.GetParameterId("jump", "Jump State");
         _sfxJumpIntensityId = _soundEmitter.GetParameterId("jump", "Jump Intensity");
     }
@@ -244,9 +209,18 @@ public class Player : StateContext, Damageable
         _state.Update();
     }
 
-    void UpdateElement()
+    public void UpdateElement(Element element)
     {
+        if (element != null)
+        {
+            _playerSkills.CurrentElement = element;
+        }
         _airMovement = _playerSkills.CurrentElement?.AirMovementSkill?.Initialize(gameObject);
+        _uiController.UpdateElements(
+            _playerSkills.LeftSkill,
+            _playerSkills.RightSkill,
+            _playerSkills.CurrentElement
+        );
     }
 
     public void TakeDamage(
@@ -274,5 +248,15 @@ public class Player : StateContext, Damageable
     public UIController UIController
     {
         get { return _uiController; }
+    }
+
+    public PlayerStatus Status
+    {
+        get { return _status; }
+    }
+
+    public ElementController ElementController
+    {
+        get { return _elementController; }
     }
 }

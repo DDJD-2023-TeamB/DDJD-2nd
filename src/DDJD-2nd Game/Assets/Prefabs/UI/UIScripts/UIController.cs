@@ -28,9 +28,12 @@ public class UIController : MonoBehaviour
     public KeyCode leftWheelKey = KeyCode.Q;
     public KeyCode rightWheelKey = KeyCode.E;
     public KeyCode missionsKey = KeyCode.M;
+    public KeyCode activeElementKey = KeyCode.LeftAlt;
 
     public Sprite fireStoneSprite;
     public Sprite redDiamondSprite;
+
+    public GameObject currentItemTitle;
 
     private void Awake()
     {
@@ -46,6 +49,7 @@ public class UIController : MonoBehaviour
         _playerUI.leftSpellWheel.gameObject.SetActive(false);
         _playerUI.rightSpellWheel.gameObject.SetActive(false);
         _playerUI.missionsUI.SetActive(false);
+        _playerUI.activeElementWheel.SetActive(false);
 
         InventoryUI inventoryUI = _playerUI.inventoryUI;
         //inventoryUI.OnItemDrop += ;
@@ -106,6 +110,14 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public void OpenActiveElement(bool isOpening)
+    {
+        if (_playerUI.activeElementWheel.activeInHierarchy != isOpening)
+        {
+            _playerUI.activeElementWheel.SetActive(isOpening);
+        }
+    }
+
     public AimedSkill GetLeftSkillSelected()
     {
         ItemSkill itemSkill = _playerUI.leftSpellWheel.GetSelectedSlot();
@@ -133,9 +145,14 @@ public class UIController : MonoBehaviour
         _playerUI.playingUI.UpdateHealth(currentHealth, maxHealth);
     }
 
-    public void UpdateMana(int currentMana, int maxMana, bool isLeft)
+    public void UpdateMana(Element element, int currentMana, int maxMana)
     {
-        _playerUI.playingUI.UpdateMana(currentMana, maxMana, isLeft);
+        _playerUI.playingUI.UpdateMana(element, currentMana, maxMana);
+    }
+
+    public void UpdateElements(Skill leftSkill, Skill rightSkill, Element element)
+    {
+        _playerUI.playingUI.UpdateElements(leftSkill, rightSkill, element);
     }
 
     public void SelectSlotLeft(int slot)

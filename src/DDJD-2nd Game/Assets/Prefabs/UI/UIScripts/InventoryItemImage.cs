@@ -18,10 +18,12 @@ public class InventoryItemImage
 
     [HideInInspector]
     public Transform parentAfterDrag;
+    public InventoryUI inventoryController;
 
     private void Start()
     {
         inventoryUI = GameObject.Find("InventoryUI");
+        inventoryController = inventoryUI.GetComponent<InventoryUI>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -31,6 +33,12 @@ public class InventoryItemImage
         transform.SetAsLastSibling();
         image.raycastTarget = false;
         itemAmountText.SetActive(false);
+        if(inventoryController.itemTitle == null)
+        {
+            Debug.Log("InvenotryImage is deleting title");
+            Destroy(inventoryController.itemTitle);
+            inventoryController.itemTitle = null;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -43,6 +51,11 @@ public class InventoryItemImage
         transform.SetParent(parentAfterDrag);
         image.raycastTarget = true;
         itemAmountText.SetActive(true);
+        if (inventoryController.itemTitle == null)
+        {
+            Destroy(inventoryController.itemTitle);
+            inventoryController.itemTitle = null;
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)

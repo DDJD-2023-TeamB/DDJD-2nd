@@ -269,6 +269,24 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AbsorbMana"",
+                    ""type"": ""Button"",
+                    ""id"": ""f685dd20-e13e-444a-b7cb-466999df4b35"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeActiveElement"",
+                    ""type"": ""Button"",
+                    ""id"": ""18b9633a-a8d4-4cf3-855d-0a1462dc3577"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -346,6 +364,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MeleeAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e4e330f7-d4fb-4eb3-b0b6-0e5f2f26d651"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AbsorbMana"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bac6528a-8a38-4d1a-b6e5-6e2e4c564e37"",
+                    ""path"": ""<Keyboard>/leftAlt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeActiveElement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -441,6 +481,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Combat_ChangeLeftSpell = m_Combat.FindAction("ChangeLeftSpell", throwIfNotFound: true);
         m_Combat_ChangeRightSpell = m_Combat.FindAction("ChangeRightSpell", throwIfNotFound: true);
         m_Combat_MeleeAttack = m_Combat.FindAction("MeleeAttack", throwIfNotFound: true);
+        m_Combat_AbsorbMana = m_Combat.FindAction("AbsorbMana", throwIfNotFound: true);
+        m_Combat_ChangeActiveElement = m_Combat.FindAction("ChangeActiveElement", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
@@ -638,6 +680,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Combat_ChangeLeftSpell;
     private readonly InputAction m_Combat_ChangeRightSpell;
     private readonly InputAction m_Combat_MeleeAttack;
+    private readonly InputAction m_Combat_AbsorbMana;
+    private readonly InputAction m_Combat_ChangeActiveElement;
     public struct CombatActions
     {
         private @PlayerInput m_Wrapper;
@@ -649,6 +693,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @ChangeLeftSpell => m_Wrapper.m_Combat_ChangeLeftSpell;
         public InputAction @ChangeRightSpell => m_Wrapper.m_Combat_ChangeRightSpell;
         public InputAction @MeleeAttack => m_Wrapper.m_Combat_MeleeAttack;
+        public InputAction @AbsorbMana => m_Wrapper.m_Combat_AbsorbMana;
+        public InputAction @ChangeActiveElement => m_Wrapper.m_Combat_ChangeActiveElement;
         public InputActionMap Get() { return m_Wrapper.m_Combat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -679,6 +725,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @MeleeAttack.started += instance.OnMeleeAttack;
             @MeleeAttack.performed += instance.OnMeleeAttack;
             @MeleeAttack.canceled += instance.OnMeleeAttack;
+            @AbsorbMana.started += instance.OnAbsorbMana;
+            @AbsorbMana.performed += instance.OnAbsorbMana;
+            @AbsorbMana.canceled += instance.OnAbsorbMana;
+            @ChangeActiveElement.started += instance.OnChangeActiveElement;
+            @ChangeActiveElement.performed += instance.OnChangeActiveElement;
+            @ChangeActiveElement.canceled += instance.OnChangeActiveElement;
         }
 
         private void UnregisterCallbacks(ICombatActions instance)
@@ -704,6 +756,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @MeleeAttack.started -= instance.OnMeleeAttack;
             @MeleeAttack.performed -= instance.OnMeleeAttack;
             @MeleeAttack.canceled -= instance.OnMeleeAttack;
+            @AbsorbMana.started -= instance.OnAbsorbMana;
+            @AbsorbMana.performed -= instance.OnAbsorbMana;
+            @AbsorbMana.canceled -= instance.OnAbsorbMana;
+            @ChangeActiveElement.started -= instance.OnChangeActiveElement;
+            @ChangeActiveElement.performed -= instance.OnChangeActiveElement;
+            @ChangeActiveElement.canceled -= instance.OnChangeActiveElement;
         }
 
         public void RemoveCallbacks(ICombatActions instance)
@@ -804,6 +862,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnChangeLeftSpell(InputAction.CallbackContext context);
         void OnChangeRightSpell(InputAction.CallbackContext context);
         void OnMeleeAttack(InputAction.CallbackContext context);
+        void OnAbsorbMana(InputAction.CallbackContext context);
+        void OnChangeActiveElement(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

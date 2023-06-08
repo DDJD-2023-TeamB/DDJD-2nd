@@ -43,7 +43,7 @@ public abstract class SkillComponent : MonoBehaviour
         if (_elapsedTime - _lastTickTime >= _skillStats.TickRate)
         {
             _lastTickTime = _elapsedTime;
-            bool success = _characterStatus.ConsumeMana(_skillStats.ManaCost);
+            bool success = _characterStatus.ConsumeMana(_skill.Element, _skillStats.ManaCost);
             if (!success)
             {
                 DestroySpell();
@@ -221,5 +221,10 @@ public abstract class SkillComponent : MonoBehaviour
     public virtual float GetNoiseRadius()
     {
         return _skillStats.NoiseRadius;
+    }
+
+    public Skill Skill
+    {
+        get { return _skill; }
     }
 }
