@@ -3540,6 +3540,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: 2f5852599379b4183bf507c38fcd8d84, type: 2}
   _jumpForce: 200
+  _acceleration: 2
+  _maxAirSpeed: 4
+  _airAcceleration: 0.8
+  _accelerationMultiplier: 1000
+  _frictionlessMaterial: {fileID: 13400000, guid: a47e96029b9f4b141a73f3105e66851c,
+    type: 2}
   _playerSkills: {fileID: 11400000, guid: 4416c54b33ddce64baf418917cb99d12, type: 2}
   _meleeCombat: {fileID: 0}
   _LeftHand: {fileID: 6737474002199511682}
@@ -3874,8 +3880,10 @@ MonoBehaviour:
   leftWheelKey: 113
   rightWheelKey: 101
   missionsKey: 109
+  activeElementKey: 308
   fireStoneSprite: {fileID: 0}
   redDiamondSprite: {fileID: 0}
+  currentItemTitle: {fileID: 0}
 --- !u!114 &1218520422210949770
 MonoBehaviour:
   m_ObjectHideFlags: 0

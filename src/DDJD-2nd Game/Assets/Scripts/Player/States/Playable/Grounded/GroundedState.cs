@@ -16,7 +16,7 @@ public class GroundedState : MeleeAttackableState
         base.Enter();
         _context.Animator.SetBool("IsGrounded", true);
         ChangeSubState(_context.Factory.Idle(this));
-        CheckMoving();
+        _context.StartCoroutine(LandCoroutine());
     }
 
     private void CheckAbsorb()
@@ -98,5 +98,15 @@ public class GroundedState : MeleeAttackableState
             }
         }
         return false;
+    }
+
+    private IEnumerator LandCoroutine()
+    {
+        _context.Collider.material = _context.FrictionlessMaterial;
+        while (true)
+        {
+            yield return new WaitForSeconds(0.6f);
+            _context.Collider.material = _context.DefaultMaterial;
+        }
     }
 }

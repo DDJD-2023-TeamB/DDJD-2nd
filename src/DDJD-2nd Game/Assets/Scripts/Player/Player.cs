@@ -85,6 +85,14 @@ public class Player : StateContext, Damageable
         get { return _aimComponent; }
     }
 
+    [SerializeField]
+    [Tooltip("The material used when the player lands")]
+    private PhysicMaterial _frictionlessMaterial;
+
+    private PhysicMaterial _defaultMaterial;
+
+    private Collider _collider;
+
     [Header("Abilities")]
     [SerializeField]
     private PlayerSkills _playerSkills;
@@ -182,6 +190,7 @@ public class Player : StateContext, Damageable
         _uiController = GetComponent<UIController>();
         _elementController = GetComponent<ElementController>();
         _characterMovement = GetComponent<CharacterMovement>();
+        _collider = GetComponent<Collider>();
         ChangeState(_factory.Playable());
     }
 
@@ -191,6 +200,7 @@ public class Player : StateContext, Damageable
         _sfxJumpStateId = _soundEmitter.GetParameterId("jump", "Jump State");
         _sfxJumpIntensityId = _soundEmitter.GetParameterId("jump", "Jump Intensity");
         _inputReceiver.OnPrintState += () => _state?.PrintState();
+        _defaultMaterial = _collider.material;
     }
 
     void Update()
@@ -252,5 +262,20 @@ public class Player : StateContext, Damageable
     public CharacterMovement CharacterMovement
     {
         get { return _characterMovement; }
+    }
+
+    public PhysicMaterial FrictionlessMaterial
+    {
+        get { return _frictionlessMaterial; }
+    }
+
+    public PhysicMaterial DefaultMaterial
+    {
+        get { return _defaultMaterial; }
+    }
+
+    public Collider Collider
+    {
+        get { return _collider; }
     }
 }
