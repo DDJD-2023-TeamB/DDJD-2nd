@@ -5,8 +5,13 @@ using Cinemachine;
 
 public class Player : StateContext, Damageable
 {
-    //TODO - mudar para private
-    public ItemsInventoryObject inventory;
+    [SerializeField]
+    private ItemsInventoryObject _inventory;
+    public ItemsInventoryObject Inventory
+    {
+        get { return _inventory; }
+        set { _inventory = value;}
+    }
 
     private PlayerStateFactory _factory;
     public PlayerStateFactory Factory

@@ -54,7 +54,7 @@ public class UIController : MonoBehaviour
         inventoryUI.OnItemSkillRightDrop += ChangeRightWheelItem;
         inventoryUI.SetupActions();
 
-        _itemsInventory = _player.inventory;
+        _itemsInventory = _player.Inventory;
 
         //DEBUG
 

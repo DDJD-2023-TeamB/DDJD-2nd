@@ -125,7 +125,7 @@ public class MissionController : MonoBehaviour
     {
         foreach (var item in mission.Reward.Items)
         {
-            _player.inventory.AddItem(item);
+            _player.Inventory.AddItem(item);
         }
 
         _player.Status.AddGold(mission.Reward.Gold);
