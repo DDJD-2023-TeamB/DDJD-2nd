@@ -20,6 +20,11 @@ public class NpcObject : ScriptableObject
         get { return _defaultDialogueInfo; }
     }
 
-    //[SerializeField]
-    //TODO: Location
+    [SerializeField]
+    private Location _location;
+    public Location Location
+    {
+        get { return _location; }
+    }
+    
 }

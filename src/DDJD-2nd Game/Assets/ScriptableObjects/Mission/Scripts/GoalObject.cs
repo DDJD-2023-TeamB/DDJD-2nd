@@ -7,6 +7,13 @@ public abstract class GoalObject : ScriptableObject
     public bool _completed = false;
     [SerializeField]
     private string _description;
-    //private Location;
+
+    //Hint
+    [SerializeField]
+    private Location _location;
+    public Location Location
+    {
+        get { return _location; }
+    }
 
 }

@@ -9,11 +9,14 @@ public enum MissionState
     Ongoing,
     Completed
 }
-public enum MissionType{
-    Story, 
+
+public enum MissionType
+{
+    Story,
     Secondary
 }
-[CreateAssetMenu(fileName="Mission", menuName = "Scriptable Objects/Mission System/Mission")]
+
+[CreateAssetMenu(fileName = "Mission", menuName = "Scriptable Objects/Mission System/Mission")]
 public class Mission2 : ScriptableObject
 {
     [SerializeField]
@@ -24,7 +27,7 @@ public class Mission2 : ScriptableObject
         get { return _status; }
         set { _status = value; }
     }
-    
+
     [SerializeField]
     private MissionType _type;
 
@@ -40,7 +43,7 @@ public class Mission2 : ScriptableObject
     {
         get { return _goals; }
     }
-    
+
     [SerializeField]
     private Interaction _interactionBegin;
     public Interaction InteractionBegin
@@ -54,7 +57,7 @@ public class Mission2 : ScriptableObject
     {
         get => _interactionEnd;
     }
-    
+
     //Do the reward
     [SerializeField]
     private Reward _reward;
@@ -72,8 +75,13 @@ public class Mission2 : ScriptableObject
         get { return _followingMissions; }
     }
 
-    //TODO AMANHA
-    //mapAreas
-    
+    [SerializeField]
+    private MapAreaType _area;
+
+    public MapAreaType Area
+    {
+        get { return _area; }
+    }
+
     //onFinished -> callback
 }

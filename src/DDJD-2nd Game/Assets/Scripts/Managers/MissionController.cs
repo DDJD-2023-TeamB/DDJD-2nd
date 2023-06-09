@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class MissionController : MonoBehaviour
 {
-    //TODO: Vindo do game state
-    [SerializeField]
     private List<Mission2> _unblockedMissions = new List<Mission2>();
+
+    [SerializeField]
+    private GameState _gameState;
 
     private Player _player;
 
@@ -14,6 +15,7 @@ public class MissionController : MonoBehaviour
     {
         ActivateMissions();
         _player = GetComponent<Player>();
+        _unblockedMissions = _gameState.UnblockedMissions;
     }
 
     private void ActivateMissions()
@@ -115,11 +117,8 @@ public class MissionController : MonoBehaviour
         {
             followingMissions.Status = MissionState.Available;
             _unblockedMissions.Add(followingMissions);
-
         }
     }
-
-
 
     private void GiveReward(Mission2 mission)
     {
@@ -128,7 +127,7 @@ public class MissionController : MonoBehaviour
             _player.Inventory.AddItem(item);
         }
 
-        _player.Status.AddGold(mission.Reward.Gold);
+        //_player.Inventory.AddGold(mission.Reward.Gold);
     }
 
     public Queue<Mission2> GetNpcMissions(NpcObject npc)
