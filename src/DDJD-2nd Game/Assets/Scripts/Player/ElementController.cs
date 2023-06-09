@@ -41,7 +41,12 @@ public class ElementController : MonoBehaviour
         position.y += 1f;
         position -= _player.transform.forward * _offset;
         RaycastHit[] hits;
-        hits = Physics.RaycastAll(position, _player.transform.forward, _absorbRange + _offset);
+        hits = Physics.RaycastAll(
+            position,
+            _player.transform.forward,
+            _absorbRange + _offset,
+            LayerMask.GetMask("ElementSource")
+        );
         foreach (RaycastHit hit in hits)
         {
             _sourceToAbsorb = hit.collider.GetComponent<ElementSource>();
