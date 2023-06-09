@@ -82,7 +82,10 @@ public class GroundedState : MeleeAttackableState
         }
         if (_substate is IdleState)
         {
-            if (_context.Input.MoveInput != Vector2.zero)
+            if (
+                _context.Input.MoveInput != Vector2.zero
+                || _context.Rigidbody.velocity.magnitude > 0.1f
+            )
             {
                 ChangeSubState(_context.Factory.Move(this));
                 return true;

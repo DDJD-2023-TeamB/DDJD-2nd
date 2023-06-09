@@ -40,10 +40,18 @@ public class MoveState : GenericState
             return;
         }
 
+        if (_context.Rigidbody.velocity.magnitude > _context.CharacterMovement.GetCurrentMaxSpeed())
+        {
+            float difference =
+                _context.Rigidbody.velocity.magnitude
+                - _context.CharacterMovement.GetCurrentMaxSpeed();
+            Decelerate(difference / 10.0f);
+        }
+
         Vector2 moveInput = _context.Input.MoveInput;
         if (moveInput == Vector2.zero)
         {
-            Decelerate();
+            Decelerate(1.0f);
         }
 
         if (moveInput != Vector2.zero)
@@ -76,7 +84,18 @@ public class MoveState : GenericState
         return false;
     }
 
-    private void Decelerate() { }
+    private void Decelerate(float multiplier)
+    {
+        Vector3 velocity = _context.Rigidbody.velocity;
+        _context.Rigidbody.AddForce(
+            -velocity.normalized
+                * multiplier
+                * _context.CharacterMovement.Acceleration
+                * Time.deltaTime
+                * _context.AccelerationMultiplier,
+            ForceMode.Acceleration
+        );
+    }
 
     private void Accelerate(Vector2 moveInput)
     {
