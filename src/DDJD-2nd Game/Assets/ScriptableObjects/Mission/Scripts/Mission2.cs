@@ -55,7 +55,7 @@ public class Mission2 : ScriptableObject
         get => _interactionEnd;
     }
     
-   
+    //Do the reward
     [SerializeField]
     private Reward _reward;
 
@@ -65,16 +65,15 @@ public class Mission2 : ScriptableObject
     }
 
     [SerializeField]
-    private List<Mission> _unblockedMissions = new List<Mission>();
+    private List<Mission2> _followingMissions = new List<Mission2>();
 
-    public List<Mission> UnblockedMissions
+    public List<Mission2> FollowingMissions
     {
-        get { return _unblockedMissions; }
+        get { return _followingMissions; }
     }
 
     //TODO AMANHA
     //mapAreas
-
-
+    
     //onFinished -> callback
 }

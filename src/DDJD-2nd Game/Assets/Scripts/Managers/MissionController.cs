@@ -4,66 +4,86 @@ using UnityEngine;
 
 public class MissionController : MonoBehaviour
 {
-    //TODO AMANHA: conjunto de unblocked missões - Vindo do game state
+    //TODO: Vindo do game state
     [SerializeField]
-    private Mission2 _currentMission;
+    private List<Mission2> _unblockedMissions = new List<Mission2>();
+
+    private Player _player;
 
     void Start()
     {
-        //TODO: iteraterar sobre as missions e defina-las como availables
-        _currentMission.Status = MissionState.Available;
+        ActivateMissions();
+        _player = GetComponent<Player>();
     }
 
-    void Update()
+    private void ActivateMissions()
     {
-        //se os há objectivos a serem cumpridos
+        foreach (var mission in _unblockedMissions)
+        {
+            if(mission.Status == MissionState.Blocked)
+            {
+                mission.Status = MissionState.Available;
+            }
+        }
     }
-
     public void CheckIfNpcIsMyGoal(NpcObject npc)
     {
-        if (_currentMission.Status == MissionState.Ongoing)
+        List<Mission2> missions = new List<Mission2>(_unblockedMissions);
+
+        foreach (var mission in missions)
         {
-            foreach (var goal in _currentMission.Goals)
+            if (mission.Status == MissionState.Ongoing)
             {
-                if (!goal._completed && goal is InteractGoal interactGoal)
+                Debug.Log(mission);
+                foreach (var goal in mission.Goals)
                 {
-                    if (interactGoal.NpcToInteract == npc)
+                    Debug.Log(goal);
+                    if (!goal._completed && goal is InteractGoal interactGoal)
                     {
-                        goal._completed = true;
-                        Debug.Log("Interact Goal Completed");
+                        if (interactGoal.NpcToInteract == npc)
+                        {
+                            Debug.Log("SAME");
+                            goal._completed = true;
+                            Debug.Log("Interact Goal Completed");
+                        }
                     }
                 }
+                CheckIfAllGoalsAreCompleted(mission);
             }
-            CheckIfAllGoalsAreCompleted();
         }
        
     }
 
     public void CheckIfItemCollectedIsMyGoal(CollectibleObject collectible)
     {
-        if (_currentMission.Status == MissionState.Ongoing)
+        List<Mission2> missions = new List<Mission2>(_unblockedMissions);
+
+        foreach (var mission in missions)
         {
-            foreach (var goal in _currentMission.Goals)
+            if (mission.Status == MissionState.Ongoing)
             {
-                if (!goal._completed && goal is CollectGoal collectGoal)
+                foreach (var goal in mission.Goals)
                 {
-                    if (collectGoal.CollectibleToCollect == collectible)
+                    if (!goal._completed && goal is CollectGoal collectGoal)
                     {
-                        collectGoal.Quantity -= 1;
-                        if(collectGoal.Quantity == 0) goal._completed = true;
-                        Debug.Log("Collect Goal Completed");
+                        if (collectGoal.CollectibleToCollect == collectible)
+                        {
+                            if(collectGoal.Quantity > 0) collectGoal.Quantity -= 1;
+                            if (collectGoal.Quantity == 0) goal._completed = true;
+                            Debug.Log("Collect Goal Completed");
+                        }
                     }
                 }
+                CheckIfAllGoalsAreCompleted(mission);
             }
-            CheckIfAllGoalsAreCompleted();
         }
        
     }
 
-    public void CheckIfAllGoalsAreCompleted()
+    public void CheckIfAllGoalsAreCompleted(Mission2 mission)
     {
         bool allGoalsCompleted = false;
-        foreach (var goal in _currentMission.Goals)
+        foreach (var goal in mission.Goals)
         {
             if (!goal._completed)
             {
@@ -75,20 +95,64 @@ public class MissionController : MonoBehaviour
         }
 
         if (allGoalsCompleted)
-            _currentMission.Status = MissionState.Completed;
+        {
+            HandleMissionComplete(mission);
+        }
+            
     }
 
-    /*public void CompleteGoal(Goal goal)
+    private void HandleMissionComplete(Mission2 mission)
     {
-        if (currentMission != null && currentMission.Status == MissionState.Ongoing)
-        {
-            currentMission.CompleteGoal(goal);
+        mission.Status = MissionState.Completed;
+        GiveReward(mission);
+        _unblockedMissions.Remove(mission);
+        UnblockFollowingMissions(mission);
+    }
 
-            if (currentMission.AreGoalsComplete())
+    private void UnblockFollowingMissions(Mission2 mission)
+    {
+        foreach (var followingMissions in mission.FollowingMissions)
+        {
+            followingMissions.Status = MissionState.Available;
+            _unblockedMissions.Add(followingMissions);
+
+        }
+    }
+
+
+
+    private void GiveReward(Mission2 mission)
+    {
+        foreach (var item in mission.Reward.Items)
+        {
+            _player.inventory.AddItem(item);
+        }
+
+        _player.Status.AddGold(mission.Reward.Gold);
+    }
+
+    public Queue<Mission2> GetNpcMissions(NpcObject npc)
+    {
+        Queue<Mission2> missions = new Queue<Mission2>();
+
+        foreach (var mission in _unblockedMissions)
+        {
+            if(mission.Status != MissionState.Completed)
             {
-                currentMission.Complete();
-                currentMission = null;
+                if(mission.InteractionBegin.Npc == npc || mission.InteractionEnd.Npc == npc)
+                {
+                    missions.Enqueue(mission);
+                }
+            }
+            foreach(var followingMission in mission.FollowingMissions)
+            {
+                if(followingMission.InteractionBegin.Npc == npc || followingMission.InteractionEnd.Npc == npc)
+                {
+                    missions.Enqueue(followingMission);
+                }
             }
         }
-    }*/
+
+        return missions;
+    }
 }

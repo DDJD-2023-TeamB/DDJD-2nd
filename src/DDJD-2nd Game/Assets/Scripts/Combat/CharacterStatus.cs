@@ -5,6 +5,7 @@ using System;
 
 public class CharacterStatus : MonoBehaviour
 {
+
     [SerializeField]
     protected int _health;
 

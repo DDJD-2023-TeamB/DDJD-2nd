@@ -8,8 +8,6 @@ public class Player : StateContext, Damageable
     //TODO - mudar para private
     public ItemsInventoryObject inventory;
 
-    public int gold; 
-
     private PlayerStateFactory _factory;
     public PlayerStateFactory Factory
     {
@@ -166,6 +164,11 @@ public class Player : StateContext, Damageable
     }
 
     private PlayerStatus _status;
+
+    public PlayerStatus Status
+    {
+        get { return _status; }
+    }
 
     private SoundEmitter _soundEmitter;
 

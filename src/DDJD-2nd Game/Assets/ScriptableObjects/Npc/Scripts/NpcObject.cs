@@ -5,15 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NPC", menuName = "Scriptable Objects/NPC/NPC")]
 public class NpcObject : ScriptableObject
 {
-    //TODO: Array (maybe queue?) de missions
-    [SerializeField]
-    private Mission2 _mission;
-
-    public Mission2 Mission
-    {
-        get { return _mission; }
-    }
-
     [SerializeField]
     private string _name;
 

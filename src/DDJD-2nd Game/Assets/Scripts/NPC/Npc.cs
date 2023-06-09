@@ -10,12 +10,21 @@ public class Npc : Interactable
 
     private Dialogue _dialogue;
     private DialogueInfo _currentDialogueInfo;
+    private Queue<Mission2> _missions = new Queue<Mission2>();
+    public Queue<Mission2> Missions
+    {
+        get { return _missions; }
+    }
+
+    private Mission2 _currentMission;
 
     protected override void Start()
     {
         base.Start();
         _dialogue = _player.Dialogue;
         _currentDialogueInfo = _npc.DefaultDialogueInfo;
+        _missions = _missionController.GetNpcMissions(_npc);
+        if(_missions.Count != 0) _currentMission = _missions.Dequeue();
     }
 
     void Update() { }
@@ -29,23 +38,30 @@ public class Npc : Interactable
     {
         _missionController.CheckIfNpcIsMyGoal(_npc);
 
-        if (_npc.Mission != null)
+        if (_currentMission != null)
         {
-            if (_npc.Mission.Status == MissionState.Blocked)
+            if (_currentMission.Status == MissionState.Blocked)
             {
                 _currentDialogueInfo = _npc.DefaultDialogueInfo;
             }
-            if (_npc.Mission.Status == MissionState.Available)
+            if (_currentMission.Status == MissionState.Available)
             {
-                if(_npc == _npc.Mission.InteractionBegin.Npc)
+                if(_npc == _currentMission.InteractionBegin.Npc)
                 {
-                    _currentDialogueInfo = _npc.Mission.InteractionBegin.DialogueInfo;
-                    _npc.Mission.Status = MissionState.Ongoing;
+                    _currentDialogueInfo = _currentMission.InteractionBegin.DialogueInfo;
+                    _currentMission.Status = MissionState.Ongoing;
                 }
             }
-            else if (_npc.Mission.Status == MissionState.Completed)
+            else if (_currentMission.Status == MissionState.Completed)
             {
-                if(_npc == _npc.Mission.InteractionEnd.Npc) _currentDialogueInfo = _npc.Mission.InteractionEnd.DialogueInfo;
+                if(_npc == _currentMission.InteractionEnd.Npc) _currentDialogueInfo = _currentMission.InteractionEnd.DialogueInfo;
+                if(_missions.Count > 0)
+                {
+                    _currentMission = _missions.Dequeue();
+                }
+                else{
+                    _currentMission = null;
+                }
             }
         }
         _dialogue.StartDialogue(_currentDialogueInfo);

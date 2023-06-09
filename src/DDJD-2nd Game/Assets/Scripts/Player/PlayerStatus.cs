@@ -9,6 +9,14 @@ public class PlayerStatus : CharacterStatus
     [SerializeField]
     private float _cameraShakeIntensity = 5.0f;
 
+    [SerializeField]
+    protected int _gold;
+
+    public int Gold
+    {
+        get { return _gold; }
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -28,5 +36,10 @@ public class PlayerStatus : CharacterStatus
         float shakeIntensity =
             Mathf.Clamp01((float)damage / (float)_maxHealth) * _cameraShakeIntensity;
         _player.CameraController.ShakeCamera(shakeIntensity, 0.2f);
+    }
+
+    public void AddGold(int gold)
+    {
+        _gold += gold;
     }
 }

@@ -7,6 +7,17 @@ public class Reward
 {
     [SerializeField]
     private int _gold;
+
+    public int Gold
+    {
+        get { return _gold; }
+    }
+
     [SerializeField]
-    private List<CollectibleObject> _items = new List<CollectibleObject>();
+    private List<ItemStack> _items = new List<ItemStack>();
+
+    public List<ItemStack> Items
+    {
+        get { return _items; }
+    }
 }

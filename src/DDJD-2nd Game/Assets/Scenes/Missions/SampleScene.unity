@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571337, b: 0.3069219, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571336, b: 0.3069219, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3175,7 +3175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e89caf55e759d4b6883237e74b93b15d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentMission: {fileID: 11400000, guid: afa16beb773ef4a5d9dc590ddfe3b850, type: 2}
+  _unblockedMissions:
+  - {fileID: 11400000, guid: 50f48febbf8c04d1293895937483a4f3, type: 2}
 --- !u!1 &1060167512
 GameObject:
   m_ObjectHideFlags: 0
@@ -3816,22 +3817,22 @@ PrefabInstance:
     - target: {fileID: 4492101057451422958, guid: 8084707323b635540b484e279ebd75fb,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9982033
+      value: 0.9981934
       objectReference: {fileID: 0}
     - target: {fileID: 4492101057451422958, guid: 8084707323b635540b484e279ebd75fb,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.058846783
+      value: 0.0588462
       objectReference: {fileID: 0}
     - target: {fileID: 4492101057451422958, guid: 8084707323b635540b484e279ebd75fb,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.011266456
+      value: 0.012110372
       objectReference: {fileID: 0}
     - target: {fileID: 4492101057451422958, guid: 8084707323b635540b484e279ebd75fb,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00066418806
+      value: -0.0007139392
       objectReference: {fileID: 0}
     - target: {fileID: 4492101058047646286, guid: 8084707323b635540b484e279ebd75fb,
         type: 3}

@@ -22,6 +22,21 @@ public class ItemsInventoryObject : ScriptableObject
             Container.Add(new ItemStack(item, amount, null));
         }
     }
+
+    public void AddItem(ItemStack itemStack)
+    {
+        Debug.Log(itemStack);
+        ItemStack slot = Container.Find(x => x.item == itemStack.item);
+
+        if (slot != null)
+        {
+            slot.AddAmount(itemStack.amount);
+        }
+        else
+        {
+            Container.Add(itemStack);
+        }
+    }
 }
 
 [System.Serializable]
