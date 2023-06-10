@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-1)]
 public class MissionController : MonoBehaviour
 {
     private List<Mission2> _unblockedMissions = new List<Mission2>();
@@ -133,7 +134,7 @@ public class MissionController : MonoBehaviour
     public Queue<Mission2> GetNpcMissions(NpcObject npc)
     {
         Queue<Mission2> missions = new Queue<Mission2>();
-
+        
         foreach (var mission in _unblockedMissions)
         {
             if(mission.Status != MissionState.Completed)

@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 011ea1f08218a4d86a7348c8b8541bd0, type: 3}
-  m_Name: Collect
+  m_Script: {fileID: 11500000, guid: 531ebd6447bbe4db69c9a371d6cd8516, type: 3}
+  m_Name: GameState
   m_EditorClassIdentifier: 
-  _completed: 0
-  _description: 
-  _location: {fileID: 0}
-  _collectibleToCollect: {fileID: 11400000, guid: e563f69444c374ab19b4b2a71d6d1bb3,
-    type: 2}
-  _quantity: 2
+  _unblockedMissions:
+  - {fileID: 11400000, guid: afa16beb773ef4a5d9dc590ddfe3b850, type: 2}
+  - {fileID: 11400000, guid: 50f48febbf8c04d1293895937483a4f3, type: 2}
+  _unblockedAreas: 
