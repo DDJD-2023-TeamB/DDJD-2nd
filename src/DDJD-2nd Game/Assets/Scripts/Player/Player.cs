@@ -272,11 +272,6 @@ public class Player : StateContext, Damageable
         set { _interactedObject = value; }
     }
 
-    public PlayerStatus Status
-    {
-        get { return _status; }
-    }
-
     public ElementController ElementController
     {
         get { return _elementController; }
