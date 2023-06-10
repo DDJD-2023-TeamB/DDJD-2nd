@@ -14,9 +14,9 @@ public class MissionController : MonoBehaviour
 
     void Start()
     {
-        ActivateMissions();
         _player = GetComponent<Player>();
         _unblockedMissions = _gameState.UnblockedMissions;
+        ActivateMissions();
     }
 
     private void ActivateMissions()
