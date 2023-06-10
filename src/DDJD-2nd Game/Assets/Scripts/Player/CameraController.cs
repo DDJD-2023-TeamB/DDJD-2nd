@@ -139,6 +139,11 @@ public class CameraController : MonoBehaviour
         _cameraTarget.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
     }
 
+    public void setCameraRotationSpeed(float value)
+    {
+        _cameraRotationSpeed = value;
+    }
+
     public GameObject CameraTarget
     {
         get { return _cameraTarget; }

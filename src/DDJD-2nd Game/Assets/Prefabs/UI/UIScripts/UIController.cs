@@ -87,6 +87,14 @@ public class UIController : MonoBehaviour
         _playerUI.playingUI.gameObject.SetActive(!isOpening);
     }
 
+    public void OpenOptions(bool isOpening)
+    {
+        currentMenu = "options";
+        _playerUI.optionsUI.gameObject.SetActive(isOpening);
+        _playerUI.menuUI.SetActive(!isOpening);
+    }
+
+
     public void OpenMissions(bool isOpening)
     {
         currentMenu = "missions";

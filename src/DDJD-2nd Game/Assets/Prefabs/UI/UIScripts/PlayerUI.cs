@@ -6,7 +6,9 @@ public class PlayerUI : MonoBehaviour
     public InventoryUI inventoryUI;
 
     [SerializeField]
-    public GameObject menuUI,
+    public GameObject
+        menuUI,
+        optionsUI,
         missionsUI,
         activeElementWheel;
 
@@ -16,4 +18,7 @@ public class PlayerUI : MonoBehaviour
 
     [SerializeField]
     public GameUI playingUI;
+
+    [SerializeField]
+    public GameObject playerObject;
 }
