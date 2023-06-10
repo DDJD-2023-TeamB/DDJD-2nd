@@ -83,7 +83,7 @@ public class EnemyShooter : Shooter
         Vector3 shotDirection
     )
     {
-        base.Shoot(spell, shotDirection, true);
+        base.Shoot(spell, shotDirection, true, aimedSkill.SkillStats.ManaCost);
     }
 
     private void ShootCharge(
@@ -103,7 +103,7 @@ public class EnemyShooter : Shooter
         if (spell != null)
         {
             Vector3 direction = GetShotDirection(spell.transform.position);
-            base.Shoot(spell, direction, true);
+            base.Shoot(spell, direction, true, aimedSkill.SkillStats.ManaCost);
         }
     }
 

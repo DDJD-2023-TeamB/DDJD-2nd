@@ -32,4 +32,9 @@ public class FovController : MonoBehaviour
 
         _camera.m_Lens.FieldOfView = fov;
     }
+
+    public void ChangeFovInstant(float fov)
+    {
+        _camera.m_Lens.FieldOfView = fov;
+    }
 }

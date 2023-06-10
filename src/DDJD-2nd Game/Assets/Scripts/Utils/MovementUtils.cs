@@ -6,7 +6,7 @@ public class MovementUtils
     {
         Vector3 position = rigidbody.position;
         position.y += 0.1f;
-        bool found = Physics.Raycast(position, Vector3.down, 0.5f);
+        bool found = Physics.Raycast(position, Vector3.down, 0.5f, RayCastUtils.PhysicalMask);
         return found;
     }
 }

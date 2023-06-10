@@ -25,6 +25,8 @@ public class InventoryUI : MonoBehaviour
     public Action<ItemStack, int> OnItemSkillLeftDrop;
     public Action<ItemStack, int> OnItemSkillRightDrop;
 
+    public GameObject itemTitle;
+
     public void SetupActions()
     {
         for (int i = 0; i < itemsPanel.transform.childCount; i++)

@@ -50,20 +50,7 @@ public class Player : StateContext, Damageable
         get { return _objectSpawner; }
     }
 
-    private Dashable _dashComponent;
-    public Dashable DashComponent
-    {
-        get { return _dashComponent; }
-    }
-
     [Header("Movement")]
-    [SerializeField]
-    private float _maxSpeed = 5f;
-    public float MaxSpeed
-    {
-        get { return _maxSpeed; }
-    }
-
     [SerializeField]
     private float _jumpForce = 20f;
     public float JumpForce
@@ -78,47 +65,39 @@ public class Player : StateContext, Damageable
         get { return _acceleration; }
     }
 
-    [Header("Camera movement")]
     [SerializeField]
-    private Transform _cameraTarget;
-    public Transform CameraTarget
+    private float _maxAirSpeed = 4f;
+    public float MaxAirSpeed
     {
-        get { return _cameraTarget; }
+        get { return _maxAirSpeed; }
     }
 
     [SerializeField]
-    private float _cameraRotationSpeed = 20.0f;
-    public float CameraRotationSpeed
+    private float _airAcceleration = 0.8f;
+    public float AirAcceleration
     {
-        get { return _cameraRotationSpeed; }
+        get { return _airAcceleration; }
     }
 
     [SerializeField]
-    private float _minAngle = 30f;
-    public float MinAngle
+    private int _accelerationMultiplier = 1000;
+    public int AccelerationMultiplier
     {
-        get { return _minAngle; }
+        get { return _accelerationMultiplier; }
     }
-
-    [SerializeField]
-    private float maxAngle = 330f;
-    public float MaxAngle
-    {
-        get { return maxAngle; }
-    }
-
-    [SerializeField]
-    private CinemachineVirtualCamera _aimCamera;
-    public CinemachineVirtualCamera AimCamera
-    {
-        get { return _aimCamera; }
-    }
-
     private AimComponent _aimComponent;
     public AimComponent AimComponent
     {
         get { return _aimComponent; }
     }
+
+    [SerializeField]
+    [Tooltip("The material used when the player lands")]
+    private PhysicMaterial _frictionlessMaterial;
+
+    private PhysicMaterial _defaultMaterial;
+
+    private Collider _collider;
 
     [Header("Abilities")]
     [SerializeField]
@@ -148,8 +127,8 @@ public class Player : StateContext, Damageable
         get { return _RightHand; }
     }
 
-    private Dashable _dashable;
-    public Dashable Dashable
+    private PlayerDashable _dashable;
+    public PlayerDashable Dashable
     {
         get { return _dashable; }
     }
@@ -194,9 +173,16 @@ public class Player : StateContext, Damageable
     {
         get { return _sfxJumpIntensityId; }
     }
+    private CharacterStatus _characterStatus;
+    public CharacterStatus CharacterStatus
+    {
+        get { return _characterStatus; }
+    }
     private UIController _uiController;
     [SerializeField]
     private Dialogue _dialogue; //TODO:: Get from UI after UI PR merges
+    private ElementController _elementController;
+    private CharacterMovement _characterMovement;
 
     void Awake()
     {
@@ -207,22 +193,27 @@ public class Player : StateContext, Damageable
         _aimComponent = GetComponent<PlayerAimComponent>();
         _shooter = GetComponent<Shooter>();
         _objectSpawner = GetComponent<ObjectSpawner>();
-        _dashComponent = GetComponent<Dashable>();
         _playerSkills.Player = this;
         _meleeCombat = GetComponent<MeleeCombat>();
-        _dashable = GetComponent<Dashable>();
+        _dashable = GetComponent<PlayerDashable>();
         _cameraController = GetComponent<CameraController>();
         _status = GetComponent<PlayerStatus>();
         _soundEmitter = GetComponent<SoundEmitter>();
+        _characterStatus = GetComponent<CharacterStatus>();
         _uiController = GetComponent<UIController>();
+        _elementController = GetComponent<ElementController>();
+        _characterMovement = GetComponent<CharacterMovement>();
+        _collider = GetComponent<Collider>();
         ChangeState(_factory.Playable());
     }
 
     void Start()
     {
-        UpdateElement();
+        UpdateElement(null);
         _sfxJumpStateId = _soundEmitter.GetParameterId("jump", "Jump State");
         _sfxJumpIntensityId = _soundEmitter.GetParameterId("jump", "Jump Intensity");
+        _inputReceiver.OnPrintState += () => _state?.PrintState();
+        _defaultMaterial = _collider.material;
     }
 
     void Update()
@@ -230,9 +221,18 @@ public class Player : StateContext, Damageable
         _state.Update();
     }
 
-    void UpdateElement()
+    public void UpdateElement(Element element)
     {
+        if (element != null)
+        {
+            _playerSkills.CurrentElement = element;
+        }
         _airMovement = _playerSkills.CurrentElement?.AirMovementSkill?.Initialize(gameObject);
+        _uiController.UpdateElements(
+            _playerSkills.LeftSkill,
+            _playerSkills.RightSkill,
+            _playerSkills.CurrentElement
+        );
     }
 
     public void TakeDamage(
@@ -270,5 +270,30 @@ public class Player : StateContext, Damageable
     {
         get { return _interactedObject; }
         set { _interactedObject = value; }
+    }
+
+    public ElementController ElementController
+    {
+        get { return _elementController; }
+    }
+
+    public CharacterMovement CharacterMovement
+    {
+        get { return _characterMovement; }
+    }
+
+    public PhysicMaterial FrictionlessMaterial
+    {
+        get { return _frictionlessMaterial; }
+    }
+
+    public PhysicMaterial DefaultMaterial
+    {
+        get { return _defaultMaterial; }
+    }
+
+    public Collider Collider
+    {
+        get { return _collider; }
     }
 }

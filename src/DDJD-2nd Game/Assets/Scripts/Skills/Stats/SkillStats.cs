@@ -101,6 +101,14 @@ public abstract class SkillStats
         set => _tickRate = value;
     }
 
+    [SerializeField]
+    private int _manaCost = 0;
+    public int ManaCost
+    {
+        get => _manaCost;
+        set => _manaCost = value;
+    }
+
     public float ForceWithDamage()
     {
         return _force + _damage * _damageToForceMultiplier;

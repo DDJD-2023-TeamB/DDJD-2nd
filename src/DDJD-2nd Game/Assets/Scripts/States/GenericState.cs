@@ -97,4 +97,13 @@ public abstract class GenericState
     {
         return _substate;
     }
+
+    public void PrintState()
+    {
+        Debug.Log(this.GetType().Name);
+        if (_substate != null)
+        {
+            _substate.PrintState();
+        }
+    }
 }
