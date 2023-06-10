@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -16,12 +17,15 @@ public class ActiveElementWheelController : MonoBehaviour
     [SerializeField] private GameObject windElementButtonObject;
     [SerializeField] private GameObject electricityElementButtonObject;
 
+    [SerializeField] private GameObject activeElementDescriptionObject;
+
     private ActiveElementButton fireElementButton;
     private ActiveElementButton earthElementButton;
     private ActiveElementButton windElementButton;
     private ActiveElementButton electricityElementButton;
     private float slotSize;
     private Player playerController;
+    private TextMeshProUGUI activeElementDescription;
     void Start()
     {
         slotSize = edgeObject.transform.position.x - transform.position.x;
@@ -30,6 +34,7 @@ public class ActiveElementWheelController : MonoBehaviour
         earthElementButton = earthElementButtonObject.GetComponent<ActiveElementButton>();
         windElementButton = windElementButtonObject.GetComponent<ActiveElementButton>();
         electricityElementButton = electricityElementButtonObject.GetComponent<ActiveElementButton>();
+        activeElementDescription = activeElementDescriptionObject.GetComponent<TextMeshProUGUI>();
     }
     void Update()
     {
@@ -38,32 +43,50 @@ public class ActiveElementWheelController : MonoBehaviour
         {
             float angle = Vector2.Angle(mouseVec, transform.right);
             Debug.DrawRay(transform.position, mouseVec, Color.yellow);
-            if (Input.GetMouseButtonDown(0))
+            if (angle > -45 && angle < 45)
             {
-                if (angle > -45 && angle < 45)
+                if (Input.GetMouseButtonDown(0))
                 {
                     playerController.UpdateElement(windElement);
-                    setSprites("wind");
+                    setSprites("Wind");
                 }
-                if (angle < -135 || angle > 135)
+                activeElementDescription.text = "Wind";
+            }
+            if (angle < -135 || angle > 135)
+            {
+
+                if (Input.GetMouseButtonDown(0))
                 {
                     playerController.UpdateElement(electricityElement);
-                    setSprites("electricity");
+                    setSprites("Electricity");
                 }
-                if (angle > 45 && angle < 135)
+                activeElementDescription.text = "Electricity";
+            }
+            if (angle > 45 && angle < 135)
+            {
+                if (mouseVec.y > 0)
                 {
-                    if (mouseVec.y > 0)
+                    if (Input.GetMouseButtonDown(0))
                     {
                         playerController.UpdateElement(fireElement);
-                        setSprites("fire");
+                        setSprites("Fire");
                     }
-                    else
+                    activeElementDescription.text = "Fire";
+                }
+                else
+                {
+                    if (Input.GetMouseButtonDown(0))
                     {
                         playerController.UpdateElement(earthElement);
-                        setSprites("earth");
+                        setSprites("Earth");
                     }
+                    activeElementDescription.text = "Earth";
                 }
             }
+        }
+        else
+        {
+            activeElementDescription.text = "";
         }
     }
 
@@ -73,18 +96,18 @@ public class ActiveElementWheelController : MonoBehaviour
         earthElementButton.setActive(false);
         windElementButton.setActive(false);
         electricityElementButton.setActive(false);
-        if (element == "fire")
+        if (element == "Fire")
         {
             fireElementButton.setActive(true);
-        }else if (element == "earth")
+        }else if (element == "Earth")
         {
             earthElementButton.setActive(true);
         }
-        else if (element == "wind")
+        else if (element == "Wind")
         {
             windElementButton.setActive(true);
         }
-        else if (element == "electricity")
+        else if (element == "Electricity")
         {
             electricityElementButton.setActive(true);
         }
