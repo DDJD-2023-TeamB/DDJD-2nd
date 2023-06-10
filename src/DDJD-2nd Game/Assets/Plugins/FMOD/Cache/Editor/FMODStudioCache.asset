@@ -232,7 +232,7 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Voices.bank
   Name: Voices
   StudioPath: bank:/Voices
-  lastModified: 638212678511517368
+  lastModified: 638214906721705209
   FileSizes:
   - Name: Desktop
     Value: 67168
@@ -285,6 +285,34 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-6851749534473844349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Attacks/Melee overlay
+  m_EditorClassIdentifier: 
+  Path: event:/Attacks/Melee overlay
+  Guid:
+    Data1: -1107946826
+    Data2: 1278192834
+    Data3: 1011146412
+    Data4: 577834099
+  Banks:
+  - {fileID: 5317653654373178222}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -5026666769579484089}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-6632862738621425670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,10 +438,10 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638212678510409686
+  lastModified: 638219580167263105
   FileSizes:
   - Name: Desktop
-    Value: 3456
+    Value: 3548
   Exists: 1
 --- !u!114 &-5933235245165181606
 MonoBehaviour:
@@ -458,7 +486,7 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638212678511355922
+  lastModified: 638214906718894899
   FileSizes:
   - Name: Desktop
     Value: 2975328
@@ -491,6 +519,32 @@ MonoBehaviour:
   - Lightning
   - Wind
   Exists: 1
+--- !u!114 &-5026666769579484089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Melee overlay/Melee Type
+  m_EditorClassIdentifier: 
+  Name: Melee Type
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3569420667
+    data2: 1541724746
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Fire
+  - Lightning
+  Exists: 1
 --- !u!114 &-4459362541762091504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,7 +560,7 @@ MonoBehaviour:
   Name: Basic Melee
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 2740336205
@@ -516,8 +570,6 @@ MonoBehaviour:
   Labels:
   - Miss
   - Basic
-  - Fire
-  - Lightning
   Exists: 1
 --- !u!114 &-4237877867514721265
 MonoBehaviour:
@@ -563,7 +615,7 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 638212678511517368
+  lastModified: 638214906720235038
   FileSizes:
   - Name: Desktop
     Value: 67296
@@ -768,7 +820,7 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Movement.bank
   Name: Movement
   StudioPath: bank:/Movement
-  lastModified: 638212678510730713
+  lastModified: 638214906679911206
   FileSizes:
   - Name: Desktop
     Value: 1631008
@@ -931,12 +983,13 @@ MonoBehaviour:
   - {fileID: -9055316217655567364}
   - {fileID: 241608974719644130}
   - {fileID: -515421990174392312}
+  - {fileID: -6851749534473844349}
   EditorParameters: []
   MasterBanks:
   - {fileID: 4433330313758352117}
   StringsBanks:
   - {fileID: -6091163670596948680}
-  cacheTime: 638212678511517368
+  cacheTime: 638219580167263105
   cacheVersion: 131603
 --- !u!114 &87656345710861160
 MonoBehaviour:
@@ -1302,7 +1355,7 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638212678510253460
+  lastModified: 638214906661121988
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -1377,10 +1430,10 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Abilities.bank
   Name: Abilities
   StudioPath: bank:/Abilities
-  lastModified: 638212678510253460
+  lastModified: 638219580167253135
   FileSizes:
   - Name: Desktop
-    Value: 2636992
+    Value: 2635040
   Exists: 1
 --- !u!114 &5332299497021798144
 MonoBehaviour:

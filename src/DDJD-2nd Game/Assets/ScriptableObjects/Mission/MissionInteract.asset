@@ -10,14 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c3120dc6799746bdb3c0626cadbfc38, type: 3}
-  m_Name: Mission
+  m_Name: MissionInteract
   m_EditorClassIdentifier: 
   _status: 0
   _type: 0
-  _goals:
-  - {fileID: 11400000, guid: 965912b2b719a40ff8badf7f8f3a3377, type: 2}
-  _interactionBegin: {fileID: 11400000, guid: 13151eb888352419a8330207842f2836, type: 2}
-  _interactionEnd: {fileID: 11400000, guid: f79b3115c351e4433b16dff4d1fe07c2, type: 2}
+  _interactionBegin:
+    _dialogueInfo:
+      _noun: Bella
+      _sentences:
+      - Welcome to Mission
+      - Go Interact with Tristan
+    _npc: {fileID: 11400000, guid: 3403cae3e543d448a83c140ebb792bde, type: 2}
+  _interactionEnd:
+    _dialogueInfo:
+      _noun: 2
+      _sentences:
+      - Well Done
+      - You've interacted with me
+    _npc: {fileID: 11400000, guid: 15f81436f65c9415ea4bde98e57c0e27, type: 2}
   _reward:
     _gold: 10
     _items:
@@ -25,3 +35,4 @@ MonoBehaviour:
       amount: 5
       id: 
   _followingMissions: []
+  _area: 0

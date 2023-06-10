@@ -154,11 +154,6 @@ public class Player : StateContext, Damageable
 
     private PlayerStatus _status;
 
-    public PlayerStatus Status
-    {
-        get { return _status; }
-    }
-
     private SoundEmitter _soundEmitter;
 
     private FMOD.Studio.PARAMETER_ID _sfxJumpStateId;

@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum MapAreaType{
+public enum MapAreaType
+{
     Fire,
     Wind,
     Ground,
     Electricity
 }
-[CreateAssetMenu(fileName="GameState", menuName = "Scriptable Objects/GameState")]
+
+[CreateAssetMenu(fileName = "GameState", menuName = "Scriptable Objects/GameState")]
 public class GameState : ScriptableObject
 {
     [SerializeField]
@@ -19,7 +21,7 @@ public class GameState : ScriptableObject
         get { return _unblockedMissions; }
         set { _unblockedMissions = value; }
     }
-    
+
     [SerializeField]
     private List<MapAreaType> _unblockedAreas;
     public List<MapAreaType> UnblockedAreas
