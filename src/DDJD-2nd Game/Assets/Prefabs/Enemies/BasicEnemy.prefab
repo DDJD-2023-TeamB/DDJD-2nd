@@ -3340,7 +3340,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7679466201466395243}
   - component: {fileID: 7679466201475659263}
-  - component: {fileID: 7158677911070190682}
   - component: {fileID: 7679466201466395240}
   - component: {fileID: 1719889469382641536}
   - component: {fileID: -6662390124669257774}
@@ -3352,6 +3351,7 @@ GameObject:
   - component: {fileID: 7562078159073174495}
   - component: {fileID: 8307550782042618538}
   - component: {fileID: 3273867762492815134}
+  - component: {fileID: 1980188279287297222}
   m_Layer: 7
   m_Name: BasicEnemy
   m_TagString: Untagged
@@ -3406,20 +3406,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7158677911070190682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7679466201466161035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c711aa3fa927e574da3aab4af178cc57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 0
-  _maxHealth: 100
 --- !u!114 &7679466201466395240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3615,6 +3601,23 @@ MonoBehaviour:
           Data3: 855472541
           Data4: -2142007058
         Path: event:/Movement/Footsteps
+--- !u!114 &1980188279287297222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7679466201466161035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f0ee0d6613609419c20d92531e4015, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 0
+  _maxHealth: 100
+  _useMana: 0
+  _mana: 0
+  _maxMana: 100
 --- !u!1 &7679466201466161037
 GameObject:
   m_ObjectHideFlags: 0

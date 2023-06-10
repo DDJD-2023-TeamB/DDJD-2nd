@@ -28,9 +28,12 @@ public class UIController : MonoBehaviour
     public KeyCode leftWheelKey = KeyCode.Q;
     public KeyCode rightWheelKey = KeyCode.E;
     public KeyCode missionsKey = KeyCode.M;
+    public KeyCode activeElementKey = KeyCode.LeftAlt;
 
     public Sprite fireStoneSprite;
     public Sprite redDiamondSprite;
+
+    public GameObject currentItemTitle;
 
     private void Awake()
     {
@@ -46,6 +49,7 @@ public class UIController : MonoBehaviour
         _playerUI.leftSpellWheel.gameObject.SetActive(false);
         _playerUI.rightSpellWheel.gameObject.SetActive(false);
         _playerUI.missionsUI.SetActive(false);
+        _playerUI.activeElementWheel.SetActive(false);
 
         InventoryUI inventoryUI = _playerUI.inventoryUI;
         //inventoryUI.OnItemDrop += ;
@@ -67,7 +71,7 @@ public class UIController : MonoBehaviour
     {
         currentMenu = "inventory";
         _playerUI.inventoryUI.gameObject.SetActive(isOpening);
-        _playerUI.playingUI.SetActive(!isOpening);
+        _playerUI.playingUI.gameObject.SetActive(!isOpening);
 
         if (isOpening)
         {
@@ -80,14 +84,14 @@ public class UIController : MonoBehaviour
     {
         currentMenu = "menu";
         _playerUI.menuUI.SetActive(isOpening);
-        _playerUI.playingUI.SetActive(!isOpening);
+        _playerUI.playingUI.gameObject.SetActive(!isOpening);
     }
 
     public void OpenMissions(bool isOpening)
     {
         currentMenu = "missions";
         _playerUI.missionsUI.SetActive(isOpening);
-        _playerUI.playingUI.SetActive(!isOpening);
+        _playerUI.playingUI.gameObject.SetActive(!isOpening);
     }
 
     public void OpenLeftSpell(bool isOpening)
@@ -103,6 +107,14 @@ public class UIController : MonoBehaviour
         if (_playerUI.rightSpellWheel.gameObject.activeInHierarchy != isOpening)
         {
             _playerUI.rightSpellWheel.gameObject.SetActive(isOpening);
+        }
+    }
+
+    public void OpenActiveElement(bool isOpening)
+    {
+        if (_playerUI.activeElementWheel.activeInHierarchy != isOpening)
+        {
+            _playerUI.activeElementWheel.SetActive(isOpening);
         }
     }
 
@@ -127,6 +139,21 @@ public class UIController : MonoBehaviour
     }
 
     private void Update() { }
+
+    public void UpdateHealth(int currentHealth, int maxHealth)
+    {
+        _playerUI.playingUI.UpdateHealth(currentHealth, maxHealth);
+    }
+
+    public void UpdateMana(Element element, int currentMana, int maxMana)
+    {
+        _playerUI.playingUI.UpdateMana(element, currentMana, maxMana);
+    }
+
+    public void UpdateElements(Skill leftSkill, Skill rightSkill, Element element)
+    {
+        _playerUI.playingUI.UpdateElements(leftSkill, rightSkill, element);
+    }
 
     public void SelectSlotLeft(int slot)
     {

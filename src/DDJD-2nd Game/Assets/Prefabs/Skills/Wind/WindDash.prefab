@@ -140,11 +140,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 1322483586
-      Data2: 1313370423
-      Data3: 1938354326
-      Data4: 772550492
-    Path: event:/Attacks/Wind Abilities/Wind Dash
+      Data1: 1742516872
+      Data2: 1324610506
+      Data3: -1868929350
+      Data4: 1570893751
+    Path: event:/Movement/Dash
   Event: 
   PlayEvent: 1
   StopEvent: 0
@@ -152,7 +152,9 @@ MonoBehaviour:
   TriggerOnce: 0
   Preload: 0
   AllowNonRigidbodyDoppler: 0
-  Params: []
+  Params:
+  - Name: Parameter 1
+    Value: 3
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20

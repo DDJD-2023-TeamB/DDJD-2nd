@@ -54,7 +54,6 @@ public class Tornado : GroundProjectileComponent, NonCollidable
         _caughtObjects = new List<CaughtInTornado>();
         _tornadoVFX = GetComponentInChildren<VisualEffect>();
         _chargeComponent.OnChargeComplete += OnChargeComplete;
-        //StartCoroutine(SpawnTornado());
     }
 
     public void Start()
@@ -90,7 +89,6 @@ public class Tornado : GroundProjectileComponent, NonCollidable
         Vector3 newPosition = transform.position;
         newPosition.y = caster.transform.position.y + 0.2f;
         transform.position = newPosition;
-        //transform.rotation = _caster.transform.rotation;
     }
 
     private void OnChargeComplete()
@@ -139,16 +137,9 @@ public class Tornado : GroundProjectileComponent, NonCollidable
         );
     }
 
-    public override void DestroySpell() { }
-
-    private IEnumerator DestroyTornado()
+    public override void DestroySpell()
     {
-        float timeToDestroy = _stats.Range / _stats.Speed;
-        yield return new WaitForSeconds(timeToDestroy);
-        _soundEmitter.StopAndRelease("tornado");
-        _tornadoVFX.SetFloat("Duration", _lifetime + 2.0f);
-
-        yield return new WaitForSeconds(1.5f);
+        _tornadoVFX.SetFloat("Duration", _lifetime + 0.5f);
         _collider.enabled = false;
         for (int i = 0; i < _caughtObjects.Count; i++)
         {
@@ -159,6 +150,16 @@ public class Tornado : GroundProjectileComponent, NonCollidable
         }
 
         Destroy(gameObject, 2.0f);
+    }
+
+    private IEnumerator DestroyTornado()
+    {
+        float timeToDestroy = _stats.Range / _stats.Speed;
+        yield return new WaitForSeconds(timeToDestroy);
+        _soundEmitter.StopAndRelease("tornado");
+        _tornadoVFX.SetFloat("Duration", _lifetime + 2.0f);
+        yield return new WaitForSeconds(1.5f);
+        DestroySpell();
     }
 
     protected override void OnImpact(Collider other, float multiplier)

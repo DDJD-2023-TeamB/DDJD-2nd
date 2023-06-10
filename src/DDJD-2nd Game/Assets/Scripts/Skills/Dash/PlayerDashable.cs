@@ -14,6 +14,8 @@ public class PlayerDashable : Dashable
 
     private Player _player;
 
+    protected CharacterMovement _characterMovement;
+
     protected override void Awake()
     {
         base.Awake();
@@ -21,11 +23,12 @@ public class PlayerDashable : Dashable
         _fovController = _playerCamTransform.GetComponent<FovController>();
         _defaultFov = _fovController.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView;
         _player = GetComponent<Player>();
+        _characterMovement = GetComponent<CharacterMovement>();
     }
 
     protected void Start()
     {
-        _maxRegularSpeed = _player.MaxSpeed;
+        _maxRegularSpeed = _characterMovement.GetCurrentMaxSpeed();
         _maxSpeed = _maxRegularSpeed;
     }
 
@@ -87,5 +90,17 @@ public class PlayerDashable : Dashable
         _animator.SetBool("IsDashing", true);
         _animator.SetFloat("DashX", dashX);
         _animator.SetFloat("DashY", dashY);
+    }
+
+    protected override float GetRegularSpeed()
+    {
+        return _characterMovement.GetCurrentMaxSpeed();
+    }
+
+    public void UpdateMaxSpeed(float maxSpeed)
+    {
+        _maxRegularSpeed = maxSpeed;
+        if (!_isDashing)
+            _maxSpeed = maxSpeed;
     }
 }

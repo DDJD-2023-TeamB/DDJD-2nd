@@ -12,6 +12,7 @@ public abstract class SkillComponent : MonoBehaviour
     protected bool _isChargeAttack = false;
     protected ChargeComponent _chargeComponent;
     protected NoiseSource _noiseComponent;
+    protected CharacterStatus _characterStatus;
 
     protected SoundEmitter _soundEmitter;
 
@@ -31,15 +32,30 @@ public abstract class SkillComponent : MonoBehaviour
     private bool _damageCaster = false;
 
     protected float _elapsedTime = 0.0f;
+    protected float _lastTickTime = 0.0f;
+    protected bool active = true; // Used in skills where the game object is only destroyed after a certain delay
 
     protected virtual void Update()
     {
         _elapsedTime += Time.deltaTime;
+        if (_skillStats.CastType != CastType.Hold || !active)
+            return;
+        if (_elapsedTime - _lastTickTime >= _skillStats.TickRate)
+        {
+            _lastTickTime = _elapsedTime;
+            bool success = _characterStatus.ConsumeMana(_skill.Element, _skillStats.ManaCost);
+            if (!success)
+            {
+                DestroySpell();
+            }
+        }
     }
 
     public virtual void SetCaster(GameObject caster)
     {
         _caster = caster;
+        _chargeComponent?.SetCaster(_caster);
+        _characterStatus = _caster.GetComponent<CharacterStatus>();
     }
 
     private Dictionary<GameObject, float> _collidedObjects = new Dictionary<GameObject, float>();
@@ -58,6 +74,7 @@ public abstract class SkillComponent : MonoBehaviour
             _isChargeAttack = true;
             _chargeComponent.MaxChargeTime = _skillStats.MaxChargeTime;
             _chargeComponent.MinChargeTime = _skillStats.MinChargeTime;
+            _chargeComponent.SetManaCost(_skillStats.ManaCost);
         }
     }
 
@@ -204,5 +221,10 @@ public abstract class SkillComponent : MonoBehaviour
     public virtual float GetNoiseRadius()
     {
         return _skillStats.NoiseRadius;
+    }
+
+    public Skill Skill
+    {
+        get { return _skill; }
     }
 }

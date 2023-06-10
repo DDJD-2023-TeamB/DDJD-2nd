@@ -40,6 +40,10 @@ public class NotAimingState : MovableState
 
     public override void StateUpdate()
     {
+        if (_context.Input.IsChangingActiveElement)
+        {
+            _context.ChangeState(_context.Factory.ChangeElement(_superstate));
+        }
         base.StateUpdate();
         CheckDash();
     }

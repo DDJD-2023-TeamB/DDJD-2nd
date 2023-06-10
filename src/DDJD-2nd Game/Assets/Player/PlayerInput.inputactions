@@ -141,7 +141,7 @@
                 {
                     "name": "",
                     "id": "c3ec16e3-9405-40ed-8fd7-1b116cca21a5",
-                    "path": "<Keyboard>/leftShift",
+                    "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -267,6 +267,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "AbsorbMana",
+                    "type": "Button",
+                    "id": "f685dd20-e13e-444a-b7cb-466999df4b35",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeActiveElement",
+                    "type": "Button",
+                    "id": "18b9633a-a8d4-4cf3-855d-0a1462dc3577",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -346,6 +364,28 @@
                     "action": "MeleeAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e4e330f7-d4fb-4eb3-b0b6-0e5f2f26d651",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AbsorbMana",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bac6528a-8a38-4d1a-b6e5-6e2e4c564e37",
+                    "path": "<Keyboard>/leftAlt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeActiveElement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -412,6 +452,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Debug",
+            "id": "3394d25e-4d7a-4e47-96fb-eeba069a2640",
+            "actions": [
+                {
+                    "name": "PrintState",
+                    "type": "Button",
+                    "id": "a521f8fa-0a75-49dd-b76c-52e81e0eef9a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ad5769b9-c5e4-4f4c-80dd-3efdf14f098d",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrintState",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

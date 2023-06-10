@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{015e09d8-4943-402c-a628-5253a31a413c}">
+		<property name="name">
+			<value>Melee Type</value>
+		</property>
+		<relationship name="folder">
+			<destination>{de79e17d-ef84-4ec5-bc49-2e353b71570e}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{d1c35259-9866-4229-b3ee-5db679aa7ec1}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{d1c35259-9866-4229-b3ee-5db679aa7ec1}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Fire</value>
+			<value>Lightning</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

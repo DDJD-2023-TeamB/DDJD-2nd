@@ -12,9 +12,19 @@ public class PlayerStateFactory : StateFactory
         return new IdleState(_context, superState);
     }
 
+    public ChangeActiveElementState ChangeElement(GenericState superState)
+    {
+        return new ChangeActiveElementState(_context, superState);
+    }
+
     public MoveState Move(GenericState superState)
     {
         return new MoveState(_context, superState);
+    }
+
+    public RunState Run(GenericState superState)
+    {
+        return new RunState(_context, superState);
     }
 
     public PlayableState Playable()
@@ -76,5 +86,10 @@ public class PlayerStateFactory : StateFactory
     public InteractingState Interacting(GenericState superState)
     {
         return new InteractingState(_context, superState);
+    }
+
+    public AbsorbingState Absorbing(GenericState superState)
+    {
+        return new AbsorbingState(_context, superState);
     }
 }
