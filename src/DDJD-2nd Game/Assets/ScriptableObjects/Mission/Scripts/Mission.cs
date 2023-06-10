@@ -17,8 +17,24 @@ public enum MissionType
 }
 
 [CreateAssetMenu(fileName = "Mission", menuName = "Scriptable Objects/Mission System/Mission")]
-public class Mission2 : ScriptableObject
+public class Mission : ScriptableObject
 {
+    [SerializeField]
+    private string _title;
+
+    public string Title
+    {
+        get { return _title; }
+    }
+
+    [SerializeField]
+    private string _description;
+
+    public string Description
+    {
+        get { return _description; }
+    }
+
     [SerializeField]
     private MissionState _status = MissionState.Blocked;
 
@@ -68,9 +84,9 @@ public class Mission2 : ScriptableObject
     }
 
     [SerializeField]
-    private List<Mission2> _followingMissions = new List<Mission2>();
+    private List<Mission> _followingMissions = new List<Mission>();
 
-    public List<Mission2> FollowingMissions
+    public List<Mission> FollowingMissions
     {
         get { return _followingMissions; }
     }

@@ -11,13 +11,13 @@ public class Npc : Interactable
     private Animator _animator;
     private Dialogue _dialogue;
     private DialogueInfo _currentDialogueInfo;
-    private Queue<Mission2> _missions = new Queue<Mission2>();
-    public Queue<Mission2> Missions
+    private Queue<Mission> _missions = new Queue<Mission>();
+    public Queue<Mission> Missions
     {
         get { return _missions; }
     }
 
-    private Mission2 _currentMission;
+    private Mission _currentMission;
 
     protected override void Start()
     {
@@ -26,7 +26,8 @@ public class Npc : Interactable
         _currentDialogueInfo = _npc.DefaultDialogueInfo;
         _missions = _missionController.GetNpcMissions(_npc);
         _animator = GetComponent<Animator>();
-        if(_missions.Count != 0) _currentMission = _missions.Dequeue();
+        if (_missions.Count != 0)
+            _currentMission = _missions.Dequeue();
     }
 
     void Update() { }
@@ -48,7 +49,7 @@ public class Npc : Interactable
             }
             if (_currentMission.Status == MissionState.Available)
             {
-                if(_npc == _currentMission.InteractionBegin.Npc)
+                if (_npc == _currentMission.InteractionBegin.Npc)
                 {
                     _currentDialogueInfo = _currentMission.InteractionBegin.DialogueInfo;
                     _currentMission.Status = MissionState.Ongoing;
@@ -56,13 +57,15 @@ public class Npc : Interactable
             }
             else if (_currentMission.Status == MissionState.Completed)
             {
-                if(_npc == _currentMission.InteractionBegin.Npc) _currentDialogueInfo = _npc.DefaultDialogueInfo; 
+                if (_npc == _currentMission.InteractionBegin.Npc)
+                    _currentDialogueInfo = _npc.DefaultDialogueInfo;
                 //_currentDialogueInfo = _currentMission.InteractionEnd.DialogueInfo;
-                if(_missions.Count > 0)
+                if (_missions.Count > 0)
                 {
                     _currentMission = _missions.Dequeue();
                 }
-                else{
+                else
+                {
                     _currentMission = null;
                 }
             }

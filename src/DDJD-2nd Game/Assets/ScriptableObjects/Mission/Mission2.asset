@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c3120dc6799746bdb3c0626cadbfc38, type: 3}
+  m_Script: {fileID: 11500000, guid: e8c5000599e034b75b66b98e905ca14a, type: 3}
   m_Name: Mission2
   m_EditorClassIdentifier: 
+  _title: Mission 2
+  _description: Collect Mission
   _status: 0
   _type: 0
   _goals:
@@ -19,11 +21,7 @@ MonoBehaviour:
   _interactionBegin: {fileID: 11400000, guid: e240469b428494e6e80609c29c8446b4, type: 2}
   _interactionEnd: {fileID: 11400000, guid: 4db7fc23f1e1a4978b451e4721eb1fe3, type: 2}
   _reward:
-    _gold: 2
-    _items:
-    - item: {fileID: 11400000, guid: cd994385346d04be0a5ebd99428624f0, type: 2}
-      amount: 1
-      id: 
-  _followingMissions:
-  - {fileID: 11400000, guid: afa16beb773ef4a5d9dc590ddfe3b850, type: 2}
+    _gold: 15
+    _items: []
+  _followingMissions: []
   _area: 0
