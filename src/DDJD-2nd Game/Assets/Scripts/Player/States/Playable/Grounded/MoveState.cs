@@ -6,6 +6,7 @@ using UnityEngine.VFX;
 public class MoveState : GenericState
 {
     private Player _context;
+    private float _currentSpeed;
 
     public MoveState(StateContext context, GenericState superState)
         : base(context, superState)
@@ -39,10 +40,18 @@ public class MoveState : GenericState
             return;
         }
 
+        if (_context.Rigidbody.velocity.magnitude > _context.CharacterMovement.GetCurrentMaxSpeed())
+        {
+            float difference =
+                _context.Rigidbody.velocity.magnitude
+                - _context.CharacterMovement.GetCurrentMaxSpeed();
+            Decelerate(difference / 10.0f);
+        }
+
         Vector2 moveInput = _context.Input.MoveInput;
         if (moveInput == Vector2.zero)
         {
-            Decelerate();
+            Decelerate(1.0f);
         }
 
         if (moveInput != Vector2.zero)
@@ -51,11 +60,13 @@ public class MoveState : GenericState
         }
         _context.Animator.SetFloat(
             "ForwardSpeed",
-            Vector3.Dot(_context.Rigidbody.velocity, _context.transform.forward) / _context.MaxSpeed
+            Vector3.Dot(_context.Rigidbody.velocity, _context.transform.forward)
+                / _context.CharacterMovement.MaxSpeed
         );
         _context.Animator.SetFloat(
             "RightSpeed",
-            Vector3.Dot(_context.Rigidbody.velocity, _context.transform.right) / _context.MaxSpeed
+            Vector3.Dot(_context.Rigidbody.velocity, _context.transform.right)
+                / _context.CharacterMovement.MaxSpeed
         );
     }
 
@@ -73,20 +84,17 @@ public class MoveState : GenericState
         return false;
     }
 
-    private void Decelerate()
+    private void Decelerate(float multiplier)
     {
         Vector3 velocity = _context.Rigidbody.velocity;
-        if (velocity.magnitude > 0.1f)
-        {
-            _context.Rigidbody.AddForce(
-                -velocity.normalized * _context.Acceleration * Time.deltaTime,
-                ForceMode.Acceleration
-            );
-        }
-        else
-        {
-            velocity = Vector3.zero;
-        }
+        _context.Rigidbody.AddForce(
+            -velocity.normalized
+                * multiplier
+                * _context.CharacterMovement.Acceleration
+                * Time.deltaTime
+                * _context.AccelerationMultiplier,
+            ForceMode.Acceleration
+        );
     }
 
     private void Accelerate(Vector2 moveInput)
@@ -94,11 +102,11 @@ public class MoveState : GenericState
         Vector3 velocity = _context.Rigidbody.velocity;
         Vector3 moveDirection =
             _context.transform.forward * moveInput.y + _context.transform.right * moveInput.x;
-        if (velocity.magnitude < _context.MaxSpeed)
+        if (velocity.magnitude < _context.CharacterMovement.MaxSpeed)
         {
             _context.Rigidbody.AddForce(
                 moveDirection
-                    * _context.Acceleration
+                    * _context.CharacterMovement.Acceleration
                     * Time.deltaTime
                     * _context.AccelerationMultiplier,
                 ForceMode.Acceleration

@@ -44,20 +44,7 @@ public class Player : StateContext, Damageable
         get { return _objectSpawner; }
     }
 
-    private Dashable _dashComponent;
-    public Dashable DashComponent
-    {
-        get { return _dashComponent; }
-    }
-
     [Header("Movement")]
-    [SerializeField]
-    private float _maxSpeed = 5f;
-    public float MaxSpeed
-    {
-        get { return _maxSpeed; }
-    }
-
     [SerializeField]
     private float _jumpForce = 20f;
     public float JumpForce
@@ -98,6 +85,14 @@ public class Player : StateContext, Damageable
         get { return _aimComponent; }
     }
 
+    [SerializeField]
+    [Tooltip("The material used when the player lands")]
+    private PhysicMaterial _frictionlessMaterial;
+
+    private PhysicMaterial _defaultMaterial;
+
+    private Collider _collider;
+
     [Header("Abilities")]
     [SerializeField]
     private PlayerSkills _playerSkills;
@@ -126,8 +121,8 @@ public class Player : StateContext, Damageable
         get { return _RightHand; }
     }
 
-    private Dashable _dashable;
-    public Dashable Dashable
+    private PlayerDashable _dashable;
+    public PlayerDashable Dashable
     {
         get { return _dashable; }
     }
@@ -174,6 +169,7 @@ public class Player : StateContext, Damageable
     }
     private UIController _uiController;
     private ElementController _elementController;
+    private CharacterMovement _characterMovement;
 
     void Awake()
     {
@@ -184,16 +180,17 @@ public class Player : StateContext, Damageable
         _aimComponent = GetComponent<PlayerAimComponent>();
         _shooter = GetComponent<Shooter>();
         _objectSpawner = GetComponent<ObjectSpawner>();
-        _dashComponent = GetComponent<Dashable>();
         _playerSkills.Player = this;
         _meleeCombat = GetComponent<MeleeCombat>();
-        _dashable = GetComponent<Dashable>();
+        _dashable = GetComponent<PlayerDashable>();
         _cameraController = GetComponent<CameraController>();
         _status = GetComponent<PlayerStatus>();
         _soundEmitter = GetComponent<SoundEmitter>();
         _characterStatus = GetComponent<CharacterStatus>();
         _uiController = GetComponent<UIController>();
         _elementController = GetComponent<ElementController>();
+        _characterMovement = GetComponent<CharacterMovement>();
+        _collider = GetComponent<Collider>();
         ChangeState(_factory.Playable());
     }
 
@@ -202,6 +199,8 @@ public class Player : StateContext, Damageable
         UpdateElement(null);
         _sfxJumpStateId = _soundEmitter.GetParameterId("jump", "Jump State");
         _sfxJumpIntensityId = _soundEmitter.GetParameterId("jump", "Jump Intensity");
+        _inputReceiver.OnPrintState += () => _state?.PrintState();
+        _defaultMaterial = _collider.material;
     }
 
     void Update()
@@ -258,5 +257,25 @@ public class Player : StateContext, Damageable
     public ElementController ElementController
     {
         get { return _elementController; }
+    }
+
+    public CharacterMovement CharacterMovement
+    {
+        get { return _characterMovement; }
+    }
+
+    public PhysicMaterial FrictionlessMaterial
+    {
+        get { return _frictionlessMaterial; }
+    }
+
+    public PhysicMaterial DefaultMaterial
+    {
+        get { return _defaultMaterial; }
+    }
+
+    public Collider Collider
+    {
+        get { return _collider; }
     }
 }

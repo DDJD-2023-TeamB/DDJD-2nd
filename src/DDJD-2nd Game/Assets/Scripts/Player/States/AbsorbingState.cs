@@ -21,7 +21,6 @@ public class AbsorbingState : GenericState
     {
         base.Exit();
         _context.Animator.SetBool("IsAbsorbing", false);
-        Debug.Log("AbsorbingState Exit " + _context.ElementController.SourceToAbsorb);
         _context.ElementController.StopAbsorb();
         _context.CameraController.ResetCameraRotation();
     }

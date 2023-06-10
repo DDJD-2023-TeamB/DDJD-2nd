@@ -26,10 +26,18 @@ public class CameraController : MonoBehaviour
 
     [SerializeField]
     private float _minAngle = -45.0f;
+
+    [SerializeField]
+    private float _runFov = 60.0f;
+
+    [SerializeField]
+    private float _walkFov = 50.0f;
     public CinemachineVirtualCamera ActiveCamera
     {
         get { return _activeCamera; }
     }
+
+    private FovController _fovController;
 
     protected void Awake()
     {
@@ -40,6 +48,16 @@ public class CameraController : MonoBehaviour
     protected void Start()
     {
         ResetCameraRotation();
+    }
+
+    public void ChangeFov(float value, float time)
+    {
+        _fovController.ChangeFov(value, 0.1f);
+    }
+
+    public void ChangeFov(float value)
+    {
+        _fovController.ChangeFovInstant(value);
     }
 
     public void ShakeCamera(float intensity, float time)
@@ -68,6 +86,7 @@ public class CameraController : MonoBehaviour
             _aimCamera.Priority = 0;
             _activeCamera = _regularCamera;
         }
+        _fovController = _activeCamera.GetComponent<FovController>();
     }
 
     public void RotateCamera(Vector3 lookInput, bool moveRigidbody)
@@ -128,5 +147,15 @@ public class CameraController : MonoBehaviour
     public CinemachineVirtualCamera AimCamera
     {
         get { return _aimCamera; }
+    }
+
+    public float RunFov
+    {
+        get { return _runFov; }
+    }
+
+    public float WalkFov
+    {
+        get { return _walkFov; }
     }
 }

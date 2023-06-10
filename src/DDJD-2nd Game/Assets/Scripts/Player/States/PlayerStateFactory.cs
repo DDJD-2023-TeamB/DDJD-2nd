@@ -22,6 +22,11 @@ public class PlayerStateFactory : StateFactory
         return new MoveState(_context, superState);
     }
 
+    public RunState Run(GenericState superState)
+    {
+        return new RunState(_context, superState);
+    }
+
     public PlayableState Playable()
     {
         return new PlayableState(_context);
