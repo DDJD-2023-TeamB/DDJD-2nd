@@ -1285,6 +1285,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 620167788567258342, guid: b648f4c3bc0d62a44a73b8bef2f93291,
         type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 620167788567258342, guid: b648f4c3bc0d62a44a73b8bef2f93291,
+        type: 3}
       propertyPath: _defaultDialogueInfo._noun
       value: NPC
       objectReference: {fileID: 0}
@@ -1307,6 +1312,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053857597966152475, guid: b648f4c3bc0d62a44a73b8bef2f93291,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6116985399485881650, guid: b648f4c3bc0d62a44a73b8bef2f93291,
         type: 3}
@@ -3527,48 +3537,12 @@ PrefabInstance:
     - {fileID: 2837628776818809517, guid: 3650faba4170b41e4b0d27bce48dac72, type: 3}
     - {fileID: 9195323793741264847, guid: 3650faba4170b41e4b0d27bce48dac72, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3650faba4170b41e4b0d27bce48dac72, type: 3}
---- !u!1 &1389715274 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 713695034757746217, guid: b648f4c3bc0d62a44a73b8bef2f93291,
-    type: 3}
-  m_PrefabInstance: {fileID: 687895204}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1389715279 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6116985399485881650, guid: b648f4c3bc0d62a44a73b8bef2f93291,
     type: 3}
   m_PrefabInstance: {fileID: 687895204}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1389715280
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1389715274}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 5dd124a6b56b1b0409cf1b5f74782a51, type: 3}
-  m_Controller: {fileID: 9100000, guid: e03cbac75ee731345be3d3c6e7774dc3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-    'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
-    'mixamorig:LeftHandPinky2'\n\tTransform 'mixamorig:RightHandRing2'\n\tTransform
-    'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform
-    'mixamorig:RightArm'\n\tand more ...\n\tFrom animation clip 'mixamo.com'\n\tFrom
-    animation clip 'mixamo.com'\n\tFrom animation clip 'mixamo.com'\n\tFrom animation
-    clip 'mixamo.com'\n\tFrom animation clip 'mixamo.com'\n\tFrom animation clip
-    'mixamo.com'\n\tFrom animation clip 'mixamo.com'"
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1480827985
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3582,10 +3556,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 15f81436f65c9415ea4bde98e57c0e27,
         type: 2}
+    - target: {fileID: 620167788567258342, guid: b648f4c3bc0d62a44a73b8bef2f93291,
+        type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 713695034757746217, guid: b648f4c3bc0d62a44a73b8bef2f93291,
         type: 3}
       propertyPath: m_Name
       value: NPC (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053857597966152475, guid: b648f4c3bc0d62a44a73b8bef2f93291,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6116985399485881650, guid: b648f4c3bc0d62a44a73b8bef2f93291,
         type: 3}

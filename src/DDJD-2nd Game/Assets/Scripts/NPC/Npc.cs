@@ -8,7 +8,7 @@ public class Npc : Interactable
 {
     [SerializeField]
     private NpcObject _npc;
-
+    private Animator _animator;
     private Dialogue _dialogue;
     private DialogueInfo _currentDialogueInfo;
     private Queue<Mission2> _missions = new Queue<Mission2>();
@@ -25,6 +25,7 @@ public class Npc : Interactable
         _dialogue = _player.Dialogue;
         _currentDialogueInfo = _npc.DefaultDialogueInfo;
         _missions = _missionController.GetNpcMissions(_npc);
+        _animator = GetComponent<Animator>();
         if(_missions.Count != 0) _currentMission = _missions.Dequeue();
     }
 
@@ -67,6 +68,8 @@ public class Npc : Interactable
             }
         }
         _dialogue.StartDialogue(_currentDialogueInfo);
+        _animator.SetInteger("Talking Index", Random.Range(0, 4));
+        _animator.SetTrigger("Talking");
     }
 
     public void ContinueInteraction()
@@ -76,6 +79,8 @@ public class Npc : Interactable
         else
         {
             _dialogue.EndDialogue();
+            _animator.SetInteger("Idle Index", Random.Range(0, 5));
+            _animator.SetTrigger("Idle");
             base.EndInteract();
         }
     }
@@ -83,6 +88,5 @@ public class Npc : Interactable
     public override void EndInteract()
     {
         base.EndInteract();
-        //TODO:: Add animation to the npc
     }
 }
