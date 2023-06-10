@@ -299,6 +299,7 @@ MonoBehaviour:
   _events:
     _keys:
     - melee
+    - meleeElement
     _values:
     - _playOnStart: 0
       _stopOnDestroy: 0
@@ -309,7 +310,17 @@ MonoBehaviour:
           Data2: 1337895590
           Data3: -138653824
           Data4: -1723026112
-        Path: event:/Melee Attacks
+        Path: event:/Attacks/Melee
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: -1107946826
+          Data2: 1278192834
+          Data3: 1011146412
+          Data4: 577834099
+        Path: event:/Attacks/Melee overlay
 --- !u!1 &956762218124547194
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,6 +1066,7 @@ MonoBehaviour:
   _events:
     _keys:
     - melee
+    - meleeElement
     _values:
     - _playOnStart: 0
       _stopOnDestroy: 0
@@ -1065,7 +1077,17 @@ MonoBehaviour:
           Data2: 1337895590
           Data3: -138653824
           Data4: -1723026112
-        Path: event:/Melee Attacks
+        Path: event:/Attacks/Melee
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: -1107946826
+          Data2: 1278192834
+          Data3: 1011146412
+          Data4: 577834099
+        Path: event:/Attacks/Melee overlay
 --- !u!1 &2944585961000116056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1675,7 +1697,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4492101057451422959}
-  m_LocalRotation: {x: 0.058846235, y: 0.012066573, z: -0.00071135716, w: 0.9981939}
+  m_LocalRotation: {x: 0.05883757, y: 0.020951057, z: -0.0012351215, w: 0.99804693}
   m_LocalPosition: {x: -0.5397235, y: 2.3344133, z: -1.468136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2130,6 +2152,7 @@ Transform:
   - {fileID: 1383292200363455867}
   - {fileID: 8348653656342378348}
   - {fileID: 79076952650345937}
+  - {fileID: 8228588811459176773}
   m_Father: {fileID: 5015672085775979565}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2208,6 +2231,7 @@ MonoBehaviour:
   _events:
     _keys:
     - melee
+    - meleeElement
     _values:
     - _playOnStart: 0
       _stopOnDestroy: 0
@@ -2218,7 +2242,17 @@ MonoBehaviour:
           Data2: 1337895590
           Data3: -138653824
           Data4: -1723026112
-        Path: event:/Melee Attacks
+        Path: event:/Attacks/Melee
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: -1107946826
+          Data2: 1278192834
+          Data3: 1011146412
+          Data4: 577834099
+        Path: event:/Attacks/Melee overlay
 --- !u!1 &5038380692370057851
 GameObject:
   m_ObjectHideFlags: 0
@@ -2658,6 +2692,7 @@ MonoBehaviour:
   _events:
     _keys:
     - melee
+    - meleeElement
     _values:
     - _playOnStart: 0
       _stopOnDestroy: 0
@@ -2668,7 +2703,17 @@ MonoBehaviour:
           Data2: 1337895590
           Data3: -138653824
           Data4: -1723026112
-        Path: event:/Melee Attacks
+        Path: event:/Attacks/Melee
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: -1107946826
+          Data2: 1278192834
+          Data3: 1011146412
+          Data4: 577834099
+        Path: event:/Attacks/Melee overlay
 --- !u!1 &5903967639473050877
 GameObject:
   m_ObjectHideFlags: 0
@@ -3357,6 +3402,51 @@ Transform:
   m_Father: {fileID: 7026416567958636142}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7581090568947958763
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8228588811459176773}
+  - component: {fileID: 1710605454393682399}
+  m_Layer: 9
+  m_Name: RightHandAbsorb
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8228588811459176773
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7581090568947958763}
+  m_LocalRotation: {x: 0.00000008137429, y: -0.00000015446862, z: -1, w: 0.00000021209962}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9204738695688527437}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1710605454393682399
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7581090568947958763}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7694690271000812756
 GameObject:
   m_ObjectHideFlags: 0
@@ -3383,6 +3473,7 @@ GameObject:
   - component: {fileID: 5597915682881764452}
   - component: {fileID: 4346819917323664300}
   - component: {fileID: 7961308323444105709}
+  - component: {fileID: 1218520422210949770}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -3450,11 +3541,6 @@ MonoBehaviour:
   _maxSpeed: 7.5
   _jumpForce: 200
   _acceleration: 2
-  _cameraTarget: {fileID: 4492101058934089455}
-  _cameraRotationSpeed: 20
-  _minAngle: 30
-  maxAngle: 330
-  _aimCamera: {fileID: 4492101057451422945}
   _playerSkills: {fileID: 11400000, guid: 4416c54b33ddce64baf418917cb99d12, type: 2}
   _meleeCombat: {fileID: 0}
   _LeftHand: {fileID: 6737474002199511682}
@@ -3690,6 +3776,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _regularCamera: {fileID: 4492101058340307231}
   _aimCamera: {fileID: 4492101057451422945}
+  _cameraTarget: {fileID: 4492101058934089452}
+  _cameraRotationSpeed: 40
+  _maxAngle: 80
+  _minAngle: -25
 --- !u!114 &8062649751035626759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3704,6 +3794,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 500
   _maxHealth: 500
+  _useMana: 1
+  _mana: 100
+  _maxMana: 100
+  _elementMana:
+    _keys:
+    - {fileID: 11400000, guid: d9da0c3870700374389d976c0d2388a7, type: 2}
+    - {fileID: 11400000, guid: 48039012ea82f1b4caa0ae6b3fd06a8d, type: 2}
+    - {fileID: 11400000, guid: 395138bc558d7cf449eb38e7c3e9ab91, type: 2}
+    - {fileID: 11400000, guid: 4f1fc44ed51339b4195c6001521bf9e3, type: 2}
+    _values: 64000000640000006400000064000000
   _cameraShakeIntensity: 20
 --- !u!114 &5597915682881764452
 MonoBehaviour:
@@ -3775,6 +3875,23 @@ MonoBehaviour:
   missionsKey: 109
   fireStoneSprite: {fileID: 0}
   redDiamondSprite: {fileID: 0}
+--- !u!114 &1218520422210949770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694690271000812756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6f8bc5673b3f3c409f4055098f5d4b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _absorbTime: 0.1
+  _absorbAmount: 5
+  _absorbRange: 3
+  _offset: 2
+  _absorbTarget: {fileID: 7581090568947958763}
 --- !u!1 &8198835224221356302
 GameObject:
   m_ObjectHideFlags: 0

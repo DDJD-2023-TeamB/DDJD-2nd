@@ -35,6 +35,7 @@ public abstract class Dashable : MonoBehaviour
         get => _isDashing;
     }
     protected DashStats _currentDashStats;
+    protected CharacterStatus _status;
 
     private DashComponent _lastDashSkill;
 
@@ -43,17 +44,21 @@ public abstract class Dashable : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
         _maxSpeed = _maxRegularSpeed;
+        _status = GetComponent<CharacterStatus>();
     }
 
     protected void Update()
     {
+        _timeSinceLastDash += Time.deltaTime;
+        if (!_isDashing)
+            return;
+
         Vector3 flatVel = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
         if (flatVel.magnitude > _maxSpeed)
         {
             Vector3 limitedVel = flatVel.normalized * _maxSpeed;
             _rigidbody.velocity = new Vector3(limitedVel.x, _rigidbody.velocity.y, limitedVel.z);
         }
-        _timeSinceLastDash += Time.deltaTime;
     }
 
     public virtual void DashWithSkill(DashSkill dashSkill)

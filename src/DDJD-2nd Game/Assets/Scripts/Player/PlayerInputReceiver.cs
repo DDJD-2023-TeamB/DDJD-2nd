@@ -79,6 +79,12 @@ public class PlayerInputReceiver : MonoBehaviour
         get { return _isChangingRightSpell; }
     }
 
+    private bool _isChangingActiveElement;
+    public bool IsChangingActiveElement
+    {
+        get { return _isChangingActiveElement; }
+    }
+
     private bool _isMeleeAttacking;
     public bool IsMeleeAttacking
     {
@@ -95,6 +101,11 @@ public class PlayerInputReceiver : MonoBehaviour
     public bool IsContinueReading
     {
         get { return _isContinueReading; }
+    }
+    private bool _isAbsorbing;
+    public bool IsAbsorbing
+    {
+        get { return _isAbsorbing; }
     }
 
     //Callbacks
@@ -137,7 +148,7 @@ public class PlayerInputReceiver : MonoBehaviour
 
         _playerInput.PlayerMovement.Dash.performed += ctx => _isDashing = true;
         _playerInput.PlayerMovement.Dash.canceled += ctx => _isDashing = false;
-        
+
         // CLicka no F e entra no estado isInteracting
         _playerInput.PlayerMovement.Interact.performed += ctx => _isInterating = true;
         _playerInput.PlayerMovement.Interact.canceled += ctx => _isInterating = false;
@@ -180,6 +191,11 @@ public class PlayerInputReceiver : MonoBehaviour
 
         _playerInput.Combat.ChangeRightSpell.performed += ctx => _isChangingRightSpell = true;
         _playerInput.Combat.ChangeRightSpell.canceled += ctx => _isChangingRightSpell = false;
+
+        _playerInput.Combat.AbsorbMana.performed += ctx => _isAbsorbing = true;
+        _playerInput.Combat.AbsorbMana.canceled += ctx => _isAbsorbing = false;
+        _playerInput.Combat.ChangeActiveElement.performed += ctx => _isChangingActiveElement = true;
+        _playerInput.Combat.ChangeActiveElement.canceled += ctx => _isChangingActiveElement = false;
 
         _playerInput.Combat.MeleeAttack.performed += ctx =>
         {

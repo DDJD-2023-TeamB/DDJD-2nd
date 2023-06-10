@@ -10,7 +10,7 @@ public class Player : StateContext, Damageable
     public ItemsInventoryObject Inventory
     {
         get { return _inventory; }
-        set { _inventory = value;}
+        set { _inventory = value; }
     }
 
     private PlayerStateFactory _factory;
@@ -78,42 +78,26 @@ public class Player : StateContext, Damageable
         get { return _acceleration; }
     }
 
-    [Header("Camera movement")]
     [SerializeField]
-    private Transform _cameraTarget;
-    public Transform CameraTarget
+    private float _maxAirSpeed = 4f;
+    public float MaxAirSpeed
     {
-        get { return _cameraTarget; }
+        get { return _maxAirSpeed; }
     }
 
     [SerializeField]
-    private float _cameraRotationSpeed = 20.0f;
-    public float CameraRotationSpeed
+    private float _airAcceleration = 0.8f;
+    public float AirAcceleration
     {
-        get { return _cameraRotationSpeed; }
+        get { return _airAcceleration; }
     }
 
     [SerializeField]
-    private float _minAngle = 30f;
-    public float MinAngle
+    private int _accelerationMultiplier = 1000;
+    public int AccelerationMultiplier
     {
-        get { return _minAngle; }
+        get { return _accelerationMultiplier; }
     }
-
-    [SerializeField]
-    private float maxAngle = 330f;
-    public float MaxAngle
-    {
-        get { return maxAngle; }
-    }
-
-    [SerializeField]
-    private CinemachineVirtualCamera _aimCamera;
-    public CinemachineVirtualCamera AimCamera
-    {
-        get { return _aimCamera; }
-    }
-
     private AimComponent _aimComponent;
     public AimComponent AimComponent
     {
@@ -194,9 +178,16 @@ public class Player : StateContext, Damageable
     {
         get { return _sfxJumpIntensityId; }
     }
+    private CharacterStatus _characterStatus;
+    public CharacterStatus CharacterStatus
+    {
+        get { return _characterStatus; }
+    }
     private UIController _uiController;
+
     [SerializeField]
     private Dialogue _dialogue; //TODO:: Get from UI after UI PR merges
+    private ElementController _elementController;
 
     void Awake()
     {
@@ -214,13 +205,15 @@ public class Player : StateContext, Damageable
         _cameraController = GetComponent<CameraController>();
         _status = GetComponent<PlayerStatus>();
         _soundEmitter = GetComponent<SoundEmitter>();
+        _characterStatus = GetComponent<CharacterStatus>();
         _uiController = GetComponent<UIController>();
+        _elementController = GetComponent<ElementController>();
         ChangeState(_factory.Playable());
     }
 
     void Start()
     {
-        UpdateElement();
+        UpdateElement(null);
         _sfxJumpStateId = _soundEmitter.GetParameterId("jump", "Jump State");
         _sfxJumpIntensityId = _soundEmitter.GetParameterId("jump", "Jump Intensity");
     }
@@ -230,9 +223,18 @@ public class Player : StateContext, Damageable
         _state.Update();
     }
 
-    void UpdateElement()
+    public void UpdateElement(Element element)
     {
+        if (element != null)
+        {
+            _playerSkills.CurrentElement = element;
+        }
         _airMovement = _playerSkills.CurrentElement?.AirMovementSkill?.Initialize(gameObject);
+        _uiController.UpdateElements(
+            _playerSkills.LeftSkill,
+            _playerSkills.RightSkill,
+            _playerSkills.CurrentElement
+        );
     }
 
     public void TakeDamage(
@@ -270,5 +272,15 @@ public class Player : StateContext, Damageable
     {
         get { return _interactedObject; }
         set { _interactedObject = value; }
+    }
+
+    public PlayerStatus Status
+    {
+        get { return _status; }
+    }
+
+    public ElementController ElementController
+    {
+        get { return _elementController; }
     }
 }

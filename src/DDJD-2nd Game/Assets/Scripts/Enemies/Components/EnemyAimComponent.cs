@@ -90,7 +90,6 @@ public class EnemyAimComponent : MonoBehaviour, AimComponent
 
     public bool GetAimRaycastHit(out RaycastHit hit)
     {
-        // TODO Check if this is correct
         return Physics.Raycast(
             _enemy.Player.transform.position,
             _enemy.Player.transform.forward,
