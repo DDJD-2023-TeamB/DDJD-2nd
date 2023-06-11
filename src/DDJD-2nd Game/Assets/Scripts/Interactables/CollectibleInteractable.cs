@@ -9,10 +9,8 @@ public class CollectibleInteractable : Interactable
 
     public override void Interact()
     {
-        GameObject
-            .FindGameObjectWithTag("Player")
-            .GetComponent<Player>()
-            .Inventory.AddItem(_item, 1);
+        _player.Inventory.AddItem(_item, 1);
         Destroy(gameObject);
+        _missionController.CheckIfItemCollectedIsMyGoal(_item);
     }
 }

@@ -13,6 +13,13 @@ public class ItemsInventoryObject : ScriptableObject
 {
     public List<ItemStack> Container = new List<ItemStack>();
 
+    private int _gold;
+
+    public int Gold
+    {
+        get { return _gold; }
+    }
+
     public void AddItem(CollectibleObject item, int amount)
     {
         ItemStack slot = Container.Find(x => x.item == item);
@@ -37,6 +44,26 @@ public class ItemsInventoryObject : ScriptableObject
         {
             Container.Remove(slot);
         }
+    }
+
+    public void AddItem(ItemStack itemStack)
+    {
+        Debug.Log(itemStack);
+        ItemStack slot = Container.Find(x => x.item == itemStack.item);
+
+        if (slot != null)
+        {
+            slot.AddAmount(itemStack.amount);
+        }
+        else
+        {
+            Container.Add(itemStack);
+        }
+    }
+
+    public void AddGold(int gold)
+    {
+        _gold += gold;
     }
 }
 

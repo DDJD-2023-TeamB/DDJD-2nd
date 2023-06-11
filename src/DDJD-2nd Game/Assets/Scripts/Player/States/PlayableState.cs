@@ -48,11 +48,10 @@ public class PlayableState : GenericState
 
     private void CheckRange()
     {
-        // Se clickou no F e se está perto de algum interable
         if (
             _context.Input.IsInteracting
             && !(_substate is InteractingState)
-            && _context._interactedObject != null
+            && _context.InteractedObject != null
         )
         {
             ChangeSubState(_context.Factory.Interacting(this));
@@ -65,7 +64,11 @@ public class PlayableState : GenericState
         {
             ChangeSubState(_context.Factory.Aiming(this));
         }
-        else if (!_context.Input.IsAiming && !(_substate is NotAimingState))
+        else if (
+            !_context.Input.IsAiming
+            && !(_substate is NotAimingState)
+            && _context.InteractedObject == null
+        )
         {
             ChangeSubState(_context.Factory.NotAiming(this));
         }

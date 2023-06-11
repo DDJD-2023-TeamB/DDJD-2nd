@@ -43,13 +43,14 @@ public class UIController : MonoBehaviour
     private void Start()
     {
         _playerUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
-
+        Debug.Log("UI = " + _playerUI);
         _playerUI.inventoryUI.gameObject.SetActive(false);
         _playerUI.menuUI.SetActive(false);
         _playerUI.leftSpellWheel.gameObject.SetActive(false);
         _playerUI.rightSpellWheel.gameObject.SetActive(false);
         _playerUI.missionsUI.SetActive(false);
         _playerUI.activeElementWheel.SetActive(false);
+        _playerUI.OptionsUI.SetUIController(this);
 
         InventoryUI inventoryUI = _playerUI.inventoryUI;
         inventoryUI.OnItemSkillLeftDrop += ChangeLeftWheelItem;
@@ -81,6 +82,13 @@ public class UIController : MonoBehaviour
         currentMenu = "menu";
         _playerUI.menuUI.SetActive(isOpening);
         _playerUI.playingUI.gameObject.SetActive(!isOpening);
+    }
+
+    public void OpenOptions(bool isOpening)
+    {
+        currentMenu = "options";
+        _playerUI.OptionsUI.gameObject.SetActive(isOpening);
+        _playerUI.menuUI.SetActive(!isOpening);
     }
 
     public void OpenMissions(bool isOpening)
@@ -231,5 +239,10 @@ public class UIController : MonoBehaviour
     public Player Player
     {
         get { return _player; }
+    }
+
+    public PlayerUI PlayerUI
+    {
+        get { return _playerUI; }
     }
 }
