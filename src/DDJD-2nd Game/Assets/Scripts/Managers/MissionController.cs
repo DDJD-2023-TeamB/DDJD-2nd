@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-1)]
 public class MissionController : MonoBehaviour
 {
     public static MissionController Instance;
     private List<Mission2> _unblockedMissions = new List<Mission2>();
+    private List<Mission> _unblockedMissions = new List<Mission>();
+
+    public List<Mission> UnblockedMissions
+    {
+        get { return _unblockedMissions; }
+    }
 
     [SerializeField]
     private GameState _gameState;
@@ -14,10 +21,10 @@ public class MissionController : MonoBehaviour
 
     void Start()
     {
-        ActivateMissions();
         _player = GetComponent<Player>();
         _unblockedMissions = _gameState.UnblockedMissions;
         Instance = this;
+        ActivateMissions();
     }
 
     private void ActivateMissions()
@@ -33,7 +40,7 @@ public class MissionController : MonoBehaviour
 
     public void CheckIfNpcIsMyGoal(NpcObject npc)
     {
-        List<Mission2> missions = new List<Mission2>(_unblockedMissions);
+        List<Mission> missions = new List<Mission>(_unblockedMissions);
 
         foreach (var mission in missions)
         {
@@ -60,7 +67,7 @@ public class MissionController : MonoBehaviour
 
     public void CheckIfItemCollectedIsMyGoal(CollectibleObject collectible)
     {
-        List<Mission2> missions = new List<Mission2>(_unblockedMissions);
+        List<Mission> missions = new List<Mission>(_unblockedMissions);
 
         foreach (var mission in missions)
         {
@@ -85,7 +92,7 @@ public class MissionController : MonoBehaviour
         }
     }
 
-    public void CheckIfAllGoalsAreCompleted(Mission2 mission)
+    public void CheckIfAllGoalsAreCompleted(Mission mission)
     {
         bool allGoalsCompleted = false;
         foreach (var goal in mission.Goals)
@@ -106,7 +113,7 @@ public class MissionController : MonoBehaviour
         }
     }
 
-    private void HandleMissionComplete(Mission2 mission)
+    private void HandleMissionComplete(Mission mission)
     {
         mission.Status = MissionState.Completed;
         GiveReward(mission);
@@ -114,7 +121,7 @@ public class MissionController : MonoBehaviour
         UnblockFollowingMissions(mission);
     }
 
-    private void UnblockFollowingMissions(Mission2 mission)
+    private void UnblockFollowingMissions(Mission mission)
     {
         foreach (var followingMissions in mission.FollowingMissions)
         {
@@ -123,7 +130,7 @@ public class MissionController : MonoBehaviour
         }
     }
 
-    private void GiveReward(Mission2 mission)
+    private void GiveReward(Mission mission)
     {
         foreach (var item in mission.Reward.Items)
         {
@@ -133,9 +140,9 @@ public class MissionController : MonoBehaviour
         //_player.Inventory.AddGold(mission.Reward.Gold);
     }
 
-    public Queue<Mission2> GetNpcMissions(NpcObject npc)
+    public Queue<Mission> GetNpcMissions(NpcObject npc)
     {
-        Queue<Mission2> missions = new Queue<Mission2>();
+        Queue<Mission> missions = new Queue<Mission>();
 
         foreach (var mission in _unblockedMissions)
         {
@@ -183,5 +190,18 @@ public class MissionController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public List<Mission> GetAvailableAndOngoingMissions()
+    {
+        List<Mission> availableMissions = new List<Mission>();
+
+        foreach (var mission in _unblockedMissions)
+        {
+            if (mission.Status == MissionState.Available || mission.Status == MissionState.Ongoing)
+                availableMissions.Add(mission);
+        }
+
+        return availableMissions;
     }
 }

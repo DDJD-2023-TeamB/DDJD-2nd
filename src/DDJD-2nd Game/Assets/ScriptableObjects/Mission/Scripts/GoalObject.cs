@@ -15,6 +15,11 @@ public abstract class GoalObject : ScriptableObject
     [SerializeField]
     private string _description;
 
+    public string Description
+    {
+        get { return _description; }
+    }
+
     //Hint
     [SerializeField]
     private Location _location;
@@ -37,5 +42,10 @@ public abstract class GoalObject : ScriptableObject
     public string Description
     {
         get { return _description; }
+    }
+
+    public bool Completed
+    {
+        get { return _completed; }
     }
 }

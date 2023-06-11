@@ -14,9 +14,9 @@ public enum MapAreaType
 public class GameState : ScriptableObject
 {
     [SerializeField]
-    private List<Mission2> _unblockedMissions = new List<Mission2>();
+    private List<Mission> _unblockedMissions = new List<Mission>();
 
-    public List<Mission2> UnblockedMissions
+    public List<Mission> UnblockedMissions
     {
         get { return _unblockedMissions; }
         set { _unblockedMissions = value; }

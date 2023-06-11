@@ -107,7 +107,7 @@ public class PlayerAimComponent : MonoBehaviour, AimComponent
         }
 
         Vector3 direction = position - origin;
-        return direction;
+        return direction.normalized;
     }
 
     public Quaternion GetAimRotation()
