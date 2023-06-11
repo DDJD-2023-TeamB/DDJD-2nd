@@ -50,6 +50,7 @@ public class UIController : MonoBehaviour
         _playerUI.rightSpellWheel.gameObject.SetActive(false);
         _playerUI.missionsUI.SetActive(false);
         _playerUI.activeElementWheel.SetActive(false);
+        _playerUI.OptionsUI.SetUIController(this);
 
         InventoryUI inventoryUI = _playerUI.inventoryUI;
         //inventoryUI.OnItemDrop += ;
@@ -90,10 +91,9 @@ public class UIController : MonoBehaviour
     public void OpenOptions(bool isOpening)
     {
         currentMenu = "options";
-        _playerUI.optionsUI.gameObject.SetActive(isOpening);
+        _playerUI.OptionsUI.gameObject.SetActive(isOpening);
         _playerUI.menuUI.SetActive(!isOpening);
     }
-
 
     public void OpenMissions(bool isOpening)
     {

@@ -610,13 +610,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryUI: {fileID: 3528289619942864747}
   menuUI: {fileID: 4921325610878591692}
-  optionsUI: {fileID: 2545849278619797761}
   missionsUI: {fileID: 3287625157040611022}
   activeElementWheel: {fileID: 57460802694432839}
   leftSpellWheel: {fileID: 6730172186552915656}
   rightSpellWheel: {fileID: 3094939608241557405}
+  _optionsUI: {fileID: 7925903127279117112}
   playingUI: {fileID: 9191066512762147877}
-  playerObject: {fileID: 0}
 --- !u!1 &689057219014479300
 GameObject:
   m_ObjectHideFlags: 0
@@ -2284,7 +2283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d56434bf3cd78443af3526d76760b93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiController: {fileID: 568079139487936959}
+  _uiController: {fileID: 0}
   mouseSensitivityScrollBarObject: {fileID: 3198164176624542905}
 --- !u!1 &2603824974437873996
 GameObject:

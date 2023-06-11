@@ -6,9 +6,7 @@ public class PlayerUI : MonoBehaviour
     public InventoryUI inventoryUI;
 
     [SerializeField]
-    public GameObject
-        menuUI,
-        optionsUI,
+    public GameObject menuUI,
         missionsUI,
         activeElementWheel;
 
@@ -17,8 +15,28 @@ public class PlayerUI : MonoBehaviour
         rightSpellWheel;
 
     [SerializeField]
-    public GameUI playingUI;
+    private OptionsController _optionsUI;
 
     [SerializeField]
-    public GameObject playerObject;
+    public GameUI playingUI;
+
+    private Player _player;
+
+    public Player Player
+    {
+        get
+        {
+            if (_player == null)
+            {
+                //FInd by tag
+                _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            }
+            return _player;
+        }
+    }
+
+    public OptionsController OptionsUI
+    {
+        get { return _optionsUI; }
+    }
 }

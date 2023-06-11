@@ -8,23 +8,31 @@ using UnityEngine.UI;
 
 public class OptionsController : MonoBehaviour
 {
-    [SerializeField] private GameObject uiController;
+    [SerializeField]
+    private UIController _uiController;
     private CameraController cameraController;
 
-    [SerializeField] private GameObject mouseSensitivityScrollBarObject;
+    [SerializeField]
+    private GameObject mouseSensitivityScrollBarObject;
 
-    private void Start()
+    public void SetUIController(UIController uiController)
     {
-        cameraController = uiController.GetComponent<PlayerUI>().playerObject.GetComponent<CameraController>();
-        mouseSensitivityScrollBarObject.GetComponent<Scrollbar>().onValueChanged.AddListener(setCameraSensitivity);
+        _uiController = uiController;
+        cameraController = _uiController.Player.CameraController;
+        mouseSensitivityScrollBarObject
+            .GetComponent<Scrollbar>()
+            .onValueChanged.AddListener(SetCameraSensitivity);
     }
+
+    private void Start() { }
+
     public void setGameVolume(float value)
     {
         Debug.Log("Volume change not yet implemented on OptionsController.cs!");
     }
 
-    public void setCameraSensitivity(float value)
+    public void SetCameraSensitivity(float value)
     {
-        cameraController.setCameraRotationSpeed(value*30+5); //Go from 5 to 35
+        cameraController.setCameraRotationSpeed(value * 30 + 5); //Go from 5 to 35
     }
 }
