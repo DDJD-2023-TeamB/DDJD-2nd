@@ -9,11 +9,14 @@ public class EarthWallComponent : StaticSkillComponent
 
     private FMOD.Studio.PARAMETER_ID _sfxStateId;
 
+    private bool _isRising;
+
     protected override void Awake()
     {
         base.Awake();
         _collider.enabled = false;
         _animator = GetComponent<Animator>();
+        _isRising = true;
     }
 
     public void Start()
@@ -41,10 +44,28 @@ public class EarthWallComponent : StaticSkillComponent
             transform.position = hit.point;
             transform.localRotation = Quaternion.LookRotation(
                 _caster.transform.forward,
-                hit.normal
+                Vector3.up
             );
             _collider.enabled = true;
         }
+    }
+
+    protected override void OnImpact(Collider other, float multiplier = 1)
+    {
+        base.OnImpact(other, multiplier);
+        if (!_isRising)
+        {
+            return;
+        }
+        Vector3 direction = (other.transform.position - transform.position).normalized;
+        direction.y = 0.5f;
+        Damage(
+            other.gameObject,
+            (int)_stats.Damage,
+            (int)_stats.ForceWithDamage(),
+            transform.position,
+            direction
+        );
     }
 
     private RaycastHit? GetTarget(Vector3 direction)

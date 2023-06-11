@@ -59,6 +59,7 @@ public abstract class SkillComponent : MonoBehaviour
     }
 
     private Dictionary<GameObject, float> _collidedObjects = new Dictionary<GameObject, float>();
+    private List<GameObject> _damagedObjects = new List<GameObject>();
 
     public virtual void SetSkill(Skill skill)
     {
@@ -130,8 +131,8 @@ public abstract class SkillComponent : MonoBehaviour
 
     public virtual void OnCollisionEnter(Collision collision)
     {
-        OnImpact(collision.collider);
         _noiseComponent?.MakeNoise(GetNoiseRadius());
+        Collide(collision.collider);
     }
 
     public virtual void OnTriggerStay(Collider other)
