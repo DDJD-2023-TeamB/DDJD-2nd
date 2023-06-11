@@ -48,7 +48,6 @@ public class EnemySpawnerManager : MonoBehaviour
 
     public void EnemyDied(BasicEnemy enemy)
     {
-        _spawnedEnemies.Remove(enemy.gameObject);
         _aliveEnemies--;
 
         if (_aliveEnemies <= 0)

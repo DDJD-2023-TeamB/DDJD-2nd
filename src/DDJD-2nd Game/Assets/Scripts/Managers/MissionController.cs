@@ -6,7 +6,6 @@ using UnityEngine;
 public class MissionController : MonoBehaviour
 {
     public static MissionController Instance;
-    private List<Mission2> _unblockedMissions = new List<Mission2>();
     private List<Mission> _unblockedMissions = new List<Mission>();
 
     public List<Mission> UnblockedMissions
@@ -118,6 +117,7 @@ public class MissionController : MonoBehaviour
         mission.Status = MissionState.Completed;
         GiveReward(mission);
         _unblockedMissions.Remove(mission);
+        _gameState.FinishedMissions.Add(mission);
         UnblockFollowingMissions(mission);
     }
 
@@ -172,7 +172,7 @@ public class MissionController : MonoBehaviour
 
     public void CompleteFightGoal(EnemySpawner _enemySpawner)
     {
-        foreach (Mission2 mission in _unblockedMissions)
+        foreach (Mission mission in _unblockedMissions)
         {
             if (mission.Status != MissionState.Ongoing)
             {

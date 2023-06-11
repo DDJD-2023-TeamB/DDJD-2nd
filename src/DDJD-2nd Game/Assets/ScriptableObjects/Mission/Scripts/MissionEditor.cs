@@ -1,14 +1,14 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(Mission2))]
+[CustomEditor(typeof(Mission))]
 public class MissionEditor : Editor
 {
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
 
-        Mission2 mission = (Mission2)target;
+        Mission mission = (Mission)target;
 
         //Show goals
         GUILayout.Label("Goals", EditorStyles.boldLabel);

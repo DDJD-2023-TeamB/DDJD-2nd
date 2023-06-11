@@ -22,7 +22,6 @@ public class Npc : Interactable
     protected override void Start()
     {
         base.Start();
-        _dialogue = _player.UIController.PlayerUI.Dialogue;
         _currentDialogueInfo = _npc.DefaultDialogueInfo;
         _missions = _missionController.GetNpcMissions(_npc);
         _animator = GetComponent<Animator>();
