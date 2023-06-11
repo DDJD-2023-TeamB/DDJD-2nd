@@ -6,11 +6,10 @@ using Cinemachine;
 public class Player : StateContext, Damageable
 {
     [SerializeField]
-    private ItemsInventoryObject _inventory;
+    private ItemsInventoryObject inventory;
     public ItemsInventoryObject Inventory
     {
-        get { return _inventory; }
-        set { _inventory = value; }
+        get { return inventory; }
     }
 
     private PlayerStateFactory _factory;

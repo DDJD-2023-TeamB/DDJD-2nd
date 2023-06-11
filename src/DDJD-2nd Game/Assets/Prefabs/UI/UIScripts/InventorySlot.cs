@@ -59,7 +59,6 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
             GameObject dropped = eventData.pointerDrag;
             currentItem = dropped.GetComponent<InventoryItemImage>().currentItem;
             OnDropAction?.Invoke(currentItem, index);
-            
         }
     }
 
@@ -67,7 +66,6 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
     {
         if (currentItem.item != null && !Input.GetMouseButton(0))
         {
-            Debug.Log("Creating title text \"" + currentItem.item.Name + "\"");
             inventoryUI.itemTitle = Instantiate(
                 ItemTitleTextPrefab,
                 Input.mousePosition + new Vector3(0, 5, 0),
@@ -85,17 +83,14 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         {
             Destroy(inventoryUI.itemTitle);
             inventoryUI.itemTitle = null;
-            //_graphic.raycastTarget = true;
         }
     }
 
     private void Update()
-    {   
+    {
         if (inventoryUI.itemTitle != null)
         {
             inventoryUI.itemTitle.transform.position = Input.mousePosition + new Vector3(0, 10, 0);
         }
-        
     }
-
 }
