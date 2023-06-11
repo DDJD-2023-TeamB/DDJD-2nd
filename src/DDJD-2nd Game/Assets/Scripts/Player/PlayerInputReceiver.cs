@@ -116,8 +116,6 @@ public class PlayerInputReceiver : MonoBehaviour
 
     public Action OnMeleeAttackKeydown;
     public Action OnMeleeAttackKeyup;
-
-    public Action OnInteration;
     public Action OnJumpKeyDown;
     public Action OnJumpKeyUp;
     public Action OnInventoryKeydown;
@@ -128,6 +126,9 @@ public class PlayerInputReceiver : MonoBehaviour
     public Action OnMenuKeyup;
 
     public Action OnPrintState;
+
+    public Action OnTutorialKeydown;
+    public Action OnTutorialKeyup;
 
     // Start is called before the first frame update
     void Awake()
@@ -218,6 +219,9 @@ public class PlayerInputReceiver : MonoBehaviour
 
         _playerInput.UI.Menu.performed += ctx => OnMenuKeydown?.Invoke();
         _playerInput.UI.Menu.canceled += ctx => OnMenuKeyup?.Invoke();
+
+        _playerInput.UI.Tutorial.performed += ctx => OnTutorialKeydown?.Invoke();
+        _playerInput.UI.Tutorial.canceled += ctx => OnTutorialKeyup?.Invoke();
 
         _playerInput.Debug.PrintState.performed += ctx => OnPrintState?.Invoke();
     }

@@ -83,6 +83,11 @@ public class PlayerStateFactory : StateFactory
         return new MenuState(_context);
     }
 
+    public TutorialState Tutorial()
+    {
+        return new TutorialState(_context);
+    }
+
     public InteractingState Interacting(GenericState superState)
     {
         return new InteractingState(_context, superState);

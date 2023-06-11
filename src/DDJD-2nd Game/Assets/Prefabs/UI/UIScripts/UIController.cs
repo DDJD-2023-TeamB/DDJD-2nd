@@ -88,6 +88,13 @@ public class UIController : MonoBehaviour
         _playerUI.playingUI.gameObject.SetActive(!isOpening);
     }
 
+    public void OpenTutorial(bool isOpening)
+    {
+        currentMenu = "tutorial";
+        _playerUI.tutorialUI.SetActive(isOpening);
+        _playerUI.playingUI.gameObject.SetActive(!isOpening);
+    }
+
     public void OpenOptions(bool isOpening)
     {
         currentMenu = "options";
