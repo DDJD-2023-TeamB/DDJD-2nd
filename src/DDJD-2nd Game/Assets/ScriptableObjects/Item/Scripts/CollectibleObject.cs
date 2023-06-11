@@ -7,5 +7,5 @@ public abstract class CollectibleObject : ItemObject
     [SerializeField]
     protected GameObject _prefab;
 
-    public abstract void Use();
+    public abstract void Use(InventoryUI inventoryUI);
 }

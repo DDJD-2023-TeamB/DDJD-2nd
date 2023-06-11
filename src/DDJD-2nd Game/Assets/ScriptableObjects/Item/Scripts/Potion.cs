@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName="Potion", menuName = "Scriptable Objects/Items/Potion")]
+[CreateAssetMenu(fileName = "Potion", menuName = "Scriptable Objects/Items/Potion")]
 public class Potion : CollectibleObject
 {
     public int restoreHealthValue;
 
-    public override void Use(){
+    public override void Use(InventoryUI inventoryUI)
+    {
         // TODO : update _health
         Debug.Log("Using potion");
     }
 }
-

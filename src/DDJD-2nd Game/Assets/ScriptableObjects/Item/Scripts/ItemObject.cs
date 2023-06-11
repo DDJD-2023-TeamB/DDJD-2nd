@@ -12,13 +12,6 @@ public abstract class ItemObject : ScriptableObject
     [SerializeField]
     private Sprite _icon;
 
-     //[SerializeField]
-    //private bool _isStackable;
-    //
-    //[ConditionalField(nameof(_isStackable))]
-    //[SerializeField]
-    //private int _maxStack;
-
     public string Name
     {
         get => _name;
@@ -28,5 +21,4 @@ public abstract class ItemObject : ScriptableObject
     {
         get => _icon;
     }
-    
 }

@@ -6,9 +6,13 @@ using TMPro;
 public class CollectibleInteractable : Interactable
 {
     public CollectibleObject _item;
+
     public override void Interact()
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().inventory.AddItem(_item, 1);
+        GameObject
+            .FindGameObjectWithTag("Player")
+            .GetComponent<Player>()
+            .Inventory.AddItem(_item, 1);
         Destroy(gameObject);
     }
 }
