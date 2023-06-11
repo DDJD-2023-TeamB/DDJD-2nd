@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -20,6 +21,11 @@ public class PlayerUI : MonoBehaviour
     [SerializeField]
     public GameUI playingUI;
 
+    [SerializeField]
+    public Dialogue Dialogue;
+
+    [SerializeField]
+    public TextMeshProUGUI HelpText;
     private Player _player;
 
     public Player Player

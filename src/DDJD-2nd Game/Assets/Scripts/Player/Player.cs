@@ -5,7 +5,13 @@ using Cinemachine;
 
 public class Player : StateContext, Damageable
 {
-    public ItemsInventoryObject inventory;
+    [SerializeField]
+    private ItemsInventoryObject _inventory;
+    public ItemsInventoryObject Inventory
+    {
+        get { return _inventory; }
+        set { _inventory = value; }
+    }
 
     private PlayerStateFactory _factory;
     public PlayerStateFactory Factory
@@ -168,6 +174,7 @@ public class Player : StateContext, Damageable
         get { return _characterStatus; }
     }
     private UIController _uiController;
+
     private ElementController _elementController;
     private CharacterMovement _characterMovement;
 
@@ -244,14 +251,19 @@ public class Player : StateContext, Damageable
         return this.gameObject;
     }
 
+    public PlayerStatus Status
+    {
+        get { return _status; }
+    }
     public UIController UIController
     {
         get { return _uiController; }
     }
 
-    public PlayerStatus Status
+    public Interactable InteractedObject
     {
-        get { return _status; }
+        get { return _interactedObject; }
+        set { _interactedObject = value; }
     }
 
     public ElementController ElementController
