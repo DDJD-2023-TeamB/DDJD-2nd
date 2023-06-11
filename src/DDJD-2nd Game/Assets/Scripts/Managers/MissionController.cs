@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MissionController : MonoBehaviour
 {
+    public static MissionController Instance;
     private List<Mission2> _unblockedMissions = new List<Mission2>();
 
     [SerializeField]
@@ -16,18 +17,20 @@ public class MissionController : MonoBehaviour
         ActivateMissions();
         _player = GetComponent<Player>();
         _unblockedMissions = _gameState.UnblockedMissions;
+        Instance = this;
     }
 
     private void ActivateMissions()
     {
         foreach (var mission in _unblockedMissions)
         {
-            if(mission.Status == MissionState.Blocked)
+            if (mission.Status == MissionState.Blocked)
             {
                 mission.Status = MissionState.Available;
             }
         }
     }
+
     public void CheckIfNpcIsMyGoal(NpcObject npc)
     {
         List<Mission2> missions = new List<Mission2>(_unblockedMissions);
@@ -53,7 +56,6 @@ public class MissionController : MonoBehaviour
                 CheckIfAllGoalsAreCompleted(mission);
             }
         }
-       
     }
 
     public void CheckIfItemCollectedIsMyGoal(CollectibleObject collectible)
@@ -70,8 +72,10 @@ public class MissionController : MonoBehaviour
                     {
                         if (collectGoal.CollectibleToCollect == collectible)
                         {
-                            if(collectGoal.Quantity > 0) collectGoal.Quantity -= 1;
-                            if (collectGoal.Quantity == 0) goal._completed = true;
+                            if (collectGoal.Quantity > 0)
+                                collectGoal.Quantity -= 1;
+                            if (collectGoal.Quantity == 0)
+                                goal._completed = true;
                             Debug.Log("Collect Goal Completed");
                         }
                     }
@@ -79,7 +83,6 @@ public class MissionController : MonoBehaviour
                 CheckIfAllGoalsAreCompleted(mission);
             }
         }
-       
     }
 
     public void CheckIfAllGoalsAreCompleted(Mission2 mission)
@@ -91,7 +94,8 @@ public class MissionController : MonoBehaviour
             {
                 break;
             }
-            else if(!allGoalsCompleted){
+            else if (!allGoalsCompleted)
+            {
                 allGoalsCompleted = true;
             }
         }
@@ -100,7 +104,6 @@ public class MissionController : MonoBehaviour
         {
             HandleMissionComplete(mission);
         }
-            
     }
 
     private void HandleMissionComplete(Mission2 mission)
@@ -136,22 +139,49 @@ public class MissionController : MonoBehaviour
 
         foreach (var mission in _unblockedMissions)
         {
-            if(mission.Status != MissionState.Completed)
+            if (mission.Status != MissionState.Completed)
             {
-                if(mission.InteractionBegin.Npc == npc || mission.InteractionEnd.Npc == npc)
+                if (mission.InteractionBegin.Npc == npc || mission.InteractionEnd.Npc == npc)
                 {
                     missions.Enqueue(mission);
                 }
             }
-            foreach(var followingMission in mission.FollowingMissions)
+            /*
+            foreach (var followingMission in mission.FollowingMissions)
             {
-                if(followingMission.InteractionBegin.Npc == npc || followingMission.InteractionEnd.Npc == npc)
+                if (
+                    followingMission.InteractionBegin.Npc == npc
+                    || followingMission.InteractionEnd.Npc == npc
+                )
                 {
                     missions.Enqueue(followingMission);
                 }
             }
+            */
         }
 
         return missions;
+    }
+
+    public void CompleteFightGoal(EnemySpawner _enemySpawner)
+    {
+        foreach (Mission2 mission in _unblockedMissions)
+        {
+            if (mission.Status != MissionState.Ongoing)
+            {
+                continue;
+            }
+            foreach (GoalObject goal in mission.Goals)
+            {
+                if (goal is FightGoal fightGoal)
+                {
+                    if (fightGoal.EnemySpawner == _enemySpawner)
+                    {
+                        goal._completed = true;
+                        CheckIfAllGoalsAreCompleted(mission);
+                    }
+                }
+            }
+        }
     }
 }

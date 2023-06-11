@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6842003671565323996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _description: teste
+  _location: {fileID: 0}
+  _npcToInteract: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c3120dc6799746bdb3c0626cadbfc38, type: 3}
+  m_Name: MissionPickup
+  m_EditorClassIdentifier: 
+  _status: 0
+  _type: 0
+  _goals:
+  - {fileID: -6842003671565323996}
+  _interactionBegin:
+    _dialogueInfo:
+      _noun: Tristan
+      _sentences:
+      - Pickup 2 Potions
+    _npc: {fileID: 0}
+  _interactionEnd:
+    _dialogueInfo:
+      _noun: 
+      _sentences: []
+    _npc: {fileID: 0}
+  _reward:
+    _gold: 2
+    _items:
+    - item: {fileID: 11400000, guid: cd994385346d04be0a5ebd99428624f0, type: 2}
+      amount: 1
+      id: 
+  _followingMissions:
+  - {fileID: 11400000, guid: afa16beb773ef4a5d9dc590ddfe3b850, type: 2}
+  _area: 0

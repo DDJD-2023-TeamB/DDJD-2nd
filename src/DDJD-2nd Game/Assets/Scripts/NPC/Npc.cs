@@ -21,10 +21,11 @@ public class Npc : Interactable
     protected override void Start()
     {
         base.Start();
-        _dialogue = _player.Dialogue;
+        _dialogue = _player.UIController.PlayerUI.Dialogue;
         _currentDialogueInfo = _npc.DefaultDialogueInfo;
         _missions = _missionController.GetNpcMissions(_npc);
-        if(_missions.Count != 0) _currentMission = _missions.Dequeue();
+        if (_missions.Count != 0)
+            _currentMission = _missions.Dequeue();
     }
 
     void Update() { }
@@ -36,6 +37,10 @@ public class Npc : Interactable
 
     public override void Interact()
     {
+        if (_dialogue == null)
+        {
+            _dialogue = _player.UIController.PlayerUI.Dialogue;
+        }
         _missionController.CheckIfNpcIsMyGoal(_npc);
 
         if (_currentMission != null)
@@ -46,7 +51,7 @@ public class Npc : Interactable
             }
             if (_currentMission.Status == MissionState.Available)
             {
-                if(_npc == _currentMission.InteractionBegin.Npc)
+                if (_npc == _currentMission.InteractionBegin.Npc)
                 {
                     _currentDialogueInfo = _currentMission.InteractionBegin.DialogueInfo;
                     _currentMission.Status = MissionState.Ongoing;
@@ -54,18 +59,20 @@ public class Npc : Interactable
             }
             else if (_currentMission.Status == MissionState.Completed)
             {
-                if(_npc == _currentMission.InteractionBegin.Npc) _currentDialogueInfo = _npc.DefaultDialogueInfo; 
+                if (_npc == _currentMission.InteractionBegin.Npc)
+                    _currentDialogueInfo = _npc.DefaultDialogueInfo;
                 //_currentDialogueInfo = _currentMission.InteractionEnd.DialogueInfo;
-                if(_missions.Count > 0)
+                if (_missions.Count > 0)
                 {
                     _currentMission = _missions.Dequeue();
                 }
-                else{
+                else
+                {
                     _currentMission = null;
                 }
             }
         }
-        _dialogue.StartDialogue(_currentDialogueInfo);
+        _player.UIController.PlayerUI.Dialogue.StartDialogue(_currentDialogueInfo);
     }
 
     public void ContinueInteraction()

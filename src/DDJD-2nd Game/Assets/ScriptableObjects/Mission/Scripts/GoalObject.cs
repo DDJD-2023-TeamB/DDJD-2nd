@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEditor;
 
 [System.Serializable]
-public abstract class GoalObject
+public abstract class GoalObject : ScriptableObject
 {
     public bool _completed = false;
 
@@ -25,5 +26,16 @@ public abstract class GoalObject
     public UnityEvent OnGoalCompleted
     {
         get { return _onGoalCompleted; }
+    }
+
+    public void OnGUI()
+    {
+        Editor editor = Editor.CreateEditor(this);
+        editor?.OnInspectorGUI();
+    }
+
+    public string Description
+    {
+        get { return _description; }
     }
 }

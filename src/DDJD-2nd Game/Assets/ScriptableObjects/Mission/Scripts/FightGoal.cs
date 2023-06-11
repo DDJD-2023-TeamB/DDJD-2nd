@@ -2,4 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FightGoal : GoalObject { }
+[System.Serializable]
+public class FightGoal : GoalObject
+{
+    [SerializeField]
+    private EnemySpawner _enemySpawner;
+
+    public EnemySpawner EnemySpawner
+    {
+        get { return _enemySpawner; }
+    }
+}

@@ -179,9 +179,6 @@ public class Player : StateContext, Damageable
         get { return _characterStatus; }
     }
     private UIController _uiController;
-
-    [SerializeField]
-    private Dialogue _dialogue; //TODO:: Get from UI after UI PR merges
     private ElementController _elementController;
 
     void Awake()
@@ -257,10 +254,6 @@ public class Player : StateContext, Damageable
     public UIController UIController
     {
         get { return _uiController; }
-    }
-    public Dialogue Dialogue
-    {
-        get { return _dialogue; }
     }
 
     public Interactable InteractedObject

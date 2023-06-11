@@ -298,6 +298,11 @@ public class UIController : MonoBehaviour
     {
         get { return _player; }
     }
+
+    public PlayerUI PlayerUI
+    {
+        get { return _playerUI; }
+    }
 }
 
 
