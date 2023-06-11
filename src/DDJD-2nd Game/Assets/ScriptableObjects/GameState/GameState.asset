@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
-  m_Name: Interact
+  m_Script: {fileID: 11500000, guid: 531ebd6447bbe4db69c9a371d6cd8516, type: 3}
+  m_Name: GameState
   m_EditorClassIdentifier: 
-  _completed: 0
-  _description: Talk to Tristan
-  _npcToInteract: {fileID: 11400000, guid: 15f81436f65c9415ea4bde98e57c0e27, type: 2}
+  _unblockedMissions:
+  - {fileID: 11400000, guid: 864eb443b6bd0ef46bbe25df2b1ce1b4, type: 2}
+  _unblockedAreas: 

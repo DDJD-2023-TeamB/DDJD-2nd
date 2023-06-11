@@ -12,10 +12,10 @@ public enum SpawnerType
 public class EnemySpawnerManager : MonoBehaviour
 {
     [SerializeField]
-    private EnemySpawnerInfo _enemySpawnerInfo;
+    private EnemySpawner _enemySpawner;
 
     [SerializeField]
-    private List<EnemySpawner> _spawners;
+    private List<EnemySpawnerComponent> _spawners;
 
     [SerializeField]
     private SpawnerType _type;
@@ -29,6 +29,8 @@ public class EnemySpawnerManager : MonoBehaviour
     [SerializeField]
     private int _totalAmountOfEnemies = 10;
 
+    private int _aliveEnemies;
+
     private int _remainingEnemies;
 
     private List<GameObject> _spawnedEnemies = new List<GameObject>();
@@ -38,11 +40,26 @@ public class EnemySpawnerManager : MonoBehaviour
     public void Start()
     {
         ResetSpawner();
+        foreach (EnemySpawnerComponent spawner in _spawners)
+        {
+            spawner.SetEnemySpawnerManager(this);
+        }
+    }
+
+    public void EnemyDied(BasicEnemy enemy)
+    {
+        _aliveEnemies--;
+
+        if (_aliveEnemies <= 0)
+        {
+            //Inform mission manager
+            MissionController.Instance.CompleteFightGoal(_enemySpawner);
+        }
     }
 
     private void SpawnEnemy()
     {
-        EnemySpawner spawner;
+        EnemySpawnerComponent spawner;
         bool spawned = false;
         GameObject enemy = null;
         do
@@ -50,7 +67,7 @@ public class EnemySpawnerManager : MonoBehaviour
             //TODO:: Could be more efficient
             spawner = _spawners[Random.Range(0, _spawners.Count)];
             spawned = spawner.CanSpawn();
-            EnemyInfo enemyInfo = _enemySpawnerInfo.GetRandomEnemyInfo();
+            EnemyInfo enemyInfo = _enemySpawner.EnemySpawnerInfo.GetRandomEnemyInfo();
             enemy = spawner.SpawnEnemy(enemyInfo);
         } while (!spawned);
         if (enemy != null)
@@ -67,6 +84,7 @@ public class EnemySpawnerManager : MonoBehaviour
     public void ResetSpawner()
     {
         _remainingEnemies = _totalAmountOfEnemies;
+        _aliveEnemies = _totalAmountOfEnemies;
     }
 
     public void StopSpawn()

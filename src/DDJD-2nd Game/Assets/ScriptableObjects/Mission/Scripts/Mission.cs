@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public enum MissionState
 {
@@ -99,5 +100,6 @@ public class Mission : ScriptableObject
         get { return _area; }
     }
 
+    public void OnEnable() { }
     //onFinished -> callback
 }

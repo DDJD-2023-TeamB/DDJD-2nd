@@ -2,10 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(
-    fileName = "Interact",
-    menuName = "Scriptable Objects/Mission System/Goal/Interact"
-)]
+[System.Serializable]
 public class InteractGoal : GoalObject
 {
     [SerializeField]

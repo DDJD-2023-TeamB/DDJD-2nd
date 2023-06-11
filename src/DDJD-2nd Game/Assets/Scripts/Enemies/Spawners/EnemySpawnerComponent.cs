@@ -1,8 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawnerComponent : MonoBehaviour
 {
+    private EnemySpawnerManager _enemySpawnerManager;
+
     [SerializeField]
     private float _spawnDelay;
 
@@ -45,6 +47,7 @@ public class EnemySpawner : MonoBehaviour
 
         BasicEnemy basicEnemy = enemy.GetComponent<BasicEnemy>();
         basicEnemy.EnemySkills = info.EnemySkills;
+        basicEnemy.SetEnemySpawnerManager(_enemySpawnerManager);
         StartCoroutine(SpawnCooldown());
         return enemy;
     }
@@ -59,5 +62,10 @@ public class EnemySpawner : MonoBehaviour
     public bool CanSpawn()
     {
         return _canSpawn;
+    }
+
+    public void SetEnemySpawnerManager(EnemySpawnerManager enemySpawnerManager)
+    {
+        _enemySpawnerManager = enemySpawnerManager;
     }
 }

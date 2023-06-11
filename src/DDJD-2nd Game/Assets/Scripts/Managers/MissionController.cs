@@ -5,6 +5,7 @@ using UnityEngine;
 [DefaultExecutionOrder(-1)]
 public class MissionController : MonoBehaviour
 {
+    public static MissionController Instance;
     private List<Mission> _unblockedMissions = new List<Mission>();
 
     public List<Mission> UnblockedMissions
@@ -21,6 +22,7 @@ public class MissionController : MonoBehaviour
     {
         _player = GetComponent<Player>();
         _unblockedMissions = _gameState.UnblockedMissions;
+        Instance = this;
         ActivateMissions();
     }
 
@@ -115,6 +117,7 @@ public class MissionController : MonoBehaviour
         mission.Status = MissionState.Completed;
         GiveReward(mission);
         _unblockedMissions.Remove(mission);
+        _gameState.FinishedMissions.Add(mission);
         UnblockFollowingMissions(mission);
     }
 
@@ -150,6 +153,7 @@ public class MissionController : MonoBehaviour
                     missions.Enqueue(mission);
                 }
             }
+            /*
             foreach (var followingMission in mission.FollowingMissions)
             {
                 if (
@@ -160,9 +164,32 @@ public class MissionController : MonoBehaviour
                     missions.Enqueue(followingMission);
                 }
             }
+            */
         }
 
         return missions;
+    }
+
+    public void CompleteFightGoal(EnemySpawner _enemySpawner)
+    {
+        foreach (Mission mission in _unblockedMissions)
+        {
+            if (mission.Status != MissionState.Ongoing)
+            {
+                continue;
+            }
+            foreach (GoalObject goal in mission.Goals)
+            {
+                if (goal is FightGoal fightGoal)
+                {
+                    if (fightGoal.EnemySpawner == _enemySpawner)
+                    {
+                        goal._completed = true;
+                        CheckIfAllGoalsAreCompleted(mission);
+                    }
+                }
+            }
+        }
     }
 
     public List<Mission> GetAvailableAndOngoingMissions()

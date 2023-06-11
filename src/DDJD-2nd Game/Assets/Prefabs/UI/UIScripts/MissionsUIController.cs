@@ -48,12 +48,21 @@ public class MissionsUIController : MonoBehaviour
         m1.addQuest(new Quest(0, "Quest 1"));
         m1.addQuest(new Quest(0, "Quest 2"));
         m1.addQuest(new Quest(1, "Quest 2"));
-        Mission m2 = new Mission("Mission 2 idoajiaskl", "Mission 2 descriptionjdwankjndajkwdnkjasnkjnakwjnkasdnawnkdna");
+        Mission m2 = new Mission(
+            "Mission 2 idoajiaskl",
+            "Mission 2 descriptionjdwankjndajkwdnkjasnkjnakwjnkasdnawnkdna"
+        );
         m2.addQuest(new Quest(0, "Quest 1"));
         m2.addQuest(new Quest(1, "Quest 2"));
-        Mission m3 = new Mission("Mission 3 idoajiaskl", "Mission 3 descriptionjdwankjndajkwdnkjasnkjnakwjnkasdnawnkdna");
+        Mission m3 = new Mission(
+            "Mission 3 idoajiaskl",
+            "Mission 3 descriptionjdwankjndajkwdnkjasnkjnakwjnkasdnawnkdna"
+        );
         m3.addQuest(new Quest(1, "Quest 1"));
-        Mission m4 = new Mission("Mission 4 idoajiaskl", "Mission 4 descriptionjdwankjndajkwdnkjasnkjnakwjnkasdnawnkdna");
+        Mission m4 = new Mission(
+            "Mission 4 idoajiaskl",
+            "Mission 4 descriptionjdwankjndajkwdnkjasnkjnakwjnkasdnawnkdna"
+        );
         m4.addQuest(new Quest(0, "Quest 1"));
         m4.addQuest(new Quest(0, "Quest 2"));
         m4.addQuest(new Quest(0, "Quest 3"));

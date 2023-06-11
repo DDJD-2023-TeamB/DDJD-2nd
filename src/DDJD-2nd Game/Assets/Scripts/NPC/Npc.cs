@@ -22,7 +22,6 @@ public class Npc : Interactable
     protected override void Start()
     {
         base.Start();
-        _dialogue = _player.Dialogue;
         _currentDialogueInfo = _npc.DefaultDialogueInfo;
         _missions = _missionController.GetNpcMissions(_npc);
         _animator = GetComponent<Animator>();
@@ -39,6 +38,10 @@ public class Npc : Interactable
 
     public override void Interact()
     {
+        if (_dialogue == null)
+        {
+            _dialogue = _player.UIController.PlayerUI.Dialogue;
+        }
         _missionController.CheckIfNpcIsMyGoal(_npc);
 
         if (_currentMission != null)

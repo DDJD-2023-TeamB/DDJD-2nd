@@ -10,7 +10,7 @@ public class Player : StateContext, Damageable
     public ItemsInventoryObject Inventory
     {
         get { return _inventory; }
-        set { _inventory = value;}
+        set { _inventory = value; }
     }
 
     private PlayerStateFactory _factory;
@@ -149,11 +149,6 @@ public class Player : StateContext, Damageable
 
     private PlayerStatus _status;
 
-    public PlayerStatus Status
-    {
-        get { return _status; }
-    }
-
     private SoundEmitter _soundEmitter;
 
     private FMOD.Studio.PARAMETER_ID _sfxJumpStateId;
@@ -179,8 +174,7 @@ public class Player : StateContext, Damageable
         get { return _characterStatus; }
     }
     private UIController _uiController;
-    [SerializeField]
-    private Dialogue _dialogue; //TODO:: Get from UI after UI PR merges
+
     private ElementController _elementController;
     private CharacterMovement _characterMovement;
 
@@ -257,13 +251,13 @@ public class Player : StateContext, Damageable
         return this.gameObject;
     }
 
+    public PlayerStatus Status
+    {
+        get { return _status; }
+    }
     public UIController UIController
     {
         get { return _uiController; }
-    }
-    public Dialogue Dialogue
-    {
-        get { return _dialogue; }
     }
 
     public Interactable InteractedObject

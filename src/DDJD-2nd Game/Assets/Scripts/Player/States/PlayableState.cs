@@ -47,7 +47,7 @@ public class PlayableState : GenericState
     }
 
     private void CheckRange()
-    {   
+    {
         if (
             _context.Input.IsInteracting
             && !(_substate is InteractingState)

@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34f8777e3318d4daca0f479db6edb42a, type: 3}
-  m_Name: InteractionBeginPickup
+  m_Script: {fileID: 11500000, guid: a9eb15f1b3c18f647934694ce7c3cf81, type: 3}
+  m_Name: DevelopmentSpawner
   m_EditorClassIdentifier: 
-  _dialogueInfo:
-    _noun: Tristan
-    _sentences:
-    - Pickup 2 Potions
-  _npc: {fileID: 11400000, guid: 15f81436f65c9415ea4bde98e57c0e27, type: 2}
+  _enemySpawnerInfo: {fileID: 11400000, guid: bc4dc737c40c1ed4ab24e3e10484a1f7, type: 2}
+  _completed: 0
