@@ -13,7 +13,7 @@ public class InventoryItemImage
 {
     public Image image;
     public ItemStack currentItem;
-    public GameObject inventoryUI;
+    public InventoryUI inventoryUI;
     public GameObject itemAmountText;
 
     [HideInInspector]
@@ -21,7 +21,8 @@ public class InventoryItemImage
 
     private void Start()
     {
-        inventoryUI = GameObject.Find("InventoryUI");
+        GameObject inventoryUIObject = GameObject.Find("InventoryUI");
+        inventoryUI = inventoryUIObject.GetComponent<InventoryUI>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -31,6 +32,12 @@ public class InventoryItemImage
         transform.SetAsLastSibling();
         image.raycastTarget = false;
         itemAmountText.SetActive(false);
+        if (inventoryUI.itemTitle == null)
+        {
+            Debug.Log("InvenotryImage is deleting title");
+            Destroy(inventoryUI.itemTitle);
+            inventoryUI.itemTitle = null;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -43,15 +50,22 @@ public class InventoryItemImage
         transform.SetParent(parentAfterDrag);
         image.raycastTarget = true;
         itemAmountText.SetActive(true);
+        if (inventoryUI.itemTitle == null)
+        {
+            Destroy(inventoryUI.itemTitle);
+            inventoryUI.itemTitle = null;
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        //TODO:: Check if it's consumable
-        if (eventData.button == PointerEventData.InputButton.Right && false)
+        if (
+            eventData.button == PointerEventData.InputButton.Right
+            && currentItem.item is CollectibleObject
+        )
         {
-            //Apply effect
-            inventoryUI.GetComponent<InventoryUI>().RemoveItem(this);
+            inventoryUI.RemoveItem(this);
+            (currentItem.item as CollectibleObject).Use(inventoryUI);
         }
     }
 }

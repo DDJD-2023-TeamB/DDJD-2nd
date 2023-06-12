@@ -2,15 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName="Book", menuName = "Scriptable Objects/Items/Book")]
+[CreateAssetMenu(fileName = "Book", menuName = "Scriptable Objects/Items/Book")]
 public class Book : CollectibleObject
 {
-    public void Awake()
+    [SerializeField]
+    private ItemSkill _itemSkill;
+
+    private Player _player;
+
+    private void Awake()
     {
-        _type = ItemType.Book;
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
-    public override void Use(){
-        Debug.Log("Using book");
+    public override void Use(InventoryUI inventoryUI)
+    {
+        if (!_player.PlayerSkills.LearnedSkills.Contains(_itemSkill))
+        {
+            _player.PlayerSkills.LearnedSkills.Add(_itemSkill);
+            bool res = inventoryUI.AddItem(new ItemStack(_itemSkill, 1));
+        }
+        _player.Inventory.RemoveItem(this);
     }
 }

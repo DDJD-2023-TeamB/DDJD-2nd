@@ -35,6 +35,7 @@ public abstract class Dashable : MonoBehaviour
         get => _isDashing;
     }
     protected DashStats _currentDashStats;
+    protected CharacterStatus _status;
 
     private DashComponent _lastDashSkill;
 
@@ -43,17 +44,21 @@ public abstract class Dashable : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
         _maxSpeed = _maxRegularSpeed;
+        _status = GetComponent<CharacterStatus>();
     }
 
-    protected void Update()
+    protected virtual void Update()
     {
+        _timeSinceLastDash += Time.deltaTime;
+        if (!_isDashing)
+            return;
+
         Vector3 flatVel = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
         if (flatVel.magnitude > _maxSpeed)
         {
             Vector3 limitedVel = flatVel.normalized * _maxSpeed;
             _rigidbody.velocity = new Vector3(limitedVel.x, _rigidbody.velocity.y, limitedVel.z);
         }
-        _timeSinceLastDash += Time.deltaTime;
     }
 
     public virtual void DashWithSkill(DashSkill dashSkill)
@@ -115,7 +120,7 @@ public abstract class Dashable : MonoBehaviour
         _animator.SetBool("IsDashing", false);
         _animator.SetFloat("DashX", 0f);
         _animator.SetFloat("DashY", 0f);
-        StartCoroutine(SmoothlyChangeMaxSpeed(_maxRegularSpeed, true));
+        StartCoroutine(SmoothlyChangeMaxSpeed(GetRegularSpeed(), true));
     }
 
     protected IEnumerator SmoothlyChangeMaxSpeed(float targetSpeed, bool isEnd = false)
@@ -145,5 +150,10 @@ public abstract class Dashable : MonoBehaviour
     public bool IsDashOnCooldown()
     {
         return _timeSinceLastDash < _minCooldown;
+    }
+
+    protected virtual float GetRegularSpeed()
+    {
+        return _maxRegularSpeed;
     }
 }

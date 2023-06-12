@@ -7,10 +7,12 @@ public class Shooter : MonoBehaviour
     protected AimComponent _aimComponent;
     protected GameObject _leftSpell;
     protected GameObject _rightSpell;
+    protected CharacterStatus _status;
 
     protected virtual void Awake()
     {
         _aimComponent = GetComponent<AimComponent>();
+        _status = GetComponent<CharacterStatus>();
     }
 
     public GameObject LeftSpell
@@ -82,10 +84,14 @@ public class Shooter : MonoBehaviour
         CancelRightShoot();
     }
 
-    public virtual bool Shoot(GameObject spell, Vector3 direction, bool leaveCaster)
+    public virtual bool Shoot(GameObject spell, Vector3 direction, bool leaveCaster, int manaCost)
     {
         SkillComponent skillComponent = spell.GetComponent<SkillComponent>();
         if (!skillComponent.CanShoot(direction))
+        {
+            return false;
+        }
+        if (!_status.ConsumeMana(skillComponent.Skill.Element, manaCost))
         {
             return false;
         }

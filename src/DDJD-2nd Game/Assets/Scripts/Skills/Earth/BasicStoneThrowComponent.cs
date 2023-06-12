@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class BasicStoneThrowComponent : ProjectileComponent
+public class BasicStoneThrowComponent : ProjectileComponent, NonPushable
 {
     private VisualEffect _vfx;
+
+    private FMOD.Studio.PARAMETER_ID _sfxStateId;
 
     protected override void Awake()
     {
         base.Awake();
         _vfx = GetComponent<VisualEffect>();
+    }
+
+    protected void Start()
+    {
+        _sfxStateId = _soundEmitter.GetParameterId("shot", "Basic Earth Shot State");
     }
 
     public override void Shoot(Vector3 direction)
@@ -31,11 +38,12 @@ public class BasicStoneThrowComponent : ProjectileComponent
         base.OnImpact(other);
 
         Rigidbody rb = other.GetComponent<Rigidbody>();
-        if (rb != null)
+        if (rb != null && other.GetComponent<NonPushable>() == null)
         {
             rb.AddForce(transform.forward * _skillStats.ForceWithDamage(), ForceMode.Impulse);
         }
 
+        _soundEmitter.SetParameterWithLabel("shot", _sfxStateId, "Impact", false);
         Damage(
             other.gameObject,
             (int)(_skillStats.Damage * multiplier),

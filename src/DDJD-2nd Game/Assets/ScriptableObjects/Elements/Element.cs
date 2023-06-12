@@ -27,9 +27,17 @@ public class Element : ScriptableObject
     }
 
     [SerializeField]
+    private string _sfxDamageLabel;
+
+    [SerializeField]
     private AirMovementSkill _airMovementSkill;
     public AirMovementSkill AirMovementSkill
     {
         get => _airMovementSkill;
+    }
+
+    public string SfxDamageLabel
+    {
+        get => _sfxDamageLabel;
     }
 }

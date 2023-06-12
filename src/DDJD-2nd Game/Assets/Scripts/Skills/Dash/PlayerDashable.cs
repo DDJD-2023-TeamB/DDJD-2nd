@@ -12,12 +12,24 @@ public class PlayerDashable : Dashable
     private FovController _fovController;
     private float _defaultFov;
 
+    private Player _player;
+
+    protected CharacterMovement _characterMovement;
+
     protected override void Awake()
     {
         base.Awake();
         _inputReceiver = GetComponent<PlayerInputReceiver>();
         _fovController = _playerCamTransform.GetComponent<FovController>();
         _defaultFov = _fovController.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView;
+        _player = GetComponent<Player>();
+        _characterMovement = GetComponent<CharacterMovement>();
+    }
+
+    protected void Start()
+    {
+        _maxRegularSpeed = _characterMovement.GetCurrentMaxSpeed();
+        _maxSpeed = _maxRegularSpeed;
     }
 
     /**
@@ -28,6 +40,7 @@ public class PlayerDashable : Dashable
         bool dashSuccessful = base.Dash(stats);
         if (!dashSuccessful)
             return false;
+        _player.CameraController.ShakeCamera(stats.CameraShakeIntensity, stats.CameraShakeDuration);
         _fovController.ChangeFov(stats.CameraFov, stats.EnterFovTime);
         return true;
     }
@@ -77,5 +90,17 @@ public class PlayerDashable : Dashable
         _animator.SetBool("IsDashing", true);
         _animator.SetFloat("DashX", dashX);
         _animator.SetFloat("DashY", dashY);
+    }
+
+    protected override float GetRegularSpeed()
+    {
+        return _characterMovement.GetCurrentMaxSpeed();
+    }
+
+    public void UpdateMaxSpeed(float maxSpeed)
+    {
+        _maxRegularSpeed = maxSpeed;
+        if (!_isDashing)
+            _maxSpeed = maxSpeed;
     }
 }

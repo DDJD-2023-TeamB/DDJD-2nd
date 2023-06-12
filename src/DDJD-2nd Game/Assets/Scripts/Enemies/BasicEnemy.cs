@@ -10,6 +10,8 @@ public class BasicEnemy : HumanoidEnemy
     private NavMeshAgent _navMeshAgent;
     private NoiseListener _noiseListener;
 
+    private EnemySpawnerManager _enemySpawnerManager;
+
     [Header("Ranges")]
     [SerializeField]
     private float _attackRange = 10.0f;
@@ -66,6 +68,7 @@ public class BasicEnemy : HumanoidEnemy
     {
         base.Die(force, hitPoint, hitDirection);
         ChangeState(new EnemyDeadState(this));
+        _enemySpawnerManager?.EnemyDied(this);
     }
 
     public override void Update()
@@ -74,9 +77,16 @@ public class BasicEnemy : HumanoidEnemy
         _state.Update();
     }
 
-    public override void TakeDamage(int damage, float force, Vector3 hitPoint, Vector3 hitDirection)
+    public override void TakeDamage(
+        GameObject damager,
+        int damage,
+        float force,
+        Vector3 hitPoint,
+        Vector3 hitDirection,
+        Element element
+    )
     {
-        base.TakeDamage(damage, force, hitPoint, hitDirection);
+        base.TakeDamage(damager, damage, force, hitPoint, hitDirection, element);
 
         OnDamageTaken?.Invoke();
         if (force >= _forceResistance)
@@ -94,6 +104,11 @@ public class BasicEnemy : HumanoidEnemy
     {
         base.ChangeState(state);
         _stateText.text = state.GetType().ToString() + " " + state.Substate?.GetType().ToString();
+    }
+
+    public void SetEnemySpawnerManager(EnemySpawnerManager enemySpawnerManager)
+    {
+        _enemySpawnerManager = enemySpawnerManager;
     }
 
     //getters and setters

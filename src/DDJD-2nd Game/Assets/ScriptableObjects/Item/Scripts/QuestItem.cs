@@ -2,15 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName="QuestItem", menuName = "Scriptable Objects/Items/QuestItem")]
+[CreateAssetMenu(fileName = "QuestItem", menuName = "Scriptable Objects/Items/QuestItem")]
 public class QuestItem : CollectibleObject
 {
-    public void Awake()
+    public override void Use(InventoryUI inventoryUI)
     {
-        _type = ItemType.QuestItem;
-    }
-
-    public override void Use(){
-        Debug.Log("Using quest item");
+        Debug.Log("Nothing");
     }
 }

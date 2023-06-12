@@ -12,6 +12,9 @@ public class EnemyDeadState : GenericState
 
     public override void Enter()
     {
+        _context.RagdollController.ActivateRagdoll();
+        _context.Animator.enabled = false;
+        _context.NavMeshAgent.enabled = false;
         base.Enter();
     }
 

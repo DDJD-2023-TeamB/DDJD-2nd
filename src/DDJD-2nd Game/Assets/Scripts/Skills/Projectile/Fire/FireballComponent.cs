@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class FireballComponent : ProjectileComponent
+public class FireballComponent : ProjectileComponent, NonPushable
 {
     [SerializeField]
     private float _explosionRadius = 3.0f;
@@ -36,38 +36,6 @@ public class FireballComponent : ProjectileComponent
     protected override void OnImpact(Collider other, float multiplier = 1)
     {
         base.OnImpact(other);
-        //Raycast sphere
-        RaycastHit[] hits = Physics.SphereCastAll(
-            transform.position,
-            _explosionRadius,
-            Vector3.up,
-            0.0f
-        );
-        foreach (RaycastHit hit in hits)
-        {
-            if (hit.collider.gameObject == _caster)
-            {
-                continue;
-            }
-            // https://docs.unity3d.com/ScriptReference/Physics.SphereCastAll.html
-            //Notes: For colliders that overlap the sphere at the start of the sweep,
-            //RaycastHit.normal is set opposite to the direction of the sweep, RaycastHit.distance is set to zero, and the zero vector gets returned in RaycastHit.point
-            Vector3 point = hit.distance == 0 ? hit.collider.bounds.center : hit.point;
-            Vector3 direction = (point - transform.position).normalized;
-            float force = GetForce();
-            Damage(hit.collider.gameObject, (int)GetDamage(), (int)force, point, direction);
-            Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.AddExplosionForce(
-                    force,
-                    transform.position,
-                    _explosionRadius,
-                    0.0f,
-                    ForceMode.Impulse
-                );
-            }
-        }
     }
 
     override public void SetSkill(Skill skill)
@@ -114,5 +82,55 @@ public class FireballComponent : ProjectileComponent
         VisualEffect vfx = impact.GetComponent<VisualEffect>();
         vfx.SetFloat("Size", _currentRadius);
         Destroy(impact, 3.0f);
+    }
+
+    public override void DestroySpell()
+    {
+        DeactivateSpell();
+        _soundEmitter.StopAndRelease("fireball");
+        Destroy(gameObject);
+    }
+
+    protected override void Explode()
+    {
+        SpawnHitVFX();
+        _soundEmitter.Stop("fireball");
+        _soundEmitter.SetParameterWithLabel("fireball", _sfxStateId, "Impact", true);
+        _fireballVFX.enabled = false;
+
+        //Raycast sphere
+        RaycastHit[] hits = Physics.SphereCastAll(
+            transform.position,
+            _explosionRadius,
+            Vector3.up,
+            0.0f
+        );
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.collider.gameObject == _caster)
+            {
+                continue;
+            }
+            // https://docs.unity3d.com/ScriptReference/Physics.SphereCastAll.html
+            //Notes: For colliders that overlap the sphere at the start of the sweep,
+            //RaycastHit.normal is set opposite to the direction of the sweep, RaycastHit.distance is set to zero, and the zero vector gets returned in RaycastHit.point
+            Vector3 point = hit.distance == 0 ? hit.collider.bounds.center : hit.point;
+            Vector3 direction = (point - transform.position).normalized;
+            float force = GetForce();
+            Damage(hit.collider.gameObject, (int)GetDamage(), (int)force, point, direction);
+            Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+            if (rb != null && hit.collider.GetComponent<NonPushable>() != null)
+            {
+                rb.AddExplosionForce(
+                    force,
+                    transform.position,
+                    _explosionRadius,
+                    0.0f,
+                    ForceMode.Impulse
+                );
+            }
+        }
+
+        DestroySpell();
     }
 }

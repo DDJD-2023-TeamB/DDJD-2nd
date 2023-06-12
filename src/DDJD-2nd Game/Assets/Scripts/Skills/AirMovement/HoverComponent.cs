@@ -7,12 +7,26 @@ public class HoverComponent : MonoBehaviour
 {
     private VisualEffect _vfx;
     private SoundEmitter _soundEmitter;
+    private FMOD.Studio.PARAMETER_ID _elementParameterId;
+
+    private Element _element;
 
     // Start is called before the first frame update
     private void Awake()
     {
         _vfx = GetComponent<VisualEffect>();
         _soundEmitter = GetComponent<SoundEmitter>();
+    }
+
+    private void Start()
+    {
+        _elementParameterId = _soundEmitter.GetParameterId("hover", "Hover Type");
+        _soundEmitter.SetParameterWithLabel(
+            "hover",
+            _elementParameterId,
+            _element.SfxDamageLabel,
+            true
+        );
     }
 
     public void Stop()
@@ -28,4 +42,10 @@ public class HoverComponent : MonoBehaviour
 
     // Update is called once per frame
     void Update() { }
+
+    public Element Element
+    {
+        get { return _element; }
+        set { _element = value; }
+    }
 }

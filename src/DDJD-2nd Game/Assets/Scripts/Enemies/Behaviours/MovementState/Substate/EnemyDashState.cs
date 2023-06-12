@@ -6,7 +6,7 @@ public class EnemyDashState : GenericState
 {
     private BasicEnemy _context;
     private DashStats _stats;
-    private DashSkill _skill;
+    private DashSkill _dashSkill;
     private EnemyDashable _dashable;
     private Vector3 _dashDirection;
 
@@ -25,14 +25,15 @@ public class EnemyDashState : GenericState
         base.Enter();
         _dashable = _context.EnemyDashable;
         _stats = _context.EnemySkills.DashStats;
-        _skill = _context.EnemySkills.CurrentElement.DashSkill;
+        _dashSkill = _context.EnemySkills.CurrentElement.DashSkill;
         _context.NavMeshAgent.enabled = false;
         _context.Rigidbody.isKinematic = false;
         bool canUseSkill =
-            _skill != null && (_skill.CanDashInAir || MovementUtils.IsGrounded(_context.Rigidbody));
+            _dashSkill != null
+            && (_dashSkill.CanDashInAir || MovementUtils.IsGrounded(_context.Rigidbody));
         if (canUseSkill)
         {
-            _dashable.DashWithSkill(_dashDirection, _skill);
+            _dashable.DashWithSkill(_dashDirection, _dashSkill);
         }
         else
         {

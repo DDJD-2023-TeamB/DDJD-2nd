@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5574611356555567780}
   - component: {fileID: 1355039477858213897}
   - component: {fileID: -4652571389743679264}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: BasicFireShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,6 +142,7 @@ MonoBehaviour:
   _damageCaster: 0
   _destroyOnImpact: 1
   _setVelocity: 0
+  _sfxStateName: Fire Ball
 --- !u!54 &1355039477858213897
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -172,13 +173,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _events:
     _keys:
-    - spawn
+    - shot
     _values:
-    - _playOnStart: 0
+    - _playOnStart: 1
+      _stopOnDestroy: 1
+      _updatePosition: 0
       _eventReference:
         Guid:
-          Data1: -482984664
-          Data2: 1146691305
-          Data3: -908953159
-          Data4: 2116586193
-        Path: event:/Fire Abilities/Fire Ball
+          Data1: -273434007
+          Data2: 1107267272
+          Data3: -793576018
+          Data4: 1952424356
+        Path: event:/Attacks/Fire Abilities/Fire Ball

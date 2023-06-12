@@ -27,6 +27,24 @@ public class AirborneState : GenericState
         _context.Input.OnJumpKeyUp -= OnJumpKeyUp;
         _context.Input.OnJumpKeyDown -= OnJumpKeyDown;
         _context.AirMovement?.Reset();
+
+        bool IsGrounded = MovementUtils.IsGrounded(_context.Rigidbody);
+        if (IsGrounded)
+        {
+            _context.SoundEmitter.SetParameterWithLabel(
+                "jump",
+                _context.SfxJumpStateId,
+                "Hit",
+                false
+            );
+            _context.SoundEmitter.SetParameter(
+                "jump",
+                _context.SfxJumpIntensityId,
+                _context.Rigidbody.velocity.magnitude / 15.0f,
+                true
+            );
+            _context.SoundEmitter.Play("footstep");
+        }
     }
 
     public override bool CanChangeState(GenericState state)
@@ -43,6 +61,17 @@ public class AirborneState : GenericState
         if (CheckCurrentStates())
         {
             return;
+        }
+
+        Vector2 moveInput = _context.Input.MoveInput;
+        if (moveInput == Vector2.zero)
+        {
+            Decelerate();
+        }
+
+        if (moveInput != Vector2.zero)
+        {
+            Accelerate(moveInput);
         }
     }
 
@@ -65,5 +94,46 @@ public class AirborneState : GenericState
     private void OnJumpKeyUp()
     {
         _context.AirMovement?.OnKeyUp();
+    }
+
+    private void Decelerate(float multiplier = 1.0f)
+    {
+        Vector3 velocity = _context.Rigidbody.velocity;
+        Vector3 horizontalVelocity = new Vector3(velocity.x, 0, velocity.z);
+        if (horizontalVelocity.magnitude > 0.1f)
+        {
+            _context.Rigidbody.AddForce(
+                -horizontalVelocity.normalized
+                    * _context.AirAcceleration
+                    * Time.deltaTime
+                    * multiplier,
+                ForceMode.Acceleration
+            );
+        }
+        else
+        {
+            velocity = new Vector3(0, velocity.y, 0);
+        }
+    }
+
+    private void Accelerate(Vector2 moveInput)
+    {
+        Vector3 velocity = _context.Rigidbody.velocity;
+        Vector3 horizontalVelocity = new Vector3(velocity.x, 0, velocity.z);
+        if (horizontalVelocity.magnitude > _context.MaxAirSpeed) // velocity might exceed because of previous state
+        {
+            Decelerate(_context.AccelerationMultiplier);
+        }
+
+        Vector3 moveDirection =
+            _context.transform.forward * moveInput.y + _context.transform.right * moveInput.x;
+
+        _context.Rigidbody.AddForce(
+            moveDirection
+                * _context.AirAcceleration
+                * Time.deltaTime
+                * _context.AccelerationMultiplier,
+            ForceMode.Acceleration
+        );
     }
 }

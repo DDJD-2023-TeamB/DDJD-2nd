@@ -94,7 +94,8 @@ public class PlayerAimComponent : MonoBehaviour, AimComponent
     public Vector3 GetAimDirection(Vector3 origin, bool rayCast = true)
     {
         Vector3 position =
-            _player.AimCamera.transform.position + _player.AimCamera.transform.forward * 10f;
+            _player.CameraController.AimCamera.transform.position
+            + _player.CameraController.AimCamera.transform.forward * 100f;
         ;
         if (rayCast)
         {
@@ -106,19 +107,19 @@ public class PlayerAimComponent : MonoBehaviour, AimComponent
         }
 
         Vector3 direction = position - origin;
-        return direction;
+        return direction.normalized;
     }
 
     public Quaternion GetAimRotation()
     {
-        return _player.CameraTarget.transform.rotation;
+        return _player.CameraController.CameraTarget.transform.rotation;
     }
 
     public bool GetAimRaycastHit(out RaycastHit hit)
     {
         return Physics.Raycast(
-            _player.AimCamera.transform.position,
-            _player.AimCamera.transform.forward,
+            _player.CameraController.AimCamera.transform.position,
+            _player.CameraController.AimCamera.transform.forward,
             out hit,
             100f,
             RayCastUtils.RayCastMask

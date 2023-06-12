@@ -63,6 +63,7 @@ public class ElectricRayComponent : RayCastSkillComponent, NonCollidable
         _soundEmitter.StopAndRelease("ray");
         _vfx.Stop();
         _vfx.SetFloat("Thickness", 0.0f);
+        active = false;
         Destroy(gameObject, 0.5f);
     }
 }

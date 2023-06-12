@@ -16,7 +16,7 @@ public class FireDashComponent : DashComponent
     public override void SetSkill(Skill skill)
     {
         base.SetSkill(skill);
-        Destroy(gameObject, _skill.DashSkillStats.EffectDuration);
+        Destroy(gameObject, _dashSkill.DashSkillStats.EffectDuration);
         Explode();
     }
 

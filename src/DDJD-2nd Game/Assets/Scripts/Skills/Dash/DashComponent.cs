@@ -4,13 +4,13 @@ using UnityEngine;
 
 public abstract class DashComponent : SkillComponent
 {
-    protected DashSkill _skill;
+    protected DashSkill _dashSkill;
     protected Vector3 _dashDirection;
 
     public override void SetSkill(Skill skill)
     {
         base.SetSkill(skill);
-        _skill = (DashSkill)skill;
+        _dashSkill = (DashSkill)skill;
     }
 
     // destroy the gameobject after the dash is over

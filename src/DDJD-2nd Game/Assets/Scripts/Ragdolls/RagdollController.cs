@@ -6,7 +6,11 @@ public class RagdollController : MonoBehaviour
 {
     private Rigidbody[] _rigidbodies; //Rig rigibodies
     private Collider[] _colliders; //Rig colliders
-    private Collider _collider; //Main collider
+
+    [SerializeField]
+    private Collider _collider; //Collider to aid in ragdoll get up
+
+    private Collider _triggerCollider; //Main Collider
     private Rigidbody _rb; //Main rigidbody
     private Animator _animator;
 
@@ -40,6 +44,12 @@ public class RagdollController : MonoBehaviour
 
     private bool _originalIsTrigger;
 
+    [SerializeField]
+    private bool _setBoneComponentsOnAwake = true;
+
+    // List of objects that damaged this ragdoll in this frame.
+    private List<GameObject> damageInteractions;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -51,7 +61,7 @@ public class RagdollController : MonoBehaviour
         _rigidbodies = rigidbodies.ToArray();
 
         _colliders = GetComponentsInChildren<Collider>();
-        _collider = GetComponent<Collider>();
+        _triggerCollider = GetComponent<Collider>();
         _animator = GetComponent<Animator>();
         _hipsBone = _animator.GetBoneTransform(HumanBodyBones.Hips);
         _bones = GetRagdollTransforms();
@@ -61,6 +71,36 @@ public class RagdollController : MonoBehaviour
         }
         _originalIsTrigger = _collider.isTrigger;
         _isRagdollActive = false;
+        damageInteractions = new List<GameObject>();
+    }
+
+    public void Start()
+    {
+        if (_setBoneComponentsOnAwake)
+        {
+            foreach (Rigidbody rb in _rigidbodies)
+            {
+                BoneComponent boneComponent = rb.GetComponent<BoneComponent>();
+                if (boneComponent == null)
+                {
+                    boneComponent = rb.gameObject.AddComponent<BoneComponent>() as BoneComponent;
+                }
+                boneComponent.SetRagdollController(this);
+            }
+        }
+
+        DeactivateRagdoll();
+    }
+
+    public void AddDamageInteraction(GameObject gameObject)
+    {
+        damageInteractions.Add(gameObject);
+        StartCoroutine(ReleaseDamageInteraction(gameObject));
+    }
+
+    public bool CanDamage(GameObject gameObject)
+    {
+        return !damageInteractions.Contains(gameObject);
     }
 
     public Transform GetRagdollTransform()
@@ -79,7 +119,8 @@ public class RagdollController : MonoBehaviour
         {
             col.enabled = true;
         }
-        _collider.isTrigger = true;
+        _collider.enabled = false;
+        _triggerCollider.enabled = false;
         _rb.isKinematic = true;
         _animator.enabled = false;
         _isRagdollActive = true;
@@ -104,9 +145,12 @@ public class RagdollController : MonoBehaviour
         }
         foreach (Collider col in _colliders)
         {
-            col.enabled = false;
+            //col.enabled = false;
+            col.isTrigger = false;
         }
         _collider.enabled = true;
+        _triggerCollider.enabled = true;
+        _triggerCollider.isTrigger = true;
         _collider.isTrigger = _originalIsTrigger;
         _rb.isKinematic = false;
         _animator.enabled = true;
@@ -130,11 +174,11 @@ public class RagdollController : MonoBehaviour
                 closestDistance = distance;
                 closestRb = rb;
             }
-            rb.AddForce(totalForce * 0.2f * hitDirection, ForceMode.Impulse);
+            //rb.AddForce(totalForce * 0.2f * hitDirection, ForceMode.Impulse);
         }
 
         //Add force to closest rigidbody
-        closestRb.AddForce(hitDirection * totalForce, ForceMode.Impulse);
+        //closestRb.AddForce(hitDirection * totalForce, ForceMode.Impulse);
     }
 
     public void AlignPositionWithHips(string animationName)
@@ -216,5 +260,20 @@ public class RagdollController : MonoBehaviour
     public BoneTransform[] GetAnimationInitialBones(string animationName)
     {
         return _animationInitialBones[animationName];
+    }
+
+    private IEnumerator ReleaseDamageInteraction(GameObject gameObject)
+    {
+        yield return 0;
+        //Remove from next frame
+        if (gameObject != null)
+        {
+            damageInteractions.Remove(gameObject);
+        }
+        else
+        {
+            // Remove nulls
+            damageInteractions.RemoveAll(item => item == null);
+        }
     }
 }

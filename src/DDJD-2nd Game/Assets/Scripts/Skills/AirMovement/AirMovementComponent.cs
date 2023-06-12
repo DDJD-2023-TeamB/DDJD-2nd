@@ -5,11 +5,14 @@ public abstract class AirMovementComponent : MonoBehaviour
     protected Player _player;
     protected Rigidbody _rb;
 
+    protected Animator _animator;
+
     protected virtual void Awake()
     {
         enabled = false;
         _player = GetComponent<Player>();
         _rb = GetComponent<Rigidbody>();
+        _animator = _player.Animator;
     }
 
     public virtual void Reset() { }

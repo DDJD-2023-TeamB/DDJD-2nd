@@ -26,6 +26,7 @@ public class EnemyMoveToState : EnemyState
     public override void Exit()
     {
         base.Exit();
+        _context.OnDamageTaken -= OnDamageTaken;
         if (_checkDestinationCoroutine != null)
         {
             _context.StopCoroutine(_checkDestinationCoroutine);

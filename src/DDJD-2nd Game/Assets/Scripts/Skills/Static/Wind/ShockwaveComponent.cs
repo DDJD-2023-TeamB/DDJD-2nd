@@ -18,20 +18,7 @@ public class ShockwaveComponent : StaticSkillComponent, NonCollidable
             return;
         }
         Vector3 direction = _shootDirection.normalized;
-        Rigidbody rb = other.GetComponent<Rigidbody>();
         float force = _stats.ForceWithDamage() * multiplier;
-        //Redirect skill
-
-        if (otherSkill != null)
-        {
-            otherSkill.SetCaster(_caster);
-            rb.velocity = Vector3.zero;
-        }
-        if (rb != null)
-        {
-            rb.AddForce(force * direction, ForceMode.Impulse);
-        }
-
         Damage(
             other.gameObject,
             (int)(_stats.Damage * multiplier),
@@ -43,6 +30,20 @@ public class ShockwaveComponent : StaticSkillComponent, NonCollidable
         //Knockdown enemy
         BasicEnemy enemy = other.GetComponent<BasicEnemy>();
         enemy?.Knockdown(force, transform.position, direction);
+
+        Rigidbody rb = other.GetComponent<Rigidbody>();
+
+        //Redirect skill
+
+        if (otherSkill != null)
+        {
+            otherSkill.SetCaster(_caster);
+            rb.velocity = Vector3.zero;
+        }
+        if (rb != null)
+        {
+            rb.AddForce(force * direction, ForceMode.Impulse);
+        }
     }
 
     public override void DestroySpell()

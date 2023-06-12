@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spellPrefab: {fileID: 7581297245760954433, guid: b52d6e1d6cbaf134683d62d77d9f877c,
     type: 3}
+  _element: {fileID: 11400000, guid: 395138bc558d7cf449eb38e7c3e9ab91, type: 2}
   _skillStats:
     _damage: 25
     _force: 0
@@ -25,6 +26,7 @@ MonoBehaviour:
     _maxChargeTime: 0
     _isContinuous: 0
     _tickRate: 0
+    _manaCost: 10
     _effectDuration: 3
   _dashStats:
     _duration: 0.5
@@ -33,5 +35,7 @@ MonoBehaviour:
     _maxSpeed: 25
     _cameraFov: 70
     _enterFovTime: 0.05
-    _exitFovTime: 0.05
+    _exitFovTime: 0.25
+    _cameraShakeIntensity: 15
+    _cameraShakeDuration: 0.3
   _canDashInAir: 1

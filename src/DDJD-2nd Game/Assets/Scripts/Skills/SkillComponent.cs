@@ -5,11 +5,14 @@ using UnityEngine;
 public abstract class SkillComponent : MonoBehaviour
 {
     protected GameObject _caster;
+
+    protected Skill _skill;
     protected SkillStats _skillStats;
 
     protected bool _isChargeAttack = false;
     protected ChargeComponent _chargeComponent;
     protected NoiseSource _noiseComponent;
+    protected CharacterStatus _characterStatus;
 
     protected SoundEmitter _soundEmitter;
 
@@ -29,21 +32,37 @@ public abstract class SkillComponent : MonoBehaviour
     private bool _damageCaster = false;
 
     protected float _elapsedTime = 0.0f;
+    protected float _lastTickTime = 0.0f;
+    protected bool active = true; // Used in skills where the game object is only destroyed after a certain delay
 
     protected virtual void Update()
     {
         _elapsedTime += Time.deltaTime;
+        if (_skillStats.CastType != CastType.Hold || !active)
+            return;
+        if (_elapsedTime - _lastTickTime >= _skillStats.TickRate)
+        {
+            _lastTickTime = _elapsedTime;
+            bool success = _characterStatus.ConsumeMana(_skill.Element, _skillStats.ManaCost);
+            if (!success)
+            {
+                DestroySpell();
+            }
+        }
     }
 
     public virtual void SetCaster(GameObject caster)
     {
         _caster = caster;
+        _chargeComponent?.SetCaster(_caster);
+        _characterStatus = _caster.GetComponent<CharacterStatus>();
     }
 
     private Dictionary<GameObject, float> _collidedObjects = new Dictionary<GameObject, float>();
 
     public virtual void SetSkill(Skill skill)
     {
+        _skill = skill;
         _skillStats = skill.SkillStats;
         if (_skillStats.CastType == CastType.Charge)
         {
@@ -55,6 +74,7 @@ public abstract class SkillComponent : MonoBehaviour
             _isChargeAttack = true;
             _chargeComponent.MaxChargeTime = _skillStats.MaxChargeTime;
             _chargeComponent.MinChargeTime = _skillStats.MinChargeTime;
+            _chargeComponent.SetManaCost(_skillStats.ManaCost);
         }
     }
 
@@ -67,6 +87,7 @@ public abstract class SkillComponent : MonoBehaviour
     )
     {
         Damageable damageable = target.GetComponent<Damageable>();
+        target = damageable?.GetDamageableObject() ?? target;
         if (!_damageCaster && target == _caster)
         {
             return;
@@ -75,7 +96,14 @@ public abstract class SkillComponent : MonoBehaviour
         {
             return;
         }
-        damageable.TakeDamage(damage, _skillStats.ForceWithDamage(), hitPoint, direction);
+        damageable.TakeDamage(
+            this.gameObject,
+            damage,
+            _skillStats.ForceWithDamage(),
+            hitPoint,
+            direction,
+            _skill.Element
+        );
     }
 
     public virtual void Shoot(Vector3 direction)
@@ -100,7 +128,7 @@ public abstract class SkillComponent : MonoBehaviour
         }
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public virtual void OnCollisionEnter(Collision collision)
     {
         OnImpact(collision.collider);
         _noiseComponent?.MakeNoise(GetNoiseRadius());
@@ -126,7 +154,10 @@ public abstract class SkillComponent : MonoBehaviour
         {
             return false;
         }
+
         GameObject otherObject = other.gameObject;
+        Damageable damageable = otherObject.GetComponent<Damageable>();
+        otherObject = damageable?.GetDamageableObject() ?? otherObject;
         if (_skillStats.IsContinuous)
         {
             if (_collidedObjects.ContainsKey(otherObject))
@@ -190,5 +221,10 @@ public abstract class SkillComponent : MonoBehaviour
     public virtual float GetNoiseRadius()
     {
         return _skillStats.NoiseRadius;
+    }
+
+    public Skill Skill
+    {
+        get { return _skill; }
     }
 }

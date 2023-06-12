@@ -13,13 +13,6 @@ public class MenuUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void openOptions()
-    {
-        //TODO: OPEN OPTIONS
-        Debug.Log("Openning options");
-    }
-
-
     public void quitGame()
     {
         //TODO: SAVE GAME STATE

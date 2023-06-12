@@ -24,6 +24,7 @@ public class ElectricBoltComponent : RayCastSkillComponent, NonCollidable
         Vector3 pos1 = transform.position;
         Vector3 pos4;
         RaycastHit? hit = GetRaycastHit();
+        Vector3 direction = GetRaycastShotDirection();
 
         if (hit != null)
         {
@@ -31,13 +32,13 @@ public class ElectricBoltComponent : RayCastSkillComponent, NonCollidable
         }
         else
         {
-            pos4 = pos1 + transform.forward * _stats.MaxDistance;
+            pos4 = pos1 + direction * _stats.MaxDistance;
         }
 
         float distance = Vector3.Distance(pos1, pos4);
         if (distance > _stats.MaxDistance)
         {
-            pos4 = pos1 + transform.forward * _stats.MaxDistance;
+            pos4 = pos1 + direction * _stats.MaxDistance;
         }
 
         ElectricRayUtils.SetBezierAndScale(transform, pos1, pos4);

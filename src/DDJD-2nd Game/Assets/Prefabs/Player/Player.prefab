@@ -236,7 +236,8 @@ GameObject:
   - component: {fileID: 1578423061471397423}
   - component: {fileID: 9029944465990448921}
   - component: {fileID: 2715304234544930070}
-  m_Layer: 6
+  - component: {fileID: 3769909569626782521}
+  m_Layer: 9
   m_Name: LeftHandHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,6 +284,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f26629a092a164dab236d075583683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3769909569626782521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855736713580985946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - melee
+    - meleeElement
+    _values:
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: 820308842
+          Data2: 1337895590
+          Data3: -138653824
+          Data4: -1723026112
+        Path: event:/Attacks/Melee
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: -1107946826
+          Data2: 1278192834
+          Data3: 1011146412
+          Data4: 577834099
+        Path: event:/Attacks/Melee overlay
 --- !u!1 &956762218124547194
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,6 +1002,7 @@ GameObject:
   - component: {fileID: 8517818375070919311}
   - component: {fileID: 716971567613677415}
   - component: {fileID: 8709851357610998055}
+  - component: {fileID: 1639183931769134707}
   m_Layer: 6
   m_Name: LeftFootHitBox
   m_TagString: Untagged
@@ -1012,6 +1051,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f26629a092a164dab236d075583683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1639183931769134707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2870785494786809861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - melee
+    - meleeElement
+    _values:
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: 820308842
+          Data2: 1337895590
+          Data3: -138653824
+          Data4: -1723026112
+        Path: event:/Attacks/Melee
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: -1107946826
+          Data2: 1278192834
+          Data3: 1011146412
+          Data4: 577834099
+        Path: event:/Attacks/Melee overlay
 --- !u!1 &2944585961000116056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,6 +1335,9 @@ MonoBehaviour:
   UnloadEvent: 2
   Banks:
   - Abilities
+  - Music
+  - Movement
+  - UI
   CollisionTag: 
   PreloadSamples: 0
 --- !u!1 &3500396441678054356
@@ -1618,7 +1697,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4492101057451422959}
-  m_LocalRotation: {x: 0.05884391, y: 0.014974768, z: -0.0008828031, w: 0.9981545}
+  m_LocalRotation: {x: 0.05884496, y: 0.013733736, z: -0.0008096409, w: 0.99817234}
   m_LocalPosition: {x: -0.5397235, y: 2.3344133, z: -1.468136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2073,6 +2152,7 @@ Transform:
   - {fileID: 1383292200363455867}
   - {fileID: 8348653656342378348}
   - {fileID: 79076952650345937}
+  - {fileID: 8228588811459176773}
   m_Father: {fileID: 5015672085775979565}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2087,6 +2167,7 @@ GameObject:
   - component: {fileID: 3129688510996236332}
   - component: {fileID: 942165180637659622}
   - component: {fileID: 4642713434733892028}
+  - component: {fileID: 3065342751113120485}
   m_Layer: 6
   m_Name: RightFootHitBox
   m_TagString: Untagged
@@ -2135,6 +2216,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f26629a092a164dab236d075583683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3065342751113120485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4910991743724890576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - melee
+    - meleeElement
+    _values:
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: 820308842
+          Data2: 1337895590
+          Data3: -138653824
+          Data4: -1723026112
+        Path: event:/Attacks/Melee
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: -1107946826
+          Data2: 1278192834
+          Data3: 1011146412
+          Data4: 577834099
+        Path: event:/Attacks/Melee overlay
 --- !u!1 &5038380692370057851
 GameObject:
   m_ObjectHideFlags: 0
@@ -2511,7 +2629,8 @@ GameObject:
   - component: {fileID: 79076952650345937}
   - component: {fileID: 988894118790861810}
   - component: {fileID: 2625061817219118427}
-  m_Layer: 6
+  - component: {fileID: 8749276271521842887}
+  m_Layer: 9
   m_Name: RightHandHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2558,6 +2677,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f26629a092a164dab236d075583683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8749276271521842887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5850911896283943163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - melee
+    - meleeElement
+    _values:
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: 820308842
+          Data2: 1337895590
+          Data3: -138653824
+          Data4: -1723026112
+        Path: event:/Attacks/Melee
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: -1107946826
+          Data2: 1278192834
+          Data3: 1011146412
+          Data4: 577834099
+        Path: event:/Attacks/Melee overlay
 --- !u!1 &5903967639473050877
 GameObject:
   m_ObjectHideFlags: 0
@@ -3246,6 +3402,37 @@ Transform:
   m_Father: {fileID: 7026416567958636142}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7581090568947958763
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8228588811459176773}
+  m_Layer: 9
+  m_Name: RightHandAbsorb
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8228588811459176773
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7581090568947958763}
+  m_LocalRotation: {x: 0.00000008137429, y: -0.00000015446862, z: -1, w: 0.00000021209962}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9204738695688527437}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7694690271000812756
 GameObject:
   m_ObjectHideFlags: 0
@@ -3267,7 +3454,14 @@ GameObject:
   - component: {fileID: 3093818352404047951}
   - component: {fileID: 5741952415770023321}
   - component: {fileID: 2948459615406707077}
+  - component: {fileID: 5458505848532433039}
+  - component: {fileID: 8062649751035626759}
+  - component: {fileID: 5597915682881764452}
+  - component: {fileID: 4346819917323664300}
   - component: {fileID: 7961308323444105709}
+  - component: {fileID: 1218520422210949770}
+  - component: {fileID: 2410517152061201940}
+  - component: {fileID: 6552981424179309022}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -3332,14 +3526,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: 2f5852599379b4183bf507c38fcd8d84, type: 2}
-  _maxSpeed: 5
   _jumpForce: 200
   _acceleration: 2
-  _cameraTarget: {fileID: 4492101058934089455}
-  _cameraRotationSpeed: 20
-  _minAngle: 30
-  maxAngle: 330
-  _aimCamera: {fileID: 4492101057451422945}
+  _maxAirSpeed: 4
+  _airAcceleration: 0.8
+  _accelerationMultiplier: 1000
+  _frictionlessMaterial: {fileID: 13400000, guid: a47e96029b9f4b141a73f3105e66851c,
+    type: 2}
   _playerSkills: {fileID: 11400000, guid: 4416c54b33ddce64baf418917cb99d12, type: 2}
   _meleeCombat: {fileID: 0}
   _LeftHand: {fileID: 6737474002199511682}
@@ -3353,14 +3546,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7694690271000812756}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 15
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!65 &7026416567958636128
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3561,6 +3754,101 @@ MonoBehaviour:
   _maxRegularSpeed: 5
   _speedChangeFactor: 50
   _playerCamTransform: {fileID: 4492101058340307228}
+--- !u!114 &5458505848532433039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694690271000812756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d038dd3ca4fcc04b80830734db2bb41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _regularCamera: {fileID: 4492101058340307231}
+  _aimCamera: {fileID: 4492101057451422945}
+  _cameraTarget: {fileID: 4492101058934089452}
+  _cameraRotationSpeed: 40
+  _maxAngle: 80
+  _minAngle: -25
+  _runFov: 60
+  _walkFov: 50
+--- !u!114 &8062649751035626759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694690271000812756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce144dd0ad4a34249b38badc065fa0db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 500
+  _maxHealth: 500
+  _useMana: 1
+  _mana: 100
+  _maxMana: 100
+  _elementMana:
+    _keys:
+    - {fileID: 11400000, guid: d9da0c3870700374389d976c0d2388a7, type: 2}
+    - {fileID: 11400000, guid: 48039012ea82f1b4caa0ae6b3fd06a8d, type: 2}
+    - {fileID: 11400000, guid: 395138bc558d7cf449eb38e7c3e9ab91, type: 2}
+    - {fileID: 11400000, guid: 4f1fc44ed51339b4195c6001521bf9e3, type: 2}
+    _values: 64000000640000006400000064000000
+  _cameraShakeIntensity: 20
+--- !u!114 &5597915682881764452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694690271000812756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c13b46f5f8082424282362e44f757aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _floorType: Wood
+--- !u!114 &4346819917323664300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694690271000812756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - footstep
+    - jump
+    _values:
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: 167925518
+          Data2: 1308022944
+          Data3: 855472541
+          Data4: -2142007058
+        Path: event:/Movement/Footsteps
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: -765863022
+          Data2: 1209146570
+          Data3: -2126559301
+          Data4: 781296483
+        Path: event:/Movement/Jump
 --- !u!114 &7961308323444105709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3573,15 +3861,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70e99400df5aada4a8a80f59a101a691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 0}
   currentMenu: playing
   inventoryKey: 9
   menuKey: 27
   leftWheelKey: 113
   rightWheelKey: 101
   missionsKey: 109
+  activeElementKey: 308
   fireStoneSprite: {fileID: 0}
   redDiamondSprite: {fileID: 0}
+  currentItemTitle: {fileID: 0}
+--- !u!114 &1218520422210949770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694690271000812756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6f8bc5673b3f3c409f4055098f5d4b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _absorbTime: 0.1
+  _absorbAmount: 5
+  _absorbRange: 3
+  _offset: 2
+  _absorbTarget: {fileID: 7581090568947958763}
+--- !u!114 &2410517152061201940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694690271000812756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e89caf55e759d4b6883237e74b93b15d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameState: {fileID: 11400000, guid: f6eef75e9317435439329e2655a9e4f6, type: 2}
+--- !u!114 &6552981424179309022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694690271000812756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2637b65c6a8ea33419559760dfa4d5ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _acceleration: 2
+  _maxRunSpeed: 15
+  _maxSpeed: 7.5
+  _maxAnimationSpeed: 1.75
 --- !u!1 &8198835224221356302
 GameObject:
   m_ObjectHideFlags: 0
