@@ -35,6 +35,9 @@ public abstract class SkillComponent : MonoBehaviour
     protected float _lastTickTime = 0.0f;
     protected bool active = true; // Used in skills where the game object is only destroyed after a certain delay
 
+    private Dictionary<GameObject, float> _collidedObjects = new Dictionary<GameObject, float>();
+    protected List<GameObject> _damagedObjects = new List<GameObject>();
+
     protected virtual void Update()
     {
         _elapsedTime += Time.deltaTime;
@@ -57,9 +60,6 @@ public abstract class SkillComponent : MonoBehaviour
         _chargeComponent?.SetCaster(_caster);
         _characterStatus = _caster.GetComponent<CharacterStatus>();
     }
-
-    private Dictionary<GameObject, float> _collidedObjects = new Dictionary<GameObject, float>();
-    private List<GameObject> _damagedObjects = new List<GameObject>();
 
     public virtual void SetSkill(Skill skill)
     {

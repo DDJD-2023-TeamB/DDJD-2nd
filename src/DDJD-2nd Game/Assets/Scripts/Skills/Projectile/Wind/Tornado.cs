@@ -164,6 +164,32 @@ public class Tornado : GroundProjectileComponent, NonCollidable
 
     protected override void OnImpact(Collider other, float multiplier)
     {
+        Damageable damageable = other.GetComponent<Damageable>();
+        if (damageable?.GetDamageableObject().layer == _caster.layer)
+        {
+            return;
+        }
+        if (damageable != null)
+        {
+            GameObject damageableObject = damageable.GetDamageableObject();
+            if (
+                !_damagedObjects.Contains(damageableObject)
+                && damageableObject.GetComponent<BasicEnemy>() != null
+            )
+            {
+                damageableObject
+                    .GetComponent<BasicEnemy>()
+                    ?.Knockdown(0f, transform.position, transform.forward);
+            }
+            Damage(
+                damageableObject,
+                (int)(_stats.Damage * multiplier),
+                0,
+                other.ClosestPoint(transform.position),
+                transform.forward
+            );
+        }
+
         if (!other.attachedRigidbody)
             return;
         if (other.attachedRigidbody.isKinematic)
@@ -181,14 +207,6 @@ public class Tornado : GroundProjectileComponent, NonCollidable
             caught.Init(this, _rb, _tornadoStrength);
             _caughtObjects.Add(caught);
         }
-
-        Damage(
-            other.gameObject,
-            (int)(_stats.Damage * multiplier),
-            (int)_tornadoStrength,
-            other.ClosestPoint(transform.position),
-            transform.forward
-        );
     }
 
     protected void OnTriggerExit(Collider other)

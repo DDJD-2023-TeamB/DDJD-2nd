@@ -41,6 +41,10 @@ public class ChargeComponent : MonoBehaviour
             return;
         }
         _chargeTime += Time.deltaTime;
+        if (_chargeTime <= _minChargeTime)
+        {
+            _chargeTime = _minChargeTime;
+        }
         if (!_characterStatus.HasEnoughMana(GetManaCost()))
         {
             _isCharging = false;

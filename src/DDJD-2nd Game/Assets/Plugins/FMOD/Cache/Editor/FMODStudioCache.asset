@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 638221251544610174
+  lastModified: 638221783573605806
   FileSizes:
   - Name: Desktop
-    Value: 67296
+    Value: 116640
   Exists: 1
 --- !u!114 &-8899655932541831967
 MonoBehaviour:
@@ -86,10 +86,10 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Movement.bank
   Name: Movement
   StudioPath: bank:/Movement
-  lastModified: 638221251522174762
+  lastModified: 638221869037719880
   FileSizes:
   - Name: Desktop
-    Value: 1631008
+    Value: 1645344
   Exists: 1
 --- !u!114 &-8798420417373273517
 MonoBehaviour:
@@ -377,6 +377,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-7178152084428820584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Abilities Menu/Abilities Menu Type
+  m_EditorClassIdentifier: 
+  Name: Abilities Menu Type
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 2054478347
+    data2: 1045777872
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Open
+  - Close
+  - Hover
+  Exists: 1
 --- !u!114 &-7104131427787966733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,10 +661,10 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Abilities.bank
   Name: Abilities
   StudioPath: bank:/Abilities
-  lastModified: 638221251513342450
+  lastModified: 638221783571717268
   FileSizes:
   - Name: Desktop
-    Value: 2635040
+    Value: 3693792
   Exists: 1
 --- !u!114 &-6341237352202516728
 MonoBehaviour:
@@ -718,36 +745,11 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
-  Parameters: []
+  Parameters:
+  - {fileID: -5685792279427546279}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-6216273426561826523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Melee overlay/Melee Type
-  m_EditorClassIdentifier: 
-  Name: Melee Type
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3569420667
-    data2: 1541724746
-  Type: 2
-  IsGlobal: 0
-  Labels:
-  - Fire
-  - Lightning
-  Exists: 1
 --- !u!114 &-6091163670596948680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -788,7 +790,7 @@ MonoBehaviour:
     Data4: -1976586680
   Banks:
   - {fileID: -8875583872252989065}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters:
@@ -825,6 +827,32 @@ MonoBehaviour:
   - Lightning
   - Wind
   Exists: 1
+--- !u!114 &-5685792279427546279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Lightning Dash/Lightning Dash State
+  m_EditorClassIdentifier: 
+  Name: Lightning Dash State
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1288640749
+    data2: 263028203
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Dash
+  - Explosion
+  Exists: 1
 --- !u!114 &-5459558611837328902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -847,7 +875,7 @@ MonoBehaviour:
   - {fileID: -6345873753029855478}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters:
   - {fileID: 4069998876487704224}
   MinDistance: 1
@@ -1133,7 +1161,7 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638221251543911259
+  lastModified: 638221783573068747
   FileSizes:
   - Name: Desktop
     Value: 2975328
@@ -1266,34 +1294,6 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-3356004496463541973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Attacks/Melee overlay
-  m_EditorClassIdentifier: 
-  Path: event:/Attacks/Melee overlay
-  Guid:
-    Data1: -1107946826
-    Data2: 1278192834
-    Data3: 1011146412
-    Data4: 577834099
-  Banks:
-  - {fileID: -6345873753029855478}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters:
-  - {fileID: -6216273426561826523}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -1605,6 +1605,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-1546525295639371272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main Menu/Main Menu Type
+  m_EditorClassIdentifier: 
+  Name: Main Menu Type
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 3862969168
+    data2: 1436630811
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Neutral
+  - Positive
+  - Select
+  Exists: 1
 --- !u!114 &-1247458670150439732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1671,12 +1698,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Dash/Parameter 1
+  m_Name: parameter:/Dash/Dash Type
   m_EditorClassIdentifier: 
-  Name: Parameter 1
+  Name: Dash Type
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 4
   Default: 0
   ID:
     data1: 734822654
@@ -1687,6 +1714,7 @@ MonoBehaviour:
   - Earth
   - Fire
   - Lightning
+  - Lightning Dash Explosion
   - Wind
   Exists: 1
 --- !u!114 &-1064323023291865415
@@ -1961,7 +1989,6 @@ MonoBehaviour:
   - {fileID: -2687039972981953084}
   - {fileID: -8798420417373273517}
   - {fileID: 7341173503992641048}
-  - {fileID: -3356004496463541973}
   - {fileID: 5623774463037052122}
   - {fileID: 541013677560433854}
   - {fileID: -6994594235015144106}
@@ -1975,12 +2002,15 @@ MonoBehaviour:
   - {fileID: 3151042226959051440}
   - {fileID: -2196265020100420690}
   - {fileID: -5428676173019482672}
+  - {fileID: 1199982298154077281}
+  - {fileID: 570579720959607357}
+  - {fileID: 606301615285920633}
   EditorParameters: []
   MasterBanks:
   - {fileID: 4035237433119530087}
   StringsBanks:
   - {fileID: 5970952019658884912}
-  cacheTime: 638221251545251806
+  cacheTime: 638221869037719880
   cacheVersion: 131603
 --- !u!114 &87656345710861160
 MonoBehaviour:
@@ -2120,6 +2150,62 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &570579720959607357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Main Menu
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Main Menu
+  Guid:
+    Data1: 237741939
+    Data2: 1121907292
+    Data3: -2065964896
+    Data4: -2104968963
+  Banks:
+  - {fileID: -8923405366262274771}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -1546525295639371272}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &606301615285920633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Abilities Menu
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Abilities Menu
+  Guid:
+    Data1: -1082774134
+    Data2: 1339836563
+    Data3: 420035251
+    Data4: 2104951584
+  Banks:
+  - {fileID: -8923405366262274771}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -7178152084428820584}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &703979804092782723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2145,6 +2231,32 @@ MonoBehaviour:
   Labels:
   - Create
   - Impact
+  Exists: 1
+--- !u!114 &734754968205032264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Melee overlay/Melee Type
+  m_EditorClassIdentifier: 
+  Name: Melee Type
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3569420667
+    data2: 1541724746
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Fire
+  - Lightning
   Exists: 1
 --- !u!114 &985333698744577542
 MonoBehaviour:
@@ -2227,6 +2339,34 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &1199982298154077281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Attacks/Melee overlay
+  m_EditorClassIdentifier: 
+  Path: event:/Attacks/Melee overlay
+  Guid:
+    Data1: -1107946826
+    Data2: 1278192834
+    Data3: 1011146412
+    Data4: 577834099
+  Banks:
+  - {fileID: -6345873753029855478}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 734754968205032264}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -2381,9 +2521,9 @@ MonoBehaviour:
     Data4: 1292578611
   Banks:
   - {fileID: -6345873753029855478}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters:
   - {fileID: -1858610465246505435}
   - {fileID: 5689072784035100881}
@@ -2566,9 +2706,9 @@ MonoBehaviour:
     Data4: 73904864
   Banks:
   - {fileID: -6345873753029855478}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -2588,7 +2728,7 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638221251513437579
+  lastModified: 638221783571832368
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -2740,7 +2880,7 @@ MonoBehaviour:
     Data4: -1248366904
   Banks:
   - {fileID: -4367734310977892154}
-  IsStream: 1
+  IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters:
@@ -2974,10 +3114,10 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638221251513452633
+  lastModified: 638221783571842374
   FileSizes:
   - Name: Desktop
-    Value: 3548
+    Value: 3798
   Exists: 1
 --- !u!114 &6754269592279153416
 MonoBehaviour:

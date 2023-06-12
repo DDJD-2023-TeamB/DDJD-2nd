@@ -174,11 +174,11 @@ public class RagdollController : MonoBehaviour
                 closestDistance = distance;
                 closestRb = rb;
             }
-            //rb.AddForce(totalForce * 0.2f * hitDirection, ForceMode.Impulse);
+            rb.AddForce(totalForce * 0.2f * hitDirection, ForceMode.Impulse);
         }
 
         //Add force to closest rigidbody
-        //closestRb.AddForce(hitDirection * totalForce, ForceMode.Impulse);
+        closestRb.AddForce(hitDirection * totalForce, ForceMode.Impulse);
     }
 
     public void AlignPositionWithHips(string animationName)

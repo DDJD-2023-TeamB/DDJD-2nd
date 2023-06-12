@@ -7,7 +7,7 @@ public class Potion : CollectibleObject
 {
     public int restoreHealthValue;
 
-    public override void Use(InventoryUI inventoryUI)
+    public override void Use(Player player)
     {
         // TODO : update _health
         Debug.Log("Using potion");

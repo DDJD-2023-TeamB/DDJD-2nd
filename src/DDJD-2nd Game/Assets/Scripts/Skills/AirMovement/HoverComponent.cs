@@ -25,6 +25,7 @@ public class HoverComponent : MonoBehaviour
     private void Start()
     {
         _elementParameterId = _soundEmitter.GetParameterId("hover", "Hover Type");
+        _vfx.Stop();
     }
 
     public void Activate()
