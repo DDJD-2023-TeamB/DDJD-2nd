@@ -21,6 +21,8 @@ public class GameUI : MonoBehaviour
     private SerializedDictionary<Element, ElementUI> _elementsUI =
         new SerializedDictionary<Element, ElementUI>();
 
+    [SerializeField] DashChargingIndicatorController dashChargingIndicator;
+
     public void UpdateElements(Skill leftSkill, Skill rightSkill, Element mainElement)
     {
         if (leftSkill.Element != _leftElement)
@@ -50,5 +52,15 @@ public class GameUI : MonoBehaviour
         {
             _rightManaBar.Value = (float)currentMana / (float)maxMana;
         }
+    }
+
+    public void startChargingIndicator()
+    {
+        dashChargingIndicator.startAnimation();
+    }
+
+    public void changeChargingIndicatorElement(Element element)
+    {
+        dashChargingIndicator.changeElement(element);
     }
 }

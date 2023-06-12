@@ -168,6 +168,7 @@ public class Player : StateContext, Damageable
         get { return _characterStatus; }
     }
     private UIController _uiController;
+    private GameUI _gameUI;
     private ElementController _elementController;
     private CharacterMovement _characterMovement;
 
@@ -191,6 +192,12 @@ public class Player : StateContext, Damageable
         _elementController = GetComponent<ElementController>();
         _characterMovement = GetComponent<CharacterMovement>();
         _collider = GetComponent<Collider>();
+        if (_uiController.PlayerUI == null)
+        {
+            Debug.Log("PlayerUI is null");
+        }
+        _gameUI = _uiController.PlayerUI.playingUI;
+        Debug.Log("oi");
         ChangeState(_factory.Playable());
     }
 
@@ -213,6 +220,7 @@ public class Player : StateContext, Damageable
         if (element != null)
         {
             _playerSkills.CurrentElement = element;
+            _gameUI.changeChargingIndicatorElement(element);
         }
         _airMovement = _playerSkills.CurrentElement?.AirMovementSkill?.Initialize(gameObject);
         _uiController.UpdateElements(

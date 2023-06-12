@@ -38,11 +38,11 @@ public class UIController : MonoBehaviour
     private void Awake()
     {
         _player = GetComponent<Player>();
+        _playerUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
     }
 
     private void Start()
     {
-        _playerUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
 
         _playerUI.inventoryUI.gameObject.SetActive(false);
         _playerUI.menuUI.SetActive(false);
@@ -305,6 +305,12 @@ public class UIController : MonoBehaviour
     public Player Player
     {
         get { return _player; }
+    }
+
+    public PlayerUI PlayerUI { 
+        get { 
+            return _playerUI; 
+        } 
     }
 }
 
