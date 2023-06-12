@@ -18,11 +18,16 @@ public class AirborneState : GenericState
         _context.Animator.SetBool("IsGrounded", false);
         _context.Input.OnJumpKeyDown += OnJumpKeyDown;
         _context.Input.OnJumpKeyUp += OnJumpKeyUp;
+        if (_context.Input.IsJumping)
+        {
+            OnJumpKeyDown();
+        }
     }
 
     public override void Exit()
     {
         base.Exit();
+        OnJumpKeyUp();
         _context.Animator.SetBool("IsGrounded", true);
         _context.Input.OnJumpKeyUp -= OnJumpKeyUp;
         _context.Input.OnJumpKeyDown -= OnJumpKeyDown;

@@ -14,6 +14,8 @@ public class HoverMovementComponent : AirMovementComponent
     private HoverComponent _leftHandVFX;
     private HoverComponent _rightHandVFX;
 
+    private Coroutine _hoverCoroutine;
+
     protected override void Awake()
     {
         base.Awake();
@@ -27,11 +29,7 @@ public class HoverMovementComponent : AirMovementComponent
 
         _leftHand = _player.Animator.GetBoneTransform(HumanBodyBones.LeftHand);
         _rightHand = _player.Animator.GetBoneTransform(HumanBodyBones.RightHand);
-    }
 
-    public override void OnKeyDown()
-    {
-        _isHovering = true;
         _leftHandVFX = Instantiate(_skill.SpellPrefab, _leftHand.position, Quaternion.identity)
             .GetComponent<HoverComponent>();
         _leftHandVFX.transform.parent = _leftHand;
@@ -40,13 +38,24 @@ public class HoverMovementComponent : AirMovementComponent
         _rightHandVFX.transform.parent = _rightHand;
         _leftHandVFX.Element = _player.PlayerSkills.CurrentElement;
         _rightHandVFX.Element = _player.PlayerSkills.CurrentElement;
-        StartCoroutine(Hover());
+    }
+
+    public override void OnKeyDown()
+    {
+        _isHovering = true;
+        _leftHandVFX.Activate();
+        _rightHandVFX.Activate();
+        _hoverCoroutine = StartCoroutine(Hover());
+        Debug.Log("OnKeyDown");
     }
 
     public override void OnKeyUp()
     {
         Reset();
-
+        if (_hoverCoroutine != null)
+        {
+            StopCoroutine(_hoverCoroutine);
+        }
         _isHovering = false;
     }
 
@@ -89,12 +98,10 @@ public class HoverMovementComponent : AirMovementComponent
         if (_leftHandVFX != null)
         {
             _leftHandVFX.Stop();
-            Destroy(_leftHandVFX, 2.0f);
         }
         if (_rightHandVFX != null)
         {
             _rightHandVFX.Stop();
-            Destroy(_rightHandVFX, 2.0f);
         }
     }
 }

@@ -11,6 +11,10 @@ public class HoverComponent : MonoBehaviour
 
     private Element _element;
 
+    private Coroutine _stopHoverCoroutine;
+
+    bool _isHovering = false;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -21,18 +25,33 @@ public class HoverComponent : MonoBehaviour
     private void Start()
     {
         _elementParameterId = _soundEmitter.GetParameterId("hover", "Hover Type");
-        _soundEmitter.SetParameterWithLabel(
-            "hover",
-            _elementParameterId,
-            _element.SfxDamageLabel,
-            true
-        );
+    }
+
+    public void Activate()
+    {
+        Debug.Log("Activate");
+        _isHovering = true;
+        if (_stopHoverCoroutine == null)
+        {
+            _vfx.Play();
+            _soundEmitter.SetParameterWithLabel(
+                "hover",
+                _elementParameterId,
+                _element.SfxDamageLabel,
+                true
+            );
+        }
+        else
+        {
+            StopCoroutine(_stopHoverCoroutine);
+            _stopHoverCoroutine = null;
+        }
     }
 
     public void Stop()
     {
-        _vfx.Stop();
-        _soundEmitter.Stop("hover");
+        _isHovering = false;
+        _stopHoverCoroutine = StartCoroutine(StopHover());
     }
 
     public void SetVelocity(Vector3 velocity)
@@ -42,6 +61,17 @@ public class HoverComponent : MonoBehaviour
 
     // Update is called once per frame
     void Update() { }
+
+    private IEnumerator StopHover()
+    {
+        yield return null;
+        if (!_isHovering)
+        {
+            _vfx.Stop();
+            _soundEmitter.Stop("hover");
+        }
+        _stopHoverCoroutine = null;
+    }
 
     public Element Element
     {
