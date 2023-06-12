@@ -29,7 +29,6 @@ public class HoverComponent : MonoBehaviour
 
     public void Activate()
     {
-        Debug.Log("Activate");
         _isHovering = true;
         if (_stopHoverCoroutine == null)
         {
@@ -51,7 +50,10 @@ public class HoverComponent : MonoBehaviour
     public void Stop()
     {
         _isHovering = false;
-        _stopHoverCoroutine = StartCoroutine(StopHover());
+        if (gameObject.activeInHierarchy)
+        {
+            _stopHoverCoroutine = StartCoroutine(StopHover());
+        }
     }
 
     public void SetVelocity(Vector3 velocity)

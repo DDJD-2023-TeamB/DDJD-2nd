@@ -46,7 +46,6 @@ public class HoverMovementComponent : AirMovementComponent
         _leftHandVFX.Activate();
         _rightHandVFX.Activate();
         _hoverCoroutine = StartCoroutine(Hover());
-        Debug.Log("OnKeyDown");
     }
 
     public override void OnKeyUp()
