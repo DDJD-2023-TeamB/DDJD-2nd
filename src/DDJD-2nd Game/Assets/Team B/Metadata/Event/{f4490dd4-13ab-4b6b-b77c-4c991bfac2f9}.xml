@@ -84,7 +84,7 @@
 	</object>
 	<object class="MultiSound" id="{6ba458db-bbde-4590-8480-bc8a572aab90}">
 		<relationship name="sounds">
-			<destination>{50d98d7e-2961-4d8b-bfc7-1c48218293be}</destination>
+			<destination>{afafe3d9-04be-426b-a835-887c94fb6b99}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{30c00400-0521-4095-a802-26a6f7d7eb83}">
@@ -100,13 +100,10 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{389e67c4-4108-45b5-ae3a-15ac32023deb}" />
-	<object class="SingleSound" id="{50d98d7e-2961-4d8b-bfc7-1c48218293be}">
-		<property name="pitch">
-			<value>-0.699999988</value>
-		</property>
+	<object class="SingleSound" id="{afafe3d9-04be-426b-a835-887c94fb6b99}">
 		<relationship name="modulators">
-			<destination>{dbdc1ab8-d213-4471-a9f2-cc9580238efb}</destination>
-			<destination>{0bbc2714-e2ea-4ebc-815e-4272021cd610}</destination>
+			<destination>{a7de78f5-691a-4952-8d59-52c018125d30}</destination>
+			<destination>{e0e6a70a-e9a6-4fc6-921c-994fd8493615}</destination>
 		</relationship>
 		<relationship name="audioFile">
 			<destination>{285f61ab-cb8b-41f7-83dd-9e2094b95b6b}</destination>
@@ -115,20 +112,14 @@
 	<object class="MixerBusFader" id="{c80ad5a9-ce99-40d6-b008-41b190ce20d7}" />
 	<object class="MixerBusFader" id="{0b976aa1-051d-43d1-8e3d-9e3e63764548}" />
 	<object class="SpatialiserEffect" id="{832c2f93-d8bf-4130-b100-0e99ab317901}" />
-	<object class="RandomizerModulator" id="{dbdc1ab8-d213-4471-a9f2-cc9580238efb}">
-		<property name="nameOfPropertyBeingModulated">
-			<value>pitch</value>
-		</property>
-		<property name="amount">
-			<value>4.16666698</value>
-		</property>
-	</object>
-	<object class="RandomizerModulator" id="{0bbc2714-e2ea-4ebc-815e-4272021cd610}">
+	<object class="RandomizerModulator" id="{a7de78f5-691a-4952-8d59-52c018125d30}">
 		<property name="nameOfPropertyBeingModulated">
 			<value>volume</value>
 		</property>
-		<property name="amount">
-			<value>3</value>
+	</object>
+	<object class="RandomizerModulator" id="{e0e6a70a-e9a6-4fc6-921c-994fd8493615}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>pitch</value>
 		</property>
 	</object>
 </objects>
