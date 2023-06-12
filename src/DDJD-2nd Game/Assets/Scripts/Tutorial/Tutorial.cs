@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-[System.Serializable]
-public class Tutorial : MonoBehaviour
+[CreateAssetMenu(fileName = "TutorialInfo", menuName = "Scriptable Objects/Tutorial/Info")]
+public class Tutorial : ScriptableObject
 {
     [SerializeField]
     private TutorialPageInfo[] _tutorialInfo;
