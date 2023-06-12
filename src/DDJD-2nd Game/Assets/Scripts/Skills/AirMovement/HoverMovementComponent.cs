@@ -43,6 +43,10 @@ public class HoverMovementComponent : AirMovementComponent
     public override void OnKeyDown()
     {
         _isHovering = true;
+        if (_hoverCoroutine != null)
+        {
+            StopCoroutine(_hoverCoroutine);
+        }
         _leftHandVFX.Activate();
         _rightHandVFX.Activate();
         _hoverCoroutine = StartCoroutine(Hover());
@@ -50,12 +54,8 @@ public class HoverMovementComponent : AirMovementComponent
 
     public override void OnKeyUp()
     {
-        Reset();
-        if (_hoverCoroutine != null)
-        {
-            StopCoroutine(_hoverCoroutine);
-        }
         _isHovering = false;
+        StartCoroutine(StopHovering());
     }
 
     public override void Update()
@@ -92,6 +92,20 @@ public class HoverMovementComponent : AirMovementComponent
         Reset();
     }
 
+    private IEnumerator StopHovering()
+    {
+        yield return new WaitForSeconds(0.15f);
+        if (!_isHovering)
+        {
+            Reset();
+            if (_hoverCoroutine != null)
+            {
+                StopCoroutine(_hoverCoroutine);
+            }
+            _hoverCoroutine = null;
+        }
+    }
+
     public override void Reset()
     {
         if (_leftHandVFX != null)
@@ -102,5 +116,10 @@ public class HoverMovementComponent : AirMovementComponent
         {
             _rightHandVFX.Stop();
         }
+    }
+
+    public override bool IsActive()
+    {
+        return _hoverCoroutine != null;
     }
 }

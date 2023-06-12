@@ -53,7 +53,8 @@ public class HoverComponent : MonoBehaviour
         _isHovering = false;
         if (gameObject.activeInHierarchy)
         {
-            _stopHoverCoroutine = StartCoroutine(StopHover());
+            _vfx.Stop();
+            _soundEmitter.Stop("hover");
         }
     }
 

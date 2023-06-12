@@ -2,3 +2,677 @@
 [LOG] Manager::init                            : maxchannels = 256 studioflags = 00000006 flags 00000000 extradriverdata 0000000000000000.
 [LOG] SystemI::init                            : Initialize version=20213 (132591), maxchannels=256, flags=0x00020000
 [LOG] SystemI::setOutputInternal               : Setting output to 'FMOD WASAPI Output'
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=8, nSamplesPerSec=48000, nAvgBytesPerSec=1536000, nBlockAlign=32, wBitsPerSample=32, cbSize=22.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x0000063F, SubFormat=00000003-0000-0010-8000-00AA00389B71.
+[LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
+[LOG] DownMix::init                            : dspbuffersize: 1024  rate: 48000. output speaker mode: 7, input speaker mode 3
+[LOG] DownMix::init                            : done.
+[LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
+[LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
+[LOG] AsyncManager::init                       : manager 000002666578F2B8 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : done
+[LOG] PlaybackSystem::init                     : 
+[LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
+[LOG] PlaybackSystem::init                     : done
+[LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
+[LOG] Manager::init                            : done.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000265D01C4FF8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Wind Dash', format=5, channels=2, frequency=48000, lengthbytes=13184, lengthpcm=52071, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.753326.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000265D01C4FF8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Lightning Dash Explosion', format=5, channels=2, frequency=48000, lengthbytes=20448, lengthpcm=82285, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999207.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000265D01C4FF8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Lightning Dash', format=5, channels=2, frequency=48000, lengthbytes=28480, lengthpcm=108000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.745209.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000265D01C4FF8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Fire Dash', format=5, channels=2, frequency=48000, lengthbytes=30464, lengthpcm=123428, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.771454.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000265D01C4FF8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Earth Dash', format=5, channels=2, frequency=48000, lengthbytes=20384, lengthpcm=82285, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.993378.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 108576
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 8064
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000265D01C5A48
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Rune', format=5, channels=2, frequency=48000, lengthbytes=15520, lengthpcm=51428, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.146057.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000265D01C09D8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Charged Fire Ball Release LI 1', format=5, channels=2, frequency=48000, lengthbytes=16288, lengthpcm=66857, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.501617.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000265D01C09D8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Charged Fire Ball Idle', format=5, channels=2, frequency=48000, lengthbytes=45152, lengthpcm=169714, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.811584.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000265D01C09D8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Charged Fire Ball Release 1', format=5, channels=2, frequency=48000, lengthbytes=17792, lengthpcm=72000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.953369.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000265D01C09D8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Charged Fire Ball Release LI 2', format=5, channels=2, frequency=48000, lengthbytes=16032, lengthpcm=66857, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.445801.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000265D01C09D8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Charged Fire Ball Charge', format=5, channels=2, frequency=48000, lengthbytes=40000, lengthpcm=154285, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.622742.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000265D01C09D8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Charged Fire Ball Release 2', format=5, channels=2, frequency=48000, lengthbytes=15584, lengthpcm=61714, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.763306.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000265D01C09D8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Charged Fire Ball Impact', format=5, channels=2, frequency=48000, lengthbytes=20992, lengthpcm=82285, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.962616.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000266CB935698
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Wind Shockwave', format=5, channels=2, frequency=48000, lengthbytes=15840, lengthpcm=66857, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000266CB936928
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Lightning Bolt', format=5, channels=2, frequency=48000, lengthbytes=18624, lengthpcm=66857, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.915649.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000266CB936508
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Fire Ball Impact', format=5, channels=2, frequency=48000, lengthbytes=12544, lengthpcm=46285, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.966797.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000266CB936508
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Fire Ball', format=5, channels=2, frequency=48000, lengthbytes=13376, lengthpcm=46285, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.973816.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000266CB936508
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Skywalk 3', format=5, channels=2, frequency=48000, lengthbytes=5472, lengthpcm=20571, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.877045.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000266CB936508
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Skywalk 2', format=5, channels=2, frequency=48000, lengthbytes=7584, lengthpcm=29999, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.752930.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000266CB936508
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Skywalk 1', format=5, channels=2, frequency=48000, lengthbytes=6368, lengthpcm=26143, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.860840.
+[LOG] SoundI::release                          :  (0000026889DA8038)
+[LOG] SoundI::release                          :     Lightning Bolt (0000026396E94D28)
+[LOG] SoundI::release                          :  (00000267794FAD18)
+[LOG] SoundI::release                          :     Wind Dash (000002638BD4E2A8)
+[LOG] SoundI::release                          :  (00000267794FA198)
+[LOG] SoundI::release                          :     Fire Dash (000002638BD53248)
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000266CB935488
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Wind Dash', format=5, channels=2, frequency=48000, lengthbytes=13184, lengthpcm=52071, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.753326.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000266CB935488
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Fire Dash', format=5, channels=2, frequency=48000, lengthbytes=30464, lengthpcm=123428, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.771454.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000266CB935488
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Lightning Bolt', format=5, channels=2, frequency=48000, lengthbytes=18624, lengthpcm=66857, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.915649.
+[LOG] SoundI::release                          :  (0000026889DA7BE8)
+[LOG] SoundI::release                          :     Skywalk 2 (00000265D2D85C88)
+[LOG] SoundI::release                          :  (0000026889DA7348)
+[LOG] SoundI::release                          :     Skywalk 1 (000002638A10AAB8)
+[LOG] SoundI::release                          :  (0000026889DA7A78)
+[LOG] SoundI::release                          :     Skywalk 3 (00000265D2D85FC8)
+[LOG] SoundI::release                          :  (0000026396014178)
+[LOG] SoundI::release                          :     Wind Shockwave (0000026396E94B88)
+[LOG] SoundI::release                          :  (0000026889DA74B8)
+[LOG] SoundI::release                          :     Fire Ball Impact (0000026396E956E8)
+[LOG] SoundI::release                          :  (0000026889DA7EC8)
+[LOG] SoundI::release                          :     Fire Ball (0000026396E95D68)
+[LOG] SoundI::release                          :  (00000267794F9A68)
+[LOG] SoundI::release                          :     Charged Fire Ball Release 2 (000002638BD598A8)
+[LOG] SoundI::release                          :  (00000267794F7F18)
+[LOG] SoundI::release                          :     Charged Fire Ball Release 1 (000002638BD538C8)
+[LOG] SoundI::release                          :  (00000267794F87B8)
+[LOG] SoundI::release                          :     Charged Fire Ball Idle (000002638BD593C8)
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000266CB936508
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Skywalk 3', format=5, channels=2, frequency=48000, lengthbytes=5472, lengthpcm=20571, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.877045.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000266CB936508
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Skywalk 2', format=5, channels=2, frequency=48000, lengthbytes=7584, lengthpcm=29999, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.752930.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 3631040
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 62752
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000CB08CFF308
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA6AF339D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA6AF33990
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA6AF33AB0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA6AF33B70
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000266CB936508
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Skywalk 1', format=5, channels=2, frequency=48000, lengthbytes=6368, lengthpcm=26143, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.860840.
+[LOG] SoundI::release                          :  (00000267794F7958)
+[LOG] SoundI::release                          :     Charged Fire Ball Release LI 2 (000002638BD56E68)
+[LOG] SoundI::release                          :  (00000267794FA758)
+[LOG] SoundI::release                          :     Charged Fire Ball Charge (000002638BD545C8)
+[LOG] SoundI::release                          :  (00000267794F7398)
+[LOG] SoundI::release                          :     Charged Fire Ball Impact (000002638BD57828)
+[LOG] SoundI::release                          :  (00000267794F9338)
+[LOG] SoundI::release                          :     Charged Fire Ball Release LI 1 (000002638BD55468)
+[LOG] SoundI::release                          :  (00000267794F7678)
+[LOG] SoundI::release                          :     Rune (000002638BD552C8)
+[LOG] SoundI::release                          :  (0000026889DA7798)
+[LOG] SoundI::release                          :     Lightning Bolt (0000026396494228)
+[LOG] SoundI::release                          :  (0000026889DA8038)
+[LOG] SoundI::release                          :     Skywalk 2 (0000026396494088)
+[LOG] SoundI::release                          :  (0000026889DA7EC8)
+[LOG] SoundI::release                          :     Skywalk 1 (0000026396494568)
+[LOG] SoundI::release                          :  (0000026889DA74B8)
+[LOG] SoundI::release                          :     Skywalk 3 (0000026396494708)
+[LOG] SoundI::release                          :  (0000026889DA7628)
+[LOG] SoundI::release                          :     Wind Dash (000002638A10A778)
+[LOG] SoundI::release                          :  (0000026889DA7D58)
+[LOG] SoundI::release                          :     Fire Dash (0000026396E94D28)
+[LOG] SoundI::release                          :  (00000267794FA8C8)
+[LOG] SoundI::release                          :     Lightning Dash (000002638BD52208)
+[LOG] SoundI::release                          :  (00000267794F7228)
+[LOG] SoundI::release                          :     Earth Dash (000002638BD53F48)
+[LOG] SoundI::release                          :  (00000267794F98F8)
+[LOG] SoundI::release                          :     Lightning Dash Explosion (000002638BD4D408)
+[LOG] SoundI::release                          :  (000002677BEF5B78)
+[LOG] SoundI::release                          :     Fire Intense (0000026866B68A88)
+[LOG] SoundI::release                          :  (0000026881E11F98)
+[LOG] SoundI::release                          :     Fire Soft (000002638AC70E68)
+[LOG] SoundI::release                          :  (000002677BEF62A8)
+[LOG] SoundI::release                          :     Earth Intense (0000026634AB2F48)
+[LOG] SoundI::release                          :  (0000026881E112A8)
+[LOG] SoundI::release                          :     Earth Soft (000002638AC70988)
+[LOG] SoundI::release                          :  (000002677BEF5E58)
+[LOG] SoundI::release                          :     Lightning Intense (000002638AC6DDA8)
+[LOG] SoundI::release                          :  (000002677BEF6138)
+[LOG] SoundI::release                          :     Lightning Soft (000002638AC6FAE8)
+[LOG] SoundI::release                          :  (000002677BEF6B48)
+[LOG] SoundI::release                          :     Wind Soft (0000026880085E08)
+[LOG] SoundI::release                          :  (0000026881E14218)
+[LOG] SoundI::release                          :     Wind Intense (000002638AC6E288)
+[LOG] SoundI::release                          :  (0000026889D8BC18)
+[LOG] SoundI::release                          :     ESE - Foot Step - Grass 7 (00000268660A58D8)
+[LOG] SoundI::release                          :  (0000026889D8B7C8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Grass 8 (00000268898D2EB8)
+[LOG] SoundI::release                          :  (0000026881E13AE8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Grass 9 (000002687BE368C8)
+[LOG] SoundI::release                          :  (0000026881E13808)
+[LOG] SoundI::release                          :     ESE - Foot Step - Grass 10 (0000026881E0F0C8)
+[LOG] SoundI::release                          :  (0000026881E11E28)
+[LOG] SoundI::release                          :     ESE - Foot Step - Grass 11 (000002687BE360A8)
+[LOG] SoundI::release                          :  (0000026889D8DE98)
+[LOG] SoundI::release                          :     ESE - Foot Step - Grass 12 (00000268660A4D78)
+[LOG] SoundI::release                          :  (0000026889D8BD88)
+[LOG] SoundI::release                          :     ESE - Foot Step - Grass 13 (00000268660A65D8)
+[LOG] SoundI::release                          :  (0000026881E119D8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Grass 14 (000002638AC6F128)
+[LOG] SoundI::release                          :  (0000026889D8C798)
+[LOG] SoundI::release                          :     ESE - Foot Step - Grass 15 (000002687BE38AE8)
+[LOG] SoundI::release                          :  (0000026889D8D038)
+[LOG] SoundI::release                          :     ESE - Foot Step - Grass 16 (00000268898CE0B8)
+[LOG] SoundI::release                          :  (0000026889D8C068)
+[LOG] SoundI::release                          :     ESE - Foot Step - Grass 17 (000002687BE38FC8)
+[LOG] SoundI::release                          :  (0000026889D8B658)
+[LOG] SoundI::release                          :     ESE - Foot Step - Grass 1 (00000268660A4F18)
+[LOG] SoundI::release                          :  (0000026889D8B378)
+[LOG] SoundI::release                          :     ESE - Foot Step - Grass 2 (00000268660A7AF8)
+[LOG] SoundI::release                          :  (0000026881E13698)
+[LOG] SoundI::release                          :     ESE - Foot Step - Grass 3 (000002687BE37428)
+[LOG] SoundI::release                          :  (0000026881E147D8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Grass 4 (000002638AC6EF88)
+[LOG] SoundI::release                          :  (0000026889D8E178)
+[LOG] SoundI::release                          :     ESE - Foot Step - Grass 5 (00000268660A5C18)
+[LOG] SoundI::release                          :  (0000026881E12C88)
+[LOG] SoundI::release                          :     ESE - Foot Step - Grass 6 (0000026881E0EBE8)
+[LOG] SoundI::release                          :  (0000026881E14388)
+[LOG] SoundI::release                          :     ESE - Foot Step - Concrete 4 (0000026881E10108)
+[LOG] SoundI::release                          :  (0000026881E14668)
+[LOG] SoundI::release                          :     ESE - Foot Step - Concrete 5 (0000026881E0ED88)
+[LOG] SoundI::release                          :  (0000026889D8D8D8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Concrete 6 (00000268898D2358)
+[LOG] SoundI::release                          :  (0000026889D8C4B8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Concrete 7 (00000268898CD898)
+[LOG] SoundI::release                          :  (0000026889D8BAA8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Concrete 8 (00000268660A50B8)
+[LOG] SoundI::release                          :  (0000026889D8EE68)
+[LOG] SoundI::release                          :     ESE - Foot Step - Concrete 9 (00000268660A6F98)
+[LOG] SoundI::release                          :  (0000026881E13F38)
+[LOG] SoundI::release                          :     ESE - Foot Step - Concrete 10 (0000026881E0CB68)
+[LOG] SoundI::release                          :  (0000026889D8DBB8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Concrete 11 (00000268660A7478)
+[LOG] SoundI::release                          :  (0000026881E129A8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Concrete 12 (000002638AC6E428)
+[LOG] SoundI::release                          :  (000002677BEF76C8)
+[LOG] SoundI::release                          :     Impact 1 (0000026866B66868)
+[LOG] SoundI::release                          :  (000002677BEF5FC8)
+[LOG] SoundI::release                          :     Impact 2 (000002638AC6FFC8)
+[LOG] SoundI::release                          :  (00000266CC265AF8)
+[LOG] SoundI::release                          :     Damage Woosh 2 (000002638AC6E768)
+[LOG] SoundI::release                          :  (0000026881E133B8)
+[LOG] SoundI::release                          :     Punch_Woosh (000002638AC704A8)
+[LOG] SoundI::release                          :  (0000026881E10B78)
+[LOG] SoundI::release                          :     Lightning Layer 1 (000002638AC6E908)
+[LOG] SoundI::release                          :  (0000026881E126C8)
+[LOG] SoundI::release                          :     Lightning Layer 2 (000002638AC6DA68)
+[LOG] SoundI::release                          :  (000002677BEF5CE8)
+[LOG] SoundI::release                          :     Fire Layer 1 (0000026634AB2C08)
+[LOG] SoundI::release                          :  (0000026881E11418)
+[LOG] SoundI::release                          :     Fire Layer 2 (000002638AC6D588)
+[LOG] SoundI::release                          :  (0000026881E13C58)
+[LOG] SoundI::release                          :     ESE - Foot Step - Concrete 13 (000002687BE39308)
+[LOG] SoundI::release                          :  (0000026889D8C348)
+[LOG] SoundI::release                          :     ESE - Foot Step - Concrete 14 (000002687BE387A8)
+[LOG] SoundI::release                          :  (0000026889D8E738)
+[LOG] SoundI::release                          :     ESE - Foot Step - Concrete 15 (00000268898CEF58)
+[LOG] SoundI::release                          :  (0000026881E13528)
+[LOG] SoundI::release                          :     ESE - Foot Step - Concrete 16 (0000026881E0FDC8)
+[LOG] SoundI::release                          :  (0000026889D8CBE8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Concrete 17 (00000268660A6298)
+[LOG] SoundI::release                          :  (0000026889D8EA18)
+[LOG] SoundI::release                          :     ESE - Foot Step - Concrete 1 (000002687BE39988)
+[LOG] SoundI::release                          :  (0000026889D8CA78)
+[LOG] SoundI::release                          :     ESE - Foot Step - Concrete 2 (00000268660A4898)
+[LOG] SoundI::release                          :  (0000026889D8DA48)
+[LOG] SoundI::release                          :     ESE - Foot Step - Dirt 3 (000002687BE38C88)
+[LOG] SoundI::release                          :  (0000026881E12838)
+[LOG] SoundI::release                          :     ESE - Foot Step - Dirt 4 (000002638AC6D0A8)
+[LOG] SoundI::release                          :  (0000026881E11588)
+[LOG] SoundI::release                          :     ESE - Foot Step - Dirt 5 (0000026881E0FC28)
+[LOG] SoundI::release                          :  (0000026889D8D5F8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Dirt 6 (00000268660A6438)
+[LOG] SoundI::release                          :  (0000026881E11868)
+[LOG] SoundI::release                          :     ESE - Foot Step - Dirt 7 (000002687BE36728)
+[LOG] SoundI::release                          :  (0000026881E12558)
+[LOG] SoundI::release                          :     ESE - Foot Step - Dirt 8 (0000026881E0D6C8)
+[LOG] SoundI::release                          :  (0000026889D8D768)
+[LOG] SoundI::release                          :     ESE - Foot Step - Dirt 9 (00000268660A7618)
+[LOG] SoundI::release                          :  (0000026889D8B938)
+[LOG] SoundI::release                          :     ESE - Foot Step - Dirt 10 (000002687BE37AA8)
+[LOG] SoundI::release                          :  (0000026881E10CE8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Dirt 11 (000002687BE36A68)
+[LOG] SoundI::release                          :  (0000026881E130D8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Dirt 13 (000002687BE37DE8)
+[LOG] SoundI::release                          :  (0000026881E12108)
+[LOG] SoundI::release                          :     ESE - Foot Step - Dirt 14 (0000026881E0E228)
+[LOG] SoundI::release                          :  (0000026881E116F8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Dirt 15 (0000026881E0D048)
+[LOG] SoundI::release                          :  (0000026889D8E458)
+[LOG] SoundI::release                          :     ESE - Foot Step - Dirt 16 (00000268660A6C58)
+[LOG] SoundI::release                          :  (0000026889D8ECF8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Dirt 17 (00000268660A60F8)
+[LOG] SoundI::release                          :  (0000026889D8E2E8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Dirt 1 (000002687BE38468)
+[LOG] SoundI::release                          :  (0000026881E13248)
+[LOG] SoundI::release                          :     ESE - Foot Step - Dirt 2 (000002687BE37F88)
+[LOG] SoundI::release                          :  (0000026889D8B098)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Fast Rolled 16 (00000268898CF5D8)
+[LOG] SoundI::release                          :  (0000026881E13DC8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Fast Rolled 17 (000002638AC6FE28)
+[LOG] SoundI::release                          :  (0000026881E14948)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Medium 01 (000002638AC6D8C8)
+[LOG] SoundI::release                          :  (0000026881E12DF8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Medium 02 (0000026881E0CEA8)
+[LOG] SoundI::release                          :  (0000026881E11138)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Medium 03 (0000026881E0E708)
+[LOG] SoundI::release                          :  (0000026889D8C1D8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Medium 04 (00000268660A43B8)
+[LOG] SoundI::release                          :  (0000026889D8B4E8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Medium 05 (00000268660A4078)
+[LOG] SoundI::release                          :  (0000026881E10E58)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Medium 06 (000002687BE37288)
+[LOG] SoundI::release                          :  (0000026881E12278)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Medium 07 (0000026881E0FA88)
+[LOG] SoundI::release                          :  (0000026881E10FC8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Medium 08 (000002638AC6EAA8)
+[LOG] SoundI::release                          :  (0000026889D8EB88)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Medium 09 (000002687BE363E8)
+[LOG] SoundI::release                          :  (0000026889D8C628)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Medium 10 (00000268660A7E38)
+[LOG] SoundI::release                          :  (0000026889D8BEF8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Slow 11 (00000268660A6918)
+[LOG] SoundI::release                          :  (0000026881E12F68)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Slow 12 (0000026881E0F8E8)
+[LOG] SoundI::release                          :  (0000026889D8D488)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Slow 13 (000002687BE39168)
+[LOG] SoundI::release                          :  (0000026889D8D1A8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Slow 14 (00000268898D3058)
+[LOG] SoundI::release                          :  (0000026881E13978)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Fast 18 (0000026881E0D868)
+[LOG] SoundI::release                          :  (0000026889D8C908)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Fast 19 (00000268898D0478)
+[LOG] SoundI::release                          :  (0000026889D8CEC8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Fast 20 (00000268660A77B8)
+[LOG] SoundI::release                          :  (0000026889D8CD58)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Fast 21 (000002687BE37908)
+[LOG] SoundI::release                          :  (0000026881E11B48)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Fast 22 (0000026881E10788)
+[LOG] SoundI::release                          :  (0000026881E11CB8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Fast 23 (000002638AC6D3E8)
+[LOG] SoundI::release                          :  (0000026881E123E8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Fast 24 (0000026881E0D388)
+[LOG] SoundI::release                          :  (0000026881E140A8)
+[LOG] SoundI::release                          :     ESE - Foot Step - Wood - Fast Rolled 15 (0000026881E0EF28)
+[LOG] SoundI::release                          :  (0000026881E12B18)
+[LOG] SoundI::release                          :     Jump Impact (0000026881E0E3C8)
+[LOG] SoundI::release                          :  (0000026881E144F8)
+[LOG] SoundI::release                          :     Short Woosh 16 (0000026881E10448)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
