@@ -18,6 +18,7 @@ public class GroundedState : MeleeAttackableState
         ChangeSubState(_context.Factory.Idle(this));
         _context.StartCoroutine(LandCoroutine());
         _context.Input.OnJumpKeyDown += Jump;
+        _context.AirMovement?.Reset();
     }
 
     public override void Exit()

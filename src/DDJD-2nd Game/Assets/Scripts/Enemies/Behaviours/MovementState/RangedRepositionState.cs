@@ -72,7 +72,7 @@ public class RangedRepositionState : EnemyMovingState
     {
         if (_tries >= _maxTries)
         {
-            _context.ChangeState(_context.States.IdleState);
+            _context.ChangeState(_context.States.AttackState);
             return _context.transform.position;
         }
         _tries++;
@@ -93,6 +93,7 @@ public class RangedRepositionState : EnemyMovingState
         // Add the offset to the player position
         Vector3 newPosition = playerPosition + newPositionOffset;
 
+        Debug.DrawLine(playerPosition, newPosition, Color.red, 5.0f);
         // Check if has a path to the new position
         UnityEngine.AI.NavMeshPath path = new UnityEngine.AI.NavMeshPath();
         if (_context.NavMeshAgent.CalculatePath(newPosition, path))

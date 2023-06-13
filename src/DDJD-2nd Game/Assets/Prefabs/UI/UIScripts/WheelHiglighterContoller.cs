@@ -8,10 +8,8 @@ public class WheelHiglighterContoller : MonoBehaviour
 
     float targetAngle;
     public float rotationSpeed = 800f;
-    void Start()
-    {
-        
-    }
+
+    void Start() { }
 
     // Update is called once per frame
     void Update()
@@ -22,7 +20,7 @@ public class WheelHiglighterContoller : MonoBehaviour
             currAngle -= 360;
         }
         float remaniningAngle = targetAngle - currAngle;
-        if (remaniningAngle>180)
+        if (remaniningAngle > 180)
         {
             remaniningAngle -= 360;
         }
@@ -30,17 +28,23 @@ public class WheelHiglighterContoller : MonoBehaviour
         {
             remaniningAngle += 360;
         }
+
+        float deltaTime = Time.deltaTime * 1 / Time.timeScale;
         //Debug.Log("Cur Angle: " + currAngle + "    Tar Angle: " + targetAngle + "     Rem Angle: " + remaniningAngle + "     Rotation Speed: " + rotationSpeed);
-        if(Mathf.Abs(remaniningAngle) < rotationSpeed * Time.deltaTime)
+        if (Mathf.Abs(remaniningAngle) < rotationSpeed * deltaTime)
         {
-            transform.rotation = Quaternion.Euler(0,0,targetAngle);
+            transform.rotation = Quaternion.Euler(0, 0, targetAngle);
         }
         else
         {
-            transform.rotation = Quaternion.Euler(0,0,transform.rotation.eulerAngles.z + Mathf.Sign(remaniningAngle)*rotationSpeed*Time.deltaTime);
+            transform.rotation = Quaternion.Euler(
+                0,
+                0,
+                transform.rotation.eulerAngles.z
+                    + Mathf.Sign(remaniningAngle) * rotationSpeed * deltaTime
+            );
             //Debug.Log("Cur Angle: " + transform.rotation.z + "    Tar Angle: " + targetAngle + "     Rotating...");
         }
-        
     }
 
     public void setTargetAngle(float angle)

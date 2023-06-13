@@ -128,7 +128,7 @@ public class FireballComponent : ProjectileComponent, NonPushable
             float force = GetForce();
             Damage(hit.collider.gameObject, (int)GetDamage(), (int)force, point, direction);
             Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
-            if (rb != null && hit.collider.GetComponent<NonPushable>() != null)
+            if (rb != null && hit.collider.GetComponent<NonPushable>() == null)
             {
                 rb.AddExplosionForce(
                     force,

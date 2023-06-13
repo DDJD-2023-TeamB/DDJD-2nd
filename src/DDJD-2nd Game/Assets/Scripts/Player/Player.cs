@@ -177,6 +177,8 @@ public class Player : StateContext, Damageable
     private ElementController _elementController;
     private CharacterMovement _characterMovement;
 
+    private TimeController _timeController;
+
     void Awake()
     {
         _inputReceiver = GetComponent<PlayerInputReceiver>();
@@ -197,6 +199,7 @@ public class Player : StateContext, Damageable
         _elementController = GetComponent<ElementController>();
         _characterMovement = GetComponent<CharacterMovement>();
         _collider = GetComponent<Collider>();
+        _timeController = GetComponent<TimeController>();
         ChangeState(_factory.Playable());
     }
 
@@ -288,5 +291,10 @@ public class Player : StateContext, Damageable
     public Collider Collider
     {
         get { return _collider; }
+    }
+
+    public TimeController TimeController
+    {
+        get { return _timeController; }
     }
 }

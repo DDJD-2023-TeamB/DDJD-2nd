@@ -49,6 +49,7 @@ public class EnemyAimComponent : MonoBehaviour, AimComponent
     public Vector3 GetAimDirection(Vector3 origin, bool rayCast = true)
     {
         _aimDirection = _enemy.Player.transform.position - origin;
+        _aimDirection.y += 0.8f; // compensate for player height
 
         return _aimDirection;
     }
@@ -57,6 +58,9 @@ public class EnemyAimComponent : MonoBehaviour, AimComponent
     {
         Vector3 position = transform.position + Vector3.up * 0.8f;
         Vector3 direction = GetAimDirection(position);
+        //Draw ray
+        position += direction.normalized * 0.5f;
+        Debug.DrawRay(position, direction * _enemy.AttackRange, Color.blue, 5.0f);
         return CanHitPlayer(position, direction);
     }
 

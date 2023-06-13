@@ -8,12 +8,13 @@ public class ChangeSpellState : MovableState
     public override void Enter()
     {
         base.Enter();
-        Time.timeScale = 0.2f;
+        _context.TimeController.Slowdown();
     }
 
     public override void Exit()
     {
         base.Exit();
+        _context.TimeController.Reset();
         AimedSkill rightSkill = _context.UIController.GetRightSkillSelected();
         AimedSkill leftSkill = _context.UIController.GetLeftSkillSelected();
 
