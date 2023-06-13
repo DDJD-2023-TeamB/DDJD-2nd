@@ -12,7 +12,7 @@ public class BoneComponent : MonoBehaviour, Damageable
     {
         if (_ragdollController != null)
         {
-            _damageable = _ragdollController.GetComponent<Damageable>();
+            SetRagdollController(_ragdollController);
         }
     }
 
@@ -44,7 +44,7 @@ public class BoneComponent : MonoBehaviour, Damageable
     public void SetRagdollController(RagdollController ragdollController)
     {
         _ragdollController = ragdollController;
-        _damageable = _ragdollController.GetComponent<Damageable>();
+        _damageable = _ragdollController.Damageable;
     }
 
     public GameObject GetDamageableObject()

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RagdollController : MonoBehaviour
 {
+    private Damageable _damageable;
     private Rigidbody[] _rigidbodies; //Rig rigibodies
     private Collider[] _colliders; //Rig colliders
 
@@ -55,6 +56,7 @@ public class RagdollController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _rigidbodies = GetComponentsInChildren<Rigidbody>();
+        _damageable = GetComponent<Damageable>();
         //Remove main rigidbody from array
         List<Rigidbody> rigidbodies = new List<Rigidbody>(_rigidbodies);
         rigidbodies.Remove(_rb);
@@ -275,5 +277,10 @@ public class RagdollController : MonoBehaviour
             // Remove nulls
             damageInteractions.RemoveAll(item => item == null);
         }
+    }
+
+    public Damageable Damageable
+    {
+        get { return _damageable; }
     }
 }

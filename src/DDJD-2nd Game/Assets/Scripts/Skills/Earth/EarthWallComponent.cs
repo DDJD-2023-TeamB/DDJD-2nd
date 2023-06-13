@@ -88,4 +88,9 @@ public class EarthWallComponent : StaticSkillComponent
         _animator.SetTrigger("EndWall");
         Destroy(gameObject, 1.5f);
     }
+
+    public void StopRising()
+    {
+        _isRising = false;
+    }
 }

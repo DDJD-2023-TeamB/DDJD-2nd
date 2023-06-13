@@ -46,6 +46,7 @@ public class GroundedState : MeleeAttackableState
         _context.Input.IsJumping = false;
         _context.Rigidbody.AddForce(Vector3.up * _context.JumpForce, ForceMode.Acceleration);
         _context.Animator.SetTrigger("Jump");
+        _context.SoundEmitter.Play("footstep");
         _context.SoundEmitter.SetParameterWithLabel("jump", _context.SfxJumpStateId, "Jump", true);
     }
 
