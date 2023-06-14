@@ -7,15 +7,16 @@ using UnityEngine.EventSystems;
 public class MissionSelectionScript : MonoBehaviour, IPointerClickHandler
 {
     public GameObject missionsUI;
-    public int missionID;
+    public Mission mission;
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (missionsUI == null) {
+        if (missionsUI == null)
+        {
             Debug.LogError("missionsUI is null!");
             return;
         }
-        missionsUI.GetComponent<MissionsUIController>().setActiveMission(missionID);
+        missionsUI.GetComponent<MissionsUIController>().setActiveMission(mission);
     }
 
     // Start is called before the first frame update
@@ -25,8 +26,5 @@ public class MissionSelectionScript : MonoBehaviour, IPointerClickHandler
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void Update() { }
 }

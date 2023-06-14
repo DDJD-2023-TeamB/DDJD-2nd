@@ -21,33 +21,48 @@ public class MissionsUIController : MonoBehaviour
     public Sprite gatherQuestIcon;
     public Sprite searchQuestIcon;
 
+    private Player _player;
+
+    private MissionController _missionController;
+
     Mission selectedMission = null;
     Color highlightColor;
 
-    Mission[] generalMissions;
+    private List<Mission> generalMissions;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        _player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Player>();
+        _missionController = _player.GetComponent<MissionController>();
         ColorUtility.TryParseHtmlString("#FED600", out highlightColor);
         loadActiveMissions();
-        setActiveMission(-1);
+        setActiveMission(null);
     }
 
     void loadActiveMissions()
     {
+        generalMissions = _missionController.GetAvailableAndOngoingMissions();
         //Temporary code for testing, should later be loaded from a game controller
-        Mission m1 = new Mission("Mission 1 idoajiaskl", "Mission 1 descriptionjdwankjndajkwdnkjasnkjnakwjnkasdnawnkdna");
+        /*Mission m1 = new Mission("Mission 1 idoajiaskl", "Mission 1 descriptionjdwankjndajkwdnkjasnkjnakwjnkasdnawnkdna");
         m1.addQuest(new Quest(0, "Quest 1"));
         m1.addQuest(new Quest(0, "Quest 2"));
         m1.addQuest(new Quest(1, "Quest 2"));
-        Mission m2 = new Mission("Mission 2 idoajiaskl", "Mission 2 descriptionjdwankjndajkwdnkjasnkjnakwjnkasdnawnkdna");
+        Mission m2 = new Mission(
+            "Mission 2 idoajiaskl",
+            "Mission 2 descriptionjdwankjndajkwdnkjasnkjnakwjnkasdnawnkdna"
+        );
         m2.addQuest(new Quest(0, "Quest 1"));
         m2.addQuest(new Quest(1, "Quest 2"));
-        Mission m3 = new Mission("Mission 3 idoajiaskl", "Mission 3 descriptionjdwankjndajkwdnkjasnkjnakwjnkasdnawnkdna");
+        Mission m3 = new Mission(
+            "Mission 3 idoajiaskl",
+            "Mission 3 descriptionjdwankjndajkwdnkjasnkjnakwjnkasdnawnkdna"
+        );
         m3.addQuest(new Quest(1, "Quest 1"));
-        Mission m4 = new Mission("Mission 4 idoajiaskl", "Mission 4 descriptionjdwankjndajkwdnkjasnkjnakwjnkasdnawnkdna");
+        Mission m4 = new Mission(
+            "Mission 4 idoajiaskl",
+            "Mission 4 descriptionjdwankjndajkwdnkjasnkjnakwjnkasdnawnkdna"
+        );
         m4.addQuest(new Quest(0, "Quest 1"));
         m4.addQuest(new Quest(0, "Quest 2"));
         m4.addQuest(new Quest(0, "Quest 3"));
@@ -56,7 +71,7 @@ public class MissionsUIController : MonoBehaviour
         m4.addQuest(new Quest(2, "Quest 6"));
         m4.addQuest(new Quest(1, "Quest 7"));
         Mission[] missions = { m1, m2, m3, m4 };
-        generalMissions = missions;
+        generalMissions = missions;*/
     }
 
     void updateMissionsUI()
@@ -68,42 +83,66 @@ public class MissionsUIController : MonoBehaviour
 
         int accumulatedQuests = 0;
 
-        for (int i = 0; i < generalMissions.Length; i++)
+        for (int i = 0; i < generalMissions.Count; i++)
         {
+            Mission mission = generalMissions[i];
             GameObject missionInstance = Instantiate(missionPrefab, missionsContent.transform);
-            missionInstance.GetComponent<MissionSelectionScript>().missionID = generalMissions[i].missionID;
-            missionInstance.transform.Find("MissionTitle").GetComponent<TextMeshProUGUI>().text = generalMissions[i].missionTitle;
-            missionInstance.transform.Find("MissionDescription").GetComponent<TextMeshProUGUI>().text = generalMissions[i].missionDescription;
-            if (generalMissions[i] == selectedMission)
+            missionInstance.GetComponent<MissionSelectionScript>().mission = mission;
+            missionInstance.transform.Find("MissionTitle").GetComponent<TextMeshProUGUI>().text =
+                mission.Title;
+            missionInstance.transform
+                .Find("MissionDescription")
+                .GetComponent<TextMeshProUGUI>()
+                .text = mission.Description;
+            if (mission == selectedMission)
             {
-                missionInstance.transform.Find("MissionTitle").GetComponent<TextMeshProUGUI>().color = highlightColor;
-                missionInstance.transform.Find("MissionDescription").GetComponent<TextMeshProUGUI>().color = highlightColor;
-
+                missionInstance.transform
+                    .Find("MissionTitle")
+                    .GetComponent<TextMeshProUGUI>()
+                    .color = highlightColor;
+                missionInstance.transform
+                    .Find("MissionDescription")
+                    .GetComponent<TextMeshProUGUI>()
+                    .color = highlightColor;
             }
             missionInstance.GetComponent<RectTransform>().pivot = new Vector2(0, 1);
-            missionInstance.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -170 * i - 40 * accumulatedQuests);
-            missionInstance.GetComponent<RectTransform>().sizeDelta = new Vector2(1600,160 + 40 * generalMissions[i].missionQuests.Length);
-            for (int j = 0; j< generalMissions[i].missionQuests.Length; j++)
+            missionInstance.GetComponent<RectTransform>().anchoredPosition = new Vector2(
+                0,
+                -170 * i - 40 * accumulatedQuests
+            );
+            missionInstance.GetComponent<RectTransform>().sizeDelta = new Vector2(
+                1600,
+                160 + 40 * mission.Goals.Count
+            );
+            for (int j = 0; j < mission.Goals.Count; j++)
             {
+                var goal = mission.Goals[j];
                 accumulatedQuests++;
-                GameObject questInstance = Instantiate(questPrefab,missionInstance.transform);
-                if (generalMissions[i] == selectedMission)
+                GameObject questInstance = Instantiate(questPrefab, missionInstance.transform);
+                if (mission == selectedMission)
                 {
                     questInstance.GetComponent<TextMeshProUGUI>().color = highlightColor;
                 }
-                questInstance.GetComponent<TextMeshProUGUI>().text = generalMissions[i].missionQuests[j].questDescription;
+                questInstance.GetComponent<TextMeshProUGUI>().text = goal.Description;
                 questInstance.GetComponent<RectTransform>().pivot = new Vector2(0, 1);
-                questInstance.GetComponent<RectTransform>().anchoredPosition = new Vector2(50, -150 - 40 * j);
-                if (generalMissions[i].missionQuests[j].questType == 0)
+                questInstance.GetComponent<RectTransform>().anchoredPosition = new Vector2(
+                    50,
+                    -150 - 40 * j
+                );
+                if (goal is FightGoal)
                 {
-                    questInstance.transform.Find("QuestTypeIcon").GetComponent<Image>().sprite = attackQuestIcon;
-                }else if(generalMissions[i].missionQuests[j].questType == 1)
-                {
-                    questInstance.transform.Find("QuestTypeIcon").GetComponent<Image>().sprite = gatherQuestIcon;
+                    questInstance.transform.Find("QuestTypeIcon").GetComponent<Image>().sprite =
+                        attackQuestIcon;
                 }
-                else if (generalMissions[i].missionQuests[j].questType == 2)
+                else if (goal is CollectGoal)
                 {
-                    questInstance.transform.Find("QuestTypeIcon").GetComponent<Image>().sprite = searchQuestIcon;
+                    questInstance.transform.Find("QuestTypeIcon").GetComponent<Image>().sprite =
+                        gatherQuestIcon;
+                }
+                else if (goal is InteractGoal)
+                {
+                    questInstance.transform.Find("QuestTypeIcon").GetComponent<Image>().sprite =
+                        searchQuestIcon;
                 }
                 else
                 {
@@ -111,30 +150,20 @@ public class MissionsUIController : MonoBehaviour
                 }
             }
         }
-        missionsContent.GetComponent<RectTransform>().sizeDelta = new Vector2(1600, 170 * generalMissions.Length + 40 * accumulatedQuests);
+        missionsContent.GetComponent<RectTransform>().sizeDelta = new Vector2(
+            1600,
+            170 * generalMissions.Count + 40 * accumulatedQuests
+        );
     }
 
-    Mission getMissionFromID(Mission[] missions, int id)
+    public void setActiveMission(Mission mission)
     {
-        for(int i = 0; i < missions.Length; i++)
+        if (selectedMission == null && mission == null)
         {
-            if (missions[i].missionID == id)
-            {
-                return missions[i];
-            }
-        }
-        return null;
-    }
-
-    public void setActiveMission(int id)
-    {
-        if (selectedMission == null && id == -1)
-        {
-            selectedMission = null;
             playingIndicatorTitle.GetComponent<TextMeshProUGUI>().text = "";
             playingIndicatorQuest.GetComponent<TextMeshProUGUI>().text = "";
         }
-        else if (selectedMission != null && id == selectedMission.missionID || id == -1) //Deselect mission
+        else if (selectedMission != null && mission == selectedMission || mission == null) //Deselect mission
         {
             selectedMission = null;
             playingIndicatorTitle.GetComponent<TextMeshProUGUI>().text = "";
@@ -142,56 +171,18 @@ public class MissionsUIController : MonoBehaviour
         }
         else //Select new mission
         {
-            selectedMission = getMissionFromID(generalMissions, id);
-            playingIndicatorTitle.GetComponent<TextMeshProUGUI>().text = selectedMission.missionTitle;
-            for (int i = 0; i < selectedMission.missionQuests.Length; i++)
+            selectedMission = mission;
+            playingIndicatorTitle.GetComponent<TextMeshProUGUI>().text = selectedMission.Title;
+            foreach (var goal in selectedMission.Goals)
             {
-                if (!selectedMission.missionQuests[i].completed)
+                if (!goal.Completed)
                 {
-                    playingIndicatorQuest.GetComponent<TextMeshProUGUI>().text = selectedMission.missionQuests[i].questDescription;
+                    playingIndicatorQuest.GetComponent<TextMeshProUGUI>().text = goal.Description;
                     break;
                 }
             }
         }
         updateMissionsUI();
         //Set active mission in game controller
-    }
-
-}
-
-public class Quest
-{
-    public int questType;
-    public bool completed = false;
-    public string questDescription;
-    public Quest(int type, string description)
-    {
-        questType = type;
-        questDescription = description;
-    }
-}
-
-public class Mission
-{
-    public Quest[] missionQuests = null;
-    public string missionTitle;
-    public string missionDescription;
-    public int missionID;
-    public static int lastMissionID;
-
-    public Mission(string title, string description)
-    {
-        missionTitle = title;
-        missionDescription = description;
-        missionQuests = new Quest[0];
-        lastMissionID++;
-        missionID = lastMissionID;
-    }
-
-
-    public void addQuest(Quest quest)
-    {
-        Array.Resize<Quest>(ref missionQuests, missionQuests.Length + 1);
-        missionQuests[missionQuests.Length - 1] = quest;
     }
 }

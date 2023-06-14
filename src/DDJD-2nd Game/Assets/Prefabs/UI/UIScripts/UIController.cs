@@ -16,12 +16,12 @@ public class UIController : MonoBehaviour
     ItemSkill[] leftWheelItems = new ItemSkill[6];
     ItemSkill[] rightWheelItems = new ItemSkill[6];
 
-    //Remover quando se fizer a função de remove
+    // Remover quando se fizer a função de remove
     ItemStack[] itemList = new ItemStack[30];
 
     public string currentMenu = "playing";
 
-    //KEYS
+    // KEYS
 
     public KeyCode inventoryKey = KeyCode.Tab;
     public KeyCode menuKey = KeyCode.Escape;
@@ -43,27 +43,24 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
-
+        _playerUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
         _playerUI.inventoryUI.gameObject.SetActive(false);
         _playerUI.menuUI.SetActive(false);
         _playerUI.leftSpellWheel.gameObject.SetActive(false);
         _playerUI.rightSpellWheel.gameObject.SetActive(false);
         _playerUI.missionsUI.SetActive(false);
         _playerUI.activeElementWheel.SetActive(false);
+        _playerUI.OptionsUI.SetUIController(this);
 
         InventoryUI inventoryUI = _playerUI.inventoryUI;
-        //inventoryUI.OnItemDrop += ;
-        //inventoryUI.OnItemSkillDrop += ;
         inventoryUI.OnItemSkillLeftDrop += ChangeLeftWheelItem;
         inventoryUI.OnItemSkillRightDrop += ChangeRightWheelItem;
         inventoryUI.SetupActions();
 
-        _itemsInventory = _player.inventory;
-
-        //DEBUG
+        _itemsInventory = _player.Inventory;
 
         UpdateSpellWheels();
-        //Items and spells
+        // Items and spells
         LoadInventory();
     }
 
@@ -90,10 +87,9 @@ public class UIController : MonoBehaviour
     public void OpenOptions(bool isOpening)
     {
         currentMenu = "options";
-        _playerUI.optionsUI.gameObject.SetActive(isOpening);
+        _playerUI.OptionsUI.gameObject.SetActive(isOpening);
         _playerUI.menuUI.SetActive(!isOpening);
     }
-
 
     public void OpenMissions(bool isOpening)
     {
@@ -186,36 +182,6 @@ public class UIController : MonoBehaviour
         _playerUI.inventoryUI.AddItem(item);
     }
 
-    /*public ItemStack RemoveItem(ItemStack item)
-    {
-        for (int i = 0; i < itemList.Length; i++)
-        {
-            if (itemList[i] == item)
-            {
-                ItemStack removedItem = itemList[i];
-                itemList[i] = null;
-                _playerUI.inventoryUI.RemoveItem(removedItem);
-                return removedItem;
-            }
-        }
-        return null;
-    }*/
-
-    /*public ItemStack RemoveItem(string itemID)
-    {
-        for (int i = 0; i < itemList.Length; i++)
-        {
-            if (itemList[i].id == itemID)
-            {
-                ItemStack removedItem = itemList[i];
-                itemList[i] = null;
-                _playerUI.inventoryUI.RemoveItem(removedItem);
-                return removedItem;
-            }
-        }
-        return null;
-    }*/
-
     public void ChangeLeftWheelItem(ItemStack ItemStack, int slot)
     {
         if (!(ItemStack.item is ItemSkill))
@@ -268,38 +234,6 @@ public class UIController : MonoBehaviour
         _playerUI.inventoryUI.SetLeftWheelSkills(new List<ItemSkill>(leftWheelItems));
         _playerUI.inventoryUI.SetRightWheelSkills(new List<ItemSkill>(rightWheelItems));
         LoadItems();
-
-        //Should load items from a game controller, this is just test code
-        /*Item firestoneItem = new ItemType(
-            "firestone",
-            "Fire Stone",
-            10,
-            fireStoneSprite,
-            false,
-            false
-        );
-        ItemType redDiamondItem = new ItemType(
-            "redDiamond",
-            "Red Diamond",
-            10,
-            redDiamondSprite,
-            true,
-            true
-        );
-        ItemStack firestoneStack1 = new ItemStack(firestoneItem, null);
-        ItemStack firestoneStack3 = new ItemStack(firestoneItem, null);
-        ItemStack firestoneStack4 = new ItemStack(firestoneItem, null);
-        ItemStack firestoneStack5 = new ItemStack(firestoneItem, null);
-        ItemStack redDiamondStack1 = new ItemStack(redDiamondItem, null);
-        ItemStack redDiamondStack2 = new ItemStack(redDiamondItem, null);
-        redDiamondStack2.amount = 427;
-        AddItem(firestoneStack1);
-        AddItem(firestoneStack2);
-        AddItem(firestoneStack3);
-        AddItem(firestoneStack4);
-        AddItem(firestoneStack5);
-        AddItem(redDiamondStack1);
-        AddItem(redDiamondStack2);*/
     }
 
     public Player Player
@@ -313,31 +247,3 @@ public class UIController : MonoBehaviour
         } 
     }
 }
-
-
-/*public class ItemType
-{
-    public string typeID;
-    public int maxItems;
-    public bool isConsumable;
-    public bool isSpell;
-    public Sprite itemSprite;
-    public string name;
-
-    public ItemType(
-        string typeID,
-        string name,
-        int maxItems,
-        Sprite itemSprite,
-        bool isConsumable,
-        bool isSpell
-    )
-    {
-        this.typeID = typeID;
-        this.maxItems = maxItems;
-        this.itemSprite = itemSprite;
-        this.isConsumable = isConsumable;
-        this.isSpell = isSpell;
-        this.name = name;
-    }
-}*/

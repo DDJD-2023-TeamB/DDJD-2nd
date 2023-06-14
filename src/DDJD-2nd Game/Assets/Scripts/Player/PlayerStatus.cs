@@ -56,4 +56,5 @@ public class PlayerStatus : CharacterStatus
         base.RestoreMana(element, manaQuantity);
         UpdateMana(element);
     }
+
 }

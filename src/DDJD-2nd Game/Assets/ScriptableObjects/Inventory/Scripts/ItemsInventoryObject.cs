@@ -5,10 +5,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
-[CreateAssetMenu(fileName= "Inventory", menuName = "Scriptable Objects/Inventory System/Inventory")]
+[CreateAssetMenu(
+    fileName = "Inventory",
+    menuName = "Scriptable Objects/Inventory System/Inventory"
+)]
 public class ItemsInventoryObject : ScriptableObject
 {
     public List<ItemStack> Container = new List<ItemStack>();
+
+    private int _gold;
+
+    public int Gold
+    {
+        get { return _gold; }
+    }
+
     public void AddItem(CollectibleObject item, int amount)
     {
         ItemStack slot = Container.Find(x => x.item == item);
@@ -22,17 +33,48 @@ public class ItemsInventoryObject : ScriptableObject
             Container.Add(new ItemStack(item, amount, null));
         }
     }
+
+    public void RemoveItem(CollectibleObject item)
+    {
+        ItemStack slot = Container.Find(x => x.item == item);
+        if (slot == null)
+            return;
+
+        if (slot.RemoveAmount(1))
+        {
+            Container.Remove(slot);
+        }
+    }
+
+    public void AddItem(ItemStack itemStack)
+    {
+        Debug.Log(itemStack);
+        ItemStack slot = Container.Find(x => x.item == itemStack.item);
+
+        if (slot != null)
+        {
+            slot.AddAmount(itemStack.amount);
+        }
+        else
+        {
+            Container.Add(itemStack);
+        }
+    }
+
+    public void AddGold(int gold)
+    {
+        _gold += gold;
+    }
 }
 
 [System.Serializable]
 public class ItemStack
 {
-
     public ItemObject item;
     public int amount;
     public string id;
 
-    public ItemStack(ItemObject _item, int _amount, string id)
+    public ItemStack(ItemObject _item, int _amount, string id = null)
     {
         item = _item;
         amount = _amount;
@@ -49,6 +91,12 @@ public class ItemStack
     public void AddAmount(int value)
     {
         amount += value;
+    }
+
+    public bool RemoveAmount(int value)
+    {
+        amount -= value;
+        return amount <= 0;
     }
 
     static System.Random random = new System.Random();
