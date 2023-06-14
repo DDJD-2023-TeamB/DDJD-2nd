@@ -47,9 +47,9 @@ public class WheelHiglighterContoller : MonoBehaviour
         }
     }
 
-    public void setTargetAngle(float angle)
+    public float TargetAngle
     {
-        //Debug.Log("Changing higlhihting angle to " + angle);
-        this.targetAngle = angle;
+        get { return targetAngle; }
+        set { targetAngle = value; }
     }
 }

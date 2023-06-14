@@ -8,10 +8,14 @@ public class Book : CollectibleObject
     [SerializeField]
     private ItemSkill _itemSkill;
 
+    [SerializeField]
+    private FMODUnity.EventReference bookEvent;
+
     private void Awake() { }
 
     public override void Use(Player player)
     {
+        FMODUnity.RuntimeManager.PlayOneShot(bookEvent, player.transform.position);
         if (!player.PlayerSkills.LearnedSkills.Contains(_itemSkill))
         {
             player.UIController.AddItem(new ItemStack(_itemSkill, 1));

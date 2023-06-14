@@ -50,7 +50,7 @@ public class AirborneState : GenericState
                 _context.Rigidbody.velocity.magnitude / 15.0f,
                 true
             );
-            _context.SoundEmitter.Play("footstep");
+            _context.Footsteps.Play();
         }
     }
 

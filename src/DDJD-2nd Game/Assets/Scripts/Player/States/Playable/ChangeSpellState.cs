@@ -9,6 +9,21 @@ public class ChangeSpellState : MovableState
     {
         base.Enter();
         _context.TimeController.Slowdown();
+
+        if (_context.Input.IsLeftShooting)
+        {
+            OnLeftKeydown();
+        }
+
+        if (_context.Input.IsRightShooting)
+        {
+            OnRightKeydown();
+        }
+
+        _context.Input.OnLeftShootKeydown += OnLeftKeydown;
+        _context.Input.OnRightShootKeydown += OnRightKeydown;
+        _context.Input.OnLeftShootKeyup += OnLeftKeyup;
+        _context.Input.OnRightShootKeyup += OnRightKeyup;
     }
 
     public override void Exit()
@@ -47,7 +62,25 @@ public class ChangeSpellState : MovableState
             _context.ChangeState(_context.Factory.Playable());
             return;
         }
-        _context.UIController.OpenLeftSpell(_context.Input.IsLeftShooting);
-        _context.UIController.OpenRightSpell(_context.Input.IsRightShooting);
+    }
+
+    private void OnLeftKeydown()
+    {
+        _context.UIController.OpenLeftSpell(true);
+    }
+
+    private void OnRightKeydown()
+    {
+        _context.UIController.OpenRightSpell(true);
+    }
+
+    private void OnLeftKeyup()
+    {
+        _context.UIController.OpenLeftSpell(false);
+    }
+
+    private void OnRightKeyup()
+    {
+        _context.UIController.OpenRightSpell(false);
     }
 }

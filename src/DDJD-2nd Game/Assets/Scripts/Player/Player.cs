@@ -179,6 +179,8 @@ public class Player : StateContext, Damageable
 
     private TimeController _timeController;
 
+    private FootSteps _footsteps;
+
     void Awake()
     {
         _inputReceiver = GetComponent<PlayerInputReceiver>();
@@ -200,6 +202,7 @@ public class Player : StateContext, Damageable
         _characterMovement = GetComponent<CharacterMovement>();
         _collider = GetComponent<Collider>();
         _timeController = GetComponent<TimeController>();
+        _footsteps = GetComponent<FootSteps>();
         ChangeState(_factory.Playable());
     }
 
@@ -296,5 +299,10 @@ public class Player : StateContext, Damageable
     public TimeController TimeController
     {
         get { return _timeController; }
+    }
+
+    public FootSteps Footsteps
+    {
+        get { return _footsteps; }
     }
 }

@@ -14,7 +14,7 @@ public class TimeController : MonoBehaviour
 
     public void Slowdown()
     {
-        Time.timeScale = 0.2f;
+        //Time.timeScale = 0.2f;
         //Get all rigidbodies in radius 50
         Collider[] colliders = Physics.OverlapSphere(transform.position, 50.0f);
         foreach (Collider collider in colliders)
