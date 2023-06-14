@@ -202,7 +202,6 @@ public class Player : StateContext, Damageable
             Debug.Log("PlayerUI is null");
         }
         _gameUI = _uiController.PlayerUI.playingUI;
-        Debug.Log("oi");
         ChangeState(_factory.Playable());
     }
 
