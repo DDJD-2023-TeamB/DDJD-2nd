@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EarthWallComponent : StaticSkillComponent
+public class EarthWallComponent : RayCastSkillComponent
 {
     private RaycastHit? _previousHit = null;
     private Animator _animator;
@@ -26,7 +26,7 @@ public class EarthWallComponent : StaticSkillComponent
 
     public override bool CanShoot(Vector3 direction)
     {
-        _previousHit = GetTarget(direction);
+        _previousHit = GetRaycastHit();
         return _previousHit != null;
     }
 
@@ -37,7 +37,7 @@ public class EarthWallComponent : StaticSkillComponent
         // Draw a raycast from the player to the mouse position
 
 
-        _previousHit = _previousHit != null ? _previousHit : GetTarget(direction);
+        _previousHit = _previousHit != null ? _previousHit : GetRaycastHit();
         if (_previousHit != null)
         {
             RaycastHit hit = _previousHit.Value;
@@ -46,6 +46,21 @@ public class EarthWallComponent : StaticSkillComponent
                 _caster.transform.forward,
                 Vector3.up
             );
+
+            //Raycast to find ground
+            RaycastHit groundHit;
+            if (
+                Physics.Raycast(
+                    transform.position,
+                    Vector3.down,
+                    out groundHit,
+                    10f,
+                    LayerMask.GetMask("Default", "Ground", "Wall", "Environment")
+                )
+            )
+            {
+                transform.position = groundHit.point;
+            }
             _collider.enabled = true;
         }
     }
@@ -66,20 +81,6 @@ public class EarthWallComponent : StaticSkillComponent
             transform.position,
             direction
         );
-    }
-
-    private RaycastHit? GetTarget(Vector3 direction)
-    {
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, 100f);
-        foreach (RaycastHit hit in hits)
-        {
-            if (hit.collider.gameObject == gameObject)
-            {
-                continue;
-            }
-            return hit;
-        }
-        return null;
     }
 
     public override void DestroySpell()

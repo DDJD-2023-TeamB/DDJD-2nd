@@ -52,6 +52,11 @@ public class ChangeSpellState : MovableState
         _context.Status.UpdateMana(leftSkill.Element);
         _context.Status.UpdateMana(rightSkill.Element);
         Time.timeScale = 1.0f;
+
+        _context.Input.OnLeftShootKeydown -= OnLeftKeydown;
+        _context.Input.OnRightShootKeydown -= OnRightKeydown;
+        _context.Input.OnLeftShootKeyup -= OnLeftKeyup;
+        _context.Input.OnRightShootKeyup -= OnRightKeyup;
     }
 
     public override void StateUpdate()
