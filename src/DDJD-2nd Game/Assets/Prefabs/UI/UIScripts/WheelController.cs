@@ -34,6 +34,8 @@ public class WheelController : MonoBehaviour
         slotSize = edgeObject.transform.position.x - spellWheelBackground.transform.position.x;
         highlighterController = wheelHiglighter.GetComponent<WheelHiglighterContoller>();
         _wheelParameterId = _soundEmitter.GetParameterId("wheel", "Abilities Menu Type");
+        wheelSelector.enabled = false;
+        highlighterController.enabled = false;
     }
 
     void Update()
@@ -88,11 +90,10 @@ public class WheelController : MonoBehaviour
 
     private void SetHighlight(float angle)
     {
-        if (highlighterController.TargetAngle == angle)
+        if (highlighterController.TargetAngle == angle || !highlighterController.enabled)
         {
             return;
         }
-        Debug.Log("Highlighting: " + angle);
         highlighterController.TargetAngle = angle;
         _soundEmitter.SetParameterWithLabel("wheel", _wheelParameterId, "Hover", true);
     }
@@ -144,6 +145,8 @@ public class WheelController : MonoBehaviour
         _soundEmitter.SetParameterWithLabel("wheel", _wheelParameterId, "Open", true);
         _canvas.enabled = true;
         _isClosed = false;
+        wheelSelector.enabled = true;
+        highlighterController.enabled = true;
     }
 
     public void Close()
@@ -151,5 +154,7 @@ public class WheelController : MonoBehaviour
         _soundEmitter.SetParameterWithLabel("wheel", _wheelParameterId, "Close", true);
         _canvas.enabled = false;
         _isClosed = true;
+        wheelSelector.enabled = false;
+        highlighterController.enabled = false;
     }
 }

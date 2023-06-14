@@ -43,7 +43,6 @@ public class UIController : MonoBehaviour
     private void Start()
     {
         _playerUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
-        Debug.Log("UI = " + _playerUI);
         _playerUI.inventoryUI.gameObject.SetActive(false);
         _playerUI.menuUI.SetActive(false);
         //_playerUI.leftSpellWheel.gameObject.SetActive(false);
