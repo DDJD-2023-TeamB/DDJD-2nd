@@ -15,6 +15,8 @@ public class WheelController : MonoBehaviour
     float slotSize = 0;
     WheelHiglighterContoller highlighterController;
 
+    [SerializeField] private ManaBarIconController manaBarIconController;
+
     private ItemObject[] _itemList = new ItemObject[6];
 
     void Start()
@@ -74,6 +76,15 @@ public class WheelController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             wheelSelector.changeSelection(slot);
+            Debug.Log(_itemList[slot].Icon);
+            if (_itemList[slot] == null)
+            {
+                manaBarIconController.changeSpellSprite(null);
+            }
+            else
+            {
+                manaBarIconController.changeSpellSprite(_itemList[slot].Icon);
+            }
             //uiController.SelectSlotLeft(slot);
         }
     }

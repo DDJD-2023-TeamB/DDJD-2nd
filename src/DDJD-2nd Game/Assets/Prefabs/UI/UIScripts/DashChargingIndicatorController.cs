@@ -14,7 +14,12 @@ public class DashChargingIndicatorController : MonoBehaviour
     [SerializeField] private Sprite electricitySprite;
     [SerializeField] private Sprite earthSprite;
 
-    public float chargingDuration = 3.0f;
+    private float chargingDuration = 3.0f;
+
+    [SerializeField] private DashSkill fireDash;
+    [SerializeField] private DashSkill electricityDash;
+    [SerializeField] private DashSkill earthDash;
+    [SerializeField] private DashSkill windDash;
 
     private int currentFrame = -1;
     public Image elementImage;
@@ -64,18 +69,22 @@ public class DashChargingIndicatorController : MonoBehaviour
     {
         if (element == windElement){
             elementImage.sprite = windSprite;
+            chargingDuration = windDash.DashSkillStats.Cooldown;
         }
         else if (element == earthElement)
         {
             elementImage.sprite = earthSprite;
+            chargingDuration = earthDash.SkillStats.Cooldown;
         }
         else if (element == fireElement)
         {
             elementImage.sprite = fireSprite;
+            chargingDuration = fireDash.SkillStats.Cooldown;
         }
         else if (element == electricityElement)
         {
             elementImage.sprite = electricitySprite;
+            chargingDuration = electricityDash.SkillStats.Cooldown;
         }
         else
         {
