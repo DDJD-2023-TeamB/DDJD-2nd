@@ -7,5 +7,13 @@ public abstract class CollectibleObject : ItemObject
     [SerializeField]
     protected GameObject _prefab;
 
+    [SerializeField]
+    protected bool _hasToPay;
+
+    public bool HasToPay
+    {
+        get => _hasToPay;
+    }
+
     public abstract void Use(InventoryUI inventoryUI);
 }
