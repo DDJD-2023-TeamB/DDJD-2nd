@@ -10,6 +10,15 @@ public abstract class CollectibleObject : ItemObject
     [SerializeField]
     protected bool _hasToPay;
 
+    //Make it conditional
+    [SerializeField]
+    protected int _cost;
+
+    public int Cost
+    {
+        get => _cost;
+    }
+
     public bool HasToPay
     {
         get => _hasToPay;

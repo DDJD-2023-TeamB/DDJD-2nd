@@ -6,8 +6,11 @@ using TMPro;
 public class FloatingText : MonoBehaviour
 {
     private Vector3 _offset;
+    //[SerializeField]
     private Transform _lookAt;
     private Camera _mainCam;
+
+    private float _heightFactor = 0.75f;
     private float _visibilityThreshold = 50f;
 
     private float _fadeDistance = 5f;
@@ -15,14 +18,15 @@ public class FloatingText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _lookAt = gameObject.transform.parent.transform.parent;
+        _lookAt = gameObject.transform.parent.transform.parent.transform;
         _mainCam = Camera.main;
-        _offset = new Vector3(0, 1, 0);
+        _offset = new Vector3(0, GetLookAtHeightOffset() * _heightFactor, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         Vector3 pos = _mainCam.WorldToScreenPoint(_lookAt.position + _offset);
 
         if (transform.position != pos)
@@ -38,5 +42,28 @@ public class FloatingText : MonoBehaviour
             textColor.a = 1f - alpha;
             GetComponent<TextMeshProUGUI>().color = textColor;
         }
+    }
+
+    // Calculate the height offset based on the bounds of the _lookAt GameObject
+    private float GetLookAtHeightOffset()
+    {
+        float heightOffset = 0f;
+
+        // Check if the _lookAt GameObject has a Renderer component
+        Renderer renderer = _lookAt.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            heightOffset = renderer.bounds.size.y;
+        }
+        else
+        {
+            Collider collider = _lookAt.GetComponent<Collider>();
+            if (collider != null)
+            {
+                heightOffset = collider.bounds.size.y;
+            }
+        }
+
+        return heightOffset;
     }
 }

@@ -45,15 +45,12 @@ public class MissionController : MonoBehaviour
         {
             if (mission.Status == MissionState.Ongoing)
             {
-                Debug.Log(mission);
                 foreach (var goal in mission.Goals)
                 {
-                    Debug.Log(goal);
                     if (!goal._completed && goal is InteractGoal interactGoal)
                     {
                         if (interactGoal.NpcToInteract == npc)
                         {
-                            Debug.Log("SAME");
                             goal._completed = true;
                             Debug.Log("Interact Goal Completed");
                         }

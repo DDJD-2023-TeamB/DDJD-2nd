@@ -76,6 +76,7 @@ public class Npc : Interactable
         _dialogue.StartDialogue(_currentDialogueInfo);
         _animator.SetInteger("Talking Index", Random.Range(0, 4));
         _animator.SetTrigger("Talking");
+        HelpManager.Instance.SetHelpText("");
     }
 
     public void ContinueInteraction()
@@ -94,5 +95,10 @@ public class Npc : Interactable
     public override void EndInteract()
     {
         base.EndInteract();
+    }
+
+    protected override void Approach()
+    {
+        HelpManager.Instance.SetHelpText("Press F to interact");
     }
 }
