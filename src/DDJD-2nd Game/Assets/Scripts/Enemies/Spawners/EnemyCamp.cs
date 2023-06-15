@@ -45,7 +45,7 @@ public class EnemyCamp : MonoBehaviour, NonCollidable
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         _enemyCommunicator.SetMessageAction(
             typeof(PlayerSightedMessage),
-            (EnemyMessage msg) => _playerSighted = true
+            (EnemyMessage msg) => OnPlayerSighted()
         );
 
         //Disable default enemies
@@ -53,6 +53,20 @@ public class EnemyCamp : MonoBehaviour, NonCollidable
         {
             enemy.SetActive(false);
         }
+    }
+
+    public void OnPlayerSighted()
+    {
+        _playerSighted = true;
+        _spawnerManager.OnSpawn += FollowPlayer;
+    }
+
+    public void FollowPlayer(BasicEnemy enemy)
+    {
+        _enemyCommunicator.SendMessage(
+            enemy.gameObject,
+            new PlayerSightedMessage(_player.transform.position)
+        );
     }
 
     private void InstantiateDefaultEnemies()
@@ -111,12 +125,6 @@ public class EnemyCamp : MonoBehaviour, NonCollidable
 
             if (enemy != null)
             {
-                Debug.DrawRay(
-                    enemy.transform.position,
-                    hit.position - enemy.transform.position,
-                    Color.red,
-                    25.0f
-                );
                 _enemyCommunicator.SendMessage(enemy, new MoveToMessage(hit.position));
             }
         }

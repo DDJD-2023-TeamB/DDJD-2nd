@@ -79,7 +79,7 @@ public class AimingState : MovableState
 
     private void OnShootKeyDown(AimedSkill skill, bool isLeft)
     {
-        if (_context.PlayerSkills.IsSkillOnCooldown(skill))
+        if (_context.PlayerSkills.IsSkillOnCooldown(skill, isLeft))
         {
             return;
         }
@@ -120,7 +120,7 @@ public class AimingState : MovableState
                 if (success)
                 {
                     _context.Animator.SetTrigger(animationTrigger);
-                    _context.PlayerSkills.StartSkillCooldown(skill);
+                    _context.PlayerSkills.StartSkillCooldown(skill, isLeft);
                     _lastAnimTrigger = animationTrigger;
                 }
                 break;
@@ -139,7 +139,7 @@ public class AimingState : MovableState
                 );
                 if (success)
                 {
-                    _context.PlayerSkills.StartSkillCooldown(skill);
+                    _context.PlayerSkills.StartSkillCooldown(skill, isLeft);
                     _context.Animator.SetTrigger(animationTrigger);
                     _skillsToAim.Add(spell.GetComponent<SkillComponent>());
                 }
@@ -189,7 +189,7 @@ public class AimingState : MovableState
                 _lastAnimTrigger = animationTrigger;
                 if (success)
                 {
-                    _context.PlayerSkills.StartSkillCooldown(skill);
+                    _context.PlayerSkills.StartSkillCooldown(skill, isLeft);
                 }
                 break;
             case CastType.Hold:
@@ -206,14 +206,14 @@ public class AimingState : MovableState
                 success = _context.ObjectSpawner.SpawnObject((SpawnSkill)skill);
                 if (success)
                 {
-                    _context.PlayerSkills.StartSkillCooldown(skill);
+                    _context.PlayerSkills.StartSkillCooldown(skill, isLeft);
                 }
                 break;
         }
 
         if (!success)
         {
-            _context.PlayerSkills.StartSkillCooldown(skill);
+            _context.PlayerSkills.StartSkillCooldown(skill, isLeft);
         }
     }
 

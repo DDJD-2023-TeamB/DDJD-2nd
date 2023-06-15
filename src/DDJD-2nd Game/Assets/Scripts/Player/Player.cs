@@ -177,6 +177,10 @@ public class Player : StateContext, Damageable
     private ElementController _elementController;
     private CharacterMovement _characterMovement;
 
+    private TimeController _timeController;
+
+    private FootSteps _footsteps;
+
     void Awake()
     {
         _inputReceiver = GetComponent<PlayerInputReceiver>();
@@ -197,11 +201,9 @@ public class Player : StateContext, Damageable
         _elementController = GetComponent<ElementController>();
         _characterMovement = GetComponent<CharacterMovement>();
         _collider = GetComponent<Collider>();
-        if (_uiController.PlayerUI == null)
-        {
-            Debug.Log("PlayerUI is null");
-        }
         _gameUI = _uiController.PlayerUI.playingUI;
+        _timeController = GetComponent<TimeController>();
+        _footsteps = GetComponent<FootSteps>();
         ChangeState(_factory.Playable());
     }
 
@@ -294,5 +296,15 @@ public class Player : StateContext, Damageable
     public Collider Collider
     {
         get { return _collider; }
+    }
+
+    public TimeController TimeController
+    {
+        get { return _timeController; }
+    }
+
+    public FootSteps Footsteps
+    {
+        get { return _footsteps; }
     }
 }

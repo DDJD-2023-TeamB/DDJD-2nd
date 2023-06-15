@@ -19,6 +19,13 @@ public class InventoryUI : MonoBehaviour
     [SerializeField]
     private GameObject _rightWheel;
 
+    private Player _player;
+
+    public void Start()
+    {
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+
     public Action OnItemRemoved;
     public Action<ItemStack, int> OnItemDrop;
     public Action<ItemStack, int> OnItemSkillDrop;
@@ -213,6 +220,11 @@ public class InventoryUI : MonoBehaviour
         if (invSlot.currentItem != null)
         {
             RemoveItem(invSlot.currentItem);
+            //Remove children from slot
+            foreach (Transform child in slot)
+            {
+                Destroy(child.gameObject);
+            }
         }
         GameObject newItem = Instantiate(InventoryItemPrefab);
         newItem.transform.SetParent(slot, false);
@@ -241,5 +253,10 @@ public class InventoryUI : MonoBehaviour
     public GameObject RightWheel
     {
         get { return _rightWheel; }
+    }
+
+    public Player Player
+    {
+        get { return _player; }
     }
 }

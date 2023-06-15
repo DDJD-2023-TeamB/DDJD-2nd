@@ -124,6 +124,10 @@ public class Hitbox : MonoBehaviour, NonCollidable
         Rigidbody rigidbody = other.GetComponent<Rigidbody>();
         if (rigidbody == null)
             return false;
+        if (other.GetComponent<NonPushable>() != null)
+        {
+            return false;
+        }
         rigidbody.AddForce(_parent.transform.forward * _force, ForceMode.Impulse);
         return true;
     }

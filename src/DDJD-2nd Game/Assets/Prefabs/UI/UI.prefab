@@ -2019,13 +2019,14 @@ GameObject:
   - component: {fileID: 339653981945695260}
   - component: {fileID: 8423847185887591929}
   - component: {fileID: 3094939608241557405}
+  - component: {fileID: 6392016018008884586}
   m_Layer: 6
   m_Name: RightSpellWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2494967251726544941
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2058,7 +2059,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2506099698596049292}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
@@ -2132,6 +2133,32 @@ MonoBehaviour:
   wheelSlotImagePrefab: {fileID: 7550414180389196432, guid: 703636d477dd0664a8c6ad394f569acc,
     type: 3}
   manaBarIconController: {fileID: 4877510482789962933}
+--- !u!114 &6392016018008884586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2506099698596049292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - wheel
+    _values:
+    - _playOnStart: 1
+      _stopOnDestroy: 0
+      _updatePosition: 0
+      _eventReference:
+        Guid:
+          Data1: -1082774134
+          Data2: 1339836563
+          Data3: 420035251
+          Data4: 2104951584
+        Path: event:/UI/Abilities Menu
 --- !u!1 &2545849278619797761
 GameObject:
   m_ObjectHideFlags: 0
@@ -6476,13 +6503,14 @@ GameObject:
   - component: {fileID: 6870903403766889088}
   - component: {fileID: 4306172782848404797}
   - component: {fileID: 6730172186552915656}
+  - component: {fileID: 6437094296378952286}
   m_Layer: 6
   m_Name: LeftSpellWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5497211173293814239
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6515,7 +6543,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6865377309096176892}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
@@ -6589,6 +6617,32 @@ MonoBehaviour:
   wheelSlotImagePrefab: {fileID: 7550414180389196432, guid: 703636d477dd0664a8c6ad394f569acc,
     type: 3}
   manaBarIconController: {fileID: 7354686600957600315}
+--- !u!114 &6437094296378952286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6865377309096176892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - wheel
+    _values:
+    - _playOnStart: 1
+      _stopOnDestroy: 0
+      _updatePosition: 0
+      _eventReference:
+        Guid:
+          Data1: -1082774134
+          Data2: 1339836563
+          Data3: 420035251
+          Data4: 2104951584
+        Path: event:/UI/Abilities Menu
 --- !u!1 &7157955781288068591
 GameObject:
   m_ObjectHideFlags: 0

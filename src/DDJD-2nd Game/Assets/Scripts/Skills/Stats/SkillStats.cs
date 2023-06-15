@@ -48,10 +48,10 @@ public abstract class SkillStats
         set => _maxChargeTime = value;
     }
 
-    protected float _minChargeTime;
-
     [ConditionalField(nameof(_castType), false, CastType.Charge)]
     [SerializeField]
+    protected float _minChargeTime;
+
     public float MinChargeTime
     {
         get => _minChargeTime;

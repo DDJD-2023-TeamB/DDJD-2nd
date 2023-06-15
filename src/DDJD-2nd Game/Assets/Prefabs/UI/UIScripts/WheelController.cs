@@ -14,19 +14,38 @@ public class WheelController : MonoBehaviour
     public GameObject wheelSlotImagePrefab;
     float slotSize = 0;
     WheelHiglighterContoller highlighterController;
+    private SoundEmitter _soundEmitter;
+    private FMOD.Studio.PARAMETER_ID _wheelParameterId;
 
     [SerializeField] private ManaBarIconController manaBarIconController;
 
     private ItemObject[] _itemList = new ItemObject[6];
 
+    private Canvas _canvas;
+
+    private bool _isClosed = false;
+
+    void Awake()
+    {
+        _soundEmitter = GetComponent<SoundEmitter>();
+        _canvas = GetComponent<Canvas>();
+    }
+
     void Start()
     {
         slotSize = edgeObject.transform.position.x - spellWheelBackground.transform.position.x;
         highlighterController = wheelHiglighter.GetComponent<WheelHiglighterContoller>();
+        _wheelParameterId = _soundEmitter.GetParameterId("wheel", "Abilities Menu Type");
+        wheelSelector.enabled = false;
+        highlighterController.enabled = false;
     }
 
     void Update()
     {
+        if (_isClosed)
+        {
+            return;
+        }
         Vector2 mouseVec = Input.mousePosition - spellWheelBackground.transform.position;
         if (mouseVec.magnitude < slotSize)
         {
@@ -34,19 +53,19 @@ public class WheelController : MonoBehaviour
             Debug.DrawRay(spellWheelBackground.transform.position, mouseVec, Color.yellow);
             if (angle < 30 && angle > -30)
             {
-                highlighterController.setTargetAngle(0);
+                SetHighlight(0);
                 checkSlotSelection(2);
             }
             if (angle < 90 && angle > 30)
             {
                 if (mouseVec.y > 0)
                 {
-                    highlighterController.setTargetAngle(60);
+                    SetHighlight(60);
                     checkSlotSelection(1);
                 }
                 else
                 {
-                    highlighterController.setTargetAngle(-60);
+                    SetHighlight(-60);
                     checkSlotSelection(3);
                 }
             }
@@ -54,21 +73,31 @@ public class WheelController : MonoBehaviour
             {
                 if (mouseVec.y > 0)
                 {
-                    highlighterController.setTargetAngle(120);
+                    SetHighlight(120);
                     checkSlotSelection(0);
                 }
                 else
                 {
-                    highlighterController.setTargetAngle(-120);
+                    SetHighlight(-120);
                     checkSlotSelection(4);
                 }
             }
             if (angle < -150 || angle > 150)
             {
-                highlighterController.setTargetAngle(180);
+                SetHighlight(180);
                 checkSlotSelection(5);
             }
         }
+    }
+
+    private void SetHighlight(float angle)
+    {
+        if (highlighterController.TargetAngle == angle || !highlighterController.enabled)
+        {
+            return;
+        }
+        highlighterController.TargetAngle = angle;
+        _soundEmitter.SetParameterWithLabel("wheel", _wheelParameterId, "Hover", true);
     }
 
     void checkSlotSelection(int slot)
@@ -120,5 +149,23 @@ public class WheelController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void Open()
+    {
+        _soundEmitter.SetParameterWithLabel("wheel", _wheelParameterId, "Open", true);
+        _canvas.enabled = true;
+        _isClosed = false;
+        wheelSelector.enabled = true;
+        highlighterController.enabled = true;
+    }
+
+    public void Close()
+    {
+        _soundEmitter.SetParameterWithLabel("wheel", _wheelParameterId, "Close", true);
+        _canvas.enabled = false;
+        _isClosed = true;
+        wheelSelector.enabled = false;
+        highlighterController.enabled = false;
     }
 }

@@ -8,20 +8,19 @@ public class Book : CollectibleObject
     [SerializeField]
     private ItemSkill _itemSkill;
 
-    private Player _player;
+    [SerializeField]
+    private FMODUnity.EventReference bookEvent;
 
-    private void Awake()
-    {
-        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-    }
+    private void Awake() { }
 
-    public override void Use(InventoryUI inventoryUI)
+    public override void Use(Player player)
     {
-        if (!_player.PlayerSkills.LearnedSkills.Contains(_itemSkill))
+        FMODUnity.RuntimeManager.PlayOneShot(bookEvent, player.transform.position);
+        if (!player.PlayerSkills.LearnedSkills.Contains(_itemSkill))
         {
-            _player.PlayerSkills.LearnedSkills.Add(_itemSkill);
-            bool res = inventoryUI.AddItem(new ItemStack(_itemSkill, 1));
+            player.UIController.AddItem(new ItemStack(_itemSkill, 1));
+            player.PlayerSkills.LearnedSkills.Add(_itemSkill);
         }
-        _player.Inventory.RemoveItem(this);
+        player.Inventory.RemoveItem(this);
     }
 }

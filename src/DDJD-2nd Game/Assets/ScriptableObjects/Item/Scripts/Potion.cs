@@ -7,9 +7,14 @@ public class Potion : CollectibleObject
 {
     public int restoreHealthValue;
 
-    public override void Use(InventoryUI inventoryUI)
+    [SerializeField]
+    private FMODUnity.EventReference soundEvent;
+
+    public override void Use(Player player)
     {
+        FMODUnity.RuntimeManager.PlayOneShot(soundEvent, player.transform.position);
         // TODO : update _health
+
         Debug.Log("Using potion");
     }
 }
