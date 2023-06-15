@@ -32,7 +32,7 @@ public class EnemyIdleState : EnemyState
                 if (_context.LineOfSight.CanSeePlayer() || _context.NoiseListener.CanHearPlayer())
                 {
                     _context.StartCoroutine(WarnNearbyEnemies());
-                    //_context.ChangeState(_context.States.ChaseState);
+                    _context.ChangeState(_context.States.ChaseState);
                 }
             }
         }
