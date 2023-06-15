@@ -72,7 +72,7 @@ public class RangedRepositionState : EnemyMovingState
     {
         if (_tries >= _maxTries)
         {
-            _context.ChangeState(_context.States.IdleState);
+            _context.ChangeState(_context.States.AttackState);
             return _context.transform.position;
         }
         _tries++;

@@ -70,4 +70,9 @@ public class FlappyMovementComponent : AirMovementComponent
     {
         base.Update();
     }
+
+    public override bool IsActive()
+    {
+        return false;
+    }
 }

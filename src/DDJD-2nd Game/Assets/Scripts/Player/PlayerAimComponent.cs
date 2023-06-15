@@ -100,6 +100,12 @@ public class PlayerAimComponent : MonoBehaviour, AimComponent
         if (rayCast)
         {
             RaycastHit hit;
+            Debug.DrawRay(
+                _player.CameraController.AimCamera.transform.position,
+                _player.CameraController.AimCamera.transform.forward * 100f,
+                Color.red,
+                10.0f
+            );
             if (GetAimRaycastHit(out hit))
             {
                 position = hit.point;

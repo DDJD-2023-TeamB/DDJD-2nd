@@ -11,12 +11,14 @@ public class ChangeActiveElementState : MovableState
     {
         base.Enter();
         _context.UIController.OpenActiveElement(true);
+        _context.TimeController.Slowdown();
     }
 
     public override void Exit()
     {
         base.Exit();
         _context.UIController.OpenActiveElement(false);
+        _context.TimeController.Reset();
     }
 
     public override void StateUpdate()

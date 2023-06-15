@@ -43,11 +43,10 @@ public class UIController : MonoBehaviour
     private void Start()
     {
         _playerUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
-        Debug.Log("UI = " + _playerUI);
         _playerUI.inventoryUI.gameObject.SetActive(false);
         _playerUI.menuUI.SetActive(false);
-        _playerUI.leftSpellWheel.gameObject.SetActive(false);
-        _playerUI.rightSpellWheel.gameObject.SetActive(false);
+        //_playerUI.leftSpellWheel.gameObject.SetActive(false);
+        //_playerUI.rightSpellWheel.gameObject.SetActive(false);
         _playerUI.missionsUI.SetActive(false);
         _playerUI.activeElementWheel.SetActive(false);
         _playerUI.OptionsUI.SetUIController(this);
@@ -100,17 +99,25 @@ public class UIController : MonoBehaviour
 
     public void OpenLeftSpell(bool isOpening)
     {
-        if (_playerUI.leftSpellWheel.gameObject.activeInHierarchy != isOpening)
+        if (isOpening)
         {
-            _playerUI.leftSpellWheel.gameObject.SetActive(isOpening);
+            _playerUI.leftSpellWheel.Open();
+        }
+        else
+        {
+            _playerUI.leftSpellWheel.Close();
         }
     }
 
     public void OpenRightSpell(bool isOpening)
     {
-        if (_playerUI.rightSpellWheel.gameObject.activeInHierarchy != isOpening)
+        if (isOpening)
         {
-            _playerUI.rightSpellWheel.gameObject.SetActive(isOpening);
+            _playerUI.rightSpellWheel.Open();
+        }
+        else
+        {
+            _playerUI.rightSpellWheel.Close();
         }
     }
 

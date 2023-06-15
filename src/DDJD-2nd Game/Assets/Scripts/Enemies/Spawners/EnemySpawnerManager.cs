@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using MyBox;
+using System;
 
 public enum SpawnerType
 {
@@ -35,6 +36,8 @@ public class EnemySpawnerManager : MonoBehaviour
 
     private List<GameObject> _spawnedEnemies = new List<GameObject>();
 
+    public Action<BasicEnemy> OnSpawn;
+
     public void Awake() { }
 
     public void Start()
@@ -61,19 +64,20 @@ public class EnemySpawnerManager : MonoBehaviour
     {
         EnemySpawnerComponent spawner;
         bool spawned = false;
-        GameObject enemy = null;
+        BasicEnemy enemy = null;
         do
         {
             //TODO:: Could be more efficient
-            spawner = _spawners[Random.Range(0, _spawners.Count)];
+            spawner = _spawners[UnityEngine.Random.Range(0, _spawners.Count)];
             spawned = spawner.CanSpawn();
             EnemyInfo enemyInfo = _enemySpawner.EnemySpawnerInfo.GetRandomEnemyInfo();
             enemy = spawner.SpawnEnemy(enemyInfo);
         } while (!spawned);
         if (enemy != null)
         {
-            _spawnedEnemies.Add(enemy);
+            _spawnedEnemies.Add(enemy.gameObject);
         }
+        OnSpawn?.Invoke(enemy);
     }
 
     public void StartSpawn()
@@ -104,7 +108,7 @@ public class EnemySpawnerManager : MonoBehaviour
             {
                 _remainingEnemies--;
             }
-            yield return new WaitForSeconds(_spawnTimer + Random.Range(0.0f, 0.5f));
+            yield return new WaitForSeconds(_spawnTimer + UnityEngine.Random.Range(0.0f, 0.5f));
         }
     }
 
