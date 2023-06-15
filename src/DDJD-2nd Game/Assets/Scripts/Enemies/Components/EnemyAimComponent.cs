@@ -60,7 +60,6 @@ public class EnemyAimComponent : MonoBehaviour, AimComponent
         Vector3 direction = GetAimDirection(position);
         //Draw ray
         position += direction.normalized * 0.5f;
-        Debug.DrawRay(position, direction * _enemy.AttackRange, Color.blue, 5.0f);
         return CanHitPlayer(position, direction);
     }
 
