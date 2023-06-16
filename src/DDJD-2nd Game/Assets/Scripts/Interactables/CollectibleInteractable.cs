@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
 using TMPro;
+using UnityEditor.Animations;
+using System.Linq;
 
 public class CollectibleInteractable : Interactable
 {
@@ -44,30 +46,13 @@ public class CollectibleInteractable : Interactable
 
     public void AddTextToCanvas(GameObject myGO, string name)
     {
-        TextMeshProUGUI text;
-        GameObject myText;
+        GameObject floatingPrefab = GameObject.Find("FloatingText");
 
-        RectTransform rectTransform;
-        FloatingText floatingText;
-
-        ColorUtility.TryParseHtmlString("#FED600", out highlightColor);
-
-        // Text
-        myText = new GameObject();
-        myText.transform.parent = myGO.transform;
-        myText.name = "itemName";
-
-        text = myText.AddComponent<TextMeshProUGUI>();
+        GameObject floatingText = Instantiate(floatingPrefab);
+        TextMeshProUGUI text = floatingText.GetComponent<TextMeshProUGUI>();
         text.text = name;
-        text.fontSize = 15;
-        text.color = highlightColor;
-        text.alignment = TextAlignmentOptions.Center;
-        // Text position
-        rectTransform = text.GetComponent<RectTransform>();
-        rectTransform.localPosition = new Vector3(0, 0, 0);
-        rectTransform.sizeDelta = new Vector2(200, 50);
 
-        floatingText = myText.AddComponent<FloatingText>();
+        floatingText.transform.SetParent(myGO.transform, false);
     }
 
     protected override void Approach()
