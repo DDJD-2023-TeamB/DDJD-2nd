@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{994ae95a-a050-46c4-aece-e198e951f21f}">
+		<property name="name">
+			<value>Earth Charge State</value>
+		</property>
+		<relationship name="folder">
+			<destination>{de79e17d-ef84-4ec5-bc49-2e353b71570e}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{9a416a32-8685-4106-9ca8-56681e978537}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{9a416a32-8685-4106-9ca8-56681e978537}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Start</value>
+			<value>Idle</value>
+			<value>Complete</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
