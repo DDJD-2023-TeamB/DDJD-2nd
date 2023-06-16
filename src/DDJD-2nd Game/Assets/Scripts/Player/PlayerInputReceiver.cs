@@ -127,6 +127,7 @@ public class PlayerInputReceiver : MonoBehaviour
     public Action OnMissionKeyup;
     public Action OnMenuKeydown;
     public Action OnMenuKeyup;
+    public Action OnUsePotion;
 
     public Action OnPrintState;
 
@@ -198,6 +199,9 @@ public class PlayerInputReceiver : MonoBehaviour
 
         _playerInput.Combat.AbsorbMana.performed += ctx => _isAbsorbing = true;
         _playerInput.Combat.AbsorbMana.canceled += ctx => _isAbsorbing = false;
+
+        _playerInput.Combat.UsePotion.performed += ctx => OnUsePotion?.Invoke();
+
         _playerInput.Combat.ChangeActiveElement.performed += ctx => _isChangingActiveElement = true;
         _playerInput.Combat.ChangeActiveElement.canceled += ctx => _isChangingActiveElement = false;
 

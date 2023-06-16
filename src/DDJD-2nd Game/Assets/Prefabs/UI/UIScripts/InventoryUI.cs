@@ -217,15 +217,15 @@ public class InventoryUI : MonoBehaviour
     private GameObject CreateItemSlot(ItemStack ItemStack, Transform slot)
     {
         InventorySlot invSlot = slot.GetComponent<InventorySlot>();
-        if (invSlot.currentItem != null)
-        {
-            RemoveItem(invSlot.currentItem);
-            //Remove children from slot
-            foreach (Transform child in slot)
-            {
-                Destroy(child.gameObject);
-            }
-        }
+        // if (invSlot.currentItem != null)
+        // {
+        //     RemoveItem(invSlot.currentItem);
+        //     //Remove children from slot
+        //     foreach (Transform child in slot)
+        //     {
+        //         Destroy(child.gameObject);
+        //     }
+        // }
         GameObject newItem = Instantiate(InventoryItemPrefab);
         newItem.transform.SetParent(slot, false);
         newItem.transform.localScale = Vector3.one;

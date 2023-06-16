@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18029143, g: 0.22572419, b: 0.30693057, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4329,22 +4329,22 @@ PrefabInstance:
     - target: {fileID: 4492101057451422958, guid: 8084707323b635540b484e279ebd75fb,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9981975
+      value: 0.9982168
       objectReference: {fileID: 0}
     - target: {fileID: 4492101057451422958, guid: 8084707323b635540b484e279ebd75fb,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.058846444
+      value: 0.058847584
       objectReference: {fileID: 0}
     - target: {fileID: 4492101057451422958, guid: 8084707323b635540b484e279ebd75fb,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.011765269
+      value: 0.009992512
       objectReference: {fileID: 0}
     - target: {fileID: 4492101057451422958, guid: 8084707323b635540b484e279ebd75fb,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0006935944
+      value: -0.0005890856
       objectReference: {fileID: 0}
     - target: {fileID: 4492101058340307228, guid: 8084707323b635540b484e279ebd75fb,
         type: 3}
@@ -6808,10 +6808,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d4852314034584cae4318148ae53dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemySpawnerInfo: {fileID: 11400000, guid: bc4dc737c40c1ed4ab24e3e10484a1f7, type: 2}
-  _spawners:
-  - {fileID: 0}
-  - {fileID: 0}
+  _enemySpawner: {fileID: 0}
+  _spawners: []
   _type: 0
   _spawnTimer: 3
   _totalAmountOfEnemies: 15

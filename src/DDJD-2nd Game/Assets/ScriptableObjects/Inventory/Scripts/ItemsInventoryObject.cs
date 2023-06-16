@@ -65,6 +65,19 @@ public class ItemsInventoryObject : ScriptableObject
     {
         _gold += gold;
     }
+
+    public void UsePotion(Player player)
+    {
+        ItemStack slot = Container.Find(x => x.item is Potion);
+        if (slot == null)
+            return;
+
+        (slot.item as Potion).Use(player);
+        if (slot.RemoveAmount(1))
+        {
+            Container.Remove(slot);
+        }
+    }
 }
 
 [System.Serializable]

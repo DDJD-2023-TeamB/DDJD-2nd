@@ -13,7 +13,7 @@ public class Potion : CollectibleObject
     public override void Use(Player player)
     {
         FMODUnity.RuntimeManager.PlayOneShot(soundEvent, player.transform.position);
-        // TODO : update _health
+        player.Status.RestoreHealth(restoreHealthValue);
 
         Debug.Log("Using potion");
     }
