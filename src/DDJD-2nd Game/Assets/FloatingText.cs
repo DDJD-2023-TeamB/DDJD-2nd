@@ -6,11 +6,13 @@ using TMPro;
 public class FloatingText : MonoBehaviour
 {
     public float animationOffsetValue;
+
     private Vector3 _offset;
     private Transform _lookAt;
     private Camera _mainCam;
+    private TextMeshProUGUI _text;
 
-    private float _heightFactor = 0.75f;
+    private float _heightFactor = 0.6f;
     private float _visibilityThreshold = 50f;
 
     private float _fadeDistance = 5f;
@@ -18,10 +20,13 @@ public class FloatingText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //TODO
-        _lookAt = gameObject.transform.parent.transform.parent.transform;
-        _mainCam = Camera.main;
-        _offset = new Vector3(0, GetLookAtHeightOffset() * _heightFactor, 0);
+        if(gameObject.transform.parent.transform.parent != null)
+        {
+            _lookAt = gameObject.transform.parent.transform.parent.transform;
+            _mainCam = Camera.main;
+            _text = GetComponent<TextMeshProUGUI>();
+            _offset = new Vector3(0, GetLookAtHeightOffset() * _heightFactor , 0);
+        }   
     }
 
     // Update is called once per frame
@@ -33,7 +38,6 @@ public class FloatingText : MonoBehaviour
 
             if (transform.position != pos)
             {
-                //Debug.Log(pos);
                 float distance = Vector3.Distance(_mainCam.transform.position, _lookAt.position);
                 float scaleFactor = 1f / distance * 10;
 
@@ -41,9 +45,9 @@ public class FloatingText : MonoBehaviour
                 transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
                 float alpha = Mathf.Clamp01((distance - _visibilityThreshold) / _fadeDistance);
 
-                Color textColor = GetComponent<TextMeshProUGUI>().color;
+                Color textColor = _text.color;
                 textColor.a = 1f - alpha;
-                GetComponent<TextMeshProUGUI>().color = textColor;
+                _text.color = textColor;
             }
         }
     }

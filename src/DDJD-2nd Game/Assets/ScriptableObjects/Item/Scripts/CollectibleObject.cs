@@ -8,7 +8,7 @@ public abstract class CollectibleObject : ItemObject
     protected GameObject _prefab;
 
     [SerializeField]
-    protected bool _hasToPay;
+    protected bool _purchasable;
 
     //Make it conditional
     [SerializeField]
@@ -19,9 +19,9 @@ public abstract class CollectibleObject : ItemObject
         get => _cost;
     }
 
-    public bool HasToPay
+    public bool Purchasable
     {
-        get => _hasToPay;
+        get => _purchasable;
     }
 
     public abstract void Use(InventoryUI inventoryUI);

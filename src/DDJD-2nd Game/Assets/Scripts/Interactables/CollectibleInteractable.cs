@@ -15,12 +15,16 @@ public class CollectibleInteractable : Interactable
 
     public FloatingText floatingText;
 
+    private static string assetSaveLocation = "Assets/Materials/Outline/Outline.mat";
+
+    private Material _material;
+    private MeshRenderer _meshRenderer;
     Color highlightColor;
 
     protected override void Start()
     {
         base.Start();
-        if (_item.HasToPay)
+        if (_item.Purchasable)
         {
             CreateCanvas();
         }
@@ -57,17 +61,58 @@ public class CollectibleInteractable : Interactable
 
     protected override void Approach()
     {
-        if (_item.HasToPay)
-            HelpManager.Instance.SetHelpText("Press F to purchase");
-        else
+        if (_item.Purchasable)
         {
+            HelpManager.Instance.SetHelpText("Press F to purchase");
+            ActivateHighlight();
+        }
+        else
+        {   
             HelpManager.Instance.SetHelpText("Press F to collect");
         }
     }
 
+    private void ActivateHighlight()
+    {
+        if(!_material)
+        {
+            _material = (Material)AssetDatabase.LoadAssetAtPath(assetSaveLocation , typeof(Material));
+            _meshRenderer = GetComponent<MeshRenderer>();
+        }
+            
+        Material[] materials = _meshRenderer.materials;
+        Material[] newMaterials = new Material[materials.Length + 1];
+        materials.CopyTo(newMaterials, 0);
+        newMaterials[newMaterials.Length - 1] = _material;
+
+        _meshRenderer.materials = newMaterials;
+    }
+
+    public override void EndInteract()
+    {
+        base.EndInteract();
+
+        if (_item.Purchasable && _meshRenderer.materials.Length >= 2){
+            DeactivateHighlight();
+        }
+    }
+
+    private void DeactivateHighlight()
+    {
+        Material[] materials = _meshRenderer.materials;
+        Material[] newMaterials = new Material[materials.Length - 1];
+
+        for (int i = 0; i < newMaterials.Length; i++)
+        {
+            newMaterials[i] = materials[i];
+        }
+
+        _meshRenderer.materials = newMaterials;
+    }
+
     public override void Interact()
     {
-        if (!_item.HasToPay)
+        if (!_item.Purchasable)
         {
             _player.Inventory.AddItem(_item, 1);
             Destroy(gameObject);

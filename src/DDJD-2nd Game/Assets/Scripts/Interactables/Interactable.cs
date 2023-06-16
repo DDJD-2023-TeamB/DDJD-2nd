@@ -39,9 +39,8 @@ public abstract class Interactable : MonoBehaviour
         {
             return;
         }
-        HelpManager.Instance.ResetText();
+        
         EndInteract();
-        Debug.Log("Leaving");
     }
 
     protected abstract void Approach();
@@ -50,6 +49,7 @@ public abstract class Interactable : MonoBehaviour
 
     public virtual void EndInteract()
     {
+        HelpManager.Instance.ResetText();
         _player.InteractedObject = null;
     }
 }
