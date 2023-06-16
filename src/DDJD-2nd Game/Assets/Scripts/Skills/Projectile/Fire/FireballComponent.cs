@@ -18,6 +18,8 @@ public class FireballComponent : ProjectileComponent, NonPushable
     private FMOD.Studio.PARAMETER_ID _sfxChargeId;
     private FMOD.Studio.PARAMETER_ID _sfxStateId;
 
+    private bool _exploded = false;
+
     protected override void Awake()
     {
         base.Awake();
@@ -69,8 +71,14 @@ public class FireballComponent : ProjectileComponent, NonPushable
         _soundEmitter.Stop("fireball");
         _soundEmitter.SetParameterWithLabel("fireball", _sfxStateId, "Release", true);
         _soundEmitter.CallWithDelay(
-            () => _soundEmitter.SetParameterWithLabel("fireball", _sfxStateId, "Iddle", false),
-            0.05f
+            () =>
+            {
+                if (!_exploded)
+                {
+                    _soundEmitter.SetParameterWithLabel("fireball", _sfxStateId, "Iddle", false);
+                }
+            },
+            0.15f
         );
         _explosionRadius = _explosionRadius * _chargeComponent.GetCurrentCharge();
         _fireballVFX.SetFloat("SpawnRate", 0);
@@ -93,6 +101,7 @@ public class FireballComponent : ProjectileComponent, NonPushable
 
     protected override void Explode()
     {
+        DeactivateSpell();
         SpawnHitVFX();
         _soundEmitter.Stop("fireball");
         _soundEmitter.SetParameterWithLabel("fireball", _sfxStateId, "Impact", true);
@@ -107,7 +116,7 @@ public class FireballComponent : ProjectileComponent, NonPushable
         );
         foreach (RaycastHit hit in hits)
         {
-            if (hit.collider.gameObject == _caster)
+            if (hit.collider.gameObject == _caster || hit.collider.gameObject == gameObject)
             {
                 continue;
             }
@@ -119,7 +128,7 @@ public class FireballComponent : ProjectileComponent, NonPushable
             float force = GetForce();
             Damage(hit.collider.gameObject, (int)GetDamage(), (int)force, point, direction);
             Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
-            if (rb != null && hit.collider.GetComponent<NonPushable>() != null)
+            if (rb != null && hit.collider.GetComponent<NonPushable>() == null)
             {
                 rb.AddExplosionForce(
                     force,
@@ -131,6 +140,12 @@ public class FireballComponent : ProjectileComponent, NonPushable
             }
         }
 
+        StartCoroutine(DestroyAfterDelay(2.0f));
+    }
+
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         DestroySpell();
     }
 }

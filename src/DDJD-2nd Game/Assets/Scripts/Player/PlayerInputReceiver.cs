@@ -53,6 +53,7 @@ public class PlayerInputReceiver : MonoBehaviour
     public bool IsJumping
     {
         get { return _isJumping; }
+        set { _isJumping = value; }
     }
 
     private bool _isWaveAttacking;
@@ -142,6 +143,7 @@ public class PlayerInputReceiver : MonoBehaviour
             OnJumpKeyDown?.Invoke();
             _isJumping = true;
         };
+
         _playerInput.PlayerMovement.Jump.canceled += ctx =>
         {
             OnJumpKeyUp?.Invoke();

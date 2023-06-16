@@ -34,7 +34,7 @@ public class BasicShotComponent : ProjectileComponent, NonPushable
         base.OnImpact(other);
 
         Rigidbody rb = other.GetComponent<Rigidbody>();
-        if (rb != null && other.GetComponent<NonPushable>() != null)
+        if (rb != null && other.GetComponent<NonPushable>() == null)
         {
             rb.AddForce(transform.forward * _skillStats.ForceWithDamage(), ForceMode.Impulse);
         }

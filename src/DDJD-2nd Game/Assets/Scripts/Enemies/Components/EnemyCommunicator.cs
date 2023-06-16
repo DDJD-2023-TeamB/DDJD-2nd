@@ -28,7 +28,14 @@ public class EnemyCommunicator : MonoBehaviour
         else
         {
             //Store message so when action is setted, it will be called
-            _messagesUnhandled.Add(message.GetType(), message);
+            if (_messagesUnhandled.ContainsKey(message.GetType()))
+            {
+                _messagesUnhandled[message.GetType()] = message;
+            }
+            else
+            {
+                _messagesUnhandled.Add(message.GetType(), message);
+            }
         }
     }
 

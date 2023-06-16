@@ -65,7 +65,7 @@ public class InventoryItemImage
         )
         {
             inventoryUI.RemoveItem(this);
-            (currentItem.item as CollectibleObject).Use(inventoryUI);
+            (currentItem.item as CollectibleObject).Use(inventoryUI.Player);
         }
     }
 }

@@ -41,8 +41,13 @@ public class FootSteps : MonoBehaviour
         float weight = animationEvent.animatorClipInfo.weight;
         if (weight >= 0.48f)
         {
-            _soundEmitter.Play("footstep");
+            Play();
             _skipNextStep = weight <= 0.5f && weight >= 0.48f;
         }
+    }
+
+    public void Play()
+    {
+        _soundEmitter.Play("footstep");
     }
 }
