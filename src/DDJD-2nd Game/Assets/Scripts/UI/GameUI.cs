@@ -23,6 +23,10 @@ public class GameUI : MonoBehaviour
 
     [SerializeField] DashChargingIndicatorController dashChargingIndicator;
 
+
+    [SerializeField]
+    public MissionCompleteNotificationController missionCompleteNotification;
+
     public void UpdateElements(Skill leftSkill, Skill rightSkill, Element mainElement)
     {
         if (leftSkill?.Element != _leftElement)

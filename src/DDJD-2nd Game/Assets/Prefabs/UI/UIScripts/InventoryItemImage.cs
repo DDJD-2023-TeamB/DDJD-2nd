@@ -34,7 +34,6 @@ public class InventoryItemImage
         itemAmountText.SetActive(false);
         if (inventoryUI.itemTitle == null)
         {
-            Debug.Log("InvenotryImage is deleting title");
             Destroy(inventoryUI.itemTitle);
             inventoryUI.itemTitle = null;
         }

@@ -27,6 +27,7 @@ public class MissionsUIController : MonoBehaviour
 
     Mission selectedMission = null;
     Color highlightColor;
+    Color completedColor;
 
     private List<Mission> generalMissions;
 
@@ -36,6 +37,7 @@ public class MissionsUIController : MonoBehaviour
         _player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Player>();
         _missionController = _player.GetComponent<MissionController>();
         ColorUtility.TryParseHtmlString("#FED600", out highlightColor);
+        ColorUtility.TryParseHtmlString("#737373", out completedColor);
         loadActiveMissions();
         setActiveMission(null);
     }
@@ -86,6 +88,10 @@ public class MissionsUIController : MonoBehaviour
         for (int i = 0; i < generalMissions.Count; i++)
         {
             Mission mission = generalMissions[i];
+            if (mission.Status == MissionState.Blocked)
+            {
+                continue;
+            }
             GameObject missionInstance = Instantiate(missionPrefab, missionsContent.transform);
             missionInstance.GetComponent<MissionSelectionScript>().mission = mission;
             missionInstance.transform.Find("MissionTitle").GetComponent<TextMeshProUGUI>().text =
@@ -94,7 +100,23 @@ public class MissionsUIController : MonoBehaviour
                 .Find("MissionDescription")
                 .GetComponent<TextMeshProUGUI>()
                 .text = mission.Description;
-            if (mission == selectedMission)
+            if(mission.Status == MissionState.Available)
+            {
+                missionInstance.GetComponent<MissionSelectionScript>().setAsNew(true);
+            }
+
+            if (mission.Status == MissionState.Completed)
+            { 
+                missionInstance.transform
+                    .Find("MissionTitle")
+                    .GetComponent<TextMeshProUGUI>()
+                    .color = completedColor;
+                missionInstance.transform
+                    .Find("MissionDescription")
+                    .GetComponent<TextMeshProUGUI>()
+                    .color = completedColor;
+            }
+            else if (mission == selectedMission)
             {
                 missionInstance.transform
                     .Find("MissionTitle")
@@ -119,7 +141,10 @@ public class MissionsUIController : MonoBehaviour
                 var goal = mission.Goals[j];
                 accumulatedQuests++;
                 GameObject questInstance = Instantiate(questPrefab, missionInstance.transform);
-                if (mission == selectedMission)
+                if (mission.Goals[j].Completed) {
+                    questInstance.GetComponent<TextMeshProUGUI>().color = completedColor;
+                }
+                else if (mission == selectedMission)
                 {
                     questInstance.GetComponent<TextMeshProUGUI>().color = highlightColor;
                 }

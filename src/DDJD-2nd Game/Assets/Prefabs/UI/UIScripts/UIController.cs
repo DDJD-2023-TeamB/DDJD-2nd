@@ -254,4 +254,10 @@ public class UIController : MonoBehaviour
             return _playerUI; 
         } 
     }
+
+
+    public void showCompleteMissionText(string missionTitle)
+    {
+        _playerUI.playingUI.missionCompleteNotification.StartAnimation(missionTitle);
+    }
 }

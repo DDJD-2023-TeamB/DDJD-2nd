@@ -105,7 +105,6 @@ public class WheelController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             wheelSelector.changeSelection(slot);
-            Debug.Log(_itemList[slot].Icon);
             if (_itemList[slot] == null)
             {
                 manaBarIconController.changeSpellSprite(null);
