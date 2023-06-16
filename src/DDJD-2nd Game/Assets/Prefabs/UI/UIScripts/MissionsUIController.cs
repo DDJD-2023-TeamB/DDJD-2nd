@@ -85,9 +85,33 @@ public class MissionsUIController : MonoBehaviour
 
         int accumulatedQuests = 0;
 
+        List<Mission> orderedGeneralMissions = new List<Mission>();
+
+        for(int i=0; i<generalMissions.Count; i++)
+        {
+            if (generalMissions[i].Status == MissionState.Available)
+            {
+                orderedGeneralMissions.Add(generalMissions[i]);
+            }
+        }
         for (int i = 0; i < generalMissions.Count; i++)
         {
-            Mission mission = generalMissions[i];
+            if (generalMissions[i].Status == MissionState.Ongoing)
+            {
+                orderedGeneralMissions.Add(generalMissions[i]);
+            }
+        }
+        for (int i = 0; i < generalMissions.Count; i++)
+        {
+            if (generalMissions[i].Status == MissionState.Completed)
+            {
+                orderedGeneralMissions.Add(generalMissions[i]);
+            }
+        }
+
+        for (int i = 0; i < orderedGeneralMissions.Count; i++)
+        {
+            Mission mission = orderedGeneralMissions[i];
             if (mission.Status == MissionState.Blocked)
             {
                 continue;
@@ -177,7 +201,7 @@ public class MissionsUIController : MonoBehaviour
         }
         missionsContent.GetComponent<RectTransform>().sizeDelta = new Vector2(
             1600,
-            170 * generalMissions.Count + 40 * accumulatedQuests
+            170 * orderedGeneralMissions.Count + 40 * accumulatedQuests
         );
     }
 
