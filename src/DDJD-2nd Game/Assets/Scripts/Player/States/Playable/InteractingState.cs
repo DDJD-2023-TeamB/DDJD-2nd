@@ -42,4 +42,9 @@ public class InteractingState : GenericState
             npc.ContinueInteraction();
         }
     }
+
+    public bool IsInteracting()
+    {
+        return _context.InteractedObject != null;
+    }
 }

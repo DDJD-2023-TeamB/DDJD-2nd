@@ -58,6 +58,26 @@ public class LightningComponent : DashComponent, NonCollidable
         _vfx.SendEvent("Flash");
         StartCoroutine(UpdateVFXTrail());
         _soundEmitter.SetEventPositionToFollow("dash", _caster);
+
+        _soundEmitter.SetParameterWithLabel(
+            "dash",
+            _elementParameterId,
+            "Lightning Dash Explosion",
+            true
+        );
+
+        _soundEmitter.CallWithDelay(
+            () =>
+            {
+                _soundEmitter.SetParameterWithLabel(
+                    "dash",
+                    _elementParameterId,
+                    "Lightning",
+                    false
+                );
+            },
+            0.15f
+        );
     }
 
     public override void SetSkill(Skill skill)
@@ -95,6 +115,13 @@ public class LightningComponent : DashComponent, NonCollidable
         {
             _skinnedMeshRenderers[i].materials = _casterMaterials[i].ToArray();
         }
+
+        _soundEmitter.SetParameterWithLabel(
+            "dash",
+            _elementParameterId,
+            "Lightning Dash Explosion",
+            false
+        );
     }
 
     private void UpdateCollider()

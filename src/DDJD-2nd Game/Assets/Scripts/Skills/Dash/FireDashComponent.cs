@@ -29,7 +29,7 @@ public class FireDashComponent : DashComponent
             if (collider.gameObject != _caster && collider.gameObject != gameObject)
             {
                 Rigidbody rb = collider.GetComponent<Rigidbody>();
-                if (rb != null)
+                if (rb != null && rb.GetComponent<NonPushable>() == null)
                 {
                     rb.AddExplosionForce(
                         _skillStats.ForceWithDamage(),
@@ -39,13 +39,17 @@ public class FireDashComponent : DashComponent
                         ForceMode.Impulse
                     );
                 }
-                Damage(
-                    collider.gameObject,
-                    (int)(_skillStats.Damage),
-                    (int)(_skillStats.ForceWithDamage()),
-                    collider.ClosestPoint(_caster.transform.position),
-                    _caster.transform.forward
-                );
+                Damageable damageable = collider.GetComponent<Damageable>();
+                if (damageable != null && damageable.GetDamageableObject().layer != _caster.layer)
+                {
+                    Damage(
+                        collider.gameObject,
+                        (int)(_skillStats.Damage),
+                        (int)(_skillStats.ForceWithDamage()),
+                        collider.ClosestPoint(_caster.transform.position),
+                        _caster.transform.forward
+                    );
+                }
             }
         }
     }

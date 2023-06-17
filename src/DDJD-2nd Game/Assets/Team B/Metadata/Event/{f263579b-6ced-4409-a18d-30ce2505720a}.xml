@@ -84,7 +84,7 @@
 	</object>
 	<object class="MultiSound" id="{db7aa5f4-288c-4aab-902e-6d6dd00592df}">
 		<relationship name="sounds">
-			<destination>{45adfd1e-eda5-470e-96f9-ff53a9daa160}</destination>
+			<destination>{5da0e678-35e2-4bb5-b94d-c8da1cccdce0}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{8670facd-c00b-4294-a9ea-558eea6b441b}">
@@ -100,10 +100,10 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{7328a6b9-738a-42de-8f82-74408ca8e355}" />
-	<object class="SingleSound" id="{45adfd1e-eda5-470e-96f9-ff53a9daa160}">
+	<object class="SingleSound" id="{5da0e678-35e2-4bb5-b94d-c8da1cccdce0}">
 		<relationship name="modulators">
-			<destination>{4f35de84-db35-4b3e-b455-8a3aaa1edaa6}</destination>
-			<destination>{82c0d376-3b2f-419a-a6d3-592040060ef8}</destination>
+			<destination>{23a8a8c0-082a-4cee-a6c8-111c87aead1e}</destination>
+			<destination>{7c86009c-55bc-4620-8028-558511293745}</destination>
 		</relationship>
 		<relationship name="audioFile">
 			<destination>{163a073e-50ce-4cfa-8d79-8601ab0ce625}</destination>
@@ -112,20 +112,20 @@
 	<object class="MixerBusFader" id="{a58c6c81-a9ee-45d0-9567-d479ddf659a4}" />
 	<object class="MixerBusFader" id="{c3dc9a27-b3a8-4dd5-beb6-cbc1cb8114a3}" />
 	<object class="SpatialiserEffect" id="{e3fd6d06-0139-4b84-9539-9abe2bc7a8d0}" />
-	<object class="RandomizerModulator" id="{4f35de84-db35-4b3e-b455-8a3aaa1edaa6}">
-		<property name="nameOfPropertyBeingModulated">
-			<value>pitch</value>
-		</property>
-		<property name="amount">
-			<value>6.25</value>
-		</property>
-	</object>
-	<object class="RandomizerModulator" id="{82c0d376-3b2f-419a-a6d3-592040060ef8}">
+	<object class="RandomizerModulator" id="{23a8a8c0-082a-4cee-a6c8-111c87aead1e}">
 		<property name="nameOfPropertyBeingModulated">
 			<value>volume</value>
 		</property>
 		<property name="amount">
-			<value>2</value>
+			<value>3</value>
+		</property>
+	</object>
+	<object class="RandomizerModulator" id="{7c86009c-55bc-4620-8028-558511293745}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>pitch</value>
+		</property>
+		<property name="amount">
+			<value>4.16666698</value>
 		</property>
 	</object>
 </objects>

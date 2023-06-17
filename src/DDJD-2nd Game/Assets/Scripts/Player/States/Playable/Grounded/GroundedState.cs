@@ -17,6 +17,14 @@ public class GroundedState : MeleeAttackableState
         _context.Animator.SetBool("IsGrounded", true);
         ChangeSubState(_context.Factory.Idle(this));
         _context.StartCoroutine(LandCoroutine());
+        _context.Input.OnJumpKeyDown += Jump;
+        _context.AirMovement?.Reset();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        _context.Input.OnJumpKeyDown -= Jump;
     }
 
     private void CheckAbsorb()
@@ -31,24 +39,16 @@ public class GroundedState : MeleeAttackableState
     {
         base.StateUpdate();
         CheckAbsorb();
-
-        if (_context.Input.IsJumping)
-        {
-            _context.Rigidbody.AddForce(
-                Vector3.up * _context.JumpForce * Time.deltaTime * 10,
-                ForceMode.Acceleration
-            );
-            _context.Animator.SetTrigger("Jump");
-            _context.SoundEmitter.SetParameterWithLabel(
-                "jump",
-                _context.SfxJumpStateId,
-                "Jump",
-                true
-            );
-            return;
-        }
-
         CheckMoving();
+    }
+
+    private void Jump()
+    {
+        _context.Input.IsJumping = false;
+        _context.Rigidbody.AddForce(Vector3.up * _context.JumpForce, ForceMode.Acceleration);
+        _context.Animator.SetTrigger("Jump");
+        _context.SoundEmitter.Play("footstep");
+        _context.SoundEmitter.SetParameterWithLabel("jump", _context.SfxJumpStateId, "Jump", true);
     }
 
     private bool CheckMoving()

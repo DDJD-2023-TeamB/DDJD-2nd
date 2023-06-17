@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{54999a60-f037-477c-9521-637fa6604400}">
+		<property name="name">
+			<value>Lightning Charge State</value>
+		</property>
+		<relationship name="folder">
+			<destination>{de79e17d-ef84-4ec5-bc49-2e353b71570e}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{5ee3865f-315c-4949-8a1c-353c30307ac6}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{5ee3865f-315c-4949-8a1c-353c30307ac6}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Start</value>
+			<value>Idle</value>
+			<value>Complete</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

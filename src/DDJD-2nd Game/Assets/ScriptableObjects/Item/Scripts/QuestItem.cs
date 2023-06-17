@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "QuestItem", menuName = "Scriptable Objects/Items/QuestItem")]
 public class QuestItem : CollectibleObject
 {
-    public override void Use(InventoryUI inventoryUI)
+    public override void Use(Player player)
     {
         Debug.Log("Nothing");
     }

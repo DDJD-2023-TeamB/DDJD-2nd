@@ -39,5 +39,6 @@ public abstract class CollectibleObject : ItemObject
         _numLeftToBuy -= 1;
     }
 
-    public abstract void Use(InventoryUI inventoryUI);
+    public abstract void Use(Player player);
+
 }

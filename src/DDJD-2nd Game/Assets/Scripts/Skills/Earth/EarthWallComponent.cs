@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EarthWallComponent : StaticSkillComponent
+public class EarthWallComponent : RayCastSkillComponent
 {
     private RaycastHit? _previousHit = null;
     private Animator _animator;
 
     private FMOD.Studio.PARAMETER_ID _sfxStateId;
 
+    private bool _isRising;
+
     protected override void Awake()
     {
         base.Awake();
         _collider.enabled = false;
         _animator = GetComponent<Animator>();
+        _isRising = true;
     }
 
     public void Start()
@@ -23,7 +26,7 @@ public class EarthWallComponent : StaticSkillComponent
 
     public override bool CanShoot(Vector3 direction)
     {
-        _previousHit = GetTarget(direction);
+        _previousHit = GetRaycastHit();
         return _previousHit != null;
     }
 
@@ -34,31 +37,50 @@ public class EarthWallComponent : StaticSkillComponent
         // Draw a raycast from the player to the mouse position
 
 
-        _previousHit = _previousHit != null ? _previousHit : GetTarget(direction);
+        _previousHit = _previousHit != null ? _previousHit : GetRaycastHit();
         if (_previousHit != null)
         {
             RaycastHit hit = _previousHit.Value;
             transform.position = hit.point;
             transform.localRotation = Quaternion.LookRotation(
                 _caster.transform.forward,
-                hit.normal
+                Vector3.up
             );
+
+            //Raycast to find ground
+            RaycastHit groundHit;
+            if (
+                Physics.Raycast(
+                    transform.position,
+                    Vector3.down,
+                    out groundHit,
+                    10f,
+                    LayerMask.GetMask("Default", "Ground", "Wall", "Environment")
+                )
+            )
+            {
+                transform.position = groundHit.point;
+            }
             _collider.enabled = true;
         }
     }
 
-    private RaycastHit? GetTarget(Vector3 direction)
+    protected override void OnImpact(Collider other, float multiplier = 1)
     {
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, 100f);
-        foreach (RaycastHit hit in hits)
+        base.OnImpact(other, multiplier);
+        if (!_isRising)
         {
-            if (hit.collider.gameObject == gameObject)
-            {
-                continue;
-            }
-            return hit;
+            return;
         }
-        return null;
+        Vector3 direction = (other.transform.position - transform.position).normalized;
+        direction.y = 0.5f;
+        Damage(
+            other.gameObject,
+            (int)_stats.Damage,
+            (int)_stats.ForceWithDamage(),
+            transform.position,
+            direction
+        );
     }
 
     public override void DestroySpell()
@@ -66,5 +88,10 @@ public class EarthWallComponent : StaticSkillComponent
         _soundEmitter.SetParameterWithLabel("wall", _sfxStateId, "Destroy", true);
         _animator.SetTrigger("EndWall");
         Destroy(gameObject, 1.5f);
+    }
+
+    public void StopRising()
+    {
+        _isRising = false;
     }
 }

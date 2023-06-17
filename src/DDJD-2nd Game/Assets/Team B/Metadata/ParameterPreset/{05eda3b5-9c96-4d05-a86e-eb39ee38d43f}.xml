@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{05eda3b5-9c96-4d05-a86e-eb39ee38d43f}">
+		<property name="name">
+			<value>Element Overlay</value>
+		</property>
+		<relationship name="folder">
+			<destination>{de79e17d-ef84-4ec5-bc49-2e353b71570e}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{b578cfca-16fe-4e03-bbd6-2ce0ffe79fe1}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{b578cfca-16fe-4e03-bbd6-2ce0ffe79fe1}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>4</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Fire</value>
+			<value>Lightning</value>
+			<value>Dirt</value>
+			<value>Wind</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

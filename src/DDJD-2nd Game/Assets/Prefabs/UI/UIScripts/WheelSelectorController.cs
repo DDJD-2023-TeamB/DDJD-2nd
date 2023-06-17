@@ -12,6 +12,7 @@ public class WheelSelectorController : MonoBehaviour
     private void Update()
     {
         float currAngle = transform.rotation.eulerAngles.z;
+        float deltaTime = Time.deltaTime * 1 / Time.timeScale;
         if (currAngle > 180)
         {
             currAngle -= 360;
@@ -25,7 +26,7 @@ public class WheelSelectorController : MonoBehaviour
         {
             remaniningAngle += 360;
         }
-        if (Mathf.Abs(remaniningAngle) < rotationSpeed * Time.deltaTime)
+        if (Mathf.Abs(remaniningAngle) < rotationSpeed * deltaTime)
         {
             transform.rotation = Quaternion.Euler(0, 0, targetAngle);
         }
@@ -35,7 +36,7 @@ public class WheelSelectorController : MonoBehaviour
                 0,
                 0,
                 transform.rotation.eulerAngles.z
-                    + Mathf.Sign(remaniningAngle) * rotationSpeed * Time.deltaTime
+                    + Mathf.Sign(remaniningAngle) * rotationSpeed * deltaTime
             );
         }
     }

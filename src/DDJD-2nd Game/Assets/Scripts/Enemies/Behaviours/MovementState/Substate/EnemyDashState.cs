@@ -46,7 +46,7 @@ public class EnemyDashState : GenericState
 
     private void OnDashFinish()
     {
-        _context.ChangeState(_nextState);
+        _context.ChangeState(_context.States.AttackState);
     }
 
     public override void Exit()
