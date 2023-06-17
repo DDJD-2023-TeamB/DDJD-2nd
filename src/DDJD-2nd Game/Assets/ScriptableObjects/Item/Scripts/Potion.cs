@@ -14,7 +14,5 @@ public class Potion : CollectibleObject
     {
         FMODUnity.RuntimeManager.PlayOneShot(soundEvent, player.transform.position);
         player.Status.RestoreHealth(restoreHealthValue);
-
-        Debug.Log("Using potion");
     }
 }

@@ -71,6 +71,8 @@ public class ItemsInventoryObject : ScriptableObject
         ItemStack slot = Container.Find(x => x.item is Potion);
         if (slot == null)
             return;
+        if (player.Status.HasMaxHealth())
+            return;
 
         (slot.item as Potion).Use(player);
         if (slot.RemoveAmount(1))

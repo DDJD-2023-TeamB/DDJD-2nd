@@ -99,4 +99,9 @@ public class CharacterStatus : MonoBehaviour
     {
         _health = Mathf.Min(_health + healthQuantity, _maxHealth);
     }
+
+    public bool HasMaxHealth()
+    {
+        return _health == _maxHealth;
+    }
 }
