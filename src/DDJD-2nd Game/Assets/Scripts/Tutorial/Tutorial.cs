@@ -9,59 +9,25 @@ public class Tutorial : ScriptableObject
 {
     [SerializeField]
     private TutorialPageInfo[] _tutorialInfo;
-
-    // public void Awake()
-    // {
-    //     _animator = GetComponent<Animator>();
-    //     _sentences = new Queue<string>();
-    // }
+    public TutorialPageInfo[] TutorialInfo
+    {
+        get { return _tutorialInfo; }
+    }
+    private int _currentPage = 0;
+    public int CurrentPage
+    {
+        get { return _currentPage; }
+    }
 
     public void Start() { }
 
-    public void DisplayNextSentence()
+    private void SwitchPage() 
     {
-        // if (_isTyping)
-        // {
-        //     return;
-        // }
-        
-        // if( _sentences.Count > 0 )
-        // {
-        //     string sentence = _sentences.Dequeue();
-        //     _isTyping = true;
-        //     StartCoroutine(TypeSentence(sentence));
-        // }
-    }
-
-    // IEnumerator TypeSentence(string sentence)
-    // {
-    //     // _dialogueText.text = "";
-    //     // foreach (char letter in sentence.ToCharArray())
-    //     // {
-    //     //     _dialogueText.text += letter;
-    //     //     yield return null;
-    //     // }
-    //     // yield return new WaitForSeconds(1.0f);
-    //     // _isTyping = false;
-    // }
-
-    public void EndDialogue()
-    {
-        // _animator.SetBool("isOpen", false);
-    }
-
-    public void CheckIfDialogueEnded()
-    {
-        // if (_isTyping)
-        // {
-        //     return false;
-        // }
-        // if (_sentences.Count == 0)
-        // {
-        //     EndDialogue();
-        //     return true;
-        // }
-        // return false;
+        _currentPage++;
+        if (_currentPage >= _tutorialInfo.Length)
+        {
+            _currentPage = 0;
+        }
     }
 
     public TutorialPageInfo[] TutorialPageInfo

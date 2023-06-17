@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEditor;
 
 [System.Serializable]
 public class Interaction
@@ -20,4 +22,12 @@ public class Interaction
     {
         get { return _npc; }
     }
+
+    [SerializeField]
+    private UnityEvent _onEndInteraction = new UnityEvent();
+    public UnityEvent OnEndInteraction
+    {
+        get { return _onEndInteraction; }
+    }
+
 }

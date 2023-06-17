@@ -16,8 +16,10 @@ public class Npc : Interactable
     {
         get { return _missions; }
     }
-
     private Mission _currentMission;
+
+    private Tutorial _currentTutorial;
+    private bool _tutorial = false;
 
     protected override void Start()
     {
@@ -27,6 +29,7 @@ public class Npc : Interactable
         _animator = GetComponent<Animator>();
         if (_missions.Count != 0)
             _currentMission = _missions.Dequeue();
+            _currentTutorial = (Tutorial)AssetDatabase.LoadAssetAtPath("Scriptable Objects/Tutorial/Info/" + _currentMission.Tutorial, typeof(Tutorial));
     }
 
     void Update() { }
@@ -62,14 +65,17 @@ public class Npc : Interactable
             {
                 if (_npc == _currentMission.InteractionBegin.Npc)
                     _currentDialogueInfo = _npc.DefaultDialogueInfo;
-                //_currentDialogueInfo = _currentMission.InteractionEnd.DialogueInfo;
+                //_currentDialogueInfo = _currentMission.InteractionEnd.DialogueInfo; 
                 if (_missions.Count > 0)
                 {
                     _currentMission = _missions.Dequeue();
+                    _currentTutorial = (Tutorial)AssetDatabase.LoadAssetAtPath("Scriptable Objects/Tutorial/Info/" + _currentMission.Tutorial, typeof(Tutorial));
+
                 }
                 else
                 {
                     _currentMission = null;
+                    _currentTutorial = null;
                 }
             }
         }
@@ -82,12 +88,29 @@ public class Npc : Interactable
     {
         if (!_dialogue.CheckIfDialogueEnded())
             _dialogue.DisplayNextSentence();
-        else
+        else if (_dialogue.CheckIfDialogueEnded() && !_tutorial)
         {
             _dialogue.EndDialogue();
             _animator.SetInteger("Idle Index", Random.Range(0, 5));
             _animator.SetTrigger("Idle");
-            base.EndInteract();
+            CheckTutorial();
+        } 
+        else if (_dialogue.CheckIfDialogueEnded() && _tutorial)
+        {
+            _player.UIController.ChangeTutorialPage(_currentTutorial);
+        }
+        else {
+            EndInteract();
+        }
+    }
+
+    private void CheckTutorial()
+    {
+        if (_currentMission.Status == MissionState.Ongoing)
+        {
+            _tutorial = true;
+            _player.UIController.OpenTutorial(true);
+            _player.UIController.ChangeTutorialPage(_currentTutorial);
         }
     }
 

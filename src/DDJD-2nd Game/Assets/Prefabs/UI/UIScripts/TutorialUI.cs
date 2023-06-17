@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.UI;
 
 public class TutorialUI : MonoBehaviour
@@ -27,26 +28,20 @@ public class TutorialUI : MonoBehaviour
     }
     Color highlightColor;
 
-    private Tutorial _tutorial;
-    public Tutorial Tutorial {
-        get { return _tutorial; }
-    }
-
     void Start()
     {
         ColorUtility.TryParseHtmlString("#FED600", out highlightColor);
-        ShowUI();
     }
 
 
-    private void ShowUI()
+    private void ShowUI(Tutorial tutorial)
     {
-        Debug.Log(_tutorial.TutorialPageInfo);
-        _title.GetComponent<TextMeshProUGUI>().text = _tutorial.TutorialPageInfo[0].Title;
+        Debug.Log(tutorial.TutorialInfo[tutorial.CurrentPage]);
+        _title.GetComponent<TextMeshProUGUI>().text = tutorial.TutorialInfo[tutorial.CurrentPage].Title;
         GameObject tutorialInstance = Instantiate(_prefab, _content.transform);
-        tutorialInstance.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = _tutorial.TutorialPageInfo[0].Text;
-        tutorialInstance.transform.Find("Gif").GetComponent<Image>().sprite = _tutorial.TutorialPageInfo[0].Gif.GetComponent<Image>().sprite;
-        tutorialInstance.transform.Find("Gif").GetComponent<Animator>().runtimeAnimatorController = _tutorial.TutorialPageInfo[0].Gif.GetComponent<Animator>().runtimeAnimatorController;
+        tutorialInstance.transform.Find("Description").GetComponent<TextMeshProUGUI>().text =tutorial.TutorialInfo[tutorial.CurrentPage].Text;
+        tutorialInstance.transform.Find("Gif").GetComponent<Image>().sprite = tutorial.TutorialInfo[tutorial.CurrentPage].Gif.GetComponent<Image>().sprite;
+        tutorialInstance.transform.Find("Gif").GetComponent<Animator>().runtimeAnimatorController = tutorial.TutorialInfo[tutorial.CurrentPage].Gif.GetComponent<Animator>().runtimeAnimatorController;
     }
 
 }

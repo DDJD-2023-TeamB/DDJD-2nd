@@ -20,7 +20,6 @@ public class PlayableState : GenericState
         _context.Input.OnInventoryKeydown += OnInventoryKeydown;
         _context.Input.OnMissionKeydown += OnMissionKeydown;
         _context.Input.OnMenuKeydown += OnMenuKeydown;
-        _context.Input.OnTutorialKeydown += OnTutorialKeydown;
     }
 
     public override void Exit()
@@ -29,7 +28,6 @@ public class PlayableState : GenericState
         _context.Input.OnInventoryKeydown -= OnInventoryKeydown;
         _context.Input.OnMissionKeydown -= OnMissionKeydown;
         _context.Input.OnMenuKeydown -= OnMenuKeydown;
-        _context.Input.OnTutorialKeydown -= OnTutorialKeydown;
     }
 
     public override bool CanChangeState(GenericState state)
@@ -97,7 +95,7 @@ public class PlayableState : GenericState
         _context.ChangeState(_context.Factory.MissionMenu());
     }
 
-    private void OnTutorialKeydown()
+    private void OnTutorialOpen()
     {
         _context.ChangeState(_context.Factory.Tutorial());
     }

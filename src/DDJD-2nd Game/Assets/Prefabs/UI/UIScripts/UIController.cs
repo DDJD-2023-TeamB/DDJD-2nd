@@ -11,6 +11,8 @@ public class UIController : MonoBehaviour
     private ItemsInventoryObject _itemsInventory;
 
     private PlayerUI _playerUI;
+
+    private TutorialUI _tutorialUI;
     private Player _player;
 
     ItemSkill[] leftWheelItems = new ItemSkill[6];
@@ -43,6 +45,7 @@ public class UIController : MonoBehaviour
     private void Start()
     {
         _playerUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
+        _tutorialUI = GameObject.FindGameObjectWithTag("TutorialUI").GetComponent<TutorialUI>();
         Debug.Log("UI = " + _playerUI);
         _playerUI.inventoryUI.gameObject.SetActive(false);
         _playerUI.menuUI.SetActive(false);
@@ -93,6 +96,11 @@ public class UIController : MonoBehaviour
         currentMenu = "tutorial";
         _playerUI.tutorialUI.SetActive(isOpening);
         _playerUI.playingUI.gameObject.SetActive(!isOpening);
+    }
+
+    public void ChangeTutorialPage(Tutorial tutorial)
+    {
+        _tutorialUI.ShowUI(tutorial);
     }
 
     public void OpenOptions(bool isOpening)
