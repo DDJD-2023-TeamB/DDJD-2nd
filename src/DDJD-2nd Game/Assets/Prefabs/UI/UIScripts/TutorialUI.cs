@@ -34,7 +34,7 @@ public class TutorialUI : MonoBehaviour
     }
 
 
-    private void ShowUI(Tutorial tutorial)
+    public void ShowUI(Tutorial tutorial)
     {
         Debug.Log(tutorial.TutorialInfo[tutorial.CurrentPage]);
         _title.GetComponent<TextMeshProUGUI>().text = tutorial.TutorialInfo[tutorial.CurrentPage].Title;

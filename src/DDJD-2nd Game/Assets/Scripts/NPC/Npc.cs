@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEditor;
 [DefaultExecutionOrder(0)]
 [System.Serializable]
 public class Npc : Interactable
