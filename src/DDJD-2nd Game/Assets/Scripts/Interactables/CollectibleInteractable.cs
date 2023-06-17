@@ -15,11 +15,11 @@ public class CollectibleInteractable : Interactable
 
     public FloatingText floatingText;
 
-    private static string assetSaveLocation = "Assets/Materials/Outline/Outline.mat";
+    private static string outlineMaterialPath = "Assets/Materials/Outline/Outline.mat";
+    private static string floatingTextPrefabPath = "Assets/Prefabs/UI/FloatingCanvas.prefab";
 
     private Material _material;
     private MeshRenderer _meshRenderer;
-    Color highlightColor;
 
     protected override void Start()
     {
@@ -32,31 +32,14 @@ public class CollectibleInteractable : Interactable
 
     public void CreateCanvas()
     {
-        GameObject myGO;
-        Canvas myCanvas;
 
-        myGO = new GameObject();
-        myGO.transform.parent = gameObject.transform;
-        myGO.name = "Canvas";
-        myGO.AddComponent<Canvas>();
+        GameObject floatingCanvasPrefab = (GameObject)AssetDatabase.LoadAssetAtPath(floatingTextPrefabPath, typeof(GameObject));
+        GameObject floatingTextCanvas = Instantiate(floatingCanvasPrefab);
 
-        myCanvas = myGO.GetComponent<Canvas>();
-        myCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        myGO.AddComponent<CanvasScaler>();
-        myGO.AddComponent<GraphicRaycaster>();
+        TextMeshProUGUI text = floatingTextCanvas.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        text.text = _item.Cost.ToString() + "$";
 
-        AddTextToCanvas(myGO, _item.Cost.ToString() + "$");
-    }
-
-    public void AddTextToCanvas(GameObject myGO, string name)
-    {
-        GameObject floatingPrefab = GameObject.Find("FloatingText");
-
-        GameObject floatingText = Instantiate(floatingPrefab);
-        TextMeshProUGUI text = floatingText.GetComponent<TextMeshProUGUI>();
-        text.text = name;
-
-        floatingText.transform.SetParent(myGO.transform, false);
+        floatingTextCanvas.transform.SetParent(transform, false);
     }
 
     protected override void Approach()
@@ -64,6 +47,7 @@ public class CollectibleInteractable : Interactable
         if (_item.Purchasable)
         {
             HelpManager.Instance.SetHelpText("Press F to purchase");
+            HelpManager.Instance.AddText(_item.NumLeftToBuy + " " + _item.Name + " left");
             ActivateHighlight();
         }
         else
@@ -76,7 +60,7 @@ public class CollectibleInteractable : Interactable
     {
         if(!_material)
         {
-            _material = (Material)AssetDatabase.LoadAssetAtPath(assetSaveLocation , typeof(Material));
+            _material = (Material)AssetDatabase.LoadAssetAtPath(outlineMaterialPath , typeof(Material));
             _meshRenderer = GetComponent<MeshRenderer>();
         }
             
@@ -123,15 +107,18 @@ public class CollectibleInteractable : Interactable
         {
             if (_player.Inventory.SubGold(_item.Cost))
             {
+                _item.BuyItem();
                 _player.Inventory.AddItem(_item, 1);
-                Destroy(gameObject);
                 HelpManager.Instance.ResetText();
+    
+                if(_item.NumLeftToBuy == 0) Destroy(gameObject);
+                
             }
             else
             {
-                _player.InteractedObject = null;
                 HelpManager.Instance.SetHelpText("Not enough gold");
             }
+            _player.InteractedObject = null;
         }
     }
 }

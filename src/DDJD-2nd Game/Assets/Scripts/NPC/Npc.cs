@@ -95,6 +95,7 @@ public class Npc : Interactable
     public override void EndInteract()
     {
         base.EndInteract();
+        //Interaction e chamar a função do interation que é um event
     }
 
     protected override void Approach()

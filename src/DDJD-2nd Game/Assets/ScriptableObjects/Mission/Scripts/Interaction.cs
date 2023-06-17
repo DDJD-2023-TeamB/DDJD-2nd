@@ -20,4 +20,6 @@ public class Interaction
     {
         get { return _npc; }
     }
+
+    //Unity event 
 }
