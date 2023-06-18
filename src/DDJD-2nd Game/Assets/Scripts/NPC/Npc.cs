@@ -47,8 +47,6 @@ public class Npc : Interactable
         Image image = _floatingIconCanvas.transform.GetChild(0).GetComponent<Image>();
 
         _floatingIconAnimator = image.GetComponent<Animator>();
-
-        PauseAnimation();
         _floatingIconCanvas.SetActive(false);
         _floatingIconCanvas.transform.SetParent(transform, false);
     }
@@ -60,13 +58,13 @@ public class Npc : Interactable
             if (_currentMission.Status == MissionState.Available && !_floatingIconCanvas.activeSelf)
             {
                 _floatingIconCanvas.SetActive(true);
-                _floatingIconAnimator.enabled = true;
             }
             else if (
-                _currentMission.Status == MissionState.Ongoing && _floatingIconAnimator.enabled
+                _currentMission.Status == MissionState.Ongoing && !_floatingIconCanvas.activeSelf
             )
             {
-                _floatingIconAnimator.enabled = false;
+                _floatingIconCanvas.SetActive(true);
+                PauseAnimation();
             }
         }
         else if (_floatingIconCanvas && _floatingIconCanvas.activeSelf)
@@ -129,8 +127,7 @@ public class Npc : Interactable
     public void PauseAnimation()
     {
         Floating floatingScript = _floatingIconCanvas.transform.GetChild(0).GetComponent<Floating>();
-        floatingScript.animationOffsetValue = 0;
-        _floatingIconAnimator.enabled = false;
+        _floatingIconAnimator.SetTrigger("Stop");
     }
 
     public void ContinueInteraction()

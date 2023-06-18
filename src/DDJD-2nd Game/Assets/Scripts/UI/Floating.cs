@@ -1,96 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
 
 public class Floating : MonoBehaviour
 {
-    public float animationOffsetValue;
-
-    private Vector3 _offset;
-    private Transform _lookAt;
-    private Camera _mainCam;
-    private Image _image;
-
-    private float _initialScale;
-
-    private float _halfHeight;
-    private RectTransform _rectTransform;
-    private float _gap = 0.2f;
+    private Transform _mainCam;
 
     // Start is called before the first frame update
     void Start()
     {
-        _lookAt = gameObject.transform.parent.transform.parent.transform;
-        _mainCam = Camera.main;
-        _image = GetComponent<Image>();
-        _offset = new Vector3(0, GetLookAtHeightOffset() / 2 + _gap, 0);
-        _rectTransform = _image.GetComponent<RectTransform>();
-        _initialScale = transform.localScale.x;
+        _mainCam = Camera.main.transform;
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        if (_lookAt != null)
-        {
-            Vector3 screenPoint = _mainCam.WorldToViewportPoint(_lookAt.position);
-            bool isOnScreen =
-                screenPoint.z > 0
-                && screenPoint.x >= 0
-                && screenPoint.x <= 1
-                && screenPoint.y >= 0
-                && screenPoint.y <= 1;
-
-            if (isOnScreen)
-            {
-                float _imageScale = transform.localScale.x;
-                _halfHeight = _rectTransform.rect.size.y * _imageScale;
-
-                Vector3 pos =
-                    _mainCam.WorldToScreenPoint(
-                        _lookAt.position + _offset + new Vector3(0, animationOffsetValue, 0)
-                    ) + new Vector3(0, _halfHeight, 0);
-
-                if (transform.position != pos)
-                {
-                    float distance = Vector3.Distance(
-                        _mainCam.transform.position,
-                        _lookAt.position
-                    );
-                    float scaleFactor = ((5f / distance) * _initialScale);
-
-                    transform.position = pos;
-                    transform.localScale = new Vector3(scaleFactor, scaleFactor, 1f);
-                }
-            }
-            else{
-                transform.localScale = new Vector3(0f, 0f, 0f);
-            }
-        }
-    }
-
-    // Calculate the height offset based on the bounds of the _lookAt GameObject
-    private float GetLookAtHeightOffset()
-    {
-        float heightOffset = 0f;
-
-        // Check if the _lookAt GameObject has a Renderer component
-        Renderer renderer = _lookAt.GetComponent<Renderer>();
-        if (renderer != null)
-        {
-            heightOffset = renderer.bounds.size.y;
-        }
-        else
-        {
-            Collider collider = _lookAt.GetComponent<Collider>();
-            if (collider != null)
-            {
-                heightOffset = collider.bounds.size.y;
-            }
-        }
-
-        return heightOffset;
+        transform.LookAt(_mainCam.position);
     }
 }
