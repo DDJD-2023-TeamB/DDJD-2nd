@@ -19,6 +19,13 @@ public class InventoryItemImage
     [HideInInspector]
     public Transform parentAfterDrag;
 
+    private UiArea _uiArea;
+    public UiArea UiArea
+    {
+        get { return _uiArea; }
+        set { _uiArea = value; }
+    }
+
     private void Start()
     {
         GameObject inventoryUIObject = GameObject.Find("InventoryUI");
@@ -34,7 +41,6 @@ public class InventoryItemImage
         itemAmountText.SetActive(false);
         if (inventoryUI.itemTitle == null)
         {
-            Debug.Log("InvenotryImage is deleting title");
             Destroy(inventoryUI.itemTitle);
             inventoryUI.itemTitle = null;
         }
@@ -50,7 +56,7 @@ public class InventoryItemImage
         transform.SetParent(parentAfterDrag);
         image.raycastTarget = true;
         itemAmountText.SetActive(true);
-        if (inventoryUI.itemTitle == null)
+        if (inventoryUI.itemTitle != null)
         {
             Destroy(inventoryUI.itemTitle);
             inventoryUI.itemTitle = null;

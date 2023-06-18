@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 638223382643091467
+  lastModified: 638224448901154453
   FileSizes:
   - Name: Desktop
-    Value: 67296
+    Value: 116416
   Exists: 1
 --- !u!114 &-8899655932541831967
 MonoBehaviour:
@@ -86,10 +86,10 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Movement.bank
   Name: Movement
   StudioPath: bank:/Movement
-  lastModified: 638223382642835578
+  lastModified: 638224448900944443
   FileSizes:
   - Name: Desktop
-    Value: 1631008
+    Value: 1522848
   Exists: 1
 --- !u!114 &-8798420417373273517
 MonoBehaviour:
@@ -333,6 +333,30 @@ MonoBehaviour:
   - Release
   - Impact
   Exists: 1
+--- !u!114 &-7526548087047743758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Ambience Village - Wilderness/Village Proximity
+  m_EditorClassIdentifier: 
+  Name: Village Proximity
+  StudioPath: 
+  Min: 0
+  Max: 100
+  Default: 0
+  ID:
+    data1: 4254689558
+    data2: 195455078
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-7482942988528332613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,6 +401,34 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-7333882008023757990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Ambience/Ambience Village - Wilderness
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Ambience/Ambience Village - Wilderness
+  Guid:
+    Data1: 1395267596
+    Data2: 1250929403
+    Data3: 904684715
+    Data4: 142978580
+  Banks:
+  - {fileID: 5037342329750656417}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -7526548087047743758}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 140000
 --- !u!114 &-7104131427787966733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,10 +686,10 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Abilities.bank
   Name: Abilities
   StudioPath: bank:/Abilities
-  lastModified: 638223382642685571
+  lastModified: 638226492964199426
   FileSizes:
   - Name: Desktop
-    Value: 2636992
+    Value: 3862368
   Exists: 1
 --- !u!114 &-6341237352202516728
 MonoBehaviour:
@@ -718,7 +770,36 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
-  Parameters: []
+  Parameters:
+  - {fileID: 525207389419342362}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6278842666586415520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Element Overlay
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Element Overlay
+  Guid:
+    Data1: 1450044450
+    Data2: 1338472850
+    Data3: -1996579710
+    Data4: -983486842
+  Banks:
+  - {fileID: -6345873753029855478}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 8556686865403494849}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -762,7 +843,7 @@ MonoBehaviour:
     Data4: -1976586680
   Banks:
   - {fileID: -8875583872252989065}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters:
@@ -821,7 +902,7 @@ MonoBehaviour:
   - {fileID: -6345873753029855478}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters:
   - {fileID: 4069998876487704224}
   MinDistance: 1
@@ -1012,34 +1093,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-4489087180616211922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Melee/Basic Melee
-  m_EditorClassIdentifier: 
-  Name: Basic Melee
-  StudioPath: 
-  Min: 0
-  Max: 3
-  Default: 0
-  ID:
-    data1: 2740336205
-    data2: 3309199001
-  Type: 2
-  IsGlobal: 0
-  Labels:
-  - Miss
-  - Basic
-  - Fire
-  - Lightning
-  Exists: 1
 --- !u!114 &-4459362541762091504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1109,7 +1162,7 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638223382643066388
+  lastModified: 638226492964399964
   FileSizes:
   - Name: Desktop
     Value: 2975328
@@ -1245,6 +1298,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-3529685494172359873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Air/Hover Intensity
+  m_EditorClassIdentifier: 
+  Name: Hover Intensity
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2371128729
+    data2: 1995108737
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-3162441206516737935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1553,6 +1630,35 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-1534835383523262656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Movement/Air
+  m_EditorClassIdentifier: 
+  Path: event:/Movement/Air
+  Guid:
+    Data1: -1524831470
+    Data2: 1279909948
+    Data3: 386926774
+    Data4: 1921847288
+  Banks:
+  - {fileID: -8875583872252989065}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -3529685494172359873}
+  - {fileID: 1662585166565058885}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-1247458670150439732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1619,12 +1725,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Dash/Parameter 1
+  m_Name: parameter:/Dash/Dash Type
   m_EditorClassIdentifier: 
-  Name: Parameter 1
+  Name: Dash Type
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 4
   Default: 0
   ID:
     data1: 734822654
@@ -1635,6 +1741,7 @@ MonoBehaviour:
   - Earth
   - Fire
   - Lightning
+  - Lightning Dash Explosion
   - Wind
   Exists: 1
 --- !u!114 &-1064323023291865415
@@ -1717,6 +1824,34 @@ MonoBehaviour:
   - Create
   - Destroy
   Exists: 1
+--- !u!114 &-857631493561204692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Main Menu
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Main Menu
+  Guid:
+    Data1: 237741939
+    Data2: 1121907292
+    Data3: -2065964896
+    Data4: -2104968963
+  Banks:
+  - {fileID: -8923405366262274771}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 7142658158546962691}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-726034635601325023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1732,10 +1867,10 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Voices.bank
   Name: Voices
   StudioPath: bank:/Voices
-  lastModified: 638221251545251806
+  lastModified: 638224448901164456
   FileSizes:
   - Name: Desktop
-    Value: 67168
+    Value: 75296
   Exists: 1
 --- !u!114 &-515421990174392312
 MonoBehaviour:
@@ -1820,34 +1955,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-135478257775152757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Attacks/Melee
-  m_EditorClassIdentifier: 
-  Path: event:/Attacks/Melee
-  Guid:
-    Data1: 820308842
-    Data2: 1337895590
-    Data3: -138653824
-    Data4: -1723026112
-  Banks:
-  - {fileID: -6345873753029855478}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters:
-  - {fileID: -4489087180616211922}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &-47141519956008056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1894,13 +2001,13 @@ MonoBehaviour:
   - {fileID: -4367734310977892154}
   - {fileID: -8923405366262274771}
   - {fileID: -726034635601325023}
+  - {fileID: 5037342329750656417}
   EditorEvents:
   - {fileID: 3941403685820269922}
   - {fileID: -6282454333781127130}
   - {fileID: -7004688267525311070}
   - {fileID: -257650255991689430}
   - {fileID: 8288641383145662732}
-  - {fileID: -135478257775152757}
   - {fileID: 303964382358967092}
   - {fileID: 1080928236033130435}
   - {fileID: 1979693036046699536}
@@ -1922,12 +2029,19 @@ MonoBehaviour:
   - {fileID: 3151042226959051440}
   - {fileID: -2196265020100420690}
   - {fileID: -5428676173019482672}
+  - {fileID: -6278842666586415520}
+  - {fileID: 4998310641564477790}
+  - {fileID: 1516902044408071553}
+  - {fileID: -7333882008023757990}
+  - {fileID: -1534835383523262656}
+  - {fileID: -857631493561204692}
+  - {fileID: 365109075078209870}
   EditorParameters: []
   MasterBanks:
   - {fileID: 4035237433119530087}
   StringsBanks:
   - {fileID: 5970952019658884912}
-  cacheTime: 638223382643091467
+  cacheTime: 638226492964399964
   cacheVersion: 131603
 --- !u!114 &87656345710861160
 MonoBehaviour:
@@ -2012,6 +2126,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &365109075078209870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Abilities Menu
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Abilities Menu
+  Guid:
+    Data1: -1082774134
+    Data2: 1339836563
+    Data3: 420035251
+    Data4: 2104951584
+  Banks:
+  - {fileID: -8923405366262274771}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 8816727014207294257}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &507431562143544992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2040,6 +2182,32 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &525207389419342362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Lightning Dash/Lightning Dash State
+  m_EditorClassIdentifier: 
+  Name: Lightning Dash State
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1288640749
+    data2: 263028203
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Dash
+  - Explosion
+  Exists: 1
 --- !u!114 &541013677560433854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2205,6 +2373,34 @@ MonoBehaviour:
   - Lightning
   - Wind
   Exists: 1
+--- !u!114 &1516902044408071553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Attacks/Melee/Magic Layer
+  m_EditorClassIdentifier: 
+  Path: event:/Attacks/Melee/Magic Layer
+  Guid:
+    Data1: -1107946826
+    Data2: 1278192834
+    Data3: 1011146412
+    Data4: 577834099
+  Banks:
+  - {fileID: -6345873753029855478}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 2909903367384547566}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &1577214744738999852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2228,6 +2424,31 @@ MonoBehaviour:
   Type: 1
   IsGlobal: 0
   Labels: []
+  Exists: 1
+--- !u!114 &1662585166565058885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Air/Air
+  m_EditorClassIdentifier: 
+  Name: Air
+  StudioPath: 
+  Min: 0
+  Max: 0
+  Default: 0
+  ID:
+    data1: 2602601732
+    data2: 2590907970
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Air
   Exists: 1
 --- !u!114 &1754629158732588561
 MonoBehaviour:
@@ -2328,9 +2549,9 @@ MonoBehaviour:
     Data4: 1292578611
   Banks:
   - {fileID: -6345873753029855478}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters:
   - {fileID: -1858610465246505435}
   - {fileID: 5689072784035100881}
@@ -2436,6 +2657,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &2909903367384547566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Magic Layer/Melee Type
+  m_EditorClassIdentifier: 
+  Name: Melee Type
+  StudioPath: 
+  Min: 0
+  Max: 3
+  Default: 0
+  ID:
+    data1: 3569420667
+    data2: 1541724746
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Fire
+  - Lightning
+  - Wind
+  - Dirt
+  Exists: 1
 --- !u!114 &3151042226959051440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2513,9 +2762,9 @@ MonoBehaviour:
     Data4: 73904864
   Banks:
   - {fileID: -6345873753029855478}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -2609,7 +2858,7 @@ MonoBehaviour:
   Name: Hover Type
   StudioPath: 
   Min: 0
-  Max: 2
+  Max: 1
   Default: 0
   ID:
     data1: 912811958
@@ -2617,7 +2866,6 @@ MonoBehaviour:
   Type: 2
   IsGlobal: 0
   Labels:
-  - Basic
   - Fire
   - Lightning
   Exists: 1
@@ -2687,7 +2935,7 @@ MonoBehaviour:
     Data4: -1248366904
   Banks:
   - {fileID: -4367734310977892154}
-  IsStream: 1
+  IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters:
@@ -2724,6 +2972,54 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &4998310641564477790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Attacks/Melee/Melee Base
+  m_EditorClassIdentifier: 
+  Path: event:/Attacks/Melee/Melee Base
+  Guid:
+    Data1: 820308842
+    Data2: 1337895590
+    Data3: -138653824
+    Data4: -1723026112
+  Banks:
+  - {fileID: -6345873753029855478}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 6934403579391645010}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5037342329750656417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Ambience.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Team B/Build/Desktop/Ambience.bank
+  Name: Ambience
+  StudioPath: bank:/Ambience
+  lastModified: 638224448900834461
+  FileSizes:
+  - Name: Desktop
+    Value: 6231872
+  Exists: 1
 --- !u!114 &5074668224040844672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2921,10 +3217,10 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638223382642695569
+  lastModified: 638226492964199426
   FileSizes:
   - Name: Desktop
-    Value: 3456
+    Value: 4184
   Exists: 1
 --- !u!114 &6754269592279153416
 MonoBehaviour:
@@ -2955,6 +3251,32 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &6934403579391645010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Melee Base/Basic Melee
+  m_EditorClassIdentifier: 
+  Name: Basic Melee
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2740336205
+    data2: 3309199001
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Miss
+  - Basic
+  Exists: 1
 --- !u!114 &6980888336978893274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3008,6 +3330,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &7142658158546962691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main Menu/Main Menu Type
+  m_EditorClassIdentifier: 
+  Name: Main Menu Type
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 3862969168
+    data2: 1436630811
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Neutral
+  - Positive
+  - Select
+  Exists: 1
 --- !u!114 &7341173503992641048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3195,3 +3544,58 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &8556686865403494849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Element Overlay/Element Overlay
+  m_EditorClassIdentifier: 
+  Name: Element Overlay
+  StudioPath: 
+  Min: 0
+  Max: 3
+  Default: 0
+  ID:
+    data1: 2769164898
+    data2: 570754059
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Fire
+  - Lightning
+  - Dirt
+  - Wind
+  Exists: 1
+--- !u!114 &8816727014207294257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Abilities Menu/Abilities Menu Type
+  m_EditorClassIdentifier: 
+  Name: Abilities Menu Type
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 2054478347
+    data2: 1045777872
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Open
+  - Close
+  - Hover
+  Exists: 1

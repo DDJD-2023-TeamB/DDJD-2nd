@@ -21,4 +21,9 @@ public abstract class ItemObject : ScriptableObject
     {
         get => _icon;
     }
+
+    public string Description
+    {
+        get => _description;
+    }
 }
