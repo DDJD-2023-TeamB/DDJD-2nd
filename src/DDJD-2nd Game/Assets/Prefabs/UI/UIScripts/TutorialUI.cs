@@ -36,6 +36,7 @@ public class TutorialUI : MonoBehaviour
 
     public void ShowUI(Tutorial tutorial)
     {
+        Debug.Log(tutorial);
         Debug.Log(tutorial.TutorialInfo[tutorial.CurrentPage]);
         _title.GetComponent<TextMeshProUGUI>().text = tutorial.TutorialInfo[tutorial.CurrentPage].Title;
         GameObject tutorialInstance = Instantiate(_prefab, _content.transform);

@@ -101,7 +101,7 @@ public class Mission : ScriptableObject
     }
 
     [SerializeField]
-    private string _tutorial;
+    private string _tutorial = null;
 
     public string Tutorial
     {

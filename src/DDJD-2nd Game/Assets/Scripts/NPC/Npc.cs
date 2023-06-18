@@ -27,9 +27,14 @@ public class Npc : Interactable
         _currentDialogueInfo = _npc.DefaultDialogueInfo;
         _missions = _missionController.GetNpcMissions(_npc);
         _animator = GetComponent<Animator>();
-        if (_missions.Count != 0)
+        Debug.Log(_missions.Count);
+        if (_missions.Count != 0) {
+            Debug.Log("innn");
             _currentMission = _missions.Dequeue();
-            _currentTutorial = (Tutorial)AssetDatabase.LoadAssetAtPath("Scriptable Objects/Tutorial/Info/" + _currentMission.Tutorial, typeof(Tutorial));
+            Debug.Log(_currentMission.Tutorial);
+            if (_currentMission.Tutorial != null) _currentTutorial = (Tutorial)AssetDatabase.LoadAssetAtPath("Scriptable Objects/Tutorial/Info/" + _currentMission.Tutorial, typeof(Tutorial));
+            Debug.Log(_currentTutorial);
+        }
     }
 
     void Update() { }
@@ -93,7 +98,7 @@ public class Npc : Interactable
             _dialogue.EndDialogue();
             _animator.SetInteger("Idle Index", Random.Range(0, 5));
             _animator.SetTrigger("Idle");
-            CheckTutorial();
+            if (_currentMission.Status == MissionState.Ongoing) CheckTutorial();
         } 
         else if (_dialogue.CheckIfDialogueEnded() && _tutorial)
         {
@@ -106,12 +111,10 @@ public class Npc : Interactable
 
     private void CheckTutorial()
     {
-        if (_currentMission.Status == MissionState.Ongoing)
-        {
-            _tutorial = true;
-            _player.UIController.OpenTutorial(true);
-            _player.UIController.ChangeTutorialPage(_currentTutorial);
-        }
+        _tutorial = true;
+        _player.UIController.OpenTutorial(true);
+        Debug.Log(_currentTutorial);
+        _player.UIController.ChangeTutorialPage(_currentTutorial);
     }
 
     public override void EndInteract()
