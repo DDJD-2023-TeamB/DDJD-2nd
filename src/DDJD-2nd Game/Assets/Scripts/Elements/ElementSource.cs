@@ -41,12 +41,13 @@ public class ElementSource : MonoBehaviour
         //VFx face hand
         _currentVFX.transform.forward = (handTransform.position - transform.position).normalized;
         _currentVFX.SetTarget(handTransform);
+    }
 
-        _soundEmitter.SetParameterWithLabel("absorb", _sfxStateID, "Start", true);
-        _soundEmitter.CallWithDelay(
-            () => _soundEmitter.SetParameterWithLabel("absorb", _sfxStateID, "Idle", false),
-            0.5f
-        );
+    public void PrepareTransfer(Player player)
+    {
+        _player = player;
+        _soundEmitter.SetParameter("absorb", _sfxStateID, 0);
+        _soundEmitter.Play("absorb");
     }
 
     public virtual void StopTransfer(Player player)
@@ -56,7 +57,7 @@ public class ElementSource : MonoBehaviour
             _currentVFX.Stop();
         }
 
-        _soundEmitter.SetParameterWithLabel("absorb", _sfxStateID, "Complete", true);
+        _soundEmitter.SetParameter("absorb", _sfxStateID, 1);
     }
 
     public Element Element

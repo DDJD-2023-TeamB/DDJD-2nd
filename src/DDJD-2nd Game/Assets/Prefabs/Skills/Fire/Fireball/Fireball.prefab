@@ -122,17 +122,28 @@ MonoBehaviour:
   _events:
     _keys:
     - fireball
+    - explosion
     _values:
     - _playOnStart: 1
       _stopOnDestroy: 0
       _updatePosition: 1
       _eventReference:
         Guid:
+          Data1: -156783445
+          Data2: 1228430047
+          Data3: -500818002
+          Data4: 455836143
+        Path: event:/Attacks/Fire Abilities/Charged Fire Ball/Charged Fire Ball
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 0
+      _eventReference:
+        Guid:
           Data1: -423278909
           Data2: 1196819011
           Data3: 852621243
           Data4: -1509556603
-        Path: event:/Attacks/Fire Abilities/Charged Fire Ball
+        Path: event:/Attacks/Fire Abilities/Charged Fire Ball/Charged Fire Ball Impact
 --- !u!1 &3801609874970732768
 GameObject:
   m_ObjectHideFlags: 0

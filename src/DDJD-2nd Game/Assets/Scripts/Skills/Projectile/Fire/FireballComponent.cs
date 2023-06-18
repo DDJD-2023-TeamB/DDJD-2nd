@@ -17,6 +17,7 @@ public class FireballComponent : ProjectileComponent, NonPushable
 
     private FMOD.Studio.PARAMETER_ID _sfxChargeId;
     private FMOD.Studio.PARAMETER_ID _sfxStateId;
+    private FMOD.Studio.PARAMETER_ID _sfxExplosionChargeId;
 
     private bool _exploded = false;
 
@@ -30,6 +31,10 @@ public class FireballComponent : ProjectileComponent, NonPushable
     {
         _sfxChargeId = _soundEmitter.GetParameterId("fireball", "Charged Fire Ball Intensity");
         _sfxStateId = _soundEmitter.GetParameterId("fireball", "Charged Fire Ball");
+        _sfxExplosionChargeId = _soundEmitter.GetParameterId(
+            "explosion",
+            "Charged Fire Ball Intensity"
+        );
         _soundEmitter.SetParameter("fireball", _sfxChargeId, 0.0f);
 
         _chargeComponent.OnChargeComplete += OnChargeComplete;
@@ -61,7 +66,7 @@ public class FireballComponent : ProjectileComponent, NonPushable
 
     private void OnChargeComplete()
     {
-        _soundEmitter.SetParameterWithLabel("fireball", _sfxStateId, "Iddle", false);
+        //_soundEmitter.SetParameterWithLabel("fireball", _sfxStateId, "Iddle", false);
     }
 
     public override void Shoot(Vector3 direction)
@@ -89,6 +94,13 @@ public class FireballComponent : ProjectileComponent, NonPushable
         GameObject impact = Instantiate(_impactPrefab, transform.position, Quaternion.identity);
         VisualEffect vfx = impact.GetComponent<VisualEffect>();
         vfx.SetFloat("Size", _currentRadius);
+        _soundEmitter.SetParameter(
+            "explosion",
+            _sfxExplosionChargeId,
+            _chargeComponent.GetCurrentCharge()
+        );
+        _soundEmitter.UpdatePosition("explosion");
+        _soundEmitter.Play("explosion");
         Destroy(impact, 3.0f);
     }
 
