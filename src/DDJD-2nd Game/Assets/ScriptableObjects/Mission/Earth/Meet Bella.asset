@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c5000599e034b75b66b98e905ca14a, type: 3}
   m_Name: Meet Bella
   m_EditorClassIdentifier: 
-  _title: Meet Bella
-  _description: Speak with Bella
+  _title: New Adventure
+  _description: Meet Bella
   _status: 1
   _type: 0
   _goals: []
@@ -25,8 +25,8 @@ MonoBehaviour:
       - With all the other lands conquered by the FireMighters, it won't be long
         until they get here.
       - I wonder if there's anyone brave enough to stand up to them...
-      - 'If you know someone like that, tell them to start by gathering some intel
-        at the other 3 villages: Wind, Electricity and Fire.'
+      - 'If you know someone like that, tell them to start by looking at the other
+        3 villages: Wind, Electricity and Fire.'
     _npc: {fileID: 11400000, guid: 3403cae3e543d448a83c140ebb792bde, type: 2}
   _interactionEnd:
     _dialogueInfo:
@@ -36,5 +36,6 @@ MonoBehaviour:
   _reward:
     _gold: 0
     _items: []
-  _followingMissions: []
+  _followingMissions:
+  - {fileID: 11400000, guid: 2f670125f4ec6ede1a2d40066de0cbf7, type: 2}
   _area: 2

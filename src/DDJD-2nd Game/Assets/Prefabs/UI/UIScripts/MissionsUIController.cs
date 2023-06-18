@@ -45,35 +45,6 @@ public class MissionsUIController : MonoBehaviour
     void loadActiveMissions()
     {
         generalMissions = _missionController.GetAvailableAndOngoingMissions();
-        //Temporary code for testing, should later be loaded from a game controller
-        /*Mission m1 = new Mission("Mission 1 idoajiaskl", "Mission 1 descriptionjdwankjndajkwdnkjasnkjnakwjnkasdnawnkdna");
-        m1.addQuest(new Quest(0, "Quest 1"));
-        m1.addQuest(new Quest(0, "Quest 2"));
-        m1.addQuest(new Quest(1, "Quest 2"));
-        Mission m2 = new Mission(
-            "Mission 2 idoajiaskl",
-            "Mission 2 descriptionjdwankjndajkwdnkjasnkjnakwjnkasdnawnkdna"
-        );
-        m2.addQuest(new Quest(0, "Quest 1"));
-        m2.addQuest(new Quest(1, "Quest 2"));
-        Mission m3 = new Mission(
-            "Mission 3 idoajiaskl",
-            "Mission 3 descriptionjdwankjndajkwdnkjasnkjnakwjnkasdnawnkdna"
-        );
-        m3.addQuest(new Quest(1, "Quest 1"));
-        Mission m4 = new Mission(
-            "Mission 4 idoajiaskl",
-            "Mission 4 descriptionjdwankjndajkwdnkjasnkjnakwjnkasdnawnkdna"
-        );
-        m4.addQuest(new Quest(0, "Quest 1"));
-        m4.addQuest(new Quest(0, "Quest 2"));
-        m4.addQuest(new Quest(0, "Quest 3"));
-        m4.addQuest(new Quest(1, "Quest 4"));
-        m4.addQuest(new Quest(0, "Quest 5"));
-        m4.addQuest(new Quest(2, "Quest 6"));
-        m4.addQuest(new Quest(1, "Quest 7"));
-        Mission[] missions = { m1, m2, m3, m4 };
-        generalMissions = missions;*/
     }
 
     void updateMissionsUI()

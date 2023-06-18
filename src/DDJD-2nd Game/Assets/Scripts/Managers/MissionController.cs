@@ -148,18 +148,6 @@ public class MissionController : MonoBehaviour
                     missions.Enqueue(mission);
                 }
             }
-            /*
-            foreach (var followingMission in mission.FollowingMissions)
-            {
-                if (
-                    followingMission.InteractionBegin.Npc == npc
-                    || followingMission.InteractionEnd.Npc == npc
-                )
-                {
-                    missions.Enqueue(followingMission);
-                }
-            }
-            */
         }
 
         return missions;
