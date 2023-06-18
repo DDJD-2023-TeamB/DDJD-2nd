@@ -83,7 +83,6 @@ public class Dialogue : MonoBehaviour
         }
         if (_sentences.Count == 0)
         {
-            EndDialogue();
             return true;
         }
         return false;

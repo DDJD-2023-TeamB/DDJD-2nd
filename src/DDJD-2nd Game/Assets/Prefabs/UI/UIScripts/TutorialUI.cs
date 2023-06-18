@@ -27,6 +27,7 @@ public class TutorialUI : MonoBehaviour
         get { return _title; }
     }
     Color highlightColor;
+    private GameObject _tutorialInstance;
 
     void Start()
     {
@@ -36,13 +37,18 @@ public class TutorialUI : MonoBehaviour
 
     public void ShowUI(Tutorial tutorial)
     {
-        Debug.Log(tutorial);
-        Debug.Log(tutorial.TutorialInfo[tutorial.CurrentPage]);
+        if (_tutorialInstance == null) _tutorialInstance = Instantiate(_prefab, _content.transform);
+        
+        // Replace title
         _title.GetComponent<TextMeshProUGUI>().text = tutorial.TutorialInfo[tutorial.CurrentPage].Title;
-        GameObject tutorialInstance = Instantiate(_prefab, _content.transform);
-        tutorialInstance.transform.Find("Description").GetComponent<TextMeshProUGUI>().text =tutorial.TutorialInfo[tutorial.CurrentPage].Text;
-        tutorialInstance.transform.Find("Gif").GetComponent<Image>().sprite = tutorial.TutorialInfo[tutorial.CurrentPage].Gif.GetComponent<Image>().sprite;
-        tutorialInstance.transform.Find("Gif").GetComponent<Animator>().runtimeAnimatorController = tutorial.TutorialInfo[tutorial.CurrentPage].Gif.GetComponent<Animator>().runtimeAnimatorController;
+       
+        // Replace description
+        _tutorialInstance.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = tutorial.TutorialInfo[tutorial.CurrentPage].Text;
+
+        // Replace GIF
+        GameObject gifGameObject = _tutorialInstance.transform.Find("Gif").gameObject;
+        gifGameObject.GetComponent<Image>().sprite = tutorial.TutorialInfo[tutorial.CurrentPage].Gif.GetComponent<Image>().sprite;
+        gifGameObject.GetComponent<Animator>().runtimeAnimatorController = tutorial.TutorialInfo[tutorial.CurrentPage].Gif.GetComponent<Animator>().runtimeAnimatorController;
     }
 
 }
