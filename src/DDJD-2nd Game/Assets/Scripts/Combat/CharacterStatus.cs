@@ -6,7 +6,6 @@ using System;
 
 public class CharacterStatus : MonoBehaviour
 {
-
     [SerializeField]
     protected int _health;
 
@@ -93,5 +92,11 @@ public class CharacterStatus : MonoBehaviour
         int mana = _elementMana[element];
         mana = Mathf.Min(mana + manaQuantity, _maxMana);
         _elementMana[element] = mana;
+    }
+
+    public int Health
+    {
+        get { return _health; }
+        set { _health = value; }
     }
 }

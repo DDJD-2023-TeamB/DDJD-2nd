@@ -12,10 +12,13 @@ public class RangedRepositionState : EnemyMovingState
 
     private Coroutine _dashCoroutine;
 
-    public RangedRepositionState(RangedEnemy enemy)
+    private float _repositionRange;
+
+    public RangedRepositionState(RangedEnemy enemy, float repositionRange = 0.0f)
         : base(enemy)
     {
         _context = enemy;
+        _repositionRange = repositionRange;
     }
 
     public override void Enter()
@@ -86,7 +89,15 @@ public class RangedRepositionState : EnemyMovingState
         float angleToPlayer = Mathf.Atan2(direction.z, direction.x);
 
         float angle = Random.Range(angleToPlayer - 45, angleToPlayer + 45);
-        float range = Random.Range(_context.AttackRange * 0.2f, _context.AttackRange * 0.9f);
+        float range;
+        if (_repositionRange > 0)
+        {
+            range = _repositionRange;
+        }
+        else
+        {
+            range = Random.Range(_context.AttackRange * 0.2f, _context.AttackRange * 0.9f);
+        }
 
         Vector3 newPositionOffset = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * range;
 

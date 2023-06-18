@@ -50,10 +50,15 @@ public class BasicEnemy : HumanoidEnemy
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _enemyDashable = GetComponent<EnemyDashable>();
         _enemyCommunicator = GetComponent<EnemyCommunicator>();
+        _navMeshAgent.speed = _enemySkills.Speed;
+        _status.Health = _enemySkills.Health;
         _states = new EnemyStates(
-            chaseState: new EnemyChaseState(this),
-            attackState: new EnemyAttackState(this),
-            idleState: new EnemyIdleState(this)
+            chaseState: (EnemyChaseState)
+                Activator.CreateInstance(_enemySkills.ChaseStrategy, new object[] { this }),
+            attackState: (EnemyAttackState)
+                Activator.CreateInstance(_enemySkills.AttackStrategy, new object[] { this }),
+            idleState: (EnemyIdleState)
+                Activator.CreateInstance(_enemySkills.IdleStrategy, new object[] { this })
         );
     }
 

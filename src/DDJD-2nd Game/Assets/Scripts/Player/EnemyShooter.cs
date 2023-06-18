@@ -8,6 +8,8 @@ public class EnemyShooter : Shooter
 
     private List<Coroutine> _routines = new List<Coroutine>();
 
+    public System.Action OnShoot;
+
     protected override void Awake()
     {
         base.Awake();
@@ -84,6 +86,7 @@ public class EnemyShooter : Shooter
     )
     {
         base.Shoot(spell, shotDirection, true, aimedSkill.SkillStats.ManaCost);
+        OnShoot?.Invoke();
     }
 
     private void ShootCharge(
@@ -104,6 +107,7 @@ public class EnemyShooter : Shooter
         {
             Vector3 direction = GetShotDirection(spell.transform.position);
             base.Shoot(spell, direction, true, aimedSkill.SkillStats.ManaCost);
+            OnShoot?.Invoke();
         }
     }
 

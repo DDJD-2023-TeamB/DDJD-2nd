@@ -2,19 +2,12 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class RangedAttackState : EnemyAttackState
+public class NoMoveAttackState : EnemyAttackState
 {
     private Coroutine _attackCoroutine;
     private new RangedEnemy _context;
-    private int _attackTries = 0;
-    private int _maxAttackTries = 3;
 
-    private int _maxAttacksInRow = 3;
-    private int _currentAttackInRow = 0;
-
-    private int _currentShots = 0;
-
-    public RangedAttackState(RangedEnemy enemy)
+    public NoMoveAttackState(RangedEnemy enemy)
         : base(enemy)
     {
         _context = enemy;
@@ -30,8 +23,6 @@ public class RangedAttackState : EnemyAttackState
         _context.Animator.SetBool("IsAiming", true);
         _context.AimComponent.StartAim();
         _attackCoroutine = _context.StartCoroutine(AttackCoroutine());
-        _context.Shooter.OnShoot += OnShoot;
-        _attackTries = 0;
     }
 
     public override void Exit()
@@ -45,12 +36,18 @@ public class RangedAttackState : EnemyAttackState
         }
 
         _context.Shooter.CancelShots();
-        _context.Shooter.OnShoot -= OnShoot;
     }
 
     public override void StateUpdate()
     {
-        base.StateUpdate();
+        if (!IsInAttackRange())
+        {
+            _context.ChangeState(_context.States.IdleState);
+            return;
+        }
+
+        Attack();
+        Move();
         FacePlayer();
     }
 
@@ -73,21 +70,7 @@ public class RangedAttackState : EnemyAttackState
         bool canAttack = _context.Shooter.ChooseSpellToUse(out aimedSkill, out origin, out isLeft);
         if (canAttack)
         {
-            if (_currentAttackInRow >= _maxAttacksInRow)
-            {
-                return;
-            }
             _context.Shooter.Shoot(aimedSkill, origin, isLeft);
-            _attackTries = 0;
-            _currentAttackInRow++;
-        }
-        else
-        {
-            _attackTries++;
-            if (_attackTries >= _maxAttackTries)
-            {
-                _context.ChangeState(new RangedRepositionState(_context));
-            }
         }
     }
 
@@ -101,16 +84,5 @@ public class RangedAttackState : EnemyAttackState
             rotation,
             Time.deltaTime * 7.5f
         );
-    }
-
-    private void OnShoot()
-    {
-        _currentShots++;
-        if (_currentShots >= _maxAttacksInRow)
-        {
-            _currentShots = 0;
-            _currentAttackInRow = 0;
-            _context.ChangeState(new RangedRepositionState(_context, Random.Range(0.5f, 1.5f)));
-        }
     }
 }

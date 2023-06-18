@@ -39,6 +39,10 @@ public class EnemyRecoveringState : GenericState
     public override void Exit()
     {
         base.Exit();
+        for (int i = 1; i < _context.Animator.layerCount; i++)
+        {
+            _context.Animator.SetLayerWeight(i, _layerWeights[i - 1]);
+        }
     }
 
     public override bool CanChangeState(GenericState state)
