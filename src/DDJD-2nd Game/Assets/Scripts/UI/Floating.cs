@@ -17,7 +17,7 @@ public class Floating : MonoBehaviour
 
     private float _halfHeight;
     private RectTransform _rectTransform;
-    private float _gap = 0.1f;
+    private float _gap = 0.2f;
 
     // Start is called before the first frame update
     void Start()

@@ -22,6 +22,8 @@ public class Npc : Interactable
     private Mission _currentMission;
 
     private static string floatingIconPrefabPath = "Assets/Prefabs/UI/FloatingIconCanvas.prefab";
+    private Animator _floatingIconAnimator;
+    private GameObject _floatingIconCanvas;
 
     protected override void Start()
     {
@@ -30,27 +32,48 @@ public class Npc : Interactable
         _missions = _missionController.GetNpcMissions(_npc);
         _animator = GetComponent<Animator>();
         if (_missions.Count != 0)
-            _currentMission = _missions.Dequeue();
-        //Por a saltar quando estiver 
-        if (_currentMission != null && _currentMission.Status != MissionState.Blocked)
         {
+            _currentMission = _missions.Dequeue();
             CreateCanvas();
         }
     }
 
     public void CreateCanvas()
     {
+        GameObject floatingCanvasPrefab = (GameObject)
+            AssetDatabase.LoadAssetAtPath(floatingIconPrefabPath, typeof(GameObject));
+        _floatingIconCanvas = Instantiate(floatingCanvasPrefab);
 
-        GameObject floatingCanvasPrefab = (GameObject)AssetDatabase.LoadAssetAtPath(floatingIconPrefabPath, typeof(GameObject));
-        GameObject floatingIconCanvas = Instantiate(floatingCanvasPrefab);
+        Image image = _floatingIconCanvas.transform.GetChild(0).GetComponent<Image>();
 
-        RawImage image = floatingIconCanvas.transform.GetChild(0).GetComponent<RawImage>();
+        _floatingIconAnimator = image.GetComponent<Animator>();
 
-        floatingIconCanvas.transform.SetParent(transform, false);
+        PauseAnimation();
+        _floatingIconCanvas.SetActive(false);
+        _floatingIconCanvas.transform.SetParent(transform, false);
     }
 
-
-    void Update() { }
+    void Update()
+    {
+        if (_currentMission != null)
+        {
+            if (_currentMission.Status == MissionState.Available && !_floatingIconCanvas.activeSelf)
+            {
+                _floatingIconCanvas.SetActive(true);
+                _floatingIconAnimator.enabled = true;
+            }
+            else if (
+                _currentMission.Status == MissionState.Ongoing && _floatingIconAnimator.enabled
+            )
+            {
+                _floatingIconAnimator.enabled = false;
+            }
+        }
+        else if (_floatingIconCanvas && _floatingIconCanvas.activeSelf)
+        {
+            _floatingIconCanvas.SetActive(false);
+        }
+    }
 
     public void ChangeDialogue(DialogueInfo newDialogueInfo)
     {
@@ -97,6 +120,17 @@ public class Npc : Interactable
         _dialogue.StartDialogue(_currentDialogueInfo);
         _animator.SetInteger("Talking Index", Random.Range(0, 4));
         _animator.SetTrigger("Talking");
+        if (_floatingIconAnimator)
+        {
+            PauseAnimation();
+        }
+    }
+
+    public void PauseAnimation()
+    {
+        Floating floatingScript = _floatingIconCanvas.transform.GetChild(0).GetComponent<Floating>();
+        floatingScript.animationOffsetValue = 0;
+        _floatingIconAnimator.enabled = false;
     }
 
     public void ContinueInteraction()
