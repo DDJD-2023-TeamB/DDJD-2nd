@@ -173,7 +173,7 @@ public class Player : StateContext, Damageable
         get { return _characterStatus; }
     }
     private UIController _uiController;
-
+    private GameUI _gameUI;
     private ElementController _elementController;
     private CharacterMovement _characterMovement;
 
@@ -201,6 +201,7 @@ public class Player : StateContext, Damageable
         _elementController = GetComponent<ElementController>();
         _characterMovement = GetComponent<CharacterMovement>();
         _collider = GetComponent<Collider>();
+        _gameUI = _uiController.PlayerUI.playingUI;
         _timeController = GetComponent<TimeController>();
         _footsteps = GetComponent<FootSteps>();
         ChangeState(_factory.Playable());
@@ -208,7 +209,7 @@ public class Player : StateContext, Damageable
 
     void Start()
     {
-        UpdateElement(null);
+        UpdateElement(_playerSkills.CurrentElement);
         _sfxJumpStateId = _soundEmitter.GetParameterId("jump", "Jump State");
         _sfxJumpIntensityId = _soundEmitter.GetParameterId("jump", "Jump Intensity");
         _inputReceiver.OnPrintState += () => _state?.PrintState();
@@ -225,6 +226,7 @@ public class Player : StateContext, Damageable
         if (element != null)
         {
             _playerSkills.CurrentElement = element;
+            _gameUI.changeChargingIndicatorElement(element);
         }
         _airMovement = _playerSkills.CurrentElement?.AirMovementSkill?.Initialize(gameObject);
         _uiController.UpdateElements(
