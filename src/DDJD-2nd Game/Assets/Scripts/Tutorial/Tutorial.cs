@@ -21,7 +21,7 @@ public class Tutorial : ScriptableObject
 
     public void Start() { }
 
-    private void SwitchPage() 
+    public void SwitchPage() 
     {
         _currentPage++;
         if (_currentPage >= _tutorialInfo.Length)

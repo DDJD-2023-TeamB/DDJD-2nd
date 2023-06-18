@@ -32,7 +32,7 @@ public class Npc : Interactable
             Debug.Log("innn");
             _currentMission = _missions.Dequeue();
             Debug.Log(_currentMission.Tutorial);
-            if (_currentMission.Tutorial != null) _currentTutorial = (Tutorial)AssetDatabase.LoadAssetAtPath("Assets/ScriptableObjects/Mission/Tutorial/" + _currentMission.Tutorial, typeof(Tutorial));
+            if (_currentMission.Tutorial != null) _currentTutorial = (Tutorial)AssetDatabase.LoadAssetAtPath("Assets/ScriptableObjects/Mission/Tutorial/" + _currentMission.Tutorial + ".asset", typeof(Tutorial));
             Debug.Log(_currentTutorial);
         }
     }
@@ -74,7 +74,7 @@ public class Npc : Interactable
                 if (_missions.Count > 0)
                 {
                     _currentMission = _missions.Dequeue();
-                    _currentTutorial = (Tutorial)AssetDatabase.LoadAssetAtPath("Assets/ScriptableObjects/Mission/Tutorial/" + _currentMission.Tutorial, typeof(Tutorial));
+                    _currentTutorial = (Tutorial)AssetDatabase.LoadAssetAtPath("Assets/ScriptableObjects/Mission/Tutorial/" + _currentMission.Tutorial + ".asset", typeof(Tutorial));
 
                 }
                 else
@@ -102,6 +102,7 @@ public class Npc : Interactable
         } 
         else if (_dialogue.CheckIfDialogueEnded() && _tutorial)
         {
+            _currentTutorial.SwitchPage();
             _player.UIController.ChangeTutorialPage(_currentTutorial);
         }
         else {
