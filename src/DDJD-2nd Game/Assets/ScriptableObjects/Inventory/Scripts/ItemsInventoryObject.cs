@@ -48,7 +48,6 @@ public class ItemsInventoryObject : ScriptableObject
 
     public void AddItem(ItemStack itemStack)
     {
-        Debug.Log(itemStack);
         ItemStack slot = Container.Find(x => x.item == itemStack.item);
 
         if (slot != null)

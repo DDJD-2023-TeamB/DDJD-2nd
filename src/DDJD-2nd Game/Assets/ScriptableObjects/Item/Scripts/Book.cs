@@ -18,7 +18,7 @@ public class Book : CollectibleObject
         FMODUnity.RuntimeManager.PlayOneShot(bookEvent, player.transform.position);
         if (!player.PlayerSkills.LearnedSkills.Contains(_itemSkill))
         {
-            player.UIController.AddItem(new ItemStack(_itemSkill, 1));
+            player.UIController.AddItem(new ItemStack(_itemSkill, 1), UiArea.Spells);
             player.PlayerSkills.LearnedSkills.Add(_itemSkill);
         }
         player.Inventory.RemoveItem(this);

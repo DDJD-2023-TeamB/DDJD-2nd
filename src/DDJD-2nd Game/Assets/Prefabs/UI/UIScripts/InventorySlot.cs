@@ -28,7 +28,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
 
     private Graphic _graphic;
 
-    public Action<ItemStack, int> OnDropAction;
+    public Action<InventoryItemImage, int, UiArea> OnDropAction;
 
     private void Awake()
     {
@@ -57,14 +57,15 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         if (transform.childCount == 0)
         {
             GameObject dropped = eventData.pointerDrag;
-            currentItem = dropped.GetComponent<InventoryItemImage>().currentItem;
-            OnDropAction?.Invoke(currentItem, index);
+            InventoryItemImage image = dropped.GetComponent<InventoryItemImage>();
+            currentItem = image.currentItem;
+            OnDropAction?.Invoke(image, index, image.UiArea);
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(currentItem == null)
+        if (currentItem == null)
         {
             return;
         }
@@ -80,17 +81,25 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
                 Input.mousePosition + new Vector3(0, 5, 0),
                 Quaternion.identity
             );
-            TextMeshProUGUI itemTitle = inventoryUI.itemTitle.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI itemTitle = inventoryUI.itemTitle.transform
+                .GetChild(1)
+                .GetComponent<TextMeshProUGUI>();
             itemTitle.text = currentItem.item.Name;
-            TextMeshProUGUI itemDescription = inventoryUI.itemTitle.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI itemDescription = inventoryUI.itemTitle.transform
+                .GetChild(2)
+                .GetComponent<TextMeshProUGUI>();
             itemDescription.text = currentItem.item.Description;
-            RectTransform backgroundTint = inventoryUI.itemTitle.transform.GetChild(0).GetComponent<RectTransform>();
+            RectTransform backgroundTint = inventoryUI.itemTitle.transform
+                .GetChild(0)
+                .GetComponent<RectTransform>();
             //Setting size and position of dark background
-            backgroundTint.anchoredPosition = new Vector2(0, itemTitle.preferredHeight+10);
-            Debug.Log(itemTitle.preferredHeight + "," + itemDescription.preferredHeight);
-            backgroundTint.sizeDelta = new Vector2(200, itemTitle.preferredHeight + itemDescription.preferredHeight+20);
+            backgroundTint.anchoredPosition = new Vector2(0, itemTitle.preferredHeight + 10);
+            backgroundTint.sizeDelta = new Vector2(
+                200,
+                itemTitle.preferredHeight + itemDescription.preferredHeight + 20
+            );
             inventoryUI.itemTitle.transform.SetParent(transform.root);
-            _graphic.raycastTarget = false;
+            //_graphic.raycastTarget = false;
         }
     }
 
@@ -116,6 +125,15 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
                 Destroy(inventoryUI.itemTitle);
                 inventoryUI.itemTitle = null;
             }
+        }
+    }
+
+    public void ClearSlot()
+    {
+        currentItem = null;
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
         }
     }
 }

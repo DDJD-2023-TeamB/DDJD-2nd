@@ -17,7 +17,8 @@ public class WheelController : MonoBehaviour
     private SoundEmitter _soundEmitter;
     private FMOD.Studio.PARAMETER_ID _wheelParameterId;
 
-    [SerializeField] private ManaBarIconController manaBarIconController;
+    [SerializeField]
+    private ManaBarIconController manaBarIconController;
 
     private ItemObject[] _itemList = new ItemObject[6];
 
@@ -127,13 +128,18 @@ public class WheelController : MonoBehaviour
         return (ItemSkill)_itemList[wheelSelector.CurrentSlot];
     }
 
-    public void updateSpellWheel(ItemObject[] itemList)
+    public void updateSpellWheel(ItemObject[] itemList, UiArea area)
     {
         _itemList = itemList;
         for (int i = 0; i < itemList.Length; i++)
         {
             if (itemList[i] != null)
             {
+                //Remove child
+                for (int j = 0; j < wheelSlots.transform.GetChild(i).childCount; j++)
+                {
+                    Destroy(wheelSlots.transform.GetChild(i).GetChild(j).gameObject);
+                }
                 GameObject itemImage = Instantiate(wheelSlotImagePrefab);
                 itemImage.transform.SetParent(wheelSlots.transform.GetChild(i));
                 itemImage.transform.position = wheelSlots.transform.GetChild(i).position;

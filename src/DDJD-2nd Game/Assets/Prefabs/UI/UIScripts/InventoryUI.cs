@@ -7,6 +7,14 @@ using UnityEngine.UI;
 using System;
 using Unity.Collections.LowLevel.Unsafe;
 
+public enum UiArea
+{
+    Items,
+    Spells,
+    LeftWheel,
+    RightWheel
+}
+
 public class InventoryUI : MonoBehaviour
 {
     public GameObject InventoryItemPrefab;
@@ -28,10 +36,10 @@ public class InventoryUI : MonoBehaviour
     }
 
     public Action OnItemRemoved;
-    public Action<ItemStack, int> OnItemDrop;
-    public Action<ItemStack, int> OnItemSkillDrop;
-    public Action<ItemStack, int> OnItemSkillLeftDrop;
-    public Action<ItemStack, int> OnItemSkillRightDrop;
+    public Action<InventoryItemImage, int, UiArea> OnItemDrop;
+    public Action<InventoryItemImage, int, UiArea> OnItemSkillDrop;
+    public Action<InventoryItemImage, int, UiArea> OnItemSkillLeftDrop;
+    public Action<InventoryItemImage, int, UiArea> OnItemSkillRightDrop;
 
     public GameObject itemTitle;
 
@@ -113,7 +121,7 @@ public class InventoryUI : MonoBehaviour
     }
 
     //Finds an available slot and adds an item to that slot. If no available slots left, returns false, if successful returns true
-    public bool AddItem(ItemStack item)
+    public bool AddItem(ItemStack item, UiArea area)
     {
         Transform availableSlot;
         if (item.item is ItemSkill)
@@ -128,7 +136,7 @@ public class InventoryUI : MonoBehaviour
         {
             return false;
         }
-        GameObject newItem = AddItemToSlot(item, availableSlot);
+        GameObject newItem = AddItemToSlot(item, availableSlot, area);
         return true;
     }
 
@@ -187,10 +195,11 @@ public class InventoryUI : MonoBehaviour
         }
         return false;
     }
+
     //Removes an item from the specified slot
     public bool RemoveItem(Transform slot)
     {
-        if(slot.childCount == 0)
+        if (slot.childCount == 0)
         {
             InventorySlot slotController = slot.GetComponent<InventorySlot>();
             if (slotController.currentItem != null)
@@ -210,14 +219,17 @@ public class InventoryUI : MonoBehaviour
     {
         for (int i = 0; i < skills.Count; i++)
         {
+            Transform slot = GetLeftSkillSlot(i);
+            InventorySlot slotController = slot.GetComponent<InventorySlot>();
+            slotController.ClearSlot();
             if (skills[i] == null)
             {
                 continue;
             }
-            Transform slot = GetLeftSkillSlot(i);
+
             //Remove children
             ItemStack item = new ItemStack(skills[i], 1, null);
-            GameObject newItem = AddItemToSlot(item, slot);
+            GameObject newItem = AddItemToSlot(item, slot, UiArea.LeftWheel);
         }
     }
 
@@ -225,17 +237,19 @@ public class InventoryUI : MonoBehaviour
     {
         for (int i = 0; i < skills.Count; i++)
         {
+            Transform slot = GetRightSkillSlot(i);
+            InventorySlot slotController = slot.GetComponent<InventorySlot>();
+            slotController.ClearSlot();
             if (skills[i] == null)
             {
                 continue;
             }
-            Transform slot = GetRightSkillSlot(i);
             ItemStack item = new ItemStack(skills[i], 1, null);
-            GameObject newItem = AddItemToSlot(item, slot);
+            GameObject newItem = AddItemToSlot(item, slot, UiArea.RightWheel);
         }
     }
 
-    private GameObject AddItemToSlot(ItemStack itemStack, Transform slot)
+    private GameObject AddItemToSlot(ItemStack itemStack, Transform slot, UiArea area)
     {
         InventorySlot invSlot = slot.GetComponent<InventorySlot>();
         if (invSlot.currentItem != null)
@@ -246,11 +260,10 @@ public class InventoryUI : MonoBehaviour
         newItem.transform.SetParent(slot, false);
         newItem.transform.localScale = Vector3.one;
         newItem.GetComponentInChildren<Image>().sprite = itemStack.item.Icon;
-        newItem.GetComponent<InventoryItemImage>().currentItem = itemStack;
-        newItem
-            .GetComponent<InventoryItemImage>()
-            .itemAmountText.GetComponent<TextMeshProUGUI>()
-            .text = itemStack.amount.ToString();
+        InventoryItemImage itemImage = newItem.GetComponent<InventoryItemImage>();
+        itemImage.currentItem = itemStack;
+        itemImage.itemAmountText.GetComponent<TextMeshProUGUI>().text = itemStack.amount.ToString();
+        itemImage.UiArea = area;
         invSlot.currentItem = itemStack;
         return newItem;
     }

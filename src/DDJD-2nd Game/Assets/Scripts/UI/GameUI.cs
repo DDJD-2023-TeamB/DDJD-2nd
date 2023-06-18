@@ -21,20 +21,20 @@ public class GameUI : MonoBehaviour
     private SerializedDictionary<Element, ElementUI> _elementsUI =
         new SerializedDictionary<Element, ElementUI>();
 
-    [SerializeField] DashChargingIndicatorController dashChargingIndicator;
-
+    [SerializeField]
+    DashChargingIndicatorController dashChargingIndicator;
 
     [SerializeField]
     public MissionCompleteNotificationController missionCompleteNotification;
 
     public void UpdateElements(Skill leftSkill, Skill rightSkill, Element mainElement)
     {
-        if (leftSkill?.Element != _leftElement)
+        if (leftSkill != null && leftSkill.Element != _leftElement)
         {
             _leftElement = leftSkill.Element;
             _leftManaBar.ChangeManaBar(_elementsUI[_leftElement]);
         }
-        if (rightSkill?.Element != _rightElement)
+        if (rightSkill != null && rightSkill.Element != _rightElement)
         {
             _rightElement = rightSkill.Element;
             _rightManaBar.ChangeManaBar(_elementsUI[_rightElement]);
