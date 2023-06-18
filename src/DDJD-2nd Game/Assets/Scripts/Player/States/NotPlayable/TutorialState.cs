@@ -10,7 +10,6 @@ public class TutorialState : GenericState
 
     public override void Enter()
     {
-        // Open tutorial with a key if wanted
         _context.UIController.OpenTutorial(true);
     }
 

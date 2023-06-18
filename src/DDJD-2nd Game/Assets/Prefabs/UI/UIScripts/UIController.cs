@@ -95,13 +95,12 @@ public class UIController : MonoBehaviour
         currentMenu = "tutorial";
         _playerUI.tutorialUI.SetActive(isOpening);
         _playerUI.playingUI.gameObject.SetActive(!isOpening);
-        _tutorialUI = _playerUI.tutorialUI.GetComponent<TutorialUI>();
+        if (isOpening == true) _tutorialUI = _playerUI.tutorialUI.GetComponent<TutorialUI>();
+        else _tutorialUI = null;
     }
 
     public void ChangeTutorialPage(Tutorial tutorial)
     {
-        Debug.Log(_tutorialUI);
-        Debug.Log("middke");
         _tutorialUI.ShowUI(tutorial);
     }
 

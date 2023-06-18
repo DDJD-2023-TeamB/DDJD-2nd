@@ -125,6 +125,8 @@ public class MissionController : MonoBehaviour
     {
         foreach (var followingMissions in mission.FollowingMissions)
         {
+            Debug.Log("UnblockFollowingMissions");
+            Debug.Log(followingMissions);
             followingMissions.Status = MissionState.Available;
             _unblockedMissions.Add(followingMissions);
         }

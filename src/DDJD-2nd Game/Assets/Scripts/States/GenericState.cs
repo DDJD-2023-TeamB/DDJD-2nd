@@ -61,6 +61,8 @@ public abstract class GenericState
 
     public bool ChangeSubState(GenericState state)
     {
+        Debug.Log("ChangeSubState");
+        Debug.Log(state);
         if (!CanChangeState(state))
         {
             return false;

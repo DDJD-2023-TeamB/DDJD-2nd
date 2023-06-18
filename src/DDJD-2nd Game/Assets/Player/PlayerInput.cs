@@ -489,7 +489,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""cc7cfcea-69a2-4fe7-9b8c-22d6f7d6bda7"",
-                    ""path"": ""<Keyboard>/t"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -522,74 +522,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PrintState"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Tutorial"",
-            ""id"": ""2db675f6-8dc4-4241-b718-6531a8e15e7f"",
-            ""actions"": [
-                {
-                    ""name"": ""Next"",
-                    ""type"": ""Button"",
-                    ""id"": ""ce0f695b-231c-4503-a404-81689e99aa65"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Previous"",
-                    ""type"": ""Button"",
-                    ""id"": ""bc942a54-955c-41e3-a6a9-81d8b4520acc"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Exit"",
-                    ""type"": ""Button"",
-                    ""id"": ""7b0e7add-bf94-4cf0-b040-946f7855370d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""dff87646-7c7a-4e54-9b81-dd4b3a3b61e3"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Next"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""02da091f-9e22-4af7-90f1-013976d340e8"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Previous"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""61482ce7-6332-4562-8013-d4a46f6c0747"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -629,11 +561,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_PrintState = m_Debug.FindAction("PrintState", throwIfNotFound: true);
-        // Tutorial
-        m_Tutorial = asset.FindActionMap("Tutorial", throwIfNotFound: true);
-        m_Tutorial_Next = m_Tutorial.FindAction("Next", throwIfNotFound: true);
-        m_Tutorial_Previous = m_Tutorial.FindAction("Previous", throwIfNotFound: true);
-        m_Tutorial_Exit = m_Tutorial.FindAction("Exit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1049,68 +976,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     }
     public DebugActions @Debug => new DebugActions(this);
-
-    // Tutorial
-    private readonly InputActionMap m_Tutorial;
-    private List<ITutorialActions> m_TutorialActionsCallbackInterfaces = new List<ITutorialActions>();
-    private readonly InputAction m_Tutorial_Next;
-    private readonly InputAction m_Tutorial_Previous;
-    private readonly InputAction m_Tutorial_Exit;
-    public struct TutorialActions
-    {
-        private @PlayerInput m_Wrapper;
-        public TutorialActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Next => m_Wrapper.m_Tutorial_Next;
-        public InputAction @Previous => m_Wrapper.m_Tutorial_Previous;
-        public InputAction @Exit => m_Wrapper.m_Tutorial_Exit;
-        public InputActionMap Get() { return m_Wrapper.m_Tutorial; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(TutorialActions set) { return set.Get(); }
-        public void AddCallbacks(ITutorialActions instance)
-        {
-            if (instance == null || m_Wrapper.m_TutorialActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_TutorialActionsCallbackInterfaces.Add(instance);
-            @Next.started += instance.OnNext;
-            @Next.performed += instance.OnNext;
-            @Next.canceled += instance.OnNext;
-            @Previous.started += instance.OnPrevious;
-            @Previous.performed += instance.OnPrevious;
-            @Previous.canceled += instance.OnPrevious;
-            @Exit.started += instance.OnExit;
-            @Exit.performed += instance.OnExit;
-            @Exit.canceled += instance.OnExit;
-        }
-
-        private void UnregisterCallbacks(ITutorialActions instance)
-        {
-            @Next.started -= instance.OnNext;
-            @Next.performed -= instance.OnNext;
-            @Next.canceled -= instance.OnNext;
-            @Previous.started -= instance.OnPrevious;
-            @Previous.performed -= instance.OnPrevious;
-            @Previous.canceled -= instance.OnPrevious;
-            @Exit.started -= instance.OnExit;
-            @Exit.performed -= instance.OnExit;
-            @Exit.canceled -= instance.OnExit;
-        }
-
-        public void RemoveCallbacks(ITutorialActions instance)
-        {
-            if (m_Wrapper.m_TutorialActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(ITutorialActions instance)
-        {
-            foreach (var item in m_Wrapper.m_TutorialActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_TutorialActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public TutorialActions @Tutorial => new TutorialActions(this);
     public interface IPlayerMovementActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -1146,11 +1011,5 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     public interface IDebugActions
     {
         void OnPrintState(InputAction.CallbackContext context);
-    }
-    public interface ITutorialActions
-    {
-        void OnNext(InputAction.CallbackContext context);
-        void OnPrevious(InputAction.CallbackContext context);
-        void OnExit(InputAction.CallbackContext context);
     }
 }

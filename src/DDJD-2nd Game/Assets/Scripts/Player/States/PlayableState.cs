@@ -58,6 +58,19 @@ public class PlayableState : GenericState
         }
     }
 
+    // private void ChangeTutorial() {
+    //     if (
+    //         _context.Input.IsInteracting
+    //         && (_substate is InteractingState)
+    //         && !(_substate is TutorialState)
+    //         && _context.InteractedObject == null
+    //         && _context.Input.IsExitingInteraction
+    //     )
+    //     {
+    //         ChangeSubState(_context.Factory.Tutorial(this));
+    //     }
+    // }
+
     private void CheckAiming()
     {
         if (_context.Input.IsAiming && !(_substate is AimingState))
@@ -95,13 +108,8 @@ public class PlayableState : GenericState
         _context.ChangeState(_context.Factory.MissionMenu());
     }
 
-    private void OnTutorialOpen()
-    {
-        _context.ChangeState(_context.Factory.Tutorial());
-    }
-
     private void OnMenuKeydown()
     {
-        _context.ChangeState(_context.Factory.Menu());
+        if (!(_substate is InteractingState)) _context.ChangeState(_context.Factory.Menu());
     }
 }
