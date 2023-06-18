@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{76d486ad-6104-441d-9a93-49c3befba977}">
+		<property name="name">
+			<value>Eath Charge State</value>
+		</property>
+		<relationship name="folder">
+			<destination>{de79e17d-ef84-4ec5-bc49-2e353b71570e}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{ca70abfd-1c05-42ff-b6b2-e7737711d826}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{ca70abfd-1c05-42ff-b6b2-e7737711d826}">
+		<property name="parameterType">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

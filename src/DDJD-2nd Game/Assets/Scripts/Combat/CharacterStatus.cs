@@ -94,4 +94,14 @@ public class CharacterStatus : MonoBehaviour
         mana = Mathf.Min(mana + manaQuantity, _maxMana);
         _elementMana[element] = mana;
     }
+
+    public virtual void RestoreHealth(int healthQuantity)
+    {
+        _health = Mathf.Min(_health + healthQuantity, _maxHealth);
+    }
+
+    public bool HasMaxHealth()
+    {
+        return _health == _maxHealth;
+    }
 }

@@ -49,8 +49,14 @@ public class ChangeSpellState : MovableState
             rightSkill,
             _context.PlayerSkills.CurrentElement
         );
-        _context.Status.UpdateMana(leftSkill.Element);
-        _context.Status.UpdateMana(rightSkill.Element);
+        if (leftSkill != null)
+        {
+            _context.Status.UpdateMana(leftSkill.Element);
+        }
+        if (rightSkill != null)
+        {
+            _context.Status.UpdateMana(rightSkill.Element);
+        }
         Time.timeScale = 1.0f;
 
         _context.Input.OnLeftShootKeydown -= OnLeftKeydown;

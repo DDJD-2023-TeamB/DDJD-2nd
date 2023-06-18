@@ -48,7 +48,6 @@ public class ItemsInventoryObject : ScriptableObject
 
     public void AddItem(ItemStack itemStack)
     {
-        Debug.Log(itemStack);
         ItemStack slot = Container.Find(x => x.item == itemStack.item);
 
         if (slot != null)
@@ -64,6 +63,21 @@ public class ItemsInventoryObject : ScriptableObject
     public void AddGold(int gold)
     {
         _gold += gold;
+    }
+
+    public void UsePotion(Player player)
+    {
+        ItemStack slot = Container.Find(x => x.item is Potion);
+        if (slot == null)
+            return;
+        if (player.Status.HasMaxHealth())
+            return;
+
+        (slot.item as Potion).Use(player);
+        if (slot.RemoveAmount(1))
+        {
+            Container.Remove(slot);
+        }
     }
 }
 
