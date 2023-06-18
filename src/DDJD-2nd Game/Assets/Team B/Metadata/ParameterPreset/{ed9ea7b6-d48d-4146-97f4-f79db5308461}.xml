@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{ed9ea7b6-d48d-4146-97f4-f79db5308461}">
+		<property name="name">
+			<value>Lightning Charge State</value>
+		</property>
+		<relationship name="folder">
+			<destination>{de79e17d-ef84-4ec5-bc49-2e353b71570e}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{dfa3eb2c-9396-4d91-a478-84c67d152796}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{dfa3eb2c-9396-4d91-a478-84c67d152796}">
+		<property name="parameterType">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
