@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3864e65684595594c9bd01be9a1e894d, type: 3}
-  m_Name: MachineGunnerFire
+  m_Name: BurstFire
   m_EditorClassIdentifier: 
   _leftSkill: {fileID: 11400000, guid: 3b354be5fe762424cb1d8852bee8be12, type: 2}
   _rightSkill: {fileID: 11400000, guid: 3b354be5fe762424cb1d8852bee8be12, type: 2}
-  _attackSpeed: 0.25
+  _attackSpeed: 0.05
   _health: 100
-  _maxAttacksInRow: 8
+  _maxAttacksInRow: 4
   _minAttacksInRow: 4
-  _speed: 6
-  _minAttackComboCooldown: 1
-  _maxAttackComboCooldown: 0.5
+  _speed: 10
+  _minAttackComboCooldown: 1.5
+  _maxAttackComboCooldown: 2.5
   _attackStrategy:
     GuidAssignmentFailed: 0
     GUID: 960f1cb1629c2264f9484114a0c9dd60
@@ -36,7 +36,7 @@ MonoBehaviour:
     GUID: 3cc5e4e6e4114844ab5fd25dc81daa59
     _typeNameAndAssembly: EnemyRandomPatrolState, Assembly-CSharp
     _suppressLogs: 0
-  _usesDash: 1
+  _usesDash: 0
   _currentElement: {fileID: 11400000, guid: 395138bc558d7cf449eb38e7c3e9ab91, type: 2}
   _dashStats:
     _duration: 0.3

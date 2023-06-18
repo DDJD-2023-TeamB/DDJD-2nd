@@ -27,7 +27,16 @@ public class EnemySkills : ScriptableObject
     private int _maxAttacksInRow = 3;
 
     [SerializeField]
+    private int _minAttacksInRow = 1;
+
+    [SerializeField]
     private float _speed = 5.0f;
+
+    [SerializeField]
+    private float _minAttackComboCooldown = 1.0f;
+
+    [SerializeField]
+    private float _maxAttackComboCooldown = 2.0f;
 
     [SerializeField]
     [Inherits(typeof(EnemyAttackState))]
@@ -105,8 +114,23 @@ public class EnemySkills : ScriptableObject
         get => _maxAttacksInRow;
     }
 
+    public int MinAttacksInRow
+    {
+        get => _minAttacksInRow;
+    }
+
     public float Speed
     {
         get => _speed;
+    }
+
+    public float MinAttackComboCooldown
+    {
+        get => _minAttackComboCooldown;
+    }
+
+    public float MaxAttackComboCooldown
+    {
+        get => _maxAttackComboCooldown;
     }
 }

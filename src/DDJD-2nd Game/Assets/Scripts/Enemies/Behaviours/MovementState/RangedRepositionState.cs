@@ -45,9 +45,7 @@ public class RangedRepositionState : EnemyMovingState
     private void StartReposition()
     {
         _tries = 0;
-        Debug.Log("Repositioning");
         _newPosition = GetNewPosition();
-        Debug.Log("New position: " + _newPosition);
         SetPath(_newPosition);
     }
 

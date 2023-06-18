@@ -14,6 +14,8 @@ public class RangedAttackState : EnemyAttackState
 
     private int _currentShots = 0;
 
+    private bool _stopAimingAtExit;
+
     public RangedAttackState(RangedEnemy enemy)
         : base(enemy)
     {
@@ -34,14 +36,22 @@ public class RangedAttackState : EnemyAttackState
         _attackTries = 0;
         _currentAttackInRow = 0;
         _currentShots = 0;
-        _maxAttacksInRow = _context.EnemySkills.MaxAttacksInRow;
+        _maxAttacksInRow = Random.Range(
+            _context.EnemySkills.MinAttacksInRow,
+            _context.EnemySkills.MaxAttacksInRow
+        );
+        _stopAimingAtExit = true;
     }
 
     public override void Exit()
     {
         base.Exit();
-        _context.Animator.SetBool("IsAiming", false);
-        _context.AimComponent.StopAim();
+
+        _context.Animator.SetBool("IsAiming", !_stopAimingAtExit);
+        if (_stopAimingAtExit)
+        {
+            _context.AimComponent.StopAim();
+        }
         if (_attackCoroutine != null)
         {
             _context.StopCoroutine(_attackCoroutine);
@@ -111,9 +121,31 @@ public class RangedAttackState : EnemyAttackState
         _currentShots++;
         if (_currentShots >= _maxAttacksInRow)
         {
+            //End 'combo'
             _currentShots = 0;
             _currentAttackInRow = 0;
-            _context.ChangeState(new RangedRepositionState(_context, Random.Range(2.5f, 4.5f)));
+            _maxAttacksInRow = Random.Range(
+                _context.EnemySkills.MinAttacksInRow,
+                _context.EnemySkills.MaxAttacksInRow
+            );
+            int random = Random.Range(0, 100);
+            if (random > 75)
+            {
+                _context.ChangeState(new RangedRepositionState(_context, Random.Range(2.5f, 4.5f)));
+            }
+            else
+            {
+                _stopAimingAtExit = false;
+                _context.ChangeState(
+                    new EnemyWaitState(
+                        _context,
+                        Random.Range(
+                            _context.EnemySkills.MinAttackComboCooldown,
+                            _context.EnemySkills.MaxAttackComboCooldown
+                        )
+                    )
+                );
+            }
         }
     }
 }
