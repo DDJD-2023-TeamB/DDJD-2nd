@@ -225,7 +225,7 @@ public class UIController : MonoBehaviour
     {
         if (!(image.currentItem.item is ItemSkill))
         {
-            Debug.Log("Is not itemskill");
+            Debug.LogError("Item is not itemskill");
             return;
         }
         if (area != UiArea.Spells)
@@ -249,7 +249,7 @@ public class UIController : MonoBehaviour
     {
         if (!(image.currentItem.item is ItemSkill))
         {
-            Debug.Log("Is not itemskill");
+            Debug.LogError("Item is not itemskill");
             return;
         }
         ItemSkill itemSkill = (ItemSkill)image.currentItem.item;
@@ -263,7 +263,7 @@ public class UIController : MonoBehaviour
     {
         if (!(image.currentItem.item is ItemSkill))
         {
-            Debug.Log("Is not itemskill");
+            Debug.LogError("Item is not itemskill");
             return;
         }
         ItemSkill itemSkill = (ItemSkill)image.currentItem.item;

@@ -7,6 +7,6 @@ public class QuestItem : CollectibleObject
 {
     public override void Use(Player player)
     {
-        Debug.Log("Nothing");
+        // Nothing
     }
 }

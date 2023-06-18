@@ -6,7 +6,7 @@ public enum MapAreaType
 {
     Fire,
     Wind,
-    Ground,
+    Earth,
     Electricity
 }
 

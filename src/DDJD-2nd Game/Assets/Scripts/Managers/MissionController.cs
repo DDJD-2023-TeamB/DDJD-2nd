@@ -47,17 +47,13 @@ public class MissionController : MonoBehaviour
         {
             if (mission.Status == MissionState.Ongoing)
             {
-                Debug.Log(mission);
                 foreach (var goal in mission.Goals)
                 {
-                    Debug.Log(goal);
                     if (!goal._completed && goal is InteractGoal interactGoal)
                     {
                         if (interactGoal.NpcToInteract == npc)
                         {
-                            Debug.Log("SAME");
                             goal._completed = true;
-                            Debug.Log("Interact Goal Completed");
                         }
                     }
                 }
@@ -84,7 +80,6 @@ public class MissionController : MonoBehaviour
                                 collectGoal.Quantity -= 1;
                             if (collectGoal.Quantity == 0)
                                 goal._completed = true;
-                            Debug.Log("Collect Goal Completed");
                         }
                     }
                 }
@@ -95,16 +90,13 @@ public class MissionController : MonoBehaviour
 
     public void CheckIfAllGoalsAreCompleted(Mission mission)
     {
-        bool allGoalsCompleted = false;
+        bool allGoalsCompleted = true;
         foreach (var goal in mission.Goals)
         {
             if (!goal._completed)
             {
+                allGoalsCompleted = false;
                 break;
-            }
-            else if (!allGoalsCompleted)
-            {
-                allGoalsCompleted = true;
             }
         }
 

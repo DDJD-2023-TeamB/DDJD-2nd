@@ -28,7 +28,7 @@ public class OptionsController : MonoBehaviour
 
     public void setGameVolume(float value)
     {
-        Debug.Log("Volume change not yet implemented on OptionsController.cs!");
+        Debug.LogError("Volume change not yet implemented on OptionsController.cs!");
     }
 
     public void SetCameraSensitivity(float value)
