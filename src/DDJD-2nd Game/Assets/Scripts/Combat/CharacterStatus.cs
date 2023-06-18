@@ -99,4 +99,14 @@ public class CharacterStatus : MonoBehaviour
         get { return _health; }
         set { _health = value; }
     }
+
+    public virtual void RestoreHealth(int healthQuantity)
+    {
+        _health = Mathf.Min(_health + healthQuantity, _maxHealth);
+    }
+
+    public bool HasMaxHealth()
+    {
+        return _health == _maxHealth;
+    }
 }
