@@ -35,22 +35,38 @@ public class Floating : MonoBehaviour
     {
         if (_lookAt != null)
         {
-            float _imageScale = transform.localScale.x;
-            _halfHeight = _rectTransform.rect.size.y * _imageScale;
+            Vector3 screenPoint = _mainCam.WorldToViewportPoint(_lookAt.position);
+            bool isOnScreen =
+                screenPoint.z > 0
+                && screenPoint.x >= 0
+                && screenPoint.x <= 1
+                && screenPoint.y >= 0
+                && screenPoint.y <= 1;
 
-            animationOffsetValue = 0;
-            Vector3 pos =
-                _mainCam.WorldToScreenPoint(
-                    _lookAt.position + _offset + new Vector3(0, animationOffsetValue, 0)
-                ) + new Vector3(0, _halfHeight, 0);
-
-            if (transform.position != pos)
+            if (isOnScreen)
             {
-                float distance = Vector3.Distance(_mainCam.transform.position, _lookAt.position);
-                float scaleFactor = ((5f / distance) * _initialScale);
+                float _imageScale = transform.localScale.x;
+                _halfHeight = _rectTransform.rect.size.y * _imageScale;
 
-                transform.position = pos;
-                transform.localScale = new Vector3(scaleFactor, scaleFactor, 0);
+                Vector3 pos =
+                    _mainCam.WorldToScreenPoint(
+                        _lookAt.position + _offset + new Vector3(0, animationOffsetValue, 0)
+                    ) + new Vector3(0, _halfHeight, 0);
+
+                if (transform.position != pos)
+                {
+                    float distance = Vector3.Distance(
+                        _mainCam.transform.position,
+                        _lookAt.position
+                    );
+                    float scaleFactor = ((5f / distance) * _initialScale);
+
+                    transform.position = pos;
+                    transform.localScale = new Vector3(scaleFactor, scaleFactor, 1f);
+                }
+            }
+            else{
+                transform.localScale = new Vector3(0f, 0f, 0f);
             }
         }
     }
