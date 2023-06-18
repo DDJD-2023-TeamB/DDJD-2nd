@@ -9,7 +9,7 @@ public class RangedAttackState : EnemyAttackState
     private int _attackTries = 0;
     private int _maxAttackTries = 3;
 
-    private int _maxAttacksInRow = 3;
+    private int _maxAttacksInRow;
     private int _currentAttackInRow = 0;
 
     private int _currentShots = 0;
@@ -32,6 +32,9 @@ public class RangedAttackState : EnemyAttackState
         _attackCoroutine = _context.StartCoroutine(AttackCoroutine());
         _context.Shooter.OnShoot += OnShoot;
         _attackTries = 0;
+        _currentAttackInRow = 0;
+        _currentShots = 0;
+        _maxAttacksInRow = _context.EnemySkills.MaxAttacksInRow;
     }
 
     public override void Exit()
@@ -110,7 +113,7 @@ public class RangedAttackState : EnemyAttackState
         {
             _currentShots = 0;
             _currentAttackInRow = 0;
-            _context.ChangeState(new RangedRepositionState(_context, Random.Range(0.5f, 1.5f)));
+            _context.ChangeState(new RangedRepositionState(_context, Random.Range(2.5f, 4.5f)));
         }
     }
 }

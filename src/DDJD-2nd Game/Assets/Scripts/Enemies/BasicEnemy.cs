@@ -50,6 +50,12 @@ public class BasicEnemy : HumanoidEnemy
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _enemyDashable = GetComponent<EnemyDashable>();
         _enemyCommunicator = GetComponent<EnemyCommunicator>();
+        SetEnemySkills(_enemySkills);
+    }
+
+    public void SetEnemySkills(EnemySkills enemySkills)
+    {
+        _enemySkills = enemySkills;
         _navMeshAgent.speed = _enemySkills.Speed;
         _status.Health = _enemySkills.Health;
         _states = new EnemyStates(

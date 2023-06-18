@@ -45,7 +45,9 @@ public class RangedRepositionState : EnemyMovingState
     private void StartReposition()
     {
         _tries = 0;
+        Debug.Log("Repositioning");
         _newPosition = GetNewPosition();
+        Debug.Log("New position: " + _newPosition);
         SetPath(_newPosition);
     }
 
@@ -68,6 +70,7 @@ public class RangedRepositionState : EnemyMovingState
 
     private void SetPath(Vector3 destination)
     {
+        Debug.Log("Setting path to " + destination);
         _context.NavMeshAgent.SetDestination(destination);
     }
 
@@ -75,6 +78,7 @@ public class RangedRepositionState : EnemyMovingState
     {
         if (_tries >= _maxTries)
         {
+            Debug.Log("Couldn't find a new position to reposition, going to attack");
             _context.ChangeState(_context.States.AttackState);
             return _context.transform.position;
         }
@@ -90,19 +94,22 @@ public class RangedRepositionState : EnemyMovingState
 
         float angle = Random.Range(angleToPlayer - 45, angleToPlayer + 45);
         float range;
+        Vector3 targetPosition;
         if (_repositionRange > 0)
         {
             range = _repositionRange;
+            targetPosition = enemyPosition;
         }
         else
         {
             range = Random.Range(_context.AttackRange * 0.2f, _context.AttackRange * 0.9f);
+            targetPosition = playerPosition;
         }
 
         Vector3 newPositionOffset = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * range;
 
         // Add the offset to the player position
-        Vector3 newPosition = playerPosition + newPositionOffset;
+        Vector3 newPosition = targetPosition + newPositionOffset;
 
         // Check if has a path to the new position
         UnityEngine.AI.NavMeshPath path = new UnityEngine.AI.NavMeshPath();

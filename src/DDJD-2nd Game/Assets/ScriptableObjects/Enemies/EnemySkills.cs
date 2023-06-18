@@ -24,7 +24,7 @@ public class EnemySkills : ScriptableObject
     private int _health = 100;
 
     [SerializeField]
-    private float _maxAttacksInRow = 3;
+    private int _maxAttacksInRow = 3;
 
     [SerializeField]
     private float _speed = 5.0f;
@@ -100,7 +100,7 @@ public class EnemySkills : ScriptableObject
         get => _health;
     }
 
-    public float MaxAttacksInRow
+    public int MaxAttacksInRow
     {
         get => _maxAttacksInRow;
     }
