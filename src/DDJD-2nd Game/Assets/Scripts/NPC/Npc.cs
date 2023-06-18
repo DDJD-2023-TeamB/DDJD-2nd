@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+using UnityEngine.UI;
 
 [DefaultExecutionOrder(0)]
 [System.Serializable]
@@ -19,6 +21,8 @@ public class Npc : Interactable
 
     private Mission _currentMission;
 
+    private static string floatingIconPrefabPath = "Assets/Prefabs/UI/FloatingIconCanvas.prefab";
+
     protected override void Start()
     {
         base.Start();
@@ -27,7 +31,24 @@ public class Npc : Interactable
         _animator = GetComponent<Animator>();
         if (_missions.Count != 0)
             _currentMission = _missions.Dequeue();
+        //Por a saltar quando estiver 
+        if (_currentMission != null && _currentMission.Status != MissionState.Blocked)
+        {
+            CreateCanvas();
+        }
     }
+
+    public void CreateCanvas()
+    {
+
+        GameObject floatingCanvasPrefab = (GameObject)AssetDatabase.LoadAssetAtPath(floatingIconPrefabPath, typeof(GameObject));
+        GameObject floatingIconCanvas = Instantiate(floatingCanvasPrefab);
+
+        RawImage image = floatingIconCanvas.transform.GetChild(0).GetComponent<RawImage>();
+
+        floatingIconCanvas.transform.SetParent(transform, false);
+    }
+
 
     void Update() { }
 
