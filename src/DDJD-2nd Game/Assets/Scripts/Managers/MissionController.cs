@@ -53,7 +53,7 @@ public class MissionController : MonoBehaviour
                     {
                         if (interactGoal.NpcToInteract == npc)
                         {
-                            goal._completed = true;
+                            goal.Complete();
                             Debug.Log("Interact Goal Completed");
                         }
                     }
@@ -80,7 +80,10 @@ public class MissionController : MonoBehaviour
                             if (collectGoal.Quantity > 0)
                                 collectGoal.Quantity -= 1;
                             if (collectGoal.Quantity == 0)
-                                goal._completed = true;
+                            {
+                                goal.Complete();
+                            }
+                                
                             Debug.Log("Collect Goal Completed");
                         }
                     }
@@ -185,7 +188,7 @@ public class MissionController : MonoBehaviour
                 {
                     if (fightGoal.EnemySpawner == _enemySpawner)
                     {
-                        goal._completed = true;
+                        goal.Complete();
                         CheckIfAllGoalsAreCompleted(mission);
                     }
                 }

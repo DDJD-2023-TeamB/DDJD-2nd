@@ -61,8 +61,6 @@ public abstract class GenericState
 
     public bool ChangeSubState(GenericState state)
     {
-        Debug.Log("ChangeSubState");
-        Debug.Log(state);
         if (!CanChangeState(state))
         {
             return false;
@@ -102,7 +100,6 @@ public abstract class GenericState
 
     public void PrintState()
     {
-        Debug.Log(this.GetType().Name);
         if (_substate != null)
         {
             _substate.PrintState();
