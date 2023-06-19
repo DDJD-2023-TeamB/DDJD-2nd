@@ -6,25 +6,48 @@ using UnityEngine.UI;
 
 public class DashChargingIndicatorController : MonoBehaviour
 {
-    [SerializeField] private Element fireElement,windElement,electricityElement,earthElement;
+    [SerializeField]
+    private Element fireElement,
+        windElement,
+        electricityElement,
+        earthElement;
 
-    [SerializeField] private List<Sprite> frameList;
-    [SerializeField] private Sprite windSprite;
-    [SerializeField] private Sprite fireSprite;
-    [SerializeField] private Sprite electricitySprite;
-    [SerializeField] private Sprite earthSprite;
+    [SerializeField]
+    private List<Sprite> frameList;
 
-    private float chargingDuration = 3.0f;
+    [SerializeField]
+    private Sprite windSprite;
 
-    [SerializeField] private DashSkill fireDash;
-    [SerializeField] private DashSkill electricityDash;
-    [SerializeField] private DashSkill earthDash;
-    [SerializeField] private DashSkill windDash;
+    [SerializeField]
+    private Sprite fireSprite;
+
+    [SerializeField]
+    private Sprite electricitySprite;
+
+    [SerializeField]
+    private Sprite earthSprite;
+
+    private float chargingDuration = 0f;
+
+    [SerializeField]
+    private DashSkill fireDash;
+
+    [SerializeField]
+    private DashSkill electricityDash;
+
+    [SerializeField]
+    private DashSkill earthDash;
+
+    [SerializeField]
+    private DashSkill windDash;
 
     private int currentFrame = -1;
     public Image elementImage;
     private Image imageComponent;
     private DateTime startTime;
+
+    // ugly way to avoid wrong cooldown at the start of the game
+    private bool firstDash = true;
 
     private void Start()
     {
@@ -35,17 +58,32 @@ public class DashChargingIndicatorController : MonoBehaviour
     public void startAnimation()
     {
         gameObject.SetActive(true);
-        startTime = System.DateTime.Now;
         currentFrame = 0;
         imageComponent.sprite = frameList[0];
+
+        float ellapsedMillisseconds = (float)(
+            (System.DateTime.Now - startTime).Milliseconds
+            + (System.DateTime.Now - startTime).Seconds * 1000
+        );
+        if (ellapsedMillisseconds > chargingDuration * 1000f)
+        { // the counter shouldn't display regular dashes
+            startTime = System.DateTime.Now;
+        }
+        firstDash = false;
     }
 
     public void Update()
     {
+        float ellapsedMillisseconds = (float)(
+            (System.DateTime.Now - startTime).Milliseconds
+            + (System.DateTime.Now - startTime).Seconds * 1000
+        );
 
-        float ellapsedMillisseconds = (float)((System.DateTime.Now - startTime).Milliseconds + (System.DateTime.Now - startTime).Seconds * 1000);
-
-        if (ellapsedMillisseconds > chargingDuration * 1000f && currentFrame != -1)
+        if (
+            (ellapsedMillisseconds >= chargingDuration * 1000f && currentFrame != -1)
+            || chargingDuration == 0f
+            || firstDash
+        )
         {
             currentFrame = -1;
             startTime = DateTime.MinValue;
@@ -53,7 +91,9 @@ public class DashChargingIndicatorController : MonoBehaviour
         }
         else
         {
-            int progress = (int)(ellapsedMillisseconds/(float)(chargingDuration*27.8));
+            int progress = (int)(
+                ellapsedMillisseconds / (chargingDuration * 1000f) * frameList.Count
+            );
 
             if (currentFrame != progress)
             {
@@ -61,13 +101,12 @@ public class DashChargingIndicatorController : MonoBehaviour
                 currentFrame = progress;
             }
         }
-
-        
     }
 
     public void changeElement(Element element)
     {
-        if (element == windElement){
+        if (element == windElement)
+        {
             elementImage.sprite = windSprite;
             chargingDuration = windDash.DashSkillStats.Cooldown;
         }
@@ -88,7 +127,9 @@ public class DashChargingIndicatorController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("invalid argument provided to changeElement in DashCharingIndicatorController.cs");
+            Debug.LogError(
+                "invalid argument provided to changeElement in DashCharingIndicatorController.cs"
+            );
         }
     }
 }
