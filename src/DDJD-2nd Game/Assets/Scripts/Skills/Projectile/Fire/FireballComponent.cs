@@ -19,8 +19,6 @@ public class FireballComponent : ProjectileComponent, NonPushable
     private FMOD.Studio.PARAMETER_ID _sfxStateId;
     private FMOD.Studio.PARAMETER_ID _sfxExplosionChargeId;
 
-    private bool _exploded = false;
-
     protected override void Awake()
     {
         base.Awake();
