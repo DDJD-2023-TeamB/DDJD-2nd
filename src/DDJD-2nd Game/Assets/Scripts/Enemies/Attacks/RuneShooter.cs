@@ -1,20 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class RuneShooter : MonoBehaviour
 {
-    private GameObject _caster;
-    private Skill _skill;
+    protected BossEnemy _caster;
+    protected Skill _skill;
 
-    private float _minShootCooldown = 0.5f;
-    private float _maxShootCooldown = 3f;
+    protected float _minShootCooldown = 0.5f;
+    protected float _maxShootCooldown = 3f;
 
-    private float _duration = 30.0f;
+    protected float _duration = 30.0f;
 
-    private SkillComponent _skillComponent;
+    protected SkillComponent _skillComponent;
 
-    private Player _player;
+    protected Player _player;
+
+    protected Rigidbody _rigidbody;
+
+    protected virtual void Awake()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -23,31 +31,31 @@ public class RuneShooter : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         Vector3 direction = (_player.transform.position - transform.position).normalized;
         transform.rotation = Quaternion.LookRotation(direction);
     }
 
-    private float GetCooldown()
+    protected float GetCooldown()
     {
         return Random.Range(_minShootCooldown, _maxShootCooldown);
     }
 
-    public void StartShoot(GameObject caster, Skill skill)
+    public virtual void StartShoot(BossEnemy caster, Skill skill)
     {
         _caster = caster;
         _skill = skill;
         StartCoroutine(Shoot());
     }
 
-    private IEnumerator Stop()
+    protected IEnumerator Stop()
     {
         yield return new WaitForSeconds(_duration);
         Destroy(gameObject);
     }
 
-    private void CreateSpell()
+    protected void CreateSpell()
     {
         GameObject spell = GameObject.Instantiate(
             _skill.SpellPrefab,
@@ -56,7 +64,7 @@ public class RuneShooter : MonoBehaviour
         );
         spell.transform.parent = transform;
         _skillComponent = spell.GetComponent<SkillComponent>();
-        _skillComponent.SetCaster(_caster);
+        _skillComponent.SetCaster(_caster.gameObject);
         _skillComponent.SetSkill(_skill);
         if (_skill.SkillStats.CastType == CastType.Charge)
         {
@@ -68,17 +76,13 @@ public class RuneShooter : MonoBehaviour
         }
     }
 
-    private IEnumerator Shoot()
+    protected IEnumerator Shoot()
     {
-        yield return new WaitForSeconds(0.5f);
-        while (true)
-        {
-            CreateSpell();
-            yield return new WaitForSeconds(GetCooldown());
-        }
+        yield return new WaitForSeconds(GetCooldown());
+        CreateSpell();
     }
 
-    private void ShootAtPlayer()
+    protected void ShootAtPlayer()
     {
         if (_player != null)
         {
@@ -86,5 +90,16 @@ public class RuneShooter : MonoBehaviour
 
             _skillComponent.Shoot(direction);
         }
+        StartCoroutine(Shoot());
+    }
+
+    public void OnDestroy()
+    {
+        if (_skillComponent != null)
+        {
+            _skillComponent.ChargeComponent.OnChargeComplete -= ShootAtPlayer;
+        }
+
+        _caster.RuneCount--;
     }
 }
