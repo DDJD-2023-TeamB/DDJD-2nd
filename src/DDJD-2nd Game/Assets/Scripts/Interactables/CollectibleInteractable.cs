@@ -6,6 +6,7 @@ using TMPro;
 public class CollectibleInteractable : Interactable
 {
     public CollectibleObject _item;
+
     public override void Interact()
     {
         _player.Inventory.AddItem(_item, 1);

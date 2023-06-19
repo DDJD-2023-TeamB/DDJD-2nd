@@ -51,7 +51,7 @@ public class PlayerSkills : ScriptableObject
         set => _dashStats = value;
     }
 
-    Dictionary<Skill, float> _skillCooldowns = new Dictionary<Skill, float>();
+    Dictionary<EquippedSkill, float> _skillCooldowns = new Dictionary<EquippedSkill, float>();
 
     private Player _player;
     public Player Player
@@ -61,30 +61,32 @@ public class PlayerSkills : ScriptableObject
 
     private float COOLDOWN_TICK = 0.1f; //Seconds
 
-    public void StartSkillCooldown(Skill skill)
+    public void StartSkillCooldown(Skill skill, bool isLeft)
     {
-        if (!_skillCooldowns.ContainsKey(skill))
+        EquippedSkill equippedSkill = new EquippedSkill(skill, isLeft);
+        if (!_skillCooldowns.ContainsKey(equippedSkill))
         {
-            _skillCooldowns.Add(skill, 0f);
+            _skillCooldowns.Add(equippedSkill, skill.SkillStats.Cooldown);
         }
-        _skillCooldowns[skill] = skill.SkillStats.Cooldown;
-        _player.StartCoroutine(SkillCooldown(skill));
+        _skillCooldowns[equippedSkill] = skill.SkillStats.Cooldown;
+        _player.StartCoroutine(SkillCooldown(equippedSkill));
     }
 
-    public IEnumerator SkillCooldown(Skill skill)
+    public IEnumerator SkillCooldown(EquippedSkill equippedSkill)
     {
-        while (_skillCooldowns[skill] > 0)
+        while (_skillCooldowns[equippedSkill] > 0)
         {
-            _skillCooldowns[skill] -= COOLDOWN_TICK;
+            _skillCooldowns[equippedSkill] -= COOLDOWN_TICK;
             yield return new WaitForSeconds(COOLDOWN_TICK);
         }
-        if (_skillCooldowns.ContainsKey(skill))
-            _skillCooldowns.Remove(skill);
+        if (_skillCooldowns.ContainsKey(equippedSkill))
+            _skillCooldowns.Remove(equippedSkill);
     }
 
-    public bool IsSkillOnCooldown(Skill skill)
+    public bool IsSkillOnCooldown(Skill skill, bool isLeft)
     {
-        return _skillCooldowns.ContainsKey(skill);
+        EquippedSkill equippedSkill = new EquippedSkill(skill, isLeft);
+        return _skillCooldowns.ContainsKey(equippedSkill);
     }
 
     public List<ItemSkill> EquippedRightSkills
@@ -103,5 +105,39 @@ public class PlayerSkills : ScriptableObject
     {
         get => _learnedSkills;
         set => _learnedSkills = value;
+    }
+}
+
+public class EquippedSkill
+{
+    Skill _skill;
+    public Skill Skill
+    {
+        get => _skill;
+    }
+    private bool _isLeft;
+    public bool IsLeft
+    {
+        get => _isLeft;
+    }
+
+    public EquippedSkill(Skill skill, bool isLeft)
+    {
+        _skill = skill;
+        _isLeft = isLeft;
+    }
+
+    public override int GetHashCode()
+    {
+        return _skill.GetHashCode() + (_isLeft ? 1 : 0);
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (obj is EquippedSkill equippedSkill)
+        {
+            return equippedSkill.Skill == _skill && equippedSkill.IsLeft == _isLeft;
+        }
+        return false;
     }
 }

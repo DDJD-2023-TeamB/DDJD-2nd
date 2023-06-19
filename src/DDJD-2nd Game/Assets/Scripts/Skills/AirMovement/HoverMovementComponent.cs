@@ -14,6 +14,8 @@ public class HoverMovementComponent : AirMovementComponent
     private HoverComponent _leftHandVFX;
     private HoverComponent _rightHandVFX;
 
+    private Coroutine _hoverCoroutine;
+
     protected override void Awake()
     {
         base.Awake();
@@ -27,11 +29,7 @@ public class HoverMovementComponent : AirMovementComponent
 
         _leftHand = _player.Animator.GetBoneTransform(HumanBodyBones.LeftHand);
         _rightHand = _player.Animator.GetBoneTransform(HumanBodyBones.RightHand);
-    }
 
-    public override void OnKeyDown()
-    {
-        _isHovering = true;
         _leftHandVFX = Instantiate(_skill.SpellPrefab, _leftHand.position, Quaternion.identity)
             .GetComponent<HoverComponent>();
         _leftHandVFX.transform.parent = _leftHand;
@@ -40,14 +38,24 @@ public class HoverMovementComponent : AirMovementComponent
         _rightHandVFX.transform.parent = _rightHand;
         _leftHandVFX.Element = _player.PlayerSkills.CurrentElement;
         _rightHandVFX.Element = _player.PlayerSkills.CurrentElement;
-        StartCoroutine(Hover());
+    }
+
+    public override void OnKeyDown()
+    {
+        _isHovering = true;
+        if (_hoverCoroutine != null)
+        {
+            StopCoroutine(_hoverCoroutine);
+        }
+        _leftHandVFX.Activate();
+        _rightHandVFX.Activate();
+        _hoverCoroutine = StartCoroutine(Hover());
     }
 
     public override void OnKeyUp()
     {
-        Reset();
-
         _isHovering = false;
+        StartCoroutine(StopHovering());
     }
 
     public override void Update()
@@ -84,17 +92,34 @@ public class HoverMovementComponent : AirMovementComponent
         Reset();
     }
 
+    private IEnumerator StopHovering()
+    {
+        yield return new WaitForSeconds(0.15f);
+        if (!_isHovering)
+        {
+            Reset();
+            if (_hoverCoroutine != null)
+            {
+                StopCoroutine(_hoverCoroutine);
+            }
+            _hoverCoroutine = null;
+        }
+    }
+
     public override void Reset()
     {
         if (_leftHandVFX != null)
         {
             _leftHandVFX.Stop();
-            Destroy(_leftHandVFX, 2.0f);
         }
         if (_rightHandVFX != null)
         {
             _rightHandVFX.Stop();
-            Destroy(_rightHandVFX, 2.0f);
         }
+    }
+
+    public override bool IsActive()
+    {
+        return _hoverCoroutine != null;
     }
 }

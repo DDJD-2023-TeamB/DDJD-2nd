@@ -26,7 +26,7 @@ public abstract class Interactable : MonoBehaviour
         {
             return;
         }
-   
+
         _player.InteractedObject = this;
         Approach();
     }
@@ -42,7 +42,8 @@ public abstract class Interactable : MonoBehaviour
         EndInteract();
     }
 
-    private void Approach(){
+    private void Approach()
+    {
         HelpManager.Instance.SetHelpText("Press F to interact");
     }
 
@@ -52,5 +53,4 @@ public abstract class Interactable : MonoBehaviour
     {
         _player.InteractedObject = null;
     }
-
 }

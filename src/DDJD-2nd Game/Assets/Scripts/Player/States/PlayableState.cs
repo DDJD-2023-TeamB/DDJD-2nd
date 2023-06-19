@@ -20,6 +20,7 @@ public class PlayableState : GenericState
         _context.Input.OnInventoryKeydown += OnInventoryKeydown;
         _context.Input.OnMissionKeydown += OnMissionKeydown;
         _context.Input.OnMenuKeydown += OnMenuKeydown;
+        _context.Input.OnUsePotion += OnUsePotion;
     }
 
     public override void Exit()
@@ -28,6 +29,7 @@ public class PlayableState : GenericState
         _context.Input.OnInventoryKeydown -= OnInventoryKeydown;
         _context.Input.OnMissionKeydown -= OnMissionKeydown;
         _context.Input.OnMenuKeydown -= OnMenuKeydown;
+        _context.Input.OnUsePotion -= OnUsePotion;
     }
 
     public override bool CanChangeState(GenericState state)
@@ -67,7 +69,9 @@ public class PlayableState : GenericState
         else if (
             !_context.Input.IsAiming
             && !(_substate is NotAimingState)
-            && _context.InteractedObject == null
+            && (
+                !(_substate is InteractingState) || !(((InteractingState)_substate).IsInteracting())
+            )
         )
         {
             ChangeSubState(_context.Factory.NotAiming(this));
@@ -98,5 +102,10 @@ public class PlayableState : GenericState
     private void OnMenuKeydown()
     {
         if (!(_substate is InteractingState)) _context.ChangeState(_context.Factory.Menu());
+    }
+
+    private void OnUsePotion()
+    {
+        _context.Inventory.UsePotion(_context);
     }
 }

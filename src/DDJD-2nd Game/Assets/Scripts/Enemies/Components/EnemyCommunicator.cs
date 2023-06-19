@@ -28,7 +28,14 @@ public class EnemyCommunicator : MonoBehaviour
         else
         {
             //Store message so when action is setted, it will be called
-            _messagesUnhandled.Add(message.GetType(), message);
+            if (_messagesUnhandled.ContainsKey(message.GetType()))
+            {
+                _messagesUnhandled[message.GetType()] = message;
+            }
+            else
+            {
+                _messagesUnhandled.Add(message.GetType(), message);
+            }
         }
     }
 
@@ -75,9 +82,19 @@ public class EnemyCommunicator : MonoBehaviour
             EnemyCommunicator communicator = collider.GetComponent<EnemyCommunicator>();
             float timeToWait =
                 Vector3.Distance(transform.position, collider.transform.position) / 10.0f;
+            StartCoroutine(SendMessageToEnemy(message, communicator, timeToWait));
             yield return new WaitForSeconds(timeToWait);
-            communicator?.ReceiveMessage(message);
         }
+    }
+
+    public IEnumerator SendMessageToEnemy(
+        EnemyMessage message,
+        EnemyCommunicator communicator,
+        float timeToWait
+    )
+    {
+        yield return new WaitForSeconds(timeToWait);
+        communicator?.ReceiveMessage(message);
     }
 
     public void SendMessage(GameObject enemy, EnemyMessage message)

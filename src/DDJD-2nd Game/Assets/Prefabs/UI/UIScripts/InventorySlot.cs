@@ -28,7 +28,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
 
     private Graphic _graphic;
 
-    public Action<ItemStack, int> OnDropAction;
+    public Action<InventoryItemImage, int, UiArea> OnDropAction;
 
     private void Awake()
     {
@@ -57,25 +57,49 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         if (transform.childCount == 0)
         {
             GameObject dropped = eventData.pointerDrag;
-            currentItem = dropped.GetComponent<InventoryItemImage>().currentItem;
-            OnDropAction?.Invoke(currentItem, index);
-            
+            InventoryItemImage image = dropped.GetComponent<InventoryItemImage>();
+            currentItem = image.currentItem;
+            OnDropAction?.Invoke(image, index, image.UiArea);
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (currentItem == null)
+        {
+            return;
+        }
         if (currentItem.item != null && !Input.GetMouseButton(0))
         {
-            Debug.Log("Creating title text \"" + currentItem.item.Name + "\"");
+            if (inventoryUI.itemTitle != null)
+            {
+                Destroy(inventoryUI.itemTitle);
+                inventoryUI.itemTitle = null;
+            }
             inventoryUI.itemTitle = Instantiate(
                 ItemTitleTextPrefab,
                 Input.mousePosition + new Vector3(0, 5, 0),
                 Quaternion.identity
             );
-            inventoryUI.itemTitle.GetComponent<TextMeshProUGUI>().text = currentItem.item.Name;
+            TextMeshProUGUI itemTitle = inventoryUI.itemTitle.transform
+                .GetChild(1)
+                .GetComponent<TextMeshProUGUI>();
+            itemTitle.text = currentItem.item.Name;
+            TextMeshProUGUI itemDescription = inventoryUI.itemTitle.transform
+                .GetChild(2)
+                .GetComponent<TextMeshProUGUI>();
+            itemDescription.text = currentItem.item.Description;
+            RectTransform backgroundTint = inventoryUI.itemTitle.transform
+                .GetChild(0)
+                .GetComponent<RectTransform>();
+            //Setting size and position of dark background
+            backgroundTint.anchoredPosition = new Vector2(0, itemTitle.preferredHeight + 10);
+            backgroundTint.sizeDelta = new Vector2(
+                200,
+                itemTitle.preferredHeight + itemDescription.preferredHeight + 20
+            );
             inventoryUI.itemTitle.transform.SetParent(transform.root);
-            _graphic.raycastTarget = false;
+            //_graphic.raycastTarget = false;
         }
     }
 
@@ -85,17 +109,31 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         {
             Destroy(inventoryUI.itemTitle);
             inventoryUI.itemTitle = null;
-            //_graphic.raycastTarget = true;
         }
     }
 
     private void Update()
-    {   
+    {
         if (inventoryUI.itemTitle != null)
         {
             inventoryUI.itemTitle.transform.position = Input.mousePosition + new Vector3(0, 10, 0);
         }
-        
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (inventoryUI.itemTitle != null)
+            {
+                Destroy(inventoryUI.itemTitle);
+                inventoryUI.itemTitle = null;
+            }
+        }
     }
 
+    public void ClearSlot()
+    {
+        currentItem = null;
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
 }

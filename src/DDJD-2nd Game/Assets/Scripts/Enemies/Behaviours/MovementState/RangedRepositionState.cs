@@ -12,10 +12,13 @@ public class RangedRepositionState : EnemyMovingState
 
     private Coroutine _dashCoroutine;
 
-    public RangedRepositionState(RangedEnemy enemy)
+    private float _repositionRange;
+
+    public RangedRepositionState(RangedEnemy enemy, float repositionRange = 0.0f)
         : base(enemy)
     {
         _context = enemy;
+        _repositionRange = repositionRange;
     }
 
     public override void Enter()
@@ -65,6 +68,7 @@ public class RangedRepositionState : EnemyMovingState
 
     private void SetPath(Vector3 destination)
     {
+        Debug.Log("Setting path to " + destination);
         _context.NavMeshAgent.SetDestination(destination);
     }
 
@@ -72,7 +76,8 @@ public class RangedRepositionState : EnemyMovingState
     {
         if (_tries >= _maxTries)
         {
-            _context.ChangeState(_context.States.IdleState);
+            Debug.Log("Couldn't find a new position to reposition, going to attack");
+            _context.ChangeState(_context.States.AttackState);
             return _context.transform.position;
         }
         _tries++;
@@ -86,12 +91,23 @@ public class RangedRepositionState : EnemyMovingState
         float angleToPlayer = Mathf.Atan2(direction.z, direction.x);
 
         float angle = Random.Range(angleToPlayer - 45, angleToPlayer + 45);
-        float range = Random.Range(_context.AttackRange * 0.2f, _context.AttackRange * 0.9f);
+        float range;
+        Vector3 targetPosition;
+        if (_repositionRange > 0)
+        {
+            range = _repositionRange;
+            targetPosition = enemyPosition;
+        }
+        else
+        {
+            range = Random.Range(_context.AttackRange * 0.2f, _context.AttackRange * 0.9f);
+            targetPosition = playerPosition;
+        }
 
         Vector3 newPositionOffset = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * range;
 
         // Add the offset to the player position
-        Vector3 newPosition = playerPosition + newPositionOffset;
+        Vector3 newPosition = targetPosition + newPositionOffset;
 
         // Check if has a path to the new position
         UnityEngine.AI.NavMeshPath path = new UnityEngine.AI.NavMeshPath();

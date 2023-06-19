@@ -5,7 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
-[CreateAssetMenu(fileName= "Inventory", menuName = "Scriptable Objects/Inventory System/Inventory")]
+[CreateAssetMenu(
+    fileName = "Inventory",
+    menuName = "Scriptable Objects/Inventory System/Inventory"
+)]
 public class ItemsInventoryObject : ScriptableObject
 {
     public List<ItemStack> Container = new List<ItemStack>();
@@ -16,7 +19,6 @@ public class ItemsInventoryObject : ScriptableObject
     {
         get { return _gold; }
     }
-
 
     public void AddItem(CollectibleObject item, int amount)
     {
@@ -32,9 +34,20 @@ public class ItemsInventoryObject : ScriptableObject
         }
     }
 
+    public void RemoveItem(CollectibleObject item)
+    {
+        ItemStack slot = Container.Find(x => x.item == item);
+        if (slot == null)
+            return;
+
+        if (slot.RemoveAmount(1))
+        {
+            Container.Remove(slot);
+        }
+    }
+
     public void AddItem(ItemStack itemStack)
     {
-        Debug.Log(itemStack);
         ItemStack slot = Container.Find(x => x.item == itemStack.item);
 
         if (slot != null)
@@ -51,17 +64,31 @@ public class ItemsInventoryObject : ScriptableObject
     {
         _gold += gold;
     }
+
+    public void UsePotion(Player player)
+    {
+        ItemStack slot = Container.Find(x => x.item is Potion);
+        if (slot == null)
+            return;
+        if (player.Status.HasMaxHealth())
+            return;
+
+        (slot.item as Potion).Use(player);
+        if (slot.RemoveAmount(1))
+        {
+            Container.Remove(slot);
+        }
+    }
 }
 
 [System.Serializable]
 public class ItemStack
 {
-
     public ItemObject item;
     public int amount;
     public string id;
 
-    public ItemStack(ItemObject _item, int _amount, string id)
+    public ItemStack(ItemObject _item, int _amount, string id = null)
     {
         item = _item;
         amount = _amount;
@@ -78,6 +105,12 @@ public class ItemStack
     public void AddAmount(int value)
     {
         amount += value;
+    }
+
+    public bool RemoveAmount(int value)
+    {
+        amount -= value;
+        return amount <= 0;
     }
 
     static System.Random random = new System.Random();

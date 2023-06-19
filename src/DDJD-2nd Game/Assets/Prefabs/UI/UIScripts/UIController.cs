@@ -18,12 +18,12 @@ public class UIController : MonoBehaviour
     ItemSkill[] leftWheelItems = new ItemSkill[6];
     ItemSkill[] rightWheelItems = new ItemSkill[6];
 
-    //Remover quando se fizer a função de remove
+    // Remover quando se fizer a função de remove
     ItemStack[] itemList = new ItemStack[30];
 
     public string currentMenu = "playing";
 
-    //KEYS
+    // KEYS
 
     public KeyCode inventoryKey = KeyCode.Tab;
     public KeyCode menuKey = KeyCode.Escape;
@@ -40,33 +40,28 @@ public class UIController : MonoBehaviour
     private void Awake()
     {
         _player = GetComponent<Player>();
+        _playerUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
     }
 
     private void Start()
     {
         _playerUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
-        Debug.Log("UI = " + _playerUI);
         _playerUI.inventoryUI.gameObject.SetActive(false);
         _playerUI.menuUI.SetActive(false);
-        _playerUI.leftSpellWheel.gameObject.SetActive(false);
-        _playerUI.rightSpellWheel.gameObject.SetActive(false);
         _playerUI.missionsUI.SetActive(false);
         _playerUI.activeElementWheel.SetActive(false);
         _playerUI.OptionsUI.SetUIController(this);
 
         InventoryUI inventoryUI = _playerUI.inventoryUI;
-        //inventoryUI.OnItemDrop += ;
-        //inventoryUI.OnItemSkillDrop += ;
         inventoryUI.OnItemSkillLeftDrop += ChangeLeftWheelItem;
         inventoryUI.OnItemSkillRightDrop += ChangeRightWheelItem;
+        inventoryUI.OnItemSkillDrop += DropItemSkill;
         inventoryUI.SetupActions();
 
         _itemsInventory = _player.Inventory;
 
-        //DEBUG
-
         UpdateSpellWheels();
-        //Items and spells
+        // Items and spells
         LoadInventory();
     }
 
@@ -120,17 +115,25 @@ public class UIController : MonoBehaviour
 
     public void OpenLeftSpell(bool isOpening)
     {
-        if (_playerUI.leftSpellWheel.gameObject.activeInHierarchy != isOpening)
+        if (isOpening)
         {
-            _playerUI.leftSpellWheel.gameObject.SetActive(isOpening);
+            _playerUI.leftSpellWheel.Open();
+        }
+        else
+        {
+            _playerUI.leftSpellWheel.Close();
         }
     }
 
     public void OpenRightSpell(bool isOpening)
     {
-        if (_playerUI.rightSpellWheel.gameObject.activeInHierarchy != isOpening)
+        if (isOpening)
         {
-            _playerUI.rightSpellWheel.gameObject.SetActive(isOpening);
+            _playerUI.rightSpellWheel.Open();
+        }
+        else
+        {
+            _playerUI.rightSpellWheel.Close();
         }
     }
 
@@ -193,71 +196,92 @@ public class UIController : MonoBehaviour
     {
         leftWheelItems = _player.PlayerSkills.EquippedLeftSkills.ToArray();
         rightWheelItems = _player.PlayerSkills.EquippedRightSkills.ToArray();
-        _playerUI.leftSpellWheel.GetComponent<WheelController>().updateSpellWheel(leftWheelItems);
-        _playerUI.rightSpellWheel.GetComponent<WheelController>().updateSpellWheel(rightWheelItems);
+        _playerUI.leftSpellWheel
+            .GetComponent<WheelController>()
+            .updateSpellWheel(leftWheelItems, UiArea.LeftWheel);
+        _playerUI.rightSpellWheel
+            .GetComponent<WheelController>()
+            .updateSpellWheel(rightWheelItems, UiArea.RightWheel);
+        _playerUI.inventoryUI.SetLeftWheelSkills(new List<ItemSkill>(leftWheelItems));
+        _playerUI.inventoryUI.SetRightWheelSkills(new List<ItemSkill>(rightWheelItems));
     }
 
-    public void AddItem(ItemStack item)
+    public void AddItem(ItemStack item, UiArea area)
     {
-        _playerUI.inventoryUI.AddItem(item);
+        _playerUI.inventoryUI.AddItem(item, area);
     }
 
-    /*public ItemStack RemoveItem(ItemStack item)
+    private void RemoveFromWheel(ItemStack itemStack, bool isLeft)
     {
-        for (int i = 0; i < itemList.Length; i++)
+        //Find item in wheel
+        ItemSkill[] wheelItems = isLeft ? leftWheelItems : rightWheelItems;
+        List<ItemSkill> equippedSkills = isLeft
+            ? _player.PlayerSkills.EquippedLeftSkills
+            : _player.PlayerSkills.EquippedRightSkills;
+        for (int i = 0; i < wheelItems.Length; i++)
         {
-            if (itemList[i] == item)
+            if (wheelItems[i] == null)
             {
-                ItemStack removedItem = itemList[i];
-                itemList[i] = null;
-                _playerUI.inventoryUI.RemoveItem(removedItem);
-                return removedItem;
+                equippedSkills[i] = null;
+                continue;
+            }
+            if (wheelItems[i] == itemStack.item)
+            {
+                equippedSkills[i] = null;
+                wheelItems[i] = null;
+                break;
             }
         }
-        return null;
-    }*/
+        UpdateSpellWheels();
+    }
 
-    /*public ItemStack RemoveItem(string itemID)
+    public void DropItemSkill(InventoryItemImage image, int slot, UiArea area)
     {
-        for (int i = 0; i < itemList.Length; i++)
+        if (!(image.currentItem.item is ItemSkill))
         {
-            if (itemList[i].id == itemID)
-            {
-                ItemStack removedItem = itemList[i];
-                itemList[i] = null;
-                _playerUI.inventoryUI.RemoveItem(removedItem);
-                return removedItem;
-            }
-        }
-        return null;
-    }*/
-
-    public void ChangeLeftWheelItem(ItemStack ItemStack, int slot)
-    {
-        if (!(ItemStack.item is ItemSkill))
-        {
-            Debug.Log("Is not itemskill");
+            Debug.LogError("Item is not itemskill");
             return;
         }
-        ItemSkill itemSkill = (ItemSkill)ItemStack.item;
+        if (area != UiArea.Spells)
+        {
+            // Remove item from it's previous position
+            if (area == UiArea.LeftWheel)
+            {
+                RemoveFromWheel(image.currentItem, true);
+                Destroy(image.gameObject);
+            }
+            else if (area == UiArea.RightWheel)
+            {
+                RemoveFromWheel(image.currentItem, true);
+                Destroy(image.gameObject);
+            }
+        }
+    }
+
+    public void ChangeLeftWheelItem(InventoryItemImage image, int slot, UiArea area)
+    {
+        if (!(image.currentItem.item is ItemSkill))
+        {
+            Debug.LogError("Item is not itemskill");
+            return;
+        }
+        ItemSkill itemSkill = (ItemSkill)image.currentItem.item;
         leftWheelItems[slot] = itemSkill;
         _player.PlayerSkills.EquippedLeftSkills[slot] = itemSkill;
-        _playerUI.leftSpellWheel.GetComponent<WheelController>().updateSpellWheel(leftWheelItems);
         UpdateSpellWheels();
         _playerUI.inventoryUI.SetLeftWheelSkills(new List<ItemSkill>(leftWheelItems));
     }
 
-    public void ChangeRightWheelItem(ItemStack ItemStack, int slot)
+    public void ChangeRightWheelItem(InventoryItemImage image, int slot, UiArea area)
     {
-        if (!(ItemStack.item is ItemSkill))
+        if (!(image.currentItem.item is ItemSkill))
         {
-            Debug.Log("Is not itemskill");
+            Debug.LogError("Item is not itemskill");
             return;
         }
-        ItemSkill itemSkill = (ItemSkill)ItemStack.item;
+        ItemSkill itemSkill = (ItemSkill)image.currentItem.item;
         rightWheelItems[slot] = itemSkill;
         _player.PlayerSkills.EquippedRightSkills[slot] = itemSkill;
-        _playerUI.rightSpellWheel.GetComponent<WheelController>().updateSpellWheel(rightWheelItems);
         UpdateSpellWheels();
         _playerUI.inventoryUI.SetRightWheelSkills(new List<ItemSkill>(rightWheelItems));
     }
@@ -266,7 +290,7 @@ public class UIController : MonoBehaviour
     {
         foreach (ItemSkill itemSkill in _player.PlayerSkills.LearnedSkills)
         {
-            AddItem(new ItemStack(itemSkill, 1, null));
+            AddItem(new ItemStack(itemSkill, 1, null), UiArea.Spells);
         }
     }
 
@@ -274,7 +298,7 @@ public class UIController : MonoBehaviour
     {
         foreach (var item in _itemsInventory.Container)
         {
-            _playerUI.inventoryUI.AddItem(item);
+            AddItem(item, UiArea.Items);
         }
     }
 
@@ -284,38 +308,6 @@ public class UIController : MonoBehaviour
         _playerUI.inventoryUI.SetLeftWheelSkills(new List<ItemSkill>(leftWheelItems));
         _playerUI.inventoryUI.SetRightWheelSkills(new List<ItemSkill>(rightWheelItems));
         LoadItems();
-
-        //Should load items from a game controller, this is just test code
-        /*Item firestoneItem = new ItemType(
-            "firestone",
-            "Fire Stone",
-            10,
-            fireStoneSprite,
-            false,
-            false
-        );
-        ItemType redDiamondItem = new ItemType(
-            "redDiamond",
-            "Red Diamond",
-            10,
-            redDiamondSprite,
-            true,
-            true
-        );
-        ItemStack firestoneStack1 = new ItemStack(firestoneItem, null);
-        ItemStack firestoneStack3 = new ItemStack(firestoneItem, null);
-        ItemStack firestoneStack4 = new ItemStack(firestoneItem, null);
-        ItemStack firestoneStack5 = new ItemStack(firestoneItem, null);
-        ItemStack redDiamondStack1 = new ItemStack(redDiamondItem, null);
-        ItemStack redDiamondStack2 = new ItemStack(redDiamondItem, null);
-        redDiamondStack2.amount = 427;
-        AddItem(firestoneStack1);
-        AddItem(firestoneStack2);
-        AddItem(firestoneStack3);
-        AddItem(firestoneStack4);
-        AddItem(firestoneStack5);
-        AddItem(redDiamondStack1);
-        AddItem(redDiamondStack2);*/
     }
 
     public Player Player
@@ -327,32 +319,9 @@ public class UIController : MonoBehaviour
     {
         get { return _playerUI; }
     }
-}
 
-
-/*public class ItemType
-{
-    public string typeID;
-    public int maxItems;
-    public bool isConsumable;
-    public bool isSpell;
-    public Sprite itemSprite;
-    public string name;
-
-    public ItemType(
-        string typeID,
-        string name,
-        int maxItems,
-        Sprite itemSprite,
-        bool isConsumable,
-        bool isSpell
-    )
+    public void showCompleteMissionText(string missionTitle)
     {
-        this.typeID = typeID;
-        this.maxItems = maxItems;
-        this.itemSprite = itemSprite;
-        this.isConsumable = isConsumable;
-        this.isSpell = isSpell;
-        this.name = name;
+        _playerUI.playingUI.missionCompleteNotification.StartAnimation(missionTitle);
     }
-}*/
+}

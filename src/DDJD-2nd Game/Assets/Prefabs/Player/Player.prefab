@@ -1383,7 +1383,7 @@ GameObject:
   - component: {fileID: 3947036104357098918}
   m_Layer: 6
   m_Name: Alpha_Surface
-  m_TagString: Untagged
+  m_TagString: PlayerSkinMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1615,6 +1615,7 @@ GameObject:
   - component: {fileID: 4492101057330347900}
   - component: {fileID: 4492101057330347902}
   - component: {fileID: 4492101057330347903}
+  - component: {fileID: 8205564864751426249}
   m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
@@ -1673,6 +1674,23 @@ MonoBehaviour:
   CameraRadius: 0.2
   DampingIntoCollision: 0
   DampingFromCollision: 2
+--- !u!114 &8205564864751426249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4492101057330347901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &4492101057451422959
 GameObject:
   m_ObjectHideFlags: 0
@@ -1697,7 +1715,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4492101057451422959}
-  m_LocalRotation: {x: 0.05884496, y: 0.013733736, z: -0.0008096409, w: 0.99817234}
+  m_LocalRotation: {x: 0.058845427, y: 0.013147389, z: -0.0007750742, w: 0.99818027}
   m_LocalPosition: {x: -0.5397235, y: 2.3344133, z: -1.468136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1756,6 +1774,7 @@ GameObject:
   - component: {fileID: 4492101058047646272}
   - component: {fileID: 4492101058047646286}
   - component: {fileID: 4492101058047646275}
+  - component: {fileID: 5069945111366950777}
   m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
@@ -1841,6 +1860,23 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
+--- !u!114 &5069945111366950777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4492101058047646284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &4492101058340307229
 GameObject:
   m_ObjectHideFlags: 0
@@ -3462,6 +3498,7 @@ GameObject:
   - component: {fileID: 1218520422210949770}
   - component: {fileID: 2410517152061201940}
   - component: {fileID: 6552981424179309022}
+  - component: {fileID: 7768398258343145679}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -3525,8 +3562,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4c21bafd157f34c9dae2852eb2c19d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inventory: {fileID: 11400000, guid: 2f5852599379b4183bf507c38fcd8d84, type: 2}
-  _jumpForce: 200
+  inventory: {fileID: 11400000, guid: 2f5852599379b4183bf507c38fcd8d84, type: 2}
+  _jumpForce: 350
   _acceleration: 2
   _maxAirSpeed: 4
   _airAcceleration: 0.8
@@ -3551,7 +3588,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 2
 --- !u!65 &7026416567958636128
@@ -3917,6 +3954,18 @@ MonoBehaviour:
   _maxRunSpeed: 15
   _maxSpeed: 7.5
   _maxAnimationSpeed: 1.75
+--- !u!114 &7768398258343145679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694690271000812756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2c887eb4eb992e40b52295c75643c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8198835224221356302
 GameObject:
   m_ObjectHideFlags: 0

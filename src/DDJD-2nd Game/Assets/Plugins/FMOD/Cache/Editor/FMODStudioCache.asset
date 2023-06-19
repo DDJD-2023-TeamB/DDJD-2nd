@@ -27,6 +27,61 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-8983529097658334232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Attacks/Melee/Melee Base
+  m_EditorClassIdentifier: 
+  Path: event:/Attacks/Melee/Melee Base
+  Guid:
+    Data1: 820308842
+    Data2: 1337895590
+    Data3: -138653824
+    Data4: -1723026112
+  Banks:
+  - {fileID: 5317653654373178222}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -99979795234758616}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-8979728863349716648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Inventory
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Inventory
+  Guid:
+    Data1: 191455767
+    Data2: 1227941080
+    Data3: -1726887262
+    Data4: -1529539535
+  Banks:
+  - {fileID: -4163189231034246468}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-8899655932541831967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +244,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-8121140263514846730
+--- !u!114 &-7812503226717103648
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,23 +254,45 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Charged Fire Ball/Charged Fire Ball
+  m_Name: parameter:/Lightning Dash/Lightning Dash State
   m_EditorClassIdentifier: 
-  Name: Charged Fire Ball
+  Name: Lightning Dash State
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
-    data1: 1012577476
-    data2: 3563575602
+    data1: 1288640749
+    data2: 263028203
   Type: 2
   IsGlobal: 0
   Labels:
-  - Charge
-  - Iddle
-  - Release
-  - Impact
+  - Dash
+  - Explosion
+  Exists: 1
+--- !u!114 &-7712968204882475685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wind Charge/State
+  m_EditorClassIdentifier: 
+  Name: State
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 503547421
+    data2: 70529192
+  Type: 1
+  IsGlobal: 0
+  Labels: []
   Exists: 1
 --- !u!114 &-7482942988528332613
 MonoBehaviour:
@@ -232,10 +309,10 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Voices.bank
   Name: Voices
   StudioPath: bank:/Voices
-  lastModified: 638227091614535132
+  lastModified: 638228008105962966
   FileSizes:
   - Name: Desktop
-    Value: 67168
+    Value: 494
   Exists: 1
 --- !u!114 &-7338220989253635936
 MonoBehaviour:
@@ -285,7 +362,7 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-6851749534473844349
+--- !u!114 &-7062614362839007914
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -294,25 +371,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Attacks/Melee overlay
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Tornado Impact/Tornado Impact
   m_EditorClassIdentifier: 
-  Path: event:/Attacks/Melee overlay
-  Guid:
-    Data1: -1107946826
-    Data2: 1278192834
-    Data3: 1011146412
-    Data4: 577834099
-  Banks:
-  - {fileID: 5317653654373178222}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters:
-  - {fileID: -5026666769579484089}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
+  Name: Tornado Impact
+  StudioPath: 
+  Min: 0
+  Max: 0
+  Default: 0
+  ID:
+    data1: 3640214816
+    data2: 1597092893
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Tornado Impact
+  Exists: 1
+--- !u!114 &-6718227476075781703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Ambience.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Team B/Build/Desktop/Ambience.bank
+  Name: Ambience
+  StudioPath: bank:/Ambience
+  lastModified: 638228008105215148
+  FileSizes:
+  - Name: Desktop
+    Value: 9399776
+  Exists: 1
 --- !u!114 &-6632862738621425670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,6 +434,59 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-6629281785208384812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Attacks/Wind Abilities/Tornado/Tornado
+  m_EditorClassIdentifier: 
+  Path: event:/Attacks/Wind Abilities/Tornado/Tornado
+  Guid:
+    Data1: 207890640
+    Data2: 1111358653
+    Data3: 1970333099
+    Data4: -865006431
+  Banks:
+  - {fileID: 5317653654373178222}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 1564841845763745506}
+  - {fileID: 508067876517096413}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 12428
+--- !u!114 &-6615303713017401938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Lightning Charge/State
+  m_EditorClassIdentifier: 
+  Name: State
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2946641833
+    data2: 885796172
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-6535411451700943092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,7 +536,7 @@ MonoBehaviour:
   - {fileID: 5317653654373178222}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters:
   - {fileID: -1848288067999154678}
   MinDistance: 1
@@ -438,10 +585,10 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638227091613873315
+  lastModified: 638228008105239945
   FileSizes:
   - Name: Desktop
-    Value: 3548
+    Value: 4946
   Exists: 1
 --- !u!114 &-5933235245165181606
 MonoBehaviour:
@@ -453,12 +600,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Dash/Parameter 1
+  m_Name: parameter:/Dash/Dash Type
   m_EditorClassIdentifier: 
-  Name: Parameter 1
+  Name: Dash Type
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 4
   Default: 0
   ID:
     data1: 734822654
@@ -469,6 +616,7 @@ MonoBehaviour:
   - Earth
   - Fire
   - Lightning
+  - Lightning Dash Explosion
   - Wind
   Exists: 1
 --- !u!114 &-5242579151107825548
@@ -486,7 +634,7 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638227091614500081
+  lastModified: 638228008105880385
   FileSizes:
   - Name: Desktop
     Value: 2975328
@@ -519,7 +667,7 @@ MonoBehaviour:
   - Lightning
   - Wind
   Exists: 1
---- !u!114 &-5026666769579484089
+--- !u!114 &-4738918820674894865
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -528,49 +676,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Melee overlay/Melee Type
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Main Menu
   m_EditorClassIdentifier: 
-  Name: Melee Type
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3569420667
-    data2: 1541724746
-  Type: 2
-  IsGlobal: 0
-  Labels:
-  - Fire
-  - Lightning
-  Exists: 1
---- !u!114 &-4459362541762091504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Melee/Basic Melee
-  m_EditorClassIdentifier: 
-  Name: Basic Melee
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2740336205
-    data2: 3309199001
-  Type: 2
-  IsGlobal: 0
-  Labels:
-  - Miss
-  - Basic
-  Exists: 1
+  Path: event:/UI/Main Menu
+  Guid:
+    Data1: 237741939
+    Data2: 1121907292
+    Data3: -2065964896
+    Data4: -2104968963
+  Banks:
+  - {fileID: -4163189231034246468}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 6189235430327144569}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-4237877867514721265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -591,7 +715,7 @@ MonoBehaviour:
     Data4: -1976586680
   Banks:
   - {fileID: -2240515257551769130}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters:
@@ -600,6 +724,54 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-4219200682460693056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Fire Village/Fire Drone
+  m_EditorClassIdentifier: 
+  Name: Fire Drone
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3462707004
+    data2: 3393462191
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-4189923787751860993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Earth Charge/State
+  m_EditorClassIdentifier: 
+  Name: State
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 904947299
+    data2: 3788752414
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-4163189231034246468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,10 +787,10 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 638227091614520055
+  lastModified: 638228008105959143
   FileSizes:
   - Name: Desktop
-    Value: 67296
+    Value: 131936
   Exists: 1
 --- !u!114 &-4034615198920129356
 MonoBehaviour:
@@ -675,6 +847,65 @@ MonoBehaviour:
   - Create
   - Destroy
   Exists: 1
+--- !u!114 &-3930996900182337969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Attacks/Wind Abilities/Tornado/Tornado Impact
+  m_EditorClassIdentifier: 
+  Path: event:/Attacks/Wind Abilities/Tornado/Tornado Impact
+  Guid:
+    Data1: -1211041353
+    Data2: 1205382641
+    Data3: -2006082394
+    Data4: 1541991971
+  Banks:
+  - {fileID: 5317653654373178222}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 1052094525688583639}
+  - {fileID: -7062614362839007914}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3770654835755204129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambience/Fire Village
+  m_EditorClassIdentifier: 
+  Path: event:/Ambience/Fire Village
+  Guid:
+    Data1: 1446563693
+    Data2: 1172431244
+    Data3: 474720172
+    Data4: -883139947
+  Banks:
+  - {fileID: -6718227476075781703}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 2048987339773777581}
+  - {fileID: -4219200682460693056}
+  - {fileID: 8075232173357044901}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 158400
 --- !u!114 &-3686291920222068919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,6 +933,62 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-3496198702931344585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Abilities Menu/Abilities Menu Type
+  m_EditorClassIdentifier: 
+  Name: Abilities Menu Type
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 2054478347
+    data2: 1045777872
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Open
+  - Close
+  - Hover
+  Exists: 1
+--- !u!114 &-3200733344348817405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Attacks/Fire Abilities/Charged Fire Ball/Charged Fire Ball
+  m_EditorClassIdentifier: 
+  Path: event:/Attacks/Fire Abilities/Charged Fire Ball/Charged Fire Ball
+  Guid:
+    Data1: -156783445
+    Data2: 1228430047
+    Data3: -500818002
+    Data4: 455836143
+  Banks:
+  - {fileID: 5317653654373178222}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 315614628302970242}
+  - {fileID: -350456551152601589}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7555
 --- !u!114 &-3162441206516737935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,6 +1009,30 @@ MonoBehaviour:
   ID:
     data1: 579358583
     data2: 651864968
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-3151920968661169436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Charged Fire Ball Impact/Charged Fire Ball Intensity
+  m_EditorClassIdentifier: 
+  Name: Charged Fire Ball Intensity
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 522363370
+    data2: 3547473405
   Type: 0
   IsGlobal: 0
   Labels: []
@@ -752,6 +1063,59 @@ MonoBehaviour:
   - Placement
   - Conection
   - Activate
+  Exists: 1
+--- !u!114 &-3001041585714389699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Attacks/Earth Abilities/Earth Charge
+  m_EditorClassIdentifier: 
+  Path: event:/Attacks/Earth Abilities/Earth Charge
+  Guid:
+    Data1: -1916989278
+    Data2: 1190697607
+    Data3: 1311198889
+    Data4: 1112510269
+  Banks:
+  - {fileID: 5317653654373178222}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -4189923787751860993}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 9000
+--- !u!114 &-2782868503741354480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Charged Fire Ball Impact/Charged Fire Ball Imapct
+  m_EditorClassIdentifier: 
+  Name: Charged Fire Ball Imapct
+  StudioPath: 
+  Min: 0
+  Max: 0
+  Default: 0
+  ID:
+    data1: 3911638886
+    data2: 4210286146
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Charged Fire Ball Impact
   Exists: 1
 --- !u!114 &-2424290092066821285
 MonoBehaviour:
@@ -820,11 +1184,38 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Movement.bank
   Name: Movement
   StudioPath: bank:/Movement
-  lastModified: 638227091614133783
+  lastModified: 638228008105480035
   FileSizes:
   - Name: Desktop
-    Value: 1631008
+    Value: 2026304
   Exists: 1
+--- !u!114 &-1855651459946949454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Attacks/Fire Abilities/Charged Fire Ball/Charged Fire Ball Fly
+  m_EditorClassIdentifier: 
+  Path: event:/Attacks/Fire Abilities/Charged Fire Ball/Charged Fire Ball Fly
+  Guid:
+    Data1: 1944739301
+    Data2: 1202178383
+    Data3: -774440513
+    Data4: -1892049947
+  Banks:
+  - {fileID: 5317653654373178222}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 8399
 --- !u!114 &-1848288067999154678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -852,7 +1243,7 @@ MonoBehaviour:
   - On
   - Off
   Exists: 1
---- !u!114 &-1241808602809503583
+--- !u!114 &-1244017132691983994
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -861,25 +1252,49 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Attacks/Melee
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Element Overlay/Element Overlay
   m_EditorClassIdentifier: 
-  Path: event:/Attacks/Melee
-  Guid:
-    Data1: 820308842
-    Data2: 1337895590
-    Data3: -138653824
-    Data4: -1723026112
-  Banks:
-  - {fileID: 5317653654373178222}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters:
-  - {fileID: -4459362541762091504}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
+  Name: Element Overlay
+  StudioPath: 
+  Min: 0
+  Max: 3
+  Default: 0
+  ID:
+    data1: 2769164898
+    data2: 570754059
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Fire
+  - Lightning
+  - Dirt
+  - Wind
+  Exists: 1
+--- !u!114 &-1075164858684437650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Fire Charge/State
+  m_EditorClassIdentifier: 
+  Name: State
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1064411833
+    data2: 3363519252
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-1028364576184840591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -903,11 +1318,12 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
-  Parameters: []
+  Parameters:
+  - {fileID: -7812503226717103648}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-515421990174392312
+--- !u!114 &-958277389845201659
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -917,21 +1333,102 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Voices/Main Character
+  m_Name: event:/UI/Element Overlay
   m_EditorClassIdentifier: 
-  Path: event:/Voices/Main Character
+  Path: event:/UI/Element Overlay
   Guid:
-    Data1: 421743902
-    Data2: 1202637335
-    Data3: -1086073188
-    Data4: -962358789
+    Data1: 1450044450
+    Data2: 1338472850
+    Data3: -1996579710
+    Data4: -983486842
   Banks:
-  - {fileID: -7482942988528332613}
+  - {fileID: 5317653654373178222}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 4408530802927861687}
+  - {fileID: -1244017132691983994}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-659980094888564503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Air/Air
+  m_EditorClassIdentifier: 
+  Name: Air
+  StudioPath: 
+  Min: 0
+  Max: 0
+  Default: 0
+  ID:
+    data1: 2602601732
+    data2: 2590907970
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Air
+  Exists: 1
+--- !u!114 &-477016652259779702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Attacks/Wind Abilities/Wind Charge
+  m_EditorClassIdentifier: 
+  Path: event:/Attacks/Wind Abilities/Wind Charge
+  Guid:
+    Data1: 798389812
+    Data2: 1315678366
+    Data3: -1706686826
+    Data4: 632453420
+  Banks:
+  - {fileID: 5317653654373178222}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -7712968204882475685}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 9000
+--- !u!114 &-402819411432792432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Abilities Menu
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Abilities Menu
+  Guid:
+    Data1: -1082774134
+    Data2: 1339836563
+    Data3: 420035251
+    Data4: 2104951584
+  Banks:
+  - {fileID: -4163189231034246468}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -3496198702931344585}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -961,6 +1458,56 @@ MonoBehaviour:
   - Fire
   - Lightning
   Exists: 1
+--- !u!114 &-350456551152601589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Charged Fire Ball/Ball State
+  m_EditorClassIdentifier: 
+  Name: Ball State
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2144293284
+    data2: 1137011054
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-99979795234758616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Melee Base/Basic Melee
+  m_EditorClassIdentifier: 
+  Name: Basic Melee
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2740336205
+    data2: 3309199001
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Miss
+  - Basic
+  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -981,13 +1528,12 @@ MonoBehaviour:
   - {fileID: -5242579151107825548}
   - {fileID: -4163189231034246468}
   - {fileID: -7482942988528332613}
+  - {fileID: -6718227476075781703}
   EditorEvents:
   - {fileID: 1754629158732588561}
   - {fileID: -1028364576184840591}
   - {fileID: 5332299497021798144}
-  - {fileID: 7122407131946036760}
   - {fileID: -8577426673163766108}
-  - {fileID: -1241808602809503583}
   - {fileID: 1043035778219825387}
   - {fileID: -8619940732303155573}
   - {fileID: 6754269592279153416}
@@ -996,7 +1542,6 @@ MonoBehaviour:
   - {fileID: -8362087631659498619}
   - {fileID: -8639779627470401306}
   - {fileID: -2268352540942200356}
-  - {fileID: 985333698744577542}
   - {fileID: -3686291920222068919}
   - {fileID: -6535411451700943092}
   - {fileID: -6341237352202516728}
@@ -1008,14 +1553,33 @@ MonoBehaviour:
   - {fileID: 4940153320947071384}
   - {fileID: -9055316217655567364}
   - {fileID: 241608974719644130}
-  - {fileID: -515421990174392312}
-  - {fileID: -6851749534473844349}
+  - {fileID: -958277389845201659}
+  - {fileID: -477016652259779702}
+  - {fileID: -8983529097658334232}
+  - {fileID: 6936160993731725011}
+  - {fileID: 4909249278715896300}
+  - {fileID: -3001041585714389699}
+  - {fileID: -3200733344348817405}
+  - {fileID: 7746037281342934187}
+  - {fileID: 273903515459743254}
+  - {fileID: -3930996900182337969}
+  - {fileID: 1267810718863758318}
+  - {fileID: -6629281785208384812}
+  - {fileID: -1855651459946949454}
+  - {fileID: 3775497590727866978}
+  - {fileID: -3770654835755204129}
+  - {fileID: 815678283600404660}
+  - {fileID: 1083956888993674896}
+  - {fileID: 1653853534437405665}
+  - {fileID: -8979728863349716648}
+  - {fileID: -4738918820674894865}
+  - {fileID: -402819411432792432}
   EditorParameters: []
   MasterBanks:
   - {fileID: 4433330313758352117}
   StringsBanks:
   - {fileID: -6091163670596948680}
-  cacheTime: 638227091614535132
+  cacheTime: 638228008105962966
   cacheVersion: 131603
 --- !u!114 &87656345710861160
 MonoBehaviour:
@@ -1072,6 +1636,58 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &273903515459743254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Attacks/Melee/Magic Layer
+  m_EditorClassIdentifier: 
+  Path: event:/Attacks/Melee/Magic Layer
+  Guid:
+    Data1: -1107946826
+    Data2: 1278192834
+    Data3: 1011146412
+    Data4: 577834099
+  Banks:
+  - {fileID: 5317653654373178222}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 751099997606133399}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &315614628302970242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Charged Fire Ball/Charged Fire Ball Intensity
+  m_EditorClassIdentifier: 
+  Name: Charged Fire Ball Intensity
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 522363370
+    data2: 3547473405
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &507431562143544992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1100,6 +1716,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &508067876517096413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Tornado/Tornado Intensity
+  m_EditorClassIdentifier: 
+  Name: Tornado Intensity
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4114973686
+    data2: 600190015
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &703979804092782723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1126,7 +1766,35 @@ MonoBehaviour:
   - Create
   - Impact
   Exists: 1
---- !u!114 &985333698744577542
+--- !u!114 &751099997606133399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Magic Layer/Melee Type
+  m_EditorClassIdentifier: 
+  Name: Melee Type
+  StudioPath: 
+  Min: 0
+  Max: 3
+  Default: 0
+  ID:
+    data1: 3569420667
+    data2: 1541724746
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Fire
+  - Lightning
+  - Wind
+  - Earth
+  Exists: 1
+--- !u!114 &815678283600404660
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1136,22 +1804,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Attacks/Fire Abilities/Charged Fire Ball
+  m_Name: event:/Movement/Air
   m_EditorClassIdentifier: 
-  Path: event:/Attacks/Fire Abilities/Charged Fire Ball
+  Path: event:/Movement/Air
   Guid:
-    Data1: -423278909
-    Data2: 1196819011
-    Data3: 852621243
-    Data4: -1509556603
+    Data1: -1524831470
+    Data2: 1279909948
+    Data3: 386926774
+    Data4: 1921847288
   Banks:
-  - {fileID: 5317653654373178222}
+  - {fileID: -2240515257551769130}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 2624591786591202017}
-  - {fileID: -8121140263514846730}
+  - {fileID: 6130763239531396913}
+  - {fileID: -659980094888564503}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -1183,6 +1851,138 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &1052094525688583639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Tornado Impact/Tornado Intensity
+  m_EditorClassIdentifier: 
+  Name: Tornado Intensity
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4114973686
+    data2: 600190015
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &1083956888993674896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Movement/Running
+  m_EditorClassIdentifier: 
+  Path: event:/Movement/Running
+  Guid:
+    Data1: 91998083
+    Data2: 1195884030
+    Data3: -323325019
+    Data4: -1583625905
+  Banks:
+  - {fileID: -2240515257551769130}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 5753241817464456918}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 35800
+--- !u!114 &1267810718863758318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Attacks/Fire Abilities/Charged Fire Ball/Charged Fire Ball Impact
+  m_EditorClassIdentifier: 
+  Path: event:/Attacks/Fire Abilities/Charged Fire Ball/Charged Fire Ball Impact
+  Guid:
+    Data1: -423278909
+    Data2: 1196819011
+    Data3: 852621243
+    Data4: -1509556603
+  Banks:
+  - {fileID: 5317653654373178222}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -2782868503741354480}
+  - {fileID: -3151920968661169436}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &1564841845763745506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Tornado/Tornado State
+  m_EditorClassIdentifier: 
+  Name: Tornado State
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1823147370
+    data2: 511086582
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &1653853534437405665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Item Buy
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Item Buy
+  Guid:
+    Data1: 2051467277
+    Data2: 1110482740
+    Data3: 323934385
+    Data4: -1285951195
+  Banks:
+  - {fileID: -4163189231034246468}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &1754629158732588561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1203,9 +2003,9 @@ MonoBehaviour:
     Data4: 73904864
   Banks:
   - {fileID: 5317653654373178222}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -1262,6 +2062,30 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &2048987339773777581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Fire Village/Whisper
+  m_EditorClassIdentifier: 
+  Name: Whisper
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3468473738
+    data2: 3256770752
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &2192201203526317152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1282,30 +2106,6 @@ MonoBehaviour:
   ID:
     data1: 3674946266
     data2: 665973251
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &2624591786591202017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Charged Fire Ball/Charged Fire Ball Intensity
-  m_EditorClassIdentifier: 
-  Name: Charged Fire Ball Intensity
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 522363370
-    data2: 3547473405
   Type: 0
   IsGlobal: 0
   Labels: []
@@ -1337,6 +2137,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &3508356072972232323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Village - Wilderness/Village Proximity
+  m_EditorClassIdentifier: 
+  Name: Village Proximity
+  StudioPath: 
+  Min: 0
+  Max: 100
+  Default: 0
+  ID:
+    data1: 4254689558
+    data2: 195455078
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &3613370968683700268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1357,7 +2181,7 @@ MonoBehaviour:
     Data4: -1248366904
   Banks:
   - {fileID: -5242579151107825548}
-  IsStream: 1
+  IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters:
@@ -1367,7 +2191,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 231216
---- !u!114 &4408530802927861687
+--- !u!114 &3775497590727866978
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1376,24 +2200,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Main Character/Vocal Type
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambience/Village - Wilderness
   m_EditorClassIdentifier: 
-  Name: Vocal Type
-  StudioPath: 
-  Min: 0
-  Max: 2
-  Default: 0
-  ID:
-    data1: 2756765505
-    data2: 2714838616
-  Type: 2
-  IsGlobal: 0
-  Labels:
-  - Pain
-  - Attack
-  - Jump
-  Exists: 1
+  Path: event:/Ambience/Village - Wilderness
+  Guid:
+    Data1: 1395267596
+    Data2: 1250929403
+    Data3: 904684715
+    Data4: 142978580
+  Banks:
+  - {fileID: -6718227476075781703}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 3508356072972232323}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 140000
 --- !u!114 &4433330313758352117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1409,11 +2234,39 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638212678510253460
+  lastModified: 638213224459255665
   FileSizes:
   - Name: Desktop
     Value: 1036
   Exists: 1
+--- !u!114 &4909249278715896300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Attacks/Lightning Abilities/Lightning Charge
+  m_EditorClassIdentifier: 
+  Path: event:/Attacks/Lightning Abilities/Lightning Charge
+  Guid:
+    Data1: -870986337
+    Data2: 1294028168
+    Data3: 681539465
+    Data4: -1660047524
+  Banks:
+  - {fileID: 5317653654373178222}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -6615303713017401938}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 12214
 --- !u!114 &4940153320947071384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1484,10 +2337,10 @@ MonoBehaviour:
   Path: Assets/Team B/Build/Desktop/Abilities.bank
   Name: Abilities
   StudioPath: bank:/Abilities
-  lastModified: 638227091613853132
+  lastModified: 638228008103797260
   FileSizes:
   - Name: Desktop
-    Value: 2635040
+    Value: 4604928
   Exists: 1
 --- !u!114 &5332299497021798144
 MonoBehaviour:
@@ -1531,7 +2384,7 @@ MonoBehaviour:
   Name: Hover Type
   StudioPath: 
   Min: 0
-  Max: 2
+  Max: 1
   Default: 0
   ID:
     data1: 912811958
@@ -1539,9 +2392,83 @@ MonoBehaviour:
   Type: 2
   IsGlobal: 0
   Labels:
-  - Basic
   - Fire
   - Lightning
+  Exists: 1
+--- !u!114 &5753241817464456918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Running/Run State
+  m_EditorClassIdentifier: 
+  Name: Run State
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1192326735
+    data2: 286015269
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &6130763239531396913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Air/Hover Intensity
+  m_EditorClassIdentifier: 
+  Name: Hover Intensity
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2371128729
+    data2: 1995108737
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &6189235430327144569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main Menu/Main Menu Type
+  m_EditorClassIdentifier: 
+  Name: Main Menu Type
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 3862969168
+    data2: 1436630811
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Neutral
+  - Positive
+  - Select
   Exists: 1
 --- !u!114 &6754269592279153416
 MonoBehaviour:
@@ -1563,40 +2490,16 @@ MonoBehaviour:
     Data4: 1292578611
   Banks:
   - {fileID: 5317653654373178222}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters:
   - {fileID: -3113984542204307514}
   - {fileID: -8899655932541831967}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &6980888336978893274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Tornado/Tornado Intensity
-  m_EditorClassIdentifier: 
-  Name: Tornado Intensity
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 4114973686
-    data2: 600190015
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &7122407131946036760
+--- !u!114 &6936160993731725011
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1606,53 +2509,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Attacks/Wind Abilities/Tornado
+  m_Name: event:/Attacks/Fire Abilities/Fire Charge
   m_EditorClassIdentifier: 
-  Path: event:/Attacks/Wind Abilities/Tornado
+  Path: event:/Attacks/Fire Abilities/Fire Charge
   Guid:
-    Data1: 1535966814
-    Data2: 1137835664
-    Data3: -1865624680
-    Data4: 1827934903
+    Data1: 311002259
+    Data2: 1229045724
+    Data3: -1874772043
+    Data4: -1532035122
   Banks:
   - {fileID: 5317653654373178222}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 6980888336978893274}
-  - {fileID: 7548370225816586413}
+  - {fileID: -1075164858684437650}
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
---- !u!114 &7548370225816586413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Tornado/Tornado
-  m_EditorClassIdentifier: 
-  Name: Tornado
-  StudioPath: 
-  Min: 0
-  Max: 3
-  Default: 0
-  ID:
-    data1: 568008195
-    data2: 688747680
-  Type: 2
-  IsGlobal: 0
-  Labels:
-  - Charge
-  - Iddle
-  - Release
-  - Impact
-  Exists: 1
+  Length: 8571
 --- !u!114 &7684346180799352657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1678,4 +2552,55 @@ MonoBehaviour:
   Labels:
   - Jump
   - Hit
+  Exists: 1
+--- !u!114 &7746037281342934187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Attacks/Wind Abilities/Tornado/Tornado Fly
+  m_EditorClassIdentifier: 
+  Path: event:/Attacks/Wind Abilities/Tornado/Tornado Fly
+  Guid:
+    Data1: -1805533005
+    Data2: 1308504437
+    Data3: 1129245595
+    Data4: 1801128179
+  Banks:
+  - {fileID: 5317653654373178222}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 8400
+--- !u!114 &8075232173357044901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Fire Village/Crows
+  m_EditorClassIdentifier: 
+  Name: Crows
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2416615732
+    data2: 2785180653
+  Type: 0
+  IsGlobal: 0
+  Labels: []
   Exists: 1

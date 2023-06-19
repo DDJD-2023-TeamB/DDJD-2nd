@@ -20,7 +20,7 @@ public class EnemySpawnerComponent : MonoBehaviour
 
     private void Update() { }
 
-    public GameObject SpawnEnemy(EnemyInfo info)
+    public BasicEnemy SpawnEnemy(EnemyInfo info)
     {
         Vector3 position;
         UnityEngine.AI.NavMeshHit hit;
@@ -46,10 +46,10 @@ public class EnemySpawnerComponent : MonoBehaviour
         GameObject enemy = Instantiate(info.Prefab, position, Quaternion.identity);
 
         BasicEnemy basicEnemy = enemy.GetComponent<BasicEnemy>();
-        basicEnemy.EnemySkills = info.EnemySkills;
+        basicEnemy.SetEnemySkills(info.EnemySkills);
         basicEnemy.SetEnemySpawnerManager(_enemySpawnerManager);
         StartCoroutine(SpawnCooldown());
-        return enemy;
+        return basicEnemy;
     }
 
     private IEnumerator SpawnCooldown()

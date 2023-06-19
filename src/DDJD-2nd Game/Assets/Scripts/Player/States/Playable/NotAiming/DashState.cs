@@ -10,6 +10,7 @@ public class DashState : MeleeAttackableState
     private Rigidbody _rigidbody;
     private Dashable _dashable;
     private CharacterStatus _status;
+    private GameUI _gameUI;
 
     public DashState(
         StateContext context,
@@ -24,21 +25,23 @@ public class DashState : MeleeAttackableState
         _skill = skill;
         _rigidbody = _context.GetComponent<Rigidbody>();
         _status = _context.GetComponent<CharacterStatus>();
+        _gameUI = _context.GetComponent<UIController>().PlayerUI.playingUI.GetComponent<GameUI>();
     }
 
     public override void Enter()
     {
         base.Enter();
         _dashable = _context.GetComponent<Dashable>();
+        _gameUI.startChargingIndicator();
         bool canUseSkill =
             _skill != null
-            && !_context.PlayerSkills.IsSkillOnCooldown(_skill)
+            && !_context.PlayerSkills.IsSkillOnCooldown(_skill, true)
             && (_skill.CanDashInAir || MovementUtils.IsGrounded(_context.Rigidbody))
             && _status.ConsumeMana(_skill.Element, _skill.SkillStats.ManaCost);
         if (canUseSkill)
         {
             _dashable.DashWithSkill(_skill);
-            _context.PlayerSkills.StartSkillCooldown(_skill);
+            _context.PlayerSkills.StartSkillCooldown(_skill, true);
         }
         else
         {

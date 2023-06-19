@@ -18,15 +18,22 @@ public class AirborneState : GenericState
         _context.Animator.SetBool("IsGrounded", false);
         _context.Input.OnJumpKeyDown += OnJumpKeyDown;
         _context.Input.OnJumpKeyUp += OnJumpKeyUp;
+        if (
+            _context.Input.IsJumping
+            && (_context.AirMovement != null && _context.AirMovement.IsActive())
+        )
+        {
+            OnJumpKeyDown();
+        }
     }
 
     public override void Exit()
     {
         base.Exit();
+        OnJumpKeyUp();
         _context.Animator.SetBool("IsGrounded", true);
         _context.Input.OnJumpKeyUp -= OnJumpKeyUp;
         _context.Input.OnJumpKeyDown -= OnJumpKeyDown;
-        _context.AirMovement?.Reset();
 
         bool IsGrounded = MovementUtils.IsGrounded(_context.Rigidbody);
         if (IsGrounded)
@@ -43,7 +50,7 @@ public class AirborneState : GenericState
                 _context.Rigidbody.velocity.magnitude / 15.0f,
                 true
             );
-            _context.SoundEmitter.Play("footstep");
+            _context.Footsteps.Play();
         }
     }
 

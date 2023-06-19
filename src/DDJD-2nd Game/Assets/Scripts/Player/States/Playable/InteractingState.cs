@@ -50,4 +50,9 @@ public class InteractingState : GenericState
             npc.ExitInteraction();
         }
     }
+
+    public bool IsInteracting()
+    {
+        return _context.InteractedObject != null;
+    }
 }

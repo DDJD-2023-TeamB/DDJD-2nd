@@ -25,7 +25,6 @@ public class ElectricBoltComponent : RayCastSkillComponent, NonCollidable
         Vector3 pos4;
         RaycastHit? hit = GetRaycastHit();
         Vector3 direction = GetRaycastShotDirection();
-
         if (hit != null)
         {
             pos4 = hit.Value.point;
@@ -43,7 +42,9 @@ public class ElectricBoltComponent : RayCastSkillComponent, NonCollidable
 
         ElectricRayUtils.SetBezierAndScale(transform, pos1, pos4);
         if (hit != null && distance <= _stats.MaxDistance)
+        {
             Collide(hit.Value.collider);
+        }
     }
 
     protected override void OnImpact(Collider other, float multiplier = 1)

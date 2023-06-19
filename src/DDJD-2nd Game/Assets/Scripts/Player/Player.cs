@@ -6,11 +6,10 @@ using Cinemachine;
 public class Player : StateContext, Damageable
 {
     [SerializeField]
-    private ItemsInventoryObject _inventory;
+    private ItemsInventoryObject inventory;
     public ItemsInventoryObject Inventory
     {
-        get { return _inventory; }
-        set { _inventory = value; }
+        get { return inventory; }
     }
 
     private PlayerStateFactory _factory;
@@ -174,9 +173,13 @@ public class Player : StateContext, Damageable
         get { return _characterStatus; }
     }
     private UIController _uiController;
-
+    private GameUI _gameUI;
     private ElementController _elementController;
     private CharacterMovement _characterMovement;
+
+    private TimeController _timeController;
+
+    private FootSteps _footsteps;
 
     void Awake()
     {
@@ -198,12 +201,15 @@ public class Player : StateContext, Damageable
         _elementController = GetComponent<ElementController>();
         _characterMovement = GetComponent<CharacterMovement>();
         _collider = GetComponent<Collider>();
+        _gameUI = _uiController.PlayerUI.playingUI;
+        _timeController = GetComponent<TimeController>();
+        _footsteps = GetComponent<FootSteps>();
         ChangeState(_factory.Playable());
     }
 
     void Start()
     {
-        UpdateElement(null);
+        UpdateElement(_playerSkills.CurrentElement);
         _sfxJumpStateId = _soundEmitter.GetParameterId("jump", "Jump State");
         _sfxJumpIntensityId = _soundEmitter.GetParameterId("jump", "Jump Intensity");
         _inputReceiver.OnPrintState += () => _state?.PrintState();
@@ -220,6 +226,7 @@ public class Player : StateContext, Damageable
         if (element != null)
         {
             _playerSkills.CurrentElement = element;
+            _gameUI.changeChargingIndicatorElement(element);
         }
         _airMovement = _playerSkills.CurrentElement?.AirMovementSkill?.Initialize(gameObject);
         _uiController.UpdateElements(
@@ -289,5 +296,15 @@ public class Player : StateContext, Damageable
     public Collider Collider
     {
         get { return _collider; }
+    }
+
+    public TimeController TimeController
+    {
+        get { return _timeController; }
+    }
+
+    public FootSteps Footsteps
+    {
+        get { return _footsteps; }
     }
 }

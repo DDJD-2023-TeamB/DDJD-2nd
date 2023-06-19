@@ -5,6 +5,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using Unity.Collections.LowLevel.Unsafe;
+
+public enum UiArea
+{
+    Items,
+    Spells,
+    LeftWheel,
+    RightWheel
+}
 
 public class InventoryUI : MonoBehaviour
 {
@@ -19,11 +28,18 @@ public class InventoryUI : MonoBehaviour
     [SerializeField]
     private GameObject _rightWheel;
 
+    private Player _player;
+
+    public void Start()
+    {
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+
     public Action OnItemRemoved;
-    public Action<ItemStack, int> OnItemDrop;
-    public Action<ItemStack, int> OnItemSkillDrop;
-    public Action<ItemStack, int> OnItemSkillLeftDrop;
-    public Action<ItemStack, int> OnItemSkillRightDrop;
+    public Action<InventoryItemImage, int, UiArea> OnItemDrop;
+    public Action<InventoryItemImage, int, UiArea> OnItemSkillDrop;
+    public Action<InventoryItemImage, int, UiArea> OnItemSkillLeftDrop;
+    public Action<InventoryItemImage, int, UiArea> OnItemSkillRightDrop;
 
     public GameObject itemTitle;
 
@@ -72,9 +88,11 @@ public class InventoryUI : MonoBehaviour
     {
         for (int i = 0; i < itemsPanel.transform.childCount; i++)
         {
-            if (itemsPanel.transform.GetChild(i).childCount == 0)
+            Transform slot = itemsPanel.transform.GetChild(i);
+            InventorySlot slotController = slot.GetComponent<InventorySlot>();
+            if (slotController.currentItem == null)
             {
-                return itemsPanel.transform.GetChild(i);
+                return slot;
             }
         }
         return null;
@@ -102,7 +120,8 @@ public class InventoryUI : MonoBehaviour
         return _rightWheel.transform.GetChild(index);
     }
 
-    public bool AddItem(ItemStack item)
+    //Finds an available slot and adds an item to that slot. If no available slots left, returns false, if successful returns true
+    public bool AddItem(ItemStack item, UiArea area)
     {
         Transform availableSlot;
         if (item.item is ItemSkill)
@@ -117,23 +136,22 @@ public class InventoryUI : MonoBehaviour
         {
             return false;
         }
-        GameObject newItem = CreateItemSlot(item, availableSlot);
+        GameObject newItem = AddItemToSlot(item, availableSlot, area);
         return true;
     }
 
+    //Goes through all slots and removes their items
     public void RemoveAllItems()
     {
         for (int i = 0; i < itemsPanel.transform.childCount; i++)
         {
-            if (itemsPanel.transform.GetChild(i).childCount != 0)
-            {
-                GameObject itemObject = itemsPanel.transform.GetChild(i).gameObject;
-                Destroy(itemObject);
-            }
+            Transform slot = itemsPanel.transform.GetChild(i);
+            RemoveItem(slot);
         }
     }
 
-    public bool RemoveItem(ItemStack item)
+    //Returns the slot where an item is. If the item is not found, returns null
+    public Transform FindItem(ItemStack item)
     {
         if (item.item is ItemSkill)
         {
@@ -141,16 +159,10 @@ public class InventoryUI : MonoBehaviour
             {
                 if (spellsPanel.transform.GetChild(i).childCount != 0)
                 {
-                    if (
-                        spellsPanel.transform
-                            .GetChild(i)
-                            .GetChild(0)
-                            .GetComponent<InventoryItemImage>()
-                            .currentItem == item
-                    )
+                    Transform slot = spellsPanel.transform.GetChild(i);
+                    if (slot.GetChild(0).GetComponent<InventoryItemImage>().currentItem == item)
                     {
-                        Destroy(spellsPanel.transform.GetChild(i).GetChild(0));
-                        return true;
+                        return slot;
                     }
                 }
             }
@@ -161,35 +173,62 @@ public class InventoryUI : MonoBehaviour
             {
                 if (itemsPanel.transform.GetChild(i).childCount != 0)
                 {
-                    if (
-                        itemsPanel.transform
-                            .GetChild(i)
-                            .GetChild(0)
-                            .GetComponent<InventoryItemImage>()
-                            .currentItem == item
-                    )
+                    Transform slot = itemsPanel.transform.GetChild(i);
+                    if (slot.GetChild(0).GetComponent<InventoryItemImage>().currentItem == item)
                     {
-                        Destroy(itemsPanel.transform.GetChild(i).GetChild(0));
-                        return true;
+                        return slot;
                     }
                 }
             }
         }
+        return null;
+    }
+
+    //Looks for an item and removes it from the slot
+    public bool RemoveItem(ItemStack item)
+    {
+        Transform slot = FindItem(item);
+        if (slot != null)
+        {
+            RemoveItem(slot);
+            return true;
+        }
         return false;
+    }
+
+    //Removes an item from the specified slot
+    public bool RemoveItem(Transform slot)
+    {
+        if (slot.childCount == 0)
+        {
+            InventorySlot slotController = slot.GetComponent<InventorySlot>();
+            if (slotController.currentItem != null)
+            {
+                slotController.currentItem = null;
+                return true;
+            }
+            return false;
+        }
+        Destroy(slot.GetChild(0).gameObject);
+        slot.GetComponent<InventorySlot>().currentItem = null;
+        return true;
     }
 
     public void SetLeftWheelSkills(List<ItemSkill> skills)
     {
         for (int i = 0; i < skills.Count; i++)
         {
+            Transform slot = GetLeftSkillSlot(i);
+            InventorySlot slotController = slot.GetComponent<InventorySlot>();
+            slotController.ClearSlot();
             if (skills[i] == null)
             {
                 continue;
             }
-            Transform slot = GetLeftSkillSlot(i);
+
             //Remove children
             ItemStack item = new ItemStack(skills[i], 1, null);
-            GameObject newItem = CreateItemSlot(item, slot);
+            GameObject newItem = AddItemToSlot(item, slot, UiArea.LeftWheel);
         }
     }
 
@@ -197,33 +236,34 @@ public class InventoryUI : MonoBehaviour
     {
         for (int i = 0; i < skills.Count; i++)
         {
+            Transform slot = GetRightSkillSlot(i);
+            InventorySlot slotController = slot.GetComponent<InventorySlot>();
+            slotController.ClearSlot();
             if (skills[i] == null)
             {
                 continue;
             }
-            Transform slot = GetRightSkillSlot(i);
             ItemStack item = new ItemStack(skills[i], 1, null);
-            GameObject newItem = CreateItemSlot(item, slot);
+            GameObject newItem = AddItemToSlot(item, slot, UiArea.RightWheel);
         }
     }
 
-    private GameObject CreateItemSlot(ItemStack ItemStack, Transform slot)
+    private GameObject AddItemToSlot(ItemStack itemStack, Transform slot, UiArea area)
     {
         InventorySlot invSlot = slot.GetComponent<InventorySlot>();
         if (invSlot.currentItem != null)
         {
-            RemoveItem(invSlot.currentItem);
+            RemoveItem(slot);
         }
         GameObject newItem = Instantiate(InventoryItemPrefab);
         newItem.transform.SetParent(slot, false);
         newItem.transform.localScale = Vector3.one;
-        newItem.GetComponentInChildren<Image>().sprite = ItemStack.item.Icon;
-        newItem.GetComponent<InventoryItemImage>().currentItem = ItemStack;
-        newItem
-            .GetComponent<InventoryItemImage>()
-            .itemAmountText.GetComponent<TextMeshProUGUI>()
-            .text = ItemStack.amount.ToString();
-        invSlot.currentItem = ItemStack;
+        newItem.GetComponentInChildren<Image>().sprite = itemStack.item.Icon;
+        InventoryItemImage itemImage = newItem.GetComponent<InventoryItemImage>();
+        itemImage.currentItem = itemStack;
+        itemImage.itemAmountText.GetComponent<TextMeshProUGUI>().text = itemStack.amount.ToString();
+        itemImage.UiArea = area;
+        invSlot.currentItem = itemStack;
         return newItem;
     }
 
@@ -241,5 +281,10 @@ public class InventoryUI : MonoBehaviour
     public GameObject RightWheel
     {
         get { return _rightWheel; }
+    }
+
+    public Player Player
+    {
+        get { return _player; }
     }
 }

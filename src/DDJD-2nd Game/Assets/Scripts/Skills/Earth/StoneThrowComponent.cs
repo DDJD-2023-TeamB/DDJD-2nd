@@ -27,7 +27,7 @@ public class StoneThrowComponent : ProjectileComponent, NonPushable
 
     protected override void OnImpact(Collider other, float multiplier = 1)
     {
-        if (_rb.velocity.magnitude < _velocityThreshold)
+        if (_damagedObjects.Count > 0 && _rb.velocity.magnitude < _velocityThreshold)
         {
             return;
         }

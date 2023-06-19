@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 
 public class EnemyAttackState : EnemyState
 {
@@ -9,6 +10,7 @@ public class EnemyAttackState : EnemyState
     {
         base.Enter();
         _context.NavMeshAgent.enabled = false;
+        _context.Animator.enabled = true;
         _context.Animator.SetBool("IsAiming", true);
         _context.Animator.SetFloat(_context.ForwardSpeedHash, 0);
         _context.Animator.SetFloat(_context.RightSpeedHash, 0);

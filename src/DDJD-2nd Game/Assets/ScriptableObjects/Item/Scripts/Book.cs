@@ -2,12 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName="Book", menuName = "Scriptable Objects/Items/Book")]
+[CreateAssetMenu(fileName = "Book", menuName = "Scriptable Objects/Items/Book")]
 public class Book : CollectibleObject
 {
-    // associado uma skill - ItemSkill
-    public override void Use(){
-        // TODO: verifica se existe a skill na lista do learnedSkills e adiciona se não tiver
-        Debug.Log("Using book");
+    [SerializeField]
+    private ItemSkill _itemSkill;
+
+    [SerializeField]
+    private FMODUnity.EventReference bookEvent;
+
+    private void Awake() { }
+
+    public override void Use(Player player)
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(bookEvent, player.transform.position);
+        if (!player.PlayerSkills.LearnedSkills.Contains(_itemSkill))
+        {
+            player.UIController.AddItem(new ItemStack(_itemSkill, 1), UiArea.Spells);
+            player.PlayerSkills.LearnedSkills.Add(_itemSkill);
+        }
+        player.Inventory.RemoveItem(this);
     }
 }

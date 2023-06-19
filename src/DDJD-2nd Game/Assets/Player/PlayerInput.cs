@@ -307,6 +307,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UsePotion"",
+                    ""type"": ""Button"",
+                    ""id"": ""1a3cd09e-b157-4484-a274-e1e2fad4c8e4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -406,6 +415,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ChangeActiveElement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a33f38c-c2a9-4aba-a704-f2bdd826b9c7"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UsePotion"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -552,6 +572,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Combat_MeleeAttack = m_Combat.FindAction("MeleeAttack", throwIfNotFound: true);
         m_Combat_AbsorbMana = m_Combat.FindAction("AbsorbMana", throwIfNotFound: true);
         m_Combat_ChangeActiveElement = m_Combat.FindAction("ChangeActiveElement", throwIfNotFound: true);
+        m_Combat_UsePotion = m_Combat.FindAction("UsePotion", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
@@ -763,6 +784,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Combat_MeleeAttack;
     private readonly InputAction m_Combat_AbsorbMana;
     private readonly InputAction m_Combat_ChangeActiveElement;
+    private readonly InputAction m_Combat_UsePotion;
     public struct CombatActions
     {
         private @PlayerInput m_Wrapper;
@@ -776,6 +798,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @MeleeAttack => m_Wrapper.m_Combat_MeleeAttack;
         public InputAction @AbsorbMana => m_Wrapper.m_Combat_AbsorbMana;
         public InputAction @ChangeActiveElement => m_Wrapper.m_Combat_ChangeActiveElement;
+        public InputAction @UsePotion => m_Wrapper.m_Combat_UsePotion;
         public InputActionMap Get() { return m_Wrapper.m_Combat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -812,6 +835,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @ChangeActiveElement.started += instance.OnChangeActiveElement;
             @ChangeActiveElement.performed += instance.OnChangeActiveElement;
             @ChangeActiveElement.canceled += instance.OnChangeActiveElement;
+            @UsePotion.started += instance.OnUsePotion;
+            @UsePotion.performed += instance.OnUsePotion;
+            @UsePotion.canceled += instance.OnUsePotion;
         }
 
         private void UnregisterCallbacks(ICombatActions instance)
@@ -843,6 +869,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @ChangeActiveElement.started -= instance.OnChangeActiveElement;
             @ChangeActiveElement.performed -= instance.OnChangeActiveElement;
             @ChangeActiveElement.canceled -= instance.OnChangeActiveElement;
+            @UsePotion.started -= instance.OnUsePotion;
+            @UsePotion.performed -= instance.OnUsePotion;
+            @UsePotion.canceled -= instance.OnUsePotion;
         }
 
         public void RemoveCallbacks(ICombatActions instance)
@@ -1000,6 +1029,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnMeleeAttack(InputAction.CallbackContext context);
         void OnAbsorbMana(InputAction.CallbackContext context);
         void OnChangeActiveElement(InputAction.CallbackContext context);
+        void OnUsePotion(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

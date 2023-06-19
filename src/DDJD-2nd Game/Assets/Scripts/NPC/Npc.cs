@@ -63,6 +63,7 @@ public class Npc : Interactable
                 {
                     _currentDialogueInfo = _currentMission.InteractionBegin.DialogueInfo;
                     _currentMission.Status = MissionState.Ongoing;
+                    _missionController.CheckIfAllGoalsAreCompleted(_currentMission);
                 }
             }
             else if (_currentMission.Status == MissionState.Completed)
