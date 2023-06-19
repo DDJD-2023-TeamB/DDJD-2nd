@@ -102,4 +102,9 @@ public class Npc : Interactable
     {
         HelpManager.Instance.SetHelpText("Press F to interact");
     }
+
+    public override bool IsInstant()
+    {
+        return false;
+    }
 }
