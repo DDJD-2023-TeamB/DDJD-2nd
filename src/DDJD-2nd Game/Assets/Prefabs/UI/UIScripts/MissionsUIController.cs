@@ -38,12 +38,12 @@ public class MissionsUIController : MonoBehaviour
         _missionController = _player.GetComponent<MissionController>();
         ColorUtility.TryParseHtmlString("#FED600", out highlightColor);
         ColorUtility.TryParseHtmlString("#737373", out completedColor);
-        loadActiveMissions();
-        setActiveMission(null);
+        LoadActiveMissions();
+        SetActiveMission(null);
         _missionController.SetMissionsUIController(this);
     }
 
-    void loadActiveMissions()
+    void LoadActiveMissions()
     {
         List<Mission> activeMissions = _missionController.GetAvailableAndOngoingMissions();
         foreach (Mission mission in activeMissions)
@@ -57,7 +57,7 @@ public class MissionsUIController : MonoBehaviour
 
     public void UpdateMissionsUI()
     {
-        loadActiveMissions();
+        LoadActiveMissions();
         foreach (Transform child in missionsContent.transform)
         {
             GameObject.Destroy(child.gameObject);
@@ -140,6 +140,10 @@ public class MissionsUIController : MonoBehaviour
                 1600,
                 160 + 40 * mission.Goals.Count
             );
+
+            if (mission.Status == MissionState.Available) // Don't display goals if before starting
+                continue;
+
             for (int j = 0; j < mission.Goals.Count; j++)
             {
                 var goal = mission.Goals[j];
@@ -178,41 +182,50 @@ public class MissionsUIController : MonoBehaviour
                 {
                     Debug.LogError("Invalid quest type!");
                 }
+
+                if (goal == mission.CurrentGoal)
+                    break;
             }
         }
         missionsContent.GetComponent<RectTransform>().sizeDelta = new Vector2(
             1600,
             170 * orderedGeneralMissions.Count + 40 * accumulatedQuests
         );
+
+        if (selectedMission != null)
+            UpdatedSelectedMission(selectedMission);
     }
 
-    public void setActiveMission(Mission mission)
+    public void SetActiveMission(Mission mission)
     {
         if (selectedMission == null && mission == null)
         {
             playingIndicatorTitle.GetComponent<TextMeshProUGUI>().text = "";
             playingIndicatorQuest.GetComponent<TextMeshProUGUI>().text = "";
         }
-        else if (selectedMission != null && mission == selectedMission || mission == null) //Deselect mission
+        // Deselect mission
+        else if (selectedMission != null && mission == selectedMission || mission == null)
         {
             selectedMission = null;
             playingIndicatorTitle.GetComponent<TextMeshProUGUI>().text = "";
             playingIndicatorQuest.GetComponent<TextMeshProUGUI>().text = "";
         }
-        else //Select new mission
+        else
         {
-            selectedMission = mission;
-            playingIndicatorTitle.GetComponent<TextMeshProUGUI>().text = selectedMission.Title;
-            foreach (var goal in selectedMission.Goals)
-            {
-                if (!goal.Completed)
-                {
-                    playingIndicatorQuest.GetComponent<TextMeshProUGUI>().text = goal.Description;
-                    break;
-                }
-            }
+            UpdatedSelectedMission(mission);
         }
         UpdateMissionsUI();
-        //Set active mission in game controller
+    }
+
+    private void UpdatedSelectedMission(Mission mission)
+    {
+        selectedMission = mission;
+        playingIndicatorTitle.GetComponent<TextMeshProUGUI>().text = selectedMission.Title;
+        if (selectedMission.CurrentGoal != null && selectedMission.Status == MissionState.Ongoing)
+        {
+            playingIndicatorQuest.GetComponent<TextMeshProUGUI>().text = selectedMission
+                .CurrentGoal
+                .Description;
+        }
     }
 }

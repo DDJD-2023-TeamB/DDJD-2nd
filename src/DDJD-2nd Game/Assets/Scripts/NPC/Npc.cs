@@ -56,6 +56,8 @@ public class Npc : Interactable
                 {
                     _currentDialogueInfo = _currentMission.InteractionBegin.DialogueInfo;
                     _currentMission.Status = MissionState.Ongoing;
+                    _currentMission.CurrentGoal.OnGoalStarted?.Invoke(); // TODO check if interaction begin is mandatory
+                    _missionController.MissionsUIController.UpdateMissionsUI();
                     _missionController.CheckIfAllGoalsAreCompleted(_currentMission);
                 }
             }
