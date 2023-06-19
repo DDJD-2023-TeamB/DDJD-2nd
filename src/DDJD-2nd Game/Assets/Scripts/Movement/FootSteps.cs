@@ -10,6 +10,9 @@ public class FootSteps : MonoBehaviour
     private static Dictionary<Terrain, TerrainTypes> _terrainTypes =
         new Dictionary<Terrain, TerrainTypes>();
 
+    private static Dictionary<Terrain, float[,,]> _terrainTextureMaps =
+        new Dictionary<Terrain, float[,,]>();
+
     private Terrain _terrain;
 
     public float[] _textureValues = new float[8];
@@ -53,6 +56,13 @@ public class FootSteps : MonoBehaviour
             {
                 //Add the terrain to the hashmap
                 _terrainTypes.Add(terrain, terrain.GetComponent<TerrainTypes>());
+                float[,,] alphaMap = terrain.terrainData.GetAlphamaps(
+                    0,
+                    0,
+                    terrain.terrainData.alphamapWidth,
+                    terrain.terrainData.alphamapHeight
+                );
+                _terrainTextureMaps.Add(terrain, alphaMap);
             }
         }
     }
@@ -96,14 +106,14 @@ public class FootSteps : MonoBehaviour
             _soundEmitter.SetParameterWithLabel("footstep", _floorTypeParameterId, "stone", false);
             return;
         }
-        ConvertPosition(transform.position);
+        ConvertPositionToMap(transform.position);
 
         CheckTexture();
     }
 
-    void ConvertPosition(Vector3 playerPosition)
+    void ConvertPositionToMap(Vector3 position)
     {
-        Vector3 terrainPosition = playerPosition - _terrain.transform.position;
+        Vector3 terrainPosition = position - _terrain.transform.position;
         Vector3 mapPosition = new Vector3(
             terrainPosition.x / _terrain.terrainData.size.x,
             0,
@@ -117,11 +127,11 @@ public class FootSteps : MonoBehaviour
 
     void CheckTexture()
     {
-        float[,,] aMap = _terrain.terrainData.GetAlphamaps(_posX, _posZ, 1, 1);
+        float[,,] aMap = _terrainTextureMaps[_terrain];
 
         for (int i = 0; i < _terrainTypes[_terrain].GetCount(); i++)
         {
-            if (aMap[0, 0, i] > 0.5f)
+            if (aMap[_posZ, _posX, i] > 0.5f)
             {
                 _floorType = _terrainTypes[_terrain].GetFloorType(i);
                 _soundEmitter.SetParameterWithLabel(
