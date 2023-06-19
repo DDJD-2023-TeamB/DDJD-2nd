@@ -58,7 +58,7 @@ public class Tornado : GroundProjectileComponent, NonCollidable
 
     public void Start()
     {
-        _sfxStateId = _soundEmitter.GetParameterId("tornado", "Tornado");
+        _sfxStateId = _soundEmitter.GetParameterId("tornado", "Tornado State");
         _sfxTornadoIntensityId = _soundEmitter.GetParameterId("tornado", "TornadoIntensity");
     }
 
@@ -91,11 +91,7 @@ public class Tornado : GroundProjectileComponent, NonCollidable
         transform.position = newPosition;
     }
 
-    private void OnChargeComplete()
-    {
-        _soundEmitter.Stop("tornado");
-        _soundEmitter.SetParameterWithLabel("tornado", _sfxStateId, "Iddle", true);
-    }
+    private void OnChargeComplete() { }
 
     private void StopGeneratingTornado()
     {
@@ -126,15 +122,8 @@ public class Tornado : GroundProjectileComponent, NonCollidable
         _rotationStrength = 50f * _chargeComponent.GetCurrentCharge();
         StartCoroutine(DestroyTornado());
 
-        _soundEmitter.Stop("tornado");
-        _soundEmitter.SetParameterWithLabel("tornado", _sfxStateId, "Release", true);
-        _soundEmitter.CallWithDelay(
-            () =>
-            {
-                _soundEmitter.SetParameterWithLabel("tornado", _sfxStateId, "Iddle", false);
-            },
-            0.05f
-        );
+        _soundEmitter.SetParameter("tornado", _sfxStateId, 1);
+        _soundEmitter.Play("idle");
     }
 
     public override void DestroySpell()

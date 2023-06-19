@@ -109,6 +109,23 @@ public class SoundEmitter : MonoBehaviour
         }
     }
 
+    public void SetParameter(
+        string eventName,
+        FMOD.Studio.PARAMETER_ID id,
+        int value,
+        bool start = false
+    )
+    {
+        if (_eventInstances.ContainsKey(eventName))
+        {
+            _eventInstances[eventName].setParameterByID(id, value);
+            if (start)
+            {
+                _eventInstances[eventName].start();
+            }
+        }
+    }
+
     public void SetParameterWithLabel(
         string eventName,
         FMOD.Studio.PARAMETER_ID id,

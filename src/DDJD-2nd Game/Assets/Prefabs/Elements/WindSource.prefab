@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5372623737851772761}
   - component: {fileID: 5372623737851772762}
   - component: {fileID: 5372623737851772763}
+  - component: {fileID: 6397479265624511784}
   m_Layer: 11
   m_Name: WindSource
   m_TagString: Untagged
@@ -140,3 +141,29 @@ MonoBehaviour:
   _element: {fileID: 11400000, guid: 4f1fc44ed51339b4195c6001521bf9e3, type: 2}
   _tranferVfxPrefab: {fileID: 7750416118139562240, guid: 15f4cb9290c967d47b704324e9dccafa,
     type: 3}
+--- !u!114 &6397479265624511784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5372623737851772764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - absorb
+    _values:
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 0
+      _eventReference:
+        Guid:
+          Data1: 798389812
+          Data2: 1315678366
+          Data3: -1706686826
+          Data4: 632453420
+        Path: event:/Attacks/Wind Abilities/Wind Charge

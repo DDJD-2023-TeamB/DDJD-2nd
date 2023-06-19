@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1545053578822132858}
   - component: {fileID: 1545053578822132859}
   - component: {fileID: 1545053578822132852}
+  - component: {fileID: 1393650417178360011}
   m_Layer: 11
   m_Name: EarthSource
   m_TagString: Untagged
@@ -140,3 +141,29 @@ MonoBehaviour:
   _element: {fileID: 11400000, guid: d9da0c3870700374389d976c0d2388a7, type: 2}
   _tranferVfxPrefab: {fileID: 6801749387470551015, guid: e2be691e91da792489eb6773ae86b503,
     type: 3}
+--- !u!114 &1393650417178360011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545053578822132853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - absorb
+    _values:
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 0
+      _eventReference:
+        Guid:
+          Data1: -1916989278
+          Data2: 1190697607
+          Data3: 1311198889
+          Data4: 1112510269
+        Path: event:/Attacks/Earth Abilities/Earth Charge

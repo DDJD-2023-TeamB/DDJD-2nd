@@ -9,6 +9,13 @@ public class RangedAttackState : EnemyAttackState
     private int _attackTries = 0;
     private int _maxAttackTries = 3;
 
+    private int _maxAttacksInRow;
+    private int _currentAttackInRow = 0;
+
+    private int _currentShots = 0;
+
+    private bool _stopAimingAtExit;
+
     public RangedAttackState(RangedEnemy enemy)
         : base(enemy)
     {
@@ -25,20 +32,33 @@ public class RangedAttackState : EnemyAttackState
         _context.Animator.SetBool("IsAiming", true);
         _context.AimComponent.StartAim();
         _attackCoroutine = _context.StartCoroutine(AttackCoroutine());
+        _context.Shooter.OnShoot += OnShoot;
         _attackTries = 0;
+        _currentAttackInRow = 0;
+        _currentShots = 0;
+        _maxAttacksInRow = Random.Range(
+            _context.EnemySkills.MinAttacksInRow,
+            _context.EnemySkills.MaxAttacksInRow
+        );
+        _stopAimingAtExit = true;
     }
 
     public override void Exit()
     {
         base.Exit();
-        _context.Animator.SetBool("IsAiming", false);
-        _context.AimComponent.StopAim();
+
+        _context.Animator.SetBool("IsAiming", !_stopAimingAtExit);
+        if (_stopAimingAtExit)
+        {
+            _context.AimComponent.StopAim();
+        }
         if (_attackCoroutine != null)
         {
             _context.StopCoroutine(_attackCoroutine);
         }
 
         _context.Shooter.CancelShots();
+        _context.Shooter.OnShoot -= OnShoot;
     }
 
     public override void StateUpdate()
@@ -66,8 +86,13 @@ public class RangedAttackState : EnemyAttackState
         bool canAttack = _context.Shooter.ChooseSpellToUse(out aimedSkill, out origin, out isLeft);
         if (canAttack)
         {
+            if (_currentAttackInRow >= _maxAttacksInRow)
+            {
+                return;
+            }
             _context.Shooter.Shoot(aimedSkill, origin, isLeft);
             _attackTries = 0;
+            _currentAttackInRow++;
         }
         else
         {
@@ -89,5 +114,38 @@ public class RangedAttackState : EnemyAttackState
             rotation,
             Time.deltaTime * 7.5f
         );
+    }
+
+    private void OnShoot()
+    {
+        _currentShots++;
+        if (_currentShots >= _maxAttacksInRow)
+        {
+            //End 'combo'
+            _currentShots = 0;
+            _currentAttackInRow = 0;
+            _maxAttacksInRow = Random.Range(
+                _context.EnemySkills.MinAttacksInRow,
+                _context.EnemySkills.MaxAttacksInRow
+            );
+            int random = Random.Range(0, 100);
+            if (random > 75)
+            {
+                _context.ChangeState(new RangedRepositionState(_context, Random.Range(2.5f, 4.5f)));
+            }
+            else
+            {
+                _stopAimingAtExit = false;
+                _context.ChangeState(
+                    new EnemyWaitState(
+                        _context,
+                        Random.Range(
+                            _context.EnemySkills.MinAttackComboCooldown,
+                            _context.EnemySkills.MaxAttackComboCooldown
+                        )
+                    )
+                );
+            }
+        }
     }
 }

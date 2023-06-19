@@ -4,8 +4,8 @@ using System.Collections;
 
 public class EnemyRandomPatrolState : EnemyIdleState
 {
-    private float _previousSpeed;
     private Coroutine _samplePositionCoroutine;
+    private Coroutine _checkSpeedCoroutine;
 
     public EnemyRandomPatrolState(BasicEnemy enemy)
         : base(enemy) { }
@@ -15,19 +15,24 @@ public class EnemyRandomPatrolState : EnemyIdleState
         base.Enter();
         _context.NavMeshAgent.enabled = true;
         _context.Rigidbody.isKinematic = true;
-        _previousSpeed = _context.NavMeshAgent.speed;
-        _context.NavMeshAgent.speed = _previousSpeed / 4.0f;
+
+        _context.NavMeshAgent.speed = _context.EnemySkills.Speed / 4.0f;
+        _checkSpeedCoroutine = _context.StartCoroutine(UpdateSpeed());
         GoToRandom();
     }
 
     public override void Exit()
     {
         base.Exit();
-        _context.NavMeshAgent.speed = _previousSpeed;
         if (_samplePositionCoroutine != null)
         {
             _context.StopCoroutine(_samplePositionCoroutine);
         }
+        if (_checkSpeedCoroutine != null)
+        {
+            _context.StopCoroutine(_checkSpeedCoroutine);
+        }
+        _context.NavMeshAgent.speed = _context.EnemySkills.Speed;
     }
 
     public override void StateUpdate()
@@ -35,7 +40,7 @@ public class EnemyRandomPatrolState : EnemyIdleState
         base.StateUpdate();
         _context.Animator.SetFloat(
             _context.ForwardSpeedHash,
-            _context.NavMeshAgent.velocity.magnitude / _previousSpeed
+            _context.NavMeshAgent.velocity.magnitude / _context.EnemySkills.Speed
         );
         if (_context.NavMeshAgent.remainingDistance < 0.5f)
         {
@@ -62,5 +67,14 @@ public class EnemyRandomPatrolState : EnemyIdleState
         yield return new WaitForSeconds(Random.Range(1.0f, 5.0f));
         GoToRandom();
         _samplePositionCoroutine = null;
+    }
+
+    private IEnumerator UpdateSpeed()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1.0f);
+            _context.NavMeshAgent.speed = _context.EnemySkills.Speed / 4.0f;
+        }
     }
 }

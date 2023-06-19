@@ -181,6 +181,8 @@ public class Player : StateContext, Damageable
 
     private FootSteps _footsteps;
 
+    private PlayerAirborneComponent _airborneComponent;
+
     void Awake()
     {
         _inputReceiver = GetComponent<PlayerInputReceiver>();
@@ -204,6 +206,7 @@ public class Player : StateContext, Damageable
         _gameUI = _uiController.PlayerUI.playingUI;
         _timeController = GetComponent<TimeController>();
         _footsteps = GetComponent<FootSteps>();
+        _airborneComponent = GetComponent<PlayerAirborneComponent>();
         ChangeState(_factory.Playable());
     }
 
@@ -306,5 +309,10 @@ public class Player : StateContext, Damageable
     public FootSteps Footsteps
     {
         get { return _footsteps; }
+    }
+
+    public PlayerAirborneComponent AirborneComponent
+    {
+        get { return _airborneComponent; }
     }
 }

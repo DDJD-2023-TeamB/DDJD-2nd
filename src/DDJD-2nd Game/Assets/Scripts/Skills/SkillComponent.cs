@@ -221,4 +221,9 @@ public abstract class SkillComponent : MonoBehaviour
     {
         get { return _skill; }
     }
+
+    public ChargeComponent ChargeComponent
+    {
+        get { return _chargeComponent; }
+    }
 }

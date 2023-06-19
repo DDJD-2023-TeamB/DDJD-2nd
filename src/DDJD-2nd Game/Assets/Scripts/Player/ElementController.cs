@@ -58,6 +58,15 @@ public class ElementController : MonoBehaviour
         return false;
     }
 
+    public void PrepareTransfer()
+    {
+        if (_sourceToAbsorb == null)
+        {
+            return;
+        }
+        _sourceToAbsorb.PrepareTransfer(_player);
+    }
+
     public void StartAbsorb()
     {
         if (_sourceToAbsorb == null)

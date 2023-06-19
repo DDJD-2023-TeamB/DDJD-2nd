@@ -57,7 +57,7 @@ public class ChunkLoader : MonoBehaviour
         }
         else
         {
-            Debug.Log("Failed to load asset");
+            Debug.LogError("Failed to load asset");
         }
         this._loading = false;
     }

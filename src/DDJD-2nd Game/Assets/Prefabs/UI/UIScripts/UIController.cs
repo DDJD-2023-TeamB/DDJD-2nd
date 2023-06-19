@@ -35,6 +35,9 @@ public class UIController : MonoBehaviour
 
     public GameObject currentItemTitle;
 
+    [SerializeField]
+    private FMODUnity.EventReference _dragEvent;
+
     private void Awake()
     {
         _player = GetComponent<Player>();
@@ -46,11 +49,12 @@ public class UIController : MonoBehaviour
         _playerUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
         _playerUI.inventoryUI.gameObject.SetActive(false);
         _playerUI.menuUI.SetActive(false);
-        //_playerUI.leftSpellWheel.gameObject.SetActive(false);
-        //_playerUI.rightSpellWheel.gameObject.SetActive(false);
         _playerUI.missionsUI.SetActive(false);
         _playerUI.activeElementWheel.SetActive(false);
         _playerUI.OptionsUI.SetUIController(this);
+
+        OpenLeftSpell(false);
+        OpenRightSpell(false);
 
         InventoryUI inventoryUI = _playerUI.inventoryUI;
         inventoryUI.OnItemSkillLeftDrop += ChangeLeftWheelItem;
@@ -83,6 +87,10 @@ public class UIController : MonoBehaviour
         currentMenu = "menu";
         _playerUI.menuUI.SetActive(isOpening);
         _playerUI.playingUI.gameObject.SetActive(!isOpening);
+        if (!isOpening)
+        {
+            _playerUI.OptionsUI.gameObject.SetActive(false);
+        }
     }
 
     public void OpenOptions(bool isOpening)
@@ -225,12 +233,12 @@ public class UIController : MonoBehaviour
     {
         if (!(image.currentItem.item is ItemSkill))
         {
-            Debug.Log("Is not itemskill");
+            Debug.LogError("Item is not itemskill");
             return;
         }
         if (area != UiArea.Spells)
         {
-            //Remove item from it's previous position
+            // Remove item from it's previous position
             if (area == UiArea.LeftWheel)
             {
                 RemoveFromWheel(image.currentItem, true);
@@ -241,15 +249,16 @@ public class UIController : MonoBehaviour
                 RemoveFromWheel(image.currentItem, true);
                 Destroy(image.gameObject);
             }
+
+            FMODUnity.RuntimeManager.PlayOneShot(_dragEvent);
         }
-        //ItemSkill itemSkill = (ItemSkill)itemStack.item;
     }
 
     public void ChangeLeftWheelItem(InventoryItemImage image, int slot, UiArea area)
     {
         if (!(image.currentItem.item is ItemSkill))
         {
-            Debug.Log("Is not itemskill");
+            Debug.LogError("Item is not itemskill");
             return;
         }
         ItemSkill itemSkill = (ItemSkill)image.currentItem.item;
@@ -257,13 +266,14 @@ public class UIController : MonoBehaviour
         _player.PlayerSkills.EquippedLeftSkills[slot] = itemSkill;
         UpdateSpellWheels();
         _playerUI.inventoryUI.SetLeftWheelSkills(new List<ItemSkill>(leftWheelItems));
+        FMODUnity.RuntimeManager.PlayOneShot(_dragEvent);
     }
 
     public void ChangeRightWheelItem(InventoryItemImage image, int slot, UiArea area)
     {
         if (!(image.currentItem.item is ItemSkill))
         {
-            Debug.Log("Is not itemskill");
+            Debug.LogError("Item is not itemskill");
             return;
         }
         ItemSkill itemSkill = (ItemSkill)image.currentItem.item;
@@ -271,6 +281,7 @@ public class UIController : MonoBehaviour
         _player.PlayerSkills.EquippedRightSkills[slot] = itemSkill;
         UpdateSpellWheels();
         _playerUI.inventoryUI.SetRightWheelSkills(new List<ItemSkill>(rightWheelItems));
+        FMODUnity.RuntimeManager.PlayOneShot(_dragEvent);
     }
 
     public void LoadSpells()

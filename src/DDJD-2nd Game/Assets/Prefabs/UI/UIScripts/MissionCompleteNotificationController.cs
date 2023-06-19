@@ -9,9 +9,14 @@ public class MissionCompleteNotificationController : MonoBehaviour
     private DateTime startTime;
     private bool animationActive = false;
 
-    [SerializeField] private float entryExitDuration = 0.5f;
-    [SerializeField] private float displayDuration = 4f;
-    [SerializeField] private TextMeshProUGUI missionTitleComponent;
+    [SerializeField]
+    private float entryExitDuration = 0.5f;
+
+    [SerializeField]
+    private float displayDuration = 4f;
+
+    [SerializeField]
+    private TextMeshProUGUI missionTitleComponent;
 
     private RectTransform rectTransform;
 
@@ -19,6 +24,7 @@ public class MissionCompleteNotificationController : MonoBehaviour
     {
         rectTransform = GetComponent<RectTransform>();
     }
+
     public void StartAnimation(string missionTitle)
     {
         missionTitleComponent.text = missionTitle;
@@ -41,15 +47,29 @@ public class MissionCompleteNotificationController : MonoBehaviour
         {
             TimeSpan delta = DateTime.Now - startTime;
             int deltaMillis = delta.Milliseconds + delta.Seconds * 1000;
-            if (deltaMillis < entryExitDuration * 1000f) {
-                rectTransform.anchoredPosition = new Vector3(-620 * (1- (float)deltaMillis / (entryExitDuration*1000)),-250,0);
-            }else if (deltaMillis < (entryExitDuration+displayDuration) * 1000)
+            if (deltaMillis < entryExitDuration * 1000f)
+            {
+                rectTransform.anchoredPosition = new Vector3(
+                    -620 * (1 - (float)deltaMillis / (entryExitDuration * 1000)),
+                    -250,
+                    0
+                );
+            }
+            else if (deltaMillis < (entryExitDuration + displayDuration) * 1000)
             {
                 rectTransform.anchoredPosition = new Vector3(0, -250, 0);
             }
-            else if(deltaMillis < (displayDuration+2*entryExitDuration) * 1000)
+            else if (deltaMillis < (displayDuration + 2 * entryExitDuration) * 1000)
             {
-                rectTransform.anchoredPosition = new Vector3(-620 * ((float)(deltaMillis - (entryExitDuration+displayDuration)*1000) / (entryExitDuration * 1000)), -250, 0);
+                rectTransform.anchoredPosition = new Vector3(
+                    -620
+                        * (
+                            (float)(deltaMillis - (entryExitDuration + displayDuration) * 1000)
+                            / (entryExitDuration * 1000)
+                        ),
+                    -250,
+                    0
+                );
             }
             else
             {
