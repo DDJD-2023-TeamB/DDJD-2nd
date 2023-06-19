@@ -6,7 +6,6 @@ using TMPro;
 public abstract class Interactable : MonoBehaviour
 {
     private TextMeshProUGUI _helpText;
-    //private GameObject object;
     protected Player _player;
 
     protected MissionController _missionController;
@@ -41,7 +40,6 @@ public abstract class Interactable : MonoBehaviour
 
         HelpManager.Instance.SetHelpText("");
         EndInteract();
-        Debug.Log("Leaving");
     }
 
     private void Approach(){

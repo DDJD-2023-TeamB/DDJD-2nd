@@ -58,19 +58,6 @@ public class PlayableState : GenericState
         }
     }
 
-    // private void ChangeTutorial() {
-    //     if (
-    //         _context.Input.IsInteracting
-    //         && (_substate is InteractingState)
-    //         && !(_substate is TutorialState)
-    //         && _context.InteractedObject == null
-    //         && _context.Input.IsExitingInteraction
-    //     )
-    //     {
-    //         ChangeSubState(_context.Factory.Tutorial(this));
-    //     }
-    // }
-
     private void CheckAiming()
     {
         if (_context.Input.IsAiming && !(_substate is AimingState))

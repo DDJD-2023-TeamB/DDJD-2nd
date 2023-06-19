@@ -91,6 +91,7 @@ public class Npc : Interactable
         {
             if (_currentMission && _currentMission.Status == MissionState.Ongoing) {
                 EndFullInteraction(false);
+                //_currentMission.InteractionBegin.OnEndInteraction.Invoke();
                 CheckTutorial();
             }
             else EndFullInteraction(true);
@@ -102,7 +103,7 @@ public class Npc : Interactable
         }
     }
 
-    private void CheckTutorial()
+    public void CheckTutorial()
     {
         _tutorial = true;
         _player.UIController.OpenTutorial(true);
