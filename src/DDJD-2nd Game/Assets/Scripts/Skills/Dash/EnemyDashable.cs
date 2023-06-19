@@ -33,7 +33,9 @@ public class EnemyDashable : Dashable
     private IEnumerator DashReadyCoroutine(DashStats stats)
     {
         _dashReady = false;
-        yield return new WaitForSeconds(stats.Duration + 0.5f);
+        yield return new WaitForSeconds(stats.Duration);
+        StartCoroutine(SmoothlyChangeMaxSpeed(GetRegularSpeed(), true));
+        yield return new WaitForSeconds(0.5f);
         OnDashFinish?.Invoke();
         yield return new WaitForSeconds(3.0f);
         _dashReady = true;
@@ -42,5 +44,16 @@ public class EnemyDashable : Dashable
     public bool IsDashReady()
     {
         return _dashReady;
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        Vector3 flatVel = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
+        if (flatVel.magnitude > _maxSpeed)
+        {
+            Vector3 limitedVel = flatVel.normalized * _maxSpeed;
+            _rigidbody.velocity = new Vector3(limitedVel.x, _rigidbody.velocity.y, limitedVel.z);
+        }
     }
 }

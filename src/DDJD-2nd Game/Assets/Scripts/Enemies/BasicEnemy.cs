@@ -57,6 +57,7 @@ public class BasicEnemy : HumanoidEnemy
     {
         _enemySkills = enemySkills;
         _navMeshAgent.speed = _enemySkills.Speed;
+        _status.MaxHealth = _enemySkills.Health;
         _status.Health = _enemySkills.Health;
         _states = new EnemyStates(
             chaseState: (EnemyChaseState)
