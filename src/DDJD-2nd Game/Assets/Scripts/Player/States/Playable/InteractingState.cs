@@ -37,8 +37,6 @@ public class InteractingState : GenericState
     public override void StateUpdate()
     {
         Interactable objt = _context.InteractedObject;
-        Debug.Log("InteractingState");
-        Debug.Log(_context.Input.IsExitingInteraction);
         if (_context.Input.IsContinueReading && objt is Npc)
         {
             Npc npc = (Npc)objt;
@@ -46,6 +44,7 @@ public class InteractingState : GenericState
         }
         if (_context.Input.IsExitingInteraction && objt is Npc)
         {
+            Debug.Log("Exiting Interaction");
             Npc npc = (Npc)objt;
             npc.ExitInteraction();
         }

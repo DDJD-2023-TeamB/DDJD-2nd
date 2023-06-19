@@ -53,7 +53,6 @@ public class MissionController : MonoBehaviour
                     {
                         if (interactGoal.NpcToInteract == npc)
                         {
-                            Debug.Log("SAME");
                             goal._completed = true;
                             Debug.Log("Interact Goal Completed");
                         }

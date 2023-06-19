@@ -66,12 +66,10 @@ public class Npc : Interactable
             {
                 if (_npc == _currentMission.InteractionBegin.Npc)
                     _currentDialogueInfo = _npc.DefaultDialogueInfo;
-                //_currentDialogueInfo = _currentMission.InteractionEnd.DialogueInfo; 
                 if (_missions.Count > 0)
                 {
                     _currentMission = _missions.Dequeue();
                     _currentTutorial = (Tutorial)AssetDatabase.LoadAssetAtPath("Assets/ScriptableObjects/Mission/Tutorial/" + _currentMission.Tutorial + ".asset", typeof(Tutorial));
-
                 }
                 else
                 {
@@ -91,11 +89,11 @@ public class Npc : Interactable
             _dialogue.DisplayNextSentence();
         else if (_dialogue.CheckIfDialogueEnded() && !_tutorial)
         {
-            _dialogue.EndDialogue();
-            _animator.SetInteger("Idle Index", Random.Range(0, 5));
-            _animator.SetTrigger("Idle");
-            if (_currentMission && _currentMission.Status == MissionState.Ongoing) CheckTutorial();
-            else EndInteract();
+            if (_currentMission && _currentMission.Status == MissionState.Ongoing) {
+                EndFullInteraction(false);
+                CheckTutorial();
+            }
+            else EndFullInteraction(true);
         } 
         else if (_dialogue.CheckIfDialogueEnded() && _tutorial)
         {
@@ -113,18 +111,23 @@ public class Npc : Interactable
 
     public void ExitInteraction()
     {
-        _dialogue.EndDialogue();
-        _animator.SetInteger("Idle Index", Random.Range(0, 5));
-        _animator.SetTrigger("Idle");
-        EndInteract();
         if (_tutorial) {
             _tutorial = false;
             _player.UIController.OpenTutorial(false);
         }
+        EndFullInteraction(true);
+    }
+
+    private void EndFullInteraction(bool endFullInteraction)
+    {
+        if (endFullInteraction) base.EndInteract();
+        EndInteract();
     }
 
     public override void EndInteract()
     {
-        base.EndInteract();
+        _dialogue.EndDialogue();
+        _animator.SetInteger("Idle Index", Random.Range(0, 5));
+        _animator.SetTrigger("Idle");
     }
 }
