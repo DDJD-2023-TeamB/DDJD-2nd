@@ -30,7 +30,7 @@ public class MissionSelectionScript : MonoBehaviour, IPointerClickHandler
         rectTransform = newIndicator.GetComponent<RectTransform>();
         if(rectTransform == null)
         {
-            Debug.Log("Rect transform is null!");
+            Debug.LogError("Rect transform is null!");
         }
     }
 
@@ -44,7 +44,6 @@ public class MissionSelectionScript : MonoBehaviour, IPointerClickHandler
         {
             float textWidth = missionTitle.preferredWidth;
             rectTransform.anchoredPosition = new Vector3(textWidth,0,0);
-            Debug.Log("Setting mission as active: " + rectTransform.anchoredPosition);
             newIndicator.SetActive(true);
         }
         else

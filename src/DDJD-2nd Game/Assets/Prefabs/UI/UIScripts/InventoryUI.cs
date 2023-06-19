@@ -209,7 +209,6 @@ public class InventoryUI : MonoBehaviour
             }
             return false;
         }
-        //Debug.Log("Deleting: " + slot.name + " with count " + slot.childCount);
         Destroy(slot.GetChild(0).gameObject);
         slot.GetComponent<InventorySlot>().currentItem = null;
         return true;

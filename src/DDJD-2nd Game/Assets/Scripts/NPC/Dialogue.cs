@@ -38,7 +38,6 @@ public class Dialogue : MonoBehaviour
         {
             _sentences.Enqueue(sentence);
         }
-        Debug.Log("StartDialogue " + _sentences.Count);
         _dialogueInfo = dialogueInfo;
         DisplayNextSentence();
     }
