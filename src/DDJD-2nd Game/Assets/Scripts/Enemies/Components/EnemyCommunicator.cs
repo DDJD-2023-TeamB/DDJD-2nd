@@ -82,9 +82,19 @@ public class EnemyCommunicator : MonoBehaviour
             EnemyCommunicator communicator = collider.GetComponent<EnemyCommunicator>();
             float timeToWait =
                 Vector3.Distance(transform.position, collider.transform.position) / 10.0f;
+            StartCoroutine(SendMessageToEnemy(message, communicator, timeToWait));
             yield return new WaitForSeconds(timeToWait);
-            communicator?.ReceiveMessage(message);
         }
+    }
+
+    public IEnumerator SendMessageToEnemy(
+        EnemyMessage message,
+        EnemyCommunicator communicator,
+        float timeToWait
+    )
+    {
+        yield return new WaitForSeconds(timeToWait);
+        communicator?.ReceiveMessage(message);
     }
 
     public void SendMessage(GameObject enemy, EnemyMessage message)

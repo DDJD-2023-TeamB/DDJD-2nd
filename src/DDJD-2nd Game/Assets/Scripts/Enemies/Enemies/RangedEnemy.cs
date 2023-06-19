@@ -18,11 +18,6 @@ public class RangedEnemy : BasicEnemy
         base.Awake();
         _shooter = GetComponent<EnemyShooter>();
         _aimComponent = GetComponent<EnemyAimComponent>();
-        _states = new EnemyStates(
-            chaseState: new EnemySimpleMovementState(this),
-            attackState: new RangedAttackState(this),
-            idleState: new EnemyRandomPatrolState(this)
-        );
     }
 
     public EnemyShooter Shooter
