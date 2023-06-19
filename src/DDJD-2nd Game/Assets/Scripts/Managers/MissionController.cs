@@ -17,10 +17,12 @@ public class MissionController : MonoBehaviour
     private GameState _gameState;
 
     private Player _player;
+    private UIController _uiController;
 
     void Start()
     {
         _player = GetComponent<Player>();
+        _uiController = GetComponent<UIController>();
         _unblockedMissions = _gameState.UnblockedMissions;
         Instance = this;
         ActivateMissions();
@@ -115,6 +117,7 @@ public class MissionController : MonoBehaviour
     private void HandleMissionComplete(Mission mission)
     {
         mission.Status = MissionState.Completed;
+        _uiController.showCompleteMissionText(mission.Title);
         GiveReward(mission);
         _unblockedMissions.Remove(mission);
         _gameState.FinishedMissions.Add(mission);

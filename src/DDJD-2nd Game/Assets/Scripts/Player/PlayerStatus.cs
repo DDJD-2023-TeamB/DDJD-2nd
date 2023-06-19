@@ -57,4 +57,9 @@ public class PlayerStatus : CharacterStatus
         UpdateMana(element);
     }
 
+    public override void RestoreHealth(int healthQuantity)
+    {
+        base.RestoreHealth(healthQuantity);
+        _player.UIController.UpdateHealth(_health, _maxHealth);
+    }
 }
