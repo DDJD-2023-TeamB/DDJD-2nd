@@ -167,6 +167,8 @@ public class Player : StateContext, Damageable
     {
         get { return _sfxJumpIntensityId; }
     }
+
+    private FMOD.Studio.PARAMETER_ID _sfxRunStateId;
     private CharacterStatus _characterStatus;
     public CharacterStatus CharacterStatus
     {
@@ -215,6 +217,7 @@ public class Player : StateContext, Damageable
         UpdateElement(_playerSkills.CurrentElement);
         _sfxJumpStateId = _soundEmitter.GetParameterId("jump", "Jump State");
         _sfxJumpIntensityId = _soundEmitter.GetParameterId("jump", "Jump Intensity");
+        _sfxRunStateId = _soundEmitter.GetParameterId("run", "Run State");
         _inputReceiver.OnPrintState += () => _state?.PrintState();
         _defaultMaterial = _collider.material;
     }
@@ -314,5 +317,10 @@ public class Player : StateContext, Damageable
     public PlayerAirborneComponent AirborneComponent
     {
         get { return _airborneComponent; }
+    }
+
+    public FMOD.Studio.PARAMETER_ID SfxRunStateId
+    {
+        get { return _sfxRunStateId; }
     }
 }

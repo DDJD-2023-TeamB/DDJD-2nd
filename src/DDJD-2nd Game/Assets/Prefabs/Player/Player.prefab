@@ -3850,6 +3850,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorType: Wood
+  _textureValues:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
 --- !u!114 &4346819917323664300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3867,6 +3876,7 @@ MonoBehaviour:
     - footstep
     - jump
     - air
+    - run
     _values:
     - _playOnStart: 0
       _stopOnDestroy: 0
@@ -3898,6 +3908,16 @@ MonoBehaviour:
           Data3: 386926774
           Data4: 1921847288
         Path: event:/Movement/Air
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: 91998083
+          Data2: 1195884030
+          Data3: -323325019
+          Data4: -1583625905
+        Path: event:/Movement/Running
 --- !u!114 &7961308323444105709
 MonoBehaviour:
   m_ObjectHideFlags: 0
