@@ -19,6 +19,8 @@ public class Npc : Interactable
     private Mission _currentMission;
 
     private Tutorial _currentTutorial;
+
+    // se tutorial está aberto ou não 
     private bool _tutorial = false;
 
     protected override void Start()
@@ -29,6 +31,7 @@ public class Npc : Interactable
         _animator = GetComponent<Animator>();
         if (_missions.Count != 0) {
             _currentMission = _missions.Dequeue();
+            //TODO
             if (_currentMission.Tutorial != null) _currentTutorial = (Tutorial)AssetDatabase.LoadAssetAtPath("Assets/ScriptableObjects/Mission/Tutorial/" + _currentMission.Tutorial + ".asset", typeof(Tutorial));
         }
     }
@@ -69,6 +72,7 @@ public class Npc : Interactable
                 if (_missions.Count > 0)
                 {
                     _currentMission = _missions.Dequeue();
+                    //TODO : remove
                     _currentTutorial = (Tutorial)AssetDatabase.LoadAssetAtPath("Assets/ScriptableObjects/Mission/Tutorial/" + _currentMission.Tutorial + ".asset", typeof(Tutorial));
                 }
                 else
@@ -87,17 +91,19 @@ public class Npc : Interactable
     {
         if (!_dialogue.CheckIfDialogueEnded())
             _dialogue.DisplayNextSentence();
+        // TODO REMOVE
         else if (_dialogue.CheckIfDialogueEnded() && !_tutorial)
         {
             if (_currentMission && _currentMission.Status == MissionState.Ongoing) {
-                EndFullInteraction(false);
-                //_currentMission.InteractionBegin.OnEndInteraction.Invoke();
+                //EndFullInteraction(false);
+                _currentMission.InteractionBegin.InteractionEnded();
                 CheckTutorial();
             }
             else EndFullInteraction(true);
         } 
         else if (_dialogue.CheckIfDialogueEnded() && _tutorial)
         {
+            // REPLACE _currentTutorial -> _currentMission.tutorial
             _currentTutorial.SwitchPage();
             _player.UIController.ChangeTutorialPage(_currentTutorial);
         }
@@ -106,14 +112,19 @@ public class Npc : Interactable
     public void CheckTutorial()
     {
         _tutorial = true;
+
+        //abrir o panel vazio
         _player.UIController.OpenTutorial(true);
+        //Preencher o tutorial
         _player.UIController.ChangeTutorialPage(_currentTutorial);
     }
 
     public void ExitInteraction()
     {
+        // TODO : remove
         if (_tutorial) {
             _tutorial = false;
+            //Fechar
             _player.UIController.OpenTutorial(false);
         }
         EndFullInteraction(true);
@@ -121,6 +132,8 @@ public class Npc : Interactable
 
     private void EndFullInteraction(bool endFullInteraction)
     {
+        // Tem de tirar o object 
+        // TODO : testar a tirar 
         if (endFullInteraction) base.EndInteract();
         EndInteract();
     }

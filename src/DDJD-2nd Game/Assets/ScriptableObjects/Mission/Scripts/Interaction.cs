@@ -30,4 +30,9 @@ public class Interaction
         get { return _onEndInteraction; }
     }
 
+    public void InteractionEnded()
+    {
+        _onEndInteraction.Invoke();
+    }
+
 }

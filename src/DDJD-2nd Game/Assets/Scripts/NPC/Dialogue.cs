@@ -73,6 +73,7 @@ public class Dialogue : MonoBehaviour
     public void EndDialogue()
     {
         _animator.SetBool("isOpen", false);
+        
     }
 
     public bool CheckIfDialogueEnded()

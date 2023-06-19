@@ -10,8 +10,10 @@ public class TutorialCallback : MonoBehaviour
     // Update is called once per frame
     void Update() { }
 
+    
+
     public void Print()
     {
-        Debug.Log("PRINTING..");
+        Debug.Log("Triggered Tutorial");
     }
 }
