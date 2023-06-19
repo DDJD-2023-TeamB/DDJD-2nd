@@ -17,6 +17,8 @@ public class WheelController : MonoBehaviour
     private SoundEmitter _soundEmitter;
     private FMOD.Studio.PARAMETER_ID _wheelParameterId;
 
+    private FMOD.Studio.PARAMETER_ID _sfxSelectElementId;
+
     [SerializeField]
     private ManaBarIconController manaBarIconController;
 
@@ -37,6 +39,7 @@ public class WheelController : MonoBehaviour
         slotSize = edgeObject.transform.position.x - spellWheelBackground.transform.position.x;
         highlighterController = wheelHiglighter.GetComponent<WheelHiglighterContoller>();
         _wheelParameterId = _soundEmitter.GetParameterId("wheel", "Abilities Menu Type");
+        _sfxSelectElementId = _soundEmitter.GetParameterId("select", "Element Overlay");
         wheelSelector.enabled = false;
         highlighterController.enabled = false;
     }
@@ -113,6 +116,13 @@ public class WheelController : MonoBehaviour
             else
             {
                 manaBarIconController.changeSpellSprite(_itemList[slot].Icon);
+                ItemSkill itemSkill = (ItemSkill)_itemList[slot];
+                _soundEmitter.SetParameterWithLabel(
+                    "select",
+                    _sfxSelectElementId,
+                    itemSkill.Skill.Element.SfxDamageLabel,
+                    true
+                );
             }
             //uiController.SelectSlotLeft(slot);
         }

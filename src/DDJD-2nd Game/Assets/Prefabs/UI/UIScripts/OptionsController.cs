@@ -15,6 +15,9 @@ public class OptionsController : MonoBehaviour
     [SerializeField]
     private GameObject mouseSensitivityScrollBarObject;
 
+    private SoundEmitter _soundEmitter;
+    private FMOD.Studio.PARAMETER_ID _menuParameterId;
+
     public void SetUIController(UIController uiController)
     {
         _uiController = uiController;
@@ -24,7 +27,15 @@ public class OptionsController : MonoBehaviour
             .onValueChanged.AddListener(SetCameraSensitivity);
     }
 
-    private void Start() { }
+    private void Awake()
+    {
+        _soundEmitter = GetComponent<SoundEmitter>();
+    }
+
+    private void Start()
+    {
+        _menuParameterId = _soundEmitter.GetParameterId("menu", "Main Menu Type");
+    }
 
     public void setGameVolume(float value)
     {

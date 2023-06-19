@@ -15,6 +15,7 @@ public class AbsorbingState : GenericState
     {
         base.Enter();
         _context.Animator.SetBool("IsAbsorbing", true);
+        _context.ElementController.PrepareTransfer();
     }
 
     public override void Exit()

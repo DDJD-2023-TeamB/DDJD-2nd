@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2941534047235666839}
   - component: {fileID: 2941534047235666835}
   - component: {fileID: 2941534047235666834}
+  - component: {fileID: 6698691040351999474}
   m_Layer: 11
   m_Name: EletricitySource
   m_TagString: Untagged
@@ -140,3 +141,29 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2.5309243
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6698691040351999474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2941534047235666838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - absorb
+    _values:
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 0
+      _eventReference:
+        Guid:
+          Data1: -870986337
+          Data2: 1294028168
+          Data3: 681539465
+          Data4: -1660047524
+        Path: event:/Attacks/Lightning Abilities/Lightning Charge

@@ -35,6 +35,9 @@ public class UIController : MonoBehaviour
 
     public GameObject currentItemTitle;
 
+    [SerializeField]
+    private FMODUnity.EventReference _dragEvent;
+
     private void Awake()
     {
         _player = GetComponent<Player>();
@@ -49,6 +52,9 @@ public class UIController : MonoBehaviour
         _playerUI.missionsUI.SetActive(false);
         _playerUI.activeElementWheel.SetActive(false);
         _playerUI.OptionsUI.SetUIController(this);
+
+        OpenLeftSpell(false);
+        OpenRightSpell(false);
 
         InventoryUI inventoryUI = _playerUI.inventoryUI;
         inventoryUI.OnItemSkillLeftDrop += ChangeLeftWheelItem;
@@ -81,6 +87,10 @@ public class UIController : MonoBehaviour
         currentMenu = "menu";
         _playerUI.menuUI.SetActive(isOpening);
         _playerUI.playingUI.gameObject.SetActive(!isOpening);
+        if (!isOpening)
+        {
+            _playerUI.OptionsUI.gameObject.SetActive(false);
+        }
     }
 
     public void OpenOptions(bool isOpening)
@@ -239,6 +249,8 @@ public class UIController : MonoBehaviour
                 RemoveFromWheel(image.currentItem, true);
                 Destroy(image.gameObject);
             }
+
+            FMODUnity.RuntimeManager.PlayOneShot(_dragEvent);
         }
     }
 
@@ -254,6 +266,7 @@ public class UIController : MonoBehaviour
         _player.PlayerSkills.EquippedLeftSkills[slot] = itemSkill;
         UpdateSpellWheels();
         _playerUI.inventoryUI.SetLeftWheelSkills(new List<ItemSkill>(leftWheelItems));
+        FMODUnity.RuntimeManager.PlayOneShot(_dragEvent);
     }
 
     public void ChangeRightWheelItem(InventoryItemImage image, int slot, UiArea area)
@@ -268,6 +281,7 @@ public class UIController : MonoBehaviour
         _player.PlayerSkills.EquippedRightSkills[slot] = itemSkill;
         UpdateSpellWheels();
         _playerUI.inventoryUI.SetRightWheelSkills(new List<ItemSkill>(rightWheelItems));
+        FMODUnity.RuntimeManager.PlayOneShot(_dragEvent);
     }
 
     public void LoadSpells()
