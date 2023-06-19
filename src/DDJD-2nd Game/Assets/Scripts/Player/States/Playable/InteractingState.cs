@@ -41,6 +41,7 @@ public class InteractingState : GenericState
         {
             Npc npc = (Npc)objt;
             npc.ContinueInteraction();
+            _context.Input.IsContinueReading = false;
         }
         if (_context.Input.IsExitingInteraction && objt is Npc)
         {

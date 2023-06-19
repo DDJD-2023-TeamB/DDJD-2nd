@@ -101,6 +101,7 @@ public class PlayerInputReceiver : MonoBehaviour
     public bool IsContinueReading
     {
         get { return _isContinueReading; }
+        set { _isContinueReading = value; }
     }
     private bool _isExitingInteraction;
     public bool IsExitingInteraction
