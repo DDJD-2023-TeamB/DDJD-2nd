@@ -149,7 +149,7 @@ public class RuneShooter : MonoBehaviour, Damageable, NonPushable
         }
     }
 
-    protected void Die()
+    public void Die()
     {
         GameObject deathVfx = Instantiate(_deathVfxPrefab, transform.position, transform.rotation);
         VisualEffect vfx = deathVfx.GetComponent<VisualEffect>();

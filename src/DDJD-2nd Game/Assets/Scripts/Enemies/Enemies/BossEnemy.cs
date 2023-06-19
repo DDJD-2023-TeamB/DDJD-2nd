@@ -67,6 +67,8 @@ public class BossEnemy : RangedEnemy
 
     private int _phaseIndex = 0;
 
+    private List<RuneShooter> _runes = new List<RuneShooter>();
+
     private BossPhase[] _phases = new BossPhase[]
     {
         new BossPhase(0, 3, 1, false, 0.90f),
@@ -104,24 +106,29 @@ public class BossEnemy : RangedEnemy
         }
         int maxRuneType = _phases[_phaseIndex].RuneVariety;
         int runeType = Random.Range(0, maxRuneType);
+        RuneShooter rune = null;
         switch (runeType)
         {
             case 0:
-                SpawnStaticRune();
+                rune = SpawnStaticRune();
                 break;
             case 1:
-                SpawnHoveringRune();
+                rune = SpawnHoveringRune();
                 break;
             case 2:
-                SpawnChaseRune();
+                rune = SpawnChaseRune();
                 break;
             case 3:
-                SpawnProtectingRune();
+                rune = SpawnProtectingRune();
                 break;
+        }
+        if (rune != null)
+        {
+            _runes.Add(rune);
         }
     }
 
-    private void SpawnProtectingRune()
+    private RuneShooter SpawnProtectingRune()
     {
         //Get random position in a circle around the boss
         float angle = Random.Range(0.0f, 360.0f);
@@ -139,9 +146,10 @@ public class BossEnemy : RangedEnemy
         Skill skill = _shockwaveSkill;
         shooter.StartShoot(this, skill);
         _runeCount++;
+        return shooter;
     }
 
-    private void SpawnStaticRune()
+    private RuneShooter SpawnStaticRune()
     {
         //Get random position in a circle around the boss
         float angle = Random.Range(0.0f, 360.0f);
@@ -159,9 +167,10 @@ public class BossEnemy : RangedEnemy
         Skill skill = _staticRuneSkills[index];
         shooter.StartShoot(this, skill);
         _runeCount++;
+        return shooter;
     }
 
-    public void SpawnHoveringRune()
+    public RuneShooter SpawnHoveringRune()
     {
         //Get random position in a circle around the boss
         float angle = Random.Range(0.0f, 360.0f);
@@ -178,9 +187,10 @@ public class BossEnemy : RangedEnemy
         HoveringRune shooter = rune.GetComponent<HoveringRune>();
         shooter.StartShoot(this, skill);
         _runeCount++;
+        return shooter;
     }
 
-    public void SpawnChaseRune()
+    public RuneShooter SpawnChaseRune()
     {
         //Get random position in a circle around the boss
         float angle = Random.Range(0.0f, 360.0f);
@@ -198,6 +208,7 @@ public class BossEnemy : RangedEnemy
         Skill skill = _chaseRuneSkills[index];
         shooter.StartShoot(this, skill);
         _runeCount++;
+        return shooter;
     }
 
     public override void TakeDamage(
@@ -216,6 +227,21 @@ public class BossEnemy : RangedEnemy
     public override void Awake()
     {
         base.Awake();
+    }
+
+    public void DestroyedRune(RuneShooter rune)
+    {
+        _runes.Remove(rune);
+        _runeCount--;
+    }
+
+    public override void Die(int force, Vector3 hitPoint, Vector3 hitDirection)
+    {
+        base.Die(force, hitPoint, hitDirection);
+        foreach (RuneShooter rune in _runes)
+        {
+            rune.Die();
+        }
     }
 
     public GameObject RuneAttackPrefab
