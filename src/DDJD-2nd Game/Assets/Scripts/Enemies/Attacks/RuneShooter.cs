@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class RuneShooter : MonoBehaviour
+public class RuneShooter : MonoBehaviour, Damageable, NonPushable
 {
+    [SerializeField]
+    protected Transform _spellOrigin;
     protected BossEnemy _caster;
     protected Skill _skill;
 
@@ -19,9 +21,21 @@ public class RuneShooter : MonoBehaviour
 
     protected Rigidbody _rigidbody;
 
+    private float _health = 100.0f;
+
+    private static int _triggerDamageHash = Animator.StringToHash("TakeDamage");
+
+    private Animator _animator;
+
+    [SerializeField]
+    private GameObject _deathVfxPrefab;
+
+    private float _runeSize = 1.0f;
+
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _animator = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -34,7 +48,13 @@ public class RuneShooter : MonoBehaviour
     protected virtual void Update()
     {
         Vector3 direction = (_player.transform.position - transform.position).normalized;
-        transform.rotation = Quaternion.LookRotation(direction);
+
+        // slowly rotate towards the player
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            Quaternion.LookRotation(direction),
+            Time.deltaTime * 5f
+        );
     }
 
     protected float GetCooldown()
@@ -47,12 +67,13 @@ public class RuneShooter : MonoBehaviour
         _caster = caster;
         _skill = skill;
         StartCoroutine(Shoot());
+        StartCoroutine(Stop());
     }
 
     protected IEnumerator Stop()
     {
         yield return new WaitForSeconds(_duration);
-        Destroy(gameObject);
+        Die();
     }
 
     protected void CreateSpell()
@@ -74,6 +95,10 @@ public class RuneShooter : MonoBehaviour
         {
             ShootAtPlayer();
         }
+        else if (_skill.SkillStats.CastType == CastType.Hold)
+        {
+            ShootAtPlayer();
+        }
     }
 
     protected IEnumerator Shoot()
@@ -86,20 +111,77 @@ public class RuneShooter : MonoBehaviour
     {
         if (_player != null)
         {
-            Vector3 direction = (_player.transform.position - transform.position).normalized;
+            Vector3 direction = GetPlayerDirection();
 
             _skillComponent.Shoot(direction);
         }
-        StartCoroutine(Shoot());
+        if (_skill.SkillStats.CastType != CastType.Hold)
+        {
+            StartCoroutine(Shoot());
+        }
     }
 
     public void OnDestroy()
     {
-        if (_skillComponent != null)
-        {
-            _skillComponent.ChargeComponent.OnChargeComplete -= ShootAtPlayer;
-        }
-
         _caster.RuneCount--;
+    }
+
+    public void TakeDamage(
+        GameObject damager,
+        int damage,
+        float force,
+        Vector3 hitPoint,
+        Vector3 hitDirection,
+        Element element
+    )
+    {
+        _animator.SetTrigger(_triggerDamageHash);
+        _health -= damage;
+        if (_health <= 0)
+        {
+            Die();
+        }
+    }
+
+    protected void Die()
+    {
+        GameObject deathVfx = Instantiate(_deathVfxPrefab, transform.position, transform.rotation);
+        VisualEffect vfx = deathVfx.GetComponent<VisualEffect>();
+        vfx.SetFloat("Size", _runeSize);
+
+        Destroy(deathVfx, 1.5f);
+        Destroy(gameObject);
+    }
+
+    public bool IsTriggerDamage()
+    {
+        return false;
+    }
+
+    // Get the main object that can be damaged, for example, a bone can be damaged, but the main object is the one that suffers the damage
+
+
+    public GameObject GetDamageableObject()
+    {
+        return gameObject;
+    }
+
+    protected Vector3 GetPlayerDirection()
+    {
+        Vector3 targetPosition = _player.transform.position;
+
+        float distanceToCaster =
+            Vector3.Distance(transform.position, _player.transform.position) * 0.1f;
+        // Apply offset
+        targetPosition +=
+            new Vector3(
+                Random.Range(-0.1f, 0.5f),
+                Random.Range(0.2f, 2.0f),
+                Random.Range(-0.5f, 0.5f)
+            ) * distanceToCaster;
+
+        Vector3 direction = (targetPosition - transform.position).normalized;
+
+        return direction;
     }
 }

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2830640808646170133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2069201297692488709}
+  m_Layer: 0
+  m_Name: SpellOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2069201297692488709
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2830640808646170133}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3277137911551064333}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3277137911551064335
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +41,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3277137911551064333}
   - component: {fileID: 3277137911551064334}
-  m_Layer: 0
+  - component: {fileID: 3191854064082352118}
+  - component: {fileID: 741408807889466761}
+  m_Layer: 7
   m_Name: RuneAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,6 +63,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8066818105461776557}
+  - {fileID: 2069201297692488709}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -45,7 +79,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de266401f2ac714088907764b81c0b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _visualEffect: {fileID: 8066818105461776556}
+  _spellOrigin: {fileID: 2069201297692488709}
+  _deathVfxPrefab: {fileID: 7374824141856398282, guid: 566fc1680bde6ee4f9a20539e93195e9,
+    type: 3}
+--- !u!65 &3191854064082352118
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3277137911551064335}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9, y: 1.9, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &741408807889466761
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3277137911551064335}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bab90c2a515c90f4882cb4b5a9235cea, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &3277137911375526571
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -135,12 +205,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a18c434c32bb78b40be81332ad5c5725, type: 3}
---- !u!2083052967 &8066818105461776556 stripped
-VisualEffect:
-  m_CorrespondingSourceObject: {fileID: 4794543334150232583, guid: a18c434c32bb78b40be81332ad5c5725,
-    type: 3}
-  m_PrefabInstance: {fileID: 3277137911375526571}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8066818105461776557 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4794543334150232582, guid: a18c434c32bb78b40be81332ad5c5725,

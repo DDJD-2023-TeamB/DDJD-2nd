@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class BossEnemy : RangedEnemy
 {
@@ -31,10 +33,22 @@ public class BossEnemy : RangedEnemy
     private Skill _lightningRay;
 
     [SerializeField]
+    private Skill _boltRay;
+
+    [SerializeField]
     private Element _lightningElement;
 
     [SerializeField]
     private Element _fireElement;
+
+    [SerializeField]
+    private List<Skill> _staticRuneSkills = new List<Skill>();
+
+    [SerializeField]
+    private List<Skill> _hoveringRuneSkills = new List<Skill>();
+
+    [SerializeField]
+    private List<Skill> _chaseRuneSkills = new List<Skill>();
 
     [SerializeField]
     private float _runeSpawnDelay = 1.0f;
@@ -43,17 +57,11 @@ public class BossEnemy : RangedEnemy
 
     private int _runeCount = 0;
 
-    private int _hoveringRuneCount = 0;
-
-    private int _chaseRuneCount = 0;
-
-    private int _maxStaticRuneCount = 3;
-    private int _maxHoveringRuneCount = 3;
-    private int _maxChaseRuneCount = 3;
+    private int _maxRuneCount = 9;
 
     public void SpawnRune()
     {
-        if (_runeCount < _maxStaticRuneCount)
+        if (_runeCount < _maxRuneCount)
         {
             //Get random position in a circle around the boss
             float angle = Random.Range(0.0f, 360.0f);
@@ -66,14 +74,17 @@ public class BossEnemy : RangedEnemy
 
             GameObject rune = Instantiate(_runeAttackPrefab, position, Quaternion.identity);
             RuneShooter shooter = rune.GetComponent<RuneShooter>();
-            shooter.StartShoot(this, _fireballSkill);
+
+            int index = Random.Range(0, _staticRuneSkills.Count);
+            Skill skill = _staticRuneSkills[index];
+            shooter.StartShoot(this, skill);
             _runeCount++;
         }
     }
 
     public void SpawnHoveringRune()
     {
-        if (_hoveringRuneCount < _maxHoveringRuneCount)
+        if (_runeCount < _maxRuneCount)
         {
             //Get random position in a circle around the boss
             float angle = Random.Range(0.0f, 360.0f);
@@ -84,16 +95,18 @@ public class BossEnemy : RangedEnemy
                 transform.position.z + radius * Mathf.Sin(angle)
             );
 
+            int index = Random.Range(0, _staticRuneSkills.Count);
+            Skill skill = _hoveringRuneSkills[index];
             GameObject rune = Instantiate(_hoveringRune, position, Quaternion.identity);
             HoveringRune shooter = rune.GetComponent<HoveringRune>();
-            shooter.StartShoot(this, _fireshotSkill);
-            _hoveringRuneCount++;
+            shooter.StartShoot(this, skill);
+            _runeCount++;
         }
     }
 
     public void SpawnChaseRune()
     {
-        if (_chaseRuneCount < _maxChaseRuneCount)
+        if (_runeCount < _maxRuneCount)
         {
             //Get random position in a circle around the boss
             float angle = Random.Range(0.0f, 360.0f);
@@ -106,8 +119,11 @@ public class BossEnemy : RangedEnemy
 
             GameObject rune = Instantiate(_chaseRunePrefab, position, Quaternion.identity);
             ChaseRune shooter = rune.GetComponent<ChaseRune>();
-            shooter.StartShoot(this, _fireshotSkill);
-            _chaseRuneCount++;
+
+            int index = Random.Range(0, _chaseRuneSkills.Count);
+            Skill skill = _chaseRuneSkills[index];
+            shooter.StartShoot(this, skill);
+            _runeCount++;
         }
     }
 
@@ -175,12 +191,6 @@ public class BossEnemy : RangedEnemy
     {
         get { return _runeCount; }
         set { _runeCount = value; }
-    }
-
-    public int HoveringRuneCount
-    {
-        get { return _hoveringRuneCount; }
-        set { _hoveringRuneCount = value; }
     }
 
     public GameObject ChaseRunePrefab

@@ -69,6 +69,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1980188279287297222, guid: 6facaed78b8c6a64b96d9739906f115f,
+        type: 3}
+      propertyPath: _maxHealth
+      value: 20000
+      objectReference: {fileID: 0}
     - target: {fileID: 3273867762492815134, guid: 6facaed78b8c6a64b96d9739906f115f,
         type: 3}
       propertyPath: _events._values.Array.data[0]._eventReference.Path
@@ -228,8 +233,18 @@ MonoBehaviour:
   _flamethrowerSkill: {fileID: 11400000, guid: 42940e98e3a72844d93f0cc67e9744db, type: 2}
   _shockwaveSkill: {fileID: 11400000, guid: e74fa9585b9ecd44387b16a47c07a6e5, type: 2}
   _lightningRay: {fileID: 11400000, guid: dfdc3d5997d15da429d5d9e978072067, type: 2}
+  _boltRay: {fileID: 11400000, guid: 5d8649be4d3ff9a48949efff41369997, type: 2}
   _lightningElement: {fileID: 11400000, guid: 48039012ea82f1b4caa0ae6b3fd06a8d, type: 2}
   _fireElement: {fileID: 11400000, guid: 395138bc558d7cf449eb38e7c3e9ab91, type: 2}
+  _staticRuneSkills:
+  - {fileID: 11400000, guid: 238d91aaae43228458debe6915784b59, type: 2}
+  - {fileID: 11400000, guid: 4b5ee26c31129494c8cf6a0c8fbd3458, type: 2}
+  _hoveringRuneSkills:
+  - {fileID: 11400000, guid: 3b354be5fe762424cb1d8852bee8be12, type: 2}
+  - {fileID: 11400000, guid: 97fb89e26f829714895d8d547deff4c4, type: 2}
+  _chaseRuneSkills:
+  - {fileID: 11400000, guid: 42940e98e3a72844d93f0cc67e9744db, type: 2}
+  - {fileID: 11400000, guid: 3b354be5fe762424cb1d8852bee8be12, type: 2}
   _runeSpawnDelay: 1
 --- !u!114 &8189407129937572364
 MonoBehaviour:
