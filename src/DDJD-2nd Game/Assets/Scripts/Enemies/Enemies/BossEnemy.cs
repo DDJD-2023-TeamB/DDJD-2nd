@@ -70,7 +70,7 @@ public class BossEnemy : RangedEnemy
         new BossPhase(1, 6, 2, false, 0.80f),
         new BossPhase(2, 9, 3, false, 0.60f),
         new BossPhase(3, 12, 4, false, 0.40f),
-        new BossPhase(4, 12, 4, true, 0.30f),
+        new BossPhase(4, 24, 4, false, 0.15f),
     };
 
     public void AdvancePhase()
