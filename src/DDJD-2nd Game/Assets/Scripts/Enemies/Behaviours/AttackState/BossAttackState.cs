@@ -80,19 +80,7 @@ public class BossAttackState : EnemyAttackState
         while (true)
         {
             yield return new WaitForSeconds(_context.RuneSpawnDelay);
-            int random = Random.Range(0, 3);
-            if (random == 0)
-            {
-                _context.SpawnHoveringRune();
-            }
-            else if (random == 1)
-            {
-                _context.SpawnChaseRune();
-            }
-            else if (random == 2)
-            {
-                _context.SpawnRune();
-            }
+            _context.SpawnRune();
         }
     }
 

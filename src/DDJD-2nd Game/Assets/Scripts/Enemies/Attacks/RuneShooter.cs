@@ -21,7 +21,8 @@ public class RuneShooter : MonoBehaviour, Damageable, NonPushable
 
     protected Rigidbody _rigidbody;
 
-    private float _health = 100.0f;
+    [SerializeField]
+    private float _health = 50.0f;
 
     private static int _triggerDamageHash = Animator.StringToHash("TakeDamage");
 
@@ -46,6 +47,11 @@ public class RuneShooter : MonoBehaviour, Damageable, NonPushable
 
     // Update is called once per frame
     protected virtual void Update()
+    {
+        UpdateRotation();
+    }
+
+    protected virtual void UpdateRotation()
     {
         Vector3 direction = (_player.transform.position - transform.position).normalized;
 
@@ -101,7 +107,7 @@ public class RuneShooter : MonoBehaviour, Damageable, NonPushable
         }
     }
 
-    protected IEnumerator Shoot()
+    protected virtual IEnumerator Shoot()
     {
         yield return new WaitForSeconds(GetCooldown());
         CreateSpell();
