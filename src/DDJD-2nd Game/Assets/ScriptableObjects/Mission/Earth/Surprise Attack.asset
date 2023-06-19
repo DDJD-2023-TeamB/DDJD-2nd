@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6159442827439109576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10ade6c6202a749d3b8a95862ea27777, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3208331280523073408, guid: 12b9752c824401b4aba52369f821a48b,
+          type: 3}
+        m_TargetAssemblyTypeName: FightCallbacks, Assembly-CSharp
+        m_MethodName: OnFightGoalCompleted
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: EnemyCampEarth
+          m_BoolArgument: 0
+        m_CallState: 2
+  _description: Defend the Earth Village
+  _location: {fileID: 0}
+  _enemySpawner: {fileID: 11400000, guid: f3c72a5fe4cf9d84abc28b92b8183ea0, type: 2}
+--- !u!114 &-1256359508851401251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3208331280523073408, guid: 12b9752c824401b4aba52369f821a48b,
+          type: 3}
+        m_TargetAssemblyTypeName: FightCallbacks, Assembly-CSharp
+        m_MethodName: OnFightGoalStarted
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: EnemyCampEarth
+          m_BoolArgument: 0
+        m_CallState: 2
+  _description: Speak with Bella
+  _location: {fileID: 0}
+  _npcToInteract: {fileID: 11400000, guid: 15f81436f65c9415ea4bde98e57c0e27, type: 2}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c5000599e034b75b66b98e905ca14a, type: 3}
+  m_Name: Surprise Attack
+  m_EditorClassIdentifier: 
+  _title: Surprise!
+  _description: Seems like someone has a surprise for you
+  _status: 1
+  _type: 0
+  _goals:
+  - {fileID: -1256359508851401251}
+  - {fileID: -6159442827439109576}
+  _interactionBegin:
+    _dialogueInfo:
+      _noun: Bella
+      _sentences:
+      - Good job reaching the bird over there!
+      - But that's not all you can do. Make sure to visit...
+      - WAIT, WHAT'S GOING ON?
+      - OH MY GOD! The village is under attack!!
+      - I knew this day would eventually come...
+    _npc: {fileID: 11400000, guid: 3403cae3e543d448a83c140ebb792bde, type: 2}
+  _interactionEnd:
+    _dialogueInfo:
+      _noun: Bella
+      _sentences:
+      - I can't believe you're THIS strong!
+      - Where have you been all this time? Anyway, thank you for saving our village!
+      - Why did we get attacked? You really don't much about this place, do you?
+      - They're the FireMighters, a group of bandits who betrayed the Fire Village.
+      - They are now trying to conquer the 4 Great Villages and make their boss the
+        strongest man on the planet.
+      - We are the only ones left standing...
+    _npc: {fileID: 11400000, guid: 3403cae3e543d448a83c140ebb792bde, type: 2}
+  _reward:
+    _gold: 0
+    _items: []
+  _followingMissions: []
+  _area: 2

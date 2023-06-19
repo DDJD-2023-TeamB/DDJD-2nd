@@ -55,6 +55,7 @@ public class MissionController : MonoBehaviour
                         if (interactGoal.NpcToInteract == npc)
                         {
                             goal._completed = true;
+                            goal.OnGoalCompleted?.Invoke();
                         }
                     }
                 }
@@ -80,7 +81,10 @@ public class MissionController : MonoBehaviour
                             if (collectGoal.Quantity > 0)
                                 collectGoal.Quantity -= 1;
                             if (collectGoal.Quantity == 0)
+                            {
                                 goal._completed = true;
+                                goal.OnGoalCompleted?.Invoke();
+                            }
                         }
                     }
                 }
@@ -170,6 +174,7 @@ public class MissionController : MonoBehaviour
                     if (fightGoal.EnemySpawner == _enemySpawner)
                     {
                         goal._completed = true;
+                        goal.OnGoalCompleted?.Invoke();
                         CheckIfAllGoalsAreCompleted(mission);
                     }
                 }
