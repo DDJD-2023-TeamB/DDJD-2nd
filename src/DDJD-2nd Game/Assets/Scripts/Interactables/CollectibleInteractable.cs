@@ -11,12 +11,8 @@ public class CollectibleInteractable : Interactable
 {
     public CollectibleObject _item;
 
-    public TextMeshProUGUI textPrefab;
-
-    public Floating floatingText;
-
     private static string outlineMaterialPath = "Assets/Materials/Outline/Outline.mat";
-    private static string floatingTextPrefabPath = "Assets/Prefabs/UI/FloatingCanvas2.prefab";
+    private static string floatingTextPrefabPath = "Assets/Prefabs/UI/FloatingCanvas.prefab";
 
     private Material _material;
     private MeshRenderer _meshRenderer;

@@ -7,6 +7,8 @@ public class Floating : MonoBehaviour
 {
     private Transform _mainCam;
     private Transform _lookAt;
+
+    private float _gap = 0.1f;
     public float animationOffsetValue;
 
     private Vector3 _initialPosition;
@@ -18,7 +20,7 @@ public class Floating : MonoBehaviour
         _lookAt = gameObject.transform.parent.transform.parent.transform;
         transform.position += new Vector3(
             0,
-            GetLookAtHeightOffset() / 2 + GetObjectAtHeightOffset() / 2,
+            GetLookAtHeightOffset() / 2 + GetObjectAtHeightOffset() + _gap,
             0
         );
         _initialPosition = transform.position;
@@ -58,10 +60,9 @@ public class Floating : MonoBehaviour
     {
         // Get the RectTransform component of the parent object
         RectTransform parentRectTransform = GetComponent<RectTransform>();
-
         // Get the preferred height of the text component
-        float preferredHeight = LayoutUtility.GetPreferredHeight(parentRectTransform);
+        float height = parentRectTransform.rect.size.y;
 
-        return preferredHeight * parentRectTransform.localScale.y;
+        return height * parentRectTransform.localScale.y;
     }
 }
