@@ -18,6 +18,7 @@ public class MissionController : MonoBehaviour
 
     private Player _player;
     private UIController _uiController;
+    private MissionsUIController _missionsUIController;
 
     void Start()
     {
@@ -47,17 +48,13 @@ public class MissionController : MonoBehaviour
         {
             if (mission.Status == MissionState.Ongoing)
             {
-                Debug.Log(mission);
                 foreach (var goal in mission.Goals)
                 {
-                    Debug.Log(goal);
                     if (!goal._completed && goal is InteractGoal interactGoal)
                     {
                         if (interactGoal.NpcToInteract == npc)
                         {
-                            Debug.Log("SAME");
                             goal._completed = true;
-                            Debug.Log("Interact Goal Completed");
                         }
                     }
                 }
@@ -84,7 +81,6 @@ public class MissionController : MonoBehaviour
                                 collectGoal.Quantity -= 1;
                             if (collectGoal.Quantity == 0)
                                 goal._completed = true;
-                            Debug.Log("Collect Goal Completed");
                         }
                     }
                 }
@@ -95,16 +91,13 @@ public class MissionController : MonoBehaviour
 
     public void CheckIfAllGoalsAreCompleted(Mission mission)
     {
-        bool allGoalsCompleted = false;
+        bool allGoalsCompleted = true;
         foreach (var goal in mission.Goals)
         {
             if (!goal._completed)
             {
+                allGoalsCompleted = false;
                 break;
-            }
-            else if (!allGoalsCompleted)
-            {
-                allGoalsCompleted = true;
             }
         }
 
@@ -122,6 +115,7 @@ public class MissionController : MonoBehaviour
         _unblockedMissions.Remove(mission);
         _gameState.FinishedMissions.Add(mission);
         UnblockFollowingMissions(mission);
+        _missionsUIController.UpdateMissionsUI();
     }
 
     private void UnblockFollowingMissions(Mission mission)
@@ -156,18 +150,6 @@ public class MissionController : MonoBehaviour
                     missions.Enqueue(mission);
                 }
             }
-            /*
-            foreach (var followingMission in mission.FollowingMissions)
-            {
-                if (
-                    followingMission.InteractionBegin.Npc == npc
-                    || followingMission.InteractionEnd.Npc == npc
-                )
-                {
-                    missions.Enqueue(followingMission);
-                }
-            }
-            */
         }
 
         return missions;
@@ -206,5 +188,10 @@ public class MissionController : MonoBehaviour
         }
 
         return availableMissions;
+    }
+
+    public void SetMissionsUIController(MissionsUIController missionsUIController)
+    {
+        _missionsUIController = missionsUIController;
     }
 }

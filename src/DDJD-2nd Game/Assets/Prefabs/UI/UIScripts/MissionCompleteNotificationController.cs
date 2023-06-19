@@ -18,6 +18,7 @@ public class MissionCompleteNotificationController : MonoBehaviour
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
+        missionTitleComponent = GetComponentInChildren<TextMeshProUGUI>();
     }
     public void StartAnimation(string missionTitle)
     {

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using TypeReferences;
 
 [CreateAssetMenu(
     fileName = "EnemySkills",
@@ -17,6 +19,36 @@ public class EnemySkills : ScriptableObject
 
     [SerializeField]
     private float _attackSpeed;
+
+    [SerializeField]
+    private int _health = 100;
+
+    [SerializeField]
+    private int _maxAttacksInRow = 3;
+
+    [SerializeField]
+    private int _minAttacksInRow = 1;
+
+    [SerializeField]
+    private float _speed = 5.0f;
+
+    [SerializeField]
+    private float _minAttackComboCooldown = 1.0f;
+
+    [SerializeField]
+    private float _maxAttackComboCooldown = 2.0f;
+
+    [SerializeField]
+    [Inherits(typeof(EnemyAttackState))]
+    private TypeReference _attackStrategy;
+
+    [SerializeField]
+    [Inherits(typeof(EnemyChaseState))]
+    private TypeReference _chaseStrategy;
+
+    [SerializeField]
+    [Inherits(typeof(EnemyIdleState))]
+    private TypeReference _idleStrategy;
 
     [SerializeField]
     private bool _usesDash;
@@ -55,5 +87,50 @@ public class EnemySkills : ScriptableObject
     public float AttackSpeed
     {
         get => _attackSpeed;
+    }
+
+    public Type AttackStrategy
+    {
+        get => _attackStrategy;
+    }
+
+    public Type ChaseStrategy
+    {
+        get => _chaseStrategy;
+    }
+
+    public Type IdleStrategy
+    {
+        get => _idleStrategy;
+    }
+
+    public int Health
+    {
+        get => _health;
+    }
+
+    public int MaxAttacksInRow
+    {
+        get => _maxAttacksInRow;
+    }
+
+    public int MinAttacksInRow
+    {
+        get => _minAttacksInRow;
+    }
+
+    public float Speed
+    {
+        get => _speed;
+    }
+
+    public float MinAttackComboCooldown
+    {
+        get => _minAttackComboCooldown;
+    }
+
+    public float MaxAttackComboCooldown
+    {
+        get => _maxAttackComboCooldown;
     }
 }

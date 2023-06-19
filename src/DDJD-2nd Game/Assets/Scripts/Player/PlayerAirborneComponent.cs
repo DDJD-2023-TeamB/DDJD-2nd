@@ -40,8 +40,8 @@ public class PlayerAirborneComponent : MonoBehaviour
 
     public void StopAirborne()
     {
-        //_isActive = false;
-        //_soundEmitter.Stop("air");
+        _isActive = false;
+        _soundEmitter.Stop("air");
     }
 
     public virtual void Update()

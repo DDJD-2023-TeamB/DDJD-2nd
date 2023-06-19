@@ -30,7 +30,7 @@ public class FireballComponent : ProjectileComponent, NonPushable
     protected void Start()
     {
         _sfxChargeId = _soundEmitter.GetParameterId("fireball", "Charged Fire Ball Intensity");
-        _sfxStateId = _soundEmitter.GetParameterId("fireball", "Charged Fire Ball");
+        _sfxStateId = _soundEmitter.GetParameterId("fireball", "Ball State");
         _sfxExplosionChargeId = _soundEmitter.GetParameterId(
             "explosion",
             "Charged Fire Ball Intensity"
@@ -73,18 +73,8 @@ public class FireballComponent : ProjectileComponent, NonPushable
     {
         base.Shoot(direction);
         _soundEmitter.SetParameter("fireball", _sfxChargeId, _chargeComponent.GetCurrentCharge());
-        _soundEmitter.Stop("fireball");
-        _soundEmitter.SetParameterWithLabel("fireball", _sfxStateId, "Release", true);
-        _soundEmitter.CallWithDelay(
-            () =>
-            {
-                if (!_exploded)
-                {
-                    _soundEmitter.SetParameterWithLabel("fireball", _sfxStateId, "Iddle", false);
-                }
-            },
-            0.15f
-        );
+        _soundEmitter.SetParameter("fireball", _sfxStateId, 1);
+        _soundEmitter.Play("idle");
         _explosionRadius = _explosionRadius * _chargeComponent.GetCurrentCharge();
         _fireballVFX.SetFloat("SpawnRate", 0);
     }
@@ -99,6 +89,7 @@ public class FireballComponent : ProjectileComponent, NonPushable
             _sfxExplosionChargeId,
             _chargeComponent.GetCurrentCharge()
         );
+        _soundEmitter.StopAndRelease("idle");
         _soundEmitter.UpdatePosition("explosion");
         _soundEmitter.Play("explosion");
         Destroy(impact, 3.0f);
@@ -116,7 +107,6 @@ public class FireballComponent : ProjectileComponent, NonPushable
         DeactivateSpell();
         SpawnHitVFX();
         _soundEmitter.Stop("fireball");
-        _soundEmitter.SetParameterWithLabel("fireball", _sfxStateId, "Impact", true);
         _fireballVFX.enabled = false;
 
         //Raycast sphere

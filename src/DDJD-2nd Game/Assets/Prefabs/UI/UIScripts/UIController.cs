@@ -46,8 +46,6 @@ public class UIController : MonoBehaviour
         _playerUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
         _playerUI.inventoryUI.gameObject.SetActive(false);
         _playerUI.menuUI.SetActive(false);
-        //_playerUI.leftSpellWheel.gameObject.SetActive(false);
-        //_playerUI.rightSpellWheel.gameObject.SetActive(false);
         _playerUI.missionsUI.SetActive(false);
         _playerUI.activeElementWheel.SetActive(false);
         _playerUI.OptionsUI.SetUIController(this);
@@ -225,12 +223,12 @@ public class UIController : MonoBehaviour
     {
         if (!(image.currentItem.item is ItemSkill))
         {
-            Debug.Log("Is not itemskill");
+            Debug.LogError("Item is not itemskill");
             return;
         }
         if (area != UiArea.Spells)
         {
-            //Remove item from it's previous position
+            // Remove item from it's previous position
             if (area == UiArea.LeftWheel)
             {
                 RemoveFromWheel(image.currentItem, true);
@@ -242,14 +240,13 @@ public class UIController : MonoBehaviour
                 Destroy(image.gameObject);
             }
         }
-        //ItemSkill itemSkill = (ItemSkill)itemStack.item;
     }
 
     public void ChangeLeftWheelItem(InventoryItemImage image, int slot, UiArea area)
     {
         if (!(image.currentItem.item is ItemSkill))
         {
-            Debug.Log("Is not itemskill");
+            Debug.LogError("Item is not itemskill");
             return;
         }
         ItemSkill itemSkill = (ItemSkill)image.currentItem.item;
@@ -263,7 +260,7 @@ public class UIController : MonoBehaviour
     {
         if (!(image.currentItem.item is ItemSkill))
         {
-            Debug.Log("Is not itemskill");
+            Debug.LogError("Item is not itemskill");
             return;
         }
         ItemSkill itemSkill = (ItemSkill)image.currentItem.item;

@@ -46,7 +46,7 @@ public class EnemySpawnerComponent : MonoBehaviour
         GameObject enemy = Instantiate(info.Prefab, position, Quaternion.identity);
 
         BasicEnemy basicEnemy = enemy.GetComponent<BasicEnemy>();
-        basicEnemy.EnemySkills = info.EnemySkills;
+        basicEnemy.SetEnemySkills(info.EnemySkills);
         basicEnemy.SetEnemySpawnerManager(_enemySpawnerManager);
         StartCoroutine(SpawnCooldown());
         return basicEnemy;

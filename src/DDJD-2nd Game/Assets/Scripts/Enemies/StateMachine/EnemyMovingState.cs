@@ -10,6 +10,7 @@ public class EnemyMovingState : EnemyState
         base.Enter();
         _context.Rigidbody.isKinematic = true;
         _context.NavMeshAgent.enabled = true;
+        _context.NavMeshAgent.speed = _context.EnemySkills.Speed;
     }
 
     public override void StateUpdate()
