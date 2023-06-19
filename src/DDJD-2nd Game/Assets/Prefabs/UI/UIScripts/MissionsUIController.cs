@@ -29,7 +29,7 @@ public class MissionsUIController : MonoBehaviour
     Color highlightColor;
     Color completedColor;
 
-    private List<Mission> generalMissions;
+    private List<Mission> generalMissions = new List<Mission>();
 
     // Start is called before the first frame update
     void Start()
@@ -40,15 +40,24 @@ public class MissionsUIController : MonoBehaviour
         ColorUtility.TryParseHtmlString("#737373", out completedColor);
         loadActiveMissions();
         setActiveMission(null);
+        _missionController.SetMissionsUIController(this);
     }
 
     void loadActiveMissions()
     {
-        generalMissions = _missionController.GetAvailableAndOngoingMissions();
+        List<Mission> activeMissions = _missionController.GetAvailableAndOngoingMissions();
+        foreach (Mission mission in activeMissions)
+        {
+            if (!generalMissions.Contains(mission))
+            {
+                generalMissions.Add(mission);
+            }
+        }
     }
 
-    void updateMissionsUI()
+    public void UpdateMissionsUI()
     {
+        loadActiveMissions();
         foreach (Transform child in missionsContent.transform)
         {
             GameObject.Destroy(child.gameObject);
@@ -58,7 +67,7 @@ public class MissionsUIController : MonoBehaviour
 
         List<Mission> orderedGeneralMissions = new List<Mission>();
 
-        for(int i=0; i<generalMissions.Count; i++)
+        for (int i = 0; i < generalMissions.Count; i++)
         {
             if (generalMissions[i].Status == MissionState.Available)
             {
@@ -95,13 +104,13 @@ public class MissionsUIController : MonoBehaviour
                 .Find("MissionDescription")
                 .GetComponent<TextMeshProUGUI>()
                 .text = mission.Description;
-            if(mission.Status == MissionState.Available)
+            if (mission.Status == MissionState.Available)
             {
                 missionInstance.GetComponent<MissionSelectionScript>().setAsNew(true);
             }
 
             if (mission.Status == MissionState.Completed)
-            { 
+            {
                 missionInstance.transform
                     .Find("MissionTitle")
                     .GetComponent<TextMeshProUGUI>()
@@ -136,7 +145,8 @@ public class MissionsUIController : MonoBehaviour
                 var goal = mission.Goals[j];
                 accumulatedQuests++;
                 GameObject questInstance = Instantiate(questPrefab, missionInstance.transform);
-                if (mission.Goals[j].Completed) {
+                if (mission.Goals[j].Completed)
+                {
                     questInstance.GetComponent<TextMeshProUGUI>().color = completedColor;
                 }
                 else if (mission == selectedMission)
@@ -202,7 +212,7 @@ public class MissionsUIController : MonoBehaviour
                 }
             }
         }
-        updateMissionsUI();
+        UpdateMissionsUI();
         //Set active mission in game controller
     }
 }

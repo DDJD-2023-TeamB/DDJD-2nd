@@ -18,6 +18,7 @@ public class MissionController : MonoBehaviour
 
     private Player _player;
     private UIController _uiController;
+    private MissionsUIController _missionsUIController;
 
     void Start()
     {
@@ -114,6 +115,7 @@ public class MissionController : MonoBehaviour
         _unblockedMissions.Remove(mission);
         _gameState.FinishedMissions.Add(mission);
         UnblockFollowingMissions(mission);
+        _missionsUIController.UpdateMissionsUI();
     }
 
     private void UnblockFollowingMissions(Mission mission)
@@ -186,5 +188,10 @@ public class MissionController : MonoBehaviour
         }
 
         return availableMissions;
+    }
+
+    public void SetMissionsUIController(MissionsUIController missionsUIController)
+    {
+        _missionsUIController = missionsUIController;
     }
 }
