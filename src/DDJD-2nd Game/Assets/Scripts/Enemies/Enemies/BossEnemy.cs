@@ -18,6 +18,9 @@ public class BossEnemy : RangedEnemy
     private GameObject _protectionRunePrefab;
 
     [SerializeField]
+    private GameObject _nextPhaseVFX;
+
+    [SerializeField]
     private Skill _fireballSkill;
 
     [SerializeField]
@@ -62,21 +65,21 @@ public class BossEnemy : RangedEnemy
 
     private int _maxRuneCount = 9;
 
-    private int _phaseIndex = 4;
+    private int _phaseIndex = 0;
 
     private BossPhase[] _phases = new BossPhase[]
     {
         new BossPhase(0, 3, 1, false, 0.90f),
         new BossPhase(1, 6, 2, false, 0.80f),
-        new BossPhase(2, 9, 3, false, 0.60f),
-        new BossPhase(3, 12, 4, false, 0.40f),
-        new BossPhase(4, 24, 4, false, 0.15f),
+        new BossPhase(2, 9, 3, false, 0.70f),
+        new BossPhase(3, 12, 4, false, 0.50f),
+        new BossPhase(4, 24, 4, false, 0f),
     };
 
     public void AdvancePhase()
     {
         BossPhase phase = _phases[_phaseIndex];
-        if (_status.Health / _status.MaxHealth > phase.HealthToAdvance)
+        if ((float)_status.Health / _status.MaxHealth > phase.HealthToAdvance)
         {
             return;
         }
@@ -87,6 +90,10 @@ public class BossEnemy : RangedEnemy
             _phaseIndex = 0;
         }
         phase = _phases[_phaseIndex];
+        Vector3 position = transform.position;
+        position.y += 0.9f;
+        GameObject vfx = Instantiate(_nextPhaseVFX, transform.position, Quaternion.identity);
+        Destroy(vfx, 2.0f);
     }
 
     public void SpawnRune()
