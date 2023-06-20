@@ -15,10 +15,19 @@ public class ElementSource : MonoBehaviour
 
     private ElementAbsorbVFX _currentVFX;
 
-    protected void Awake() { }
+    private SoundEmitter _soundEmitter;
+    private FMOD.Studio.PARAMETER_ID _sfxStateID;
+
+    protected void Awake()
+    {
+        _soundEmitter = GetComponent<SoundEmitter>();
+    }
 
     // Start is called before the first frame update
-    void Start() { }
+    void Start()
+    {
+        _sfxStateID = _soundEmitter.GetParameterId("absorb", "State");
+    }
 
     // Update is called once per frame
     void Update() { }
@@ -34,12 +43,21 @@ public class ElementSource : MonoBehaviour
         _currentVFX.SetTarget(handTransform);
     }
 
+    public void PrepareTransfer(Player player)
+    {
+        _player = player;
+        _soundEmitter.SetParameter("absorb", _sfxStateID, 0);
+        _soundEmitter.Play("absorb");
+    }
+
     public virtual void StopTransfer(Player player)
     {
         if (_player == player && _currentVFX != null)
         {
             _currentVFX.Stop();
         }
+
+        _soundEmitter.SetParameter("absorb", _sfxStateID, 1);
     }
 
     public Element Element

@@ -52,7 +52,10 @@ public class CameraController : MonoBehaviour
 
     public void ChangeFov(float value, float time)
     {
-        _fovController.ChangeFov(value, 0.1f);
+        if (_fovController != null)
+        {
+            _fovController.ChangeFov(value, 0.1f);
+        }
     }
 
     public void ChangeFov(float value)

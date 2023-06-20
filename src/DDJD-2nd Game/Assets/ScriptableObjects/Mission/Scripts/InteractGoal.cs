@@ -6,10 +6,9 @@ using UnityEngine;
 public class InteractGoal : GoalObject
 {
     [SerializeField]
-    private NpcObject _npcToInteract;
-
-    public NpcObject NpcToInteract
+    private Interaction _interaction;
+    public Interaction Interaction
     {
-        get { return _npcToInteract; }
+        get { return _interaction; }
     }
 }

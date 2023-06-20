@@ -61,8 +61,8 @@ MonoBehaviour:
   windElement: {fileID: 11400000, guid: 4f1fc44ed51339b4195c6001521bf9e3, type: 2}
   electricityElement: {fileID: 11400000, guid: 48039012ea82f1b4caa0ae6b3fd06a8d, type: 2}
   fireElementButtonObject: {fileID: 3176209804790739428}
-  earthElementButtonObject: {fileID: 8028068974347199032}
-  windElementButtonObject: {fileID: 7437346740185139313}
+  earthElementButtonObject: {fileID: 7437346740185139313}
+  windElementButtonObject: {fileID: 8028068974347199032}
   electricityElementButtonObject: {fileID: 2429565424842759666}
   activeElementDescriptionObject: {fileID: 4940105135744671811}
 --- !u!1 &72036046981300425
@@ -2152,6 +2152,7 @@ MonoBehaviour:
   _events:
     _keys:
     - wheel
+    - select
     _values:
     - _playOnStart: 1
       _stopOnDestroy: 0
@@ -2163,6 +2164,16 @@ MonoBehaviour:
           Data3: 420035251
           Data4: 2104951584
         Path: event:/UI/Abilities Menu
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 0
+      _eventReference:
+        Guid:
+          Data1: 1450044450
+          Data2: 1338472850
+          Data3: -1996579710
+          Data4: -983486842
+        Path: event:/UI/Element Overlay
 --- !u!1 &2545849278619797761
 GameObject:
   m_ObjectHideFlags: 0
@@ -2178,6 +2189,7 @@ GameObject:
   - component: {fileID: 4560952128426982851}
   - component: {fileID: 3853680390496786787}
   - component: {fileID: 7925903127279117112}
+  - component: {fileID: 2357153658662414996}
   m_Layer: 6
   m_Name: OptionsMenu
   m_TagString: Untagged
@@ -2324,6 +2336,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiController: {fileID: 0}
   mouseSensitivityScrollBarObject: {fileID: 3198164176624542905}
+--- !u!114 &2357153658662414996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2545849278619797761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - menu
+    _values:
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 0
+      _eventReference:
+        Guid:
+          Data1: 237741939
+          Data2: 1121907292
+          Data3: -2065964896
+          Data4: -2104968963
+        Path: event:/UI/Main Menu
 --- !u!1 &2603824974437873996
 GameObject:
   m_ObjectHideFlags: 0
@@ -2777,7 +2815,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The revenge of the mad farmers
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ed9a06a66206bc044a930751c37037c2, type: 2}
   m_sharedMaterial: {fileID: 6352611323421988322, guid: ed9a06a66206bc044a930751c37037c2,
@@ -4467,6 +4505,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6709550099759257113}
+        m_TargetAssemblyTypeName: MenuUI, Assembly-CSharp
+        m_MethodName: ClickButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4424125706744704437
 GameObject:
   m_ObjectHideFlags: 0
@@ -5111,7 +5161,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8191772597941586146}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6709550099759257113}
+        m_TargetAssemblyTypeName: MenuUI, Assembly-CSharp
+        m_MethodName: quitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4921325610878591692
 GameObject:
   m_ObjectHideFlags: 0
@@ -5125,6 +5187,7 @@ GameObject:
   - component: {fileID: 2791961528356855579}
   - component: {fileID: 2871477375720430635}
   - component: {fileID: 6709550099759257113}
+  - component: {fileID: 5405578946581899609}
   m_Layer: 6
   m_Name: MenuUI
   m_TagString: Untagged
@@ -5228,6 +5291,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 370c542ef4963c74c82ac182e20c9ca7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5405578946581899609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4921325610878591692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a99067ea49528a41afcea0d1f83aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+    _keys:
+    - menu
+    _values:
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 0
+      _eventReference:
+        Guid:
+          Data1: 237741939
+          Data2: 1121907292
+          Data3: -2065964896
+          Data4: -2104968963
+        Path: event:/UI/Main Menu
 --- !u!1 &4940105135744671811
 GameObject:
   m_ObjectHideFlags: 0
@@ -5417,7 +5506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entryExitDuration: 0.5
   displayDuration: 4
-  missionTitleComponent: {fileID: 0}
+  missionTitleComponent: {fileID: 4372996258490271786}
 --- !u!1 &4963937750981827034
 GameObject:
   m_ObjectHideFlags: 0
@@ -6487,6 +6576,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6709550099759257113}
+        m_TargetAssemblyTypeName: MenuUI, Assembly-CSharp
+        m_MethodName: ClickButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6456823543129514739
 GameObject:
   m_ObjectHideFlags: 0
@@ -6915,6 +7016,7 @@ MonoBehaviour:
   _events:
     _keys:
     - wheel
+    - select
     _values:
     - _playOnStart: 1
       _stopOnDestroy: 0
@@ -6926,6 +7028,16 @@ MonoBehaviour:
           Data3: 420035251
           Data4: 2104951584
         Path: event:/UI/Abilities Menu
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 0
+      _eventReference:
+        Guid:
+          Data1: 1450044450
+          Data2: 1338472850
+          Data3: -1996579710
+          Data4: -983486842
+        Path: event:/UI/Element Overlay
 --- !u!1 &7157955781288068591
 GameObject:
   m_ObjectHideFlags: 0
@@ -7128,7 +7240,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Mission complete!
+  m_text: Mission Complete!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ed9a06a66206bc044a930751c37037c2, type: 2}
   m_sharedMaterial: {fileID: 6352611323421988322, guid: ed9a06a66206bc044a930751c37037c2,
@@ -7354,7 +7466,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4a59c4e2b9274834ebb7117f189775ad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1131fc0af833b3a40afa635e0539225e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7376,8 +7488,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75c18fb21eebfa1469f8677395d2b677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeSprite: {fileID: 21300000, guid: 0e669882b3c28db4daa218cda470af85, type: 3}
-  inactiveSprite: {fileID: 21300000, guid: 4a59c4e2b9274834ebb7117f189775ad, type: 3}
+  activeSprite: {fileID: 21300000, guid: c0504ffb380aed84188cf2e3f2419ab8, type: 3}
+  inactiveSprite: {fileID: 21300000, guid: 1131fc0af833b3a40afa635e0539225e, type: 3}
 --- !u!1 &7569031036993506810
 GameObject:
   m_ObjectHideFlags: 0
@@ -7975,7 +8087,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6015849831305998338
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16786,7 +16898,7 @@ PrefabInstance:
     - target: {fileID: 245970799664179270, guid: dfa7da3283202b24f9fe6a69d39fc6d9,
         type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4278190080
+      value: 4278245118
       objectReference: {fileID: 0}
     - target: {fileID: 5606731049753856101, guid: dfa7da3283202b24f9fe6a69d39fc6d9,
         type: 3}
@@ -16802,6 +16914,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5606731049753856101, guid: dfa7da3283202b24f9fe6a69d39fc6d9,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfa7da3283202b24f9fe6a69d39fc6d9, type: 3}

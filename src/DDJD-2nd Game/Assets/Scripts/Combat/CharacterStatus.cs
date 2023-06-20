@@ -109,4 +109,10 @@ public class CharacterStatus : MonoBehaviour
     {
         return _health == _maxHealth;
     }
+
+    public int MaxHealth
+    {
+        get { return _maxHealth; }
+        set { _maxHealth = value; }
+    }
 }

@@ -10,6 +10,9 @@ public abstract class GoalObject : ScriptableObject
     public bool _completed = false;
 
     [SerializeField]
+    private UnityEvent _onGoalStarted = new UnityEvent();
+
+    [SerializeField]
     private UnityEvent _onGoalCompleted = new UnityEvent();
 
     [SerializeField]
@@ -23,6 +26,11 @@ public abstract class GoalObject : ScriptableObject
         get { return _location; }
     }
 
+    public UnityEvent OnGoalStarted
+    {
+        get { return _onGoalStarted; }
+    }
+
     public UnityEvent OnGoalCompleted
     {
         get { return _onGoalCompleted; }
@@ -32,6 +40,12 @@ public abstract class GoalObject : ScriptableObject
     {
         Editor editor = Editor.CreateEditor(this);
         editor?.OnInspectorGUI();
+    }
+
+    public void Complete()
+    {
+        _completed = true;
+        OnGoalCompleted?.Invoke();
     }
 
     public string Description

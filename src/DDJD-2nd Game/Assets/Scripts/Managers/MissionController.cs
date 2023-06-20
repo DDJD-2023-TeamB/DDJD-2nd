@@ -19,6 +19,10 @@ public class MissionController : MonoBehaviour
     private Player _player;
     private UIController _uiController;
     private MissionsUIController _missionsUIController;
+    public MissionsUIController MissionsUIController
+    {
+        get { return _missionsUIController; }
+    }
 
     void Start()
     {
@@ -33,10 +37,7 @@ public class MissionController : MonoBehaviour
     {
         foreach (var mission in _unblockedMissions)
         {
-            if (mission.Status == MissionState.Blocked)
-            {
-                mission.Status = MissionState.Available;
-            }
+            mission.Unblock();
         }
     }
 
@@ -46,20 +47,16 @@ public class MissionController : MonoBehaviour
 
         foreach (var mission in missions)
         {
-            if (mission.Status == MissionState.Ongoing)
+            if (
+                mission.Status != MissionState.Ongoing
+                || mission.CurrentGoal is not InteractGoal interactGoal
+                || mission.CurrentGoal.Completed
+            )
+                continue;
+
+            if (interactGoal.Interaction.Npc == npc)
             {
-                foreach (var goal in mission.Goals)
-                {
-                    if (!goal._completed && goal is InteractGoal interactGoal)
-                    {
-                        if (interactGoal.NpcToInteract == npc)
-                        {
-                            goal.Complete();
-                            Debug.Log("Interact Goal Completed");
-                        }
-                    }
-                }
-                CheckIfAllGoalsAreCompleted(mission);
+                GoalCompleted(mission);
             }
         }
     }
@@ -70,42 +67,30 @@ public class MissionController : MonoBehaviour
 
         foreach (var mission in missions)
         {
-            if (mission.Status == MissionState.Ongoing)
+            if (
+                mission.Status != MissionState.Ongoing
+                || mission.CurrentGoal is not CollectGoal collectGoal
+                || mission.CurrentGoal.Completed
+            )
+                continue;
+
+            if (collectGoal.CollectibleToCollect == collectible)
             {
-                foreach (var goal in mission.Goals)
+                if (collectGoal.Quantity > 0)
                 {
-                    if (!goal._completed && goal is CollectGoal collectGoal)
-                    {
-                        if (collectGoal.CollectibleToCollect == collectible)
-                        {
-                            if (collectGoal.Quantity > 0)
-                                collectGoal.Quantity -= 1;
-                            if (collectGoal.Quantity == 0)
-                            {
-                                goal.Complete();
-                            }
-                                
-                            Debug.Log("Collect Goal Completed");
-                        }
-                    }
+                    collectGoal.Quantity -= 1;
                 }
-                CheckIfAllGoalsAreCompleted(mission);
+                else
+                {
+                    GoalCompleted(mission);
+                }
             }
         }
     }
 
     public void CheckIfAllGoalsAreCompleted(Mission mission)
     {
-        bool allGoalsCompleted = true;
-        foreach (var goal in mission.Goals)
-        {
-            if (!goal._completed)
-            {
-                allGoalsCompleted = false;
-                break;
-            }
-        }
-
+        bool allGoalsCompleted = mission.IsCompleted();
         if (allGoalsCompleted)
         {
             HandleMissionComplete(mission);
@@ -127,10 +112,7 @@ public class MissionController : MonoBehaviour
     {
         foreach (var followingMissions in mission.FollowingMissions)
         {
-            Debug.Log("UnblockFollowingMissions");
-            Debug.Log(followingMissions);
-            followingMissions.Status = MissionState.Available;
-            _unblockedMissions.Add(followingMissions);
+            followingMissions.Unblock();
         }
     }
 
@@ -144,23 +126,39 @@ public class MissionController : MonoBehaviour
         //_player.Inventory.AddGold(mission.Reward.Gold);
     }
 
-    public Queue<Mission> GetNpcMissions(NpcObject npc)
+    public List<Mission> GetNpcMissions(NpcObject npc, bool interactionBegin)
     {
-        Queue<Mission> missions = new Queue<Mission>();
+        List<Mission> missions = new List<Mission>();
 
         foreach (var mission in _unblockedMissions)
         {
-            if (mission.Status != MissionState.Completed)
+            Debug.Log(mission.Title);
             {
-                if (mission.InteractionBegin.Npc == npc || mission.InteractionEnd.Npc == npc)
+                if (mission.Status == MissionState.Available && mission.InteractionBegin.Npc == npc)
                 {
-                    missions.Enqueue(mission);
+                    missions.Add(mission);
+                }
+                else if (interactionBegin) {
+                    if (mission.Status == MissionState.Ongoing
+                        && mission.InteractionBegin.Npc == npc
+                    )
+                    {
+                        missions.Add(mission);
+                    }
+                }
+                else if (mission.Status == MissionState.Ongoing
+                    && mission.CurrentGoal is InteractGoal interactGoal
+                    && interactGoal.Interaction.Npc == npc
+                )
+                {
+                    missions.Add(mission);
                 }
             }
         }
 
         return missions;
     }
+    
 
     public void CompleteFightGoal(EnemySpawner _enemySpawner)
     {
@@ -176,8 +174,7 @@ public class MissionController : MonoBehaviour
                 {
                     if (fightGoal.EnemySpawner == _enemySpawner)
                     {
-                        goal.Complete();
-                        CheckIfAllGoalsAreCompleted(mission);
+                        GoalCompleted(mission);
                     }
                 }
             }
@@ -200,5 +197,12 @@ public class MissionController : MonoBehaviour
     public void SetMissionsUIController(MissionsUIController missionsUIController)
     {
         _missionsUIController = missionsUIController;
+    }
+
+    public void GoalCompleted(Mission mission)
+    {
+        mission.CompleteCurrentGoal();
+        CheckIfAllGoalsAreCompleted(mission);
+        _missionsUIController?.UpdateMissionsUI();
     }
 }

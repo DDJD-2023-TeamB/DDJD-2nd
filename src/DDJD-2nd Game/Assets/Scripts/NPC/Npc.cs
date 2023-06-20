@@ -12,23 +12,14 @@ public class Npc : Interactable
     private Animator _animator;
     private Dialogue _dialogue;
     private DialogueInfo _currentDialogueInfo;
-    private Queue<Mission> _missions = new Queue<Mission>();
-    public Queue<Mission> Missions
-    {
-        get { return _missions; }
-    }
+
     private Mission _currentMission;
 
     protected override void Start()
     {
         base.Start();
         _currentDialogueInfo = _npc.DefaultDialogueInfo;
-        _missions = _missionController.GetNpcMissions(_npc);
         _animator = GetComponent<Animator>();
-        if (_missions.Count != 0)
-        {
-            _currentMission = _missions.Dequeue();
-        }
     }
 
     void Update() { }
@@ -44,11 +35,11 @@ public class Npc : Interactable
         {
             _dialogue = _player.UIController.PlayerUI.Dialogue;
         }
-        _missionController.CheckIfNpcIsMyGoal(_npc);
 
-        if (_currentMission != null)
+        _currentDialogueInfo = _npc.DefaultDialogueInfo;
+        foreach (var mission in _missionController.GetNpcMissions(_npc, false))
         {
-            switch (_currentMission.Status)
+            switch (mission.Status)
             {
                 case MissionState.Blocked:
                 {
@@ -57,40 +48,39 @@ public class Npc : Interactable
                 }
                 case MissionState.Available:
                 {
-                    if (_npc == _currentMission.InteractionBegin.Npc)
-                    {
-                        _currentDialogueInfo = _currentMission.InteractionBegin.DialogueInfo;
-                        _currentMission.Status = MissionState.Ongoing;
-                        _missionController.CheckIfAllGoalsAreCompleted(_currentMission);
-                    }
+                    _currentDialogueInfo = mission.InteractionBegin.DialogueInfo;
+                    mission.Status = MissionState.Ongoing;
+                    mission.CurrentGoal.OnGoalStarted?.Invoke();
+                    _missionController.MissionsUIController?.UpdateMissionsUI();
+                    _missionController.CheckIfAllGoalsAreCompleted(mission);
                     break;
                 }
                 case MissionState.Ongoing:
                 {
-                    if (_npc == _currentMission.InteractionBegin.Npc)
-                    {
-                        _currentDialogueInfo = _currentMission.InteractionBegin.DialogueInfo;
-                        _missionController.CheckIfAllGoalsAreCompleted(_currentMission);
-                    }
+                    if (mission.CurrentGoal is InteractGoal interactGoal)
+                        _currentDialogueInfo = mission.InteractionBegin.DialogueInfo;
                     break;
                 }
-                case MissionState.Completed:
-                {
-                    if (_npc == _currentMission.InteractionBegin.Npc)
-                        _currentDialogueInfo = _npc.DefaultDialogueInfo;
+                // case MissionState.Completed:
+                // {
+                //     if (_npc == _currentMission.InteractionBegin.Npc)
+                //         _currentDialogueInfo = _npc.DefaultDialogueInfo;
 
-                    if (_missions.Count > 0)
-                    {
-                        _currentMission = _missions.Dequeue();
-                    }
-                    else
-                    {
-                        _currentMission = null;
-                    }
-                    break;
-                }
+                //     if (_missions.Count > 0)
+                //     {
+                //         _currentMission = _missions.Dequeue();
+                //     }
+                //     else
+                //     {
+                //         _currentMission = null;
+                //     }
+                //     break;
+                // }
             }
         }
+
+        _missionController.CheckIfNpcIsMyGoal(_npc);
+
         _dialogue.StartDialogue(_currentDialogueInfo);
         _animator.SetInteger("Talking Index", Random.Range(0, 4));
         _animator.SetTrigger("Talking");
@@ -98,20 +88,27 @@ public class Npc : Interactable
 
     public void ContinueInteraction()
     {
-        if (!_dialogue.CheckIfDialogueEnded())
+        if (!_dialogue.CheckIfDialogueEnded()) {
+            Debug.Log("Continue");
             _dialogue.DisplayNextSentence();
+        }
         else
         {
-            if (
-                _currentMission
-                && _npc == _currentMission.InteractionBegin.Npc
-                && _currentMission.Status == MissionState.Ongoing
-            )
+            foreach (var mission in _missionController.GetNpcMissions(_npc, true))
             {
-                _currentMission.InteractionBegin.InteractionEnded();
+                Debug.Log(mission);
+                if (
+                    mission
+                    && _npc == mission.InteractionBegin.Npc
+                    && mission.Status == MissionState.Ongoing
+                )
+                {
+                    _currentMission = mission;
+                    mission.InteractionBegin.InteractionEnded();
+                    return;
+                }
             }
-            else
-                EndFullInteraction(true);
+            EndFullInteraction(true);
         }
     }
 
