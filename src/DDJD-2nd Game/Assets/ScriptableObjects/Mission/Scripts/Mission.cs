@@ -99,14 +99,6 @@ public class Mission : ScriptableObject
     {
         get { return _area; }
     }
-
-    [SerializeField]
-    private string _tutorial = null;
-
-    public string Tutorial
-    {
-        get { return _tutorial; }
-    }
     public void OnEnable() { }
     //onFinished -> callback
 }

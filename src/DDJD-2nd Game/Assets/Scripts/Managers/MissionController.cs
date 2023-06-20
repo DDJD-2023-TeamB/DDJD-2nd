@@ -120,7 +120,7 @@ public class MissionController : MonoBehaviour
         _unblockedMissions.Remove(mission);
         _gameState.FinishedMissions.Add(mission);
         UnblockFollowingMissions(mission);
-        _missionsUIController.UpdateMissionsUI();
+        if(_missionsUIController != null) _missionsUIController.UpdateMissionsUI();
     }
 
     private void UnblockFollowingMissions(Mission mission)

@@ -46,6 +46,7 @@ public abstract class GoalObject : ScriptableObject
 
     public void Complete()
     {
+        _completed = true;
         _onGoalCompleted?.Invoke();
     }
 }

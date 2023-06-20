@@ -4,16 +4,40 @@ using UnityEngine;
 
 public class TutorialCallback : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start() { }
+    private Player _player;
+    private Tutorial _tutorial;
 
-    // Update is called once per frame
-    void Update() { }
-
-    
-
-    public void Print()
+    public void HandleTutorial(Tutorial tutorial)
     {
-        Debug.Log("Triggered Tutorial");
+        if (_tutorial == null && tutorial != null)
+        {
+            _tutorial = tutorial;
+            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            _player.UIController.HandleTutorial(true, tutorial);
+        }
+        else
+        {
+            SwitchPageInTutorial();
+        }
     }
+
+    private void SwitchPageInTutorial()
+    {
+        if (_tutorial)
+        {
+            _tutorial.SwitchPage();
+            _player.UIController.ChangeTutorialPage(_tutorial);
+        }
+    }
+
+    public void ExitTutorial()
+    {
+        if (_tutorial)
+        {
+            _tutorial = null;
+            _player.UIController.OpenTutorial(false);
+        }
+    }
+
+      
 }

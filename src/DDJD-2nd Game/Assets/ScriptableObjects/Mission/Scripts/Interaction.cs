@@ -32,7 +32,18 @@ public class Interaction
 
     public void InteractionEnded()
     {
-        _onEndInteraction.Invoke();
+        _onEndInteraction?.Invoke();
     }
 
+    [SerializeField]
+    private UnityEvent _onTutorialExit = new UnityEvent();
+    public UnityEvent OnTutorialExit
+    {
+        get { return _onTutorialExit; }
+    }
+
+    public void Exit()
+    {
+        OnTutorialExit?.Invoke();
+    }
 }

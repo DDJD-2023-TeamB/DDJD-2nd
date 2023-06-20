@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+
 [DefaultExecutionOrder(0)]
 [System.Serializable]
 public class Npc : Interactable
@@ -18,21 +19,15 @@ public class Npc : Interactable
     }
     private Mission _currentMission;
 
-    private Tutorial _currentTutorial;
-
-    // se tutorial está aberto ou não 
-    private bool _tutorial = false;
-
     protected override void Start()
     {
         base.Start();
         _currentDialogueInfo = _npc.DefaultDialogueInfo;
         _missions = _missionController.GetNpcMissions(_npc);
         _animator = GetComponent<Animator>();
-        if (_missions.Count != 0) {
+        if (_missions.Count != 0)
+        {
             _currentMission = _missions.Dequeue();
-            //TODO
-            if (_currentMission.Tutorial != null) _currentTutorial = (Tutorial)AssetDatabase.LoadAssetAtPath("Assets/ScriptableObjects/Mission/Tutorial/" + _currentMission.Tutorial + ".asset", typeof(Tutorial));
         }
     }
 
@@ -53,33 +48,46 @@ public class Npc : Interactable
 
         if (_currentMission != null)
         {
-            if (_currentMission.Status == MissionState.Blocked)
+            switch (_currentMission.Status)
             {
-                _currentDialogueInfo = _npc.DefaultDialogueInfo;
-            }
-            if (_currentMission.Status == MissionState.Available)
-            {
-                if (_npc == _currentMission.InteractionBegin.Npc)
+                case MissionState.Blocked:
                 {
-                    _currentDialogueInfo = _currentMission.InteractionBegin.DialogueInfo;
-                    _currentMission.Status = MissionState.Ongoing;
-                    _missionController.CheckIfAllGoalsAreCompleted(_currentMission);
-                }
-            }
-            else if (_currentMission.Status == MissionState.Completed)
-            {
-                if (_npc == _currentMission.InteractionBegin.Npc)
                     _currentDialogueInfo = _npc.DefaultDialogueInfo;
-                if (_missions.Count > 0)
-                {
-                    _currentMission = _missions.Dequeue();
-                    //TODO : remove
-                    _currentTutorial = (Tutorial)AssetDatabase.LoadAssetAtPath("Assets/ScriptableObjects/Mission/Tutorial/" + _currentMission.Tutorial + ".asset", typeof(Tutorial));
+                    break;
                 }
-                else
+                case MissionState.Available:
                 {
-                    _currentMission = null;
-                    _currentTutorial = null;
+                    if (_npc == _currentMission.InteractionBegin.Npc)
+                    {
+                        _currentDialogueInfo = _currentMission.InteractionBegin.DialogueInfo;
+                        _currentMission.Status = MissionState.Ongoing;
+                        _missionController.CheckIfAllGoalsAreCompleted(_currentMission);
+                    }
+                    break;
+                }
+                case MissionState.Ongoing:
+                {
+                    if (_npc == _currentMission.InteractionBegin.Npc)
+                    {
+                        _currentDialogueInfo = _currentMission.InteractionBegin.DialogueInfo;
+                        _missionController.CheckIfAllGoalsAreCompleted(_currentMission);
+                    }
+                    break;
+                }
+                case MissionState.Completed:
+                {
+                    if (_npc == _currentMission.InteractionBegin.Npc)
+                        _currentDialogueInfo = _npc.DefaultDialogueInfo;
+
+                    if (_missions.Count > 0)
+                    {
+                        _currentMission = _missions.Dequeue();
+                    }
+                    else
+                    {
+                        _currentMission = null;
+                    }
+                    break;
                 }
             }
         }
@@ -92,50 +100,31 @@ public class Npc : Interactable
     {
         if (!_dialogue.CheckIfDialogueEnded())
             _dialogue.DisplayNextSentence();
-        // TODO REMOVE
-        else if (_dialogue.CheckIfDialogueEnded() && !_tutorial)
+        else
         {
-            if (_currentMission && _currentMission.Status == MissionState.Ongoing) {
-                //EndFullInteraction(false);
+            if (
+                _currentMission
+                && _npc == _currentMission.InteractionBegin.Npc
+                && _currentMission.Status == MissionState.Ongoing
+            )
+            {
                 _currentMission.InteractionBegin.InteractionEnded();
-                CheckTutorial();
             }
-            else EndFullInteraction(true);
-        } 
-        else if (_dialogue.CheckIfDialogueEnded() && _tutorial)
-        {
-            // REPLACE _currentTutorial -> _currentMission.tutorial
-            _currentTutorial.SwitchPage();
-            _player.UIController.ChangeTutorialPage(_currentTutorial);
+            else
+                EndFullInteraction(true);
         }
-    }
-
-    public void CheckTutorial()
-    {
-        _tutorial = true;
-
-        //abrir o panel vazio
-        _player.UIController.OpenTutorial(true);
-        //Preencher o tutorial
-        _player.UIController.ChangeTutorialPage(_currentTutorial);
     }
 
     public void ExitInteraction()
     {
-        // TODO : remove
-        if (_tutorial) {
-            _tutorial = false;
-            //Fechar
-            _player.UIController.OpenTutorial(false);
-        }
+        _currentMission.InteractionBegin.Exit();
         EndFullInteraction(true);
     }
 
     private void EndFullInteraction(bool endFullInteraction)
     {
-        // Tem de tirar o object 
-        // TODO : testar a tirar 
-        if (endFullInteraction) base.EndInteract();
+        if (endFullInteraction)
+            base.EndInteract();
         EndInteract();
     }
 
