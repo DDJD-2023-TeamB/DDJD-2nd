@@ -287,6 +287,18 @@ public class UIController : MonoBehaviour
             Debug.LogError("Item is not itemskill");
             return;
         }
+
+        if (area == UiArea.LeftWheel)
+        {
+            RemoveFromWheel(image.currentItem, true);
+            Destroy(image.gameObject);
+        }
+        else if (area == UiArea.RightWheel)
+        {
+            RemoveFromWheel(image.currentItem, true);
+            Destroy(image.gameObject);
+        }
+
         ItemSkill itemSkill = (ItemSkill)image.currentItem.item;
         leftWheelItems[slot] = itemSkill;
         _player.PlayerSkills.EquippedLeftSkills[slot] = itemSkill;
