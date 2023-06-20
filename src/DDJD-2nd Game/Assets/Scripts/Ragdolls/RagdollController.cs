@@ -19,6 +19,9 @@ public class RagdollController : MonoBehaviour
     private float _knockbackForceMultiplier = 3f;
 
     [SerializeField]
+    private bool _deactivateBones = false;
+
+    [SerializeField]
     private List<string> _animationsLoaded = new List<string>();
     private Dictionary<string, BoneTransform[]> _animationInitialBones =
         new Dictionary<string, BoneTransform[]>();
@@ -63,6 +66,18 @@ public class RagdollController : MonoBehaviour
         _rigidbodies = rigidbodies.ToArray();
 
         _colliders = GetComponentsInChildren<Collider>();
+
+        //Remove colliders that contains Hitbox
+        List<Collider> colliders = new List<Collider>(_colliders);
+        foreach (Collider collider in _colliders)
+        {
+            if (collider.gameObject.GetComponent<Hitbox>() != null)
+            {
+                colliders.Remove(collider);
+            }
+        }
+        _colliders = colliders.ToArray();
+
         _triggerCollider = GetComponent<Collider>();
         _animator = GetComponent<Animator>();
         _hipsBone = _animator.GetBoneTransform(HumanBodyBones.Hips);
@@ -147,7 +162,10 @@ public class RagdollController : MonoBehaviour
         }
         foreach (Collider col in _colliders)
         {
-            //col.enabled = false;
+            if (_deactivateBones)
+            {
+                col.enabled = false;
+            }
             col.isTrigger = false;
         }
         _collider.enabled = true;
@@ -282,5 +300,12 @@ public class RagdollController : MonoBehaviour
     public Damageable Damageable
     {
         get { return _damageable; }
+    }
+
+    public void SetPositionToRagdoll()
+    {
+        _hipsBone.parent = null;
+        transform.position = _hipsBone.position;
+        _hipsBone.parent = transform;
     }
 }

@@ -151,6 +151,10 @@ public class RuneShooter : MonoBehaviour, Damageable, NonPushable
 
     public void Die()
     {
+        if (gameObject == null)
+        {
+            return;
+        }
         GameObject deathVfx = Instantiate(_deathVfxPrefab, transform.position, transform.rotation);
         VisualEffect vfx = deathVfx.GetComponent<VisualEffect>();
         vfx.SetFloat("Size", _runeSize);
