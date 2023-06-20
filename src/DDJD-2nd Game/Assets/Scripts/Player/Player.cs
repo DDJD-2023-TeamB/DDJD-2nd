@@ -189,6 +189,8 @@ public class Player : StateContext, Damageable
 
     private RagdollController _ragdollController;
 
+    private PlayerMusic _playerMusic;
+
     void Awake()
     {
         _inputReceiver = GetComponent<PlayerInputReceiver>();
@@ -214,6 +216,7 @@ public class Player : StateContext, Damageable
         _airborneComponent = GetComponent<PlayerAirborneComponent>();
         _playerDeath = GetComponent<PlayerDeath>();
         _ragdollController = GetComponent<RagdollController>();
+        _playerMusic = GetComponent<PlayerMusic>();
         ChangeState(_factory.Playable());
     }
 
@@ -349,5 +352,10 @@ public class Player : StateContext, Damageable
     public RagdollController RagdollController
     {
         get { return _ragdollController; }
+    }
+
+    public PlayerMusic PlayerMusic
+    {
+        get { return _playerMusic; }
     }
 }
