@@ -136,4 +136,6 @@ public class CollectibleInteractable : Interactable
     {
         return true;
     }
+
+  
 }
