@@ -68,6 +68,7 @@ public class Npc : Interactable
         if (_floatingIconCanvas.activeSelf && !missionFound)
         {
             _floatingIconCanvas.SetActive(false);
+            Debug.Log("Deactivated icon");
         }
 
         yield return new WaitForSeconds(0.5f);

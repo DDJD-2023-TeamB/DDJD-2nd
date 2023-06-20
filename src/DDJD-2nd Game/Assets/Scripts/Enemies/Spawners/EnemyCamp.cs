@@ -99,13 +99,15 @@ public class EnemyCamp : MonoBehaviour, NonCollidable
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!other.CompareTag("Player"))
         {
-            if (_coroutine != null)
-            {
-                StopCoroutine(_coroutine);
-                _spawnerManager.StopSpawn();
-            }
+            return;
+        }
+
+        if (_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+            _spawnerManager.StopSpawn();
         }
 
         //Move enemies back to camp
