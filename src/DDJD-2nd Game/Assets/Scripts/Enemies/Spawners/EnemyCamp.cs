@@ -7,7 +7,8 @@ using MyBox;
 public enum SpawnerTriggerType
 {
     OnProximity,
-    OnCombat
+    OnCombat,
+    OnGoalStart
 }
 
 public class EnemyCamp : MonoBehaviour, NonCollidable
@@ -38,6 +39,7 @@ public class EnemyCamp : MonoBehaviour, NonCollidable
     private Coroutine _coroutine;
 
     private bool _playerSighted = false;
+    private bool _fightGoalStarted = false;
 
     private void Awake()
     {
@@ -147,7 +149,6 @@ public class EnemyCamp : MonoBehaviour, NonCollidable
                     {
                         _spawnerManager.StartSpawn();
                         continueCoroutine = false;
-                        break;
                     }
                     break;
                 case SpawnerTriggerType.OnCombat:
@@ -155,7 +156,14 @@ public class EnemyCamp : MonoBehaviour, NonCollidable
                     {
                         _spawnerManager.StartSpawn();
                         continueCoroutine = false;
-                        break;
+                    }
+                    break;
+                case SpawnerTriggerType.OnGoalStart:
+                    if (_fightGoalStarted)
+                    {
+                        InstantiateDefaultEnemies();
+                        _spawnerManager.StartSpawn();
+                        continueCoroutine = false;
                     }
                     break;
             }
@@ -186,6 +194,17 @@ public class EnemyCamp : MonoBehaviour, NonCollidable
     {
         _spawnerManager.ResetSpawner();
         _playerSighted = false;
-        InstantiateDefaultEnemies();
+        if (_triggerType != SpawnerTriggerType.OnGoalStart)
+            InstantiateDefaultEnemies();
+    }
+
+    public void OnFightGoalStarted()
+    {
+        _fightGoalStarted = true;
+    }
+
+    public void OnFightGoalCompleted()
+    {
+        _fightGoalStarted = false;
     }
 }

@@ -9,8 +9,12 @@ public class MissionSelectionScript : MonoBehaviour, IPointerClickHandler
 {
     public GameObject missionsUI;
     public Mission mission;
-    [SerializeField] private GameObject newIndicator;
-    [SerializeField] private TextMeshProUGUI missionTitle;
+
+    [SerializeField]
+    private GameObject newIndicator;
+
+    [SerializeField]
+    private TextMeshProUGUI missionTitle;
     private RectTransform rectTransform;
 
     public void OnPointerClick(PointerEventData eventData)
@@ -20,7 +24,7 @@ public class MissionSelectionScript : MonoBehaviour, IPointerClickHandler
             Debug.LogError("missionsUI is null!");
             return;
         }
-        missionsUI.GetComponent<MissionsUIController>().setActiveMission(mission);
+        missionsUI.GetComponent<MissionsUIController>().SetActiveMission(mission);
     }
 
     // Start is called before the first frame update
@@ -28,7 +32,7 @@ public class MissionSelectionScript : MonoBehaviour, IPointerClickHandler
     {
         missionsUI = GameObject.Find("MissionsUI");
         rectTransform = newIndicator.GetComponent<RectTransform>();
-        if(rectTransform == null)
+        if (rectTransform == null)
         {
             Debug.LogError("Rect transform is null!");
         }
@@ -43,7 +47,7 @@ public class MissionSelectionScript : MonoBehaviour, IPointerClickHandler
         if (isNew)
         {
             float textWidth = missionTitle.preferredWidth;
-            rectTransform.anchoredPosition = new Vector3(textWidth,0,0);
+            rectTransform.anchoredPosition = new Vector3(textWidth, 0, 0);
             newIndicator.SetActive(true);
         }
         else
