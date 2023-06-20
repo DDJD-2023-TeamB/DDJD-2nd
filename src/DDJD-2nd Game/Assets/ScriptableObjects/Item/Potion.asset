@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Potion
   _description: Restores 10 health points
-  _icon: {fileID: 21300000, guid: 79c32a0efbfff5243952761612676010, type: 3}
-  _prefab: {fileID: 7240042555244189334, guid: 3650faba4170b41e4b0d27bce48dac72, type: 3}
-  _purchasable: 1
-  _cost: 0
+  _icon: {fileID: 21300000, guid: bcc79d29c01b0ef48834aa4f011924f5, type: 3}
+  _prefab: {fileID: 4106680580294549584, guid: 82f709b2a51d24a759b3255bf2092483, type: 3}
+  _purchasable: 0
+  _cost: 25
   _numLeftToBuy: 3
   _unlimited: 1
-  restoreHealthValue: 5
+  restoreHealthValue: 10
   soundEvent:
     Guid:
       Data1: 873991447
@@ -30,3 +30,4 @@ MonoBehaviour:
     Path: event:/UI/Potion
   _effectPrefab: {fileID: 5050110611324221885, guid: d86ce0c149ded0219920d8fb8e2242e5,
     type: 3}
+  _effectDuration: 2
