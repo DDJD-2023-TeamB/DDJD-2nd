@@ -47,10 +47,10 @@ public class ActiveElementWheelController : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    playerController.UpdateElement(windElement);
-                    setSprites("Wind");
+                    playerController.UpdateElement(earthElement);
+                    setSprites("Earth");
                 }
-                activeElementDescription.text = "Wind";
+                activeElementDescription.text = "Earth";
             }
             if (angle < -135 || angle > 135)
             {
@@ -77,10 +77,10 @@ public class ActiveElementWheelController : MonoBehaviour
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
-                        playerController.UpdateElement(earthElement);
-                        setSprites("Earth");
+                        playerController.UpdateElement(windElement);
+                        setSprites("Wind");
                     }
-                    activeElementDescription.text = "Earth";
+                    activeElementDescription.text = "Wind";
                 }
             }
         }

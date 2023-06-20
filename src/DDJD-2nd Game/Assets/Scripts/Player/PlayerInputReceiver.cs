@@ -102,6 +102,12 @@ public class PlayerInputReceiver : MonoBehaviour
     public bool IsContinueReading
     {
         get { return _isContinueReading; }
+        set { _isContinueReading = value; }
+    }
+    private bool _isExitingInteraction;
+    public bool IsExitingInteraction
+    {
+        get { return _isExitingInteraction; }
     }
     private bool _isAbsorbing;
     public bool IsAbsorbing
@@ -117,7 +123,6 @@ public class PlayerInputReceiver : MonoBehaviour
 
     public Action OnMeleeAttackKeydown;
     public Action OnMeleeAttackKeyup;
-
     public Action OnInteractionKeyDown;
     public Action OnJumpKeyDown;
     public Action OnJumpKeyUp;
@@ -127,6 +132,7 @@ public class PlayerInputReceiver : MonoBehaviour
     public Action OnMissionKeyup;
     public Action OnMenuKeydown;
     public Action OnMenuKeyup;
+    public Action OnUsePotion;
 
     public Action OnPrintState;
 
@@ -201,6 +207,9 @@ public class PlayerInputReceiver : MonoBehaviour
 
         _playerInput.Combat.AbsorbMana.performed += ctx => _isAbsorbing = true;
         _playerInput.Combat.AbsorbMana.canceled += ctx => _isAbsorbing = false;
+
+        _playerInput.Combat.UsePotion.performed += ctx => OnUsePotion?.Invoke();
+
         _playerInput.Combat.ChangeActiveElement.performed += ctx => _isChangingActiveElement = true;
         _playerInput.Combat.ChangeActiveElement.canceled += ctx => _isChangingActiveElement = false;
 
@@ -223,6 +232,9 @@ public class PlayerInputReceiver : MonoBehaviour
 
         _playerInput.UI.Menu.performed += ctx => OnMenuKeydown?.Invoke();
         _playerInput.UI.Menu.canceled += ctx => OnMenuKeyup?.Invoke();
+
+        _playerInput.UI.Tutorial.performed += ctx => _isExitingInteraction = true;
+        _playerInput.UI.Tutorial.canceled += ctx => _isExitingInteraction = false;
 
         _playerInput.Debug.PrintState.performed += ctx => OnPrintState?.Invoke();
     }

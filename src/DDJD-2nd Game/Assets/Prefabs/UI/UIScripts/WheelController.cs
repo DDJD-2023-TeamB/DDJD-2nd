@@ -17,6 +17,11 @@ public class WheelController : MonoBehaviour
     private SoundEmitter _soundEmitter;
     private FMOD.Studio.PARAMETER_ID _wheelParameterId;
 
+    private FMOD.Studio.PARAMETER_ID _sfxSelectElementId;
+
+    [SerializeField]
+    private ManaBarIconController manaBarIconController;
+
     private ItemObject[] _itemList = new ItemObject[6];
 
     private Canvas _canvas;
@@ -34,6 +39,7 @@ public class WheelController : MonoBehaviour
         slotSize = edgeObject.transform.position.x - spellWheelBackground.transform.position.x;
         highlighterController = wheelHiglighter.GetComponent<WheelHiglighterContoller>();
         _wheelParameterId = _soundEmitter.GetParameterId("wheel", "Abilities Menu Type");
+        _sfxSelectElementId = _soundEmitter.GetParameterId("select", "Element Overlay");
         wheelSelector.enabled = false;
         highlighterController.enabled = false;
     }
@@ -103,6 +109,21 @@ public class WheelController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             wheelSelector.changeSelection(slot);
+            if (_itemList[slot] == null)
+            {
+                manaBarIconController.changeSpellSprite(null);
+            }
+            else
+            {
+                manaBarIconController.changeSpellSprite(_itemList[slot].Icon);
+                ItemSkill itemSkill = (ItemSkill)_itemList[slot];
+                _soundEmitter.SetParameterWithLabel(
+                    "select",
+                    _sfxSelectElementId,
+                    itemSkill.Skill.Element.SfxDamageLabel,
+                    true
+                );
+            }
             //uiController.SelectSlotLeft(slot);
         }
     }
@@ -117,13 +138,18 @@ public class WheelController : MonoBehaviour
         return (ItemSkill)_itemList[wheelSelector.CurrentSlot];
     }
 
-    public void updateSpellWheel(ItemObject[] itemList)
+    public void updateSpellWheel(ItemObject[] itemList, UiArea area)
     {
         _itemList = itemList;
         for (int i = 0; i < itemList.Length; i++)
         {
             if (itemList[i] != null)
             {
+                //Remove child
+                for (int j = 0; j < wheelSlots.transform.GetChild(i).childCount; j++)
+                {
+                    Destroy(wheelSlots.transform.GetChild(i).GetChild(j).gameObject);
+                }
                 GameObject itemImage = Instantiate(wheelSlotImagePrefab);
                 itemImage.transform.SetParent(wheelSlots.transform.GetChild(i));
                 itemImage.transform.position = wheelSlots.transform.GetChild(i).position;

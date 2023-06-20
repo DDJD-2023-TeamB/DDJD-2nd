@@ -1383,7 +1383,7 @@ GameObject:
   - component: {fileID: 3947036104357098918}
   m_Layer: 6
   m_Name: Alpha_Surface
-  m_TagString: Untagged
+  m_TagString: PlayerSkinMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3499,6 +3499,7 @@ GameObject:
   - component: {fileID: 2410517152061201940}
   - component: {fileID: 6552981424179309022}
   - component: {fileID: 7768398258343145679}
+  - component: {fileID: 2914040765468682999}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -3865,6 +3866,7 @@ MonoBehaviour:
     _keys:
     - footstep
     - jump
+    - air
     _values:
     - _playOnStart: 0
       _stopOnDestroy: 0
@@ -3886,6 +3888,16 @@ MonoBehaviour:
           Data3: -2126559301
           Data4: 781296483
         Path: event:/Movement/Jump
+    - _playOnStart: 0
+      _stopOnDestroy: 0
+      _updatePosition: 1
+      _eventReference:
+        Guid:
+          Data1: -1524831470
+          Data2: 1279909948
+          Data3: 386926774
+          Data4: 1921847288
+        Path: event:/Movement/Air
 --- !u!114 &7961308323444105709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3908,6 +3920,13 @@ MonoBehaviour:
   fireStoneSprite: {fileID: 0}
   redDiamondSprite: {fileID: 0}
   currentItemTitle: {fileID: 0}
+  _dragEvent:
+    Guid:
+      Data1: 191455767
+      Data2: 1227941080
+      Data3: -1726887262
+      Data4: -1529539535
+    Path: event:/UI/Inventory
 --- !u!114 &1218520422210949770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3964,6 +3983,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2c887eb4eb992e40b52295c75643c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2914040765468682999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694690271000812756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa53421e64f2189469deb233f87253e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8198835224221356302

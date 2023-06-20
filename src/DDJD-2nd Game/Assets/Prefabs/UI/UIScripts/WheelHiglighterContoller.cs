@@ -30,7 +30,6 @@ public class WheelHiglighterContoller : MonoBehaviour
         }
 
         float deltaTime = Time.deltaTime * 1 / Time.timeScale;
-        //Debug.Log("Cur Angle: " + currAngle + "    Tar Angle: " + targetAngle + "     Rem Angle: " + remaniningAngle + "     Rotation Speed: " + rotationSpeed);
         if (Mathf.Abs(remaniningAngle) < rotationSpeed * deltaTime)
         {
             transform.rotation = Quaternion.Euler(0, 0, targetAngle);
@@ -43,7 +42,6 @@ public class WheelHiglighterContoller : MonoBehaviour
                 transform.rotation.eulerAngles.z
                     + Mathf.Sign(remaniningAngle) * rotationSpeed * deltaTime
             );
-            //Debug.Log("Cur Angle: " + transform.rotation.z + "    Tar Angle: " + targetAngle + "     Rotating...");
         }
     }
 

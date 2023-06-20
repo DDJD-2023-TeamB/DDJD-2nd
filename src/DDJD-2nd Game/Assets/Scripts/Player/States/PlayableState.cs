@@ -21,6 +21,7 @@ public class PlayableState : GenericState
         _context.Input.OnMissionKeydown += OnMissionKeydown;
         _context.Input.OnMenuKeydown += OnMenuKeydown;
         _context.Input.OnInteractionKeyDown += OnInteractionKeyDown;
+        _context.Input.OnUsePotion += OnUsePotion;
     }
 
     public override void Exit()
@@ -30,6 +31,7 @@ public class PlayableState : GenericState
         _context.Input.OnMissionKeydown -= OnMissionKeydown;
         _context.Input.OnMenuKeydown -= OnMenuKeydown;
         _context.Input.OnInteractionKeyDown -= OnInteractionKeyDown;
+        _context.Input.OnUsePotion -= OnUsePotion;
     }
 
     public override bool CanChangeState(GenericState state)
@@ -88,7 +90,13 @@ public class PlayableState : GenericState
 
     private void OnMenuKeydown()
     {
-        _context.ChangeState(_context.Factory.Menu());
+        if (!(_substate is InteractingState))
+            _context.ChangeState(_context.Factory.Menu());
+    }
+
+    private void OnUsePotion()
+    {
+        _context.Inventory.UsePotion(_context);
     }
 
     private void OnInteractionKeyDown()
@@ -97,7 +105,8 @@ public class PlayableState : GenericState
             return;
         if (!_context.InteractedObject.IsInstant())
             ChangeSubState(_context.Factory.Interacting(this));
-        else {
+        else
+        {
             _context.InteractedObject.Interact();
         }
     }

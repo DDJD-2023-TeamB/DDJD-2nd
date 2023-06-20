@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: Fight mission dev
   _description: Development mission
-  _status: 3
+  _status: 0
   _type: 0
   _goals:
   - {fileID: 2591822052486553218}
@@ -24,16 +24,23 @@ MonoBehaviour:
       _sentences:
       - Kill the enemies in dev
     _npc: {fileID: 11400000, guid: 15f81436f65c9415ea4bde98e57c0e27, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
   _interactionEnd:
     _dialogueInfo:
       _noun: 
       _sentences: []
     _npc: {fileID: 0}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
   _reward:
     _gold: 0
     _items: []
   _followingMissions: []
   _area: 0
+  _tutorial: 
 --- !u!114 &2591822052486553218
 MonoBehaviour:
   m_ObjectHideFlags: 0
