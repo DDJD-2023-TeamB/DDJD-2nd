@@ -37,7 +37,7 @@ public class DashChargingIndicatorController : MonoBehaviour
         gameObject.SetActive(true);
         startTime = System.DateTime.Now;
         currentFrame = 0;
-        imageComponent.sprite = frameList[0];
+        //imageComponent.sprite = frameList[0];
     }
 
     public void Update()
@@ -57,7 +57,7 @@ public class DashChargingIndicatorController : MonoBehaviour
 
             if (currentFrame != progress)
             {
-                imageComponent.sprite = frameList[progress];
+                //imageComponent.sprite = frameList[progress];
                 currentFrame = progress;
             }
         }
