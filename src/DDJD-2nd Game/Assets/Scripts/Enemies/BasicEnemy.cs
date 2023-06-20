@@ -81,6 +81,7 @@ public class BasicEnemy : HumanoidEnemy
         base.Die(force, hitPoint, hitDirection);
         ChangeState(new EnemyDeadState(this));
         _enemySpawnerManager?.EnemyDied(this);
+        GameManager.Instance.EnemyDied(this);
     }
 
     public override void Update()

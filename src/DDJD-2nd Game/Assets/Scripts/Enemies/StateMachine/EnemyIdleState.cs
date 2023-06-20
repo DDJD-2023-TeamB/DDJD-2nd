@@ -33,6 +33,7 @@ public class EnemyIdleState : EnemyState
                 {
                     _context.StartCoroutine(WarnNearbyEnemies());
                     _context.ChangeState(_context.States.ChaseState);
+                    GameManager.Instance.PlayerDetected(_context);
                 }
             }
         }
