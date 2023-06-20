@@ -54,8 +54,8 @@ public class UIController : MonoBehaviour
         _playerUI.activeElementWheel.gameObject.SetActive(false);
         _playerUI.OptionsUI.SetUIController(this);
 
-        //OpenLeftSpell(false);
-        //OpenRightSpell(false);
+        OpenLeftSpell(false);
+        OpenRightSpell(false);
 
         InventoryUI inventoryUI = _playerUI.inventoryUI;
         inventoryUI.OnItemSkillLeftDrop += ChangeLeftWheelItem;

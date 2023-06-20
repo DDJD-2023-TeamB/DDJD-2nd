@@ -65,6 +65,11 @@ MonoBehaviour:
   windElementButtonObject: {fileID: 8028068974347199032}
   electricityElementButtonObject: {fileID: 2429565424842759666}
   activeElementDescriptionObject: {fileID: 4940105135744671811}
+  fireElementButton: {fileID: 8963237149101253579}
+  earthElementButton: {fileID: 4113422691707947886}
+  windElementButton: {fileID: 5685952809341098447}
+  electricityElementButton: {fileID: 298821915974888863}
+  activeElementDescription: {fileID: 1546499650557254744}
 --- !u!1 &72036046981300425
 GameObject:
   m_ObjectHideFlags: 0
@@ -14112,6 +14117,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8601566395975945297}
     m_Modifications:
+    - target: {fileID: 3281690745508135941, guid: e58d8ef574ce6104985f63ad3054d3f6,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5248596551980998547, guid: e58d8ef574ce6104985f63ad3054d3f6,
         type: 3}
       propertyPath: m_Pivot.x
