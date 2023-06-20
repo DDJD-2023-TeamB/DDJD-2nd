@@ -102,6 +102,12 @@ public class PlayerInputReceiver : MonoBehaviour
     public bool IsContinueReading
     {
         get { return _isContinueReading; }
+        set { _isContinueReading = value; }
+    }
+    private bool _isExitingInteraction;
+    public bool IsExitingInteraction
+    {
+        get { return _isExitingInteraction; }
     }
     private bool _isAbsorbing;
     public bool IsAbsorbing
@@ -117,8 +123,6 @@ public class PlayerInputReceiver : MonoBehaviour
 
     public Action OnMeleeAttackKeydown;
     public Action OnMeleeAttackKeyup;
-
-    public Action OnInteration;
     public Action OnJumpKeyDown;
     public Action OnJumpKeyUp;
     public Action OnInventoryKeydown;
@@ -224,6 +228,9 @@ public class PlayerInputReceiver : MonoBehaviour
 
         _playerInput.UI.Menu.performed += ctx => OnMenuKeydown?.Invoke();
         _playerInput.UI.Menu.canceled += ctx => OnMenuKeyup?.Invoke();
+
+        _playerInput.UI.Tutorial.performed += ctx => _isExitingInteraction = true;
+        _playerInput.UI.Tutorial.canceled += ctx => _isExitingInteraction = false;
 
         _playerInput.Debug.PrintState.performed += ctx => OnPrintState?.Invoke();
     }

@@ -6,8 +6,6 @@ using TMPro;
 public abstract class Interactable : MonoBehaviour
 {
     private TextMeshProUGUI _helpText;
-
-    //private GameObject object;
     protected Player _player;
 
     protected MissionController _missionController;

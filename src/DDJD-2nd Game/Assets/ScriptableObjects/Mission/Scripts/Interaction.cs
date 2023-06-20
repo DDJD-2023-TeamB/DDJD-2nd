@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEditor;
 
 [System.Serializable]
 public class Interaction
@@ -19,5 +21,30 @@ public class Interaction
     public NpcObject Npc
     {
         get { return _npc; }
+    }
+
+    [SerializeField]
+    private UnityEvent _onEndInteraction = new UnityEvent();
+    public UnityEvent OnEndInteraction
+    {
+        get { return _onEndInteraction; }
+    }
+
+    public void InteractionEnded()
+    {
+        Debug.Log("Interaction ended");
+        _onEndInteraction?.Invoke();
+    }
+
+    [SerializeField]
+    private UnityEvent _onTutorialExit = new UnityEvent();
+    public UnityEvent OnTutorialExit
+    {
+        get { return _onTutorialExit; }
+    }
+
+    public void Exit()
+    {
+        OnTutorialExit?.Invoke();
     }
 }

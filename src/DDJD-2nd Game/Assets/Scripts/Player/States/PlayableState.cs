@@ -101,7 +101,7 @@ public class PlayableState : GenericState
 
     private void OnMenuKeydown()
     {
-        _context.ChangeState(_context.Factory.Menu());
+        if (!(_substate is InteractingState)) _context.ChangeState(_context.Factory.Menu());
     }
 
     private void OnUsePotion()

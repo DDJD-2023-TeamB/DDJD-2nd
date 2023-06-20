@@ -105,7 +105,7 @@ public class MissionController : MonoBehaviour
         _unblockedMissions.Remove(mission);
         _gameState.FinishedMissions.Add(mission);
         UnblockFollowingMissions(mission);
-        _missionsUIController.UpdateMissionsUI();
+        if(_missionsUIController != null) _missionsUIController.UpdateMissionsUI();
     }
 
     private void UnblockFollowingMissions(Mission mission)
@@ -126,19 +126,27 @@ public class MissionController : MonoBehaviour
         //_player.Inventory.AddGold(mission.Reward.Gold);
     }
 
-    public List<Mission> GetNpcMissions(NpcObject npc)
+    public List<Mission> GetNpcMissions(NpcObject npc, bool interactionBegin)
     {
         List<Mission> missions = new List<Mission>();
 
         foreach (var mission in _unblockedMissions)
         {
+            Debug.Log(mission.Title);
             {
                 if (mission.Status == MissionState.Available && mission.InteractionBegin.Npc == npc)
                 {
                     missions.Add(mission);
                 }
-                else if (
-                    mission.Status == MissionState.Ongoing
+                else if (interactionBegin) {
+                    if (mission.Status == MissionState.Ongoing
+                        && mission.InteractionBegin.Npc == npc
+                    )
+                    {
+                        missions.Add(mission);
+                    }
+                }
+                else if (mission.Status == MissionState.Ongoing
                     && mission.CurrentGoal is InteractGoal interactGoal
                     && interactGoal.Interaction.Npc == npc
                 )
@@ -150,6 +158,7 @@ public class MissionController : MonoBehaviour
 
         return missions;
     }
+    
 
     public void CompleteFightGoal(EnemySpawner _enemySpawner)
     {
@@ -194,6 +203,6 @@ public class MissionController : MonoBehaviour
     {
         mission.CompleteCurrentGoal();
         CheckIfAllGoalsAreCompleted(mission);
-        _missionsUIController.UpdateMissionsUI();
+        _missionsUIController?.UpdateMissionsUI();
     }
 }

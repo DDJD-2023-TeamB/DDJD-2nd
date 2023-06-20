@@ -98,7 +98,6 @@ public class Mission : ScriptableObject
     {
         get { return _area; }
     }
-
     public void OnEnable() { }
 
     public void Unblock()
