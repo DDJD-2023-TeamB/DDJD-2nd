@@ -9,6 +9,7 @@ public class PlayerMusic : MonoBehaviour
 
     private FMOD.Studio.PARAMETER_ID _musicHealthParameterId;
     private FMOD.Studio.PARAMETER_ID _musicMenuParameterId;
+    private FMOD.Studio.PARAMETER_ID _musicFadeParameterId;
 
     private float _menu_parameter_value = 0;
 
@@ -24,6 +25,7 @@ public class PlayerMusic : MonoBehaviour
     {
         _musicHealthParameterId = _soundEmitter.GetParameterId("battle_music", "Health");
         _musicMenuParameterId = _soundEmitter.GetParameterId("battle_music", "Menu");
+        _musicFadeParameterId = _soundEmitter.GetParameterId("battle_music", "Fade");
         StartCoroutine(MusicUpdate());
 
         if (GameManager.Instance != null)
@@ -47,13 +49,19 @@ public class PlayerMusic : MonoBehaviour
     {
         UpdateMusicParameters();
         _soundEmitter.Play("battle_music");
+        _soundEmitter.CallWithDelay(
+            () => _soundEmitter.SetParameter("battle_music", _musicFadeParameterId, 1.0f),
+            0.1f
+        );
+
         _updateCoroutine = StartCoroutine(MusicUpdate());
     }
 
     public void EndCombat()
     {
         Debug.Log("End combat in player");
-        _soundEmitter.Stop("battle_music");
+        _soundEmitter.SetParameter("battle_music", _musicFadeParameterId, 0.0f);
+        _soundEmitter.CallWithDelay(() => _soundEmitter.Stop("battle_music"), 2.0f);
         if (_updateCoroutine != null)
         {
             StopCoroutine(_updateCoroutine);

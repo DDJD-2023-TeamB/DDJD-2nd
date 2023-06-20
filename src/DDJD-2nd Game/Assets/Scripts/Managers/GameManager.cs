@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour
 
     public void EnemyDied(BasicEnemy enemy)
     {
-        Debug.Log("Enemy died");
         _enemiesAggroed.Remove(enemy);
         if (_enemiesAggroed.Count <= 0)
         {
@@ -51,7 +50,6 @@ public class GameManager : MonoBehaviour
 
     public void PlayerLostOfSight(BasicEnemy enemy)
     {
-        Debug.Log("Player lost of sight");
         if (_enemiesAggroed.Contains(enemy))
         {
             _enemiesAggroed.Remove(enemy);
@@ -68,7 +66,6 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-        Debug.Log("Player detected");
         _enemiesAggroed.Add(enemy);
         if (_enemiesAggroed.Count == 1)
         {
