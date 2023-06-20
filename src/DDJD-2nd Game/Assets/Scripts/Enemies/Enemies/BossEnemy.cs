@@ -107,6 +107,7 @@ public class BossEnemy : RangedEnemy
         int maxRuneType = _phases[_phaseIndex].RuneVariety;
         int runeType = Random.Range(0, maxRuneType);
         RuneShooter rune = null;
+        Debug.Log("Spawned rune " + runeType);
         switch (runeType)
         {
             case 0:
@@ -240,6 +241,10 @@ public class BossEnemy : RangedEnemy
         base.Die(force, hitPoint, hitDirection);
         foreach (RuneShooter rune in _runes)
         {
+            if (rune != null)
+            {
+                continue;
+            }
             rune.Die();
         }
     }

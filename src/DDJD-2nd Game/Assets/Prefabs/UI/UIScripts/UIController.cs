@@ -82,7 +82,6 @@ public class UIController : MonoBehaviour
             _playerUI.inventoryUI.RemoveAllItems();
             LoadItems();
             LoadGold();
-            
         }
     }
 
@@ -97,15 +96,16 @@ public class UIController : MonoBehaviour
         }
     }
 
-
     public void OpenTutorial(bool isOpening)
     {
         currentMenu = "tutorial";
         _playerUI.tutorialUI.SetActive(isOpening);
         _playerUI.playingUI.gameObject.SetActive(!isOpening);
-        
-        if (isOpening == true) _tutorialUI = _playerUI.tutorialUI.GetComponent<TutorialUI>();
-        else _tutorialUI = null;
+
+        if (isOpening == true)
+            _tutorialUI = _playerUI.tutorialUI.GetComponent<TutorialUI>();
+        else
+            _tutorialUI = null;
     }
 
     public void HandleTutorial(bool isOpening, Tutorial tutorial)
@@ -324,7 +324,6 @@ public class UIController : MonoBehaviour
         {
             AddItem(item, UiArea.Items);
         }
-
     }
 
     public void LoadGold()

@@ -7,7 +7,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using static MyBox.EditorTools.MyGUI;
 
 public class InventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {

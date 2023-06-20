@@ -20,6 +20,8 @@ public class RunState : GenericState
         base.Enter();
         _context.CharacterMovement.IsRunning = true;
         _context.Dashable.UpdateMaxSpeed(_context.CharacterMovement.GetCurrentMaxSpeed());
+        _context.SoundEmitter.SetParameter("run", _context.SfxRunStateId, 0);
+        _context.SoundEmitter.Play("run");
     }
 
     public override void Exit()
@@ -29,6 +31,7 @@ public class RunState : GenericState
         _context.Animator.speed = 1f;
         _context.Dashable.UpdateMaxSpeed(_context.CharacterMovement.GetCurrentMaxSpeed());
         _context.CameraController.ChangeFov(_context.CameraController.WalkFov, 0.2f);
+        _context.SoundEmitter.SetParameter("run", _context.SfxRunStateId, 1);
     }
 
     public override bool CanChangeState(GenericState state)
