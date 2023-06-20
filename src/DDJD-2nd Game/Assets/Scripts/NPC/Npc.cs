@@ -156,7 +156,10 @@ public class Npc : Interactable
             {
                 if (_dialogue.Mission.IsInInteractionBegin(_npc))
                 {
-                    _dialogue.Mission.InteractionBegin.InteractionEnded();
+                    if (_dialogue.Mission.InteractionBegin.InteractionEnded())
+                    {
+                        return;
+                    }
                 }
                 _dialogue.Mission = null;
             }
