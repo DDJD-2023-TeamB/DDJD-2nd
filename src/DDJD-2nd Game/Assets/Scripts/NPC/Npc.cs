@@ -61,21 +61,6 @@ public class Npc : Interactable
                         _currentDialogueInfo = mission.InteractionBegin.DialogueInfo;
                     break;
                 }
-                // case MissionState.Completed:
-                // {
-                //     if (_npc == _currentMission.InteractionBegin.Npc)
-                //         _currentDialogueInfo = _npc.DefaultDialogueInfo;
-
-                //     if (_missions.Count > 0)
-                //     {
-                //         _currentMission = _missions.Dequeue();
-                //     }
-                //     else
-                //     {
-                //         _currentMission = null;
-                //     }
-                //     break;
-                // }
             }
         }
 
@@ -88,7 +73,8 @@ public class Npc : Interactable
 
     public void ContinueInteraction()
     {
-        if (!_dialogue.CheckIfDialogueEnded()) {
+        if (!_dialogue.CheckIfDialogueEnded())
+        {
             Debug.Log("Continue");
             _dialogue.DisplayNextSentence();
         }
