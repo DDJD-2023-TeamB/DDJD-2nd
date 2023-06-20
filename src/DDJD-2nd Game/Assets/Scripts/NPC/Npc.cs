@@ -77,6 +77,7 @@ public class Npc : Interactable
     {
         if (_dialogue == null)
         {
+            HelpManager.Instance.ResetText();
             _dialogue = _player.UIController.PlayerUI.Dialogue;
         }
 
@@ -131,7 +132,6 @@ public class Npc : Interactable
     {
         if (!_dialogue.CheckIfDialogueEnded())
         {
-            Debug.Log("Continue");
             _dialogue.DisplayNextSentence();
         }
         else
