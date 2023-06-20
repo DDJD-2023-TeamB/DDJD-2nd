@@ -30,10 +30,10 @@ public class Interaction
         get { return _onEndInteraction; }
     }
 
-    public void InteractionEnded()
+    public bool InteractionEnded()
     {
-        Debug.Log("Interaction ended");
         _onEndInteraction?.Invoke();
+        return EventUtils.IsEventSet(_onEndInteraction);
     }
 
     [SerializeField]

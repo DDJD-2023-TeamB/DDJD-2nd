@@ -43,7 +43,6 @@ public class UIController : MonoBehaviour
     private void Awake()
     {
         _player = GetComponent<Player>();
-        _playerUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
     }
 
     private void Start()

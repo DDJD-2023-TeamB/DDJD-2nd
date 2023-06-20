@@ -19,9 +19,15 @@ public class Tutorial : ScriptableObject
         get { return _currentPage; }
     }
 
-    public void Start() { }
+    [SerializeField]
+    private bool started = false;
+    public bool Started
+    {
+        get { return started; }
+        set { started = value; }
+    }
 
-    public void SwitchPage() 
+    public void SwitchPage()
     {
         _currentPage++;
         if (_currentPage >= _tutorialInfo.Length)

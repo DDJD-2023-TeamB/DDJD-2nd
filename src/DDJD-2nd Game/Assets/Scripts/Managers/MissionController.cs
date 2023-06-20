@@ -13,6 +13,13 @@ public class MissionController : MonoBehaviour
         get { return _unblockedMissions; }
     }
 
+    private Mission _selectedMission;
+    public Mission SelectedMission
+    {
+        get { return _selectedMission; }
+        set { _selectedMission = value; }
+    }
+
     [SerializeField]
     private GameState _gameState;
 
@@ -41,23 +48,17 @@ public class MissionController : MonoBehaviour
         }
     }
 
-    public void CheckIfNpcIsMyGoal(NpcObject npc)
+    public void CheckIfNpcIsMyGoal(NpcObject npc, Mission mission)
     {
-        List<Mission> missions = new List<Mission>(_unblockedMissions);
-
-        foreach (var mission in missions)
+        if (
+            mission.Status == MissionState.Ongoing
+            && mission.CurrentGoal is InteractGoal interactGoal
+            && !mission.CurrentGoal.Completed
+            && interactGoal.Interaction.Npc == npc
+        )
         {
-            if (
-                mission.Status != MissionState.Ongoing
-                || mission.CurrentGoal is not InteractGoal interactGoal
-                || mission.CurrentGoal.Completed
-            )
-                continue;
-
-            if (interactGoal.Interaction.Npc == npc)
-            {
-                GoalCompleted(mission);
-            }
+            Debug.Log("Npc goal completed");
+            GoalCompleted(mission);
         }
     }
 
@@ -124,29 +125,48 @@ public class MissionController : MonoBehaviour
             _player.Inventory.AddItem(item);
         }
 
-        //_player.Inventory.AddGold(mission.Reward.Gold);
+        _player.Inventory.AddGold(mission.Reward.Gold);
     }
 
-    public List<Mission> GetNpcMissions(NpcObject npc)
+    public List<Mission> GetNpcMissions(NpcObject npc, bool repeatInteractionBegin = true)
     {
         List<Mission> missions = new List<Mission>();
 
         foreach (var mission in _unblockedMissions)
         {
             {
-                if (mission.Status == MissionState.Available && mission.InteractionBegin.Npc == npc)
+                switch (mission.Status)
                 {
-                    missions.Add(mission);
-                }
-                if (mission.Status == MissionState.Ongoing) {
-                    if (mission.CurrentGoal is InteractGoal interactGoal) {
-                        if (interactGoal.Interaction.Npc == npc) missions.Add(mission);
-                        else if (mission.InteractionBegin.Npc == npc && interactGoal.Interaction.Npc != npc) missions.Add(mission);
-                    }
-                    else if (mission.InteractionBegin.Npc == npc) missions.Add(mission);
+                    case MissionState.Available:
+                        if (mission.InteractionBegin.Npc == npc)
+                        {
+                            missions.Add(mission);
+                        }
+                        break;
+                    case MissionState.Ongoing:
+                        if (
+                            mission.CurrentGoal is InteractGoal interactGoal
+                            && interactGoal.Interaction.Npc == npc
+                        )
+                        {
+                            missions.Add(mission);
+                        }
+                        else if (mission.InteractionBegin.Npc == npc && repeatInteractionBegin)
+                            missions.Add(mission);
+                        break;
                 }
             }
         }
+
+        Debug.Log("Missions count: " + missions.Count);
+
+        // Put selected mission in first place to give it priority
+        if (_selectedMission != null && missions.Remove(_selectedMission))
+        {
+            missions.Insert(0, _selectedMission);
+        }
+
+        Debug.Log("Missions count after selected mission: " + missions.Count);
 
         return missions;
     }
