@@ -28,6 +28,9 @@ public class InventoryUI : MonoBehaviour
     [SerializeField]
     private GameObject _rightWheel;
 
+    [SerializeField]
+    private TextMeshProUGUI _gold;
+
     private Player _player;
 
     public void Start()
@@ -138,6 +141,11 @@ public class InventoryUI : MonoBehaviour
         }
         GameObject newItem = AddItemToSlot(item, availableSlot, area);
         return true;
+    }
+
+    public void UpdateGold(int gold)
+    {
+        _gold.text = gold.ToString();
     }
 
     //Goes through all slots and removes their items
