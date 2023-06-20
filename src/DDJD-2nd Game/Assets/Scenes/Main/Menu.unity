@@ -277,7 +277,6 @@ GameObject:
   m_Component:
   - component: {fileID: 105638345}
   - component: {fileID: 105638346}
-  - component: {fileID: 105638347}
   m_Layer: 6
   m_Name: LoadingBar
   m_TagString: Untagged
@@ -358,49 +357,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &105638347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 105638344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cdd7fe4a59ddd34fb197b42dd0bad41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 105638346}
-  gradient:
-    serializedVersion: 2
-    key0: {r: 0.9960785, g: 0.83921576, b: 0, a: 0.49803922}
-    key1: {r: 0.9960785, g: 0.83921576, b: 0, a: 0.49803922}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  bar: {fileID: 0}
 --- !u!4 &110908473 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8672847430586326936, guid: 7c41964487b21dc4997089d9294c86f1,
