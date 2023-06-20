@@ -56,18 +56,6 @@ public class MissionController : MonoBehaviour
 
             if (interactGoal.Interaction.Npc == npc)
             {
-                foreach (var goal in mission.Goals)
-                {
-                    if (!goal._completed && goal is InteractGoal interactGoal)
-                    {
-                        if (interactGoal.NpcToInteract == npc)
-                        {
-                            goal._completed = true;
-                            Debug.Log("Interact Goal Completed");
-                        }
-                    }
-                }
-                CheckIfAllGoalsAreCompleted(mission);
                 GoalCompleted(mission);
             }
         }

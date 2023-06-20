@@ -25,9 +25,10 @@ public class Npc : Interactable
         base.Start();
         _currentDialogueInfo = _npc.DefaultDialogueInfo;
         _animator = GetComponent<Animator>();
-        if (_missions.Count != 0)
+        List<Mission> missions = _missionController.GetNpcMissions(_npc, false);
+        if (missions.Count != 0)
         {
-            _currentMission = _missions.Dequeue();
+            _currentMission = missions[0];
             CreateCanvas();
         }
     }
