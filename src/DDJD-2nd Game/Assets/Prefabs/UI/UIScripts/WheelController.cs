@@ -109,6 +109,8 @@ public class WheelController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             wheelSelector.changeSelection(slot);
+            if (slot >= _itemList.Length)
+                return;
             if (_itemList[slot] == null)
             {
                 manaBarIconController.changeSpellSprite(null);
@@ -124,7 +126,6 @@ public class WheelController : MonoBehaviour
                     true
                 );
             }
-            //uiController.SelectSlotLeft(slot);
         }
     }
 

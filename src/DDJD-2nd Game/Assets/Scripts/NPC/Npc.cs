@@ -13,9 +13,6 @@ public class Npc : Interactable
     private Animator _animator;
     private Dialogue _dialogue;
     private DialogueInfo _currentDialogueInfo;
-
-    private Mission _currentMission;
-
     private static string floatingIconPrefabPath = "Assets/Prefabs/UI/FloatingIconCanvas.prefab";
     private Animator _floatingIconAnimator;
     private GameObject _floatingIconCanvas;
@@ -25,15 +22,11 @@ public class Npc : Interactable
         base.Start();
         _currentDialogueInfo = _npc.DefaultDialogueInfo;
         _animator = GetComponent<Animator>();
-        List<Mission> missions = _missionController.GetNpcMissions(_npc);
-        if (missions.Count != 0)
-        {
-            _currentMission = missions[0];
-            CreateCanvas();
-        }
+        CreateFloatingIconCanvas();
+        StartCoroutine(UpdateFloatingIcon());
     }
 
-    public void CreateCanvas()
+    public void CreateFloatingIconCanvas()
     {
         GameObject floatingCanvasPrefab = (GameObject)
             AssetDatabase.LoadAssetAtPath(floatingIconPrefabPath, typeof(GameObject));
@@ -46,26 +39,38 @@ public class Npc : Interactable
         _floatingIconCanvas.transform.SetParent(transform, false);
     }
 
-    void Update()
+    private IEnumerator UpdateFloatingIcon()
     {
-        if (_currentMission != null)
+        bool missionFound = false;
+        foreach (var mission in _missionController.GetNpcMissions(_npc, false))
         {
-            if (_currentMission.Status == MissionState.Available && !_floatingIconCanvas.activeSelf)
+            if (mission.Status == MissionState.Available)
             {
-                _floatingIconCanvas.SetActive(true);
+                if (!_floatingIconCanvas.activeSelf)
+                {
+                    _floatingIconCanvas.SetActive(true);
+                }
+                missionFound = true;
+                break;
             }
-            else if (
-                _currentMission.Status == MissionState.Ongoing && !_floatingIconCanvas.activeSelf
-            )
+            else if (mission.Status == MissionState.Ongoing)
             {
-                _floatingIconCanvas.SetActive(true);
-                PauseAnimation();
+                if (!_floatingIconCanvas.activeSelf)
+                {
+                    _floatingIconCanvas.SetActive(true);
+                    PauseAnimation();
+                }
+                missionFound = true;
+                break;
             }
         }
-        else if (_floatingIconCanvas && _floatingIconCanvas.activeSelf)
+
+        if (_floatingIconCanvas.activeSelf && !missionFound)
         {
             _floatingIconCanvas.SetActive(false);
         }
+
+        yield return new WaitForSeconds(0.5f);
     }
 
     public void ChangeDialogue(DialogueInfo newDialogueInfo)
@@ -81,15 +86,11 @@ public class Npc : Interactable
         }
 
         _currentDialogueInfo = _npc.DefaultDialogueInfo;
+        Mission targetMission = null;
         foreach (var mission in _missionController.GetNpcMissions(_npc))
         {
             switch (mission.Status)
             {
-                case MissionState.Blocked:
-                {
-                    _currentDialogueInfo = _npc.DefaultDialogueInfo;
-                    break;
-                }
                 case MissionState.Available:
                 {
                     _currentDialogueInfo = mission.InteractionBegin.DialogueInfo;
@@ -97,25 +98,34 @@ public class Npc : Interactable
                     mission.CurrentGoal.OnGoalStarted?.Invoke();
                     _missionController.MissionsUIController?.UpdateMissionsUI();
                     _missionController.CheckIfAllGoalsAreCompleted(mission);
+                    targetMission = mission;
                     break;
                 }
                 case MissionState.Ongoing:
                 {
-                    if (mission.CurrentGoal is InteractGoal interactGoal) {
+                    if (
+                        mission.CurrentGoal is InteractGoal interactGoal
+                        && interactGoal.Interaction.Npc == _npc
+                    )
+                    {
                         _currentDialogueInfo = interactGoal.Interaction.DialogueInfo;
-                        if (mission.InteractionBegin.Npc == _npc && interactGoal.Interaction.Npc != _npc)
-                        {
-                            _currentDialogueInfo = mission.InteractionBegin.DialogueInfo;
-                        }
                     }
                     else if (mission.InteractionBegin.Npc == _npc)
                         _currentDialogueInfo = mission.InteractionBegin.DialogueInfo;
+                    targetMission = mission;
                     break;
                 }
             }
+
+            if (targetMission != null)
+                break;
         }
 
-        _missionController.CheckIfNpcIsMyGoal(_npc);
+        if (targetMission != null)
+        {
+            _missionController.CheckIfNpcIsMyGoal(_npc, targetMission);
+            _dialogue.Mission = targetMission;
+        }
 
         _dialogue.StartDialogue(_currentDialogueInfo);
         _animator.SetInteger("Talking Index", Random.Range(0, 4));
@@ -142,18 +152,13 @@ public class Npc : Interactable
         }
         else
         {
-            foreach (var mission in _missionController.GetNpcMissions(_npc))
+            if (_dialogue.Mission != null)
             {
-                if (
-                    mission
-                    && _npc == mission.InteractionBegin.Npc
-                    && mission.Status == MissionState.Ongoing
-                )
+                if (_dialogue.Mission.IsInInteractionBegin(_npc))
                 {
-                    _currentMission = mission;
-                    mission.InteractionBegin.InteractionEnded();
-                    return;
+                    _dialogue.Mission.InteractionBegin.InteractionEnded();
                 }
+                _dialogue.Mission = null;
             }
             EndFullInteraction(true);
         }
@@ -161,7 +166,14 @@ public class Npc : Interactable
 
     public void ExitInteraction()
     {
-        _currentMission.InteractionBegin.Exit();
+        if (_dialogue.Mission != null)
+        {
+            if (_dialogue.Mission.IsInInteractionBegin(_npc))
+            {
+                _dialogue.Mission.InteractionBegin.Exit();
+            }
+            _dialogue.Mission = null;
+        }
         EndFullInteraction(true);
     }
 
@@ -175,10 +187,9 @@ public class Npc : Interactable
     public override void EndInteract()
     {
         base.EndInteract();
-        _dialogue.EndDialogue();
+        _dialogue?.EndDialogue();
         _animator.SetInteger("Idle Index", Random.Range(0, 5));
         _animator.SetTrigger("Idle");
-        //Interaction e chamar a função do interation que é um event
     }
 
     protected override void Approach()
