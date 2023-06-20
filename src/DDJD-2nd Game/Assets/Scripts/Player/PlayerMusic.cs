@@ -33,13 +33,6 @@ public class PlayerMusic : MonoBehaviour
         }
     }
 
-    public void StartAttack()
-    {
-        UpdateMusicParameters();
-        _soundEmitter.Play("battle_music");
-        _updateCoroutine = StartCoroutine(MusicUpdate());
-    }
-
     private IEnumerator MusicUpdate()
     {
         while (true)
@@ -50,12 +43,21 @@ public class PlayerMusic : MonoBehaviour
         }
     }
 
-    public void StartCombat() { }
+    public void StartCombat()
+    {
+        UpdateMusicParameters();
+        _soundEmitter.Play("battle_music");
+        _updateCoroutine = StartCoroutine(MusicUpdate());
+    }
 
     public void EndCombat()
     {
+        Debug.Log("End combat in player");
         _soundEmitter.Stop("battle_music");
-        StopCoroutine(_updateCoroutine);
+        if (_updateCoroutine != null)
+        {
+            StopCoroutine(_updateCoroutine);
+        }
     }
 
     public void OpenMenu()
@@ -70,7 +72,11 @@ public class PlayerMusic : MonoBehaviour
 
     private void UpdateMusicParameters()
     {
-        float health = _player.Status.Health / _player.Status.MaxHealth;
+        float health = (float)_player.Status.Health / _player.Status.MaxHealth;
+        if (health == 0.0f)
+        {
+            health = 0.01f;
+        }
         _soundEmitter.SetParameter("battle_music", _musicHealthParameterId, health);
         _soundEmitter.SetParameter("battle_music", _musicMenuParameterId, _menu_parameter_value);
     }
