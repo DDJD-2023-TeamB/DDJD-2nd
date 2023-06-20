@@ -193,7 +193,7 @@ public class MissionsUIController : MonoBehaviour
         );
 
         if (selectedMission != null)
-            UpdatedSelectedMission(selectedMission);
+            UpdateSelectedMission(selectedMission);
     }
 
     public void SetActiveMission(Mission mission)
@@ -212,12 +212,12 @@ public class MissionsUIController : MonoBehaviour
         }
         else if (mission.Status != MissionState.Completed)
         {
-            UpdatedSelectedMission(mission);
+            UpdateSelectedMission(mission);
         }
         UpdateMissionsUI();
     }
 
-    private void UpdatedSelectedMission(Mission mission)
+    private void UpdateSelectedMission(Mission mission)
     {
         if (mission.Status == MissionState.Completed)
         {
@@ -226,7 +226,7 @@ public class MissionsUIController : MonoBehaviour
             return;
         }
 
-        selectedMission = mission;
+        ChangeSelectedMission(mission);
         playingIndicatorTitle.GetComponent<TextMeshProUGUI>().text = selectedMission.Title;
         if (selectedMission.CurrentGoal != null && selectedMission.Status == MissionState.Ongoing)
         {
@@ -234,5 +234,11 @@ public class MissionsUIController : MonoBehaviour
                 .CurrentGoal
                 .Description;
         }
+    }
+
+    private void ChangeSelectedMission(Mission mission)
+    {
+        selectedMission = mission;
+        _missionController.SelectedMission = mission;
     }
 }

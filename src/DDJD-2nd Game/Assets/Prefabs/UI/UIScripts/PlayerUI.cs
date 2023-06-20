@@ -9,8 +9,10 @@ public class PlayerUI : MonoBehaviour
     [SerializeField]
     public GameObject menuUI,
         missionsUI,
-        activeElementWheel,
         tutorialUI;
+
+    [SerializeField]
+    public ActiveElementWheelController activeElementWheel;
 
     [SerializeField]
     public WheelController leftSpellWheel,

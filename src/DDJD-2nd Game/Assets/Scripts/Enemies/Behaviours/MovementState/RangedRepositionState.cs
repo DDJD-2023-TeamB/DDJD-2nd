@@ -68,7 +68,6 @@ public class RangedRepositionState : EnemyMovingState
 
     private void SetPath(Vector3 destination)
     {
-        Debug.Log("Setting path to " + destination);
         _context.NavMeshAgent.SetDestination(destination);
     }
 
