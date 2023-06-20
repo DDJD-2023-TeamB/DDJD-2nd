@@ -53,8 +53,8 @@ public class UIController : MonoBehaviour
         _playerUI.activeElementWheel.SetActive(false);
         _playerUI.OptionsUI.SetUIController(this);
 
-        OpenLeftSpell(false);
-        OpenRightSpell(false);
+        //OpenLeftSpell(false);
+        //OpenRightSpell(false);
 
         InventoryUI inventoryUI = _playerUI.inventoryUI;
         inventoryUI.OnItemSkillLeftDrop += ChangeLeftWheelItem;
@@ -79,6 +79,8 @@ public class UIController : MonoBehaviour
         {
             _playerUI.inventoryUI.RemoveAllItems();
             LoadItems();
+            LoadGold();
+            
         }
     }
 
@@ -298,6 +300,12 @@ public class UIController : MonoBehaviour
         {
             AddItem(item, UiArea.Items);
         }
+
+    }
+
+    public void LoadGold()
+    {
+        _playerUI.inventoryUI.UpdateGold(_itemsInventory.Gold);
     }
 
     public void LoadInventory()
@@ -306,6 +314,7 @@ public class UIController : MonoBehaviour
         _playerUI.inventoryUI.SetLeftWheelSkills(new List<ItemSkill>(leftWheelItems));
         _playerUI.inventoryUI.SetRightWheelSkills(new List<ItemSkill>(rightWheelItems));
         LoadItems();
+        LoadGold();
     }
 
     public Player Player

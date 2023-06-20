@@ -60,6 +60,7 @@ public class DashChargingIndicatorController : MonoBehaviour
         gameObject.SetActive(true);
         currentFrame = 0;
         imageComponent.sprite = frameList[0];
+        imageComponent.sprite = frameList[0];
 
         float ellapsedMillisseconds = (float)(
             (System.DateTime.Now - startTime).Milliseconds
@@ -97,7 +98,7 @@ public class DashChargingIndicatorController : MonoBehaviour
 
             if (currentFrame != progress)
             {
-                imageComponent.sprite = frameList[progress];
+                //imageComponent.sprite = frameList[progress];
                 currentFrame = progress;
             }
         }
