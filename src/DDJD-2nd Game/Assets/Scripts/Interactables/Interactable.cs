@@ -39,7 +39,7 @@ public abstract class Interactable : MonoBehaviour
         {
             return;
         }
-        
+
         EndInteract();
     }
 
@@ -52,4 +52,6 @@ public abstract class Interactable : MonoBehaviour
         HelpManager.Instance.ResetText();
         _player.InteractedObject = null;
     }
+
+    public abstract bool IsInstant();
 }

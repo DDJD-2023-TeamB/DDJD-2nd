@@ -11,10 +11,6 @@ public class CollectibleInteractable : Interactable
 {
     public CollectibleObject _item;
 
-    public TextMeshProUGUI textPrefab;
-
-    public FloatingText floatingText;
-
     private static string outlineMaterialPath = "Assets/Materials/Outline/Outline.mat";
     private static string floatingTextPrefabPath = "Assets/Prefabs/UI/FloatingCanvas.prefab";
 
@@ -32,11 +28,13 @@ public class CollectibleInteractable : Interactable
 
     public void CreateCanvas()
     {
-
-        GameObject floatingCanvasPrefab = (GameObject)AssetDatabase.LoadAssetAtPath(floatingTextPrefabPath, typeof(GameObject));
+        GameObject floatingCanvasPrefab = (GameObject)
+            AssetDatabase.LoadAssetAtPath(floatingTextPrefabPath, typeof(GameObject));
         GameObject floatingTextCanvas = Instantiate(floatingCanvasPrefab);
 
-        TextMeshProUGUI text = floatingTextCanvas.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI text = floatingTextCanvas.transform
+            .GetChild(0)
+            .GetComponent<TextMeshProUGUI>();
         text.text = _item.Cost.ToString() + "$";
 
         floatingTextCanvas.transform.SetParent(transform, false);
@@ -46,24 +44,24 @@ public class CollectibleInteractable : Interactable
     {
         if (_item.Purchasable)
         {
-            HelpManager.Instance.SetHelpText("Press F to purchase");
-            HelpManager.Instance.AddText(_item.NumLeftToBuy + " " + _item.Name + " left");
+            UpdateText();
             ActivateHighlight();
         }
         else
-        {   
+        {
             HelpManager.Instance.SetHelpText("Press F to collect");
         }
     }
 
     private void ActivateHighlight()
     {
-        if(!_material)
+        if (!_material)
         {
-            _material = (Material)AssetDatabase.LoadAssetAtPath(outlineMaterialPath , typeof(Material));
+            _material = (Material)
+                AssetDatabase.LoadAssetAtPath(outlineMaterialPath, typeof(Material));
             _meshRenderer = GetComponent<MeshRenderer>();
         }
-            
+
         Material[] materials = _meshRenderer.materials;
         Material[] newMaterials = new Material[materials.Length + 1];
         materials.CopyTo(newMaterials, 0);
@@ -72,11 +70,20 @@ public class CollectibleInteractable : Interactable
         _meshRenderer.materials = newMaterials;
     }
 
+    private void UpdateText()
+    {
+        HelpManager.Instance.ResetText();
+        HelpManager.Instance.SetHelpText("Press F to purchase");
+        if (!_item.Unlimited)
+            HelpManager.Instance.AddText(_item.NumLeftToBuy + " " + _item.Name + " left");
+    }
+
     public override void EndInteract()
     {
         base.EndInteract();
 
-        if (_item.Purchasable && _meshRenderer.materials.Length >= 2){
+        if (_item.Purchasable && _meshRenderer.materials.Length >= 2)
+        {
             DeactivateHighlight();
         }
     }
@@ -109,16 +116,24 @@ public class CollectibleInteractable : Interactable
             {
                 _item.BuyItem();
                 _player.Inventory.AddItem(_item, 1);
-                HelpManager.Instance.ResetText();
-    
-                if(_item.NumLeftToBuy == 0) Destroy(gameObject);
-                
+                UpdateText();
+
+                if (_item.NumLeftToBuy == 0 && !_item.Unlimited)
+                {
+                    Destroy(gameObject);
+                    HelpManager.Instance.ResetText();
+                }
+                    
             }
             else
             {
                 HelpManager.Instance.SetHelpText("Not enough gold");
             }
-            _player.InteractedObject = null;
         }
+    }
+
+    public override bool IsInstant()
+    {
+        return true;
     }
 }

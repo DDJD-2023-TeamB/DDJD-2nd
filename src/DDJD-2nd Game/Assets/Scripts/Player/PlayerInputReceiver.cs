@@ -118,7 +118,7 @@ public class PlayerInputReceiver : MonoBehaviour
     public Action OnMeleeAttackKeydown;
     public Action OnMeleeAttackKeyup;
 
-    public Action OnInteration;
+    public Action OnInteractionKeyDown;
     public Action OnJumpKeyDown;
     public Action OnJumpKeyUp;
     public Action OnInventoryKeydown;
@@ -153,8 +153,11 @@ public class PlayerInputReceiver : MonoBehaviour
         _playerInput.PlayerMovement.Dash.performed += ctx => _isDashing = true;
         _playerInput.PlayerMovement.Dash.canceled += ctx => _isDashing = false;
 
-        // CLicka no F e entra no estado isInteracting
-        _playerInput.PlayerMovement.Interact.performed += ctx => _isInterating = true;
+        _playerInput.PlayerMovement.Interact.performed += ctx =>
+        {
+            OnInteractionKeyDown?.Invoke();
+            _isInterating = true;
+        };
         _playerInput.PlayerMovement.Interact.canceled += ctx => _isInterating = false;
 
         _playerInput.PlayerMovement.Continue.performed += ctx => _isContinueReading = true;

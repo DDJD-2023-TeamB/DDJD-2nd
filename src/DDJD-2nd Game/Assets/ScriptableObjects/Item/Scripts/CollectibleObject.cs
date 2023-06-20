@@ -24,7 +24,7 @@ public abstract class CollectibleObject : ItemObject
     {
         get => _cost;
     }
- 
+
     [ConditionalField(nameof(_purchasable), false, true)]
     [SerializeField]
     protected int _numLeftToBuy;
@@ -34,11 +34,21 @@ public abstract class CollectibleObject : ItemObject
         get => _numLeftToBuy;
     }
 
+    [ConditionalField(nameof(_purchasable), false, true)]
+    [SerializeField]
+    protected bool _unlimited;
+
+    public bool Unlimited
+    {
+        get => _unlimited;
+    }
+
     public void BuyItem()
     {
-        _numLeftToBuy -= 1;
+        if (_unlimited)
+            return;
+        if(_numLeftToBuy > 0) _numLeftToBuy -= 1;
     }
 
     public abstract void Use(Player player);
-
 }
