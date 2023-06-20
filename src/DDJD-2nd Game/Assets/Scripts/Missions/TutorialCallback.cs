@@ -11,7 +11,6 @@ public class TutorialCallback : MonoBehaviour
     {
         if ((_tutorial == null && tutorial != null) || !_tutorial.Started)
         {
-            Debug.Log("Start tutorial");
             _tutorial = tutorial;
             _tutorial.Started = true;
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -35,7 +34,6 @@ public class TutorialCallback : MonoBehaviour
 
     public void ExitTutorial()
     {
-        Debug.Log("Exit tutorial");
         if (_tutorial)
         {
             _tutorial = null;

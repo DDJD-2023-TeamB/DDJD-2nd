@@ -41,37 +41,39 @@ public class Npc : Interactable
 
     private IEnumerator UpdateFloatingIcon()
     {
-        bool missionFound = false;
-        foreach (var mission in _missionController.GetNpcMissions(_npc, false))
+        while (true)
         {
-            if (mission.Status == MissionState.Available)
+            bool missionFound = false;
+            foreach (var mission in _missionController.GetNpcMissions(_npc, false))
             {
-                if (!_floatingIconCanvas.activeSelf)
+                if (mission.Status == MissionState.Available)
                 {
-                    _floatingIconCanvas.SetActive(true);
+                    if (!_floatingIconCanvas.activeSelf)
+                    {
+                        _floatingIconCanvas.SetActive(true);
+                    }
+                    missionFound = true;
+                    break;
                 }
-                missionFound = true;
-                break;
+                else if (mission.Status == MissionState.Ongoing)
+                {
+                    if (!_floatingIconCanvas.activeSelf)
+                    {
+                        _floatingIconCanvas.SetActive(true);
+                        PauseAnimation();
+                    }
+                    missionFound = true;
+                    break;
+                }
             }
-            else if (mission.Status == MissionState.Ongoing)
+
+            if (_floatingIconCanvas.activeSelf && !missionFound)
             {
-                if (!_floatingIconCanvas.activeSelf)
-                {
-                    _floatingIconCanvas.SetActive(true);
-                    PauseAnimation();
-                }
-                missionFound = true;
-                break;
+                _floatingIconCanvas.SetActive(false);
             }
-        }
 
-        if (_floatingIconCanvas.activeSelf && !missionFound)
-        {
-            _floatingIconCanvas.SetActive(false);
-            Debug.Log("Deactivated icon");
+            yield return new WaitForSeconds(0.5f);
         }
-
-        yield return new WaitForSeconds(0.5f);
     }
 
     public void ChangeDialogue(DialogueInfo newDialogueInfo)
