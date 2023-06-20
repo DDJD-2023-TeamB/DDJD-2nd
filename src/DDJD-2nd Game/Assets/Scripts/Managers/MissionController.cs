@@ -57,7 +57,6 @@ public class MissionController : MonoBehaviour
             && interactGoal.Interaction.Npc == npc
         )
         {
-            Debug.Log("Npc goal completed");
             GoalCompleted(mission);
         }
     }
@@ -175,19 +174,16 @@ public class MissionController : MonoBehaviour
     {
         foreach (Mission mission in _unblockedMissions)
         {
-            if (mission.Status != MissionState.Ongoing)
+            if (
+                mission.Status != MissionState.Ongoing
+                || mission.CurrentGoal is not FightGoal fightGoal
+            )
             {
                 continue;
             }
-            foreach (GoalObject goal in mission.Goals)
+            if (fightGoal.EnemySpawner == _enemySpawner)
             {
-                if (goal is FightGoal fightGoal)
-                {
-                    if (fightGoal.EnemySpawner == _enemySpawner)
-                    {
-                        GoalCompleted(mission);
-                    }
-                }
+                GoalCompleted(mission);
             }
         }
     }

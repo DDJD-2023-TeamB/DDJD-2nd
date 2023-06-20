@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3864e65684595594c9bd01be9a1e894d, type: 3}
-  m_Name: Fireball
+  m_Name: SlowFireball
   m_EditorClassIdentifier: 
   _leftSkill: {fileID: 11400000, guid: 238d91aaae43228458debe6915784b59, type: 2}
   _rightSkill: {fileID: 11400000, guid: 238d91aaae43228458debe6915784b59, type: 2}
-  _attackSpeed: 1
-  _health: 100
+  _attackSpeed: 0.5
+  _health: 50
   _maxAttacksInRow: 3
-  _speed: 3
+  _minAttacksInRow: 1
+  _speed: 2
+  _minAttackComboCooldown: 1
+  _maxAttackComboCooldown: 2
   _attackStrategy:
     GuidAssignmentFailed: 0
     GUID: 960f1cb1629c2264f9484114a0c9dd60
@@ -33,7 +36,7 @@ MonoBehaviour:
     GUID: 3cc5e4e6e4114844ab5fd25dc81daa59
     _typeNameAndAssembly: EnemyRandomPatrolState, Assembly-CSharp
     _suppressLogs: 0
-  _usesDash: 1
+  _usesDash: 0
   _currentElement: {fileID: 11400000, guid: 395138bc558d7cf449eb38e7c3e9ab91, type: 2}
   _dashStats:
     _duration: 0.3

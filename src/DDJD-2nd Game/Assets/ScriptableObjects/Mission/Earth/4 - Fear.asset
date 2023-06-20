@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6159442827439109576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10ade6c6202a749d3b8a95862ea27777, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3208331280523073408, guid: 12b9752c824401b4aba52369f821a48b,
+          type: 3}
+        m_TargetAssemblyTypeName: FightCallbacks, Assembly-CSharp
+        m_MethodName: OnFightGoalStarted
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: EnemyCampOutsideEarth
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3208331280523073408, guid: 12b9752c824401b4aba52369f821a48b,
+          type: 3}
+        m_TargetAssemblyTypeName: FightCallbacks, Assembly-CSharp
+        m_MethodName: OnFightGoalCompleted
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: EnemyCampOutsideEarth
+          m_BoolArgument: 0
+        m_CallState: 2
+  _description: Look for enemies outside
+  _location: {fileID: 0}
+  _enemySpawner: {fileID: 11400000, guid: a4f177f702dc02f4080cf0921e54a4c0, type: 2}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c5000599e034b75b66b98e905ca14a, type: 3}
+  m_Name: 4 - Fear
+  m_EditorClassIdentifier: 
+  _title: Suspicious Gang
+  _description: Investigate the suspicious gang going around Earth Village
+  _status: 1
+  _type: 0
+  _goals:
+  - {fileID: -6159442827439109576}
+  - {fileID: 8710463978971418610}
+  _interactionBegin:
+    _dialogueInfo:
+      _noun: Edward
+      _sentences:
+      - Hey, I'm Edward, the guardian of this castle.
+      - You know, things are not going great in the village...
+      - People are scared and we don't have the man power to defend ourselves.
+      - Just a while ago I saw a group of suspicious guys lurking around the village.
+      - I know how strong you are, do you mind taking a look outside?
+    _npc: {fileID: 11400000, guid: 9e25ee036b1a8c0459c44a31e1e0b48c, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
+  _reward:
+    _gold: 100
+    _items: []
+  _followingMissions: []
+  _area: 2
+--- !u!114 &8710463978971418610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  _description: Talk with Edward
+  _location: {fileID: 0}
+  _interaction:
+    _dialogueInfo:
+      _noun: Edward
+      _sentences:
+      - You killed all of the guys outside!?
+      - Well, that's an extreme way to solve it but thanks anyway!
+      - Here, you deserve some extra gold to spend on new items.
+      - I hope to see you again around here!
+    _npc: {fileID: 11400000, guid: 9e25ee036b1a8c0459c44a31e1e0b48c, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
