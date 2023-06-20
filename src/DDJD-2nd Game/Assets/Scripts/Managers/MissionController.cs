@@ -54,7 +54,7 @@ public class MissionController : MonoBehaviour
             )
                 continue;
 
-            if (interactGoal.NpcToInteract == npc)
+            if (interactGoal.Interaction.Npc == npc)
             {
                 GoalCompleted(mission);
             }
@@ -126,17 +126,24 @@ public class MissionController : MonoBehaviour
         //_player.Inventory.AddGold(mission.Reward.Gold);
     }
 
-    public Queue<Mission> GetNpcMissions(NpcObject npc)
+    public List<Mission> GetNpcMissions(NpcObject npc)
     {
-        Queue<Mission> missions = new Queue<Mission>();
+        List<Mission> missions = new List<Mission>();
 
         foreach (var mission in _unblockedMissions)
         {
-            if (mission.Status != MissionState.Completed)
             {
-                if (mission.InteractionBegin.Npc == npc || mission.InteractionEnd.Npc == npc)
+                if (mission.Status == MissionState.Available && mission.InteractionBegin.Npc == npc)
                 {
-                    missions.Enqueue(mission);
+                    missions.Add(mission);
+                }
+                else if (
+                    mission.Status == MissionState.Ongoing
+                    && mission.CurrentGoal is InteractGoal interactGoal
+                    && interactGoal.Interaction.Npc == npc
+                )
+                {
+                    missions.Add(mission);
                 }
             }
         }

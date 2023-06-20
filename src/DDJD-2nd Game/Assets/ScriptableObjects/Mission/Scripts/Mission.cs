@@ -76,14 +76,6 @@ public class Mission : ScriptableObject
     }
 
     [SerializeField]
-    private Interaction _interactionEnd;
-    public Interaction InteractionEnd
-    {
-        get => _interactionEnd;
-    }
-
-    //Do the reward
-    [SerializeField]
     private Reward _reward;
 
     public Reward Reward

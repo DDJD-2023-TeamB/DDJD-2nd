@@ -210,7 +210,7 @@ public class MissionsUIController : MonoBehaviour
             playingIndicatorTitle.GetComponent<TextMeshProUGUI>().text = "";
             playingIndicatorQuest.GetComponent<TextMeshProUGUI>().text = "";
         }
-        else
+        else if (mission.Status != MissionState.Completed)
         {
             UpdatedSelectedMission(mission);
         }
@@ -219,6 +219,13 @@ public class MissionsUIController : MonoBehaviour
 
     private void UpdatedSelectedMission(Mission mission)
     {
+        if (mission.Status == MissionState.Completed)
+        {
+            playingIndicatorTitle.GetComponent<TextMeshProUGUI>().text = "";
+            playingIndicatorQuest.GetComponent<TextMeshProUGUI>().text = "";
+            return;
+        }
+
         selectedMission = mission;
         playingIndicatorTitle.GetComponent<TextMeshProUGUI>().text = selectedMission.Title;
         if (selectedMission.CurrentGoal != null && selectedMission.Status == MissionState.Ongoing)

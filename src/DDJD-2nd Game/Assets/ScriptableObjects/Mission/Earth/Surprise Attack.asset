@@ -66,6 +66,7 @@ MonoBehaviour:
   _type: 0
   _goals:
   - {fileID: -6159442827439109576}
+  - {fileID: 8710463978971418610}
   _interactionBegin:
     _dialogueInfo:
       _noun: Bella
@@ -76,20 +77,43 @@ MonoBehaviour:
       - OH MY GOD! The village is under attack!!
       - I knew this day would eventually come...
     _npc: {fileID: 11400000, guid: 3403cae3e543d448a83c140ebb792bde, type: 2}
-  _interactionEnd:
-    _dialogueInfo:
-      _noun: Bella
-      _sentences:
-      - I can't believe you're THIS strong!
-      - Where have you been all this time? Anyway, thank you for saving our village!
-      - Why did we get attacked? You really don't much about this place, do you?
-      - They're the FireMighters, a group of bandits who betrayed the Fire Village.
-      - They are now trying to conquer the 4 Great Villages and make their boss the
-        strongest man on the planet.
-      - We are the only ones left standing...
-    _npc: {fileID: 11400000, guid: 3403cae3e543d448a83c140ebb792bde, type: 2}
   _reward:
     _gold: 0
     _items: []
   _followingMissions: []
   _area: 2
+--- !u!114 &8710463978971418610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  _description: Meet with Bella
+  _location: {fileID: 0}
+  _interaction:
+    _dialogueInfo:
+      _noun: Bella
+      _sentences:
+      - Wow, I can't believe you're THIS strong! Where have you been all this time?
+      - Anyway, thanks for saving our beloved village!
+      - Why were they attacking us? You really don't know much about this place...
+      - They were FireMighters, a group of bandits who betrayed the Fire Village.
+      - They're trying to conquer the 4 Great Villages and make their boss the strongest
+        man on the planet!
+      - The other 3 villages have already been conquered, we're the only ones left
+        standing.
+      - I wonder if anyone will ever be able to defeat them...
+    _npc: {fileID: 11400000, guid: 3403cae3e543d448a83c140ebb792bde, type: 2}
