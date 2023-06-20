@@ -105,7 +105,8 @@ public class MissionController : MonoBehaviour
         _unblockedMissions.Remove(mission);
         _gameState.FinishedMissions.Add(mission);
         UnblockFollowingMissions(mission);
-        if(_missionsUIController != null) _missionsUIController.UpdateMissionsUI();
+        if (_missionsUIController != null)
+            _missionsUIController.UpdateMissionsUI();
     }
 
     private void UnblockFollowingMissions(Mission mission)
@@ -138,15 +139,18 @@ public class MissionController : MonoBehaviour
                 {
                     missions.Add(mission);
                 }
-                else if (interactionBegin) {
-                    if (mission.Status == MissionState.Ongoing
+                else if (interactionBegin)
+                {
+                    if (
+                        mission.Status == MissionState.Ongoing
                         && mission.InteractionBegin.Npc == npc
                     )
                     {
                         missions.Add(mission);
                     }
                 }
-                else if (mission.Status == MissionState.Ongoing
+                else if (
+                    mission.Status == MissionState.Ongoing
                     && mission.CurrentGoal is InteractGoal interactGoal
                     && interactGoal.Interaction.Npc == npc
                 )
@@ -158,7 +162,6 @@ public class MissionController : MonoBehaviour
 
         return missions;
     }
-    
 
     public void CompleteFightGoal(EnemySpawner _enemySpawner)
     {

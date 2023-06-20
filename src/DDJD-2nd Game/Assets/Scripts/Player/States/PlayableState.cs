@@ -20,6 +20,7 @@ public class PlayableState : GenericState
         _context.Input.OnInventoryKeydown += OnInventoryKeydown;
         _context.Input.OnMissionKeydown += OnMissionKeydown;
         _context.Input.OnMenuKeydown += OnMenuKeydown;
+        _context.Input.OnInteractionKeyDown += OnInteractionKeyDown;
         _context.Input.OnUsePotion += OnUsePotion;
     }
 
@@ -29,6 +30,7 @@ public class PlayableState : GenericState
         _context.Input.OnInventoryKeydown -= OnInventoryKeydown;
         _context.Input.OnMissionKeydown -= OnMissionKeydown;
         _context.Input.OnMenuKeydown -= OnMenuKeydown;
+        _context.Input.OnInteractionKeyDown -= OnInteractionKeyDown;
         _context.Input.OnUsePotion -= OnUsePotion;
     }
 
@@ -45,19 +47,6 @@ public class PlayableState : GenericState
     {
         CheckAiming();
         LookRotation();
-        CheckRange();
-    }
-
-    private void CheckRange()
-    {
-        if (
-            _context.Input.IsInteracting
-            && !(_substate is InteractingState)
-            && _context.InteractedObject != null
-        )
-        {
-            ChangeSubState(_context.Factory.Interacting(this));
-        }
     }
 
     private void CheckAiming()
@@ -101,11 +90,24 @@ public class PlayableState : GenericState
 
     private void OnMenuKeydown()
     {
-        if (!(_substate is InteractingState)) _context.ChangeState(_context.Factory.Menu());
+        if (!(_substate is InteractingState))
+            _context.ChangeState(_context.Factory.Menu());
     }
 
     private void OnUsePotion()
     {
         _context.Inventory.UsePotion(_context);
+    }
+
+    private void OnInteractionKeyDown()
+    {
+        if (!_context.InteractedObject)
+            return;
+        if (!_context.InteractedObject.IsInstant())
+            ChangeSubState(_context.Factory.Interacting(this));
+        else
+        {
+            _context.InteractedObject.Interact();
+        }
     }
 }

@@ -294,6 +294,30 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-7767905025892140373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Air/Hover Intensity
+  m_EditorClassIdentifier: 
+  Name: Hover Intensity
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2371128729
+    data2: 1995108737
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-7482942988528332613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,6 +663,35 @@ MonoBehaviour:
   - Name: Desktop
     Value: 2975328
   Exists: 1
+--- !u!114 &-5133265248957435148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Attacks/Fire Abilities/Charged Fire Ball
+  m_EditorClassIdentifier: 
+  Path: event:/Attacks/Fire Abilities/Charged Fire Ball
+  Guid:
+    Data1: -423278909
+    Data2: 1196819011
+    Data3: 852621243
+    Data4: -1509556603
+  Banks:
+  - {fileID: 5317653654373178222}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -2356835400630958323}
+  - {fileID: -8199670896367982002}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-5131085429420812121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -821,6 +874,32 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-3996041286243444494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Lightning Dash/Lightning Dash State
+  m_EditorClassIdentifier: 
+  Name: Lightning Dash State
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1288640749
+    data2: 263028203
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Dash
+  - Explosion
+  Exists: 1
 --- !u!114 &-3936829373070905044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1138,6 +1217,30 @@ MonoBehaviour:
     data1: 816036408
     data2: 3410288474
   Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-2356835400630958323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Charged Fire Ball/Charged Fire Ball Intensity
+  m_EditorClassIdentifier: 
+  Name: Charged Fire Ball Intensity
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 522363370
+    data2: 3547473405
+  Type: 0
   IsGlobal: 0
   Labels: []
   Exists: 1
@@ -1924,7 +2027,7 @@ MonoBehaviour:
   Banks:
   - {fileID: 5317653654373178222}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters:
   - {fileID: -2782868503741354480}
@@ -2602,5 +2705,7 @@ MonoBehaviour:
     data2: 2785180653
   Type: 0
   IsGlobal: 0
-  Labels: []
+  Labels:
+  - Miss
+  - Basic
   Exists: 1

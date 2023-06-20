@@ -81,6 +81,14 @@ public class ItemsInventoryObject : ScriptableObject
             Container.Remove(slot);
         }
     }
+
+    public bool SubGold(int gold)
+    {
+        if(_gold < gold)
+            return false;
+        _gold -= gold;
+        return true;
+    }
 }
 
 [System.Serializable]

@@ -17,7 +17,6 @@ public class InteractingState : GenericState
         _context.Animator.SetFloat("ForwardSpeed", 0.0f);
         _context.Animator.SetFloat("RightSpeed", 0.0f);
         objt.Interact();
-        HelpManager.Instance.SetHelpText("");
     }
 
     public override void Exit()
