@@ -169,6 +169,7 @@ public class Player : StateContext, Damageable
     }
 
     private FMOD.Studio.PARAMETER_ID _sfxRunStateId;
+    private FMOD.Studio.PARAMETER_ID _sfxDashStateId;
     private CharacterStatus _characterStatus;
     public CharacterStatus CharacterStatus
     {
@@ -227,6 +228,7 @@ public class Player : StateContext, Damageable
         _sfxJumpStateId = _soundEmitter.GetParameterId("jump", "Jump State");
         _sfxJumpIntensityId = _soundEmitter.GetParameterId("jump", "Jump Intensity");
         _sfxRunStateId = _soundEmitter.GetParameterId("run", "Run State");
+        _sfxDashStateId = _soundEmitter.GetParameterId("dash", "Dash Type");
         _inputReceiver.OnPrintState += () => _state?.PrintState();
         _defaultMaterial = _collider.material;
         _status.OnDeath += (int damage, Vector3 hitPoint, Vector3 direction) =>
@@ -357,5 +359,10 @@ public class Player : StateContext, Damageable
     public PlayerMusic PlayerMusic
     {
         get { return _playerMusic; }
+    }
+
+    public FMOD.Studio.PARAMETER_ID SfxDashStateId
+    {
+        get { return _sfxDashStateId; }
     }
 }

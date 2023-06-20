@@ -4711,9 +4711,10 @@ MonoBehaviour:
     - air
     - run
     - battle_music
+    - dash
     _values:
     - _playOnStart: 0
-      _stopOnDestroy: 0
+      _stopOnDestroy: 1
       _updatePosition: 1
       _eventReference:
         Guid:
@@ -4723,7 +4724,7 @@ MonoBehaviour:
           Data4: -2142007058
         Path: event:/Movement/Footsteps
     - _playOnStart: 0
-      _stopOnDestroy: 0
+      _stopOnDestroy: 1
       _updatePosition: 1
       _eventReference:
         Guid:
@@ -4733,7 +4734,7 @@ MonoBehaviour:
           Data4: 781296483
         Path: event:/Movement/Jump
     - _playOnStart: 0
-      _stopOnDestroy: 0
+      _stopOnDestroy: 1
       _updatePosition: 1
       _eventReference:
         Guid:
@@ -4743,7 +4744,7 @@ MonoBehaviour:
           Data4: 1921847288
         Path: event:/Movement/Air
     - _playOnStart: 0
-      _stopOnDestroy: 0
+      _stopOnDestroy: 1
       _updatePosition: 1
       _eventReference:
         Guid:
@@ -4753,7 +4754,7 @@ MonoBehaviour:
           Data4: -1583625905
         Path: event:/Movement/Running
     - _playOnStart: 0
-      _stopOnDestroy: 0
+      _stopOnDestroy: 1
       _updatePosition: 1
       _eventReference:
         Guid:
@@ -4762,6 +4763,16 @@ MonoBehaviour:
           Data3: 909528201
           Data4: 604223519
         Path: event:/Music/Battle Music
+    - _playOnStart: 0
+      _stopOnDestroy: 1
+      _updatePosition: 0
+      _eventReference:
+        Guid:
+          Data1: 1742516872
+          Data2: 1324610506
+          Data3: -1868929350
+          Data4: 1570893751
+        Path: event:/Movement/Dash
 --- !u!114 &7961308323444105709
 MonoBehaviour:
   m_ObjectHideFlags: 0
