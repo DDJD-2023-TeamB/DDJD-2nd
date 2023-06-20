@@ -27,7 +27,6 @@ public class MenuHandler : MonoBehaviour
     IEnumerator LoadScene(string sceneName)
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-        Debug.Log("Loading scene: " + asyncLoad.progress);
 
         slider.gameObject.SetActive(true);
         GameObject.Find("StartButton").SetActive(false);
@@ -36,8 +35,11 @@ public class MenuHandler : MonoBehaviour
 
         while (!asyncLoad.isDone)
         {
-            slider.value = asyncLoad.progress * 100;
+            float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f); // Adjust the progress value
+            slider.value = Mathf.RoundToInt(progress * 100);
             yield return null;
         }
+
+        yield return new WaitForSeconds(1.0f);
     }
 }
