@@ -52,7 +52,7 @@ public class UIController : MonoBehaviour
         _playerUI.inventoryUI.gameObject.SetActive(false);
         _playerUI.menuUI.SetActive(false);
         _playerUI.missionsUI.SetActive(false);
-        _playerUI.activeElementWheel.SetActive(false);
+        _playerUI.activeElementWheel.gameObject.SetActive(false);
         _playerUI.OptionsUI.SetUIController(this);
 
         //OpenLeftSpell(false);
@@ -159,9 +159,10 @@ public class UIController : MonoBehaviour
 
     public void OpenActiveElement(bool isOpening)
     {
-        if (_playerUI.activeElementWheel.activeInHierarchy != isOpening)
+        if (_playerUI.activeElementWheel.gameObject.activeInHierarchy != isOpening)
         {
-            _playerUI.activeElementWheel.SetActive(isOpening);
+            _playerUI.activeElementWheel.gameObject.SetActive(isOpening);
+            _playerUI.activeElementWheel.SetUnlockedElements(_player.PlayerSkills.Elements);
         }
     }
 
