@@ -11,6 +11,8 @@ public class UIController : MonoBehaviour
     private ItemsInventoryObject _itemsInventory;
 
     private PlayerUI _playerUI;
+
+    private TutorialUI _tutorialUI;
     private Player _player;
 
     ItemSkill[] leftWheelItems = new ItemSkill[6];
@@ -53,6 +55,9 @@ public class UIController : MonoBehaviour
         _playerUI.activeElementWheel.SetActive(false);
         _playerUI.OptionsUI.SetUIController(this);
 
+        //OpenLeftSpell(false);
+        //OpenRightSpell(false);
+
         InventoryUI inventoryUI = _playerUI.inventoryUI;
         inventoryUI.OnItemSkillLeftDrop += ChangeLeftWheelItem;
         inventoryUI.OnItemSkillRightDrop += ChangeRightWheelItem;
@@ -76,6 +81,7 @@ public class UIController : MonoBehaviour
         {
             _playerUI.inventoryUI.RemoveAllItems();
             LoadItems();
+            LoadGold();
         }
     }
 
@@ -88,6 +94,29 @@ public class UIController : MonoBehaviour
         {
             _playerUI.OptionsUI.gameObject.SetActive(false);
         }
+    }
+
+    public void OpenTutorial(bool isOpening)
+    {
+        currentMenu = "tutorial";
+        _playerUI.tutorialUI.SetActive(isOpening);
+        _playerUI.playingUI.gameObject.SetActive(!isOpening);
+
+        if (isOpening == true)
+            _tutorialUI = _playerUI.tutorialUI.GetComponent<TutorialUI>();
+        else
+            _tutorialUI = null;
+    }
+
+    public void HandleTutorial(bool isOpening, Tutorial tutorial)
+    {
+        OpenTutorial(isOpening);
+        ChangeTutorialPage(tutorial);
+    }
+
+    public void ChangeTutorialPage(Tutorial tutorial)
+    {
+        _tutorialUI.ShowUI(tutorial);
     }
 
     public void OpenOptions(bool isOpening)
@@ -297,12 +326,18 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public void LoadGold()
+    {
+        _playerUI.inventoryUI.UpdateGold(_itemsInventory.Gold);
+    }
+
     public void LoadInventory()
     {
         LoadSpells();
         _playerUI.inventoryUI.SetLeftWheelSkills(new List<ItemSkill>(leftWheelItems));
         _playerUI.inventoryUI.SetRightWheelSkills(new List<ItemSkill>(rightWheelItems));
         LoadItems();
+        LoadGold();
     }
 
     public Player Player

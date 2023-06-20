@@ -13,6 +13,7 @@ public class ItemsInventoryObject : ScriptableObject
 {
     public List<ItemStack> Container = new List<ItemStack>();
 
+    [SerializeField]
     private int _gold;
 
     public int Gold
@@ -62,7 +63,8 @@ public class ItemsInventoryObject : ScriptableObject
 
     public void AddGold(int gold)
     {
-        _gold += gold;
+        if(_gold + gold <= 9999)
+            _gold += gold;
     }
 
     public void UsePotion(Player player)
@@ -78,6 +80,14 @@ public class ItemsInventoryObject : ScriptableObject
         {
             Container.Remove(slot);
         }
+    }
+
+    public bool SubGold(int gold)
+    {
+        if(_gold < gold)
+            return false;
+        _gold -= gold;
+        return true;
     }
 }
 

@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0989c57f669db94bbce0c35b1ac5783, type: 3}
   m_Name: Book
   m_EditorClassIdentifier: 
-  _name: 
+  _name: Book
   _description: 
   _icon: {fileID: 21300000, guid: 4ab4f6d4220a29a45b303abbe392658b, type: 3}
   _prefab: {fileID: 3344876173666980320, guid: 544465db516d54195a5fa34fe25fee7f, type: 3}
+  _purchasable: 1
+  _cost: 2
+  _numLeftToBuy: 1
+  _unlimited: 0
   _itemSkill: {fileID: 0}
   bookEvent:
     Guid:

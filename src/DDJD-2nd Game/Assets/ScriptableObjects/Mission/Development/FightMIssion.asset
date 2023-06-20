@@ -24,16 +24,23 @@ MonoBehaviour:
       _sentences:
       - Kill the enemies in dev
     _npc: {fileID: 11400000, guid: 15f81436f65c9415ea4bde98e57c0e27, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
   _interactionEnd:
     _dialogueInfo:
       _noun: 
       _sentences: []
     _npc: {fileID: 0}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
   _reward:
     _gold: 0
     _items: []
   _followingMissions: []
   _area: 0
+  _tutorial: 
 --- !u!114 &2591822052486553218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ade6c6202a749d3b8a95862ea27777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _completed: 1
+  _completed: 0
   _onGoalCompleted:
     m_PersistentCalls:
       m_Calls:

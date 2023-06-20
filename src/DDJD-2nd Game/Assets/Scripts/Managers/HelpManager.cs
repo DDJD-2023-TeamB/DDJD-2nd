@@ -23,4 +23,13 @@ public class HelpManager : MonoBehaviour
     public void SetHelpText(string text){
         _helpText.text = text;
     }
+
+    public void AddText(string text)
+    {
+        _helpText.text += "\n\n" + text;
+    }
+
+    public void ResetText(){
+        _helpText.text = "";
+    }
 }

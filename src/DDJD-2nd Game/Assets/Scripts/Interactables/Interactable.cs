@@ -6,8 +6,6 @@ using TMPro;
 public abstract class Interactable : MonoBehaviour
 {
     private TextMeshProUGUI _helpText;
-
-    //private GameObject object;
     protected Player _player;
 
     protected MissionController _missionController;
@@ -40,19 +38,18 @@ public abstract class Interactable : MonoBehaviour
             return;
         }
 
-        HelpManager.Instance.SetHelpText("");
         EndInteract();
     }
 
-    private void Approach()
-    {
-        HelpManager.Instance.SetHelpText("Press F to interact");
-    }
+    protected abstract void Approach();
 
     public abstract void Interact();
 
     public virtual void EndInteract()
     {
+        HelpManager.Instance.ResetText();
         _player.InteractedObject = null;
     }
+
+    public abstract bool IsInstant();
 }

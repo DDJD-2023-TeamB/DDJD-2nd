@@ -61,6 +61,13 @@ public class Mission : ScriptableObject
         get { return _goals; }
     }
 
+    private GoalObject _currentGoal;
+    public GoalObject CurrentGoal
+    {
+        get { return _currentGoal; }
+        set { _currentGoal = value; }
+    }
+
     [SerializeField]
     private Interaction _interactionBegin;
     public Interaction InteractionBegin
@@ -68,14 +75,6 @@ public class Mission : ScriptableObject
         get => _interactionBegin;
     }
 
-    [SerializeField]
-    private Interaction _interactionEnd;
-    public Interaction InteractionEnd
-    {
-        get => _interactionEnd;
-    }
-
-    //Do the reward
     [SerializeField]
     private Reward _reward;
 
@@ -99,7 +98,35 @@ public class Mission : ScriptableObject
     {
         get { return _area; }
     }
-
     public void OnEnable() { }
-    //onFinished -> callback
+
+    public void Unblock()
+    {
+        if (_status == MissionState.Completed)
+            return;
+
+        _status = MissionState.Available;
+        if (_goals.Count > 0)
+            _currentGoal = _goals[0];
+    }
+
+    public void CompleteCurrentGoal()
+    {
+        _currentGoal.Complete();
+        int nextGoalIndex = _goals.IndexOf(_currentGoal) + 1;
+        if (nextGoalIndex < _goals.Count)
+        {
+            _currentGoal = _goals[nextGoalIndex];
+            _currentGoal.OnGoalStarted?.Invoke();
+        }
+        else
+        {
+            _currentGoal = null;
+        }
+    }
+
+    public bool IsCompleted()
+    {
+        return _currentGoal == null;
+    }
 }

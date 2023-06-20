@@ -1,0 +1,143 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5954251082484780428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  _description: 
+  _location: {fileID: 0}
+  _interaction:
+    _dialogueInfo:
+      _noun: 
+      _sentences: []
+    _npc: {fileID: 0}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c5000599e034b75b66b98e905ca14a, type: 3}
+  m_Name: Mission
+  m_EditorClassIdentifier: 
+  _title: Mission 1
+  _description: kill them all
+  _status: 1
+  _type: 0
+  _goals:
+  - {fileID: 4690247295529768849}
+  _interactionBegin:
+    _dialogueInfo:
+      _noun: John
+      _sentences:
+      - hello fam
+      - how are you
+      - good
+    _npc: {fileID: 11400000, guid: 3403cae3e543d448a83c140ebb792bde, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7439360548436250048, guid: 78f2720a0af9449ca8e0d4ead905becc,
+            type: 3}
+          m_TargetAssemblyTypeName: TutorialCallback, Assembly-CSharp
+          m_MethodName: HandleTutorial
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 958887c49bfe7c44c9707b52a49c595d,
+              type: 2}
+            m_ObjectArgumentAssemblyTypeName: Tutorial, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7439360548436250048, guid: 78f2720a0af9449ca8e0d4ead905becc,
+            type: 3}
+          m_TargetAssemblyTypeName: TutorialCallback, Assembly-CSharp
+          m_MethodName: ExitTutorial
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  _reward:
+    _gold: 3
+    _items: []
+  _followingMissions: []
+  _area: 0
+--- !u!114 &4690247295529768849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 1
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  _description: Interact
+  _location: {fileID: 0}
+  _interaction:
+    _dialogueInfo:
+      _noun: Tristan
+      _sentences:
+      - AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+    _npc: {fileID: 11400000, guid: 15f81436f65c9415ea4bde98e57c0e27, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
