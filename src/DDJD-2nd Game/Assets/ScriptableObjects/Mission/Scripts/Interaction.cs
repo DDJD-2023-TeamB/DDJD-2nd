@@ -32,6 +32,7 @@ public class Interaction
 
     public void InteractionEnded()
     {
+        Debug.Log("Interaction ended");
         _onEndInteraction?.Invoke();
     }
 

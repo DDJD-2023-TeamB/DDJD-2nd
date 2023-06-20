@@ -57,10 +57,4 @@ public abstract class GoalObject : ScriptableObject
     {
         get { return _completed; }
     }
-
-    public void Complete()
-    {
-        _completed = true;
-        _onGoalCompleted?.Invoke();
-    }
 }

@@ -9,6 +9,9 @@ public class TutorialCallback : MonoBehaviour
 
     public void HandleTutorial(Tutorial tutorial)
     {
+        Debug.Log("HandleTutorial");
+        Debug.Log(tutorial);
+        Debug.Log(_tutorial);
         if (_tutorial == null && tutorial != null)
         {
             _tutorial = tutorial;
