@@ -185,6 +185,10 @@ public class Player : StateContext, Damageable
 
     private PlayerAirborneComponent _airborneComponent;
 
+    private PlayerDeath _playerDeath;
+
+    private RagdollController _ragdollController;
+
     void Awake()
     {
         _inputReceiver = GetComponent<PlayerInputReceiver>();
@@ -208,6 +212,8 @@ public class Player : StateContext, Damageable
         _timeController = GetComponent<TimeController>();
         _footsteps = GetComponent<FootSteps>();
         _airborneComponent = GetComponent<PlayerAirborneComponent>();
+        _playerDeath = GetComponent<PlayerDeath>();
+        _ragdollController = GetComponent<RagdollController>();
         ChangeState(_factory.Playable());
     }
 
@@ -220,6 +226,17 @@ public class Player : StateContext, Damageable
         _sfxRunStateId = _soundEmitter.GetParameterId("run", "Run State");
         _inputReceiver.OnPrintState += () => _state?.PrintState();
         _defaultMaterial = _collider.material;
+        _status.OnDeath += (int damage, Vector3 hitPoint, Vector3 direction) =>
+            ChangeState(_factory.Dead());
+        _ragdollController.DeactivateRagdoll();
+
+        _playerDeath.OnRespawn += () =>
+        {
+            _cameraController.ResetCameraRotation();
+            inventory.SubGold(_playerDeath.GoldLostOnDeath);
+            _status.Reset();
+            ChangeState(_factory.Playable());
+        };
     }
 
     void Update()
@@ -322,5 +339,15 @@ public class Player : StateContext, Damageable
     public FMOD.Studio.PARAMETER_ID SfxRunStateId
     {
         get { return _sfxRunStateId; }
+    }
+
+    public PlayerDeath PlayerDeath
+    {
+        get { return _playerDeath; }
+    }
+
+    public RagdollController RagdollController
+    {
+        get { return _ragdollController; }
     }
 }
