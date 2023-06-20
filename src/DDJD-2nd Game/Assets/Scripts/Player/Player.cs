@@ -205,7 +205,6 @@ public class Player : StateContext, Damageable
         _elementController = GetComponent<ElementController>();
         _characterMovement = GetComponent<CharacterMovement>();
         _collider = GetComponent<Collider>();
-        _gameUI = _uiController.PlayerUI.playingUI;
         _timeController = GetComponent<TimeController>();
         _footsteps = GetComponent<FootSteps>();
         _airborneComponent = GetComponent<PlayerAirborneComponent>();
@@ -214,6 +213,7 @@ public class Player : StateContext, Damageable
 
     void Start()
     {
+        _gameUI = _uiController.PlayerUI.playingUI;
         UpdateElement(_playerSkills.CurrentElement);
         _sfxJumpStateId = _soundEmitter.GetParameterId("jump", "Jump State");
         _sfxJumpIntensityId = _soundEmitter.GetParameterId("jump", "Jump Intensity");

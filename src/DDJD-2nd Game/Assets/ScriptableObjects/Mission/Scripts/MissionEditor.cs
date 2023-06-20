@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 
@@ -46,3 +47,5 @@ public class MissionEditor : Editor
         }
     }
 }
+
+#endif

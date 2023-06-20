@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 [System.Serializable]
 public abstract class GoalObject : ScriptableObject
@@ -30,8 +32,10 @@ public abstract class GoalObject : ScriptableObject
 
     public void OnGUI()
     {
+#if UNITY_EDITOR
         Editor editor = Editor.CreateEditor(this);
         editor?.OnInspectorGUI();
+#endif
     }
 
     public string Description
