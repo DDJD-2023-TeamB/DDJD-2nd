@@ -5,16 +5,14 @@ using UnityEngine;
 public class TutorialCallback : MonoBehaviour
 {
     private Player _player;
-    private Tutorial _tutorial;
+    private Tutorial _tutorial = null;
 
     public void HandleTutorial(Tutorial tutorial)
     {
-        Debug.Log("HandleTutorial");
-        Debug.Log(tutorial);
-        Debug.Log(_tutorial);
-        if (_tutorial == null && tutorial != null)
+        if ((_tutorial == null && tutorial != null) || !_tutorial.Started)
         {
             _tutorial = tutorial;
+            _tutorial.Started = true;
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             _player.UIController.HandleTutorial(true, tutorial);
         }
@@ -29,7 +27,8 @@ public class TutorialCallback : MonoBehaviour
         if (_tutorial)
         {
             _tutorial.SwitchPage();
-            _player.UIController.ChangeTutorialPage(_tutorial);
+            UIController uiController = _player.UIController;
+            uiController.ChangeTutorialPage(_tutorial);
         }
     }
 
@@ -41,6 +40,4 @@ public class TutorialCallback : MonoBehaviour
             _player.UIController.OpenTutorial(false);
         }
     }
-
-      
 }
