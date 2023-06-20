@@ -11,21 +11,21 @@ public class LoadingBar : MonoBehaviour
     [SerializeField]
 	private Gradient gradient;
     [SerializeField]
-	private Image life;
+	private Image bar;
 
 	public void SetMaxValue(int value)
 	{
 		slider.maxValue = value;
 		slider.value = value;
 
-		life.color = gradient.Evaluate(1f);
+		bar.color = gradient.Evaluate(1f);
 	}
 
     public void SetValue(int value)
 	{
 		slider.value = value;
 
-		life.color = gradient.Evaluate(slider.normalizedValue);
+		bar.color = gradient.Evaluate(slider.normalizedValue);
 	}
 
 }
