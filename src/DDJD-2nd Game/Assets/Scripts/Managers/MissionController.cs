@@ -127,35 +127,23 @@ public class MissionController : MonoBehaviour
         //_player.Inventory.AddGold(mission.Reward.Gold);
     }
 
-    public List<Mission> GetNpcMissions(NpcObject npc, bool interactionBegin)
+    public List<Mission> GetNpcMissions(NpcObject npc)
     {
         List<Mission> missions = new List<Mission>();
 
         foreach (var mission in _unblockedMissions)
         {
-            Debug.Log(mission.Title);
             {
                 if (mission.Status == MissionState.Available && mission.InteractionBegin.Npc == npc)
                 {
                     missions.Add(mission);
                 }
-                else if (interactionBegin)
-                {
-                    if (
-                        mission.Status == MissionState.Ongoing
-                        && mission.InteractionBegin.Npc == npc
-                    )
-                    {
-                        missions.Add(mission);
+                if (mission.Status == MissionState.Ongoing) {
+                    if (mission.CurrentGoal is InteractGoal interactGoal) {
+                        if (interactGoal.Interaction.Npc == npc) missions.Add(mission);
+                        else if (mission.InteractionBegin.Npc == npc && interactGoal.Interaction.Npc != npc) missions.Add(mission);
                     }
-                }
-                else if (
-                    mission.Status == MissionState.Ongoing
-                    && mission.CurrentGoal is InteractGoal interactGoal
-                    && interactGoal.Interaction.Npc == npc
-                )
-                {
-                    missions.Add(mission);
+                    else if (mission.InteractionBegin.Npc == npc) missions.Add(mission);
                 }
             }
         }

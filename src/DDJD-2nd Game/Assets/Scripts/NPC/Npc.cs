@@ -25,7 +25,7 @@ public class Npc : Interactable
         base.Start();
         _currentDialogueInfo = _npc.DefaultDialogueInfo;
         _animator = GetComponent<Animator>();
-        List<Mission> missions = _missionController.GetNpcMissions(_npc, false);
+        List<Mission> missions = _missionController.GetNpcMissions(_npc);
         if (missions.Count != 0)
         {
             _currentMission = missions[0];
@@ -81,7 +81,7 @@ public class Npc : Interactable
         }
 
         _currentDialogueInfo = _npc.DefaultDialogueInfo;
-        foreach (var mission in _missionController.GetNpcMissions(_npc, false))
+        foreach (var mission in _missionController.GetNpcMissions(_npc))
         {
             switch (mission.Status)
             {
@@ -101,7 +101,14 @@ public class Npc : Interactable
                 }
                 case MissionState.Ongoing:
                 {
-                    if (mission.CurrentGoal is InteractGoal interactGoal)
+                    if (mission.CurrentGoal is InteractGoal interactGoal) {
+                        _currentDialogueInfo = interactGoal.Interaction.DialogueInfo;
+                        if (mission.InteractionBegin.Npc == _npc && interactGoal.Interaction.Npc != _npc)
+                        {
+                            _currentDialogueInfo = mission.InteractionBegin.DialogueInfo;
+                        }
+                    }
+                    else if (mission.InteractionBegin.Npc == _npc)
                         _currentDialogueInfo = mission.InteractionBegin.DialogueInfo;
                     break;
                 }
@@ -131,14 +138,12 @@ public class Npc : Interactable
     {
         if (!_dialogue.CheckIfDialogueEnded())
         {
-            Debug.Log("Continue");
             _dialogue.DisplayNextSentence();
         }
         else
         {
-            foreach (var mission in _missionController.GetNpcMissions(_npc, true))
+            foreach (var mission in _missionController.GetNpcMissions(_npc))
             {
-                Debug.Log(mission);
                 if (
                     mission
                     && _npc == mission.InteractionBegin.Npc
