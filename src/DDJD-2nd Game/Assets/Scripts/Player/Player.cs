@@ -249,6 +249,14 @@ public class Player : StateContext, Damageable
         _state.Update();
     }
 
+    void FixedUpdate()
+    {
+        if (transform.position.y < -100)
+        {
+            _playerDeath.Die();
+        }
+    }
+
     public void UpdateElement(Element element)
     {
         if (element != null)
