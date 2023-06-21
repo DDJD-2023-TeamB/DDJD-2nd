@@ -32,7 +32,7 @@ public class DashState : MeleeAttackableState
     {
         base.Enter();
         _dashable = _context.GetComponent<Dashable>();
-        _gameUI.startChargingIndicator();
+
         bool canUseSkill =
             _skill != null
             && !_context.PlayerSkills.IsSkillOnCooldown(_skill, true)
@@ -41,6 +41,7 @@ public class DashState : MeleeAttackableState
         if (canUseSkill)
         {
             _dashable.DashWithSkill(_skill);
+            _gameUI.startChargingIndicator();
             _context.PlayerSkills.StartSkillCooldown(_skill, true);
         }
         else

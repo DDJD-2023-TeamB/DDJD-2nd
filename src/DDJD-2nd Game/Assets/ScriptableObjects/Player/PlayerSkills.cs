@@ -35,10 +35,10 @@ public class PlayerSkills : ScriptableObject
     private List<ItemSkill> _learnedSkills = new List<ItemSkill>();
 
     [SerializeField]
-    private List<ItemSkill> _equippedLeftSkills = new List<ItemSkill>();
+    private ItemSkill[] _equippedLeftSkills = new ItemSkill[6];
 
     [SerializeField]
-    private List<ItemSkill> _equippedRightSkills = new List<ItemSkill>();
+    private ItemSkill[] _equippedRightSkills = new ItemSkill[6];
 
     public AimedSkill LeftSkill
     {
@@ -97,13 +97,13 @@ public class PlayerSkills : ScriptableObject
         return _skillCooldowns.ContainsKey(equippedSkill);
     }
 
-    public List<ItemSkill> EquippedRightSkills
+    public ItemSkill[] EquippedRightSkills
     {
         get => _equippedRightSkills;
         set => _equippedRightSkills = value;
     }
 
-    public List<ItemSkill> EquippedLeftSkills
+    public ItemSkill[] EquippedLeftSkills
     {
         get => _equippedLeftSkills;
         set => _equippedLeftSkills = value;

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 [DefaultExecutionOrder(0)]
 [System.Serializable]
-public class Npc : Interactable
+public class Npc : Interactable, NonCollidable
 {
     [SerializeField]
     private NpcObject _npc;
@@ -99,7 +99,7 @@ public class Npc : Interactable
                 {
                     _currentDialogueInfo = mission.InteractionBegin.DialogueInfo;
                     mission.Status = MissionState.Ongoing;
-                    mission.CurrentGoal.OnGoalStarted?.Invoke();
+                    mission.CurrentGoal?.OnGoalStarted?.Invoke();
                     _missionController.MissionsUIController?.UpdateMissionsUI();
                     _missionController.CheckIfAllGoalsAreCompleted(mission);
                     targetMission = mission;
@@ -142,6 +142,7 @@ public class Npc : Interactable
         {
             PauseAnimation();
         }
+        HelpManager.Instance.ResetText();
     }
 
     public void PauseAnimation()
