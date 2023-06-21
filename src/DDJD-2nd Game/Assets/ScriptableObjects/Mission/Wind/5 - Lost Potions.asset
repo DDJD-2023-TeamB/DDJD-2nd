@@ -19,7 +19,7 @@ MonoBehaviour:
   _onGoalCompleted:
     m_PersistentCalls:
       m_Calls: []
-  _description: 
+  _description: Find the 10 lost potions
   _location: {fileID: 0}
   _interaction:
     _dialogueInfo:
@@ -42,26 +42,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8c5000599e034b75b66b98e905ca14a, type: 3}
-  m_Name: Collect Lightning book
+  m_Name: 5 - Lost Potions
   m_EditorClassIdentifier: 
-  _title: Thunderbound Pursuit
-  _description: 'Seek the lightning shot book '
+  _title: Lost Potions
+  _description: Collect 10 potions
   _status: 1
   _type: 0
   _goals:
   - {fileID: 2559059439445779564}
   _interactionBegin:
     _dialogueInfo:
-      _noun: Kaiya
+      _noun: Elysia
       _sentences:
-      - Greetings, adventurer. Are you prepared for the journey that lies ahead?
-      - I need you to find an old book hidden within the heart of the Lightning Village.
-        Venture into the electrifying landscape
-      - Its ancient knowledge and hidden techniques will grant you the power to create
-        lightning cages.
-      - May the lightning guide your path, young one. Remember, the storms can be
-        both friend and foe.
-    _npc: {fileID: 11400000, guid: 1f336fd8e35c04cf7acfb0a1466ea6ce, type: 2}
+      - 'Ah, it''s fortunate that you''ve arrived. The wagon has met with misfortune,
+        causing the precious potions within to be scattered. '
+      - These potions possess magical properties that can bestow significant enhancements
+        upon your abilities.
+      - Best of luck, and may your quest be filled with discoveries.
+    _npc: {fileID: 11400000, guid: d71eb7bd4f9ce4f4d901723714bed05e, type: 2}
     _onEndInteraction:
       m_PersistentCalls:
         m_Calls: []
@@ -72,7 +70,7 @@ MonoBehaviour:
     _gold: 0
     _items: []
   _followingMissions: []
-  _area: 3
+  _area: 1
 --- !u!114 &2559059439445779564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,14 +97,14 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: CollectLightningTrapBook
+          m_StringArgument: CollectPotionsWind
           m_BoolArgument: 0
         m_CallState: 2
   _onGoalCompleted:
     m_PersistentCalls:
       m_Calls: []
-  _description: Collect the Lightning Trap Book
+  _description: Collect 10 potions
   _location: {fileID: 0}
-  _collectibleToCollect: {fileID: 11400000, guid: aeaee707f7d33c64eb35c7ee4f7a3647,
+  _collectibleToCollect: {fileID: 11400000, guid: e563f69444c374ab19b4b2a71d6d1bb3,
     type: 2}
-  _quantity: 1
+  _quantity: 10

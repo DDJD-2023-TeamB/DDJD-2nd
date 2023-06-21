@@ -42,27 +42,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8c5000599e034b75b66b98e905ca14a, type: 3}
-  m_Name: Collect Fireshot book
+  m_Name: 2 - Collect Lightning book
   m_EditorClassIdentifier: 
-  _title: The Guardian's Call
-  _description: 'Collect the fireshot book '
-  _status: 1
+  _title: Thunderbound Pursuit
+  _description: 'Seek the lightning shot book '
+  _status: 0
   _type: 0
   _goals:
   - {fileID: 2559059439445779564}
   _interactionBegin:
     _dialogueInfo:
-      _noun: Elder Raelin
+      _noun: Kaiya
       _sentences:
-      - Greetings, adventurer. I sense your determination.  Welcome to Fire Village!
-      - I shall grant you access to the missions of our ancestral past. But first,
-        there is a task you must undertake. Deep within the realm of knowledge lies
-        a sacred artifact.
-      - ' It holds the ancient wisdom and incantations needed to unlock the ability
-        to wield the fiery essence itself.'
-      - Seek it out and bring it to me. Last reminder, with great power comes great
-        responsibility.
-    _npc: {fileID: 11400000, guid: 741a1c0760ea549e7b774f87dba41dd6, type: 2}
+      - Greetings, adventurer. Are you prepared for the journey that lies ahead?
+      - I need you to find an old book hidden within the heart of the Lightning Village.
+        Venture into the electrifying landscape
+      - Its ancient knowledge and hidden techniques will grant you the power to create
+        lightning cages.
+      - May the lightning guide your path, young one. Remember, the storms can be
+        both friend and foe.
+    _npc: {fileID: 11400000, guid: 1f336fd8e35c04cf7acfb0a1466ea6ce, type: 2}
     _onEndInteraction:
       m_PersistentCalls:
         m_Calls: []
@@ -72,8 +71,9 @@ MonoBehaviour:
   _reward:
     _gold: 0
     _items: []
-  _followingMissions: []
-  _area: 0
+  _followingMissions:
+  - {fileID: 11400000, guid: d047e4c8a04925d4babaf884c9dd9205, type: 2}
+  _area: 3
 --- !u!114 &2559059439445779564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,14 +100,14 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: CollectFireShotBook
+          m_StringArgument: CollectLightningTrapBook
           m_BoolArgument: 0
         m_CallState: 2
   _onGoalCompleted:
     m_PersistentCalls:
       m_Calls: []
-  _description: Collect the FireShot Book
+  _description: Collect the Lightning Trap Book
   _location: {fileID: 0}
-  _collectibleToCollect: {fileID: 11400000, guid: 1fcae3db729eb0c45b6f36ecb22c2a63,
+  _collectibleToCollect: {fileID: 11400000, guid: aeaee707f7d33c64eb35c7ee4f7a3647,
     type: 2}
   _quantity: 1
