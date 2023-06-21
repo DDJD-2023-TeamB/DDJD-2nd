@@ -91,7 +91,6 @@ public class MissionController : MonoBehaviour
     public void CheckIfAllGoalsAreCompleted(Mission mission)
     {
         bool allGoalsCompleted = mission.IsCompleted();
-        Debug.Log("All goals completed: " + allGoalsCompleted);
         if (allGoalsCompleted)
         {
             HandleMissionComplete(mission);

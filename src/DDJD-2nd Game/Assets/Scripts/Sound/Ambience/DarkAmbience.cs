@@ -21,7 +21,6 @@ public class DarkAmbience : Ambience
         {
             return;
         }
-        Debug.Log("Ola");
         _soundEmitter.SetParameter(
             "ambience",
             _fireDroneId,
