@@ -19,13 +19,14 @@ MonoBehaviour:
   _onGoalCompleted:
     m_PersistentCalls:
       m_Calls: []
-  _description: Find the 10 lost potions
+  _description: Talk to Elysia
   _location: {fileID: 0}
   _interaction:
     _dialogueInfo:
-      _noun: 
-      _sentences: []
-    _npc: {fileID: 0}
+      _noun: Elysia
+      _sentences:
+      - Enjoy the potions but don't drink them all at once!
+    _npc: {fileID: 11400000, guid: d71eb7bd4f9ce4f4d901723714bed05e, type: 2}
     _onEndInteraction:
       m_PersistentCalls:
         m_Calls: []
@@ -46,10 +47,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: Lost Potions
   _description: Collect 10 potions
-  _status: 1
+  _status: 0
   _type: 0
   _goals:
   - {fileID: 2559059439445779564}
+  - {fileID: -4168142203361568891}
   _interactionBegin:
     _dialogueInfo:
       _noun: Elysia
@@ -67,7 +69,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _reward:
-    _gold: 0
+    _gold: 50
     _items: []
   _followingMissions: []
   _area: 1

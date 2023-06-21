@@ -27,6 +27,7 @@ MonoBehaviour:
       _sentences:
       - Ah, brave adventurer, you have proven yourself once again.
       - May the wisdom of the ancients accompany you on your endeavors.
+      - As a reward, I grant the available missions of this village.
     _npc: {fileID: 11400000, guid: 741a1c0760ea549e7b774f87dba41dd6, type: 2}
     _onEndInteraction:
       m_PersistentCalls:
@@ -73,7 +74,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _reward:
-    _gold: 0
+    _gold: 100
     _items: []
   _followingMissions:
   - {fileID: 11400000, guid: 80ef2a17aaff61740bd756b4305af3bc, type: 2}

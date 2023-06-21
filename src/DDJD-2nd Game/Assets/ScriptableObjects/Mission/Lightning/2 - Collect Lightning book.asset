@@ -19,13 +19,15 @@ MonoBehaviour:
   _onGoalCompleted:
     m_PersistentCalls:
       m_Calls: []
-  _description: 
+  _description: Talk to Kaiya
   _location: {fileID: 0}
   _interaction:
     _dialogueInfo:
-      _noun: 
-      _sentences: []
-    _npc: {fileID: 0}
+      _noun: Kaiya
+      _sentences:
+      - Congraulations! You can now trap enemies using the lightning power!
+      - Good luck on your future journeys
+    _npc: {fileID: 11400000, guid: 1f336fd8e35c04cf7acfb0a1466ea6ce, type: 2}
     _onEndInteraction:
       m_PersistentCalls:
         m_Calls: []
@@ -50,6 +52,7 @@ MonoBehaviour:
   _type: 0
   _goals:
   - {fileID: 2559059439445779564}
+  - {fileID: -4168142203361568891}
   _interactionBegin:
     _dialogueInfo:
       _noun: Kaiya
@@ -69,7 +72,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _reward:
-    _gold: 0
+    _gold: 100
     _items: []
   _followingMissions:
   - {fileID: 11400000, guid: d047e4c8a04925d4babaf884c9dd9205, type: 2}

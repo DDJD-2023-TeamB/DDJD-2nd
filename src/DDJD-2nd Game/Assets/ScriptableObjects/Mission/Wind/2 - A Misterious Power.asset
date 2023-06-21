@@ -35,8 +35,11 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _reward:
-    _gold: 0
-    _items: []
+    _gold: 100
+    _items:
+    - item: {fileID: 11400000, guid: b223bc49040909f42af95b487c092140, type: 2}
+      amount: 1
+      id: 2
   _followingMissions:
   - {fileID: 11400000, guid: e7b60d558aec4774ca148fd53bd7631b, type: 2}
   _area: 1
