@@ -1,0 +1,237 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6159442827439109576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10ade6c6202a749d3b8a95862ea27777, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3208331280523073408, guid: 12b9752c824401b4aba52369f821a48b,
+          type: 3}
+        m_TargetAssemblyTypeName: FightCallbacks, Assembly-CSharp
+        m_MethodName: OnFightGoalStarted
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: EnemyCampFireLightning
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3208331280523073408, guid: 12b9752c824401b4aba52369f821a48b,
+          type: 3}
+        m_TargetAssemblyTypeName: FightCallbacks, Assembly-CSharp
+        m_MethodName: OnFightGoalCompleted
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: EnemyCampFireLightning
+          m_BoolArgument: 0
+        m_CallState: 2
+  _description: Defeat the FireMighters
+  _location: {fileID: 0}
+  _enemySpawner: {fileID: 11400000, guid: d996ea154fbf66e46bf1d498bbd4715d, type: 2}
+--- !u!114 &-5236205649443155024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  _description: Tell Sarah the news
+  _location: {fileID: 0}
+  _interaction:
+    _dialogueInfo:
+      _noun: Sarah
+      _sentences:
+      - I see, that's how it went... I think it's for the best
+      - Thanks for trying to bring him back. Here's your promised reward
+    _npc: {fileID: 11400000, guid: 5b7b0135adde3dc4998b8967c84b681b, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &-1030251147587006142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  _description: Enter the Lightning Village
+  _location: {fileID: 0}
+  _interaction:
+    _dialogueInfo:
+      _noun: Juan
+      _sentences:
+      - Wait a minute! What brings you to the Lightning Village?
+      - I see, you're looking for Sarah's brother
+      - You should look around the lion statue, he usually hangs out there
+    _npc: {fileID: 11400000, guid: de6bd04c09a9dbd4986c89d949e7361f, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c5000599e034b75b66b98e905ca14a, type: 3}
+  m_Name: 3 - Brother Betrayal
+  m_EditorClassIdentifier: 
+  _title: Brother Betrayal
+  _description: Avenge Sarah and find her brother
+  _status: 1
+  _type: 0
+  _goals:
+  - {fileID: -1030251147587006142}
+  - {fileID: 8710463978971418610}
+  - {fileID: -6159442827439109576}
+  - {fileID: 6835060126050777344}
+  - {fileID: -5236205649443155024}
+  _interactionBegin:
+    _dialogueInfo:
+      _noun: Sarah
+      _sentences:
+      - You're not from here, are you? You must be an adventurer!
+      - Are you by any chance going to the Lightning Village?
+      - My brother betrayed us and started living there
+      - He joined the FireMighters and is tormenting all the villages.
+      - I know it's really bad for me to ask you this, but...
+      - Could you please go there and stop his evil deeds? I have a great reward
+    _npc: {fileID: 11400000, guid: 5b7b0135adde3dc4998b8967c84b681b, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
+  _reward:
+    _gold: 300
+    _items: []
+  _followingMissions: []
+  _area: 0
+--- !u!114 &6835060126050777344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  _description: Talk to Bruno
+  _location: {fileID: 0}
+  _interaction:
+    _dialogueInfo:
+      _noun: Bruno
+      _sentences:
+      - I can't believe it...
+      - You killed ALL of my men! You're a monster!
+      - But there's no way I'll go back, I swore loyalty to the boss!
+      - I lost my honor, please just grant me a final wish
+      - I want to have my head taken by the one who took everything from me
+    _npc: {fileID: 11400000, guid: eddfad256a966314c9d80490da243c11, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &8710463978971418610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  _description: Find Sarah's brother
+  _location: {fileID: 0}
+  _interaction:
+    _dialogueInfo:
+      _noun: Bruno
+      _sentences:
+      - Ugh!? You want me to go back to the Fire Village make amends?
+      - HAHAHA Who do you think I am?
+      - I'm Bruno, manager of the FIRE MIGHTEERS!!
+      - I don't take orders from anyone besides our boss!
+      - You'll have to use force if you want to take me! Fight these guys!
+    _npc: {fileID: 11400000, guid: eddfad256a966314c9d80490da243c11, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []

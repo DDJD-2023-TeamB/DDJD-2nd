@@ -157,15 +157,12 @@ public class MissionController : MonoBehaviour
             }
         }
 
-        Debug.Log("Missions count: " + missions.Count);
 
         // Put selected mission in first place to give it priority
         if (_selectedMission != null && missions.Remove(_selectedMission))
         {
             missions.Insert(0, _selectedMission);
         }
-
-        Debug.Log("Missions count after selected mission: " + missions.Count);
 
         return missions;
     }
