@@ -15,6 +15,8 @@ public class PlayerDeath : MonoBehaviour
 
     public Action OnRespawn;
 
+    public Action OnRespawnAvailable;
+
     private void Awake()
     {
         _ragdollController = GetComponent<RagdollController>();
@@ -44,6 +46,7 @@ public class PlayerDeath : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         _canRespawn = true;
+        OnRespawnAvailable?.Invoke();
     }
 
     public bool CanRespawn

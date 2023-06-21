@@ -26,10 +26,13 @@ public class InventoryItemImage
         set { _uiArea = value; }
     }
 
+
+
     private void Start()
     {
         GameObject inventoryUIObject = GameObject.Find("InventoryUI");
         inventoryUI = inventoryUIObject.GetComponent<InventoryUI>();
+        itemAmountText = transform.GetChild(0).gameObject;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -70,7 +73,9 @@ public class InventoryItemImage
             && currentItem.item is CollectibleObject
         )
         {
-            inventoryUI.RemoveItem(this);
+            inventoryUI.DecreaseItemAmount(this,2);
+            inventoryUI.RemoveAllItems();
+            inventoryUI.Player.UIController.LoadItems();
             (currentItem.item as CollectibleObject).Use(inventoryUI.Player);
         }
     }

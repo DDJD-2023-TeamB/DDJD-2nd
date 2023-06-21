@@ -5,6 +5,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEditor;
 
 public class UIController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class UIController : MonoBehaviour
 
     private TutorialUI _tutorialUI;
     private Player _player;
+
+    private GameObject _dieMessage;
 
     ItemSkill[] leftWheelItems = new ItemSkill[6];
     ItemSkill[] rightWheelItems = new ItemSkill[6];
@@ -53,6 +56,7 @@ public class UIController : MonoBehaviour
         _playerUI.missionsUI.SetActive(false);
         _playerUI.activeElementWheel.gameObject.SetActive(false);
         _playerUI.OptionsUI.SetUIController(this);
+        CloseDieInfo();
 
         OpenLeftSpell(false);
         OpenRightSpell(false);
@@ -81,6 +85,14 @@ public class UIController : MonoBehaviour
             _playerUI.inventoryUI.RemoveAllItems();
             LoadItems();
             LoadGold();
+        }
+        if(!isOpening)
+        {
+            if (_playerUI.inventoryUI.itemTitle != null)
+            {
+                Destroy(_playerUI.inventoryUI.itemTitle);
+                _playerUI.inventoryUI.itemTitle = null;
+            }
         }
     }
 
@@ -329,8 +341,8 @@ public class UIController : MonoBehaviour
             return;
         }
 
-        while (FindItemSkill((ItemSkill)image.currentItem.item, true) != null)
-        {
+        while (FindItemSkill((ItemSkill)image.currentItem.item, true) != null) {
+
             RemoveFromWheel(image.currentItem, true);
         }
 
@@ -341,7 +353,7 @@ public class UIController : MonoBehaviour
         }
         else if (area == UiArea.RightWheel)
         {
-            RemoveFromWheel(image.currentItem, true);
+            RemoveFromWheel(image.currentItem, false);
             Destroy(image.gameObject);
         }
 
@@ -363,6 +375,16 @@ public class UIController : MonoBehaviour
         while (FindItemSkill((ItemSkill)image.currentItem.item, false) != null)
         {
             RemoveFromWheel(image.currentItem, false);
+        }
+        if (area == UiArea.RightWheel)
+        {
+            RemoveFromWheel(image.currentItem, false);
+            Destroy(image.gameObject);
+        }
+        else if (area == UiArea.LeftWheel)
+        {
+            RemoveFromWheel(image.currentItem, true);
+            Destroy(image.gameObject);
         }
         ItemSkill itemSkill = (ItemSkill)image.currentItem.item;
         rightWheelItems[slot] = itemSkill;
@@ -415,5 +437,21 @@ public class UIController : MonoBehaviour
     public void showCompleteMissionText(string missionTitle)
     {
         _playerUI.playingUI.missionCompleteNotification.StartAnimation(missionTitle);
+    }
+
+    public void ShowDieMessage()
+    {
+        _playerUI.DieMessage.text = "You Died";
+    }
+
+    public void CloseDieInfo()
+    {
+        _playerUI.DieMessage.text = "";
+        _playerUI.KeyMessage.text = "";
+    }
+
+    public void ShowKeyMessage()
+    {
+        _playerUI.KeyMessage.text = "Press 'Enter' key to restart";
     }
 }
