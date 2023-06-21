@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c5000599e034b75b66b98e905ca14a, type: 3}
+  m_Name: 1 - DiscoverLightning
+  m_EditorClassIdentifier: 
+  _title: Discover Lightning
+  _description: Discover the Lightning Village
+  _status: 0
+  _type: 0
+  _goals: []
+  _interactionBegin:
+    _dialogueInfo:
+      _noun: Juan
+      _sentences:
+      - Wait a minute! What brings you to the Lightning Village?
+      - You're a traveller? Fine... But don't stay here long, the locals don't like
+        visitors
+      - And be careful... Don't trust strangers!
+    _npc: {fileID: 11400000, guid: de6bd04c09a9dbd4986c89d949e7361f, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
+  _reward:
+    _gold: 50
+    _items: []
+  _followingMissions:
+  - {fileID: 11400000, guid: e0c0be29ee591433a8115f84ff12a254, type: 2}
+  _area: 3

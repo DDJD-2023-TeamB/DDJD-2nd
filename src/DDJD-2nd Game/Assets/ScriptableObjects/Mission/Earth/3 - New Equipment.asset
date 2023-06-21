@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7124077210680923109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  _description: Reach Feathers
+  _location: {fileID: 0}
+  _interaction:
+    _dialogueInfo:
+      _noun: Maria
+      _sentences:
+      - Hi there! Is this your first time in our shop?
+      - Don't worry, I'll tell you all there is to know about our amazing items!
+    _npc: {fileID: 11400000, guid: 21b55e5a8a99830409163d327e0c68ba, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c5000599e034b75b66b98e905ca14a, type: 3}
+  m_Name: 3 - New Equipment
+  m_EditorClassIdentifier: 
+  _title: A New Adventure
+  _description: Find more about this village
+  _status: 0
+  _type: 0
+  _goals:
+  - {fileID: -7124077210680923109}
+  _interactionBegin:
+    _dialogueInfo:
+      _noun: Bella
+      _sentences:
+      - You may be strong but your current power is nothing against the FireMighters
+      - You should think about acquiring new items and spells in our store
+      - You should already have some gold on you!
+    _npc: {fileID: 11400000, guid: 3403cae3e543d448a83c140ebb792bde, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
+  _reward:
+    _gold: 100
+    _items: []
+  _followingMissions:
+  - {fileID: 11400000, guid: 801850f64d609564bb0e363592821711, type: 2}
+  _area: 2

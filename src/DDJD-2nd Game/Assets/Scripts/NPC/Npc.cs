@@ -132,8 +132,12 @@ public class Npc : Interactable
         }
 
         _dialogue.StartDialogue(_currentDialogueInfo);
-        _animator.SetInteger("Talking Index", Random.Range(0, 4));
-        _animator.SetTrigger("Talking");
+
+        if (_animator != null)
+        {
+            _animator.SetInteger("Talking Index", Random.Range(0, 4));
+            _animator.SetTrigger("Talking");
+        }
         if (_floatingIconAnimator)
         {
             PauseAnimation();
@@ -195,8 +199,12 @@ public class Npc : Interactable
     {
         base.EndInteract();
         _dialogue?.EndDialogue();
-        _animator.SetInteger("Idle Index", Random.Range(0, 5));
-        _animator.SetTrigger("Idle");
+
+        if (_animator != null)
+        {
+            _animator.SetInteger("Idle Index", Random.Range(0, 5));
+            _animator.SetTrigger("Idle");
+        }
     }
 
     protected override void Approach()

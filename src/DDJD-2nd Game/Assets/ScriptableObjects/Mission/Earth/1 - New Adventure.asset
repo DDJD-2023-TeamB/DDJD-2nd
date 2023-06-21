@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7124077210680923109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 1
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  _description: Reach Feathers
+  _location: {fileID: 0}
+  _interaction:
+    _dialogueInfo:
+      _noun: Feathers
+      _sentences:
+      - Piu Piu Piu (What do you want?)
+      - Piu Piu Piu Piu (I was just chilling up here)
+      - Piu Piu Piu? Piu (You want me to teach you how to fight? I'm a bird)
+    _npc: {fileID: 11400000, guid: 2b676fcfe2b9df341bee5f15e9cc0392, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c5000599e034b75b66b98e905ca14a, type: 3}
+  m_Name: 1 - New Adventure
+  m_EditorClassIdentifier: 
+  _title: A New Adventure
+  _description: Find more about this village
+  _status: 1
+  _type: 0
+  _goals:
+  - {fileID: -7124077210680923109}
+  _interactionBegin:
+    _dialogueInfo:
+      _noun: Bella
+      _sentences:
+      - Good morning! What a shiny day it is today
+      - You seem bored, do you need something to do?
+      - I think feathers is up to something! Go talk to him on top of the castle.
+      - You can use your amazing dash for that!
+    _npc: {fileID: 11400000, guid: 3403cae3e543d448a83c140ebb792bde, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
+  _reward:
+    _gold: 100
+    _items: []
+  _followingMissions:
+  - {fileID: 11400000, guid: 8ddefa81c3efdec438d20fb9e8cbc6e1, type: 2}
+  _area: 2
