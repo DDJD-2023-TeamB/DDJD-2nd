@@ -77,7 +77,7 @@ public class MissionController : MonoBehaviour
 
             if (collectGoal.CollectibleToCollect == collectible)
             {
-                if (collectGoal.Quantity > 0)
+                if (collectGoal.Quantity > 1)
                 {
                     collectGoal.Quantity -= 1;
                 }

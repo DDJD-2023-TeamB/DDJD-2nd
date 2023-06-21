@@ -143,4 +143,6 @@ public class CollectibleInteractable : Interactable, NonCollidable
     {
         return true;
     }
+
+  
 }
