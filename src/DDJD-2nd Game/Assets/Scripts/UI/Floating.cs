@@ -28,7 +28,13 @@ public class Floating : MonoBehaviour
                 GetLookAtHeightOffset() / 2 + GetObjectAtHeightOffset() + _gap,
                 0
             );
+            transform.localScale = new Vector3(
+                transform.localScale.x / _lookAt.localScale.x,
+                transform.localScale.y / _lookAt.localScale.y,
+                transform.localScale.z / _lookAt.localScale.z
+            );
         }
+
         _initialPosition = transform.position;
     }
 
@@ -36,8 +42,11 @@ public class Floating : MonoBehaviour
     void LateUpdate()
     {
         transform.position = _initialPosition + new Vector3(0, animationOffsetValue, 0);
+
         if (_useParent)
+        {
             transform.LookAt(_mainCam.position);
+        }
     }
 
     // Calculate the height offset based on the bounds of the _lookAt GameObject
@@ -60,7 +69,7 @@ public class Floating : MonoBehaviour
             }
         }
 
-        return heightOffset;
+        return heightOffset * _lookAt.localScale.y;
     }
 
     private float GetObjectAtHeightOffset()

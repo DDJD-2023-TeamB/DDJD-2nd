@@ -142,6 +142,7 @@ public class Npc : Interactable, NonCollidable
         {
             PauseAnimation();
         }
+        HelpManager.Instance.ResetText();
     }
 
     public void PauseAnimation()
