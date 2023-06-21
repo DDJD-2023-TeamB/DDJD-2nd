@@ -21,6 +21,7 @@ public class EnemyChaseState : EnemyState
         else if (!IsInAggroRange())
         {
             _context.ChangeState(_context.States.IdleState);
+            GameManager.Instance.PlayerLostOfSight(_context);
             return;
         }
         Move();

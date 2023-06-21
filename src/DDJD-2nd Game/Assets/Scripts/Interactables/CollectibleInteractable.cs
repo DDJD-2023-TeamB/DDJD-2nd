@@ -109,12 +109,20 @@ public class CollectibleInteractable : Interactable, NonCollidable
             Destroy(gameObject);
             _missionController.CheckIfItemCollectedIsMyGoal(_item);
             HelpManager.Instance.ResetText();
+            FMODUnity.RuntimeManager.PlayOneShot(
+                SoundBank.Instance.PickupSound,
+                transform.position
+            );
         }
         else
         {
             if (_player.Inventory.SubGold(_item.Cost))
             {
                 _item.BuyItem();
+                FMODUnity.RuntimeManager.PlayOneShot(
+                    SoundBank.Instance.BuySound,
+                    transform.position
+                );
                 _player.Inventory.AddItem(_item, 1);
                 UpdateText();
 

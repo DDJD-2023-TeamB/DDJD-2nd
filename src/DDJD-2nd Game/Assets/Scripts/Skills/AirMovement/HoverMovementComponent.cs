@@ -122,4 +122,14 @@ public class HoverMovementComponent : AirMovementComponent
     {
         return _hoverCoroutine != null;
     }
+
+    public override void Release()
+    {
+        base.Release();
+        Reset();
+        if (_leftHandVFX != null)
+            Destroy(_leftHandVFX.gameObject, 1.5f);
+        if (_rightHandVFX != null)
+            Destroy(_rightHandVFX.gameObject, 1.5f);
+    }
 }

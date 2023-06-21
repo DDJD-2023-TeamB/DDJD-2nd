@@ -14,6 +14,7 @@ public class EnemyAttackState : EnemyState
         _context.Animator.SetBool("IsAiming", true);
         _context.Animator.SetFloat(_context.ForwardSpeedHash, 0);
         _context.Animator.SetFloat(_context.RightSpeedHash, 0);
+        GameManager.Instance.PlayerDetected(_context);
     }
 
     public override void StateUpdate()

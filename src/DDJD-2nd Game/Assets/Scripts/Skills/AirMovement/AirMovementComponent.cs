@@ -36,4 +36,6 @@ public abstract class AirMovementComponent : MonoBehaviour
     public virtual void OnKeyUp() { }
 
     public abstract bool IsActive();
+
+    public virtual void Release() { }
 }
