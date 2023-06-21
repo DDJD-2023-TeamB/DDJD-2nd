@@ -107,6 +107,7 @@ public class MissionController : MonoBehaviour
         UnblockFollowingMissions(mission);
         if (_missionsUIController != null)
             _missionsUIController.UpdateMissionsUI();
+        FMODUnity.RuntimeManager.PlayOneShot(SoundBank.Instance.MissionCompleteSound, Vector3.zero);
     }
 
     private void UnblockFollowingMissions(Mission mission)
@@ -207,6 +208,8 @@ public class MissionController : MonoBehaviour
     {
         mission.CompleteCurrentGoal();
         CheckIfAllGoalsAreCompleted(mission);
+
+        FMODUnity.RuntimeManager.PlayOneShot(SoundBank.Instance.GoalCompleteSound, Vector3.zero);
         _missionsUIController?.UpdateMissionsUI();
     }
 }
