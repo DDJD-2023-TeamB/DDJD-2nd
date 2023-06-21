@@ -39,9 +39,6 @@ public class BasicEnemy : HumanoidEnemy
 
     private EnemyCommunicator _enemyCommunicator;
 
-    [SerializeField]
-    private TextMeshProUGUI _stateText;
-
     public override void Awake()
     {
         base.Awake();
@@ -116,7 +113,6 @@ public class BasicEnemy : HumanoidEnemy
     public override void ChangeState(GenericState state)
     {
         base.ChangeState(state);
-        _stateText.text = state.GetType().ToString() + " " + state.Substate?.GetType().ToString();
     }
 
     public void SetEnemySpawnerManager(EnemySpawnerManager enemySpawnerManager)

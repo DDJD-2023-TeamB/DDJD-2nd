@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{73a1a08e-2cd8-4469-bf44-f5f9dc73b1a6}">
+		<property name="name">
+			<value>Coil Trap</value>
+		</property>
+		<relationship name="folder">
+			<destination>{de79e17d-ef84-4ec5-bc49-2e353b71570e}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{ea73e019-94fa-471e-b3e1-13a421309107}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{ea73e019-94fa-471e-b3e1-13a421309107}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Placement</value>
+			<value>Conection</value>
+			<value>Activate</value>
+		</property>
+		<property name="initialValue">
+			<value>1</value>
+		</property>
+	</object>
+</objects>

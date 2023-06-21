@@ -218,7 +218,7 @@ public class UIController : MonoBehaviour
         if (_player.PlayerSkills.EquippedLeftSkills.Length != 6)
         {
             ItemSkill[] equipedLeftSkills = new ItemSkill[6];
-            for(int i = 0; i< _player.PlayerSkills.EquippedLeftSkills.Length; i++)
+            for (int i = 0; i < _player.PlayerSkills.EquippedLeftSkills.Length; i++)
             {
                 equipedLeftSkills[i] = _player.PlayerSkills.EquippedLeftSkills[i];
             }
@@ -296,7 +296,6 @@ public class UIController : MonoBehaviour
         return null;
     }
 
-
     public void DropItemSkill(InventoryItemImage image, int slot, UiArea area)
     {
         if (!(image.currentItem.item is ItemSkill))
@@ -330,7 +329,7 @@ public class UIController : MonoBehaviour
             return;
         }
 
-        while(FindItemSkill((ItemSkill)image.currentItem.item, true) != null)
+        while (FindItemSkill((ItemSkill)image.currentItem.item, true) != null)
         {
             RemoveFromWheel(image.currentItem, true);
         }
@@ -356,7 +355,6 @@ public class UIController : MonoBehaviour
 
     public void ChangeRightWheelItem(InventoryItemImage image, int slot, UiArea area)
     {
-        Debug.Log("Changing right wheel");
         if (!(image.currentItem.item is ItemSkill))
         {
             Debug.LogError("Item is not itemskill");

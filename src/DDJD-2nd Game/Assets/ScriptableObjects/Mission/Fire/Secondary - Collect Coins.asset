@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4168142203361568891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  _description: Give the coins to Elder
+  _location: {fileID: 0}
+  _interaction:
+    _dialogueInfo:
+      _noun: Elder Raelin
+      _sentences:
+      - Thanks a ton for the coins!
+      - Here, take some of them to yourself
+    _npc: {fileID: 11400000, guid: 741a1c0760ea549e7b774f87dba41dd6, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c5000599e034b75b66b98e905ca14a, type: 3}
+  m_Name: Secondary - Collect Coins
+  m_EditorClassIdentifier: 
+  _title: Gotta Catch'em All
+  _description: Collect all the coins
+  _status: 0
+  _type: 1
+  _goals:
+  - {fileID: 2559059439445779564}
+  - {fileID: -4168142203361568891}
+  _interactionBegin:
+    _dialogueInfo:
+      _noun: Elder Raelin
+      _sentences:
+      - Hello again, adventurer. Someone has been stealing from the civiliains
+      - I heard he ran away and dropped some of the coins along the way
+      - Do you mind looking for them around the village?
+    _npc: {fileID: 11400000, guid: 741a1c0760ea549e7b774f87dba41dd6, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
+  _reward:
+    _gold: 150
+    _items: []
+  _followingMissions: []
+  _area: 0
+--- !u!114 &2559059439445779564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 011ea1f08218a4d86a7348c8b8541bd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9089035556450893789, guid: 12b9752c824401b4aba52369f821a48b,
+          type: 3}
+        m_TargetAssemblyTypeName: CollectCallback, Assembly-CSharp
+        m_MethodName: OnCollectGoalStarted
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: CollectCoins
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  _description: Collect the 6 Coins
+  _location: {fileID: 0}
+  _collectibleToCollect: {fileID: 11400000, guid: 3b683927504642a48ae1527435c0b55d,
+    type: 2}
+  _quantity: 6

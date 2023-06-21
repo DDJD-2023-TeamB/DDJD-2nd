@@ -59,7 +59,6 @@ public class PlayerMusic : MonoBehaviour
 
     public void EndCombat()
     {
-        Debug.Log("End combat in player");
         _soundEmitter.SetParameter("battle_music", _musicFadeParameterId, 0.0f);
         _soundEmitter.CallWithDelay(() => _soundEmitter.Stop("battle_music"), 2.0f);
         if (_updateCoroutine != null)

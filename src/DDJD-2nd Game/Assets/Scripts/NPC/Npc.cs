@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 [DefaultExecutionOrder(0)]
 [System.Serializable]
-public class Npc : Interactable
+public class Npc : Interactable, NonCollidable
 {
     [SerializeField]
     private NpcObject _npc;
@@ -85,6 +85,7 @@ public class Npc : Interactable
     {
         if (_dialogue == null)
         {
+            HelpManager.Instance.ResetText();
             _dialogue = _player.UIController.PlayerUI.Dialogue;
         }
 
@@ -98,7 +99,7 @@ public class Npc : Interactable
                 {
                     _currentDialogueInfo = mission.InteractionBegin.DialogueInfo;
                     mission.Status = MissionState.Ongoing;
-                    mission.CurrentGoal.OnGoalStarted?.Invoke();
+                    mission.CurrentGoal?.OnGoalStarted?.Invoke();
                     _missionController.MissionsUIController?.UpdateMissionsUI();
                     _missionController.CheckIfAllGoalsAreCompleted(mission);
                     targetMission = mission;
@@ -131,12 +132,17 @@ public class Npc : Interactable
         }
 
         _dialogue.StartDialogue(_currentDialogueInfo);
-        _animator.SetInteger("Talking Index", Random.Range(0, 4));
-        _animator.SetTrigger("Talking");
+
+        if (_animator != null)
+        {
+            _animator.SetInteger("Talking Index", Random.Range(0, 4));
+            _animator.SetTrigger("Talking");
+        }
         if (_floatingIconAnimator)
         {
             PauseAnimation();
         }
+        HelpManager.Instance.ResetText();
     }
 
     public void PauseAnimation()
@@ -194,8 +200,12 @@ public class Npc : Interactable
     {
         base.EndInteract();
         _dialogue?.EndDialogue();
-        _animator.SetInteger("Idle Index", Random.Range(0, 5));
-        _animator.SetTrigger("Idle");
+
+        if (_animator != null)
+        {
+            _animator.SetInteger("Idle Index", Random.Range(0, 5));
+            _animator.SetTrigger("Idle");
+        }
     }
 
     protected override void Approach()

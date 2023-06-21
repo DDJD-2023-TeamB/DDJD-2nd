@@ -61,6 +61,10 @@ public class CollectibleInteractable : Interactable, NonCollidable
                 AssetDatabase.LoadAssetAtPath(outlineMaterialPath, typeof(Material));
             _meshRenderer = GetComponent<MeshRenderer>();
         }
+        if (_meshRenderer == null)
+        {
+            return;
+        }
 
         Material[] materials = _meshRenderer.materials;
         Material[] newMaterials = new Material[materials.Length + 1];
@@ -90,6 +94,10 @@ public class CollectibleInteractable : Interactable, NonCollidable
 
     private void DeactivateHighlight()
     {
+        if (_meshRenderer == null)
+        {
+            return;
+        }
         Material[] materials = _meshRenderer.materials;
         Material[] newMaterials = new Material[materials.Length - 1];
 
@@ -105,7 +113,8 @@ public class CollectibleInteractable : Interactable, NonCollidable
     {
         if (!_item.Purchasable)
         {
-            _player.Inventory.AddItem(_item, 1);
+            if (_item is not QuestItem)
+                _player.Inventory.AddItem(_item, 1);
             Destroy(gameObject);
             _missionController.CheckIfItemCollectedIsMyGoal(_item);
             HelpManager.Instance.ResetText();

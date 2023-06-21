@@ -44,7 +44,6 @@ public class InteractingState : GenericState
         }
         if (_context.Input.IsExitingInteraction && objt is Npc)
         {
-            Debug.Log("Exiting Interaction");
             Npc npc = (Npc)objt;
             npc.ExitInteraction();
         }

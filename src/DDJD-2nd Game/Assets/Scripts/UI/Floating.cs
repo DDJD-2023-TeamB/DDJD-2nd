@@ -13,16 +13,28 @@ public class Floating : MonoBehaviour
 
     private Vector3 _initialPosition;
 
+    [SerializeField]
+    private bool _useParent = true;
+
     // Start is called before the first frame update
     void Start()
     {
         _mainCam = Camera.main.transform;
-        _lookAt = gameObject.transform.parent.transform.parent.transform;
-        transform.position += new Vector3(
-            0,
-            GetLookAtHeightOffset() / 2 + GetObjectAtHeightOffset() + _gap,
-            0
-        );
+        if (_useParent)
+        {
+            _lookAt = gameObject.transform.parent.transform.parent.transform;
+            transform.position += new Vector3(
+                0,
+                GetLookAtHeightOffset() / 2 + GetObjectAtHeightOffset() + _gap,
+                0
+            );
+            transform.localScale = new Vector3(
+                transform.localScale.x / _lookAt.localScale.x,
+                transform.localScale.y / _lookAt.localScale.y,
+                transform.localScale.z / _lookAt.localScale.z
+            );
+        }
+
         _initialPosition = transform.position;
     }
 
@@ -30,7 +42,11 @@ public class Floating : MonoBehaviour
     void LateUpdate()
     {
         transform.position = _initialPosition + new Vector3(0, animationOffsetValue, 0);
-        transform.LookAt(_mainCam.position);
+
+        if (_useParent)
+        {
+            transform.LookAt(_mainCam.position);
+        }
     }
 
     // Calculate the height offset based on the bounds of the _lookAt GameObject
@@ -53,7 +69,7 @@ public class Floating : MonoBehaviour
             }
         }
 
-        return heightOffset;
+        return heightOffset * _lookAt.localScale.y;
     }
 
     private float GetObjectAtHeightOffset()

@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c5000599e034b75b66b98e905ca14a, type: 3}
+  m_Name: 4 - Look Up There
+  m_EditorClassIdentifier: 
+  _title: Look Up There
+  _description: Explore the Wind Village
+  _status: 0
+  _type: 0
+  _goals:
+  - {fileID: 4396769566214662530}
+  _interactionBegin:
+    _dialogueInfo:
+      _noun: Robert
+      _sentences:
+      - Don't listen to my sister, she heard stories about you and became fanatic
+      - The real reason FireMighters attacked was to slay Harry, our greatest wizard
+      - He's now hiding on top of this tower. You should meet him!
+    _npc: {fileID: 11400000, guid: 2c330faa73b2cf948b6d538b3215f313, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
+  _reward:
+    _gold: 100
+    _items:
+    - item: {fileID: 11400000, guid: 5a4a2a9db29768242a0a6c119b42d9fe, type: 2}
+      amount: 1
+      id: 3
+  _followingMissions:
+  - {fileID: 11400000, guid: f587b62d67f304e788399f9edbf7b9cd, type: 2}
+  _area: 1
+--- !u!114 &4396769566214662530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  _description: Meet Harry
+  _location: {fileID: 0}
+  _interaction:
+    _dialogueInfo:
+      _noun: Harry
+      _sentences:
+      - Hi, I am Mr. Potter but you can call me Harry
+      - I saw how you protected me down there. I was touched!
+      - Why would anyone even bother to protect some stranger? Amazing
+      - To thank for your kind action, take the strongest spell I can offer!
+    _npc: {fileID: 11400000, guid: 4c7e220d781eb894bb6347cb6a1aae7a, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []

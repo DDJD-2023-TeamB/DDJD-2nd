@@ -57,7 +57,6 @@ public class MissionController : MonoBehaviour
             && interactGoal.Interaction.Npc == npc
         )
         {
-            Debug.Log("Npc goal completed");
             GoalCompleted(mission);
         }
     }
@@ -77,7 +76,7 @@ public class MissionController : MonoBehaviour
 
             if (collectGoal.CollectibleToCollect == collectible)
             {
-                if (collectGoal.Quantity > 0)
+                if (collectGoal.Quantity > 1)
                 {
                     collectGoal.Quantity -= 1;
                 }
@@ -108,13 +107,15 @@ public class MissionController : MonoBehaviour
         UnblockFollowingMissions(mission);
         if (_missionsUIController != null)
             _missionsUIController.UpdateMissionsUI();
+        FMODUnity.RuntimeManager.PlayOneShot(SoundBank.Instance.MissionCompleteSound, Vector3.zero);
     }
 
     private void UnblockFollowingMissions(Mission mission)
     {
-        foreach (var followingMissions in mission.FollowingMissions)
+        foreach (var followingMission in mission.FollowingMissions)
         {
-            followingMissions.Unblock();
+            followingMission.Unblock();
+            _unblockedMissions.Add(followingMission);
         }
     }
 
@@ -158,15 +159,11 @@ public class MissionController : MonoBehaviour
             }
         }
 
-        //Debug.Log("Missions count: " + missions.Count);
-
         // Put selected mission in first place to give it priority
         if (_selectedMission != null && missions.Remove(_selectedMission))
         {
             missions.Insert(0, _selectedMission);
         }
-
-        //Debug.Log("Missions count after selected mission: " + missions.Count);
 
         return missions;
     }
@@ -175,19 +172,16 @@ public class MissionController : MonoBehaviour
     {
         foreach (Mission mission in _unblockedMissions)
         {
-            if (mission.Status != MissionState.Ongoing)
+            if (
+                mission.Status != MissionState.Ongoing
+                || mission.CurrentGoal is not FightGoal fightGoal
+            )
             {
                 continue;
             }
-            foreach (GoalObject goal in mission.Goals)
+            if (fightGoal.EnemySpawner == _enemySpawner)
             {
-                if (goal is FightGoal fightGoal)
-                {
-                    if (fightGoal.EnemySpawner == _enemySpawner)
-                    {
-                        GoalCompleted(mission);
-                    }
-                }
+                GoalCompleted(mission);
             }
         }
     }
@@ -214,6 +208,8 @@ public class MissionController : MonoBehaviour
     {
         mission.CompleteCurrentGoal();
         CheckIfAllGoalsAreCompleted(mission);
+
+        FMODUnity.RuntimeManager.PlayOneShot(SoundBank.Instance.GoalCompleteSound, Vector3.zero);
         _missionsUIController?.UpdateMissionsUI();
     }
 }

@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6159442827439109576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10ade6c6202a749d3b8a95862ea27777, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3208331280523073408, guid: 12b9752c824401b4aba52369f821a48b,
+          type: 3}
+        m_TargetAssemblyTypeName: FightCallbacks, Assembly-CSharp
+        m_MethodName: OnFightGoalStarted
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: EnemyCampWind
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3208331280523073408, guid: 12b9752c824401b4aba52369f821a48b,
+          type: 3}
+        m_TargetAssemblyTypeName: FightCallbacks, Assembly-CSharp
+        m_MethodName: OnFightGoalCompleted
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: EnemyCampWind
+          m_BoolArgument: 0
+        m_CallState: 2
+  _description: Fight the invaders
+  _location: {fileID: 0}
+  _enemySpawner: {fileID: 11400000, guid: 5e25b8f67380fe34ea1b7cd6eab5b9a1, type: 2}
+--- !u!114 &-1003653345021642755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  _description: Talk with Beatrice
+  _location: {fileID: 0}
+  _interaction:
+    _dialogueInfo:
+      _noun: Beatrice
+      _sentences:
+      - Daaaamnn brooo, you're strong as hell!
+      - You might just be the saviour we need!
+      - Here, take this shiny guy to help on your adventure
+    _npc: {fileID: 11400000, guid: 0fddfa34f735e4147b3d560280422dfe, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c5000599e034b75b66b98e905ca14a, type: 3}
+  m_Name: 3 - Invasion
+  m_EditorClassIdentifier: 
+  _title: Invasion
+  _description: The Wind Village is under attack
+  _status: 0
+  _type: 0
+  _goals:
+  - {fileID: -6159442827439109576}
+  - {fileID: -1003653345021642755}
+  _interactionBegin:
+    _dialogueInfo:
+      _noun: Beatrice
+      _sentences:
+      - My dudee, you should not be here!
+      - The FireMighters have heard about what you've been doing and they're furious!
+      - They have close connection with the Wind Village. They'll be here any time
+        to take your head!
+      - Ruuuun for your liiifeeeee
+    _npc: {fileID: 11400000, guid: 0fddfa34f735e4147b3d560280422dfe, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
+  _reward:
+    _gold: 200
+    _items: []
+  _followingMissions:
+  - {fileID: 11400000, guid: 9370d2d2b2cd4be47a7cd1b498e99496, type: 2}
+  _area: 1

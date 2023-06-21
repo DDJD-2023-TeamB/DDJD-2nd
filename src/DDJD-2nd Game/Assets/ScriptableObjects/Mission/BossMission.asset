@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c5000599e034b75b66b98e905ca14a, type: 3}
+  m_Name: BossMission
+  m_EditorClassIdentifier: 
+  _title: FireMighters' Boss
+  _description: Go to the Earth Village for news about the Boss
+  _status: 0
+  _type: 0
+  _goals:
+  - {fileID: 7243384009521461385}
+  _interactionBegin:
+    _dialogueInfo:
+      _noun: Bella
+      _sentences:
+      - Oh my god, it's been so long since you left the village!
+      - I can't believe how strong you are now. You got the FireMighters trembling!
+      - However... Because of your deeds, their boss came to see us some days ago...
+      - He challenged you to a fight between the Fire and Lightning villages.
+      - And only one of you will survive!
+      - But the worst part... Oh, I don't know how to say this so I'll just say it
+      - He's no other than your father that's been missing for 5 years!
+      - That explains how you're so naturally strong too
+      - I'm sorry about this but you must stop your father and save the 4 Great Villages!
+      - I wish you the best of luck!
+    _npc: {fileID: 11400000, guid: 3403cae3e543d448a83c140ebb792bde, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
+  _reward:
+    _gold: 1000
+    _items: []
+  _followingMissions: []
+  _area: 0
+--- !u!114 &7243384009521461385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10ade6c6202a749d3b8a95862ea27777, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 1
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3208331280523073408, guid: 12b9752c824401b4aba52369f821a48b,
+          type: 3}
+        m_TargetAssemblyTypeName: FightCallbacks, Assembly-CSharp
+        m_MethodName: OnFightGoalStarted
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: BossCampFire
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3208331280523073408, guid: 12b9752c824401b4aba52369f821a48b,
+          type: 3}
+        m_TargetAssemblyTypeName: FightCallbacks, Assembly-CSharp
+        m_MethodName: OnFightGoalCompleted
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: BossCampFire
+          m_BoolArgument: 0
+        m_CallState: 2
+  _description: Defeat your father
+  _location: {fileID: 0}
+  _enemySpawner: {fileID: 11400000, guid: 2a6262fc3f58fef43ad990aed79f6130, type: 2}

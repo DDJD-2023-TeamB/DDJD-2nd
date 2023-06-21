@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6491e7519377b54dacf0101810c12a9, type: 3}
+  m_Name: Potion Purchasable
+  m_EditorClassIdentifier: 
+  _name: Potion
+  _description: Restores health
+  _icon: {fileID: 21300000, guid: 2f14de539384e4a98b4bc3b01c4fedde, type: 3}
+  _prefab: {fileID: 4106680580294549584, guid: 82f709b2a51d24a759b3255bf2092483, type: 3}
+  _purchasable: 1
+  _cost: 100
+  _numLeftToBuy: 3
+  _unlimited: 1
+  restoreHealthValue: 25
+  soundEvent:
+    Guid:
+      Data1: 873991447
+      Data2: 1158417759
+      Data3: -1169272392
+      Data4: -342074246
+    Path: event:/UI/Potion
+  _effectPrefab: {fileID: 5050110611324221885, guid: d86ce0c149ded0219920d8fb8e2242e5,
+    type: 3}
+  _effectDuration: 2

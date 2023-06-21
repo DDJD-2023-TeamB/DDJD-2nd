@@ -63,7 +63,7 @@ public class BossEnemy : RangedEnemy
 
     private int _runeCount = 0;
 
-    private int _maxRuneCount = 9;
+    private int _maxRuneCount = 3;
 
     private int _phaseIndex = 0;
 
@@ -107,7 +107,6 @@ public class BossEnemy : RangedEnemy
         int maxRuneType = _phases[_phaseIndex].RuneVariety;
         int runeType = Random.Range(0, maxRuneType);
         RuneShooter rune = null;
-        Debug.Log("Spawned rune " + runeType);
         switch (runeType)
         {
             case 0:
@@ -234,6 +233,7 @@ public class BossEnemy : RangedEnemy
     {
         _runes.Remove(rune);
         _runeCount--;
+        _maxRuneCount = _phases[_phaseIndex].MaxRuneCount;
     }
 
     public override void Die(int force, Vector3 hitPoint, Vector3 hitDirection)

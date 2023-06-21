@@ -249,13 +249,21 @@ public class Player : StateContext, Damageable
         _state.Update();
     }
 
+    void FixedUpdate()
+    {
+        if (transform.position.y < -100)
+        {
+            _playerDeath.Die();
+        }
+    }
+
     public void UpdateElement(Element element)
     {
         if (element != null)
         {
             _airMovement?.Release();
-            _airMovement = element.AirMovementSkill?.Initialize(gameObject);
             _playerSkills.CurrentElement = element;
+            _airMovement = element.AirMovementSkill?.Initialize(gameObject);
             _gameUI.changeChargingIndicatorElement(element);
         }
 

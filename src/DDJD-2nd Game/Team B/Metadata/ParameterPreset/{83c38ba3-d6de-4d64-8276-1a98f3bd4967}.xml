@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{83c38ba3-d6de-4d64-8276-1a98f3bd4967}">
+		<property name="name">
+			<value>Basic Melee</value>
+		</property>
+		<relationship name="folder">
+			<destination>{de79e17d-ef84-4ec5-bc49-2e353b71570e}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{fca40e0f-cb60-4bf0-8eb6-b5d90a5de890}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{fca40e0f-cb60-4bf0-8eb6-b5d90a5de890}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Miss</value>
+			<value>Basic</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

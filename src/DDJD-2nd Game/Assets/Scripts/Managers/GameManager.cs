@@ -98,7 +98,6 @@ public class GameManager : MonoBehaviour
             }
             if (_enemiesAggroed.Count <= 0)
             {
-                Debug.Log("Combat end on CombatUpdate");
                 CombatEnd();
             }
         }

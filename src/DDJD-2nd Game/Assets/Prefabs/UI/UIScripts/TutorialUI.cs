@@ -12,23 +12,12 @@ using UnityEngine.UI;
 public class TutorialUI : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _prefab;
-    public GameObject Prefab {
-        get { return _prefab; }
-    }
+    private GameObject _description;
     [SerializeField]
-    private GameObject _content;
-    public GameObject Content {
-        get { return _content; }
-    }
+    private GameObject _image;
     [SerializeField]
     private GameObject _title;
-    public GameObject Title {
-        get { return _title; }
-    }
     Color highlightColor;
-    private GameObject _tutorialInstance;
-
     void Start()
     {
         ColorUtility.TryParseHtmlString("#FED600", out highlightColor);
@@ -37,18 +26,18 @@ public class TutorialUI : MonoBehaviour
 
     public void ShowUI(Tutorial tutorial)
     {
-        if (_tutorialInstance == null) _tutorialInstance = Instantiate(_prefab, _content.transform);
-        
         // Replace title
         _title.GetComponent<TextMeshProUGUI>().text = tutorial.TutorialInfo[tutorial.CurrentPage].Title;
        
         // Replace description
-        _tutorialInstance.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = tutorial.TutorialInfo[tutorial.CurrentPage].Text;
+        _description.GetComponent<TextMeshProUGUI>().text = tutorial.TutorialInfo[tutorial.CurrentPage].Text;
 
-        // Replace GIF
-        GameObject gifGameObject = _tutorialInstance.transform.Find("Gif").gameObject;
-        gifGameObject.GetComponent<Image>().sprite = tutorial.TutorialInfo[tutorial.CurrentPage].Gif.GetComponent<Image>().sprite;
-        gifGameObject.GetComponent<Animator>().runtimeAnimatorController = tutorial.TutorialInfo[tutorial.CurrentPage].Gif.GetComponent<Animator>().runtimeAnimatorController;
+        // Replace Image
+        _image.GetComponent<Image>().sprite = Sprite.Create(
+            tutorial.TutorialInfo[tutorial.CurrentPage].Image,
+            new Rect(0, 0, tutorial.TutorialInfo[tutorial.CurrentPage].Image.width, tutorial.TutorialInfo[tutorial.CurrentPage].Image.height),
+            Vector2.one * 0.5f
+        );
     }
 
 }
