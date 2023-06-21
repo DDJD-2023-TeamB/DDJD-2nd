@@ -142,6 +142,7 @@ public class Npc : Interactable
         {
             PauseAnimation();
         }
+        HelpManager.Instance.ResetText();
     }
 
     public void PauseAnimation()
