@@ -6,36 +6,60 @@ using UnityEngine.Rendering.Universal;
 
 public class ActiveElementWheelController : MonoBehaviour
 {
-    [SerializeField] private GameObject edgeObject;
-    [SerializeField] private Element fireElement;
-    [SerializeField] private Element earthElement;
-    [SerializeField] private Element windElement;
-    [SerializeField] private Element electricityElement;
+    [SerializeField]
+    private GameObject edgeObject;
 
-    [SerializeField] private GameObject fireElementButtonObject;
-    [SerializeField] private GameObject earthElementButtonObject;
-    [SerializeField] private GameObject windElementButtonObject;
-    [SerializeField] private GameObject electricityElementButtonObject;
+    [SerializeField]
+    private Element fireElement;
 
-    [SerializeField] private GameObject activeElementDescriptionObject;
+    [SerializeField]
+    private Element earthElement;
 
+    [SerializeField]
+    private Element windElement;
+
+    [SerializeField]
+    private Element electricityElement;
+
+    [SerializeField]
+    private GameObject fireElementButtonObject;
+
+    [SerializeField]
+    private GameObject earthElementButtonObject;
+
+    [SerializeField]
+    private GameObject windElementButtonObject;
+
+    [SerializeField]
+    private GameObject electricityElementButtonObject;
+
+    [SerializeField]
+    private GameObject activeElementDescriptionObject;
+
+    [SerializeField]
     private ActiveElementButton fireElementButton;
+
+    [SerializeField]
     private ActiveElementButton earthElementButton;
+
+    [SerializeField]
     private ActiveElementButton windElementButton;
+
+    [SerializeField]
     private ActiveElementButton electricityElementButton;
     private float slotSize;
     private Player playerController;
+
+    [SerializeField]
     private TextMeshProUGUI activeElementDescription;
+
     void Start()
     {
         slotSize = edgeObject.transform.position.x - transform.position.x;
         playerController = GameObject.Find("Player").GetComponent<Player>();
-        fireElementButton = fireElementButtonObject.GetComponent<ActiveElementButton>();
-        earthElementButton = earthElementButtonObject.GetComponent<ActiveElementButton>();
-        windElementButton = windElementButtonObject.GetComponent<ActiveElementButton>();
-        electricityElementButton = electricityElementButtonObject.GetComponent<ActiveElementButton>();
-        activeElementDescription = activeElementDescriptionObject.GetComponent<TextMeshProUGUI>();
+        //activeElementDescription = activeElementDescriptionObject.GetComponent<TextMeshProUGUI>();
     }
+
     void Update()
     {
         Vector2 mouseVec = Input.mousePosition - transform.position;
@@ -43,7 +67,7 @@ public class ActiveElementWheelController : MonoBehaviour
         {
             float angle = Vector2.Angle(mouseVec, transform.right);
             Debug.DrawRay(transform.position, mouseVec, Color.yellow);
-            if (angle > -45 && angle < 45)
+            if (angle > -45 && angle < 45 && !earthElementButton.IsLocked)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -52,9 +76,8 @@ public class ActiveElementWheelController : MonoBehaviour
                 }
                 activeElementDescription.text = "Earth";
             }
-            if (angle < -135 || angle > 135)
+            if (angle < -135 || angle > 135 && !electricityElementButton.IsLocked)
             {
-
                 if (Input.GetMouseButtonDown(0))
                 {
                     playerController.UpdateElement(electricityElement);
@@ -64,7 +87,7 @@ public class ActiveElementWheelController : MonoBehaviour
             }
             if (angle > 45 && angle < 135)
             {
-                if (mouseVec.y > 0)
+                if (mouseVec.y > 0 && !fireElementButton.IsLocked)
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
@@ -73,7 +96,7 @@ public class ActiveElementWheelController : MonoBehaviour
                     }
                     activeElementDescription.text = "Fire";
                 }
-                else
+                else if (!windElementButton.IsLocked)
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
@@ -99,7 +122,8 @@ public class ActiveElementWheelController : MonoBehaviour
         if (element == "Fire")
         {
             fireElementButton.setActive(true);
-        }else if (element == "Earth")
+        }
+        else if (element == "Earth")
         {
             earthElementButton.setActive(true);
         }
@@ -111,5 +135,13 @@ public class ActiveElementWheelController : MonoBehaviour
         {
             electricityElementButton.setActive(true);
         }
+    }
+
+    public void SetUnlockedElements(List<Element> elements)
+    {
+        fireElementButton.SetLocked(!elements.Contains(fireElement));
+        earthElementButton.SetLocked(!elements.Contains(earthElement));
+        windElementButton.SetLocked(!elements.Contains(windElement));
+        electricityElementButton.SetLocked(!elements.Contains(electricityElement));
     }
 }

@@ -53,6 +53,23 @@ public class CharacterStatus : MonoBehaviour
     // Update is called once per frame
     void Update() { }
 
+    public void Reset()
+    {
+        _health = 0;
+        RestoreHealth(_maxHealth);
+
+        //Update _elementMana
+
+
+        //Iterate through all elements
+        List<Element> elements = new List<Element>(_elementMana.Keys);
+        foreach (Element element in elements)
+        {
+            _elementMana[element] = 0;
+            RestoreMana(element, _maxMana);
+        }
+    }
+
     public virtual void TakeDamage(
         GameObject damager,
         int damage,

@@ -169,6 +169,7 @@ public class Player : StateContext, Damageable
     }
 
     private FMOD.Studio.PARAMETER_ID _sfxRunStateId;
+    private FMOD.Studio.PARAMETER_ID _sfxDashStateId;
     private CharacterStatus _characterStatus;
     public CharacterStatus CharacterStatus
     {
@@ -184,6 +185,12 @@ public class Player : StateContext, Damageable
     private FootSteps _footsteps;
 
     private PlayerAirborneComponent _airborneComponent;
+
+    private PlayerDeath _playerDeath;
+
+    private RagdollController _ragdollController;
+
+    private PlayerMusic _playerMusic;
 
     void Awake()
     {
@@ -208,6 +215,9 @@ public class Player : StateContext, Damageable
         _timeController = GetComponent<TimeController>();
         _footsteps = GetComponent<FootSteps>();
         _airborneComponent = GetComponent<PlayerAirborneComponent>();
+        _playerDeath = GetComponent<PlayerDeath>();
+        _ragdollController = GetComponent<RagdollController>();
+        _playerMusic = GetComponent<PlayerMusic>();
         ChangeState(_factory.Playable());
     }
 
@@ -218,8 +228,20 @@ public class Player : StateContext, Damageable
         _sfxJumpStateId = _soundEmitter.GetParameterId("jump", "Jump State");
         _sfxJumpIntensityId = _soundEmitter.GetParameterId("jump", "Jump Intensity");
         _sfxRunStateId = _soundEmitter.GetParameterId("run", "Run State");
+        _sfxDashStateId = _soundEmitter.GetParameterId("dash", "Dash Type");
         _inputReceiver.OnPrintState += () => _state?.PrintState();
         _defaultMaterial = _collider.material;
+        _status.OnDeath += (int damage, Vector3 hitPoint, Vector3 direction) =>
+            ChangeState(_factory.Dead());
+        _ragdollController.DeactivateRagdoll();
+
+        _playerDeath.OnRespawn += () =>
+        {
+            _cameraController.ResetCameraRotation();
+            inventory.SubGold(_playerDeath.GoldLostOnDeath);
+            _status.Reset();
+            ChangeState(_factory.Playable());
+        };
     }
 
     void Update()
@@ -322,5 +344,25 @@ public class Player : StateContext, Damageable
     public FMOD.Studio.PARAMETER_ID SfxRunStateId
     {
         get { return _sfxRunStateId; }
+    }
+
+    public PlayerDeath PlayerDeath
+    {
+        get { return _playerDeath; }
+    }
+
+    public RagdollController RagdollController
+    {
+        get { return _ragdollController; }
+    }
+
+    public PlayerMusic PlayerMusic
+    {
+        get { return _playerMusic; }
+    }
+
+    public FMOD.Studio.PARAMETER_ID SfxDashStateId
+    {
+        get { return _sfxDashStateId; }
     }
 }
