@@ -149,14 +149,14 @@ public class EnemyCamp : MonoBehaviour, NonCollidable
                         < _triggerRadius
                     )
                     {
-                        _spawnerManager.StartSpawn();
+                        _spawnerManager.StartSpawn(false);
                         continueCoroutine = false;
                     }
                     break;
                 case SpawnerTriggerType.OnCombat:
                     if (_playerSighted)
                     {
-                        _spawnerManager.StartSpawn();
+                        _spawnerManager.StartSpawn(true);
                         continueCoroutine = false;
                     }
                     break;
@@ -164,7 +164,7 @@ public class EnemyCamp : MonoBehaviour, NonCollidable
                     if (_fightGoalStarted)
                     {
                         InstantiateDefaultEnemies();
-                        _spawnerManager.StartSpawn();
+                        _spawnerManager.StartSpawn(true);
                         continueCoroutine = false;
                     }
                     break;

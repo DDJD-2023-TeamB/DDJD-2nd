@@ -55,6 +55,10 @@ public class FireballComponent : ProjectileComponent, NonPushable
     protected void OnCharge()
     {
         float previousRadius = _currentRadius;
+        if (_caster == null)
+        {
+            return;
+        }
         _currentRadius = Mathf.Lerp(0, _maxRadius, _chargeComponent.GetCurrentCharge());
         float radiusChange = _currentRadius - previousRadius;
         transform.position += _caster.transform.forward * radiusChange;
