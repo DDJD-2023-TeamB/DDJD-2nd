@@ -24,6 +24,7 @@ public class ChangeSpellState : MovableState
         _context.Input.OnRightShootKeydown += OnRightKeydown;
         _context.Input.OnLeftShootKeyup += OnLeftKeyup;
         _context.Input.OnRightShootKeyup += OnRightKeyup;
+        _context.PlayerMusic.OpenMenu();
     }
 
     public override void Exit()
@@ -57,12 +58,12 @@ public class ChangeSpellState : MovableState
         {
             _context.Status.UpdateMana(rightSkill.Element);
         }
-        Time.timeScale = 1.0f;
 
         _context.Input.OnLeftShootKeydown -= OnLeftKeydown;
         _context.Input.OnRightShootKeydown -= OnRightKeydown;
         _context.Input.OnLeftShootKeyup -= OnLeftKeyup;
         _context.Input.OnRightShootKeyup -= OnRightKeyup;
+        _context.PlayerMusic.CloseMenu();
     }
 
     public override void StateUpdate()

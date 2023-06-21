@@ -116,7 +116,7 @@ public class FireballComponent : ProjectileComponent, NonPushable
         );
         foreach (RaycastHit hit in hits)
         {
-            if (hit.collider.gameObject == _caster || hit.collider.gameObject == gameObject)
+            if (hit.collider.gameObject.layer == _caster.gameObject.layer)
             {
                 continue;
             }

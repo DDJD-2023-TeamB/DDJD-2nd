@@ -205,4 +205,13 @@ public class SoundEmitter : MonoBehaviour
         instance.start();
         instance.release();
     }
+
+    public void PlayOneShot(string eventName)
+    {
+        FMOD.Studio.EventInstance instance = FMODUnity.RuntimeManager.CreateInstance(
+            _events[eventName].EventReference
+        );
+        instance.start();
+        instance.release();
+    }
 }

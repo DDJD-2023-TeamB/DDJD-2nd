@@ -53,7 +53,6 @@ public class AirborneState : GenericState
             );
             _context.Footsteps.Play();
         }
-        _context.AirborneComponent.StopAirborne();
     }
 
     public override bool CanChangeState(GenericState state)

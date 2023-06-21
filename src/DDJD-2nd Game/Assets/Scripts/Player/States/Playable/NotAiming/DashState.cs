@@ -46,6 +46,12 @@ public class DashState : MeleeAttackableState
         else
         {
             _dashable.Dash(_stats);
+            _context.SoundEmitter.SetParameterWithLabel(
+                "dash",
+                _context.SfxDashStateId,
+                "Basic",
+                true
+            );
         }
     }
 

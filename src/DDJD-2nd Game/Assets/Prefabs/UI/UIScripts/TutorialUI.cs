@@ -45,10 +45,12 @@ public class TutorialUI : MonoBehaviour
         // Replace description
         _tutorialInstance.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = tutorial.TutorialInfo[tutorial.CurrentPage].Text;
 
-        // Replace GIF
-        GameObject gifGameObject = _tutorialInstance.transform.Find("Gif").gameObject;
-        gifGameObject.GetComponent<Image>().sprite = tutorial.TutorialInfo[tutorial.CurrentPage].Gif.GetComponent<Image>().sprite;
-        gifGameObject.GetComponent<Animator>().runtimeAnimatorController = tutorial.TutorialInfo[tutorial.CurrentPage].Gif.GetComponent<Animator>().runtimeAnimatorController;
+        // Replace Image
+        _tutorialInstance.transform.Find("Image").GetComponent<Image>().sprite = Sprite.Create(
+            tutorial.TutorialInfo[tutorial.CurrentPage].Image,
+            new Rect(0, 0, tutorial.TutorialInfo[tutorial.CurrentPage].Image.width, tutorial.TutorialInfo[tutorial.CurrentPage].Image.height),
+            Vector2.one * 0.5f
+        );
     }
 
 }

@@ -92,4 +92,9 @@ public class PlayerStateFactory : StateFactory
     {
         return new AbsorbingState(_context, superState);
     }
+
+    public DeadState Dead()
+    {
+        return new DeadState(_context, null);
+    }
 }

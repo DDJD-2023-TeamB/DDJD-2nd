@@ -100,7 +100,6 @@ public abstract class Dashable : MonoBehaviour
 
         _rigidbody.AddForce(force * 100f, ForceMode.Acceleration);
         SetDashAnimation();
-
         _maxSpeed = stats.MaxSpeed;
         StartCoroutine(SmoothlyChangeMaxSpeed(stats.MaxSpeed, false));
 

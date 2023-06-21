@@ -156,9 +156,10 @@ MonoBehaviour:
   _events:
     _keys:
     - absorb
+    - idle
     _values:
     - _playOnStart: 0
-      _stopOnDestroy: 0
+      _stopOnDestroy: 1
       _updatePosition: 0
       _eventReference:
         Guid:
@@ -167,3 +168,13 @@ MonoBehaviour:
           Data3: 1311198889
           Data4: 1112510269
         Path: event:/Attacks/Earth Abilities/Earth Charge
+    - _playOnStart: 1
+      _stopOnDestroy: 1
+      _updatePosition: 0
+      _eventReference:
+        Guid:
+          Data1: 1429952977
+          Data2: 1132954096
+          Data3: -1434587217
+          Data4: -1215714610
+        Path: event:/Attacks/Hotspot/Earth Hotspot

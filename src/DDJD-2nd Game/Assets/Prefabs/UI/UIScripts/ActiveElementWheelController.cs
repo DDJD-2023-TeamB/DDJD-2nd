@@ -36,24 +36,28 @@ public class ActiveElementWheelController : MonoBehaviour
     [SerializeField]
     private GameObject activeElementDescriptionObject;
 
+    [SerializeField]
     private ActiveElementButton fireElementButton;
+
+    [SerializeField]
     private ActiveElementButton earthElementButton;
+
+    [SerializeField]
     private ActiveElementButton windElementButton;
+
+    [SerializeField]
     private ActiveElementButton electricityElementButton;
     private float slotSize;
     private Player playerController;
+
+    [SerializeField]
     private TextMeshProUGUI activeElementDescription;
 
     void Start()
     {
         slotSize = edgeObject.transform.position.x - transform.position.x;
         playerController = GameObject.Find("Player").GetComponent<Player>();
-        fireElementButton = fireElementButtonObject.GetComponent<ActiveElementButton>();
-        earthElementButton = earthElementButtonObject.GetComponent<ActiveElementButton>();
-        windElementButton = windElementButtonObject.GetComponent<ActiveElementButton>();
-        electricityElementButton =
-            electricityElementButtonObject.GetComponent<ActiveElementButton>();
-        activeElementDescription = activeElementDescriptionObject.GetComponent<TextMeshProUGUI>();
+        //activeElementDescription = activeElementDescriptionObject.GetComponent<TextMeshProUGUI>();
     }
 
     void Update()

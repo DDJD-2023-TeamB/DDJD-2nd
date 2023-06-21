@@ -156,9 +156,10 @@ MonoBehaviour:
   _events:
     _keys:
     - absorb
+    - idle
     _values:
     - _playOnStart: 0
-      _stopOnDestroy: 0
+      _stopOnDestroy: 1
       _updatePosition: 0
       _eventReference:
         Guid:
@@ -167,3 +168,13 @@ MonoBehaviour:
           Data3: -1706686826
           Data4: 632453420
         Path: event:/Attacks/Wind Abilities/Wind Charge
+    - _playOnStart: 1
+      _stopOnDestroy: 1
+      _updatePosition: 0
+      _eventReference:
+        Guid:
+          Data1: -990290755
+          Data2: 1187308961
+          Data3: 1444943523
+          Data4: -1444879198
+        Path: event:/Attacks/Hotspot/Wind Hotspot

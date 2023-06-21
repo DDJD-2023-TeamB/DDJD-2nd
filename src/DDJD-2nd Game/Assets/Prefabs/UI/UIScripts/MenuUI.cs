@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class MenuUI : MonoBehaviour
 {
@@ -37,5 +39,11 @@ public class MenuUI : MonoBehaviour
         //TODO: SAVE GAME STATE
         _soundEmitter.SetParameterWithLabel("menu", _menuParameterId, "Positive", true);
         Application.Quit();
+    }
+
+    public void mainMenu()
+    {
+        _soundEmitter.SetParameterWithLabel("menu", _menuParameterId, "Positive", true);
+        SceneManager.LoadSceneAsync("Menu");
     }
 }

@@ -129,6 +129,6 @@ public class RunState : GenericState
             _context.Rigidbody.velocity.magnitude
         );
         fov = math.clamp(fov, _context.CameraController.WalkFov, _context.CameraController.RunFov);
-        _context.CameraController.ChangeFov(fov);
+        _context.CameraController?.ChangeFov(fov);
     }
 }

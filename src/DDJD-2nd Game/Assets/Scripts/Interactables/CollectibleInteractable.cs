@@ -7,7 +7,7 @@ using TMPro;
 using UnityEditor.Animations;
 using System.Linq;
 
-public class CollectibleInteractable : Interactable
+public class CollectibleInteractable : Interactable, NonCollidable
 {
     public CollectibleObject _item;
 
@@ -109,12 +109,20 @@ public class CollectibleInteractable : Interactable
             Destroy(gameObject);
             _missionController.CheckIfItemCollectedIsMyGoal(_item);
             HelpManager.Instance.ResetText();
+            FMODUnity.RuntimeManager.PlayOneShot(
+                SoundBank.Instance.PickupSound,
+                transform.position
+            );
         }
         else
         {
             if (_player.Inventory.SubGold(_item.Cost))
             {
                 _item.BuyItem();
+                FMODUnity.RuntimeManager.PlayOneShot(
+                    SoundBank.Instance.BuySound,
+                    transform.position
+                );
                 _player.Inventory.AddItem(_item, 1);
                 UpdateText();
 
@@ -123,7 +131,6 @@ public class CollectibleInteractable : Interactable
                     Destroy(gameObject);
                     HelpManager.Instance.ResetText();
                 }
-                    
             }
             else
             {
@@ -136,4 +143,6 @@ public class CollectibleInteractable : Interactable
     {
         return true;
     }
+
+  
 }
