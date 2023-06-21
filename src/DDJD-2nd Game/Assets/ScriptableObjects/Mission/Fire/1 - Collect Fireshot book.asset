@@ -69,10 +69,37 @@ MonoBehaviour:
     _npc: {fileID: 11400000, guid: 741a1c0760ea549e7b774f87dba41dd6, type: 2}
     _onEndInteraction:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 5127587324625021438, guid: 12b9752c824401b4aba52369f821a48b,
+            type: 3}
+          m_TargetAssemblyTypeName: TutorialCallback, Assembly-CSharp
+          m_MethodName: HandleTutorial
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: fe8789a1993f6df49a3ba4239f70315d,
+              type: 2}
+            m_ObjectArgumentAssemblyTypeName: Tutorial, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     _onTutorialExit:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 5127587324625021438, guid: 12b9752c824401b4aba52369f821a48b,
+            type: 3}
+          m_TargetAssemblyTypeName: TutorialCallback, Assembly-CSharp
+          m_MethodName: ExitTutorial
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   _reward:
     _gold: 100
     _items: []

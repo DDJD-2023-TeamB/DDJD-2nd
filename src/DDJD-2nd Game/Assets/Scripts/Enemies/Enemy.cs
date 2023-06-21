@@ -43,7 +43,13 @@ public abstract class Enemy : StateContext, Damageable
     }
 
     // Update is called once per frame
-    virtual public void Update() { }
+    virtual public void Update()
+    {
+        if (transform.position.y == 100)
+        {
+            Die(0, Vector3.zero, Vector3.zero);
+        }
+    }
 
     public virtual void TakeDamage(
         GameObject damager,
