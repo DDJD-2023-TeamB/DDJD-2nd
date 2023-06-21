@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4531224598399342320}
   - component: {fileID: 670472666780916053}
   - component: {fileID: 3362227527740632479}
-  - component: {fileID: 8904447796716695609}
   - component: {fileID: -5311141801407019448}
+  - component: {fileID: 8734103399284715114}
   m_Layer: 0
   m_Name: LightningTrapBook
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3866890514056514634}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,20 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8904447796716695609
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3866890514056514634}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4261849482073782191, guid: 30663d2e0eae90940b64eff3e2f719f4, type: 3}
 --- !u!114 &-5311141801407019448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,4 +97,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b281acad7b5be44a900cce08f39a4b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _item: {fileID: 11400000, guid: cf53afc05b2c65e49a0374f224b31382, type: 2}
+  _item: {fileID: 11400000, guid: aeaee707f7d33c64eb35c7ee4f7a3647, type: 2}
+--- !u!135 &8734103399284715114
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3866890514056514634}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.75
+  m_Center: {x: 0.0709244, y: 0.019648552, z: 0.02254866}

@@ -41,6 +41,14 @@ public class GameManager : MonoBehaviour
     public void EnemyDied(BasicEnemy enemy)
     {
         _enemiesAggroed.Remove(enemy);
+
+        Vector3 position = enemy.transform.position;
+        position.y = 0;
+
+        enemy.EnemyCommunicator.SendMessageToEnemies(
+            new PlayerSightedMessage(_player.transform.position)
+        );
+
         if (_enemiesAggroed.Count <= 0)
         {
             CombatEnd();

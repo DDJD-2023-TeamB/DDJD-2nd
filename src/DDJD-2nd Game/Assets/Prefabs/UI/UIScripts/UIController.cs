@@ -86,6 +86,14 @@ public class UIController : MonoBehaviour
             LoadItems();
             LoadGold();
         }
+        if(!isOpening)
+        {
+            if (_playerUI.inventoryUI.itemTitle != null)
+            {
+                Destroy(_playerUI.inventoryUI.itemTitle);
+                _playerUI.inventoryUI.itemTitle = null;
+            }
+        }
     }
 
     public void OpenMenu(bool isOpening)
@@ -333,8 +341,8 @@ public class UIController : MonoBehaviour
             return;
         }
 
-        while (FindItemSkill((ItemSkill)image.currentItem.item, true) != null)
-        {
+        while (FindItemSkill((ItemSkill)image.currentItem.item, true) != null) {
+
             RemoveFromWheel(image.currentItem, true);
         }
 
@@ -345,7 +353,7 @@ public class UIController : MonoBehaviour
         }
         else if (area == UiArea.RightWheel)
         {
-            RemoveFromWheel(image.currentItem, true);
+            RemoveFromWheel(image.currentItem, false);
             Destroy(image.gameObject);
         }
 
@@ -367,6 +375,16 @@ public class UIController : MonoBehaviour
         while (FindItemSkill((ItemSkill)image.currentItem.item, false) != null)
         {
             RemoveFromWheel(image.currentItem, false);
+        }
+        if (area == UiArea.RightWheel)
+        {
+            RemoveFromWheel(image.currentItem, false);
+            Destroy(image.gameObject);
+        }
+        else if (area == UiArea.LeftWheel)
+        {
+            RemoveFromWheel(image.currentItem, true);
+            Destroy(image.gameObject);
         }
         ItemSkill itemSkill = (ItemSkill)image.currentItem.item;
         rightWheelItems[slot] = itemSkill;

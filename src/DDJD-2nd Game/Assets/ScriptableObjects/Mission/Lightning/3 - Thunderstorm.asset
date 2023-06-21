@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ade6c6202a749d3b8a95862ea27777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _completed: 0
+  _completed: 1
   _onGoalStarted:
     m_PersistentCalls:
       m_Calls:
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: Thunderstorm
   _description: Run away from the thunderstorm!
-  _status: 0
+  _status: 3
   _type: 0
   _goals:
   - {fileID: -6159442827439109576}
@@ -99,10 +99,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 011ea1f08218a4d86a7348c8b8541bd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _completed: 0
+  _completed: 1
   _onGoalStarted:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9089035556450893789, guid: 12b9752c824401b4aba52369f821a48b,
+          type: 3}
+        m_TargetAssemblyTypeName: CollectCallback, Assembly-CSharp
+        m_MethodName: OnCollectGoalStarted
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: CollectLightningStone
+          m_BoolArgument: 0
+        m_CallState: 2
   _onGoalCompleted:
     m_PersistentCalls:
       m_Calls: []
@@ -123,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _completed: 0
+  _completed: 1
   _onGoalStarted:
     m_PersistentCalls:
       m_Calls: []

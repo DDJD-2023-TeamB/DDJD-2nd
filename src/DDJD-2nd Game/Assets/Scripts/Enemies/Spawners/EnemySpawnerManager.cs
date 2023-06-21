@@ -38,6 +38,8 @@ public class EnemySpawnerManager : MonoBehaviour
 
     public Action<BasicEnemy> OnSpawn;
 
+    private bool _attackPlayer = false;
+
     public void Awake() { }
 
     public void Start()
@@ -72,6 +74,17 @@ public class EnemySpawnerManager : MonoBehaviour
             spawned = spawner.CanSpawn();
             EnemyInfo enemyInfo = _enemySpawner.EnemySpawnerInfo.GetRandomEnemyInfo();
             enemy = spawner.SpawnEnemy(enemyInfo);
+            if (_attackPlayer)
+            {
+                //enemy.AggroRange = 100.0f;
+                /*
+                enemy.EnemyCommunicator.SendMessageToEnemy(
+                    new PlayerSightedMessage(GameManager.Instance.Player.transform.position),
+                    enemy.GetComponent<EnemyCommunicator>(),
+                    0.0f
+                );
+                */
+            }
         } while (!spawned);
         if (enemy != null)
         {
@@ -80,8 +93,9 @@ public class EnemySpawnerManager : MonoBehaviour
         OnSpawn?.Invoke(enemy);
     }
 
-    public void StartSpawn()
+    public void StartSpawn(bool attackPlayer)
     {
+        _attackPlayer = attackPlayer;
         _spawnCoroutine = StartCoroutine(SpawnCoroutine());
     }
 

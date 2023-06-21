@@ -22,6 +22,11 @@ public class BossManager : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitForSeconds(1f);
+            if (!_missionsUIController.IsReady)
+            {
+                continue;
+            }
             bool unblockBoss = true;
             foreach (var mission in _gameState.UnblockedMissions)
             {
@@ -39,8 +44,6 @@ public class BossManager : MonoBehaviour
                 _missionsUIController.UpdateMissionsUI();
                 yield break;
             }
-
-            yield return new WaitForSeconds(1f);
         }
     }
 }
