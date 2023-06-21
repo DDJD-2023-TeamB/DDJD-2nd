@@ -47,6 +47,18 @@ public class ItemsInventoryObject : ScriptableObject
         }
     }
 
+    public void RemoveItemAmount(ItemStack item, int value)
+    {
+        if (item.amount <= value)
+        {
+            Container.Remove(item);
+        }
+        else
+        {
+            item.RemoveAmount(value);
+        }
+    }
+
     public void AddItem(ItemStack itemStack)
     {
         ItemStack slot = Container.Find(x => x.item == itemStack.item);
