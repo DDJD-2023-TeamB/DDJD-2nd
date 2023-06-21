@@ -9,6 +9,9 @@ public class SoundLocation : MonoBehaviour
     private string _soundParameter;
 
     [SerializeField]
+    private string _eventName = "ambience";
+
+    [SerializeField]
     [Tooltip("The radius of the circle around the center where the sound is maximum")]
     private float _radiusMax = 30.0f;
 
@@ -35,8 +38,13 @@ public class SoundLocation : MonoBehaviour
     {
         //FInd by tag
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        _soundParameterId = _soundEmitter.GetParameterId(_soundParameter, _soundParameter);
-        StartCoroutine(CheckRange());
+        //StartCoroutine(CheckRange());
+    }
+
+    public FMOD.Studio.PARAMETER_ID GetParameterId()
+    {
+        _soundParameterId = _soundEmitter.GetParameterId(_eventName, _soundParameter);
+        return _soundParameterId;
     }
 
     protected virtual void Update() { }
@@ -47,41 +55,43 @@ public class SoundLocation : MonoBehaviour
         {
             yield return new WaitForSeconds(1.0f);
             bool inRange = IsPlayerInRange();
-            if (inRange && !_isPlayerInRange)
+            if (inRange)
             {
                 _isPlayerInRange = true;
                 float value = _isCloser
                     ? GetDistanceToCenterNormalized()
                     : GetDistanceToCenterNormalizedInverted();
-                _soundEmitter.SetParameter("ambience", _soundParameterId, value);
+                _soundEmitter.SetParameter(_eventName, _soundParameterId, value);
             }
             else if (!inRange && _isPlayerInRange)
             {
                 float value = _isCloser ? 0 : 1;
-                _soundEmitter.SetParameter("ambience", _soundParameterId, value);
+                _soundEmitter.SetParameter(_eventName, _soundParameterId, value);
                 _isPlayerInRange = false;
             }
         }
     }
 
-    protected bool IsPlayerInRange()
+    public bool IsPlayerInRange()
     {
         return GetDistanceToCenter() < _radiusMin;
     }
 
-    protected float GetDistanceToCenter()
+    public float GetDistanceToCenter()
     {
         return Vector3.Distance(_player.transform.position, transform.position);
     }
 
-    protected float GetDistanceToCenterNormalized()
+    public float GetDistanceToCenterNormalized()
     {
         float normalized = math.remap(_radiusMax, _radiusMin, 0, 1.0f, GetDistanceToCenter());
-
+        Debug.Log(
+            normalized + " vs " + GetDistanceToCenter() + " vs " + _radiusMin + " vs " + _radiusMax
+        );
         return Mathf.Clamp(normalized, 0.0f, 1.0f);
     }
 
-    protected float GetDistanceToCenterNormalizedInverted()
+    public float GetDistanceToCenterNormalizedInverted()
     {
         float normalized = math.remap(_radiusMax, _radiusMin, 1.0f, 0, GetDistanceToCenter());
 
@@ -90,10 +100,29 @@ public class SoundLocation : MonoBehaviour
 
     public void OnDrawGizmos()
     {
-        Debug.Log("draw");
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _radiusMax);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, _radiusMin);
+    }
+
+    public string SoundParameter
+    {
+        get => _soundParameter;
+    }
+
+    public string EventName
+    {
+        get => _eventName;
+    }
+
+    public FMOD.Studio.PARAMETER_ID SoundParameterId
+    {
+        get => _soundParameterId;
+    }
+
+    public bool IsCloser
+    {
+        get => _isCloser;
     }
 }

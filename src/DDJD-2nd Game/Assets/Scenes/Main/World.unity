@@ -1292,6 +1292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundParameter: Crows Proximity
+  _eventName: ambience
   _radiusMax: 40
   _radiusMin: 75
   _soundEmitter: {fileID: 1833086721}
@@ -1340,7 +1341,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundParameter: Whispers
+  _soundParameter: Whisper
+  _eventName: ambience
   _radiusMax: 30
   _radiusMin: 100
   _soundEmitter: {fileID: 1833086721}
@@ -1710,6 +1712,9 @@ Transform:
   - {fileID: 1927018178}
   - {fileID: 296585712}
   - {fileID: 790450617}
+  - {fileID: 925711156}
+  - {fileID: 1699050682}
+  - {fileID: 403892760}
   m_Father: {fileID: 1833086720}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2775,6 +2780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundParameter: Trees Proximity
+  _eventName: ambience
   _radiusMax: 30
   _radiusMin: 50
   _soundEmitter: {fileID: 1833086721}
@@ -3792,7 +3798,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundParameter: Earth Drone
+  _soundParameter: Drone Intensity
+  _eventName: earth_drone
   _radiusMax: 40
   _radiusMin: 100
   _soundEmitter: {fileID: 1833086721}
@@ -3841,7 +3848,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundParameter: Birds Proximity
+  _soundParameter: Hawks Proximity
+  _eventName: ambience
   _radiusMax: 40
   _radiusMin: 85
   _soundEmitter: {fileID: 1833086721}
@@ -4486,6 +4494,56 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401921116}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &403892759
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 403892760}
+  - component: {fileID: 403892761}
+  m_Layer: 0
+  m_Name: AmbienceWind (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &403892760
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403892759}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 77.7, y: 0, z: 40}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 149260475}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &403892761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403892759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundParameter: Wind Intensity
+  _eventName: ambience
+  _radiusMax: 30
+  _radiusMin: 75
+  _soundEmitter: {fileID: 1833086721}
+  _isCloser: 1
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -5489,6 +5547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundParameter: Trees Proximity
+  _eventName: ambience
   _radiusMax: 30
   _radiusMin: 50
   _soundEmitter: {fileID: 1833086721}
@@ -6372,6 +6431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundParameter: Crows Proximity
+  _eventName: ambience
   _radiusMax: 40
   _radiusMin: 75
   _soundEmitter: {fileID: 1833086721}
@@ -6658,6 +6718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundParameter: Vilages Sounds
+  _eventName: ambience
   _radiusMax: 30
   _radiusMin: 50
   _soundEmitter: {fileID: 1833086721}
@@ -7168,7 +7229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundParameter: Desert Wind
+  _soundParameter: Desert Wind Intensity
+  _eventName: ambience
   _radiusMax: 40
   _radiusMin: 60
   _soundEmitter: {fileID: 1833086721}
@@ -7359,7 +7421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundParameter: Fire Drone
+  _soundParameter: Drone Intensity
+  _eventName: fire_drone
   _radiusMax: 40
   _radiusMin: 100
   _soundEmitter: {fileID: 1833086721}
@@ -8180,7 +8243,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 790450616}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -31.2, y: 0, z: -47.6}
+  m_LocalPosition: {x: -29.1, y: 0, z: -60.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8200,6 +8263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundParameter: Birds Proximity
+  _eventName: ambience
   _radiusMax: 30
   _radiusMin: 75
   _soundEmitter: {fileID: 1833086721}
@@ -9119,6 +9183,56 @@ PrefabInstance:
       objectReference: {fileID: 518216103}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8084707323b635540b484e279ebd75fb, type: 3}
+--- !u!1 &925711155
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 925711156}
+  - component: {fileID: 925711157}
+  m_Layer: 0
+  m_Name: AmbienceWind
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &925711156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925711155}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -28.8, y: 0, z: -46.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 149260475}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &925711157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925711155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundParameter: Wind Intensity
+  _eventName: ambience
+  _radiusMax: 30
+  _radiusMin: 75
+  _soundEmitter: {fileID: 1833086721}
+  _isCloser: 1
 --- !u!1 &928619953
 GameObject:
   m_ObjectHideFlags: 0
@@ -10181,6 +10295,56 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008111290}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1012951805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1012951806}
+  - component: {fileID: 1012951807}
+  m_Layer: 0
+  m_Name: AmbienceCrowsFire (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1012951806
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012951805}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -106.7, y: 0, z: -215}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2072014741}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1012951807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012951805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundParameter: Crows Proximity
+  _eventName: ambience
+  _radiusMax: 20
+  _radiusMin: 60
+  _soundEmitter: {fileID: 1833086721}
+  _isCloser: 1
 --- !u!1 &1033792945
 GameObject:
   m_ObjectHideFlags: 0
@@ -10295,7 +10459,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1035365630
 Transform:
   m_ObjectHideFlags: 0
@@ -10551,6 +10715,56 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1039098793}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1060367305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1060367306}
+  - component: {fileID: 1060367307}
+  m_Layer: 0
+  m_Name: AmbienceWindLightning
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1060367306
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060367305}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 22.5, y: 0, z: -84.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1263650108}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1060367307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060367305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundParameter: Dark Wind
+  _eventName: ambience
+  _radiusMax: 60
+  _radiusMin: 130
+  _soundEmitter: {fileID: 1833086721}
+  _isCloser: 1
 --- !u!1 &1070617224
 GameObject:
   m_ObjectHideFlags: 0
@@ -11203,7 +11417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1156353120
 Transform:
   m_ObjectHideFlags: 0
@@ -12558,6 +12772,8 @@ Transform:
   - {fileID: 573768355}
   - {fileID: 102476434}
   - {fileID: 1621231493}
+  - {fileID: 1060367306}
+  - {fileID: 1941184988}
   m_Father: {fileID: 1833086720}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12702,7 +12918,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundParameter: Desert Wind
+  _soundParameter: Desert Wind Intensity
+  _eventName: ambience
   _radiusMax: 30
   _radiusMin: 75
   _soundEmitter: {fileID: 1833086721}
@@ -13328,7 +13545,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundParameter: Desert Wind
+  _soundParameter: Desert Wind Intensity
+  _eventName: ambience
   _radiusMax: 40
   _radiusMin: 85
   _soundEmitter: {fileID: 1833086721}
@@ -13358,7 +13576,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353618500}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -175.6, y: 0, z: -208.3}
+  m_LocalPosition: {x: -175.5, y: 0, z: -208.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13378,6 +13596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundParameter: Crows Proximity
+  _eventName: ambience
   _radiusMax: 60
   _radiusMin: 130
   _soundEmitter: {fileID: 1833086721}
@@ -14862,6 +15081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundParameter: Birds Proximity
+  _eventName: ambience
   _radiusMax: 30
   _radiusMin: 75
   _soundEmitter: {fileID: 1833086721}
@@ -15174,6 +15394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundParameter: Whisper
+  _eventName: ambience
   _radiusMax: 40
   _radiusMin: 60
   _soundEmitter: {fileID: 1833086721}
@@ -15222,7 +15443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundParameter: Fire Drone
+  _soundParameter: Drone Intensity
+  _eventName: fire_drone
   _radiusMax: 30
   _radiusMin: 100
   _soundEmitter: {fileID: 1833086721}
@@ -15496,7 +15718,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundParameter: Birds Proximity
+  _soundParameter: Hawks Proximity
+  _eventName: ambience
   _radiusMax: 30
   _radiusMin: 75
   _soundEmitter: {fileID: 1833086721}
@@ -15615,7 +15838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1596494489
 Transform:
   m_ObjectHideFlags: 0
@@ -16081,6 +16304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundParameter: Crows Proximity
+  _eventName: ambience
   _radiusMax: 40
   _radiusMin: 75
   _soundEmitter: {fileID: 1833086721}
@@ -16705,6 +16929,56 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1661047256}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1699050681
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1699050682}
+  - component: {fileID: 1699050683}
+  m_Layer: 0
+  m_Name: AmbienceWind (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1699050682
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699050681}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -19.5, y: 0, z: 31.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 149260475}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1699050683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699050681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundParameter: Wind Intensity
+  _eventName: ambience
+  _radiusMax: 30
+  _radiusMin: 75
+  _soundEmitter: {fileID: 1833086721}
+  _isCloser: 1
 --- !u!1 &1704604993
 GameObject:
   m_ObjectHideFlags: 0
@@ -17994,6 +18268,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1833086720}
   - component: {fileID: 1833086721}
+  - component: {fileID: 1833086722}
   m_Layer: 0
   m_Name: Ambience
   m_TagString: Untagged
@@ -18035,10 +18310,11 @@ MonoBehaviour:
   _events:
     _keys:
     - ambience
-    - drone
+    - earth_drone
+    - fire_drone
     _values:
     - _playOnStart: 1
-      _stopOnDestroy: 0
+      _stopOnDestroy: 1
       _updatePosition: 0
       _eventReference:
         Guid:
@@ -18048,15 +18324,38 @@ MonoBehaviour:
           Data4: 142978580
         Path: event:/Ambience/Complete Ambience
     - _playOnStart: 1
-      _stopOnDestroy: 0
+      _stopOnDestroy: 1
       _updatePosition: 0
       _eventReference:
         Guid:
-          Data1: 1395267596
-          Data2: 1250929403
-          Data3: 904684715
-          Data4: 142978580
-        Path: event:/Ambience/Complete Ambience
+          Data1: -1284704121
+          Data2: 1232991179
+          Data3: 501414295
+          Data4: 1421076559
+        Path: event:/Ambience/Earth Drone
+    - _playOnStart: 1
+      _stopOnDestroy: 1
+      _updatePosition: 0
+      _eventReference:
+        Guid:
+          Data1: 1681976697
+          Data2: 1134696359
+          Data3: 1139185792
+          Data4: 587712383
+        Path: event:/Ambience/Fire Drone
+--- !u!114 &1833086722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833086719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dfc0c0a58ff2da408e823c1942c6e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _values: []
 --- !u!1001 &1837533636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18183,6 +18482,56 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1850896155
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1850896156}
+  - component: {fileID: 1850896157}
+  m_Layer: 0
+  m_Name: 'AmbienceWindFire '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1850896156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850896155}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -175.6, y: 0, z: -208.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2072014741}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1850896157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850896155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundParameter: Dark Wind
+  _eventName: ambience
+  _radiusMax: 60
+  _radiusMin: 130
+  _soundEmitter: {fileID: 1833086721}
+  _isCloser: 1
 --- !u!1 &1856597773
 GameObject:
   m_ObjectHideFlags: 0
@@ -18356,6 +18705,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundParameter: Vilages Sounds
+  _eventName: ambience
   _radiusMax: 25
   _radiusMin: 75
   _soundEmitter: {fileID: 1833086721}
@@ -18598,7 +18948,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1888591612
 Transform:
   m_ObjectHideFlags: 0
@@ -18802,6 +19152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundParameter: Village Sounds
+  _eventName: ambience
   _radiusMax: 40
   _radiusMin: 75
   _soundEmitter: {fileID: 1833086721}
@@ -18851,8 +19202,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundParameter: Trees Proximity
+  _eventName: ambience
   _radiusMax: 30
   _radiusMin: 50
+  _soundEmitter: {fileID: 1833086721}
+  _isCloser: 1
+--- !u!1 &1941184987
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1941184988}
+  - component: {fileID: 1941184989}
+  m_Layer: 0
+  m_Name: AmbienceWindLightning (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1941184988
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941184987}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 104, y: 0, z: -30.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1263650108}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1941184989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941184987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundParameter: Dark Wind
+  _eventName: ambience
+  _radiusMax: 60
+  _radiusMin: 120
   _soundEmitter: {fileID: 1833086721}
   _isCloser: 1
 --- !u!1 &1953008759
@@ -19570,6 +19972,8 @@ Transform:
   - {fileID: 1353618501}
   - {fileID: 107746928}
   - {fileID: 1523072559}
+  - {fileID: 1850896156}
+  - {fileID: 1012951806}
   m_Father: {fileID: 1833086720}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19891,7 +20295,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2108154770}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.900002, y: 0, z: -149.2}
+  m_LocalPosition: {x: -26.7, y: 0, z: -149.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19910,9 +20314,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundParameter: Birds Proximity
+  _soundParameter: Hawks Proximity
+  _eventName: ambience
   _radiusMax: 40
-  _radiusMin: 60
+  _radiusMin: 80
   _soundEmitter: {fileID: 1833086721}
   _isCloser: 1
 --- !u!1 &2117715459
