@@ -97,7 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: Invasion
   _description: The Wind Village is under attack
-  _status: 1
+  _status: 0
   _type: 0
   _goals:
   - {fileID: -6159442827439109576}
@@ -121,5 +121,6 @@ MonoBehaviour:
   _reward:
     _gold: 200
     _items: []
-  _followingMissions: []
+  _followingMissions:
+  - {fileID: 11400000, guid: 9370d2d2b2cd4be47a7cd1b498e99496, type: 2}
   _area: 1
