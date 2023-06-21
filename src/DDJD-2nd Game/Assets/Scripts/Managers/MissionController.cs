@@ -111,9 +111,10 @@ public class MissionController : MonoBehaviour
 
     private void UnblockFollowingMissions(Mission mission)
     {
-        foreach (var followingMissions in mission.FollowingMissions)
+        foreach (var followingMission in mission.FollowingMissions)
         {
-            followingMissions.Unblock();
+            followingMission.Unblock();
+            _unblockedMissions.Add(followingMission);
         }
     }
 
@@ -156,7 +157,6 @@ public class MissionController : MonoBehaviour
                 }
             }
         }
-
 
         // Put selected mission in first place to give it priority
         if (_selectedMission != null && missions.Remove(_selectedMission))
