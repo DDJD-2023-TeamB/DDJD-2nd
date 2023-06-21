@@ -10,21 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8c5000599e034b75b66b98e905ca14a, type: 3}
-  m_Name: 1 - Discover WInd 1
+  m_Name: 1 - DiscoverLightning
   m_EditorClassIdentifier: 
-  _title: Discover Wind
-  _description: Discover the Wind Village
+  _title: Discover Lightning
+  _description: Discover the Lightning Village
   _status: 0
   _type: 0
   _goals: []
   _interactionBegin:
     _dialogueInfo:
-      _noun: Aang
+      _noun: Juan
       _sentences:
-      - Welcome to the peaceful village of the Wind!
-      - Or at least that's what we wanted it to be...
-      - Anyway, watch out for the strong winds!
-    _npc: {fileID: 11400000, guid: b660778efce2e1b47958f651c9144861, type: 2}
+      - Wait a minute! What brings you to the Lightning Village?
+      - You're a traveller? Fine... But don't stay here long, the locals don't like
+        visitors
+      - And be careful... Don't trust strangers!
+    _npc: {fileID: 11400000, guid: de6bd04c09a9dbd4986c89d949e7361f, type: 2}
     _onEndInteraction:
       m_PersistentCalls:
         m_Calls: []
@@ -34,6 +35,5 @@ MonoBehaviour:
   _reward:
     _gold: 50
     _items: []
-  _followingMissions:
-  - {fileID: 11400000, guid: e16305931dcecc24aba45a0424fe15b4, type: 2}
-  _area: 1
+  _followingMissions: []
+  _area: 3

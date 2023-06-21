@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 531ebd6447bbe4db69c9a371d6cd8516, type: 3}
-  m_Name: GameState
+  m_Script: {fileID: 11500000, guid: 54a0bfa486b4f4e97bad21c1d5d63214, type: 3}
+  m_Name: Maria
   m_EditorClassIdentifier: 
-  _unblockedMissions:
-  - {fileID: 11400000, guid: d253b23cd63dc63498518c5dcf703a63, type: 2}
-  _unblockedAreas: 02000000
+  _name: Maria
+  _defaultDialogueInfo:
+    _noun: Maria
+    _sentences:
+    - Another customer to try out our amazing spells?
+    - Go ahead, no need to be shy!
+  _location: {fileID: 0}
