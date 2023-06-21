@@ -12,6 +12,12 @@ public class SoundBank : MonoBehaviour
     [SerializeField]
     private FMODUnity.EventReference _buySound;
 
+    [SerializeField]
+    private FMODUnity.EventReference _goalCompleteSound;
+
+    [SerializeField]
+    private FMODUnity.EventReference _missionCompleteSound;
+
     void Awake()
     {
         if (Instance == null)
@@ -29,5 +35,15 @@ public class SoundBank : MonoBehaviour
     public FMODUnity.EventReference BuySound
     {
         get { return _buySound; }
+    }
+
+    public FMODUnity.EventReference GoalCompleteSound
+    {
+        get { return _goalCompleteSound; }
+    }
+
+    public FMODUnity.EventReference MissionCompleteSound
+    {
+        get { return _missionCompleteSound; }
     }
 }
