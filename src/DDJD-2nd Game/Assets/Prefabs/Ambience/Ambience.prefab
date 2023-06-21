@@ -1,5 +1,105 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &192454649063457717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1228216428224333020}
+  - component: {fileID: 6344296651635345903}
+  m_Layer: 0
+  m_Name: AmbienceBirdsWind (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1228216428224333020
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192454649063457717}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 23.5, y: 0, z: -18.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2979943451903274374}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6344296651635345903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192454649063457717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundParameter: Birds Proximity
+  _eventName: ambience
+  _radiusMax: 30
+  _radiusMin: 125
+  _soundEmitter: {fileID: 2979943450215254588}
+  _isCloser: 1
+--- !u!1 &1342690969936874150
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3610105996292436528}
+  - component: {fileID: 4987516754598308202}
+  m_Layer: 0
+  m_Name: AmbienceBirdsEarth (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3610105996292436528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342690969936874150}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -12.7, y: 0, z: -272.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2979943451274777388}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4987516754598308202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342690969936874150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundParameter: Hawks Proximity
+  _eventName: ambience
+  _radiusMax: 30
+  _radiusMin: 60
+  _soundEmitter: {fileID: 2979943450215254588}
+  _isCloser: 1
 --- !u!1 &2979943449936021167
 GameObject:
   m_ObjectHideFlags: 0
@@ -47,7 +147,7 @@ MonoBehaviour:
   _soundParameter: Hawks Proximity
   _eventName: ambience
   _radiusMax: 40
-  _radiusMin: 80
+  _radiusMin: 90
   _soundEmitter: {fileID: 2979943450215254588}
   _isCloser: 1
 --- !u!1 &2979943450035079849
@@ -230,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundParameter: Dark Wind
+  _soundParameter: Dark Wind Intensity
   _eventName: ambience
   _radiusMax: 60
   _radiusMin: 120
@@ -266,7 +366,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2979943451903274374}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2979943450189517822
 MonoBehaviour:
@@ -283,7 +383,7 @@ MonoBehaviour:
   _soundParameter: Trees Proximity
   _eventName: ambience
   _radiusMax: 30
-  _radiusMin: 50
+  _radiusMin: 80
   _soundEmitter: {fileID: 2979943450215254588}
   _isCloser: 1
 --- !u!1 &2979943450215254978
@@ -428,7 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundParameter: Dark Wind
+  _soundParameter: Dark Wind Intensity
   _eventName: ambience
   _radiusMax: 60
   _radiusMin: 130
@@ -464,7 +564,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2979943451903274374}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2979943450349326726
 MonoBehaviour:
@@ -481,7 +581,7 @@ MonoBehaviour:
   _soundParameter: Wind Intensity
   _eventName: ambience
   _radiusMax: 30
-  _radiusMin: 75
+  _radiusMin: 85
   _soundEmitter: {fileID: 2979943450215254588}
   _isCloser: 1
 --- !u!1 &2979943450422911673
@@ -531,7 +631,7 @@ MonoBehaviour:
   _soundParameter: Crows Proximity
   _eventName: ambience
   _radiusMax: 40
-  _radiusMin: 75
+  _radiusMin: 90
   _soundEmitter: {fileID: 2979943450215254588}
   _isCloser: 1
 --- !u!1 &2979943450535774018
@@ -881,7 +981,7 @@ MonoBehaviour:
   _soundParameter: Desert Wind Intensity
   _eventName: ambience
   _radiusMax: 30
-  _radiusMin: 75
+  _radiusMin: 85
   _soundEmitter: {fileID: 2979943450215254588}
   _isCloser: 1
 --- !u!1 &2979943450851827718
@@ -1017,7 +1117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundParameter: Dark Wind
+  _soundParameter: Dark Wind Intensity
   _eventName: ambience
   _radiusMax: 60
   _radiusMin: 130
@@ -1053,7 +1153,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2979943451903274374}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2979943451186601480
 MonoBehaviour:
@@ -1070,7 +1170,7 @@ MonoBehaviour:
   _soundParameter: Wind Intensity
   _eventName: ambience
   _radiusMax: 30
-  _radiusMin: 75
+  _radiusMin: 100
   _soundEmitter: {fileID: 2979943450215254588}
   _isCloser: 1
 --- !u!1 &2979943451274777389
@@ -1109,6 +1209,7 @@ Transform:
   - {fileID: 2979943450689198489}
   - {fileID: 2979943450800692993}
   - {fileID: 2979943451363098121}
+  - {fileID: 3610105996292436528}
   m_Father: {fileID: 2979943450215254589}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1142,7 +1243,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2979943451903274374}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2979943451317695623
 MonoBehaviour:
@@ -1159,7 +1260,7 @@ MonoBehaviour:
   _soundParameter: Birds Proximity
   _eventName: ambience
   _radiusMax: 30
-  _radiusMin: 75
+  _radiusMin: 85
   _soundEmitter: {fileID: 2979943450215254588}
   _isCloser: 1
 --- !u!1 &2979943451363098126
@@ -1209,7 +1310,7 @@ MonoBehaviour:
   _soundParameter: Desert Wind Intensity
   _eventName: ambience
   _radiusMax: 40
-  _radiusMin: 60
+  _radiusMin: 80
   _soundEmitter: {fileID: 2979943450215254588}
   _isCloser: 1
 --- !u!1 &2979943451405988455
@@ -1309,7 +1410,7 @@ MonoBehaviour:
   _soundParameter: Vilages Sounds
   _eventName: ambience
   _radiusMax: 30
-  _radiusMin: 50
+  _radiusMin: 60
   _soundEmitter: {fileID: 2979943450215254588}
   _isCloser: 1
 --- !u!1 &2979943451537483679
@@ -1359,7 +1460,7 @@ MonoBehaviour:
   _soundParameter: Crows Proximity
   _eventName: ambience
   _radiusMax: 40
-  _radiusMin: 75
+  _radiusMin: 90
   _soundEmitter: {fileID: 2979943450215254588}
   _isCloser: 1
 --- !u!1 &2979943451551375489
@@ -1392,7 +1493,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2979943451903274374}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2979943451551375491
 MonoBehaviour:
@@ -1442,7 +1543,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2979943451903274374}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2979943451636092708
 MonoBehaviour:
@@ -1459,7 +1560,7 @@ MonoBehaviour:
   _soundParameter: Wind Intensity
   _eventName: ambience
   _radiusMax: 30
-  _radiusMin: 75
+  _radiusMin: 85
   _soundEmitter: {fileID: 2979943450215254588}
   _isCloser: 1
 --- !u!1 &2979943451680417448
@@ -1592,7 +1693,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2979943451903274374}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2979943451748609228
 MonoBehaviour:
@@ -1642,13 +1743,16 @@ Transform:
   m_Children:
   - {fileID: 2979943451412576783}
   - {fileID: 2979943450564993556}
+  - {fileID: 5607890095618121481}
+  - {fileID: 2979943451317695620}
   - {fileID: 2979943451551375488}
   - {fileID: 2979943450189517823}
   - {fileID: 2979943451748609229}
-  - {fileID: 2979943451317695620}
   - {fileID: 2979943451186601481}
   - {fileID: 2979943450349326727}
   - {fileID: 2979943451636092709}
+  - {fileID: 6258873923685117516}
+  - {fileID: 1228216428224333020}
   m_Father: {fileID: 2979943450215254589}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1699,7 +1803,7 @@ MonoBehaviour:
   _soundParameter: Crows Proximity
   _eventName: ambience
   _radiusMax: 40
-  _radiusMin: 75
+  _radiusMin: 90
   _soundEmitter: {fileID: 2979943450215254588}
   _isCloser: 1
 --- !u!1 &2979943452012950354
@@ -1752,3 +1856,103 @@ MonoBehaviour:
   _radiusMin: 100
   _soundEmitter: {fileID: 2979943450215254588}
   _isCloser: 0
+--- !u!1 &8060350419055083398
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5607890095618121481}
+  - component: {fileID: 1089023389523328426}
+  m_Layer: 0
+  m_Name: AmbienceBirdsWind (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5607890095618121481
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8060350419055083398}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -21.4, y: 0, z: 40.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2979943451903274374}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1089023389523328426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8060350419055083398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundParameter: Birds Proximity
+  _eventName: ambience
+  _radiusMax: 30
+  _radiusMin: 75
+  _soundEmitter: {fileID: 2979943450215254588}
+  _isCloser: 1
+--- !u!1 &9170341049951488140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6258873923685117516}
+  - component: {fileID: 5823224563108221853}
+  m_Layer: 0
+  m_Name: AmbienceTreesWind (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6258873923685117516
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9170341049951488140}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 23.9, y: 0, z: -18.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2979943451903274374}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5823224563108221853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9170341049951488140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaef30bf5d3bbd34fb9b56d8adb84eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundParameter: Trees Proximity
+  _eventName: ambience
+  _radiusMax: 30
+  _radiusMin: 80
+  _soundEmitter: {fileID: 2979943450215254588}
+  _isCloser: 1
