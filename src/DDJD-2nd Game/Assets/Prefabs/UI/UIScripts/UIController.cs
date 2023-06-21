@@ -214,8 +214,35 @@ public class UIController : MonoBehaviour
 
     public void UpdateSpellWheels()
     {
-        leftWheelItems = _player.PlayerSkills.EquippedLeftSkills.ToArray();
-        rightWheelItems = _player.PlayerSkills.EquippedRightSkills.ToArray();
+        //If fore some reason equipedleftskills does not have a size of 6, resize it
+        if (_player.PlayerSkills.EquippedLeftSkills.Length != 6)
+        {
+            ItemSkill[] equipedLeftSkills = new ItemSkill[6];
+            for (int i = 0; i < _player.PlayerSkills.EquippedLeftSkills.Length; i++)
+            {
+                equipedLeftSkills[i] = _player.PlayerSkills.EquippedLeftSkills[i];
+            }
+            _player.PlayerSkills.EquippedLeftSkills = equipedLeftSkills;
+        }
+        //If fore some reason EquipedRightSkills does not have a size of 6, resize it
+        if (_player.PlayerSkills.EquippedRightSkills.Length != 6)
+        {
+            ItemSkill[] equipedRightSkills = new ItemSkill[6];
+            for (int i = 0; i < _player.PlayerSkills.EquippedRightSkills.Length; i++)
+            {
+                equipedRightSkills[i] = _player.PlayerSkills.EquippedRightSkills[i];
+            }
+            _player.PlayerSkills.EquippedRightSkills = equipedRightSkills;
+        }
+        for (int i = 0; i < _player.PlayerSkills.EquippedLeftSkills.Length; i++)
+        {
+            leftWheelItems[i] = _player.PlayerSkills.EquippedLeftSkills[i];
+        }
+        for (int i = 0; i < _player.PlayerSkills.EquippedRightSkills.Length; i++)
+        {
+            rightWheelItems[i] = _player.PlayerSkills.EquippedRightSkills[i];
+        }
+
         _playerUI.leftSpellWheel
             .GetComponent<WheelController>()
             .updateSpellWheel(leftWheelItems, UiArea.LeftWheel);
@@ -235,7 +262,7 @@ public class UIController : MonoBehaviour
     {
         //Find item in wheel
         ItemSkill[] wheelItems = isLeft ? leftWheelItems : rightWheelItems;
-        List<ItemSkill> equippedSkills = isLeft
+        ItemSkill[] equippedSkills = isLeft
             ? _player.PlayerSkills.EquippedLeftSkills
             : _player.PlayerSkills.EquippedRightSkills;
         for (int i = 0; i < wheelItems.Length; i++)
@@ -253,6 +280,20 @@ public class UIController : MonoBehaviour
             }
         }
         UpdateSpellWheels();
+    }
+
+    //Returns the slot index of the item
+    public int? FindItemSkill(ItemSkill item, bool isLeft)
+    {
+        ItemSkill[] wheelItems = isLeft ? leftWheelItems : rightWheelItems;
+        for (int i = 0; i < wheelItems.Length; i++)
+        {
+            if (wheelItems[i] == item)
+            {
+                return i;
+            }
+        }
+        return null;
     }
 
     public void DropItemSkill(InventoryItemImage image, int slot, UiArea area)
@@ -288,6 +329,11 @@ public class UIController : MonoBehaviour
             return;
         }
 
+        while (FindItemSkill((ItemSkill)image.currentItem.item, true) != null)
+        {
+            RemoveFromWheel(image.currentItem, true);
+        }
+
         if (area == UiArea.LeftWheel)
         {
             RemoveFromWheel(image.currentItem, true);
@@ -313,6 +359,10 @@ public class UIController : MonoBehaviour
         {
             Debug.LogError("Item is not itemskill");
             return;
+        }
+        while (FindItemSkill((ItemSkill)image.currentItem.item, false) != null)
+        {
+            RemoveFromWheel(image.currentItem, false);
         }
         ItemSkill itemSkill = (ItemSkill)image.currentItem.item;
         rightWheelItems[slot] = itemSkill;
