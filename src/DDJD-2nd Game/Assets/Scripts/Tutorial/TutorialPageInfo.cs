@@ -23,9 +23,9 @@ public class TutorialPageInfo
         get { return _text; }
     }
     [SerializeField]
-    private GameObject _gif;
-    public GameObject Gif
+    private Texture2D _image;
+    public Texture2D Image
     {
-        get { return _gif; }
+        get { return _image; }
     }
 }

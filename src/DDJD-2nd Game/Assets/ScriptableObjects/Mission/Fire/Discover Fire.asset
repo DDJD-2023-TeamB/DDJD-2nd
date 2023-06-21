@@ -13,12 +13,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls: []
   _onGoalCompleted:
     m_PersistentCalls:
       m_Calls: []
   _description: Speak with the Fire guard
   _location: {fileID: 0}
-  _npcToInteract: {fileID: 11400000, guid: 15f81436f65c9415ea4bde98e57c0e27, type: 2}
+  _interaction:
+    _dialogueInfo:
+      _noun: 
+      _sentences: []
+    _npc: {fileID: 0}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,11 +55,24 @@ MonoBehaviour:
       _noun: 
       _sentences: []
     _npc: {fileID: 0}
-  _interactionEnd:
-    _dialogueInfo:
-      _noun: 
-      _sentences: []
-    _npc: {fileID: 0}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
   _reward:
     _gold: 0
     _items: []
