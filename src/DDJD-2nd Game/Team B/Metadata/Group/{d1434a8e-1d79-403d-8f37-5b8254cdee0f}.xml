@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MixerGroup" id="{d1434a8e-1d79-403d-8f37-5b8254cdee0f}">
+		<property name="name">
+			<value>Drone</value>
+		</property>
+		<relationship name="masters">
+			<destination>{f203dee5-ce28-45fe-855c-a647d3f08a10}</destination>
+		</relationship>
+		<relationship name="effectChain">
+			<destination>{0432f779-bb1e-42fa-98d4-ee6c4bdcef19}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{e454281b-c397-44ba-b821-058464092d22}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{5465846d-ab55-4a46-9ae8-0d497de963c9}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{0432f779-bb1e-42fa-98d4-ee6c4bdcef19}">
+		<relationship name="effects">
+			<destination>{d2c89501-2291-4a9d-835d-abe31287c1cc}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{e454281b-c397-44ba-b821-058464092d22}" />
+	<object class="MixerBusFader" id="{d2c89501-2291-4a9d-835d-abe31287c1cc}" />
+</objects>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MixerGroup" id="{15999668-018d-4c55-8d2d-ce8efb418e89}">
+		<property name="name">
+			<value>Melee and Overlays</value>
+		</property>
+		<relationship name="masters">
+			<destination>{f203dee5-ce28-45fe-855c-a647d3f08a10}</destination>
+		</relationship>
+		<relationship name="effectChain">
+			<destination>{03fac791-d009-44ae-a0e4-1d4537f29209}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{1efc6e79-2caa-4af9-9cbe-371c0a54e384}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{5465846d-ab55-4a46-9ae8-0d497de963c9}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{03fac791-d009-44ae-a0e4-1d4537f29209}">
+		<relationship name="effects">
+			<destination>{8b372778-11d8-43ad-9971-0f84fd9b60e9}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{1efc6e79-2caa-4af9-9cbe-371c0a54e384}" />
+	<object class="MixerBusFader" id="{8b372778-11d8-43ad-9971-0f84fd9b60e9}" />
+</objects>
