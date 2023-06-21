@@ -29,6 +29,22 @@ public class PlayerUI : MonoBehaviour
 
     [SerializeField]
     public TextMeshProUGUI HelpText;
+
+    [SerializeField]
+    private TextMeshProUGUI _dieMessage;
+
+    public TextMeshProUGUI DieMessage
+    {
+        get { return _dieMessage; }
+    }
+
+    [SerializeField]
+    private TextMeshProUGUI _keyMessage;
+
+    public TextMeshProUGUI KeyMessage
+    {
+        get { return _keyMessage; }
+    }
     private Player _player;
 
     public Player Player

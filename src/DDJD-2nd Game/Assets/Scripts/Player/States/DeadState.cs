@@ -11,15 +11,25 @@ public class DeadState : GenericState
         _context = (Player)context;
     }
 
+    public void ShowMessage()
+    {
+        _context.UIController.ShowKeyMessage();
+    }
+
     public override void Enter()
     {
         base.Enter();
         _context.PlayerDeath.Die();
+        _context.UIController.ShowDieMessage();
+        _context.PlayerDeath.OnRespawnAvailable += ShowMessage;
     }
 
     public override void Exit()
     {
         base.Exit();
+        _context.PlayerDeath.OnRespawnAvailable -= ShowMessage;
+        _context.UIController.CloseDieInfo();
+      
     }
 
     public override void StateUpdate()

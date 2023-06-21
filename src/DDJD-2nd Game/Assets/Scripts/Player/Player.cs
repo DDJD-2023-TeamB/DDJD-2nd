@@ -235,7 +235,12 @@ public class Player : StateContext, Damageable
         _inputReceiver.OnPrintState += () => _state?.PrintState();
         _defaultMaterial = _collider.material;
         _status.OnDeath += (int damage, Vector3 hitPoint, Vector3 direction) =>
-            ChangeState(_factory.Dead());
+        {
+            if (!(_state is DeadState))
+            {
+                ChangeState(_factory.Dead());
+            }
+        };
         _ragdollController.DeactivateRagdoll();
 
         _playerDeath.OnRespawn += () =>
