@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6159442827439109576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10ade6c6202a749d3b8a95862ea27777, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3208331280523073408, guid: 12b9752c824401b4aba52369f821a48b,
+          type: 3}
+        m_TargetAssemblyTypeName: FightCallbacks, Assembly-CSharp
+        m_MethodName: OnFightGoalStarted
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: EnemyCampLightning
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3208331280523073408, guid: 12b9752c824401b4aba52369f821a48b,
+          type: 3}
+        m_TargetAssemblyTypeName: FightCallbacks, Assembly-CSharp
+        m_MethodName: OnFightGoalCompleted
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: EnemyCampLightning
+          m_BoolArgument: 0
+        m_CallState: 2
+  _description: Take refugee in the forest
+  _location: {fileID: 0}
+  _enemySpawner: {fileID: 11400000, guid: 8fcb9ae66d1728a4cb351ed990e1491d, type: 2}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c5000599e034b75b66b98e905ca14a, type: 3}
+  m_Name: 3 - Thunderstorm
+  m_EditorClassIdentifier: 
+  _title: Thunderstorm
+  _description: Run away from the thunderstorm!
+  _status: 1
+  _type: 0
+  _goals:
+  - {fileID: -6159442827439109576}
+  - {fileID: 8710463978971418610}
+  - {fileID: 3269590432808538638}
+  _interactionBegin:
+    _dialogueInfo:
+      _noun: Rui
+      _sentences:
+      - Watch out, there is a deadly thunderstorm coming!
+      - Anybody who stays in the village is in great danger!
+      - Make sure to go outside and take refugee in the forest.
+    _npc: {fileID: 11400000, guid: a30d053e64a76484aa26a841b2e14f9a, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
+  _reward:
+    _gold: 100
+    _items: []
+  _followingMissions: []
+  _area: 3
+--- !u!114 &3269590432808538638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 011ea1f08218a4d86a7348c8b8541bd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  _description: Look for the Lightning Gem
+  _location: {fileID: 0}
+  _collectibleToCollect: {fileID: 0}
+  _quantity: 1
+--- !u!114 &8710463978971418610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  _onGoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  _description: Talk with Rui
+  _location: {fileID: 0}
+  _interaction:
+    _dialogueInfo:
+      _noun: Rui
+      _sentences:
+      - WHAT!? You're still here?
+      - Hehehe sorry about that... I didn't mean to harm you or anything
+      - Well, to make up for it, I'll tell you a great secret!
+      - Check that lion statue very closely. There is a valuable item hidden in there
+    _npc: {fileID: 11400000, guid: a30d053e64a76484aa26a841b2e14f9a, type: 2}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []

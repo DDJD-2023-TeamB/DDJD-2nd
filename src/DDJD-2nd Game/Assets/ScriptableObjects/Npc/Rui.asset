@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 531ebd6447bbe4db69c9a371d6cd8516, type: 3}
-  m_Name: GameState
+  m_Script: {fileID: 11500000, guid: 54a0bfa486b4f4e97bad21c1d5d63214, type: 3}
+  m_Name: Rui
   m_EditorClassIdentifier: 
-  _unblockedMissions:
-  - {fileID: 11400000, guid: d047e4c8a04925d4babaf884c9dd9205, type: 2}
-  _unblockedAreas: 02000000
+  _name: Rui
+  _defaultDialogueInfo:
+    _noun: Rui
+    _sentences:
+    - H.. Hi, I'm Rui. Hmm... What brings you here?
+    - I'm just minding my own business, stop looking!
+  _location: {fileID: 0}
