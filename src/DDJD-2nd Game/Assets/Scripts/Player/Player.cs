@@ -253,10 +253,12 @@ public class Player : StateContext, Damageable
     {
         if (element != null)
         {
+            _airMovement?.Release();
+            _airMovement = element.AirMovementSkill?.Initialize(gameObject);
             _playerSkills.CurrentElement = element;
             _gameUI.changeChargingIndicatorElement(element);
         }
-        _airMovement = _playerSkills.CurrentElement?.AirMovementSkill?.Initialize(gameObject);
+
         _uiController.UpdateElements(
             _playerSkills.LeftSkill,
             _playerSkills.RightSkill,

@@ -15,15 +15,16 @@ public class HoverMovementSkill : AirMovementSkill
     {
         get => _hoverSkillStats;
     }
+    private HoverMovementComponent _hoverComponent;
 
     public override AirMovementComponent Initialize(GameObject obj)
     {
         HoverMovementComponent hoverComponent = obj.GetComponent<HoverMovementComponent>();
-        if (hoverComponent == null)
+        if (_hoverComponent == null)
         {
-            hoverComponent = obj.AddComponent<HoverMovementComponent>();
+            _hoverComponent = obj.AddComponent<HoverMovementComponent>();
         }
-        hoverComponent.SetSkill(this);
-        return hoverComponent;
+        _hoverComponent.SetSkill(this);
+        return _hoverComponent;
     }
 }
