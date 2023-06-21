@@ -78,7 +78,6 @@ public class DynamicAmbience : MonoBehaviour
             }
             _soundParameters[soundParameter].Add(soundLocation);
         }
-        Debug.Log(_soundParameters.Count + " vs " + soundLocations.Length);
         StartCoroutine(UpdateSoundParameters());
     }
 

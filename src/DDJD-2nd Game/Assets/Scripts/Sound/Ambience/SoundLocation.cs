@@ -85,9 +85,6 @@ public class SoundLocation : MonoBehaviour
     public float GetDistanceToCenterNormalized()
     {
         float normalized = math.remap(_radiusMax, _radiusMin, 0, 1.0f, GetDistanceToCenter());
-        Debug.Log(
-            normalized + " vs " + GetDistanceToCenter() + " vs " + _radiusMin + " vs " + _radiusMax
-        );
         return Mathf.Clamp(normalized, 0.0f, 1.0f);
     }
 
