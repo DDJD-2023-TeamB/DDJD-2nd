@@ -59,7 +59,7 @@ public class BossEnemy : RangedEnemy
     [SerializeField]
     private float _runeSpawnDelay = 1.0f;
 
-    private float _hoveringRuneSpawnDelay = 5.0f;
+    private float _hoveringRuneSpawnDelay = 2.5f;
 
     private int _runeCount = 0;
 

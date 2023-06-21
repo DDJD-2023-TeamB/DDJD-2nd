@@ -431,7 +431,14 @@ public class UIController : MonoBehaviour
 
     public PlayerUI PlayerUI
     {
-        get { return _playerUI; }
+        get
+        {
+            if (_playerUI == null)
+            {
+                _playerUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
+            }
+            return _playerUI;
+        }
     }
 
     public void showCompleteMissionText(string missionTitle)
