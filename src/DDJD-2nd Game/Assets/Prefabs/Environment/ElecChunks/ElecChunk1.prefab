@@ -610,7 +610,7 @@ PrefabInstance:
     - target: {fileID: 3305581528943329081, guid: 7b2f7db3cfd80f64a8f882b9559bf6c0,
         type: 3}
       propertyPath: m_Name
-      value: Male 4
+      value: Bruno Die
       objectReference: {fileID: 0}
     - target: {fileID: 3305581528943551193, guid: 7b2f7db3cfd80f64a8f882b9559bf6c0,
         type: 3}
@@ -675,7 +675,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2048208693065979639}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3589468542884491317
+--- !u!114 &3838154041269178755
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -688,6 +688,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _npc: {fileID: 11400000, guid: eddfad256a966314c9d80490da243c11, type: 2}
+--- !u!114 &7347424222121817468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3581340369248512462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f0ee0d6613609419c20d92531e4015, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 1
+  _maxHealth: 1
+  _useMana: 0
+  _mana: 0
+  _maxMana: 100
+  _elementMana:
+    _keys: []
+    _values: 
+--- !u!114 &8890871949323816369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3581340369248512462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1443a4a093ea23440892f103fac7c4c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deathVFX: {fileID: 5471931807513829789, guid: 1418d163fbcef03428e9afeaf6db58f7,
+    type: 3}
 --- !u!4 &3581340369248678958 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3305581528943551193, guid: 7b2f7db3cfd80f64a8f882b9559bf6c0,

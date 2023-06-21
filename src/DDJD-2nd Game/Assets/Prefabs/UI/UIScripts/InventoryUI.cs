@@ -291,8 +291,7 @@ public class InventoryUI : MonoBehaviour
         {
             itemImage.currentItem.amount -= value;
         }
-        _player.Inventory.RemoveItemAmount(itemImage.currentItem,value);
-
+        // _player.Inventory.RemoveItem(itemImage.currentItem.item);
     }
 
     public GameObject LeftWheel

@@ -7,12 +7,6 @@ using UnityEditor;
 
 public class CollectCallback : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start() { }
-
-    // Update is called once per frame
-    void Update() { }
-
     public void OnCollectGoalStarted(CollectibleGoalData data)
     {
         foreach (GameObject prefab in data.Prefabs)
@@ -23,10 +17,5 @@ public class CollectCallback : MonoBehaviour
                 Instantiate(prefab);
             }
         }
-    }
-
-    public void Print()
-    {
-        Debug.Log("PRINTING..");
     }
 }
