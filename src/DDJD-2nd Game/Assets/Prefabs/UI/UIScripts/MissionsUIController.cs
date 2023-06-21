@@ -31,6 +31,8 @@ public class MissionsUIController : MonoBehaviour
 
     private List<Mission> generalMissions = new List<Mission>();
 
+    private bool _isReady = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +43,7 @@ public class MissionsUIController : MonoBehaviour
         LoadActiveMissions();
         SetActiveMission(null);
         _missionController.SetMissionsUIController(this);
+        _isReady = true;
     }
 
     void LoadActiveMissions()
@@ -240,5 +243,10 @@ public class MissionsUIController : MonoBehaviour
     {
         selectedMission = mission;
         _missionController.SelectedMission = mission;
+    }
+
+    public bool IsReady
+    {
+        get { return _isReady; }
     }
 }
