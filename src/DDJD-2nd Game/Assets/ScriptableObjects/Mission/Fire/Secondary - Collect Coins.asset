@@ -19,14 +19,14 @@ MonoBehaviour:
   _onGoalCompleted:
     m_PersistentCalls:
       m_Calls: []
-  _description: Talk to Elder
+  _description: Give the coins to Elder
   _location: {fileID: 0}
   _interaction:
     _dialogueInfo:
       _noun: Elder Raelin
       _sentences:
-      - Ah, brave adventurer, you have proven yourself once again.
-      - May the wisdom of the ancients accompany you on your endeavors.
+      - Thanks a ton for the coins!
+      - Here, take some of them to yourself
     _npc: {fileID: 11400000, guid: 741a1c0760ea549e7b774f87dba41dd6, type: 2}
     _onEndInteraction:
       m_PersistentCalls:
@@ -44,12 +44,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8c5000599e034b75b66b98e905ca14a, type: 3}
-  m_Name: 1 - Collect Fireshot book
+  m_Name: Secondary - Collect Coins
   m_EditorClassIdentifier: 
-  _title: The Guardian's Call
-  _description: 'Collect the fireshot book '
+  _title: Gotta Catch'em All
+  _description: Collect all the coins
   _status: 0
-  _type: 0
+  _type: 1
   _goals:
   - {fileID: 2559059439445779564}
   - {fileID: -4168142203361568891}
@@ -57,14 +57,9 @@ MonoBehaviour:
     _dialogueInfo:
       _noun: Elder Raelin
       _sentences:
-      - Greetings, adventurer. I sense your determination.  Welcome to Fire Village!
-      - I shall grant you access to the missions of our ancestral past. But first,
-        there is a task you must undertake. Deep within the realm of knowledge lies
-        a sacred artifact.
-      - ' It holds the ancient wisdom and incantations needed to unlock the ability
-        to wield the fiery essence itself.'
-      - Seek it out and bring it to me. Last reminder, with great power comes great
-        responsibility.
+      - Hello again, adventurer. Someone has been stealing from the civiliains
+      - I heard he ran away and dropped some of the coins along the way
+      - Do you mind looking for them around the village?
     _npc: {fileID: 11400000, guid: 741a1c0760ea549e7b774f87dba41dd6, type: 2}
     _onEndInteraction:
       m_PersistentCalls:
@@ -73,10 +68,9 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _reward:
-    _gold: 0
+    _gold: 150
     _items: []
-  _followingMissions:
-  - {fileID: 11400000, guid: 80ef2a17aaff61740bd756b4305af3bc, type: 2}
+  _followingMissions: []
   _area: 0
 --- !u!114 &2559059439445779564
 MonoBehaviour:
@@ -104,14 +98,14 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: CollectFireShotBook
+          m_StringArgument: CollectCoins
           m_BoolArgument: 0
         m_CallState: 2
   _onGoalCompleted:
     m_PersistentCalls:
       m_Calls: []
-  _description: Collect the FireShot Book
+  _description: Collect the 6 Coins
   _location: {fileID: 0}
-  _collectibleToCollect: {fileID: 11400000, guid: 1fcae3db729eb0c45b6f36ecb22c2a63,
+  _collectibleToCollect: {fileID: 11400000, guid: 3b683927504642a48ae1527435c0b55d,
     type: 2}
-  _quantity: 1
+  _quantity: 6
