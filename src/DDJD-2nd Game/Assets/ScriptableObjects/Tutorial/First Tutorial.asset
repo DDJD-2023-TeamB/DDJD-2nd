@@ -10,23 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 473ee4020bb63d34d9bf22313cf263f7, type: 3}
-  m_Name: Movement
+  m_Name: First Tutorial
   m_EditorClassIdentifier: 
   _tutorialInfo:
   - _title: Movement
     _text: Use the WASD keys for character movement.
-    _image: {fileID: 0}
+    _image: {fileID: 2800000, guid: f218825fdc6ada644bd7cc93d8efd9ab, type: 3}
   - _title: Jump
     _text: To execute a jump, simply press the spacebar.
-    _image: {fileID: 0}
+    _image: {fileID: 2800000, guid: b4322d572ad641141a2608f2bee1b98d, type: 3}
   - _title: Run
     _text: While moving with the WASD keys, if you press the Shift key, the player
       will start running.
-    _image: {fileID: 0}
+    _image: {fileID: 2800000, guid: 68b4ce2bf9cfb354f98aaf167212c359, type: 3}
   - _title: Dash
-    _text: INSERIR
-    _image: {fileID: 0}
-  - _title: Airwalk
-    _text: To airwalk INSERIR
-    _image: {fileID: 0}
-  started: 0
+    _text: To dash, use the Ctrl key.
+    _image: {fileID: 2800000, guid: 607acef594992bd4395fde531b799e91, type: 3}
+  - _title: Missions
+    _text: 'To see the list of missions available/concluded, press the key M.
+
+      If
+      you wish to see the mission while exploring, select a mission that hasn''t
+      been concluded.'
+    _image: {fileID: 2800000, guid: 6b1add47580965b42bd4fe308464d802, type: 3}
+  started: 1
