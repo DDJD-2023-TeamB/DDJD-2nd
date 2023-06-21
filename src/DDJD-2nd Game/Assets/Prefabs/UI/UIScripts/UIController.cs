@@ -86,6 +86,14 @@ public class UIController : MonoBehaviour
             LoadItems();
             LoadGold();
         }
+        if(!isOpening)
+        {
+            if (_playerUI.inventoryUI.itemTitle != null)
+            {
+                Destroy(_playerUI.inventoryUI.itemTitle);
+                _playerUI.inventoryUI.itemTitle = null;
+            }
+        }
     }
 
     public void OpenMenu(bool isOpening)
