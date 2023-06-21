@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4531224598399342320}
   - component: {fileID: 670472666780916053}
   - component: {fileID: 3362227527740632479}
-  - component: {fileID: 8904447796716695609}
   - component: {fileID: -5311141801407019448}
+  - component: {fileID: 5864287159292255695}
   m_Layer: 0
   m_Name: LightningBoltBook
   m_TagString: Untagged
@@ -85,20 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8904447796716695609
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3866890514056514634}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4261849482073782191, guid: 30663d2e0eae90940b64eff3e2f719f4, type: 3}
 --- !u!114 &-5311141801407019448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,3 +98,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 11400000, guid: a31bf6a02df364d489dc90c3c36bbeae, type: 2}
+--- !u!135 &5864287159292255695
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3866890514056514634}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.75
+  m_Center: {x: 0.0709244, y: 0.019648552, z: 0.02254866}
