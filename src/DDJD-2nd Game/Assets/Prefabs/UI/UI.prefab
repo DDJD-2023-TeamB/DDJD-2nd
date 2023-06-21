@@ -2389,9 +2389,10 @@ MonoBehaviour:
     _keys:
     - wheel
     - select
+    - wheel_hover
     _values:
     - _playOnStart: 1
-      _stopOnDestroy: 0
+      _stopOnDestroy: 1
       _updatePosition: 0
       _eventReference:
         Guid:
@@ -2401,7 +2402,7 @@ MonoBehaviour:
           Data4: 2104951584
         Path: event:/UI/Abilities Menu
     - _playOnStart: 0
-      _stopOnDestroy: 0
+      _stopOnDestroy: 1
       _updatePosition: 0
       _eventReference:
         Guid:
@@ -2410,6 +2411,16 @@ MonoBehaviour:
           Data3: -1996579710
           Data4: -983486842
         Path: event:/UI/Element Overlay
+    - _playOnStart: 0
+      _stopOnDestroy: 1
+      _updatePosition: 0
+      _eventReference:
+        Guid:
+          Data1: 58294902
+          Data2: 1115947990
+          Data3: -161641793
+          Data4: -1359125343
+        Path: event:/UI/Abilities Menu Hover
 --- !u!1 &2545849278619797761
 GameObject:
   m_ObjectHideFlags: 0
@@ -7259,9 +7270,10 @@ MonoBehaviour:
     _keys:
     - wheel
     - select
+    - wheel_hover
     _values:
     - _playOnStart: 1
-      _stopOnDestroy: 0
+      _stopOnDestroy: 1
       _updatePosition: 0
       _eventReference:
         Guid:
@@ -7271,7 +7283,7 @@ MonoBehaviour:
           Data4: 2104951584
         Path: event:/UI/Abilities Menu
     - _playOnStart: 0
-      _stopOnDestroy: 0
+      _stopOnDestroy: 1
       _updatePosition: 0
       _eventReference:
         Guid:
@@ -7280,6 +7292,16 @@ MonoBehaviour:
           Data3: -1996579710
           Data4: -983486842
         Path: event:/UI/Element Overlay
+    - _playOnStart: 0
+      _stopOnDestroy: 1
+      _updatePosition: 0
+      _eventReference:
+        Guid:
+          Data1: 58294902
+          Data2: 1115947990
+          Data3: -161641793
+          Data4: -1359125343
+        Path: event:/UI/Abilities Menu Hover
 --- !u!1 &7157955781288068591
 GameObject:
   m_ObjectHideFlags: 0
