@@ -277,8 +277,22 @@ public class InventoryUI : MonoBehaviour
 
     public void RemoveItem(InventoryItemImage itemImage)
     {
-        //Remove item from game controller
-        Destroy(itemImage.gameObject);
+        RemoveItem(itemImage.currentItem);
+    }
+
+    public void DecreaseItemAmount(InventoryItemImage itemImage, int value)
+    {
+        if (itemImage.currentItem.amount <= value)
+        {
+            Debug.Log("Removing item");
+            RemoveItem(itemImage.currentItem);
+        }
+        else
+        {
+            itemImage.currentItem.amount -= value;
+        }
+        _player.Inventory.RemoveItemAmount(itemImage.currentItem,value);
+
     }
 
     public GameObject LeftWheel
