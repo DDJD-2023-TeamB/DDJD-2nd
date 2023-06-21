@@ -1440,7 +1440,12 @@ PrefabInstance:
         type: 3}
       propertyPath: _dieText
       value: 
-      objectReference: {fileID: 530057418}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727868839618036459, guid: 700102b3ee59b4f4b9e2d4a3d83899f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3248599141159872322, guid: 700102b3ee59b4f4b9e2d4a3d83899f2,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -1566,14 +1571,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1727868839618036457, guid: 700102b3ee59b4f4b9e2d4a3d83899f2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 700102b3ee59b4f4b9e2d4a3d83899f2, type: 3}
---- !u!1 &530057418 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 139859528197117162, guid: 700102b3ee59b4f4b9e2d4a3d83899f2,
-    type: 3}
-  m_PrefabInstance: {fileID: 530057417}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &571771588 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7026416567958636142, guid: 8084707323b635540b484e279ebd75fb,
