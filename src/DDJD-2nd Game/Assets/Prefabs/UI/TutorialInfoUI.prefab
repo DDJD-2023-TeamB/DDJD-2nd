@@ -49,9 +49,8 @@ GameObject:
   - component: {fileID: 6840575367435743091}
   - component: {fileID: 4836439348328110261}
   - component: {fileID: 6687092907245412236}
-  - component: {fileID: 5358321557131049666}
   m_Layer: 6
-  m_Name: Gif
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,8 +73,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 86, y: -756}
-  m_SizeDelta: {x: 717.716, y: 687.853}
+  m_AnchoredPosition: {x: 70, y: -740}
+  m_SizeDelta: {x: 717.716, y: 435.9282}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4836439348328110261
 CanvasRenderer:
@@ -115,27 +114,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &5358321557131049666
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7159721982898182449}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8956254076496554784
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,16 +183,16 @@ MonoBehaviour:
   m_text: This is a placeholder text for a mission. If you are seeing this, most
     likely you found a way to break the game. Good job. Hope you are proud of yourself.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bda593d6fde17c848862fa1657379cca, type: 2}
-  m_sharedMaterial: {fileID: -5794585476294236437, guid: bda593d6fde17c848862fa1657379cca,
+  m_fontAsset: {fileID: 11400000, guid: ed9a06a66206bc044a930751c37037c2, type: 2}
+  m_sharedMaterial: {fileID: 6352611323421988322, guid: ed9a06a66206bc044a930751c37037c2,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
