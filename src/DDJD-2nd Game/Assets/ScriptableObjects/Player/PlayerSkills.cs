@@ -24,6 +24,14 @@ public class PlayerSkills : ScriptableObject
     }
 
     [SerializeField]
+    private List<Element> _elements = new List<Element>();
+    public List<Element> Elements
+    {
+        get => _elements;
+        set => _elements = value;
+    }
+
+    [SerializeField]
     private List<ItemSkill> _learnedSkills = new List<ItemSkill>();
 
     [SerializeField]

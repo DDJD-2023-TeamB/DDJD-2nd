@@ -7,7 +7,7 @@ using TMPro;
 using UnityEditor.Animations;
 using System.Linq;
 
-public class CollectibleInteractable : Interactable
+public class CollectibleInteractable : Interactable, NonCollidable
 {
     public CollectibleObject _item;
 
@@ -123,7 +123,6 @@ public class CollectibleInteractable : Interactable
                     Destroy(gameObject);
                     HelpManager.Instance.ResetText();
                 }
-                    
             }
             else
             {

@@ -98,6 +98,7 @@ public class Mission : ScriptableObject
     {
         get { return _area; }
     }
+
     public void OnEnable() { }
 
     public void Unblock()
@@ -128,5 +129,13 @@ public class Mission : ScriptableObject
     public bool IsCompleted()
     {
         return _currentGoal == null;
+    }
+
+    public bool IsInInteractionBegin(NpcObject npc)
+    {
+        bool isNotCurrentGoal =
+            _currentGoal is not InteractGoal interactGoal || interactGoal.Interaction.Npc != npc;
+
+        return npc == _interactionBegin.Npc && _status == MissionState.Ongoing && isNotCurrentGoal;
     }
 }

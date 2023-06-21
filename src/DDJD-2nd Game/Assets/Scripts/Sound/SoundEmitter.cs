@@ -190,4 +190,19 @@ public class SoundEmitter : MonoBehaviour
             );
         }
     }
+
+    public static void PlayOneShot(
+        FMODUnity.EventReference eventReference,
+        string parameterName,
+        string parameterValue,
+        Vector3 position = new Vector3()
+    )
+    {
+        FMOD.Studio.EventInstance instance = FMODUnity.RuntimeManager.CreateInstance(
+            eventReference
+        );
+        instance.setParameterByNameWithLabel(parameterName, parameterValue);
+        instance.start();
+        instance.release();
+    }
 }

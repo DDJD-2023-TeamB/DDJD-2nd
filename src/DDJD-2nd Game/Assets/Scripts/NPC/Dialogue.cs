@@ -20,6 +20,13 @@ public class Dialogue : MonoBehaviour
     private Animator _animator;
     private bool _isTyping = false;
 
+    private Mission _mission;
+    public Mission Mission
+    {
+        get { return _mission; }
+        set { _mission = value; }
+    }
+
     public void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -48,8 +55,8 @@ public class Dialogue : MonoBehaviour
         {
             return;
         }
-        
-        if( _sentences.Count > 0 )
+
+        if (_sentences.Count > 0)
         {
             string sentence = _sentences.Dequeue();
             _isTyping = true;
@@ -72,7 +79,6 @@ public class Dialogue : MonoBehaviour
     public void EndDialogue()
     {
         _animator.SetBool("isOpen", false);
-        
     }
 
     public bool CheckIfDialogueEnded()

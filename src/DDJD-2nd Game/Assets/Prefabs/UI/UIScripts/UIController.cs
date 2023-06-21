@@ -43,7 +43,6 @@ public class UIController : MonoBehaviour
     private void Awake()
     {
         _player = GetComponent<Player>();
-        _playerUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
     }
 
     private void Start()
@@ -52,11 +51,11 @@ public class UIController : MonoBehaviour
         _playerUI.inventoryUI.gameObject.SetActive(false);
         _playerUI.menuUI.SetActive(false);
         _playerUI.missionsUI.SetActive(false);
-        _playerUI.activeElementWheel.SetActive(false);
+        _playerUI.activeElementWheel.gameObject.SetActive(false);
         _playerUI.OptionsUI.SetUIController(this);
 
-        //OpenLeftSpell(false);
-        //OpenRightSpell(false);
+        OpenLeftSpell(false);
+        OpenRightSpell(false);
 
         InventoryUI inventoryUI = _playerUI.inventoryUI;
         inventoryUI.OnItemSkillLeftDrop += ChangeLeftWheelItem;
@@ -159,9 +158,10 @@ public class UIController : MonoBehaviour
 
     public void OpenActiveElement(bool isOpening)
     {
-        if (_playerUI.activeElementWheel.activeInHierarchy != isOpening)
+        if (_playerUI.activeElementWheel.gameObject.activeInHierarchy != isOpening)
         {
-            _playerUI.activeElementWheel.SetActive(isOpening);
+            _playerUI.activeElementWheel.gameObject.SetActive(isOpening);
+            _playerUI.activeElementWheel.SetUnlockedElements(_player.PlayerSkills.Elements);
         }
     }
 
@@ -287,6 +287,18 @@ public class UIController : MonoBehaviour
             Debug.LogError("Item is not itemskill");
             return;
         }
+
+        if (area == UiArea.LeftWheel)
+        {
+            RemoveFromWheel(image.currentItem, true);
+            Destroy(image.gameObject);
+        }
+        else if (area == UiArea.RightWheel)
+        {
+            RemoveFromWheel(image.currentItem, true);
+            Destroy(image.gameObject);
+        }
+
         ItemSkill itemSkill = (ItemSkill)image.currentItem.item;
         leftWheelItems[slot] = itemSkill;
         _player.PlayerSkills.EquippedLeftSkills[slot] = itemSkill;
