@@ -124,8 +124,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4103928827094624776}
-  - component: {fileID: 6775094198701882593}
   - component: {fileID: 6987983340332122402}
+  - component: {fileID: 4268506190575631949}
   m_Layer: 0
   m_Name: PotionPurchasable
   m_TagString: Untagged
@@ -151,19 +151,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6775094198701882593
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4106680580294549584}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.034111, y: 2.5685277, z: 2.2086792}
-  m_Center: {x: -0.017406464, y: -0.017427921, z: -0.0002593994}
 --- !u!114 &6987983340332122402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,6 +164,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 11400000, guid: 481b6dc385ce2cc4187e6da38f8721aa, type: 2}
+--- !u!135 &4268506190575631949
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4106680580294549584}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4107193019060605556
 GameObject:
   m_ObjectHideFlags: 0
