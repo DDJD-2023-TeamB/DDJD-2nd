@@ -97,7 +97,7 @@ public class DashChargingIndicatorController : MonoBehaviour
 
             if (currentFrame != progress)
             {
-                //imageComponent.sprite = frameList[progress];
+                imageComponent.sprite = frameList[progress];
                 currentFrame = progress;
             }
         }
