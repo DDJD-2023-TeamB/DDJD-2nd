@@ -103,7 +103,7 @@ public class WheelController : MonoBehaviour
             return;
         }
         highlighterController.TargetAngle = angle;
-        _soundEmitter.SetParameterWithLabel("wheel", _wheelParameterId, "Hover", true);
+        _soundEmitter.PlayOneShot("wheel_hover");
     }
 
     void checkSlotSelection(int slot)
