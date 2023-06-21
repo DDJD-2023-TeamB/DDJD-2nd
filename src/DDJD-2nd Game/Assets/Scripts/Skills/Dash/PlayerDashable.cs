@@ -54,10 +54,7 @@ public class PlayerDashable : Dashable
     protected override Vector3 GetDashDirection()
     {
         Transform forwardTransform;
-        if (allowAllDirections)
-            forwardTransform = _playerCamTransform;
-        else
-            forwardTransform = transform;
+        forwardTransform = transform;
 
         Vector2 moveInput = _inputReceiver.MoveInput;
         Vector3 direction = Vector3.zero;
@@ -68,6 +65,7 @@ public class PlayerDashable : Dashable
         else
         {
             direction = forwardTransform.forward;
+            moveInput = new Vector2(0, 1);
         }
         Vector3 axis =
             -forwardTransform.forward * moveInput.x + forwardTransform.right * moveInput.y;
