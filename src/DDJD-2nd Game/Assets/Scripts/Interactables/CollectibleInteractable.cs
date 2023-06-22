@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
 using TMPro;
+#if UNITY_EDITOR
 using UnityEditor.Animations;
+#endif
 using System.Linq;
 
 public class CollectibleInteractable : Interactable, NonCollidable
@@ -28,8 +30,12 @@ public class CollectibleInteractable : Interactable, NonCollidable
 
     public void CreateCanvas()
     {
+        /*
         GameObject floatingCanvasPrefab = (GameObject)
             AssetDatabase.LoadAssetAtPath(floatingTextPrefabPath, typeof(GameObject));
+            */
+        //GameObject floatingCanvasPrefab = Bank.Instance.Get("FloatingText");
+        GameObject floatingCanvasPrefab = Resources.Load("FloatingCanvas") as GameObject;
         GameObject floatingTextCanvas = Instantiate(floatingCanvasPrefab);
 
         TextMeshProUGUI text = floatingTextCanvas.transform
@@ -57,8 +63,8 @@ public class CollectibleInteractable : Interactable, NonCollidable
     {
         if (!_material)
         {
-            _material = (Material)
-                AssetDatabase.LoadAssetAtPath(outlineMaterialPath, typeof(Material));
+            _material = Resources.Load("Outline") as Material;
+
             _meshRenderer = GetComponent<MeshRenderer>();
         }
         if (_meshRenderer == null)

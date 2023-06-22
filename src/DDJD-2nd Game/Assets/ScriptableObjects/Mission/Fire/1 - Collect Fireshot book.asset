@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: The Guardian's Call
   _description: 'Collect the fireshot book '
-  _status: 0
+  _status: 2
   _type: 0
   _goals:
   - {fileID: 2559059439445779564}
@@ -126,13 +126,14 @@ MonoBehaviour:
           type: 3}
         m_TargetAssemblyTypeName: CollectCallback, Assembly-CSharp
         m_MethodName: OnCollectGoalStarted
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 11400000, guid: 21610d98b6e5bc34fa4a0b92e89a1241,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: CollectibleGoalData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: CollectFireShotBook
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   _onGoalCompleted:

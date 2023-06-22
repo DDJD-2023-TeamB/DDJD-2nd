@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14f1d1b3b617b49088c03555062a785a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _completed: 0
+  _completed: 1
   _onGoalStarted:
     m_PersistentCalls:
       m_Calls: []
   _onGoalCompleted:
     m_PersistentCalls:
       m_Calls: []
-  _description: Reach Feathers
+  _description: Reach the store in front of the castle
   _location: {fileID: 0}
   _interaction:
     _dialogueInfo:
@@ -73,9 +73,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c5000599e034b75b66b98e905ca14a, type: 3}
   m_Name: 3 - New Equipment
   m_EditorClassIdentifier: 
-  _title: A New Adventure
-  _description: Find more about this village
-  _status: 0
+  _title: New Equipment
+  _description: It's time to upgrade your skills
+  _status: 3
   _type: 0
   _goals:
   - {fileID: -7124077210680923109}

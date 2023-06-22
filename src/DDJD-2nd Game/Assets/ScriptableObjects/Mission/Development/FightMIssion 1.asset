@@ -24,11 +24,12 @@ MonoBehaviour:
       _sentences:
       - Kill the enemies in dev
     _npc: {fileID: 11400000, guid: 15f81436f65c9415ea4bde98e57c0e27, type: 2}
-  _interactionEnd:
-    _dialogueInfo:
-      _noun: 
-      _sentences: []
-    _npc: {fileID: 0}
+    _onEndInteraction:
+      m_PersistentCalls:
+        m_Calls: []
+    _onTutorialExit:
+      m_PersistentCalls:
+        m_Calls: []
   _reward:
     _gold: 0
     _items: []
@@ -47,16 +48,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _completed: 0
+  _onGoalStarted:
+    m_PersistentCalls:
+      m_Calls: []
   _onGoalCompleted:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 9089035556450893789, guid: 12b9752c824401b4aba52369f821a48b,
+          type: 3}
+        m_TargetAssemblyTypeName: CollectCallback, Assembly-CSharp
+        m_MethodName: OnCollectGoalStarted
+        m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: Mission, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

@@ -28,8 +28,12 @@ public class Npc : Interactable, NonCollidable
 
     public void CreateFloatingIconCanvas()
     {
+        /*
         GameObject floatingCanvasPrefab = (GameObject)
             AssetDatabase.LoadAssetAtPath(floatingIconPrefabPath, typeof(GameObject));
+        */
+        //GameObject floatingCanvasPrefab = Bank.Instance.Get("FloatingIconCanvas");
+        GameObject floatingCanvasPrefab = Resources.Load("FloatingIconCanvas") as GameObject;
         _floatingIconCanvas = Instantiate(floatingCanvasPrefab);
 
         Image image = _floatingIconCanvas.transform.GetChild(0).GetComponent<Image>();

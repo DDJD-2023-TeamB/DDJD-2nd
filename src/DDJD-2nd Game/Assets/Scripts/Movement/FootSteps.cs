@@ -39,6 +39,25 @@ public class FootSteps : MonoBehaviour
 
     private int _posZ;
 
+    public static void LoadTerrains()
+    {
+        //Find all terrains in the scene
+        Terrain[] terrains = FindObjectsOfType<Terrain>();
+        Debug.Log(terrains.Length);
+        foreach (Terrain terrain in terrains)
+        {
+            //Add the terrain to the hashmap
+            _terrainTypes.Add(terrain, terrain.GetComponent<TerrainTypes>());
+            float[,,] alphaMap = terrain.terrainData.GetAlphamaps(
+                0,
+                0,
+                terrain.terrainData.alphamapWidth,
+                terrain.terrainData.alphamapHeight
+            );
+            _terrainTextureMaps.Add(terrain, alphaMap);
+        }
+    }
+
     protected void Awake()
     {
         _soundEmitter = GetComponent<SoundEmitter>();
@@ -48,23 +67,6 @@ public class FootSteps : MonoBehaviour
     {
         _floorTypeParameterId = _soundEmitter.GetParameterId("footstep", "Floor Type");
         //_soundEmitter.SetParameterWithLabel("footsteps", _floorTypeParameterId, _floorType, false);
-        if (_terrainTypes.Count == 0)
-        {
-            //Find all terrains in the scene
-            Terrain[] terrains = FindObjectsOfType<Terrain>();
-            foreach (Terrain terrain in terrains)
-            {
-                //Add the terrain to the hashmap
-                _terrainTypes.Add(terrain, terrain.GetComponent<TerrainTypes>());
-                float[,,] alphaMap = terrain.terrainData.GetAlphamaps(
-                    0,
-                    0,
-                    terrain.terrainData.alphamapWidth,
-                    terrain.terrainData.alphamapHeight
-                );
-                _terrainTextureMaps.Add(terrain, alphaMap);
-            }
-        }
     }
 
     public void ChangeFloorType(string type)

@@ -223,9 +223,7 @@ public class Player : StateContext, Damageable
 
     void Start()
     {
-        Debug.Log("uiController: " + _uiController);
-        Debug.Log("uiController.PlayerUI: " + _uiController.PlayerUI);
-        Debug.Log("uiController.PlayerUI.playingUI: " + _uiController.PlayerUI.playingUI);
+        FootSteps.LoadTerrains();
         _gameUI = _uiController.PlayerUI.playingUI;
         UpdateElement(_playerSkills.CurrentElement);
         _sfxJumpStateId = _soundEmitter.GetParameterId("jump", "Jump State");
