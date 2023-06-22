@@ -182,6 +182,10 @@ public abstract class SkillComponent : MonoBehaviour
 
     private bool CanCollide(Collider other)
     {
+        if (other.GetComponent<EarthWallComponent>() != null)
+        {
+            return true;
+        }
         if (other.gameObject == _caster)
         {
             return false;

@@ -86,7 +86,7 @@ public class UIController : MonoBehaviour
             LoadItems();
             LoadGold();
         }
-        if(!isOpening)
+        if (!isOpening)
         {
             if (_playerUI.inventoryUI.itemTitle != null)
             {
@@ -325,7 +325,7 @@ public class UIController : MonoBehaviour
             }
             else if (area == UiArea.RightWheel)
             {
-                RemoveFromWheel(image.currentItem, true);
+                RemoveFromWheel(image.currentItem, false);
                 Destroy(image.gameObject);
             }
 
@@ -341,8 +341,8 @@ public class UIController : MonoBehaviour
             return;
         }
 
-        while (FindItemSkill((ItemSkill)image.currentItem.item, true) != null) {
-
+        while (FindItemSkill((ItemSkill)image.currentItem.item, true) != null)
+        {
             RemoveFromWheel(image.currentItem, true);
         }
 

@@ -47,7 +47,6 @@ public class Npc : Interactable, NonCollidable
         while (true)
         {
             bool missionFound = false;
-            Debug.Log("mission controller = " + _missionController);
             foreach (var mission in _missionController.GetNpcMissions(_npc, false))
             {
                 Debug.Log(mission.Description + " - state " + mission.Status);
