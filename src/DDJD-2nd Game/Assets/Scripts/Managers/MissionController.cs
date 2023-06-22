@@ -105,10 +105,12 @@ public class MissionController : MonoBehaviour
         _unblockedMissions.Remove(mission);
         _gameState.FinishedMissions.Add(mission);
         UnblockFollowingMissions(mission);
-        if (_unblockedMissions.Count > 0)
-            _missionsUIController.SetActiveMission(_unblockedMissions[0]);
         if (_missionsUIController != null)
+        {
+            if (_unblockedMissions.Count > 0)
+                _missionsUIController.SetActiveMission(_unblockedMissions[0]);
             _missionsUIController.UpdateMissionsUI();
+        }
         FMODUnity.RuntimeManager.PlayOneShot(SoundBank.Instance.MissionCompleteSound, Vector3.zero);
     }
 

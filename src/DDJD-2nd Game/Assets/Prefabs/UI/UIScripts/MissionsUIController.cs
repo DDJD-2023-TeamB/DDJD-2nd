@@ -237,6 +237,10 @@ public class MissionsUIController : MonoBehaviour
                 .CurrentGoal
                 .Description;
         }
+        else
+        {
+            playingIndicatorQuest.GetComponent<TextMeshProUGUI>().text = "";
+        }
     }
 
     private void ChangeSelectedMission(Mission mission)

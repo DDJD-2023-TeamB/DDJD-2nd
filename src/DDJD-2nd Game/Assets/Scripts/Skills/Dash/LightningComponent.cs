@@ -62,7 +62,7 @@ public class LightningComponent : DashComponent, NonCollidable
         _soundEmitter.SetParameterWithLabel(
             "dash",
             _elementParameterId,
-            "Lightning Dash Explosion",
+            "Lightning Explosion",
             true
         );
 

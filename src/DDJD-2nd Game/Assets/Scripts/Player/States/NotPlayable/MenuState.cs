@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class MenuState : GenericState
 {
     protected Player _context;
@@ -12,6 +14,7 @@ public class MenuState : GenericState
     {
         _context.Input.OnMenuKeydown += OnMenuKeydown;
         _context.UIController.OpenMenu(true);
+        Time.timeScale = 0.0f;
     }
 
     public override void Exit()
@@ -19,6 +22,7 @@ public class MenuState : GenericState
         base.Exit();
         _context.Input.OnMenuKeydown -= OnMenuKeydown;
         _context.UIController.OpenMenu(false);
+        Time.timeScale = 1.0f;
     }
 
     public override void StateUpdate() { }
