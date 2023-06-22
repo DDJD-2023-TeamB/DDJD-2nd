@@ -17,11 +17,13 @@ public class InteractingState : GenericState
         _context.Animator.SetFloat("ForwardSpeed", 0.0f);
         _context.Animator.SetFloat("RightSpeed", 0.0f);
         objt.Interact();
+        Cursor.visible = false;
     }
 
     public override void Exit()
     {
         base.Exit();
+        Cursor.visible = true;
     }
 
     public override bool CanChangeState(GenericState state)

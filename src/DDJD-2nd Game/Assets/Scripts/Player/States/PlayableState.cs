@@ -22,6 +22,7 @@ public class PlayableState : GenericState
         _context.Input.OnMenuKeydown += OnMenuKeydown;
         _context.Input.OnInteractionKeyDown += OnInteractionKeyDown;
         _context.Input.OnUsePotion += OnUsePotion;
+        Cursor.visible = false;
     }
 
     public override void Exit()
@@ -32,6 +33,7 @@ public class PlayableState : GenericState
         _context.Input.OnMenuKeydown -= OnMenuKeydown;
         _context.Input.OnInteractionKeyDown -= OnInteractionKeyDown;
         _context.Input.OnUsePotion -= OnUsePotion;
+        Cursor.visible = true;
     }
 
     public override bool CanChangeState(GenericState state)
