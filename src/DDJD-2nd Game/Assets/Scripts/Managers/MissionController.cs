@@ -137,7 +137,7 @@ public class MissionController : MonoBehaviour
     {
         List<Mission> missions = new List<Mission>();
 
-        foreach (var mission in _unblockedMissions)
+        foreach (Mission mission in _unblockedMissions)
         {
             {
                 switch (mission.Status)

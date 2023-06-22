@@ -26,5 +26,4 @@ public class NpcObject : ScriptableObject
     {
         get { return _location; }
     }
-    
 }

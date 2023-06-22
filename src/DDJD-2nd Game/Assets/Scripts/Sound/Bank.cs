@@ -7,7 +7,13 @@ public class Bank : MonoBehaviour
     public static Bank Instance;
 
     [SerializeField]
-    private SerializedDictionary<string, GameObject> _banks;
+    private GameObject _canvasIcon;
+
+    [SerializeField]
+    private GameObject _canvasText;
+
+    [SerializeField]
+    private Material _outline;
 
     void Awake()
     {
@@ -18,13 +24,18 @@ public class Bank : MonoBehaviour
         }
     }
 
-    public GameObject Get(string key)
+    public GameObject CanvasIcon
     {
-        if (_banks.ContainsKey(key))
-        {
-            return _banks[key];
-        }
-        Debug.LogError("Key not found in SoundBank: " + key);
-        return null;
+        get { return _canvasIcon; }
+    }
+
+    public GameObject CanvasText
+    {
+        get { return _canvasText; }
+    }
+
+    public Material Outline
+    {
+        get { return _outline; }
     }
 }

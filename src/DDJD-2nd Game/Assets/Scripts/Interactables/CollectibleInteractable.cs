@@ -32,7 +32,7 @@ public class CollectibleInteractable : Interactable, NonCollidable
             AssetDatabase.LoadAssetAtPath(floatingTextPrefabPath, typeof(GameObject));
             */
         //GameObject floatingCanvasPrefab = Bank.Instance.Get("FloatingText");
-        GameObject floatingCanvasPrefab = Resources.Load("FloatingCanvas") as GameObject;
+        GameObject floatingCanvasPrefab = Bank.Instance.CanvasText;
         GameObject floatingTextCanvas = Instantiate(floatingCanvasPrefab);
 
         TextMeshProUGUI text = floatingTextCanvas.transform
@@ -60,7 +60,7 @@ public class CollectibleInteractable : Interactable, NonCollidable
     {
         if (!_material)
         {
-            _material = Resources.Load("Outline") as Material;
+            _material = Bank.Instance.Outline;
 
             _meshRenderer = GetComponent<MeshRenderer>();
         }
