@@ -14,6 +14,8 @@ public class RangedRepositionState : EnemyMovingState
 
     private float _repositionRange;
 
+    private Coroutine _checkCanHitCoroutine;
+
     public RangedRepositionState(RangedEnemy enemy, float repositionRange = 0.0f)
         : base(enemy)
     {
@@ -31,6 +33,7 @@ public class RangedRepositionState : EnemyMovingState
                 EnemyMovementStateUtils.DashCoroutine(_context, 10.0f, this)
             );
         }
+        //_checkCanHitCoroutine = _context.StartCoroutine(CheckIfCanHit());
     }
 
     public override void Exit()
@@ -39,6 +42,11 @@ public class RangedRepositionState : EnemyMovingState
         if (_dashCoroutine != null)
         {
             _context.StopCoroutine(_dashCoroutine);
+        }
+
+        if (_checkCanHitCoroutine != null)
+        {
+            _context.StopCoroutine(_checkCanHitCoroutine);
         }
     }
 
@@ -118,6 +126,19 @@ public class RangedRepositionState : EnemyMovingState
         {
             // If not, try again
             return GetNewPosition();
+        }
+    }
+
+    private IEnumerator CheckIfCanHit()
+    {
+        while (true)
+        {
+            if (_context.AimComponent.CanHitPlayer())
+            {
+                _context.ChangeState(_context.States.AttackState);
+                break;
+            }
+            yield return new WaitForSeconds(2.5f);
         }
     }
 }

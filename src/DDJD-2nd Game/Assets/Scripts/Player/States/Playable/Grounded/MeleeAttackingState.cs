@@ -69,21 +69,6 @@ public class MeleeAttackingState : GenericState
         Vector2 moveInput = _context.Input.MoveInput;
         Vector3 moveDirection =
             _context.transform.forward * moveInput.y + _context.transform.right * moveInput.x;
-        //If there is an enemy in front of the player, damage it
-
-
-        //Search for enemy in front of the player
-        Collider[] colliders = Physics.OverlapSphere(
-            _context.transform.position + moveDirection * 1.0f,
-            2f,
-            LayerMask.GetMask("Enemy")
-        );
-
-        if (colliders.Length > 0)
-        {
-            moveDirection = colliders[0].transform.position - _context.transform.position;
-            moveDirection.y = 0;
-        }
 
         moveDirection = moveDirection.normalized;
         if (moveInput != Vector2.zero)

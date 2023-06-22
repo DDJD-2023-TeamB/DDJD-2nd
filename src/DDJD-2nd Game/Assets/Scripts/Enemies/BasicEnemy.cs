@@ -39,6 +39,8 @@ public class BasicEnemy : HumanoidEnemy
 
     private EnemyCommunicator _enemyCommunicator;
 
+    private Vector3 _spawnerPosition;
+
     public override void Awake()
     {
         base.Awake();
@@ -118,6 +120,36 @@ public class BasicEnemy : HumanoidEnemy
     public void SetEnemySpawnerManager(EnemySpawnerManager enemySpawnerManager)
     {
         _enemySpawnerManager = enemySpawnerManager;
+        _spawnerPosition = _enemySpawnerManager.transform.position;
+        StartCoroutine(DontLeaveSpawner());
+    }
+
+    private IEnumerator DontLeaveSpawner()
+    {
+        while (true)
+        {
+            float distance = Vector3.Distance(_spawnerPosition, transform.position);
+
+            if (distance > _enemySpawnerManager.SpawnRadius)
+            {
+                // Get random position in camp
+                Vector3 randomPosition = new Vector3(
+                    UnityEngine.Random.Range(-5.0f, 5.0f),
+                    0.0f,
+                    UnityEngine.Random.Range(-5.0f, 5.0f)
+                );
+                randomPosition += _spawnerPosition;
+                NavMeshHit hit;
+                NavMesh.SamplePosition(
+                    randomPosition,
+                    out hit,
+                    5.0f,
+                    UnityEngine.AI.NavMesh.AllAreas
+                );
+                ChangeState(new EnemyMoveToState(this, randomPosition));
+            }
+            yield return new WaitForSeconds(1.0f);
+        }
     }
 
     //getters and setters

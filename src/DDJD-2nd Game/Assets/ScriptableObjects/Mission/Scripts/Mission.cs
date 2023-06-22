@@ -129,7 +129,12 @@ public class Mission : ScriptableObject
     public GoalObject GetPreviousGoal()
     {
         int goalIndex = _goals.IndexOf(_currentGoal);
-        if (_status == MissionState.Completed) {
+        if (_goals.Count == 0)
+        {
+            return null;
+        }
+        if (_status == MissionState.Completed)
+        {
             return _goals[_goals.Count - 1];
         }
         if (goalIndex > 0)

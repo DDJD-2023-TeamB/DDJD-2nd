@@ -40,7 +40,15 @@ public class EnemySpawnerManager : MonoBehaviour
 
     private bool _attackPlayer = false;
 
-    public void Awake() { }
+    private BoxCollider _collider;
+
+    public float _spawnRadius;
+
+    public void Awake()
+    {
+        _collider = GetComponent<BoxCollider>();
+        _spawnRadius = _collider.size.x / 2.0f + _collider.size.z / 2.0f;
+    }
 
     public void Start()
     {
@@ -62,35 +70,26 @@ public class EnemySpawnerManager : MonoBehaviour
         }
     }
 
-    private void SpawnEnemy()
+    public float SpawnRadius
+    {
+        get { return _spawnRadius; }
+    }
+
+    private BasicEnemy SpawnEnemy()
     {
         EnemySpawnerComponent spawner;
-        bool spawned = false;
+        bool canSpawn = false;
         BasicEnemy enemy = null;
-        do
-        {
-            //TODO:: Could be more efficient
-            spawner = _spawners[UnityEngine.Random.Range(0, _spawners.Count)];
-            spawned = spawner.CanSpawn();
-            EnemyInfo enemyInfo = _enemySpawner.EnemySpawnerInfo.GetRandomEnemyInfo();
-            enemy = spawner.SpawnEnemy(enemyInfo);
-            if (_attackPlayer)
-            {
-                //enemy.AggroRange = 100.0f;
-                /*
-                enemy.EnemyCommunicator.SendMessageToEnemy(
-                    new PlayerSightedMessage(GameManager.Instance.Player.transform.position),
-                    enemy.GetComponent<EnemyCommunicator>(),
-                    0.0f
-                );
-                */
-            }
-        } while (!spawned);
+        //TODO:: Could be more efficient
+        spawner = _spawners[UnityEngine.Random.Range(0, _spawners.Count)];
+        EnemyInfo enemyInfo = _enemySpawner.EnemySpawnerInfo.GetRandomEnemyInfo();
+        enemy = spawner.SpawnEnemy(enemyInfo);
         if (enemy != null)
         {
             _spawnedEnemies.Add(enemy.gameObject);
+            OnSpawn?.Invoke(enemy);
         }
-        OnSpawn?.Invoke(enemy);
+        return enemy;
     }
 
     public void StartSpawn(bool attackPlayer)
@@ -117,8 +116,8 @@ public class EnemySpawnerManager : MonoBehaviour
     {
         while (_remainingEnemies > 0 || _type == SpawnerType.Unlimitted)
         {
-            SpawnEnemy();
-            if (_remainingEnemies > 0)
+            BasicEnemy enemy = SpawnEnemy();
+            if (_remainingEnemies > 0 && enemy != null)
             {
                 _remainingEnemies--;
             }

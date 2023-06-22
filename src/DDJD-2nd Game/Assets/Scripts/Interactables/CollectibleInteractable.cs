@@ -13,9 +13,6 @@ public class CollectibleInteractable : Interactable, NonCollidable
 {
     public CollectibleObject _item;
 
-    private static string outlineMaterialPath = "Assets/Materials/Outline/Outline.mat";
-    private static string floatingTextPrefabPath = "Assets/Prefabs/UI/FloatingCanvas.prefab";
-
     private Material _material;
     private MeshRenderer _meshRenderer;
 

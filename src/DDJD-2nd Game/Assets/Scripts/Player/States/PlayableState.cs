@@ -104,7 +104,7 @@ public class PlayableState : GenericState
         if (!_context.InteractedObject)
             return;
         if (!_context.InteractedObject.IsInstant())
-            ChangeSubState(_context.Factory.Interacting(this));
+            _context.ChangeState(_context.Factory.Interacting(null));
         else
         {
             _context.InteractedObject.Interact();

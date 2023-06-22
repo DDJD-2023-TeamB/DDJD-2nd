@@ -16,6 +16,8 @@ public class RangedAttackState : EnemyAttackState
 
     private bool _stopAimingAtExit;
 
+    private Coroutine _sendPlayerSightCoroutine;
+
     public RangedAttackState(RangedEnemy enemy)
         : base(enemy)
     {
@@ -41,6 +43,8 @@ public class RangedAttackState : EnemyAttackState
             _context.EnemySkills.MaxAttacksInRow
         );
         _stopAimingAtExit = true;
+
+        _sendPlayerSightCoroutine = _context.StartCoroutine(SendPlayerSightMessage());
     }
 
     public override void Exit()
@@ -59,6 +63,11 @@ public class RangedAttackState : EnemyAttackState
 
         _context.Shooter.CancelShots();
         _context.Shooter.OnShoot -= OnShoot;
+
+        if (_sendPlayerSightCoroutine != null)
+        {
+            _context.StopCoroutine(_sendPlayerSightCoroutine);
+        }
     }
 
     public override void StateUpdate()
@@ -146,6 +155,17 @@ public class RangedAttackState : EnemyAttackState
                     )
                 );
             }
+        }
+    }
+
+    private IEnumerator SendPlayerSightMessage()
+    {
+        while (true)
+        {
+            _context.EnemyCommunicator.SendMessageToEnemies(
+                new PlayerSightedMessage(_context.Player.transform.position)
+            );
+            yield return new WaitForSeconds(2.0f);
         }
     }
 }

@@ -13,7 +13,6 @@ public class Npc : Interactable, NonCollidable
     private Animator _animator;
     private Dialogue _dialogue;
     private DialogueInfo _currentDialogueInfo;
-    private static string floatingIconPrefabPath = "Assets/Prefabs/UI/FloatingIconCanvas.prefab";
     private Animator _floatingIconAnimator;
     private GameObject _floatingIconCanvas;
 
@@ -94,6 +93,8 @@ public class Npc : Interactable, NonCollidable
         }
 
         _currentDialogueInfo = _npc.DefaultDialogueInfo;
+        Debug.Log("Interacting with " + _npc.Name);
+        Debug.Log("Current dialogue info: " + _currentDialogueInfo.Sentences.Length);
         Mission targetMission = null;
         foreach (var mission in _missionController.GetNpcMissions(_npc))
         {
@@ -102,6 +103,10 @@ public class Npc : Interactable, NonCollidable
                 case MissionState.Available:
                 {
                     _currentDialogueInfo = mission.InteractionBegin.DialogueInfo;
+                    Debug.Log(
+                        "Current dialogue info in available: "
+                            + _currentDialogueInfo.Sentences.Length
+                    );
                     mission.Status = MissionState.Ongoing;
                     mission.CurrentGoal?.OnGoalStarted?.Invoke();
                     _missionController.MissionsUIController?.UpdateMissionsUI();
@@ -135,6 +140,7 @@ public class Npc : Interactable, NonCollidable
             _dialogue.Mission = targetMission;
         }
 
+        Debug.Log("Start dialogue info: " + _currentDialogueInfo.Sentences.Length);
         _dialogue.StartDialogue(_currentDialogueInfo);
 
         if (_animator != null)
@@ -167,13 +173,20 @@ public class Npc : Interactable, NonCollidable
         {
             if (_dialogue.Mission != null)
             {
-                if (_dialogue.Mission.IsInInteractionBegin(_npc) && EventUtils.IsEventSet(_dialogue.Mission.InteractionBegin.OnEndInteraction))
+                if (
+                    _dialogue.Mission.IsInInteractionBegin(_npc)
+                    && EventUtils.IsEventSet(_dialogue.Mission.InteractionBegin.OnEndInteraction)
+                )
                 {
                     if (_dialogue.Mission.InteractionBegin.InteractionEnded())
                     {
                         return;
                     }
-                } else if (_dialogue.Mission.GetPreviousGoal() is InteractGoal interactGoal && EventUtils.IsEventSet(interactGoal.Interaction.OnEndInteraction))
+                }
+                else if (
+                    _dialogue.Mission.GetPreviousGoal() is InteractGoal interactGoal
+                    && EventUtils.IsEventSet(interactGoal.Interaction.OnEndInteraction)
+                )
                 {
                     if (interactGoal.Interaction.InteractionEnded())
                     {
@@ -190,10 +203,17 @@ public class Npc : Interactable, NonCollidable
     {
         if (_dialogue.Mission != null)
         {
-            if (_dialogue.Mission.IsInInteractionBegin(_npc) && EventUtils.IsEventSet(_dialogue.Mission.InteractionBegin.OnEndInteraction))
+            if (
+                _dialogue.Mission.IsInInteractionBegin(_npc)
+                && EventUtils.IsEventSet(_dialogue.Mission.InteractionBegin.OnEndInteraction)
+            )
             {
                 _dialogue.Mission.InteractionBegin.Exit();
-            } else if (_dialogue.Mission.GetPreviousGoal() is InteractGoal interactGoal && EventUtils.IsEventSet(interactGoal.Interaction.OnEndInteraction))
+            }
+            else if (
+                _dialogue.Mission.GetPreviousGoal() is InteractGoal interactGoal
+                && EventUtils.IsEventSet(interactGoal.Interaction.OnEndInteraction)
+            )
             {
                 interactGoal.Interaction.Exit();
             }

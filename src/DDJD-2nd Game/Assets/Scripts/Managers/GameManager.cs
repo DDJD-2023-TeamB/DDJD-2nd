@@ -26,13 +26,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+
     private void CombatStart()
     {
         OnCombatStart?.Invoke();
         _combatCoroutine = StartCoroutine(CombatUpdate());
     }
 
-    private void CombatEnd()
+    public void CombatEnd()
     {
         OnCombatEnd?.Invoke();
         StopCoroutine(_combatCoroutine);
@@ -81,11 +86,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-    }
-
     // To ensure combat doesn't stay forever in case of bug
     private IEnumerator CombatUpdate()
     {
@@ -109,5 +109,10 @@ public class GameManager : MonoBehaviour
                 CombatEnd();
             }
         }
+    }
+
+    public Player Player
+    {
+        get { return _player; }
     }
 }

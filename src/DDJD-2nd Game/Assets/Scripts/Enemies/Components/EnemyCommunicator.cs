@@ -21,6 +21,7 @@ public class EnemyCommunicator : MonoBehaviour
 
     public void ReceiveMessage(EnemyMessage message)
     {
+        Debug.Log("received message");
         if (_messageActions.ContainsKey(message.GetType()))
         {
             _messageActions[message.GetType()]?.Invoke(message);
@@ -66,24 +67,24 @@ public class EnemyCommunicator : MonoBehaviour
         return _messageActions[messageType];
     }
 
-    public IEnumerator SendMessageToEnemies(EnemyMessage message)
+    public void SendMessageToEnemies(EnemyMessage message)
     {
         Collider[] colliders = Physics.OverlapSphere(
             transform.position,
             _messageRange,
             LayerMask.GetMask("Enemy") | LayerMask.GetMask("PlayerTrigger")
         );
+        Debug.Log("sending message");
         foreach (Collider collider in colliders)
         {
             if (collider == null)
             {
-                break;
+                continue;
             }
             EnemyCommunicator communicator = collider.GetComponent<EnemyCommunicator>();
             float timeToWait =
                 Vector3.Distance(transform.position, collider.transform.position) / 10.0f;
             StartCoroutine(SendMessageToEnemy(message, communicator, timeToWait));
-            yield return new WaitForSeconds(timeToWait);
         }
     }
 

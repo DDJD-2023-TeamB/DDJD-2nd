@@ -7,8 +7,6 @@ using UnityEditor;
 
 public class CollectCallback : MonoBehaviour
 {
-    private static string path = "Assets/Prefabs/Missions/Goals/Collect/";
-
     // Start is called before the first frame update
     void Start() { }
 

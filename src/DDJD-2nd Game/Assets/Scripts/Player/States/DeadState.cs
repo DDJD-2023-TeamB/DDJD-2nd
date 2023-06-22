@@ -29,7 +29,7 @@ public class DeadState : GenericState
         base.Exit();
         _context.PlayerDeath.OnRespawnAvailable -= ShowMessage;
         _context.UIController.CloseDieInfo();
-      
+        GameManager.Instance.CombatEnd();
     }
 
     public override void StateUpdate()

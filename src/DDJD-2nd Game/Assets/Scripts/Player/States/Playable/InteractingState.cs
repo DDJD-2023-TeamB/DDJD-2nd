@@ -47,6 +47,11 @@ public class InteractingState : GenericState
             Npc npc = (Npc)objt;
             npc.ExitInteraction();
         }
+
+        if (objt == null)
+        {
+            _context.ChangeState(_context.Factory.Playable());
+        }
     }
 
     public bool IsInteracting()

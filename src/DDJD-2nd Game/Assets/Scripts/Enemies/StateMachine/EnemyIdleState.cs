@@ -78,12 +78,14 @@ public class EnemyIdleState : EnemyState
     private void OnPlayerSightedMessage(EnemyMessage message)
     {
         _context.ChangeState(_context.States.ChaseState);
+        Debug.Log("PlayerSightedMessage received");
     }
 
     private IEnumerator WarnNearbyEnemies()
     {
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
         PlayerSightedMessage message = new PlayerSightedMessage(_context.Player.transform.position);
-        _context.StartCoroutine(_context.EnemyCommunicator.SendMessageToEnemies(message));
+        _context.EnemyCommunicator.SendMessageToEnemies(message);
+        yield return null;
     }
 }
