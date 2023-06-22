@@ -167,9 +167,15 @@ public class Npc : Interactable, NonCollidable
         {
             if (_dialogue.Mission != null)
             {
-                if (_dialogue.Mission.IsInInteractionBegin(_npc))
+                if (_dialogue.Mission.IsInInteractionBegin(_npc) && EventUtils.IsEventSet(_dialogue.Mission.InteractionBegin.OnEndInteraction))
                 {
                     if (_dialogue.Mission.InteractionBegin.InteractionEnded())
+                    {
+                        return;
+                    }
+                } else if (_dialogue.Mission.GetPreviousGoal() is InteractGoal interactGoal && EventUtils.IsEventSet(interactGoal.Interaction.OnEndInteraction))
+                {
+                    if (interactGoal.Interaction.InteractionEnded())
                     {
                         return;
                     }
@@ -184,9 +190,12 @@ public class Npc : Interactable, NonCollidable
     {
         if (_dialogue.Mission != null)
         {
-            if (_dialogue.Mission.IsInInteractionBegin(_npc))
+            if (_dialogue.Mission.IsInInteractionBegin(_npc) && EventUtils.IsEventSet(_dialogue.Mission.InteractionBegin.OnEndInteraction))
             {
                 _dialogue.Mission.InteractionBegin.Exit();
+            } else if (_dialogue.Mission.GetPreviousGoal() is InteractGoal interactGoal && EventUtils.IsEventSet(interactGoal.Interaction.OnEndInteraction))
+            {
+                interactGoal.Interaction.Exit();
             }
             _dialogue.Mission = null;
         }
