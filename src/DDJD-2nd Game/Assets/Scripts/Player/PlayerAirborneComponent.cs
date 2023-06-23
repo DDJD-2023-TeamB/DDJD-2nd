@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Mathematics;
 
 public class PlayerAirborneComponent : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class PlayerAirborneComponent : MonoBehaviour
     public void StartAirborne()
     {
         _isActive = true;
+        Debug.Log("Start airbone");
         _soundEmitter?.SetParameter("air", _sfxIntensityID, 0.0f);
         _soundEmitter?.Play("air");
     }
@@ -48,8 +50,9 @@ public class PlayerAirborneComponent : MonoBehaviour
     {
         if (_isActive)
         {
-            _soundEmitter.SetParameter("air", _sfxIntensityID, 0);
-            float intensity = _player.Rigidbody.velocity.magnitude / 10.0f;
+            float intensity = _player.Rigidbody.velocity.magnitude / 20.0f;
+            intensity = Mathf.Clamp(0.0f, 1.0f, intensity);
+
             _soundEmitter.SetParameter("air", _sfxIntensityID, intensity);
         }
     }

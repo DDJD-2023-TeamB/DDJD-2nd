@@ -27,6 +27,10 @@ public class ProtectionRune : RuneShooter
     protected override void Update()
     {
         base.Update();
+        if (_caster == null)
+        {
+            return;
+        }
         Vector3 desiredPosition;
         if (_targetPosition != null)
         {

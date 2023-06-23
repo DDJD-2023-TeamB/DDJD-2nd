@@ -43,6 +43,7 @@ public class BasicStoneThrowComponent : ProjectileComponent, NonPushable
             rb.AddForce(transform.forward * _skillStats.ForceWithDamage(), ForceMode.Impulse);
         }
 
+        _soundEmitter.UpdatePosition("shot");
         _soundEmitter.SetParameterWithLabel("shot", _sfxStateId, "Impact", false);
         Damage(
             other.gameObject,

@@ -57,10 +57,14 @@
 			<destination>{599b5171-b24a-47ee-a7a6-d5e72f4a5613}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{5465846d-ab55-4a46-9ae8-0d497de963c9}</destination>
+			<destination>{22f4a9bf-43b1-4cd0-a6c1-5bed9e70cf5e}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{183b88c9-8462-451f-8347-e40c984c01e0}" />
+	<object class="EventAutomatableProperties" id="{183b88c9-8462-451f-8347-e40c984c01e0}">
+		<property name="maximumDistance">
+			<value>75</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{7e8b14c9-df60-4f9f-ae79-666447e78888}" />
 	<object class="GroupTrack" id="{742a7549-3122-4de5-ab5e-0ab02e04f208}">
 		<relationship name="modules">
@@ -93,6 +97,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{df69855f-df5d-420c-a267-f0398e8833b2}">
+		<property name="volume">
+			<value>-2</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{6f2d3c32-d76d-46ed-a42b-4981342c1544}</destination>
 		</relationship>
@@ -122,6 +129,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{49f33cf4-26e5-4223-a150-3d35ff25cb95}">
+		<property name="volume">
+			<value>-3</value>
+		</property>
 		<property name="name">
 			<value>Fire Ball</value>
 		</property>
@@ -148,6 +158,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{8e7359b6-7aaa-4a5c-8ba0-6d48badc9713}">
+		<property name="volume">
+			<value>-3</value>
+		</property>
 		<property name="name">
 			<value>Impact</value>
 		</property>
@@ -214,7 +227,11 @@
 	</object>
 	<object class="MixerBusPanner" id="{84ae70de-1d8f-4de7-aafb-ba05411e19ba}" />
 	<object class="MixerBusFader" id="{7a2abf45-5889-4e26-a163-21a9d78370ad}" />
-	<object class="SpatialiserEffect" id="{776ff613-3a28-4131-b4de-42f17f7e7115}" />
+	<object class="SpatialiserEffect" id="{776ff613-3a28-4131-b4de-42f17f7e7115}">
+		<property name="distanceRolloffType">
+			<value>1</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{33dc587a-d7e4-4a3b-8834-5e4d4c606862}" />
 	<object class="MixerBusFader" id="{2021b920-acd8-4871-a9f1-823add3450d0}" />
 </objects>

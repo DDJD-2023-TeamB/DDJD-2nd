@@ -26,7 +26,8 @@ public class ElementSource : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _sfxStateID = _soundEmitter.GetParameterId("absorb", "State");
+        string parameterName = _element.SfxDamageLabel + "ChargeState";
+        _sfxStateID = _soundEmitter.GetParameterId("absorb", parameterName);
     }
 
     // Update is called once per frame

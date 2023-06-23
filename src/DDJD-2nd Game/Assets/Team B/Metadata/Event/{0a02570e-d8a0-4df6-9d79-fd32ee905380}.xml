@@ -59,7 +59,7 @@
 			<destination>{1e5e0061-f801-4634-a3ca-bad1abea031b}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{5465846d-ab55-4a46-9ae8-0d497de963c9}</destination>
+			<destination>{201733a2-c3e0-4413-a3b8-60bcad0b54d5}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{227f8bdd-b5b8-4ad1-abc3-f11a36e674fa}" />
@@ -114,7 +114,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{68c9bb66-a9b6-4782-81cb-8822d58ef527}">
 		<property name="volume">
-			<value>-2</value>
+			<value>-5</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{fce8a8c1-5cf1-4ce0-b2a1-9d0154d30859}</destination>
@@ -160,6 +160,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{410723dc-1dac-49c7-a274-bab913cb829b}">
+		<property name="volume">
+			<value>-7</value>
+		</property>
 		<property name="name">
 			<value>Stone</value>
 		</property>
@@ -204,6 +207,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{d78bd036-bfb5-4b04-a493-95a7cfbebc56}">
+		<property name="volume">
+			<value>-10.5</value>
+		</property>
 		<property name="name">
 			<value>Dirt</value>
 		</property>
@@ -246,6 +252,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{39848b9d-3e1a-4ddd-8054-b15e45d41a60}">
+		<property name="volume">
+			<value>-11.5</value>
+		</property>
 		<property name="name">
 			<value>Grass</value>
 		</property>
@@ -295,6 +304,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{6c00b732-5aed-4410-a26f-4a8d1035e1c6}">
+		<property name="volume">
+			<value>-10</value>
+		</property>
 		<property name="name">
 			<value>Wood</value>
 		</property>

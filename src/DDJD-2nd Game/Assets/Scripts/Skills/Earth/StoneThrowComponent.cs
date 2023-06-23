@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
+using Unity.Mathematics;
 
 public class StoneThrowComponent : ProjectileComponent, NonPushable
 {
@@ -13,6 +14,8 @@ public class StoneThrowComponent : ProjectileComponent, NonPushable
 
     [SerializeField, Tooltip("Minimum velocity to deal damage")]
     private float _velocityThreshold = 3.0f;
+
+    private bool _canReboundSFX = true;
 
     protected override void Awake()
     {
@@ -39,14 +42,30 @@ public class StoneThrowComponent : ProjectileComponent, NonPushable
             other.ClosestPoint(_caster.transform.position),
             _caster.transform.forward
         );
-        _soundEmitter.SetParameterWithLabel("stone", _sfxStateId, "Impact", false);
+        _soundEmitter.SetParameterWithLabel("stone", _sfxStateId, "Impact", true);
         StartCoroutine(DestroyAfterTime(_destroyAfterCollision));
     }
 
     public override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
-        _soundEmitter.SetParameterWithLabel("stone", _sfxStateId, "Rebound", false);
+    }
+
+    public override void OnCollisionStay(Collision collision)
+    {
+        base.OnCollisionStay(collision);
+        if (
+            collision.gameObject.layer != LayerMask.NameToLayer("Enemy")
+            && collision.gameObject.layer != LayerMask.NameToLayer("Player")
+        )
+        {
+            if (_canReboundSFX)
+            {
+                _canReboundSFX = false;
+                _soundEmitter.SetParameterWithLabel("stone", _sfxStateId, "Rebound", true);
+                StartCoroutine(CanReboundRoutine());
+            }
+        }
     }
 
     public override void Shoot(Vector3 direction)
@@ -64,7 +83,11 @@ public class StoneThrowComponent : ProjectileComponent, NonPushable
         base.Shoot(direction);
         //add torque
         _rb.AddTorque(
-            new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), Random.Range(-1, 1)) * 100
+            new Vector3(
+                UnityEngine.Random.Range(-1, 1),
+                UnityEngine.Random.Range(-1, 1),
+                UnityEngine.Random.Range(-1, 1)
+            ) * 100
         );
     }
 
@@ -87,5 +110,15 @@ public class StoneThrowComponent : ProjectileComponent, NonPushable
 
         Destroy(gameObject);
         SpawnHitVFX();
+    }
+
+    private IEnumerator CanReboundRoutine()
+    {
+        float velocity = _rb.velocity.magnitude;
+        Debug.Log(velocity);
+
+        float duration = math.remap(1, 35.0f, 1.0f, 0.3f, velocity);
+        yield return new WaitForSeconds(UnityEngine.Random.Range(duration, duration + 0.1f));
+        _canReboundSFX = true;
     }
 }

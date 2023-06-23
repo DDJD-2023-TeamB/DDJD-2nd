@@ -128,6 +128,8 @@ public abstract class SkillComponent : MonoBehaviour
         Collide(collision.collider);
     }
 
+    public virtual void OnCollisionStay(Collision collision) { }
+
     public virtual void OnTriggerStay(Collider other)
     {
         if (_skillStats == null || !_skillStats.IsContinuous)

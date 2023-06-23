@@ -101,7 +101,7 @@ public class BasicEnemy : HumanoidEnemy
         base.TakeDamage(damager, damage, force, hitPoint, hitDirection, element);
 
         OnDamageTaken?.Invoke();
-        if (force >= _forceResistance)
+        if (force >= _forceResistance && !(_state is EnemyKnockdownState))
         {
             Knockdown(force, hitPoint, hitDirection);
         }

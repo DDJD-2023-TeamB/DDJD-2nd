@@ -61,10 +61,14 @@
 			<destination>{34e07841-fd1e-4fb6-8c75-3b210c98935a}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{5465846d-ab55-4a46-9ae8-0d497de963c9}</destination>
+			<destination>{22f4a9bf-43b1-4cd0-a6c1-5bed9e70cf5e}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{694dc62d-bea4-4f34-94a6-d50840ac8e56}" />
+	<object class="EventAutomatableProperties" id="{694dc62d-bea4-4f34-94a6-d50840ac8e56}">
+		<property name="maximumDistance">
+			<value>75</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{7dc020a3-1c51-4e5d-b87f-c02e44657a04}" />
 	<object class="GroupTrack" id="{c1aae25c-6101-4565-bf23-9d7e158dbae2}">
 		<relationship name="automationTracks">
@@ -157,6 +161,9 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{4c4ca3b9-9ca7-48ce-92b2-d969e3c0c9c9}">
+		<property name="isCutoff">
+			<value>true</value>
+		</property>
 		<relationship name="automators">
 			<destination>{049932aa-37f1-4e3a-891a-bd99d6553346}</destination>
 		</relationship>
@@ -186,6 +193,9 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{d6b8191b-7f79-476b-9eb1-39519cc9f00e}">
+		<property name="isCutoff">
+			<value>true</value>
+		</property>
 		<property name="start">
 			<value>1</value>
 		</property>
@@ -214,6 +224,9 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{3c99b268-d780-432f-a076-4b5ea87711da}">
+		<property name="isCutoff">
+			<value>true</value>
+		</property>
 		<property name="start">
 			<value>1</value>
 		</property>
@@ -244,6 +257,9 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{c3f1f6b6-508b-403d-9770-7ab297c3468a}">
+		<property name="isCutoff">
+			<value>true</value>
+		</property>
 		<property name="start">
 			<value>1</value>
 		</property>

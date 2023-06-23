@@ -57,10 +57,14 @@
 			<destination>{9b9543f5-26ed-476b-b10f-93e3bf93a040}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{5465846d-ab55-4a46-9ae8-0d497de963c9}</destination>
+			<destination>{22f4a9bf-43b1-4cd0-a6c1-5bed9e70cf5e}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{9191c264-6176-4ef9-ad71-a0da0dc06d0c}" />
+	<object class="EventAutomatableProperties" id="{9191c264-6176-4ef9-ad71-a0da0dc06d0c}">
+		<property name="maximumDistance">
+			<value>60</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{2f9dac25-0508-4410-89d3-269b7f1c07b7}" />
 	<object class="GroupTrack" id="{755e8361-7884-4d7f-ae57-5312f91e1379}">
 		<relationship name="automationTracks">
@@ -189,7 +193,7 @@
 			<value>1</value>
 		</property>
 		<property name="value">
-			<value>-2</value>
+			<value>4</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{e6d5c3f7-0b11-422d-8e62-452c3635402c}">
@@ -197,7 +201,7 @@
 			<value>0</value>
 		</property>
 		<property name="value">
-			<value>-9</value>
+			<value>-3</value>
 		</property>
 	</object>
 	<object class="Automator" id="{f949e1be-f176-4690-913f-0a16f0e5d8ae}">

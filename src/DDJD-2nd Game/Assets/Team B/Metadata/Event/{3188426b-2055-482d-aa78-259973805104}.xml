@@ -57,10 +57,14 @@
 			<destination>{192406bc-9713-401f-93f0-0d5600d1a3ce}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{5465846d-ab55-4a46-9ae8-0d497de963c9}</destination>
+			<destination>{22f4a9bf-43b1-4cd0-a6c1-5bed9e70cf5e}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{a44220d9-39c9-48cc-96d2-3eb030684567}" />
+	<object class="EventAutomatableProperties" id="{a44220d9-39c9-48cc-96d2-3eb030684567}">
+		<property name="maximumDistance">
+			<value>60</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{ab56ede3-4e11-4784-9f08-920ec30cee89}" />
 	<object class="GroupTrack" id="{ab0d55fc-9f47-4354-a960-c9d3a2e01b1c}">
 		<relationship name="modules">
@@ -119,6 +123,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{7a3cebb3-2dd1-4cf3-93c4-97a1d5c6c164}">
+		<property name="volume">
+			<value>2</value>
+		</property>
 		<property name="name">
 			<value>Create Wall</value>
 		</property>

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using FMODUnity;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Music Volume", 1.0f, false);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SFX Volume ", 1.0f, false);
     }
 
     private void CombatStart()

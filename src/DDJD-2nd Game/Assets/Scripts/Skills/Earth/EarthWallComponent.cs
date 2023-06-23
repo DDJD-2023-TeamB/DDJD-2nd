@@ -19,10 +19,7 @@ public class EarthWallComponent : RayCastSkillComponent
         _isRising = true;
     }
 
-    public void Start()
-    {
-        _sfxStateId = _soundEmitter.GetParameterId("wall", "Earth Wall");
-    }
+    public void Start() { }
 
     public override bool CanShoot(Vector3 direction)
     {
@@ -63,6 +60,8 @@ public class EarthWallComponent : RayCastSkillComponent
             }
             _collider.enabled = true;
         }
+        _soundEmitter.UpdatePosition("wall");
+        _sfxStateId = _soundEmitter.GetParameterId("wall", "Earth Wall");
     }
 
     protected override void OnImpact(Collider other, float multiplier = 1)

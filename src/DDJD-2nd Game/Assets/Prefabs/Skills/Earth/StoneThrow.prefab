@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 9193202802362063527}
   - component: {fileID: -8859950383586261120}
   - component: {fileID: 7930388712817229410}
+  - component: {fileID: 7675995682090150886}
   m_Layer: 9
   m_Name: StoneThrow
   m_TagString: Untagged
@@ -274,7 +275,7 @@ SphereCollider:
   m_GameObject: {fileID: 5907751620782577184}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.42211795
   m_Center: {x: 0, y: 0, z: 0.03}
@@ -361,7 +362,7 @@ MonoBehaviour:
     - stone
     _values:
     - _playOnStart: 1
-      _stopOnDestroy: 0
+      _stopOnDestroy: 1
       _updatePosition: 1
       _eventReference:
         Guid:
@@ -370,3 +371,16 @@ MonoBehaviour:
           Data3: 1190102411
           Data4: 601975116
         Path: event:/Attacks/Earth Abilities/Big Earth Shot
+--- !u!65 &7675995682090150886
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5907751620782577184}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.75, y: 0.75, z: 0.75}
+  m_Center: {x: 0, y: 0, z: 0}

@@ -161,20 +161,11 @@ public class Tornado : GroundProjectileComponent, NonCollidable
         if (damageable != null)
         {
             GameObject damageableObject = damageable.GetDamageableObject();
-            if (
-                !_damagedObjects.Contains(damageableObject)
-                && damageableObject.GetComponent<BasicEnemy>() != null
-            )
-            {
-                damageableObject
-                    .GetComponent<BasicEnemy>()
-                    ?.Knockdown(0f, transform.position, transform.forward);
-            }
             Damage(
                 damageableObject,
-                (int)(_stats.Damage * multiplier),
-                0,
-                other.ClosestPoint(transform.position),
+                (int)(_stats.Damage * multiplier * _chargeComponent.GetCurrentCharge()),
+                (int)_tornadoStrength,
+                Vector3.zero,
                 transform.forward
             );
         }
