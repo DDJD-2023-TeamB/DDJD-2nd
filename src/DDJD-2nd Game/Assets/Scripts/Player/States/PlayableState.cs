@@ -22,6 +22,8 @@ public class PlayableState : GenericState
         _context.Input.OnMenuKeydown += OnMenuKeydown;
         _context.Input.OnInteractionKeyDown += OnInteractionKeyDown;
         _context.Input.OnUsePotion += OnUsePotion;
+        _context.Input.OnMapKeydown += OnMapKeydown;
+        _context.Input.OnMapKeyup += OnMapKeyup;
         Cursor.visible = false;
     }
 
@@ -33,6 +35,9 @@ public class PlayableState : GenericState
         _context.Input.OnMenuKeydown -= OnMenuKeydown;
         _context.Input.OnInteractionKeyDown -= OnInteractionKeyDown;
         _context.Input.OnUsePotion -= OnUsePotion;
+        _context.Input.OnMapKeydown -= OnMapKeydown;
+        _context.Input.OnMapKeyup -= OnMapKeyup;
+        OnMapKeyup();
         Cursor.visible = true;
     }
 
@@ -111,5 +116,15 @@ public class PlayableState : GenericState
         {
             _context.InteractedObject.Interact();
         }
+    }
+
+    private void OnMapKeydown()
+    {
+        _context.UIController.OpenMap();
+    }
+
+    private void OnMapKeyup()
+    {
+        _context.UIController.CloseMap();
     }
 }

@@ -13,8 +13,7 @@ public class Npc : Interactable, NonCollidable
     private Animator _animator;
     private Dialogue _dialogue;
     private DialogueInfo _currentDialogueInfo;
-    private Animator _floatingIconAnimator;
-    private GameObject _floatingIconCanvas;
+    private FloatingCanvas _floatingIconCanvas;
 
     protected override void Start()
     {
@@ -33,12 +32,12 @@ public class Npc : Interactable, NonCollidable
         */
         //GameObject floatingCanvasPrefab = Bank.Instance.Get("FloatingIconCanvas");
         GameObject floatingCanvasPrefab = Bank.Instance.CanvasIcon;
-        _floatingIconCanvas = Instantiate(floatingCanvasPrefab);
+        GameObject floatingCanvas = Instantiate(floatingCanvasPrefab);
 
-        Image image = _floatingIconCanvas.transform.GetChild(0).GetComponent<Image>();
-
-        _floatingIconAnimator = image.GetComponent<Animator>();
-        _floatingIconCanvas.SetActive(false);
+        _floatingIconCanvas = floatingCanvas.GetComponent<FloatingCanvas>();
+        _floatingIconCanvas.SetParent(gameObject);
+        Image image = _floatingIconCanvas.WorldCanvas.transform.GetChild(0).GetComponent<Image>();
+        _floatingIconCanvas.gameObject.SetActive(false);
         _floatingIconCanvas.transform.SetParent(transform, false);
     }
 
@@ -49,21 +48,21 @@ public class Npc : Interactable, NonCollidable
             bool missionFound = false;
             foreach (var mission in _missionController.GetNpcMissions(_npc, false))
             {
-                Debug.Log(mission.Description + " - state " + mission.Status);
                 if (mission.Status == MissionState.Available)
                 {
-                    if (!_floatingIconCanvas.activeSelf)
+                    if (!_floatingIconCanvas.gameObject.activeSelf)
                     {
-                        _floatingIconCanvas.SetActive(true);
+                        _floatingIconCanvas.gameObject.SetActive(true);
                     }
                     missionFound = true;
                     break;
                 }
                 else if (mission.Status == MissionState.Ongoing)
                 {
-                    if (!_floatingIconCanvas.activeSelf)
+                    if (!_floatingIconCanvas.gameObject.activeSelf)
                     {
-                        _floatingIconCanvas.SetActive(true);
+                        _floatingIconCanvas.gameObject.SetActive(true);
+                        _floatingIconCanvas.StopAnimation();
                         PauseAnimation();
                     }
                     missionFound = true;
@@ -71,9 +70,9 @@ public class Npc : Interactable, NonCollidable
                 }
             }
 
-            if (_floatingIconCanvas.activeSelf && !missionFound)
+            if (_floatingIconCanvas.gameObject.activeSelf && !missionFound)
             {
-                _floatingIconCanvas.SetActive(false);
+                _floatingIconCanvas.gameObject.SetActive(false);
             }
 
             yield return new WaitForSeconds(0.5f);
@@ -149,19 +148,13 @@ public class Npc : Interactable, NonCollidable
             _animator.SetInteger("Talking Index", Random.Range(0, 4));
             _animator.SetTrigger("Talking");
         }
-        if (_floatingIconAnimator)
-        {
-            PauseAnimation();
-        }
+        PauseAnimation();
         HelpManager.Instance.ResetText();
     }
 
     public void PauseAnimation()
     {
-        Floating floatingScript = _floatingIconCanvas.transform
-            .GetChild(0)
-            .GetComponent<Floating>();
-        _floatingIconAnimator.SetTrigger("Stop");
+        _floatingIconCanvas?.StopAnimation();
     }
 
     public void ContinueInteraction()

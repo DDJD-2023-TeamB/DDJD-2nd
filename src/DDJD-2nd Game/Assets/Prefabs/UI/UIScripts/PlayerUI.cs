@@ -12,6 +12,9 @@ public class PlayerUI : MonoBehaviour
         tutorialUI;
 
     [SerializeField]
+    public GameObject mapUI;
+
+    [SerializeField]
     public ActiveElementWheelController activeElementWheel;
 
     [SerializeField]

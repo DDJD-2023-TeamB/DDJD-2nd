@@ -481,6 +481,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Map"",
+                    ""type"": ""Button"",
+                    ""id"": ""9d4eef07-7ed0-4c5e-9767-88fd464f350c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -525,6 +534,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Tutorial"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee6845d8-77c2-4efb-bcc7-976164ece7fb"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Map"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -590,6 +610,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_UI_Missions = m_UI.FindAction("Missions", throwIfNotFound: true);
         m_UI_Menu = m_UI.FindAction("Menu", throwIfNotFound: true);
         m_UI_Tutorial = m_UI.FindAction("Tutorial", throwIfNotFound: true);
+        m_UI_Map = m_UI.FindAction("Map", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_PrintState = m_Debug.FindAction("PrintState", throwIfNotFound: true);
@@ -908,6 +929,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Missions;
     private readonly InputAction m_UI_Menu;
     private readonly InputAction m_UI_Tutorial;
+    private readonly InputAction m_UI_Map;
     public struct UIActions
     {
         private @PlayerInput m_Wrapper;
@@ -916,6 +938,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Missions => m_Wrapper.m_UI_Missions;
         public InputAction @Menu => m_Wrapper.m_UI_Menu;
         public InputAction @Tutorial => m_Wrapper.m_UI_Tutorial;
+        public InputAction @Map => m_Wrapper.m_UI_Map;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -937,6 +960,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Tutorial.started += instance.OnTutorial;
             @Tutorial.performed += instance.OnTutorial;
             @Tutorial.canceled += instance.OnTutorial;
+            @Map.started += instance.OnMap;
+            @Map.performed += instance.OnMap;
+            @Map.canceled += instance.OnMap;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -953,6 +979,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Tutorial.started -= instance.OnTutorial;
             @Tutorial.performed -= instance.OnTutorial;
             @Tutorial.canceled -= instance.OnTutorial;
+            @Map.started -= instance.OnMap;
+            @Map.performed -= instance.OnMap;
+            @Map.canceled -= instance.OnMap;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1048,6 +1077,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnMissions(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
         void OnTutorial(InputAction.CallbackContext context);
+        void OnMap(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {

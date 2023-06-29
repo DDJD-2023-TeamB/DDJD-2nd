@@ -461,4 +461,14 @@ public class UIController : MonoBehaviour
     {
         _playerUI.KeyMessage.text = "Press 'Enter' key to restart";
     }
+
+    public void OpenMap()
+    {
+        _playerUI.mapUI.SetActive(true);
+    }
+
+    public void CloseMap()
+    {
+        _playerUI.mapUI.SetActive(false);
+    }
 }

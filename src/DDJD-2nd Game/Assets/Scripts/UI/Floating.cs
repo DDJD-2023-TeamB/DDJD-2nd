@@ -8,6 +8,8 @@ public class Floating : MonoBehaviour
     private Transform _mainCam;
     private Transform _lookAt;
 
+    private GameObject _parent;
+
     private float _gap = 0.1f;
     public float animationOffsetValue;
 
@@ -20,22 +22,6 @@ public class Floating : MonoBehaviour
     void Start()
     {
         _mainCam = Camera.main.transform;
-        if (_useParent)
-        {
-            _lookAt = gameObject.transform.parent.transform.parent.transform;
-            transform.position += new Vector3(
-                0,
-                GetLookAtHeightOffset() / 2 + GetObjectAtHeightOffset() + _gap,
-                0
-            );
-            transform.localScale = new Vector3(
-                transform.localScale.x / _lookAt.localScale.x,
-                transform.localScale.y / _lookAt.localScale.y,
-                transform.localScale.z / _lookAt.localScale.z
-            );
-        }
-
-        _initialPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -80,5 +66,29 @@ public class Floating : MonoBehaviour
         float height = parentRectTransform.rect.size.y;
 
         return height * parentRectTransform.localScale.y;
+    }
+
+    public void SetParent(GameObject obj)
+    {
+        _parent = obj;
+        _lookAt = _parent.transform;
+
+        _lookAt = gameObject.transform.parent.transform.parent.transform.parent.transform;
+        transform.position += new Vector3(
+            0,
+            GetLookAtHeightOffset() / 2 + GetObjectAtHeightOffset() + _gap,
+            0
+        );
+        transform.localScale = new Vector3(
+            transform.localScale.x / _lookAt.localScale.x,
+            transform.localScale.y / _lookAt.localScale.y,
+            transform.localScale.z / _lookAt.localScale.z
+        );
+        _initialPosition = transform.position;
+    }
+
+    public GameObject Parent
+    {
+        get { return _parent; }
     }
 }
