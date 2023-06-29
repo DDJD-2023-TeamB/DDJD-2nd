@@ -103,7 +103,7 @@ public class RangedAttackState : EnemyAttackState
             _attackTries = 0;
             _currentAttackInRow++;
         }
-        else
+        else if (!_context.Shooter.IsShooting())
         {
             _attackTries++;
             if (_attackTries >= _maxAttackTries)

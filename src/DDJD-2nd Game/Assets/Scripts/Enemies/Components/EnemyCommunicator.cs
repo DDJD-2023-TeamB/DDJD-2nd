@@ -21,7 +21,6 @@ public class EnemyCommunicator : MonoBehaviour
 
     public void ReceiveMessage(EnemyMessage message)
     {
-        Debug.Log("received message");
         if (_messageActions.ContainsKey(message.GetType()))
         {
             _messageActions[message.GetType()]?.Invoke(message);
@@ -74,7 +73,6 @@ public class EnemyCommunicator : MonoBehaviour
             _messageRange,
             LayerMask.GetMask("Enemy") | LayerMask.GetMask("PlayerTrigger")
         );
-        Debug.Log("sending message");
         foreach (Collider collider in colliders)
         {
             if (collider == null)

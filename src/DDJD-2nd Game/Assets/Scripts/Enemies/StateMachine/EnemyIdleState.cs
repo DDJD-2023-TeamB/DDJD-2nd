@@ -78,7 +78,6 @@ public class EnemyIdleState : EnemyState
     private void OnPlayerSightedMessage(EnemyMessage message)
     {
         _context.ChangeState(_context.States.ChaseState);
-        Debug.Log("PlayerSightedMessage received");
     }
 
     private IEnumerator WarnNearbyEnemies()

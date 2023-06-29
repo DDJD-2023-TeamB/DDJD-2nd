@@ -14,6 +14,7 @@ public class InteractingState : GenericState
     public override void Enter()
     {
         Interactable objt = _context.InteractedObject;
+        _context.Input.OnExitKeydown += ExitInteraction;
         _context.Animator.SetFloat("ForwardSpeed", 0.0f);
         _context.Animator.SetFloat("RightSpeed", 0.0f);
         objt.Interact();
@@ -23,6 +24,7 @@ public class InteractingState : GenericState
     public override void Exit()
     {
         base.Exit();
+        _context.Input.OnExitKeydown -= ExitInteraction;
         Cursor.visible = true;
     }
 
@@ -44,13 +46,21 @@ public class InteractingState : GenericState
             _context.Input.IsContinueReading = false;
             npc.ContinueInteraction();
         }
-        if (_context.Input.IsExitingInteraction && objt is Npc)
-        {
-            Npc npc = (Npc)objt;
-            npc.ExitInteraction();
-        }
 
         if (objt == null)
+        {
+            _context.ChangeState(_context.Factory.Playable());
+        }
+    }
+
+    private void ExitInteraction()
+    {
+        if (_context.InteractedObject is Npc)
+        {
+            Npc npc = (Npc)_context.InteractedObject;
+            npc.ExitInteraction();
+        }
+        if (_context.InteractedObject == null)
         {
             _context.ChangeState(_context.Factory.Playable());
         }

@@ -11,6 +11,7 @@ public class MissionMenuState : GenericState
     public override void Enter()
     {
         _context.Input.OnMissionKeydown += OnMissionKeydown;
+        _context.Input.OnExitKeydown += OnMissionKeydown;
         _context.UIController.OpenMissions(true);
     }
 
@@ -18,6 +19,7 @@ public class MissionMenuState : GenericState
     {
         base.Exit();
         _context.Input.OnMissionKeydown -= OnMissionKeydown;
+        _context.Input.OnExitKeydown += OnMissionKeydown;
         _context.UIController.OpenMissions(false);
     }
 

@@ -131,4 +131,9 @@ public class EnemyShooter : Shooter
         yield return routine;
         _routines.Remove(routine);
     }
+
+    public bool IsShooting()
+    {
+        return _leftSpell != null || _rightSpell != null;
+    }
 }

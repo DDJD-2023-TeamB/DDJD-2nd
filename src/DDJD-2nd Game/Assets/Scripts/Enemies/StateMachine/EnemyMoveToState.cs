@@ -21,6 +21,10 @@ public class EnemyMoveToState : EnemyState
         _context.NavMeshAgent.SetDestination(_position);
         _checkDestinationCoroutine = _context.StartCoroutine(CheckDestination());
         _context.OnDamageTaken += OnDamageTaken;
+        _context.EnemyCommunicator.SetMessageAction(
+            typeof(PlayerSightedMessage),
+            OnPlayerSightedMessage
+        );
     }
 
     public override void Exit()
@@ -31,6 +35,10 @@ public class EnemyMoveToState : EnemyState
         {
             _context.StopCoroutine(_checkDestinationCoroutine);
         }
+        _context.EnemyCommunicator.DeleteAction(
+            typeof(PlayerSightedMessage),
+            OnPlayerSightedMessage
+        );
     }
 
     public override void StateUpdate()
@@ -62,6 +70,11 @@ public class EnemyMoveToState : EnemyState
     }
 
     private void OnDamageTaken()
+    {
+        _context.ChangeState(_context.States.ChaseState);
+    }
+
+    private void OnPlayerSightedMessage(EnemyMessage message)
     {
         _context.ChangeState(_context.States.ChaseState);
     }

@@ -136,6 +136,8 @@ public class PlayerInputReceiver : MonoBehaviour
 
     public Action OnPrintState;
 
+    public Action OnExitKeydown;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -230,7 +232,11 @@ public class PlayerInputReceiver : MonoBehaviour
         _playerInput.UI.Missions.performed += ctx => OnMissionKeydown?.Invoke();
         _playerInput.UI.Missions.canceled += ctx => OnMissionKeyup?.Invoke();
 
-        _playerInput.UI.Menu.performed += ctx => OnMenuKeydown?.Invoke();
+        _playerInput.UI.Menu.performed += ctx =>
+        {
+            OnMenuKeydown?.Invoke();
+            OnExitKeydown?.Invoke();
+        };
         _playerInput.UI.Menu.canceled += ctx => OnMenuKeyup?.Invoke();
 
         _playerInput.UI.Tutorial.performed += ctx => _isExitingInteraction = true;

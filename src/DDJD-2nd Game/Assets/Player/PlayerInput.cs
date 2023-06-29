@@ -192,6 +192,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Continue"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""66cd112e-691c-4d72-9bc6-72654ea420e5"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Continue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },

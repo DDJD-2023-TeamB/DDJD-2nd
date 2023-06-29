@@ -11,6 +11,7 @@ public class InventoryState : GenericState
     public override void Enter()
     {
         _context.Input.OnInventoryKeydown += OnInventoryKeydown;
+        _context.Input.OnExitKeydown += OnInventoryKeydown;
         _context.UIController.OpenInventory(true);
     }
 
@@ -18,6 +19,7 @@ public class InventoryState : GenericState
     {
         base.Exit();
         _context.Input.OnInventoryKeydown -= OnInventoryKeydown;
+        _context.Input.OnExitKeydown -= OnInventoryKeydown;
         _context.UIController.OpenInventory(false);
     }
 

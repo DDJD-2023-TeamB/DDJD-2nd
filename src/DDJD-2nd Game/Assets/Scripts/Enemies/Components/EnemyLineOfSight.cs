@@ -19,6 +19,7 @@ public class EnemyLineOfSight : MonoBehaviour
 
     public bool CanSeePlayer()
     {
+        Vector3 position = transform.position + Vector3.up * 0.9f;
         Vector3 direction = _enemy.Player.transform.position - transform.position;
         direction.y = 0;
         float angle = Vector3.Angle(direction, transform.forward);
@@ -28,7 +29,7 @@ public class EnemyLineOfSight : MonoBehaviour
             RaycastHit hit;
             if (
                 Physics.Raycast(
-                    transform.position,
+                    position,
                     direction.normalized,
                     out hit,
                     _distance,
