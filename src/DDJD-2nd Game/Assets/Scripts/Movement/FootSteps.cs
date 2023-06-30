@@ -43,7 +43,6 @@ public class FootSteps : MonoBehaviour
     {
         //Find all terrains in the scene
         Terrain[] terrains = FindObjectsOfType<Terrain>();
-        Debug.Log(terrains.Length);
         foreach (Terrain terrain in terrains)
         {
             //Add the terrain to the hashmap

@@ -284,15 +284,13 @@ public class InventoryUI : MonoBehaviour
     {
         if (itemImage.currentItem.amount <= value)
         {
-            Debug.Log("Removing item");
             RemoveItem(itemImage.currentItem);
         }
         else
         {
             itemImage.currentItem.amount -= value;
         }
-        _player.Inventory.RemoveItemAmount(itemImage.currentItem,value);
-
+        // _player.Inventory.RemoveItem(itemImage.currentItem.item);
     }
 
     public GameObject LeftWheel

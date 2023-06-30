@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class InteractCallback : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start() { }
-
-    // Update is called once per frame
-    void Update() { }
-
-    public void Print()
+    public void MakeNpcDamageable(string npcName)
     {
-        Debug.Log("PRINTING..");
+        GameObject npc = GameObject.Find(npcName);
+        GameObject.Destroy(npc.GetComponent<Npc>());
     }
 }
