@@ -32,6 +32,9 @@ public class EnemyCamp : MonoBehaviour, NonCollidable
     [SerializeField]
     private SpawnerTriggerType _triggerType;
 
+    [SerializeField]
+    private GameObject _fightArea;
+
     [ConditionalField(nameof(_triggerType), false, SpawnerTriggerType.OnProximity)]
     [SerializeField]
     private float _triggerRadius;
@@ -203,10 +206,12 @@ public class EnemyCamp : MonoBehaviour, NonCollidable
     public void OnFightGoalStarted()
     {
         _fightGoalStarted = true;
+        _fightArea?.SetActive(true);
     }
 
     public void OnFightGoalCompleted()
     {
         _fightGoalStarted = false;
+        _fightArea?.SetActive(false);
     }
 }

@@ -25,7 +25,9 @@ public class FloatingCanvas : MonoBehaviour
         _worldCanvasAnimator = _worldCanvas.transform.GetChild(0).GetComponent<Animator>();
         _worldFloatingIcon = _worldCanvas.transform.GetChild(0).GetComponent<Floating>();
         if (_hasMapCanvas)
+        {
             _mapCanvasAnimator = _mapCanvas.transform.GetChild(0).GetComponent<Animator>();
+        }
         _worldFloatingIcon.SetParent(_parent);
     }
 

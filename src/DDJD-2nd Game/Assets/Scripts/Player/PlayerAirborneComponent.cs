@@ -35,7 +35,6 @@ public class PlayerAirborneComponent : MonoBehaviour
     public void StartAirborne()
     {
         _isActive = true;
-        Debug.Log("Start airbone");
         _soundEmitter?.SetParameter("air", _sfxIntensityID, 0.0f);
         _soundEmitter?.Play("air");
     }

@@ -13,6 +13,7 @@ public class Floating : MonoBehaviour
     private float _gap = 0.1f;
     public float animationOffsetValue;
 
+    [SerializeField]
     private Vector3 _initialPosition;
 
     [SerializeField]
@@ -27,7 +28,7 @@ public class Floating : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        transform.position = _initialPosition + new Vector3(0, animationOffsetValue, 0);
+        transform.localPosition = _initialPosition + new Vector3(0, animationOffsetValue, 0);
 
         if (_useParent)
         {
@@ -55,7 +56,7 @@ public class Floating : MonoBehaviour
             }
         }
 
-        return heightOffset * _lookAt.localScale.y;
+        return heightOffset;
     }
 
     private float GetObjectAtHeightOffset()
@@ -73,8 +74,8 @@ public class Floating : MonoBehaviour
         _parent = obj;
         _lookAt = _parent.transform;
 
-        _lookAt = gameObject.transform.parent.transform.parent.transform.parent.transform;
-        transform.position += new Vector3(
+        //_lookAt = gameObject.transform.parent.transform.parent.transform.parent.transform;
+        transform.localPosition += new Vector3(
             0,
             GetLookAtHeightOffset() / 2 + GetObjectAtHeightOffset() + _gap,
             0
@@ -84,7 +85,7 @@ public class Floating : MonoBehaviour
             transform.localScale.y / _lookAt.localScale.y,
             transform.localScale.z / _lookAt.localScale.z
         );
-        _initialPosition = transform.position;
+        _initialPosition = transform.localPosition;
     }
 
     public GameObject Parent

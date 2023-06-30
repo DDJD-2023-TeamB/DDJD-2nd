@@ -14,7 +14,6 @@ public class Location : MonoBehaviour
         get { return _area; }
     }
 
-    // TODO : confirmar
     [SerializeField]
     private Transform _position;
 
@@ -30,5 +29,4 @@ public class Location : MonoBehaviour
     {
         get { return _radius; }
     }
-
 }

@@ -34,7 +34,8 @@ public class CollectibleInteractable : Interactable, NonCollidable
         //GameObject floatingCanvasPrefab = Bank.Instance.Get("FloatingText");
         GameObject floatingCanvasPrefab = Bank.Instance.CanvasText;
         GameObject floatingTextCanvas = Instantiate(floatingCanvasPrefab);
-
+        Floating floating = floatingTextCanvas.transform.GetChild(0).GetComponent<Floating>();
+        floating.SetParent(gameObject);
         TextMeshProUGUI text = floatingTextCanvas.transform
             .GetChild(0)
             .GetComponent<TextMeshProUGUI>();
