@@ -22,6 +22,11 @@ public class FloatingCanvas : MonoBehaviour
 
     public void Start()
     {
+        Init();
+    }
+
+    private void Init()
+    {
         _worldCanvasAnimator = _worldCanvas.transform.GetChild(0).GetComponent<Animator>();
         _worldFloatingIcon = _worldCanvas.transform.GetChild(0).GetComponent<Floating>();
         if (_hasMapCanvas)
@@ -40,9 +45,13 @@ public class FloatingCanvas : MonoBehaviour
 
     public void StopAnimation()
     {
+        if (_worldCanvasAnimator == null)
+        {
+            Init();
+        }
         _worldCanvasAnimator.SetTrigger("Stop");
         if (_hasMapCanvas)
-            _mapCanvasAnimator.SetTrigger("Stop");
+            _mapCanvasAnimator?.SetTrigger("Stop");
     }
 
     public GameObject WorldCanvas

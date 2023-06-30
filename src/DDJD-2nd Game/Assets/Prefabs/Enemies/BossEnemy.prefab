@@ -158,18 +158,6 @@ PrefabInstance:
     - {fileID: 1719889469382641536, guid: 6facaed78b8c6a64b96d9739906f115f, type: 3}
     - {fileID: 3394632313977282746, guid: 6facaed78b8c6a64b96d9739906f115f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6facaed78b8c6a64b96d9739906f115f, type: 3}
---- !u!114 &1020991218554778866 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6075020786167775455, guid: 6facaed78b8c6a64b96d9739906f115f,
-    type: 3}
-  m_PrefabInstance: {fileID: 6513758865696568365}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &3528417475213454886 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7679466201466395147, guid: 6facaed78b8c6a64b96d9739906f115f,
@@ -218,7 +206,6 @@ MonoBehaviour:
   _aggroRange: 40
   _enemySkills: {fileID: 11400000, guid: d8429b318f4d6fb4e9814a1e017b82ac, type: 2}
   _forceResistance: 150
-  _stateText: {fileID: 1020991218554778866}
   _leftSpellOrigin: {fileID: 8175225478650227955}
   _rightSpellOrigin: {fileID: 5841399273070316930}
   _runeAttackPrefab: {fileID: 3277137911551064335, guid: bae9462b1331b704eb15519fd779b4b0,
@@ -249,7 +236,7 @@ MonoBehaviour:
   _chaseRuneSkills:
   - {fileID: 11400000, guid: 42940e98e3a72844d93f0cc67e9744db, type: 2}
   - {fileID: 11400000, guid: 3b354be5fe762424cb1d8852bee8be12, type: 2}
-  _runeSpawnDelay: 1
+  _runeSpawnDelay: 3
 --- !u!114 &8189407129937572364
 MonoBehaviour:
   m_ObjectHideFlags: 0

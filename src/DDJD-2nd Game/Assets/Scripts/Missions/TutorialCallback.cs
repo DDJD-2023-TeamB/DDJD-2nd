@@ -24,6 +24,10 @@ public class TutorialCallback : MonoBehaviour
 
     private void SwitchPageInTutorial()
     {
+        if (_player == null)
+        {
+            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        }
         if (_tutorial)
         {
             _tutorial.SwitchPage();
@@ -34,6 +38,10 @@ public class TutorialCallback : MonoBehaviour
 
     public void ExitTutorial()
     {
+        if (_player == null)
+        {
+            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        }
         if (_tutorial)
         {
             _tutorial = null;

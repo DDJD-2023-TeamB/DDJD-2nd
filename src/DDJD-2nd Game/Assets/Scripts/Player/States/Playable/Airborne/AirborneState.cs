@@ -26,11 +26,13 @@ public class AirborneState : GenericState
             OnJumpKeyDown();
         }
         _context.AirborneComponent.StartAirborne();
+        _context.Collider.material = _context.FrictionlessMaterial;
     }
 
     public override void Exit()
     {
         base.Exit();
+        _context.Collider.material = _context.DefaultMaterial;
         OnJumpKeyUp();
         _context.Animator.SetBool("IsGrounded", true);
         _context.Input.OnJumpKeyUp -= OnJumpKeyUp;

@@ -94,6 +94,7 @@ public class Player : StateContext, Damageable
     [Tooltip("The material used when the player lands")]
     private PhysicMaterial _frictionlessMaterial;
 
+    [SerializeField]
     private PhysicMaterial _defaultMaterial;
 
     private Collider _collider;
@@ -231,7 +232,6 @@ public class Player : StateContext, Damageable
         _sfxRunStateId = _soundEmitter.GetParameterId("run", "Run State");
         _sfxDashStateId = _soundEmitter.GetParameterId("dash", "Dash Type");
         _inputReceiver.OnPrintState += () => _state?.PrintState();
-        _defaultMaterial = _collider.material;
         _status.OnDeath += (int damage, Vector3 hitPoint, Vector3 direction) =>
         {
             if (!(_state is DeadState))

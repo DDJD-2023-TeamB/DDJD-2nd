@@ -125,6 +125,7 @@ public class MissionController : MonoBehaviour
 
     private void GiveReward(Mission mission)
     {
+        _player.UIController.ShowReward(mission.Reward);
         foreach (var item in mission.Reward.Items)
         {
             _player.Inventory.AddItem(item);

@@ -32,6 +32,7 @@ public class Interaction
 
     public bool InteractionEnded()
     {
+        Debug.Log("Interaction ended");
         _onEndInteraction?.Invoke();
         return EventUtils.IsEventSet(_onEndInteraction);
     }

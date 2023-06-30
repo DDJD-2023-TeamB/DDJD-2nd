@@ -43,6 +43,7 @@ public class Npc : Interactable, NonCollidable
 
     private IEnumerator UpdateFloatingIcon()
     {
+        yield return new WaitForSeconds(0.5f);
         while (true)
         {
             bool missionFound = false;
@@ -62,7 +63,6 @@ public class Npc : Interactable, NonCollidable
                     if (!_floatingIconCanvas.gameObject.activeSelf)
                     {
                         _floatingIconCanvas.gameObject.SetActive(true);
-                        _floatingIconCanvas.StopAnimation();
                         PauseAnimation();
                     }
                     missionFound = true;
@@ -70,7 +70,7 @@ public class Npc : Interactable, NonCollidable
                 }
             }
 
-            if (_floatingIconCanvas.gameObject.activeSelf && !missionFound)
+            if (!missionFound)
             {
                 _floatingIconCanvas.gameObject.SetActive(false);
             }

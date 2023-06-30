@@ -206,12 +206,18 @@ public class EnemyCamp : MonoBehaviour, NonCollidable
     public void OnFightGoalStarted()
     {
         _fightGoalStarted = true;
-        _fightArea?.SetActive(true);
+        if (_fightArea != null)
+        {
+            _fightArea.SetActive(true);
+        }
     }
 
     public void OnFightGoalCompleted()
     {
         _fightGoalStarted = false;
-        _fightArea?.SetActive(false);
+        if (_fightArea != null)
+        {
+            _fightArea.SetActive(false);
+        }
     }
 }

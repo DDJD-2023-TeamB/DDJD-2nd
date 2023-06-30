@@ -75,7 +75,7 @@ public class Floating : MonoBehaviour
         _lookAt = _parent.transform;
 
         //_lookAt = gameObject.transform.parent.transform.parent.transform.parent.transform;
-        transform.localPosition += new Vector3(
+        transform.localPosition = new Vector3(
             0,
             GetLookAtHeightOffset() / 2 + GetObjectAtHeightOffset() + _gap,
             0

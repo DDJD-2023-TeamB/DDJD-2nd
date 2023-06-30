@@ -471,4 +471,14 @@ public class UIController : MonoBehaviour
     {
         _playerUI.mapUI.SetActive(false);
     }
+
+    public void ShowReward(Reward reward)
+    {
+        if (reward.Items.Count == 0)
+        {
+            return;
+        }
+        _playerUI.playingUI.itemReceivedNotificationController.SetItems(reward.Items);
+        _playerUI.playingUI.itemReceivedNotificationController.StartAnimation();
+    }
 }

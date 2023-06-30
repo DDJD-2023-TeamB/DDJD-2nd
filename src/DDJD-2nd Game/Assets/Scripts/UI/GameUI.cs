@@ -27,6 +27,9 @@ public class GameUI : MonoBehaviour
     [SerializeField]
     public MissionCompleteNotificationController missionCompleteNotification;
 
+    [SerializeField]
+    public ItemReceivedNotificationController itemReceivedNotificationController;
+
     public void UpdateElements(Skill leftSkill, Skill rightSkill, Element mainElement)
     {
         if (leftSkill != null && leftSkill.Element != _leftElement)

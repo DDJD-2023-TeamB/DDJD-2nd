@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1385816657750014099}
   - component: {fileID: 5044195276345697589}
   - component: {fileID: 853828352391189316}
-  - component: {fileID: 4016158746202812308}
+  - component: {fileID: 2360967279932982087}
   m_Layer: 0
   m_Name: FireshotBook
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593231158090504518}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -202, y: 0.203, z: -208.647}
+  m_LocalPosition: {x: -200.24, y: 1.871, z: -191.62}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -113,8 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 11400000, guid: 1fcae3db729eb0c45b6f36ecb22c2a63, type: 2}
---- !u!65 &4016158746202812308
-BoxCollider:
+--- !u!135 &2360967279932982087
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -124,5 +124,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.14048767, y: 0.35212308, z: 0.35336247}
-  m_Center: {x: 0.06338501, y: 0.010933965, z: 0.024161443}
+  m_Radius: 0.75
+  m_Center: {x: 0.0709244, y: 0.019648552, z: 0.02254866}

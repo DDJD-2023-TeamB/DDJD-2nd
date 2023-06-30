@@ -56,8 +56,12 @@ public class BossEnemy : RangedEnemy
     [SerializeField]
     private List<Skill> _chaseRuneSkills = new List<Skill>();
 
+    private Coroutine _spawnRuneCoroutine;
+
+    private Coroutine _distanceCoroutine;
+
     [SerializeField]
-    private float _runeSpawnDelay = 1.0f;
+    private float _runeSpawnDelay = 3.0f;
 
     private float _hoveringRuneSpawnDelay = 2.5f;
 
@@ -95,6 +99,7 @@ public class BossEnemy : RangedEnemy
         Vector3 position = transform.position;
         position.y += 0.9f;
         GameObject vfx = Instantiate(_nextPhaseVFX, transform.position, Quaternion.identity);
+        _maxRuneCount = phase.MaxRuneCount;
         Destroy(vfx, 2.0f);
     }
 
@@ -222,6 +227,52 @@ public class BossEnemy : RangedEnemy
     {
         base.TakeDamage(damager, damage, force, hitPoint, hitDirection, element);
         AdvancePhase();
+    }
+
+    public void StartCombat()
+    {
+        if (_spawnRuneCoroutine == null)
+        {
+            _spawnRuneCoroutine = StartCoroutine(SpawnRuneCoroutine());
+            _distanceCoroutine = StartCoroutine(CheckDistance());
+        }
+    }
+
+    private IEnumerator CheckDistance()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1.0f);
+            float distance = Vector3.Distance(_player.transform.position, transform.position);
+            if (distance > _aggroRange)
+            {
+                StopCombat();
+                break;
+            }
+        }
+    }
+
+    public void StopCombat()
+    {
+        if (_spawnRuneCoroutine != null)
+        {
+            StopCoroutine(_spawnRuneCoroutine);
+        }
+
+        if (_distanceCoroutine != null)
+        {
+            StopCoroutine(_distanceCoroutine);
+        }
+    }
+
+    private IEnumerator SpawnRuneCoroutine()
+    {
+        yield return new WaitForSeconds(2.0f);
+        while (true)
+        {
+            yield return new WaitForSeconds(_runeSpawnDelay);
+            SpawnRune();
+        }
     }
 
     public override void Awake()

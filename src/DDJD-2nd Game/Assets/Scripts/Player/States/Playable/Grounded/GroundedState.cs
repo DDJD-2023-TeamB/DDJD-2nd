@@ -106,11 +106,12 @@ public class GroundedState : MeleeAttackableState
 
     private IEnumerator LandCoroutine()
     {
-        _context.Collider.material = _context.FrictionlessMaterial;
+        //_context.Collider.material = _context.FrictionlessMaterial;
         while (true)
         {
             yield return new WaitForSeconds(0.6f);
             _context.Collider.material = _context.DefaultMaterial;
+            break;
         }
     }
 }

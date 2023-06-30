@@ -16,8 +16,6 @@ public class BossAttackState : EnemyAttackState
 
     private bool _stopAimingAtExit;
 
-    private Coroutine _spawnRuneCoroutine;
-
     public BossAttackState(RangedEnemy enemy)
         : base(enemy)
     {
@@ -43,7 +41,7 @@ public class BossAttackState : EnemyAttackState
             _context.EnemySkills.MaxAttacksInRow
         );
         _stopAimingAtExit = true;
-        _spawnRuneCoroutine = _context.StartCoroutine(SpawnRuneCoroutine());
+        _context.StartCombat();
     }
 
     public override void Exit()
@@ -60,10 +58,6 @@ public class BossAttackState : EnemyAttackState
             _context.StopCoroutine(_attackCoroutine);
         }
 
-        if (_spawnRuneCoroutine != null)
-        {
-            _context.StopCoroutine(_spawnRuneCoroutine);
-        }
         _context.Shooter.CancelShots();
         _context.Shooter.OnShoot -= OnShoot;
     }
@@ -72,16 +66,6 @@ public class BossAttackState : EnemyAttackState
     {
         base.StateUpdate();
         FacePlayer();
-    }
-
-    private IEnumerator SpawnRuneCoroutine()
-    {
-        yield return new WaitForSeconds(2.0f);
-        while (true)
-        {
-            yield return new WaitForSeconds(_context.RuneSpawnDelay);
-            _context.SpawnRune();
-        }
     }
 
     private IEnumerator AttackCoroutine()
@@ -111,7 +95,7 @@ public class BossAttackState : EnemyAttackState
             _attackTries = 0;
             _currentAttackInRow++;
         }
-        else
+        else if (!_context.Shooter.IsShooting())
         {
             _attackTries++;
             if (_attackTries >= _maxAttackTries)

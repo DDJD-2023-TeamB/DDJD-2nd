@@ -6,7 +6,7 @@ using TMPro;
 
 public class BasicEnemy : HumanoidEnemy
 {
-    private Player _player;
+    protected Player _player;
     private NavMeshAgent _navMeshAgent;
     private NoiseListener _noiseListener;
 
@@ -14,10 +14,10 @@ public class BasicEnemy : HumanoidEnemy
 
     [Header("Ranges")]
     [SerializeField]
-    private float _attackRange = 10.0f;
+    protected float _attackRange = 10.0f;
 
     [SerializeField]
-    private float _aggroRange = 40.0f;
+    protected float _aggroRange = 40.0f;
 
     protected EnemyStates _states;
 

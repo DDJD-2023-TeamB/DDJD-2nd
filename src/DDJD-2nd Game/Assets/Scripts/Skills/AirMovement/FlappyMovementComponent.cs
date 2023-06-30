@@ -24,7 +24,6 @@ public class FlappyMovementComponent : AirMovementComponent
             return;
         }
         _animator.SetTrigger("JumpAir");
-        _jumpsAvailable--;
     }
 
     public void Skywalk()
@@ -53,6 +52,7 @@ public class FlappyMovementComponent : AirMovementComponent
             visualEffect.SendEvent("Regular");
         }
         Destroy(vfx, 2.0f);
+        _jumpsAvailable--;
     }
 
     public override void Reset()

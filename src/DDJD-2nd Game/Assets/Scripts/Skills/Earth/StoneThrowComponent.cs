@@ -115,8 +115,6 @@ public class StoneThrowComponent : ProjectileComponent, NonPushable
     private IEnumerator CanReboundRoutine()
     {
         float velocity = _rb.velocity.magnitude;
-        Debug.Log(velocity);
-
         float duration = math.remap(1, 35.0f, 1.0f, 0.3f, velocity);
         yield return new WaitForSeconds(UnityEngine.Random.Range(duration, duration + 0.1f));
         _canReboundSFX = true;
