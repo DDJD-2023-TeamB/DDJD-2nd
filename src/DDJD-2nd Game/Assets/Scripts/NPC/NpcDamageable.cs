@@ -25,13 +25,13 @@ public class NpcDamageable : MonoBehaviour, Damageable
         _ragdollController?.DeactivateRagdoll();
     }
 
-    // public void Update()
-    // {
-    //     if (transform.position.y == 100)
-    //     {
-    //         Die(0, Vector3.zero, Vector3.zero);
-    //     }
-    // }
+    public void Update()
+    {
+        if (transform.position.y == 100)
+        {
+            Die(0, Vector3.zero, Vector3.zero);
+        }
+    }
 
     public void Die(int force, Vector3 hitPoint, Vector3 hitDirection)
     {
@@ -45,7 +45,7 @@ public class NpcDamageable : MonoBehaviour, Damageable
         StartCoroutine(WaitAndDie(3f));
     }
 
-    private GameObject SpawnDeathVFX(Vector3 position) // TODO SpawnDeathVFX being called!????????????????????????????
+    private GameObject SpawnDeathVFX(Vector3 position)
     {
         GameObject deathVFX = Instantiate(_deathVFX, position, transform.rotation);
         Destroy(gameObject, 0.1f);

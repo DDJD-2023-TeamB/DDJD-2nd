@@ -93,8 +93,6 @@ public class Npc : Interactable, NonCollidable
         }
 
         _currentDialogueInfo = _npc.DefaultDialogueInfo;
-        Debug.Log("Interacting with " + _npc.Name);
-        Debug.Log("Current dialogue info: " + _currentDialogueInfo.Sentences.Length);
         Mission targetMission = null;
         foreach (var mission in _missionController.GetNpcMissions(_npc))
         {
@@ -103,10 +101,6 @@ public class Npc : Interactable, NonCollidable
                 case MissionState.Available:
                 {
                     _currentDialogueInfo = mission.InteractionBegin.DialogueInfo;
-                    Debug.Log(
-                        "Current dialogue info in available: "
-                            + _currentDialogueInfo.Sentences.Length
-                    );
                     mission.Status = MissionState.Ongoing;
                     mission.CurrentGoal?.OnGoalStarted?.Invoke();
                     _missionController.MissionsUIController?.UpdateMissionsUI();
@@ -140,7 +134,6 @@ public class Npc : Interactable, NonCollidable
             _dialogue.Mission = targetMission;
         }
 
-        Debug.Log("Start dialogue info: " + _currentDialogueInfo.Sentences.Length);
         _dialogue.StartDialogue(_currentDialogueInfo);
 
         if (_animator != null)

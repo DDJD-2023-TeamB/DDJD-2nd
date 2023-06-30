@@ -284,7 +284,6 @@ public class InventoryUI : MonoBehaviour
     {
         if (itemImage.currentItem.amount <= value)
         {
-            Debug.Log("Removing item");
             RemoveItem(itemImage.currentItem);
         }
         else
