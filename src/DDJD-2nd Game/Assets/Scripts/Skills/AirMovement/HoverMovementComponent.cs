@@ -127,6 +127,11 @@ public class HoverMovementComponent : AirMovementComponent
     {
         base.Release();
         Reset();
+        if (_hoverCoroutine != null)
+        {
+            StopCoroutine(_hoverCoroutine);
+        }
+        _hoverCoroutine = null;
         if (_leftHandVFX != null)
             Destroy(_leftHandVFX.gameObject, 1.5f);
         if (_rightHandVFX != null)

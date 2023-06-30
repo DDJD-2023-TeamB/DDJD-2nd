@@ -257,11 +257,13 @@ public class BossEnemy : RangedEnemy
         if (_spawnRuneCoroutine != null)
         {
             StopCoroutine(_spawnRuneCoroutine);
+            _spawnRuneCoroutine = null;
         }
 
         if (_distanceCoroutine != null)
         {
             StopCoroutine(_distanceCoroutine);
+            _distanceCoroutine = null;
         }
     }
 
